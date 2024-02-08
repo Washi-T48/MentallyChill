@@ -12,7 +12,8 @@
   "main": "index.js",
   "scripts": {
     "server": "nodemon server.js",
-    "ngrok": "ngrok.exe http --domain=healthy-busy-quail.ngrok-free.app 3000 --config ngrok.yml"
+    "ngrok": "ngrok.exe http --domain=healthy-busy-quail.ngrok-free.app 3000 --config ngrok.yml",
+    "start": "node server.js"
   },
   "author": "",
   "license": "ISC",
