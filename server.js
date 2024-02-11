@@ -1,22 +1,22 @@
 import HandleEvent from './handle.js';
+import { logger } from './logger.js';
 import express from 'express';
 import dotenv from 'dotenv';
 const app = express();
-dotenv.config();
 
+dotenv.config();
 const PORT = process.env.PORT;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => {
-    console.log("Hello, World!");
     res.sendStatus(200);
 });
 
 app.post("/webhook", async function (req, res) {
     var event = new HandleEvent(req.body);
-    console.log(event.getText());
+    logger.info(req.body);
     res.sendStatus(200);
 });
 
