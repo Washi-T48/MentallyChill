@@ -1,6 +1,11 @@
+import { logger } from "./logger.js";
+
 class HandleEvent {
     constructor(event) {
         this.event = event.events[0];
+        if (this.event.type == 'message') {
+            logger.message(JSON.stringify(this.getMessage()));
+        }
     }
 
     getEventType() {
@@ -11,6 +16,28 @@ class HandleEvent {
     getEventSource() {
         this.source = this.event.source;
         return this.source;
+    }
+
+    getID() {
+        if (this.getEventSource().type == 'user') {
+            this.id = this.getUserID();
+            return this.id;
+        }
+        else if (this.getEventSource().type == 'group') {
+            this.id = this.getGroupID();
+            return this.id;
+        }
+    }
+
+    getUserID() {
+        this.userID = this.getEventSource().userId;
+        return this.userID;
+    }
+
+    getGroupID() {
+        this.groupID = this.getEventSource().groupId;
+        this.userID = this.getEventSource().userId;
+        return this.groupID;
     }
 
     getMessage() {

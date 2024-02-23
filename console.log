@@ -1,5 +1,820 @@
-{"level"{"level":"info","message":{"destination":"Uc982a71d0ca6096f519a4ca4ec27adc7","events":[{"deliveryContext":{"isRedelivery":false},"message":{"id":"494606349222281457","quoteToken":"D5ZQWIq2lttFQDO22znmvGj5w3Sz8_YCkmmo_li5MH5QFQpV8Qfujc4AwC9YlbOAGS9YcYBIt7YIluTeYODzXWZ_FSjwG6ASC3WX_XKF1_ruEOZL9ltpllAj8DVPL7y12XDe9EYpInusYBeyb7l83w","text":"Yaho","type":"text"},"mode":"active","replyToken":"4fc013513c6d4f5ead65125740fe4072","source":{"groupId":"C3ac20e451bc2eb3fedf4b9c20c59121c","type":"group","userId":"Ubfc46b489ce8ddbde6044e641542a729"},"timestamp":1707639661504,"type":"message","webhookEventId":"01HPBM2SDYN2KASJ7MW3T7MK3E"}]}}
-{"level":"info","message":{"destination":"Uc982a71d0ca6096f519a4ca4ec27adc7","events":[{"deliveryContext":{"isRedelivery":false},"follow":{"isUnblocked":false},"mode":"active","replyToken":"d45c6a40714d40508ff00ce3d1989f52","source":{"type":"user","userId":"U5c8fda9b0a3084f1e96c427817fea0a6"},"timestamp":1707639767449,"type":"follow","webhookEventId":"01HPBM60WG3J3YXNSHZ0VMCWKA"}]}}
-{"level":"info","message":{"destination":"Uc982a71d0ca6096f519a4ca4ec27adc7","events":[{"deliveryContext":{"isRedelivery":false},"follow":{"isUnblocked":false},"mode":"active","replyToken":"1919918bce094b39854cf76bb767261b","source":{"type":"user","userId":"Ubfc46b489ce8ddbde6044e641542a729"},"timestamp":1707640906768,"type":"follow","webhookEventId":"01HPBN8S637DGV8JR9S9XGVVWN"}]}}
-{"level":"info","message":{"destination":"Uc982a71d0ca6096f519a4ca4ec27adc7","events":[{"deliveryContext":{"isRedelivery":false},"message":{"id":"494608443085684962","quoteToken":"kHN55c2ldNk1i6kieKItVPIumwdBQXl4c_kVUZ4a0yeVhJua13NqZN7-IdML1KCToY5jwb3xRu0BFfz9JdGoy2nlu9ZDQrbIyGjeT7Qo3hFsetuQf7eoE0VE7JEEHkIaJWSN_mpCk6-5u4CHlbVPGA","text":"ALLAH","type":"text"},"mode":"active","replyToken":"db12f256989841ce9fc862cf7b0a2c94","source":{"groupId":"C3ac20e451bc2eb3fedf4b9c20c59121c","type":"group","userId":"U43354d20204e8cd7717133c1a03d9360"},"timestamp":1707640909658,"type":"message","webhookEventId":"01HPBN8WAQFEPN4QQ4BYV3CEKW"}]}}
-{"level":"info","message":{"destination":"Uc982a71d0ca6096f519a4ca4ec27adc7","events":[{"deliveryContext":{"isRedelivery":false},"message":{"id":"494608465315758130","quoteToken":"OnrRT3UuTn_NymOMye2OfJ8JDNeETNDnGv1Stpmy6c6fJSf0BVCChdGOOkcEPlZXe6_E5_MbdWaYBmvFSirZv6n9vUYCzcPGEIGFENwuaFVWkO4sGtWVvk6amrJ-lm0vXgOjHRiATiDpZi48rU1S_A","text":"Da way","type":"text"},"mode":"active","replyToken":"29fcfe04576e45fa976b22f6bd1c8ce8","source":{"type":"user","userId":"Ubfc46b489ce8ddbde6044e641542a729"},"timestamp":1707640922792,"type":"message","webhookEventId":"01HPBN99532S47FQ71D5NWGY5H"}]}}
+2024-02-23 19:56:30 [logs]: Logger.js initialized
+2024-02-23 19:56:30 [server]: Server listening on port 3000
+2024-02-23 19:57:01 [logs]: Logger.js initialized
+2024-02-23 19:57:01 [server]: Server listening on port 3000
+2024-02-23 19:57:12 [logs]: Logger.js initialized
+2024-02-23 19:57:13 [server]: Server listening on port 3000
+2024-02-23 19:57:17 [event]: [object Object]
+2024-02-23 19:57:24 [logs]: Logger.js initialized
+2024-02-23 19:57:25 [server]: Server listening on port 3000
+2024-02-23 19:57:34 [logs]: Logger.js initialized
+2024-02-23 19:57:34 [server]: Server listening on port 3000
+2024-02-23 19:57:35 [logs]: Logger.js initialized
+2024-02-23 19:57:36 [server]: Server listening on port 3000
+2024-02-23 19:57:38 [logs]: Logger.js initialized
+2024-02-23 19:57:39 [server]: Server listening on port 3000
+2024-02-23 19:57:48 [logs]: Logger.js initialized
+2024-02-23 19:57:48 [server]: Server listening on port 3000
+2024-02-23 19:57:56 [logs]: Logger.js initialized
+2024-02-23 19:57:56 [server]: Server listening on port 3000
+2024-02-23 19:57:57 [logs]: Logger.js initialized
+2024-02-23 19:57:57 [server]: Server listening on port 3000
+2024-02-23 19:58:00 [logs]: [object Object]
+2024-02-23 19:58:11 [logs]: Logger.js initialized
+2024-02-23 19:58:11 [server]: Server listening on port 3000
+2024-02-23 19:58:19 [logs]: Logger.js initialized
+2024-02-23 19:58:19 [server]: Server listening on port 3000
+2024-02-23 19:58:21 [logs]: Logger.js initialized
+2024-02-23 19:58:21 [server]: Server listening on port 3000
+2024-02-23 19:58:23 [logs]: Logger.js initialized
+2024-02-23 19:58:23 [server]: Server listening on port 3000
+2024-02-23 19:58:26 [logs]: Logger.js initialized
+2024-02-23 19:58:26 [server]: Server listening on port 3000
+2024-02-23 19:58:28 [logs]: [object Object]
+2024-02-23 19:59:00 [logs]: Logger.js initialized
+2024-02-23 19:59:00 [server]: Server listening on port 3000
+2024-02-23 19:59:02 [logs]: Logger.js initialized
+2024-02-23 19:59:02 [server]: Server listening on port 3000
+2024-02-23 19:59:05 [logs]: {"destination":"Uc982a71d0ca6096f519a4ca4ec27adc7","events":[{"type":"message","message":{"type":"text","id":"496373800725119059","quoteToken":"dO0CiBu4oTAPjN1i6ILikMN1ZbUAxt4vFKQNep9yhhjdDa27jdR_ZB1UDydjPeTQQhhOoGhJOf4SjvkvtdMxpIAcR8OHbKVMKK9oaTwDjklVFqKXWqpMh7TbDeiIp41nldtc00PFrQvjbsFNzZc-Uw","text":"awdawd"},"webhookEventId":"01HQB0RHCVTX084BHN84S7JXKR","deliveryContext":{"isRedelivery":false},"timestamp":1708693144873,"source":{"type":"user","userId":"U43354d20204e8cd7717133c1a03d9360"},"replyToken":"193d332d27e641fb812093b170dec829","mode":"active"}]}
+2024-02-23 19:59:13 [logs]: Logger.js initialized
+2024-02-23 19:59:13 [server]: Server listening on port 3000
+2024-02-23 19:59:30 [logs]: Logger.js initialized
+2024-02-23 19:59:30 [server]: Server listening on port 3000
+2024-02-23 19:59:48 [logs]: Logger.js initialized
+2024-02-23 19:59:48 [server]: Server listening on port 3000
+2024-02-23 20:00:28 [logs]: Logger.js initialized
+2024-02-23 20:00:28 [server]: Server listening on port 3000
+2024-02-23 20:00:41 [logs]: Logger.js initialized
+2024-02-23 20:00:41 [server]: Server listening on port 3000
+2024-02-23 20:00:42 [logs]: Logger.js initialized
+2024-02-23 20:00:43 [server]: Server listening on port 3000
+2024-02-23 20:01:06 [logs]: Logger.js initialized
+2024-02-23 20:01:06 [server]: Server listening on port 3000
+2024-02-23 20:01:08 [logs]: Logger.js initialized
+2024-02-23 20:01:08 [server]: Server listening on port 3000
+2024-02-23 20:01:11 [logs]: Logger.js initialized
+2024-02-23 20:01:11 [server]: Server listening on port 3000
+2024-02-23 20:01:25 [logs]: Logger.js initialized
+2024-02-23 20:01:25 [server]: Server listening on port 3000
+2024-02-23 20:01:28 [logs]: Logger.js initialized
+2024-02-23 20:01:28 [server]: Server listening on port 3000
+2024-02-23 20:01:31 [logs]: Logger.js initialized
+2024-02-23 20:01:31 [server]: Server listening on port 3000
+2024-02-23 20:01:33 [logs]: Logger.js initialized
+2024-02-23 20:01:33 [server]: Server listening on port 3000
+2024-02-23 20:01:36 [logs]: Logger.js initialized
+2024-02-23 20:01:36 [server]: Server listening on port 3000
+2024-02-23 20:01:37 [logs]: Logger.js initialized
+2024-02-23 20:01:37 [server]: Server listening on port 3000
+2024-02-23 20:01:45 [logs]: Logger.js initialized
+2024-02-23 20:01:45 [server]: Server listening on port 3000
+2024-02-23 20:01:55 [logs]: Logger.js initialized
+2024-02-23 20:01:55 [server]: Server listening on port 3000
+2024-02-23 20:02:00 [logs]: Logger.js initialized
+2024-02-23 20:02:01 [server]: Server listening on port 3000
+2024-02-23 20:02:01 [logs]: Logger.js initialized
+2024-02-23 20:02:01 [server]: Server listening on port 3000
+2024-02-23 20:02:03 [message]: [object Object]
+2024-02-23 20:02:15 [logs]: Logger.js initialized
+2024-02-23 20:02:15 [server]: Server listening on port 3000
+2024-02-23 20:02:18 [message]: {"type":"text","id":"496374125548273954","quoteToken":"f49eiPHhAqgE4JlxyYhDy9MxasgIqpDZqpRX1vQzXusjg7oDjLAOk3OSVUMavw-b2D3HwQIUUt5vHIMTRjQ3pIYgWkg_MrUhxql8HzmvQNQ0Z1BzcpikyIuiZ_HKlD1gT95f23_BdnxQsBk6MQ2fGQ","text":"awdawd"}
+2024-02-23 20:02:32 [logs]: Logger.js initialized
+2024-02-23 20:02:32 [server]: Server listening on port 3000
+2024-02-23 20:02:34 [message]: "awdawd"
+2024-02-23 20:02:51 [logs]: Logger.js initialized
+2024-02-23 20:02:51 [server]: Server listening on port 3000
+2024-02-23 20:02:54 [message]: {"type":"text","id":"496374185241608289","quoteToken":"f2VZdDfVk6bPKgUyfxOsJNiGwE7oivpFMxfWyhjC-2uDpWysJVwLwPuGHIgzMi7n4Y2HhSAPJf34OyTq_cG-jKPZj4Vt6H2vOMo-w-jlEHr1EYgucGc59jUkWNWWEZqlpjFT9eRi0v6vDRghO_HF-A","text":"awdawd"}
+2024-02-23 20:04:41 [logs]: Logger.js initialized
+2024-02-23 20:04:41 [server]: Server listening on port 3000
+2024-02-23 20:05:00 [logs]: Logger.js initialized
+2024-02-23 20:05:00 [server]: Server listening on port 3000
+2024-02-23 20:05:04 [message]: {"type":"message","message":{"type":"text","id":"496374402574188819","quoteToken":"0-leAULrPrh264R9q6Gx03nv7iIuH2vr3b3ks-O-13SGf-s2oihRkCf7vgjHtuVwFh9sytZLI30Y4oXsqWj-VT7K1Dxgwj_EQ-BRB0aSELqEUYGDJLi3A8npQdLIySVG6ISzg8X5jMxFQvXFx547nA","text":"awawd"},"webhookEventId":"01HQB13FX9MYDYWXB924XGHVA1","deliveryContext":{"isRedelivery":false},"timestamp":1708693503541,"source":{"type":"user","userId":"U43354d20204e8cd7717133c1a03d9360"},"replyToken":"c1b9f2de22a549578ae77604b8761f9d","mode":"active"}
+2024-02-23 20:05:22 [logs]: Logger.js initialized
+2024-02-23 20:05:22 [server]: Server listening on port 3000
+2024-02-23 20:05:25 [logs]: Logger.js initialized
+2024-02-23 20:05:25 [server]: Server listening on port 3000
+2024-02-23 20:05:27 [logs]: Logger.js initialized
+2024-02-23 20:05:27 [server]: Server listening on port 3000
+2024-02-23 20:05:28 [logs]: Logger.js initialized
+2024-02-23 20:05:28 [server]: Server listening on port 3000
+2024-02-23 20:05:30 [message]: {"type":"user","userId":"U43354d20204e8cd7717133c1a03d9360"}
+2024-02-23 20:05:39 [message]: {"type":"group","groupId":"C3ac20e451bc2eb3fedf4b9c20c59121c","userId":"U43354d20204e8cd7717133c1a03d9360"}
+2024-02-23 20:05:46 [logs]: Logger.js initialized
+2024-02-23 20:05:46 [server]: Server listening on port 3000
+2024-02-23 20:05:49 [logs]: Logger.js initialized
+2024-02-23 20:05:49 [server]: Server listening on port 3000
+2024-02-23 20:05:49 [logs]: Logger.js initialized
+2024-02-23 20:05:49 [server]: Server listening on port 3000
+2024-02-23 20:05:50 [logs]: Logger.js initialized
+2024-02-23 20:05:50 [server]: Server listening on port 3000
+2024-02-23 20:07:41 [message]: {"type":"group","groupId":"C3ac20e451bc2eb3fedf4b9c20c59121c","userId":"U43354d20204e8cd7717133c1a03d9360"}
+2024-02-23 20:07:53 [logs]: Logger.js initialized
+2024-02-23 20:07:54 [server]: Server listening on port 3000
+2024-02-23 20:07:55 [logs]: Logger.js initialized
+2024-02-23 20:07:55 [server]: Server listening on port 3000
+2024-02-23 20:07:58 [logs]: Logger.js initialized
+2024-02-23 20:07:58 [server]: Server listening on port 3000
+2024-02-23 20:08:01 [logs]: Logger.js initialized
+2024-02-23 20:08:01 [server]: Server listening on port 3000
+2024-02-23 20:08:02 [logs]: Logger.js initialized
+2024-02-23 20:08:02 [server]: Server listening on port 3000
+2024-02-23 20:08:06 [message]: "[object Object]awdawd"
+2024-02-23 20:08:14 [logs]: Logger.js initialized
+2024-02-23 20:08:14 [server]: Server listening on port 3000
+2024-02-23 20:08:18 [logs]: Logger.js initialized
+2024-02-23 20:08:18 [server]: Server listening on port 3000
+2024-02-23 20:08:21 [logs]: Logger.js initialized
+2024-02-23 20:08:21 [server]: Server listening on port 3000
+2024-02-23 20:08:30 [logs]: Logger.js initialized
+2024-02-23 20:08:30 [server]: Server listening on port 3000
+2024-02-23 20:08:33 [message]: {"type":"user","userId":"U43354d20204e8cd7717133c1a03d9360"}{"type":"text","id":"496374753670725858","quoteToken":"f4qZCdwk4UhzH66JkldssC5kaM93nOHn5J63KXIHtg3f5G_e_i7OEwSi9tXwW7BUkApfxKhiQhVReBZ4L9-2OETpQdFWUb-F10ZlqGyool4JA3Va05KSpY9j7xUktuwEqndHw0zCMF18qzyvy8khgQ","text":"awdawda"}
+2024-02-23 20:09:04 [message]: {"type":"user","userId":"U43354d20204e8cd7717133c1a03d9360"}{"type":"text","id":"496374806116040785","quoteToken":"uqciWueVVCQptXMzgtxcJ3o2bvan8YwJyLOy0yyNXeQl0ViVqyiCMMgHLpiazA_4BLXd2Gt2uOEeV97MF902mHLvr8EKXfnUn2EVBb7Eam0v0HoS3g5cHLmlQDEy8WV52trYvBxvEz65Z69KffVX-g","text":"awdawd"}
+2024-02-23 20:09:50 [logs]: Logger.js initialized
+2024-02-23 20:09:50 [server]: Server listening on port 3000
+2024-02-23 20:09:52 [message]: undefined{"type":"text","id":"496374886344687633","quoteToken":"6T0eavFaxCMf-aS9Q-H7vjIoT-gV8iHoHIoMvDO_hnGAmd_-WW5Bi-pPo5Z3NIKKRcRjFP-CadpmqybtNzErvZT-J5i_sc2zdFR0tfGyezjevn934LFyJWndzSr9v90Y2PAO4oXvOOIq7CYliqkEtQ","text":"awdawd"}
+2024-02-23 20:10:01 [logs]: Logger.js initialized
+2024-02-23 20:10:02 [server]: Server listening on port 3000
+2024-02-23 20:10:06 [logs]: Logger.js initialized
+2024-02-23 20:10:07 [server]: Server listening on port 3000
+2024-02-23 20:10:12 [message]: undefined"awdawd"
+2024-02-23 20:10:20 [logs]: Logger.js initialized
+2024-02-23 20:10:20 [server]: Server listening on port 3000
+2024-02-23 20:10:22 [message]: undefined"awdawd"
+2024-02-23 20:10:45 [logs]: Logger.js initialized
+2024-02-23 20:10:45 [server]: Server listening on port 3000
+2024-02-23 20:10:48 [logs]: Logger.js initialized
+2024-02-23 20:10:48 [server]: Server listening on port 3000
+2024-02-23 20:10:49 [logs]: Logger.js initialized
+2024-02-23 20:10:49 [server]: Server listening on port 3000
+2024-02-23 20:10:50 [logs]: Logger.js initialized
+2024-02-23 20:10:50 [server]: Server listening on port 3000
+2024-02-23 20:10:54 [message]: U43354d20204e8cd7717133c1a03d9360"awdawd"
+2024-02-23 20:11:05 [logs]: Logger.js initialized
+2024-02-23 20:11:05 [server]: Server listening on port 3000
+2024-02-23 20:11:08 [message]: U43354d20204e8cd7717133c1a03d9360 "awdawd"
+2024-02-23 20:11:17 [logs]: Logger.js initialized
+2024-02-23 20:11:17 [server]: Server listening on port 3000
+2024-02-23 20:11:20 [message]: U43354d20204e8cd7717133c1a03d9360 :"awdawd"
+2024-02-23 20:11:24 [message]: C3ac20e451bc2eb3fedf4b9c20c59121c :"awdawd"
+2024-02-23 20:11:50 [logs]: Logger.js initialized
+2024-02-23 20:11:50 [server]: Server listening on port 3000
+2024-02-23 20:11:52 [logs]: Logger.js initialized
+2024-02-23 20:11:52 [server]: Server listening on port 3000
+2024-02-23 20:11:55 [logs]: Logger.js initialized
+2024-02-23 20:11:55 [server]: Server listening on port 3000
+2024-02-23 20:11:57 [logs]: Logger.js initialized
+2024-02-23 20:11:57 [server]: Server listening on port 3000
+2024-02-23 20:12:00 [message]: undefined :"awdawd"
+2024-02-23 20:12:11 [logs]: Logger.js initialized
+2024-02-23 20:12:11 [server]: Server listening on port 3000
+2024-02-23 20:12:12 [logs]: Logger.js initialized
+2024-02-23 20:12:12 [server]: Server listening on port 3000
+2024-02-23 20:12:14 [logs]: Logger.js initialized
+2024-02-23 20:12:14 [server]: Server listening on port 3000
+2024-02-23 20:12:16 [logs]: Logger.js initialized
+2024-02-23 20:12:16 [server]: Server listening on port 3000
+2024-02-23 20:12:18 [logs]: Logger.js initialized
+2024-02-23 20:12:18 [server]: Server listening on port 3000
+2024-02-23 20:12:25 [logs]: Logger.js initialized
+2024-02-23 20:12:25 [server]: Server listening on port 3000
+2024-02-23 20:12:27 [logs]: Logger.js initialized
+2024-02-23 20:12:27 [server]: Server listening on port 3000
+2024-02-23 20:12:30 [message]: U43354d20204e8cd7717133c1a03d9360 :"awdawd"
+2024-02-23 20:12:42 [message]: U43354d20204e8cd7717133c1a03d9360 :"awdawd"
+2024-02-23 20:12:52 [logs]: Logger.js initialized
+2024-02-23 20:12:52 [server]: Server listening on port 3000
+2024-02-23 20:12:55 [message]: U43354d20204e8cd7717133c1a03d9360: "awdawd"
+2024-02-23 20:13:18 [message]: C3ac20e451bc2eb3fedf4b9c20c59121c: " Bruh"
+2024-02-23 20:13:32 [logs]: Logger.js initialized
+2024-02-23 20:13:33 [server]: Server listening on port 3000
+2024-02-23 20:13:56 [logs]: Logger.js initialized
+2024-02-23 20:13:56 [server]: Server listening on port 3000
+2024-02-23 20:13:58 [logs]: Logger.js initialized
+2024-02-23 20:13:59 [server]: Server listening on port 3000
+2024-02-23 20:14:01 [logs]: Logger.js initialized
+2024-02-23 20:14:01 [server]: Server listening on port 3000
+2024-02-23 20:14:03 [logs]: Logger.js initialized
+2024-02-23 20:14:03 [server]: Server listening on port 3000
+2024-02-23 20:14:07 [logs]: Logger.js initialized
+2024-02-23 20:14:07 [server]: Server listening on port 3000
+2024-02-23 20:14:09 [message]: U43354d20204e8cd7717133c1a03d9360: "awdawd"
+2024-02-23 20:14:35 [logs]: Logger.js initialized
+2024-02-23 20:14:36 [server]: Server listening on port 3000
+2024-02-23 20:14:36 [logs]: Logger.js initialized
+2024-02-23 20:14:36 [server]: Server listening on port 3000
+2024-02-23 20:14:39 [message]: U43354d20204e8cd7717133c1a03d9360: "awdawd"
+2024-02-23 20:14:48 [message]: U43354d20204e8cd7717133c1a03d9360: "nigger"
+2024-02-23 20:14:52 [message]: U43354d20204e8cd7717133c1a03d9360: "nigger"
+2024-02-23 20:15:07 [message]: U43354d20204e8cd7717133c1a03d9360: "nigger"
+2024-02-23 20:15:10 [message]: U43354d20204e8cd7717133c1a03d9360: "nigger"
+2024-02-23 20:15:12 [message]: U43354d20204e8cd7717133c1a03d9360: "nigger"
+2024-02-23 20:15:15 [message]: U43354d20204e8cd7717133c1a03d9360: "nigger"
+2024-02-23 20:15:26 [logs]: Logger.js initialized
+2024-02-23 20:15:26 [server]: Server listening on port 3000
+2024-02-23 20:15:32 [logs]: Logger.js initialized
+2024-02-23 20:15:32 [server]: Server listening on port 3000
+2024-02-23 20:39:39 [logs]: Logger.js initialized
+2024-02-23 20:39:39 [server]: Server listening on port 3000
+2024-02-23 20:39:58 [message]: U43354d20204e8cd7717133c1a03d9360: "testicle"
+2024-02-23 20:40:05 [logs]: Logger.js initialized
+2024-02-23 20:40:05 [server]: Server listening on port 3000
+2024-02-23 20:40:06 [message]: U43354d20204e8cd7717133c1a03d9360: "awdawd"
+2024-02-23 20:40:27 [logs]: Logger.js initialized
+2024-02-23 20:40:27 [server]: Server listening on port 3000
+2024-02-23 20:40:28 [logs]: Logger.js initialized
+2024-02-23 20:40:28 [server]: Server listening on port 3000
+2024-02-23 20:40:35 [logs]: Logger.js initialized
+2024-02-23 20:40:35 [server]: Server listening on port 3000
+2024-02-23 20:40:39 [logs]: Logger.js initialized
+2024-02-23 20:40:40 [server]: Server listening on port 3000
+2024-02-23 20:40:42 [logs]: Logger.js initialized
+2024-02-23 20:40:42 [server]: Server listening on port 3000
+2024-02-23 20:40:48 [logs]: Logger.js initialized
+2024-02-23 20:40:48 [server]: Server listening on port 3000
+2024-02-23 20:40:50 [logs]: Logger.js initialized
+2024-02-23 20:40:50 [server]: Server listening on port 3000
+2024-02-23 20:40:53 [logs]: Logger.js initialized
+2024-02-23 20:40:53 [server]: Server listening on port 3000
+2024-02-23 20:41:32 [logs]: Logger.js initialized
+2024-02-23 20:41:32 [server]: Server listening on port 3000
+2024-02-23 20:41:42 [logs]: Logger.js initialized
+2024-02-23 20:41:42 [server]: Server listening on port 3000
+2024-02-23 20:41:52 [logs]: Logger.js initialized
+2024-02-23 20:41:52 [server]: Server listening on port 3000
+2024-02-23 20:41:57 [logs]: Logger.js initialized
+2024-02-23 20:41:57 [server]: Server listening on port 3000
+2024-02-23 20:42:03 [message]: U43354d20204e8cd7717133c1a03d9360: "awdaw"
+2024-02-23 20:42:04 [error]: {"message":"Request failed with status code 400","name":"AxiosError","stack":"AxiosError: Request failed with status code 400\n    at settle (file:///D:/Desktop/Codes/MentallyChill/node_modules/axios/lib/core/settle.js:19:12)\n    at IncomingMessage.handleStreamEnd (file:///D:/Desktop/Codes/MentallyChill/node_modules/axios/lib/adapters/http.js:589:11)\n    at IncomingMessage.emit (node:events:531:35)\n    at endReadableNT (node:internal/streams/readable:1696:12)\n    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)\n    at Axios.request (file:///D:/Desktop/Codes/MentallyChill/node_modules/axios/lib/core/Axios.js:45:41)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)","config":{"transitional":{"silentJSONParsing":true,"forcedJSONParsing":true,"clarifyTimeoutError":false},"adapter":["xhr","http"],"transformRequest":[null],"transformResponse":[null],"timeout":0,"xsrfCookieName":"XSRF-TOKEN","xsrfHeaderName":"X-XSRF-TOKEN","maxContentLength":-1,"maxBodyLength":-1,"env":{},"headers":{"Accept":"application/json, text/plain, */*","Content-Type":"application/json","Authorization":"Bearer GzWkhxhMvqYSICzVefC/PiXqeFPU0A7mDUnd3JLzizzo0Y+tJXy3GFRy4ezdhgfmhSQLQoQpNLo1HHQ/3K4XzsqttUz7lNmPIqooVsVv/z4jsbszRLb11cKg7df+aQL1n6Ndj2xezeuH+iPrSO/dGwdB04t89/1O/w1cDnyilFU=","User-Agent":"axios/1.6.7","Content-Length":"71","Accept-Encoding":"gzip, compress, deflate, br"},"method":"post","url":"https://api.line.me/v2/bot/message/push","data":"{\"to\":\"U43354d20204e8cd7717133c1a03d9360\",\"messages\":[{\"type\":\"text\"}]}"},"code":"ERR_BAD_REQUEST","status":400}
+2024-02-23 20:42:33 [message]: U43354d20204e8cd7717133c1a03d9360: "aw"
+2024-02-23 20:42:33 [error]: {"message":"Request failed with status code 400","name":"AxiosError","stack":"AxiosError: Request failed with status code 400\n    at settle (file:///D:/Desktop/Codes/MentallyChill/node_modules/axios/lib/core/settle.js:19:12)\n    at IncomingMessage.handleStreamEnd (file:///D:/Desktop/Codes/MentallyChill/node_modules/axios/lib/adapters/http.js:589:11)\n    at IncomingMessage.emit (node:events:531:35)\n    at endReadableNT (node:internal/streams/readable:1696:12)\n    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)\n    at Axios.request (file:///D:/Desktop/Codes/MentallyChill/node_modules/axios/lib/core/Axios.js:45:41)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)","config":{"transitional":{"silentJSONParsing":true,"forcedJSONParsing":true,"clarifyTimeoutError":false},"adapter":["xhr","http"],"transformRequest":[null],"transformResponse":[null],"timeout":0,"xsrfCookieName":"XSRF-TOKEN","xsrfHeaderName":"X-XSRF-TOKEN","maxContentLength":-1,"maxBodyLength":-1,"env":{},"headers":{"Accept":"application/json, text/plain, */*","Content-Type":"application/json","Authorization":"Bearer GzWkhxhMvqYSICzVefC/PiXqeFPU0A7mDUnd3JLzizzo0Y+tJXy3GFRy4ezdhgfmhSQLQoQpNLo1HHQ/3K4XzsqttUz7lNmPIqooVsVv/z4jsbszRLb11cKg7df+aQL1n6Ndj2xezeuH+iPrSO/dGwdB04t89/1O/w1cDnyilFU=","User-Agent":"axios/1.6.7","Content-Length":"71","Accept-Encoding":"gzip, compress, deflate, br"},"method":"post","url":"https://api.line.me/v2/bot/message/push","data":"{\"to\":\"U43354d20204e8cd7717133c1a03d9360\",\"messages\":[{\"type\":\"text\"}]}"},"code":"ERR_BAD_REQUEST","status":400}
+2024-02-23 20:43:01 [message]: U43354d20204e8cd7717133c1a03d9360: "awdawd"
+2024-02-23 20:43:01 [error]: {"message":"Request failed with status code 400","name":"AxiosError","stack":"AxiosError: Request failed with status code 400\n    at settle (file:///D:/Desktop/Codes/MentallyChill/node_modules/axios/lib/core/settle.js:19:12)\n    at IncomingMessage.handleStreamEnd (file:///D:/Desktop/Codes/MentallyChill/node_modules/axios/lib/adapters/http.js:589:11)\n    at IncomingMessage.emit (node:events:531:35)\n    at endReadableNT (node:internal/streams/readable:1696:12)\n    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)\n    at Axios.request (file:///D:/Desktop/Codes/MentallyChill/node_modules/axios/lib/core/Axios.js:45:41)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)","config":{"transitional":{"silentJSONParsing":true,"forcedJSONParsing":true,"clarifyTimeoutError":false},"adapter":["xhr","http"],"transformRequest":[null],"transformResponse":[null],"timeout":0,"xsrfCookieName":"XSRF-TOKEN","xsrfHeaderName":"X-XSRF-TOKEN","maxContentLength":-1,"maxBodyLength":-1,"env":{},"headers":{"Accept":"application/json, text/plain, */*","Content-Type":"application/json","Authorization":"Bearer GzWkhxhMvqYSICzVefC/PiXqeFPU0A7mDUnd3JLzizzo0Y+tJXy3GFRy4ezdhgfmhSQLQoQpNLo1HHQ/3K4XzsqttUz7lNmPIqooVsVv/z4jsbszRLb11cKg7df+aQL1n6Ndj2xezeuH+iPrSO/dGwdB04t89/1O/w1cDnyilFU=","User-Agent":"axios/1.6.7","Content-Length":"71","Accept-Encoding":"gzip, compress, deflate, br"},"method":"post","url":"https://api.line.me/v2/bot/message/push","data":"{\"to\":\"U43354d20204e8cd7717133c1a03d9360\",\"messages\":[{\"type\":\"text\"}]}"},"code":"ERR_BAD_REQUEST","status":400}
+2024-02-23 20:44:56 [message]: U43354d20204e8cd7717133c1a03d9360: "awd"
+2024-02-23 20:44:56 [error]: {"message":"Request failed with status code 400","name":"AxiosError","stack":"AxiosError: Request failed with status code 400\n    at settle (file:///D:/Desktop/Codes/MentallyChill/node_modules/axios/lib/core/settle.js:19:12)\n    at IncomingMessage.handleStreamEnd (file:///D:/Desktop/Codes/MentallyChill/node_modules/axios/lib/adapters/http.js:589:11)\n    at IncomingMessage.emit (node:events:531:35)\n    at endReadableNT (node:internal/streams/readable:1696:12)\n    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)\n    at Axios.request (file:///D:/Desktop/Codes/MentallyChill/node_modules/axios/lib/core/Axios.js:45:41)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)","config":{"transitional":{"silentJSONParsing":true,"forcedJSONParsing":true,"clarifyTimeoutError":false},"adapter":["xhr","http"],"transformRequest":[null],"transformResponse":[null],"timeout":0,"xsrfCookieName":"XSRF-TOKEN","xsrfHeaderName":"X-XSRF-TOKEN","maxContentLength":-1,"maxBodyLength":-1,"env":{},"headers":{"Accept":"application/json, text/plain, */*","Content-Type":"application/json","Authorization":"Bearer GzWkhxhMvqYSICzVefC/PiXqeFPU0A7mDUnd3JLzizzo0Y+tJXy3GFRy4ezdhgfmhSQLQoQpNLo1HHQ/3K4XzsqttUz7lNmPIqooVsVv/z4jsbszRLb11cKg7df+aQL1n6Ndj2xezeuH+iPrSO/dGwdB04t89/1O/w1cDnyilFU=","User-Agent":"axios/1.6.7","Content-Length":"71","Accept-Encoding":"gzip, compress, deflate, br"},"method":"post","url":"https://api.line.me/v2/bot/message/push","data":"{\"to\":\"U43354d20204e8cd7717133c1a03d9360\",\"messages\":[{\"type\":\"text\"}]}"},"code":"ERR_BAD_REQUEST","status":400}
+2024-02-23 20:45:18 [logs]: Logger.js initialized
+2024-02-23 20:45:18 [server]: Server listening on port 3000
+2024-02-23 20:45:20 [message]: U43354d20204e8cd7717133c1a03d9360: "awdaw"
+2024-02-23 20:45:20 [error]: {"message":"Request failed with status code 400","name":"AxiosError","stack":"AxiosError: Request failed with status code 400\n    at settle (file:///D:/Desktop/Codes/MentallyChill/node_modules/axios/lib/core/settle.js:19:12)\n    at IncomingMessage.handleStreamEnd (file:///D:/Desktop/Codes/MentallyChill/node_modules/axios/lib/adapters/http.js:589:11)\n    at IncomingMessage.emit (node:events:531:35)\n    at endReadableNT (node:internal/streams/readable:1696:12)\n    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)\n    at Axios.request (file:///D:/Desktop/Codes/MentallyChill/node_modules/axios/lib/core/Axios.js:45:41)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)","config":{"transitional":{"silentJSONParsing":true,"forcedJSONParsing":true,"clarifyTimeoutError":false},"adapter":["xhr","http"],"transformRequest":[null],"transformResponse":[null],"timeout":0,"xsrfCookieName":"XSRF-TOKEN","xsrfHeaderName":"X-XSRF-TOKEN","maxContentLength":-1,"maxBodyLength":-1,"env":{},"headers":{"Accept":"application/json, text/plain, */*","Content-Type":"application/json","Authorization":"Bearer GzWkhxhMvqYSICzVefC/PiXqeFPU0A7mDUnd3JLzizzo0Y+tJXy3GFRy4ezdhgfmhSQLQoQpNLo1HHQ/3K4XzsqttUz7lNmPIqooVsVv/z4jsbszRLb11cKg7df+aQL1n6Ndj2xezeuH+iPrSO/dGwdB04t89/1O/w1cDnyilFU=","User-Agent":"axios/1.6.7","Content-Length":"71","Accept-Encoding":"gzip, compress, deflate, br"},"method":"post","url":"https://api.line.me/v2/bot/message/push","data":"{\"to\":\"Ubfc46b489ce8ddbde6044e641542a729\",\"messages\":[{\"type\":\"text\"}]}"},"code":"ERR_BAD_REQUEST","status":400}
+2024-02-23 20:45:56 [logs]: Logger.js initialized
+2024-02-23 20:45:56 [server]: Server listening on port 3000
+2024-02-23 20:45:59 [message]: U43354d20204e8cd7717133c1a03d9360: "awdaw"
+2024-02-23 20:45:59 [error]: {}
+2024-02-23 20:46:03 [message]: U43354d20204e8cd7717133c1a03d9360: "Test"
+2024-02-23 20:46:04 [error]: {}
+2024-02-23 20:46:35 [logs]: Logger.js initialized
+2024-02-23 20:46:35 [server]: Server listening on port 3000
+2024-02-23 20:46:46 [logs]: Logger.js initialized
+2024-02-23 20:46:46 [server]: Server listening on port 3000
+2024-02-23 20:46:51 [logs]: Logger.js initialized
+2024-02-23 20:46:51 [server]: Server listening on port 3000
+2024-02-23 20:46:52 [logs]: Logger.js initialized
+2024-02-23 20:46:52 [server]: Server listening on port 3000
+2024-02-23 20:46:56 [logs]: Logger.js initialized
+2024-02-23 20:46:56 [server]: Server listening on port 3000
+2024-02-23 20:47:00 [logs]: Logger.js initialized
+2024-02-23 20:47:00 [server]: Server listening on port 3000
+2024-02-23 20:47:02 [message]: U43354d20204e8cd7717133c1a03d9360: "awdawd"
+2024-02-23 20:47:02 [error]: {}
+2024-02-23 20:47:09 [logs]: Logger.js initialized
+2024-02-23 20:47:09 [server]: Server listening on port 3000
+2024-02-23 20:47:11 [message]: U43354d20204e8cd7717133c1a03d9360: "efef"
+2024-02-23 20:47:12 [error]: {}
+2024-02-23 20:47:21 [logs]: Logger.js initialized
+2024-02-23 20:47:21 [server]: Server listening on port 3000
+2024-02-23 20:47:23 [logs]: Logger.js initialized
+2024-02-23 20:47:24 [server]: Server listening on port 3000
+2024-02-23 20:47:24 [logs]: Logger.js initialized
+2024-02-23 20:47:24 [server]: Server listening on port 3000
+2024-02-23 20:47:27 [message]: U43354d20204e8cd7717133c1a03d9360: "234234"
+2024-02-23 20:47:27 [error]: {}
+2024-02-23 20:47:49 [logs]: Logger.js initialized
+2024-02-23 20:47:49 [server]: Server listening on port 3000
+2024-02-23 20:48:18 [logs]: Logger.js initialized
+2024-02-23 20:48:18 [server]: Server listening on port 3000
+2024-02-23 20:48:32 [logs]: Logger.js initialized
+2024-02-23 20:48:32 [server]: Server listening on port 3000
+2024-02-23 20:48:40 [logs]: Logger.js initialized
+2024-02-23 20:48:40 [server]: Server listening on port 3000
+2024-02-23 20:48:44 [logs]: Logger.js initialized
+2024-02-23 20:48:44 [server]: Server listening on port 3000
+2024-02-23 20:49:06 [logs]: Logger.js initialized
+2024-02-23 20:49:06 [server]: Server listening on port 3000
+2024-02-23 20:49:17 [logs]: Logger.js initialized
+2024-02-23 20:49:17 [server]: Server listening on port 3000
+2024-02-23 20:49:18 [logs]: Logger.js initialized
+2024-02-23 20:49:18 [server]: Server listening on port 3000
+2024-02-23 20:49:21 [logs]: Logger.js initialized
+2024-02-23 20:49:21 [server]: Server listening on port 3000
+2024-02-23 20:49:26 [logs]: Logger.js initialized
+2024-02-23 20:49:27 [server]: Server listening on port 3000
+2024-02-23 20:49:29 [logs]: Logger.js initialized
+2024-02-23 20:49:29 [server]: Server listening on port 3000
+2024-02-23 20:49:32 [logs]: Logger.js initialized
+2024-02-23 20:49:32 [server]: Server listening on port 3000
+2024-02-23 20:49:34 [logs]: Logger.js initialized
+2024-02-23 20:49:34 [server]: Server listening on port 3000
+2024-02-23 20:49:41 [logs]: Logger.js initialized
+2024-02-23 20:49:41 [server]: Server listening on port 3000
+2024-02-23 20:49:59 [logs]: Logger.js initialized
+2024-02-23 20:49:59 [server]: Server listening on port 3000
+2024-02-23 20:50:02 [logs]: Logger.js initialized
+2024-02-23 20:50:02 [server]: Server listening on port 3000
+2024-02-23 20:50:05 [logs]: Logger.js initialized
+2024-02-23 20:50:05 [server]: Server listening on port 3000
+2024-02-23 20:50:07 [logs]: Logger.js initialized
+2024-02-23 20:50:08 [server]: Server listening on port 3000
+2024-02-23 20:50:56 [message]: U5c8fda9b0a3084f1e96c427817fea0a6: "บลาๆๆๆๆ"
+2024-02-23 20:50:57 [error]: {}
+2024-02-23 20:51:03 [message]: U5c8fda9b0a3084f1e96c427817fea0a6: "Hi"
+2024-02-23 20:51:03 [error]: {}
+2024-02-23 20:51:05 [message]: U5c8fda9b0a3084f1e96c427817fea0a6: "Oh hi"
+2024-02-23 20:51:06 [error]: {}
+2024-02-23 20:51:18 [logs]: Logger.js initialized
+2024-02-23 20:51:18 [server]: Server listening on port 3000
+2024-02-23 20:51:26 [logs]: Logger.js initialized
+2024-02-23 20:51:26 [server]: Server listening on port 3000
+2024-02-23 20:51:31 [logs]: Logger.js initialized
+2024-02-23 20:51:31 [server]: Server listening on port 3000
+2024-02-23 20:51:37 [logs]: Logger.js initialized
+2024-02-23 20:51:37 [server]: Server listening on port 3000
+2024-02-23 20:51:42 [logs]: Logger.js initialized
+2024-02-23 20:51:42 [server]: Server listening on port 3000
+2024-02-23 20:51:50 [logs]: Logger.js initialized
+2024-02-23 20:51:50 [server]: Server listening on port 3000
+2024-02-23 20:51:53 [message]: U43354d20204e8cd7717133c1a03d9360: "test"
+2024-02-23 20:51:53 [action]: pushMessage test U43354d20204e8cd7717133c1a03d9360
+2024-02-23 20:51:53 [error]: {}
+2024-02-23 20:52:16 [logs]: Logger.js initialized
+2024-02-23 20:52:17 [server]: Server listening on port 3000
+2024-02-23 20:52:30 [logs]: Logger.js initialized
+2024-02-23 20:52:30 [server]: Server listening on port 3000
+2024-02-23 20:52:31 [logs]: Logger.js initialized
+2024-02-23 20:52:31 [server]: Server listening on port 3000
+2024-02-23 20:52:35 [message]: U43354d20204e8cd7717133c1a03d9360: "awd"
+2024-02-23 20:52:35 [action]: pushMessage Recieved! U5c8fda9b0a3084f1e96c427817fea0a6
+2024-02-23 20:52:35 [error]: {}
+2024-02-23 20:52:52 [message]: U5c8fda9b0a3084f1e96c427817fea0a6: "Wrgi"
+2024-02-23 20:52:52 [action]: pushMessage Recieved! U5c8fda9b0a3084f1e96c427817fea0a6
+2024-02-23 20:52:52 [error]: {}
+2024-02-23 20:53:03 [message]: U5c8fda9b0a3084f1e96c427817fea0a6: "Oo"
+2024-02-23 20:53:03 [action]: pushMessage Recieved! U5c8fda9b0a3084f1e96c427817fea0a6
+2024-02-23 20:53:03 [error]: {}
+2024-02-23 20:53:13 [message]: U5c8fda9b0a3084f1e96c427817fea0a6: "มาหวะ"
+2024-02-23 20:53:13 [action]: pushMessage Recieved! U5c8fda9b0a3084f1e96c427817fea0a6
+2024-02-23 20:53:13 [error]: {}
+2024-02-23 20:53:25 [message]: U43354d20204e8cd7717133c1a03d9360: "อะไรมา"
+2024-02-23 20:53:25 [action]: pushMessage Recieved! U5c8fda9b0a3084f1e96c427817fea0a6
+2024-02-23 20:53:26 [error]: {}
+2024-02-23 20:53:30 [message]: U5c8fda9b0a3084f1e96c427817fea0a6: "Received "
+2024-02-23 20:53:30 [action]: pushMessage Recieved! U5c8fda9b0a3084f1e96c427817fea0a6
+2024-02-23 20:53:30 [error]: {}
+2024-02-23 20:53:37 [logs]: Logger.js initialized
+2024-02-23 20:53:37 [server]: Server listening on port 3000
+2024-02-23 20:53:39 [logs]: Logger.js initialized
+2024-02-23 20:53:39 [server]: Server listening on port 3000
+2024-02-23 20:53:40 [message]: U5c8fda9b0a3084f1e96c427817fea0a6: "ใครส่งก้มาหรอ"
+2024-02-23 20:53:40 [action]: pushMessage Kill Yourself U5c8fda9b0a3084f1e96c427817fea0a6
+2024-02-23 20:53:41 [error]: {}
+2024-02-23 20:53:49 [message]: U43354d20204e8cd7717133c1a03d9360: "ลองฟังก์ชั่นเฉยๆ"
+2024-02-23 20:53:49 [action]: pushMessage Kill Yourself U5c8fda9b0a3084f1e96c427817fea0a6
+2024-02-23 20:53:49 [error]: {}
+2024-02-23 20:54:02 [message]: U43354d20204e8cd7717133c1a03d9360: "ฟังก์ชั่น pushMessage คือส่งข้อความตรง"
+2024-02-23 20:54:02 [action]: pushMessage Kill Yourself U5c8fda9b0a3084f1e96c427817fea0a6
+2024-02-23 20:54:03 [error]: {}
+2024-02-23 20:54:22 [logs]: Logger.js initialized
+2024-02-23 20:54:22 [server]: Server listening on port 3000
+2024-02-23 20:54:27 [logs]: Logger.js initialized
+2024-02-23 20:54:28 [server]: Server listening on port 3000
+2024-02-23 20:54:31 [logs]: Logger.js initialized
+2024-02-23 20:54:31 [server]: Server listening on port 3000
+2024-02-23 20:54:32 [logs]: Logger.js initialized
+2024-02-23 20:54:32 [server]: Server listening on port 3000
+2024-02-23 20:54:33 [logs]: Logger.js initialized
+2024-02-23 20:54:34 [server]: Server listening on port 3000
+2024-02-23 20:54:37 [logs]: Logger.js initialized
+2024-02-23 20:54:37 [server]: Server listening on port 3000
+2024-02-23 20:54:41 [logs]: Logger.js initialized
+2024-02-23 20:54:41 [server]: Server listening on port 3000
+2024-02-23 20:54:43 [message]: U43354d20204e8cd7717133c1a03d9360: "ก่อนหน้านี้มันเป็นแค่ replyMessage"
+2024-02-23 20:54:43 [action]: replyMessage Kill Yourself 972a65d32cca4ab6b9584688be6570fa
+2024-02-23 20:54:43 [error]: {}
+2024-02-23 20:55:07 [logs]: Logger.js initialized
+2024-02-23 20:55:07 [server]: Server listening on port 3000
+2024-02-23 20:55:09 [logs]: Logger.js initialized
+2024-02-23 20:55:09 [server]: Server listening on port 3000
+2024-02-23 20:55:11 [message]: U43354d20204e8cd7717133c1a03d9360: "แบบนี้"
+2024-02-23 20:55:11 [action]: replyMessage พูดมากปากเหม็น a698eb6ecde54c838097f8ff780831b8
+2024-02-23 20:55:11 [error]: {}
+2024-02-23 20:55:21 [logs]: Logger.js initialized
+2024-02-23 20:55:21 [server]: Server listening on port 3000
+2024-02-23 20:55:26 [logs]: Logger.js initialized
+2024-02-23 20:55:26 [server]: Server listening on port 3000
+2024-02-23 20:55:30 [message]: U43354d20204e8cd7717133c1a03d9360: "aw"
+2024-02-23 20:55:30 [action]: pushMessage พูดมากปากเหม็น C3ac20e451bc2eb3fedf4b9c20c59121c
+2024-02-23 20:55:31 [error]: {}
+2024-02-23 20:55:44 [message]: U43354d20204e8cd7717133c1a03d9360: "awdawd"
+2024-02-23 20:55:44 [action]: pushMessage พูดมากปากเหม็น undefined
+2024-02-23 20:55:44 [error]: {"message":"Request failed with status code 400","name":"AxiosError","stack":"AxiosError: Request failed with status code 400\n    at settle (file:///D:/Desktop/Codes/MentallyChill/node_modules/axios/lib/core/settle.js:19:12)\n    at IncomingMessage.handleStreamEnd (file:///D:/Desktop/Codes/MentallyChill/node_modules/axios/lib/adapters/http.js:589:11)\n    at IncomingMessage.emit (node:events:531:35)\n    at endReadableNT (node:internal/streams/readable:1696:12)\n    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)\n    at Axios.request (file:///D:/Desktop/Codes/MentallyChill/node_modules/axios/lib/core/Axios.js:45:41)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)","config":{"transitional":{"silentJSONParsing":true,"forcedJSONParsing":true,"clarifyTimeoutError":false},"adapter":["xhr","http"],"transformRequest":[null],"transformResponse":[null],"timeout":0,"xsrfCookieName":"XSRF-TOKEN","xsrfHeaderName":"X-XSRF-TOKEN","maxContentLength":-1,"maxBodyLength":-1,"env":{},"headers":{"Accept":"application/json, text/plain, */*","Content-Type":"application/json","Authorization":"Bearer GzWkhxhMvqYSICzVefC/PiXqeFPU0A7mDUnd3JLzizzo0Y+tJXy3GFRy4ezdhgfmhSQLQoQpNLo1HHQ/3K4XzsqttUz7lNmPIqooVsVv/z4jsbszRLb11cKg7df+aQL1n6Ndj2xezeuH+iPrSO/dGwdB04t89/1O/w1cDnyilFU=","User-Agent":"axios/1.6.7","Content-Length":"82","Accept-Encoding":"gzip, compress, deflate, br"},"method":"post","url":"https://api.line.me/v2/bot/message/push","data":"{\"messages\":[{\"type\":\"text\",\"text\":\"พูดมากปากเหม็น\"}]}"},"code":"ERR_BAD_REQUEST","status":400}
+2024-02-23 20:55:49 [logs]: Logger.js initialized
+2024-02-23 20:55:49 [server]: Server listening on port 3000
+2024-02-23 20:55:51 [message]: U43354d20204e8cd7717133c1a03d9360: "awdawd"
+2024-02-23 20:55:51 [action]: pushMessage พูดมากปากเหม็น U43354d20204e8cd7717133c1a03d9360
+2024-02-23 20:55:51 [error]: {}
+2024-02-23 20:55:59 [logs]: Logger.js initialized
+2024-02-23 20:56:00 [server]: Server listening on port 3000
+2024-02-23 20:56:55 [message]: U43354d20204e8cd7717133c1a03d9360: "ลอง"
+2024-02-23 20:56:55 [action]: pushMessage พูดมากปากเหม็น C3ac20e451bc2eb3fedf4b9c20c59121c
+2024-02-23 20:56:56 [error]: {}
+2024-02-23 20:56:58 [message]: U43354d20204e8cd7717133c1a03d9360: "เค"
+2024-02-23 20:56:58 [action]: pushMessage พูดมากปากเหม็น C3ac20e451bc2eb3fedf4b9c20c59121c
+2024-02-23 20:56:59 [error]: {}
+2024-02-23 20:57:06 [logs]: Logger.js initialized
+2024-02-23 20:57:06 [server]: Server listening on port 3000
+2024-02-23 20:57:11 [logs]: Logger.js initialized
+2024-02-23 20:57:11 [server]: Server listening on port 3000
+2024-02-23 20:57:15 [logs]: Logger.js initialized
+2024-02-23 20:57:15 [server]: Server listening on port 3000
+2024-02-23 20:58:16 [logs]: Logger.js initialized
+2024-02-23 20:58:17 [server]: Server listening on port 3000
+2024-02-23 20:59:01 [logs]: Logger.js initialized
+2024-02-23 20:59:01 [server]: Server listening on port 3000
+2024-02-23 20:59:06 [logs]: Logger.js initialized
+2024-02-23 20:59:06 [server]: Server listening on port 3000
+2024-02-23 20:59:08 [logs]: Logger.js initialized
+2024-02-23 20:59:09 [server]: Server listening on port 3000
+2024-02-23 20:59:12 [logs]: Logger.js initialized
+2024-02-23 20:59:13 [server]: Server listening on port 3000
+2024-02-23 20:59:17 [logs]: Logger.js initialized
+2024-02-23 20:59:17 [server]: Server listening on port 3000
+2024-02-23 20:59:38 [logs]: Logger.js initialized
+2024-02-23 20:59:38 [server]: Server listening on port 3000
+2024-02-23 21:01:46 [message]: U43354d20204e8cd7717133c1a03d9360: "testicle"
+2024-02-23 21:01:46 [action]: pushMessage C3ac20e451bc2eb3fedf4b9c20c59121c Message Received!
+2024-02-23 21:01:46 [error]: {"message":"Request failed with status code 400","name":"AxiosError","stack":"AxiosError: Request failed with status code 400\n    at settle (file:///D:/Desktop/Codes/MentallyChill/node_modules/axios/lib/core/settle.js:19:12)\n    at IncomingMessage.handleStreamEnd (file:///D:/Desktop/Codes/MentallyChill/node_modules/axios/lib/adapters/http.js:589:11)\n    at IncomingMessage.emit (node:events:531:35)\n    at endReadableNT (node:internal/streams/readable:1696:12)\n    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)\n    at Axios.request (file:///D:/Desktop/Codes/MentallyChill/node_modules/axios/lib/core/Axios.js:45:41)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)","config":{"transitional":{"silentJSONParsing":true,"forcedJSONParsing":true,"clarifyTimeoutError":false},"adapter":["xhr","http"],"transformRequest":[null],"transformResponse":[null],"timeout":0,"xsrfCookieName":"XSRF-TOKEN","xsrfHeaderName":"X-XSRF-TOKEN","maxContentLength":-1,"maxBodyLength":-1,"env":{},"headers":{"Accept":"application/json, text/plain, */*","Content-Type":"application/json","Authorization":"Bearer GzWkhxhMvqYSICzVefC/PiXqeFPU0A7mDUnd3JLzizzo0Y+tJXy3GFRy4ezdhgfmhSQLQoQpNLo1HHQ/3K4XzsqttUz7lNmPIqooVsVv/z4jsbszRLb11cKg7df+aQL1n6Ndj2xezeuH+iPrSO/dGwdB04t89/1O/w1cDnyilFU=","User-Agent":"axios/1.6.7","Content-Length":"98","Accept-Encoding":"gzip, compress, deflate, br"},"method":"post","url":"https://api.line.me/v2/bot/message/push","data":"{\"to\":\"Message Received!\",\"messages\":[{\"type\":\"text\",\"text\":\"C3ac20e451bc2eb3fedf4b9c20c59121c\"}]}"},"code":"ERR_BAD_REQUEST","status":400}
+2024-02-23 21:02:02 [logs]: Logger.js initialized
+2024-02-23 21:02:02 [server]: Server listening on port 3000
+2024-02-23 21:02:10 [logs]: Logger.js initialized
+2024-02-23 21:02:11 [server]: Server listening on port 3000
+2024-02-23 21:02:14 [logs]: Logger.js initialized
+2024-02-23 21:02:15 [server]: Server listening on port 3000
+2024-02-23 21:02:18 [message]: U43354d20204e8cd7717133c1a03d9360: "awdawd"
+2024-02-23 21:02:18 [action]: pushMessage Message Received! C3ac20e451bc2eb3fedf4b9c20c59121c
+2024-02-23 21:02:18 [error]: {}
+2024-02-23 21:02:35 [logs]: Logger.js initialized
+2024-02-23 21:02:35 [server]: Server listening on port 3000
+2024-02-23 21:02:50 [message]: U43354d20204e8cd7717133c1a03d9360: "Nerd"
+2024-02-23 21:02:50 [action]: pushMessage Nerd Your mom C3ac20e451bc2eb3fedf4b9c20c59121c
+2024-02-23 21:02:50 [error]: {}
+2024-02-23 21:02:56 [logs]: Logger.js initialized
+2024-02-23 21:02:56 [logs]: Logger.js initialized
+2024-02-23 21:02:56 [server]: Server listening on port 3000
+2024-02-23 21:05:09 [message]: U43354d20204e8cd7717133c1a03d9360: "man"
+2024-02-23 21:05:09 [action]: pushMessage man your mom C3ac20e451bc2eb3fedf4b9c20c59121c
+2024-02-23 21:05:09 [error]: {}
+2024-02-23 21:05:31 [logs]: Logger.js initialized
+2024-02-23 21:05:31 [server]: Server listening on port 3000
+2024-02-23 21:05:34 [logs]: Logger.js initialized
+2024-02-23 21:05:34 [server]: Server listening on port 3000
+2024-02-23 21:05:45 [logs]: Logger.js initialized
+2024-02-23 21:05:45 [server]: Server listening on port 3000
+2024-02-23 21:05:45 [logs]: Logger.js initialized
+2024-02-23 21:05:46 [server]: Server listening on port 3000
+2024-02-23 21:05:47 [message]: U43354d20204e8cd7717133c1a03d9360: "aw"
+2024-02-23 21:05:47 [action]: replyMessage aw your mom => C3ac20e451bc2eb3fedf4b9c20c59121c
+2024-02-23 21:05:47 [error]: {"message":"Request failed with status code 400","name":"AxiosError","stack":"AxiosError: Request failed with status code 400\n    at settle (file:///D:/Desktop/Codes/MentallyChill/node_modules/axios/lib/core/settle.js:19:12)\n    at IncomingMessage.handleStreamEnd (file:///D:/Desktop/Codes/MentallyChill/node_modules/axios/lib/adapters/http.js:589:11)\n    at IncomingMessage.emit (node:events:531:35)\n    at endReadableNT (node:internal/streams/readable:1696:12)\n    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)\n    at Axios.request (file:///D:/Desktop/Codes/MentallyChill/node_modules/axios/lib/core/Axios.js:45:41)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)","config":{"transitional":{"silentJSONParsing":true,"forcedJSONParsing":true,"clarifyTimeoutError":false},"adapter":["xhr","http"],"transformRequest":[null],"transformResponse":[null],"timeout":0,"xsrfCookieName":"XSRF-TOKEN","xsrfHeaderName":"X-XSRF-TOKEN","maxContentLength":-1,"maxBodyLength":-1,"env":{},"headers":{"Accept":"application/json, text/plain, */*","Content-Type":"application/json","Authorization":"Bearer GzWkhxhMvqYSICzVefC/PiXqeFPU0A7mDUnd3JLzizzo0Y+tJXy3GFRy4ezdhgfmhSQLQoQpNLo1HHQ/3K4XzsqttUz7lNmPIqooVsVv/z4jsbszRLb11cKg7df+aQL1n6Ndj2xezeuH+iPrSO/dGwdB04t89/1O/w1cDnyilFU=","User-Agent":"axios/1.6.7","Content-Length":"156","Accept-Encoding":"gzip, compress, deflate, br"},"method":"post","url":"https://api.line.me/v2/bot/message/reply","data":"{\"replyToken\":\"C3ac20e451bc2eb3fedf4b9c20c59121c\",\"messages\":[{\"notificationDisabled\":true,\"customAggregationUnits\":\"\",\"type\":\"text\",\"text\":\"aw your mom\"}]}"},"code":"ERR_BAD_REQUEST","status":400}
+2024-02-23 21:06:24 [logs]: Logger.js initialized
+2024-02-23 21:06:24 [server]: Server listening on port 3000
+2024-02-23 21:06:27 [message]: U43354d20204e8cd7717133c1a03d9360: "q2eq2e"
+2024-02-23 21:06:27 [action]: replyMessage q2eq2e your mom => b571f7508c8148d5bd4b66dc7f6ca02c
+2024-02-23 21:06:27 [error]: {}
+2024-02-23 21:06:38 [logs]: Logger.js initialized
+2024-02-23 21:06:38 [server]: Server listening on port 3000
+2024-02-23 21:06:40 [logs]: Logger.js initialized
+2024-02-23 21:06:40 [server]: Server listening on port 3000
+2024-02-23 21:06:43 [message]: U43354d20204e8cd7717133c1a03d9360: "awd"
+2024-02-23 21:06:43 [action]: replyMessage awd your mom => 1d9d40bcb1bb4a81be2f777bafa38ac1
+2024-02-23 21:07:14 [logs]: Logger.js initialized
+2024-02-23 21:07:14 [server]: Server listening on port 3000
+2024-02-23 21:07:16 [message]: U43354d20204e8cd7717133c1a03d9360: "awd"
+2024-02-23 21:07:16 [action]: replyMessage awd your mom => 436d420f594b4f1a981f2e968670b6b3
+2024-02-23 21:07:36 [logs]: Logger.js initialized
+2024-02-23 21:07:36 [server]: Server listening on port 3000
+2024-02-23 21:07:40 [logs]: Logger.js initialized
+2024-02-23 21:07:40 [server]: Server listening on port 3000
+2024-02-23 21:07:43 [message]: U43354d20204e8cd7717133c1a03d9360: "awd"
+2024-02-23 21:07:43 [action]: replyMessage awd your mom => 02a1716b34a14ad0b761c95d9440fc8a
+2024-02-23 21:07:43 [response]: [object Object]
+2024-02-23 21:07:56 [logs]: Logger.js initialized
+2024-02-23 21:07:56 [server]: Server listening on port 3000
+2024-02-23 21:07:57 [logs]: Logger.js initialized
+2024-02-23 21:07:57 [server]: Server listening on port 3000
+2024-02-23 21:08:00 [message]: U43354d20204e8cd7717133c1a03d9360: "awd"
+2024-02-23 21:08:00 [action]: replyMessage awd your mom => fc3311bffdc84acd88826d458a6e9b72
+2024-02-23 21:10:49 [logs]: Logger.js initialized
+2024-02-23 21:10:49 [server]: Server listening on port 3000
+2024-02-23 21:10:55 [logs]: Logger.js initialized
+2024-02-23 21:10:55 [server]: Server listening on port 3000
+2024-02-23 21:11:02 [logs]: Logger.js initialized
+2024-02-23 21:11:02 [server]: Server listening on port 3000
+2024-02-23 21:11:03 [logs]: Logger.js initialized
+2024-02-23 21:11:03 [server]: Server listening on port 3000
+2024-02-23 21:11:05 [logs]: Logger.js initialized
+2024-02-23 21:11:05 [server]: Server listening on port 3000
+2024-02-23 21:11:43 [message]: U43354d20204e8cd7717133c1a03d9360: "test"
+2024-02-23 21:11:43 [action]: replyMessage test your mom => 4a64ff25ccdf40afa235914f9fb570b1
+2024-02-23 21:11:54 [logs]: Logger.js initialized
+2024-02-23 21:11:54 [server]: Server listening on port 3000
+2024-02-23 21:11:57 [message]: U43354d20204e8cd7717133c1a03d9360: "test"
+2024-02-23 21:11:57 [action]: replyMessage test your mom => a64453630f354964bf33dcd3888383cc
+2024-02-23 21:11:57 [logs]: [object Object]
+2024-02-23 21:12:04 [logs]: Logger.js initialized
+2024-02-23 21:12:04 [server]: Server listening on port 3000
+2024-02-23 21:12:07 [logs]: Logger.js initialized
+2024-02-23 21:12:07 [server]: Server listening on port 3000
+2024-02-23 21:12:09 [logs]: Logger.js initialized
+2024-02-23 21:12:09 [server]: Server listening on port 3000
+2024-02-23 21:12:12 [message]: U43354d20204e8cd7717133c1a03d9360: "test"
+2024-02-23 21:12:12 [action]: replyMessage test your mom => a04c412eadb94c6a98055377631758f0
+2024-02-23 21:12:12 [logs]: {"sentMessages":[{"id":"496381162382426231","quoteToken":"Pg8JXJW-LKtXIIcD1HPaCRq70CJZAR5doYlpNDSl6pbV1hTzUDPoFrCQSUEB-BIG3dhCixklIdbl0vyU8ND_2VLB3yZL_W9nyNSfqIsFfZQHom9Eagg_UP8TNRRxF3fGURq7ILa21xgkjdULGnEHWA"}]}
+2024-02-23 21:12:25 [logs]: Logger.js initialized
+2024-02-23 21:12:26 [server]: Server listening on port 3000
+2024-02-23 21:12:28 [message]: U43354d20204e8cd7717133c1a03d9360: "again"
+2024-02-23 21:12:28 [action]: replyMessage again your mom => acfc3c07de024ea192aa743f05ec02fa
+2024-02-23 21:12:44 [logs]: Logger.js initialized
+2024-02-23 21:12:45 [server]: Server listening on port 3000
+2024-02-23 21:12:46 [logs]: Logger.js initialized
+2024-02-23 21:12:46 [server]: Server listening on port 3000
+2024-02-23 21:12:48 [logs]: Logger.js initialized
+2024-02-23 21:12:48 [server]: Server listening on port 3000
+2024-02-23 21:12:49 [logs]: Logger.js initialized
+2024-02-23 21:12:49 [server]: Server listening on port 3000
+2024-02-23 21:13:00 [logs]: Logger.js initialized
+2024-02-23 21:13:00 [server]: Server listening on port 3000
+2024-02-23 21:13:09 [logs]: Logger.js initialized
+2024-02-23 21:13:09 [server]: Server listening on port 3000
+2024-02-23 21:13:12 [message]: U43354d20204e8cd7717133c1a03d9360: "man"
+2024-02-23 21:13:12 [action]: replyMessage man your mom => 746231ad4bc74175ade0bdb5d760e001
+2024-02-23 21:13:16 [logs]: Logger.js initialized
+2024-02-23 21:13:16 [server]: Server listening on port 3000
+2024-02-23 21:13:21 [logs]: Logger.js initialized
+2024-02-23 21:13:21 [server]: Server listening on port 3000
+2024-02-23 21:13:23 [logs]: Logger.js initialized
+2024-02-23 21:13:23 [server]: Server listening on port 3000
+2024-02-23 21:13:25 [logs]: Logger.js initialized
+2024-02-23 21:13:26 [server]: Server listening on port 3000
+2024-02-23 21:13:31 [message]: U43354d20204e8cd7717133c1a03d9360: "mango"
+2024-02-23 21:13:31 [action]: replyMessage mango your mom => 07c5d8a5d4ad4138a78c58326c48d514
+2024-02-23 21:13:32 [error]: undefined
+2024-02-23 21:13:40 [logs]: Logger.js initialized
+2024-02-23 21:13:40 [server]: Server listening on port 3000
+2024-02-23 21:13:42 [logs]: Logger.js initialized
+2024-02-23 21:13:42 [server]: Server listening on port 3000
+2024-02-23 21:13:44 [message]: U43354d20204e8cd7717133c1a03d9360: "man"
+2024-02-23 21:13:44 [action]: replyMessage man your mom => 3c4b5ac59d934a5ab0a7eea0e8f00ca8
+2024-02-23 21:13:45 [error]: {"message":"Request failed with status code 400","name":"AxiosError","stack":"AxiosError: Request failed with status code 400\n    at settle (file:///D:/Desktop/Codes/MentallyChill/node_modules/axios/lib/core/settle.js:19:12)\n    at IncomingMessage.handleStreamEnd (file:///D:/Desktop/Codes/MentallyChill/node_modules/axios/lib/adapters/http.js:589:11)\n    at IncomingMessage.emit (node:events:531:35)\n    at endReadableNT (node:internal/streams/readable:1696:12)\n    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)\n    at Axios.request (file:///D:/Desktop/Codes/MentallyChill/node_modules/axios/lib/core/Axios.js:45:41)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)","config":{"transitional":{"silentJSONParsing":true,"forcedJSONParsing":true,"clarifyTimeoutError":false},"adapter":["xhr","http"],"transformRequest":[null],"transformResponse":[null],"timeout":0,"xsrfCookieName":"XSRF-TOKEN","xsrfHeaderName":"X-XSRF-TOKEN","maxContentLength":-1,"maxBodyLength":-1,"env":{},"headers":{"Accept":"application/json, text/plain, */*","Content-Type":"application/json","Authorization":"Bearer GzWkhxhMvqYSICzVefC/PiXqeFPU0A7mDUnd3JLzizzo0Y+tJXy3GFRy4ezdhgfmhSQLQoQpNLo1HHQ/3K4XzsqttUz7lNmPIqooVsVv/z4jsbszRLb11cKg7df+aQL1n6Ndj2xezeuH+iPrSO/dGwdB04t89/1O/w1cDnyilFU=","User-Agent":"axios/1.6.7","Content-Length":"155","Accept-Encoding":"gzip, compress, deflate, br"},"method":"post","url":"https://api.line.me/v2/bot/message/reply","data":"{\"replyToken\":\"3c4b5ac59d934a5ab0a7eea0e8f00ca8\",\"messages\":[{\"notificationDisabled\":true,\"customAggregationUnits\":\"\",\"type\":\"ext\",\"text\":\"man your mom\"}]}"},"code":"ERR_BAD_REQUEST","status":400}
+2024-02-23 21:14:00 [logs]: Logger.js initialized
+2024-02-23 21:14:00 [server]: Server listening on port 3000
+2024-02-23 21:14:00 [logs]: Logger.js initialized
+2024-02-23 21:14:01 [server]: Server listening on port 3000
+2024-02-23 21:14:05 [message]: U43354d20204e8cd7717133c1a03d9360: "why"
+2024-02-23 21:14:05 [action]: replyMessage why your mom => aef8d03e8fb64f9bbb371ba4bbaecf59
+2024-02-23 21:14:06 [error]: {"message":"Request failed with status code 400","name":"AxiosError","stack":"AxiosError: Request failed with status code 400\n    at settle (file:///D:/Desktop/Codes/MentallyChill/node_modules/axios/lib/core/settle.js:19:12)\n    at IncomingMessage.handleStreamEnd (file:///D:/Desktop/Codes/MentallyChill/node_modules/axios/lib/adapters/http.js:589:11)\n    at IncomingMessage.emit (node:events:531:35)\n    at endReadableNT (node:internal/streams/readable:1696:12)\n    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)\n    at Axios.request (file:///D:/Desktop/Codes/MentallyChill/node_modules/axios/lib/core/Axios.js:45:41)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)","config":{"transitional":{"silentJSONParsing":true,"forcedJSONParsing":true,"clarifyTimeoutError":false},"adapter":["xhr","http"],"transformRequest":[null],"transformResponse":[null],"timeout":0,"xsrfCookieName":"XSRF-TOKEN","xsrfHeaderName":"X-XSRF-TOKEN","maxContentLength":-1,"maxBodyLength":-1,"env":{},"headers":{"Accept":"application/json, text/plain, */*","Content-Type":"application/json","Authorization":"Bearer GzWkhxhMvqYSICzVefC/PiXqeFPU0A7mDUnd3JLzizzo0Y+tJXy3GFRy4ezdhgfmhSQLQoQpNLo1HHQ/3K4XzsqttUz7lNmPIqooVsVv/z4jsbszRLb11cKg7df+aQL1n6Ndj2xezeuH+iPrSO/dGwdB04t89/1O/w1cDnyilFU=","User-Agent":"axios/1.6.7","Content-Length":"155","Accept-Encoding":"gzip, compress, deflate, br"},"method":"post","url":"https://api.line.me/v2/bot/message/reply","data":"{\"replyToken\":\"aef8d03e8fb64f9bbb371ba4bbaecf59\",\"messages\":[{\"notificationDisabled\":true,\"customAggregationUnits\":\"\",\"type\":\"ext\",\"text\":\"why your mom\"}]}"},"code":"ERR_BAD_REQUEST","status":400}
+2024-02-23 21:14:10 [logs]: Logger.js initialized
+2024-02-23 21:14:11 [server]: Server listening on port 3000
+2024-02-23 21:14:12 [logs]: Logger.js initialized
+2024-02-23 21:14:12 [server]: Server listening on port 3000
+2024-02-23 21:14:21 [message]: U43354d20204e8cd7717133c1a03d9360: "man"
+2024-02-23 21:14:21 [action]: replyMessage man your mom => cb8c6334aa24431c9ab6e9c7010c52d2
+2024-02-23 21:14:21 [logs]: {"sentMessages":[{"id":"496381379312353666","quoteToken":"BUTMLECldIsF6JXWYSqEfv_Lj6yPsvwMstWu45TXPUNIWmYGCq4-SrSN82QQ64kXNOHKhoFL2G9FxPZ2igJydazsw-ugroh_HtWlvGK9Z1EDapx92GMVke5ALx2i1XT3rhRRI-pgmtB09jpk0tGuuw"}]}
+2024-02-23 21:24:03 [message]: U43354d20204e8cd7717133c1a03d9360: "smash"
+2024-02-23 21:24:03 [action]: replyMessage smash your mom => 7286cba6c9f447aaa220a04482600309
+2024-02-23 21:24:03 [logs]: {"sentMessages":[{"id":"496382354772984201","quoteToken":"0FEO5UbTfgu9lQkn5fkMeaJ6guBoS0TNyXoBLTpRkT7vR4q_G2lkdHlmXE6LTKEPWSp0ckf4RpN807Ets6eocc_X8wsXFOK54KE_S53Mlzh9t5JeDcmozwyuvGqmEKOmVrb1R_mbBiPHwH8I6VEIwQ"}]}
+2024-02-23 21:24:10 [logs]: Logger.js initialized
+2024-02-23 21:24:10 [server]: Server listening on port 3000
+2024-02-23 21:24:50 [message]: U43354d20204e8cd7717133c1a03d9360: "a"
+2024-02-23 21:24:50 [action]: replyMessage a => 79c5a2717c664a6181b6f57189d2577f
+2024-02-23 21:24:50 [logs]: {"sentMessages":[{"id":"496382433944928484","quoteToken":"Z_5z6fGE0TwkraiNPcFb8GSHyoXUYnb30CYFeCzCbzEW-4bYW44NAgOsEYuTeGGew1uzl_uhfRRixEaYAodrvOjItl3xRHDm9dXuU8kFvDhUE3PttKAwXMpEyqe0XMQoV6DCsl4ivw_3IF07AlrPSg"}]}
+2024-02-23 21:25:16 [logs]: Logger.js initialized
+2024-02-23 21:25:16 [server]: Server listening on port 3000
+2024-02-23 21:25:18 [message]: "awdaw"
+2024-02-23 21:25:18 [action]: replyMessage awdaw => c144a669846440359449f188370b6334
+2024-02-23 21:25:19 [logs]: {"sentMessages":[{"id":"496382481760256131","quoteToken":"Q3fHFQYAVE4W0rWGKwkAjOb7xh2sj4PJdveOQWx2xIuNjdugxhiX39kQkwknzyxZbIwOusXHGFhPTdvQ0Y2RhHJLKnYj_0Jx6eNyuakxsX6dWAm2F0Qtivdn1CbVVcN7Jw1tR6bgWPss4PyH-fN1lw"}]}
+2024-02-23 21:25:53 [message]: "aaaaaaaaaaaaaaaaaaaaaaaa"
+2024-02-23 21:25:53 [action]: replyMessage aaaaaaaaaaaaaaaaaaaaaaaa => e6637568869e4fe7bd5581dbac467eb2
+2024-02-23 21:25:54 [logs]: {"sentMessages":[{"id":"496382540731384068","quoteToken":"XkjYOq04Oagt5zATn4LcOOeByhlbfCIQacBP6R87ZltLfqI_ibkeSv8WuGSH-NdRD3BCQdV2bD-QS_5sMPHZwid7u-rZqxNRquikI6IZ6H5LExMoATXIxiVq0FYIYe_LaCIHlrS3EHAovmtuUg7RdA"}]}
+2024-02-23 21:26:11 [logs]: Logger.js initialized
+2024-02-23 21:26:11 [server]: Server listening on port 3000
+2024-02-23 21:26:14 [message]: {"type":"text","id":"496382574134821273","quoteToken":"P3qjMp40IY83C7636JB2n8Oj-n8ZzodWf04nqxTf_fW8aAJpgp828VJQ8Llw4rY54tHJwdEF4BIDeP5LsoOJtPCbqaHPpqiJsARStqJTokcBIfPprgDMkWfRjnKl05B1Pg31GQTTMhCG4QZLcimqCg","text":"aaaaaaaaaaaaaaaaa"}
+2024-02-23 21:26:14 [action]: replyMessage aaaaaaaaaaaaaaaaa => ba8b67d4e1914a8b8f43624c9fbca2b4
+2024-02-23 21:26:14 [logs]: {"sentMessages":[{"id":"496382575796289938","quoteToken":"qI9yuAtIr_TFmhZi8kr92YC7vCOEKqERdHbGve95YKq1WWm0ebQY6T3-wC1YefpNRjAAlUHCWQ3QsRM2ecN1WaaHKsnrivAewluuzNNCmiYDHDcC3CtRRj2UY4XduWciz0UD6ZHEVaLL5WPaHgPkYQ"}]}
+2024-02-23 21:26:38 [message]: {"type":"text","id":"496382614131966242","quotedMessageId":"496379472682418307","quoteToken":"RioFEtzK-6Hl9OOzTpWW8n8YUhzMywgIEFAbPVzr_UZji8mahNr96GRDM30jqfsiwL8vSvkBj7oakovDbqp0j8SOz6cFxTLlUc4x52-YF_Ez4L9Kj0o-W3KzM3ymtgyZkuYgUxOuOeiHvE1-JLs8PA","text":"ลอง"}
+2024-02-23 21:26:38 [action]: replyMessage ลอง => dcffaff123214e0fb40679e51efce407
+2024-02-23 21:26:38 [logs]: {"sentMessages":[{"id":"496382615138336966","quoteToken":"NNFcM-yn_67T28QecsWp60OjWKA2CvPddqXVJAy1fydT51DNfAaYChHJ-yeFkuFdnzgWKu4uovGxjoQ5swJslIj5ksfhbRHkUlOnDnEaas4wrsRAq63ACT4XQqvS7lqaRB_JX-a6SAruFwBOQYnC0A"}]}
+2024-02-23 21:27:48 [logs]: Logger.js initialized
+2024-02-23 21:27:48 [server]: Server listening on port 3000
+2024-02-23 21:28:09 [logs]: Logger.js initialized
+2024-02-23 21:28:10 [server]: Server listening on port 3000
+2024-02-23 21:28:13 [logs]: Logger.js initialized
+2024-02-23 21:28:14 [server]: Server listening on port 3000
+2024-02-23 21:28:21 [message]: {"type":"text","id":"496382786635038777","quoteToken":"eUg_7UsbquF4GmhROUCGWzUll44QLcVrDCEPNPysfofGDR4blMDbZVcMsV3rKzNeHXf-5bUepdxabal2O_bDrpz_0Hiq-CzVnM7FudBImhlgIJVCKCtIxFl5z8f1Iu2jYzhbZmm2-DjT1l9a88NAbA","text":"awdawd"}
+2024-02-23 21:28:21 [action]: replyMessage awdawd => e29519459af34089b3160b6df58363a7
+2024-02-23 21:28:21 [response]: {"sentMessages":[{"id":"496382787910894005","quoteToken":"pYhElahYRtz5raeMGOqnrB4CpD3ycPYKiNd3cdQ0PZ1WhrBw2oHosERxqb0s3ptEtie3Lf2z81meon_JGgLMr_LIduAEPgqFaEeFIMabvlghQtMzDDAxR0dz6szOeZwbBq8U9s-n0vmYGmx0hk56BA"}]}
+2024-02-23 21:29:55 [logs]: Logger.js initialized
+2024-02-23 21:29:55 [server]: Server listening on port 3000
+2024-02-23 21:29:58 [logs]: Logger.js initialized
+2024-02-23 21:29:58 [server]: Server listening on port 3000
+2024-02-23 21:32:07 [message]: {"type":"text","id":"496383166504763457","quoteToken":"zQBXSwGUkXCyL816KQdeO9eh0kp7XcfsUO6fkLEW8Ho_dLOofRSKy_KkDlrGrs8ZQfnNgqkPC7-PaUx1cR-YMRL-YVeC_pwWF5vLBv7OWIPVomnxzZaJn8mZZDbCrjd1v1dTcnzkgmRwD_K31Me6Ig","text":"ฟ"}
+2024-02-23 21:32:07 [action]: replyMessage ฟ => 318a645ed6fb458d9338afd1fded2911
+2024-02-23 21:32:07 [response]: {"sentMessages":[{"id":"496383167780618242","quoteToken":"CkmZSip1MnW0GfQvL8OeFX4gl45606z9yeCpu4C621dEeTA3UZJyhHMiXl9O25o2SC0n3Ns0oIO8AV8rZQASsuibf1KKAxBoDNhDJVGcqiiiPhOqToHhXfgRoMMbhv9s7IjQwilYo_N-XTJ9AjuFQQ"}]}
+2024-02-23 21:32:14 [message]: {"type":"text","id":"496383177947611716","quoteToken":"1aAWe8i7K_pPBeQZa6DO1CXjd13J88vsEmUPb961nDsdwASdzBPvBiXh-mn6psfao5EMtUha9SZHcDDjY6NPwaYvJz0BvMqm9XcjRfOaooKo0Lz6Js4kwZDOIbAyrs1kUlqpl46TnzcFwiU9cIhxKg","text":",,y,y,y,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,"}
+2024-02-23 21:32:14 [action]: replyMessage ,,y,y,y,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,, => dc32837066b04ac5a4203190fb5a9537
+2024-02-23 21:32:14 [response]: {"sentMessages":[{"id":"496383179457298676","quoteToken":"x-tkWavWJ1p86YH81Sg9e3mar5CrE4MPD45OHniJVeasANB5vQkiJhiXO-WlEl7qlf1f6DsTDKl1GTXmG9ZgEcDHV2khTOVMXpUKomhcjFuJD1BEf_c-QrqxlU0GWtjJj2YrwXTS-mnF3J9NmAJGnA"}]}
+2024-02-23 21:33:05 [logs]: Logger.js initialized
+2024-02-23 21:33:06 [server]: Server listening on port 3000
+2024-02-23 21:35:45 [message]: {"type":"text","id":"496383532499730481","quoteToken":"xBkDMHggU9q9u1lyO9BwWlebwxtBhm6Lny8qBOWEb4ibTT_c4JlkEjrXCqIlPgds4pSv6n-uo7RrvUxNgm0weh9svzlm0uq5BH_BoxlKlY5AWxMGuq63ArkZGgSnn_Io1STcFduIoqKdCz2AIi2k3w","text":"ฟไก"}
+2024-02-23 21:35:45 [action]: replyMessage ฟไก => 9ce12b9c450c4732bfa7930555f143d8
+2024-02-23 21:35:46 [response]: {"sentMessages":[{"id":"496383534295154771","quoteToken":"w3GMi_Eqqm8XV3h6W9IweS21TuROIfiXXs3wnnnzfLURxQmxauoBqUlnJSl30oQCIT9lABoZNLUS6HUlhMl9tr_iA3OQODnCf8ggszn-EFzoTdS_Gyl5ydJ6k8Qw9VceZ8f8G1xdJFd08JJZibOHgQ"}]}
+2024-02-23 21:36:14 [logs]: Logger.js initialized
+2024-02-23 21:36:15 [server]: Server listening on port 3000
+2024-02-23 21:36:17 [logs]: Logger.js initialized
+2024-02-23 21:36:17 [server]: Server listening on port 3000
+2024-02-23 21:36:18 [logs]: Logger.js initialized
+2024-02-23 21:36:18 [server]: Server listening on port 3000
+2024-02-23 21:36:24 [logs]: Logger.js initialized
+2024-02-23 21:36:24 [server]: Server listening on port 3000
+2024-02-23 21:36:29 [logs]: Logger.js initialized
+2024-02-23 21:36:29 [server]: Server listening on port 3000
+2024-02-23 21:36:30 [logs]: Logger.js initialized
+2024-02-23 21:36:30 [server]: Server listening on port 3000
+2024-02-23 21:36:31 [logs]: Logger.js initialized
+2024-02-23 21:36:31 [server]: Server listening on port 3000
+2024-02-23 21:36:39 [logs]: Logger.js initialized
+2024-02-23 21:36:39 [server]: Server listening on port 3000
+2024-02-23 21:36:41 [logs]: Logger.js initialized
+2024-02-23 21:36:41 [server]: Server listening on port 3000
+2024-02-23 21:36:42 [logs]: Logger.js initialized
+2024-02-23 21:36:43 [server]: Server listening on port 3000
+2024-02-23 21:36:54 [logs]: Logger.js initialized
+2024-02-23 21:36:54 [server]: Server listening on port 3000
+2024-02-23 21:36:56 [message]: {"type":"text","id":"496383651987062849","quoteToken":"vXc-8u6i08t3Qjqf3sVjZKqeVrWcOy8IyDxY7T-llxHStyN2uS0rxXM_I_Hxi0nFqGt1O334Oez4eyhBlsr31-dvmBL7cj8cr06dOGxPgByy7UF5PSeUPwX2l9w1RQ0uTBmlsBe3HBhq2H8E9Kceag","text":"awd"}
+2024-02-23 21:36:56 [action]: replyMessage awd => 7510ced9793d447fb83a924b6bb2b15c
+2024-02-23 21:36:57 [error]: {"message":"Request failed with status code 400","name":"AxiosError","stack":"AxiosError: Request failed with status code 400\n    at settle (file:///D:/Desktop/Codes/MentallyChill/node_modules/axios/lib/core/settle.js:19:12)\n    at IncomingMessage.handleStreamEnd (file:///D:/Desktop/Codes/MentallyChill/node_modules/axios/lib/adapters/http.js:589:11)\n    at IncomingMessage.emit (node:events:531:35)\n    at endReadableNT (node:internal/streams/readable:1696:12)\n    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)\n    at Axios.request (file:///D:/Desktop/Codes/MentallyChill/node_modules/axios/lib/core/Axios.js:45:41)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)","config":{"transitional":{"silentJSONParsing":true,"forcedJSONParsing":true,"clarifyTimeoutError":false},"adapter":["xhr","http"],"transformRequest":[null],"transformResponse":[null],"timeout":0,"xsrfCookieName":"XSRF-TOKEN","xsrfHeaderName":"X-XSRF-TOKEN","maxContentLength":-1,"maxBodyLength":-1,"env":{},"headers":{"Accept":"application/json, text/plain, */*","Content-Type":"application/json","Authorization":"Bearer GzWkhxhMvqYSICzVefC/PiXqeFPU0A7mDUnd3JLzizzo0Y+tJXy3GFRy4ezdhgfmhSQLQoQpNLo1HHQ/3K4XzsqttUz7lNmPIqooVsVv/z4jsbszRLb11cKg7df+aQL1n6Ndj2xezeuH+iPrSO/dGwdB04t89/1O/w1cDnyilFU=","User-Agent":"axios/1.6.7","Content-Length":"286","Accept-Encoding":"gzip, compress, deflate, br"},"method":"post","url":"https://api.line.me/v2/bot/message/reply","data":"{\"replyToken\":\"7510ced9793d447fb83a924b6bb2b15c\",\"messages\":[{\"notificationDisabled\":true,\"customAggregationUnits\":\"\",\"type\":\"text\",\"text\":\"awd\"},{\"type\":\"bubble\",\"body\":{\"type\":\"box\",\"layout\":\"horizontal\",\"contents\":[{\"type\":\"text\",\"text\":\"Hello,\"},{\"type\":\"text\",\"text\":\"World!\"}]}}]}"},"code":"ERR_BAD_REQUEST","status":400}
+2024-02-23 21:37:07 [logs]: Logger.js initialized
+2024-02-23 21:37:07 [server]: Server listening on port 3000
+2024-02-23 21:37:12 [logs]: Logger.js initialized
+2024-02-23 21:37:12 [server]: Server listening on port 3000
+2024-02-23 21:37:16 [message]: {"type":"text","id":"496383685089034852","quoteToken":"4JlaRK1RMkA_63NZDOqj2UY9MGdSlLBqqYVKYKnOunz3xhtl98lolk-s6fNhV8dZmHc6ahAx_I4Vv0DnUybEyh19eI75czcdQqwZhkTbtVhs5D67_e_om2oYr_Mw0CAnUYNqe_awhfhxqREHEFrv3g","text":"awd"}
+2024-02-23 21:37:16 [action]: replyMessage awd => 7807375115204fbcb8edbd8b7945d0d4
+2024-02-23 21:37:16 [error]: {"message":"Request failed with status code 400","name":"AxiosError","stack":"AxiosError: Request failed with status code 400\n    at settle (file:///D:/Desktop/Codes/MentallyChill/node_modules/axios/lib/core/settle.js:19:12)\n    at IncomingMessage.handleStreamEnd (file:///D:/Desktop/Codes/MentallyChill/node_modules/axios/lib/adapters/http.js:589:11)\n    at IncomingMessage.emit (node:events:531:35)\n    at endReadableNT (node:internal/streams/readable:1696:12)\n    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)\n    at Axios.request (file:///D:/Desktop/Codes/MentallyChill/node_modules/axios/lib/core/Axios.js:45:41)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)","config":{"transitional":{"silentJSONParsing":true,"forcedJSONParsing":true,"clarifyTimeoutError":false},"adapter":["xhr","http"],"transformRequest":[null],"transformResponse":[null],"timeout":0,"xsrfCookieName":"XSRF-TOKEN","xsrfHeaderName":"X-XSRF-TOKEN","maxContentLength":-1,"maxBodyLength":-1,"env":{},"headers":{"Accept":"application/json, text/plain, */*","Content-Type":"application/json","Authorization":"Bearer GzWkhxhMvqYSICzVefC/PiXqeFPU0A7mDUnd3JLzizzo0Y+tJXy3GFRy4ezdhgfmhSQLQoQpNLo1HHQ/3K4XzsqttUz7lNmPIqooVsVv/z4jsbszRLb11cKg7df+aQL1n6Ndj2xezeuH+iPrSO/dGwdB04t89/1O/w1cDnyilFU=","User-Agent":"axios/1.6.7","Content-Length":"201","Accept-Encoding":"gzip, compress, deflate, br"},"method":"post","url":"https://api.line.me/v2/bot/message/reply","data":"{\"replyToken\":\"7807375115204fbcb8edbd8b7945d0d4\",\"messages\":[{\"type\":\"bubble\",\"body\":{\"type\":\"box\",\"layout\":\"horizontal\",\"contents\":[{\"type\":\"text\",\"text\":\"Hello,\"},{\"type\":\"text\",\"text\":\"World!\"}]}}]}"},"code":"ERR_BAD_REQUEST","status":400}
+2024-02-23 21:37:36 [logs]: Logger.js initialized
+2024-02-23 21:37:36 [server]: Server listening on port 3000
+2024-02-23 21:37:38 [logs]: Logger.js initialized
+2024-02-23 21:37:38 [server]: Server listening on port 3000
+2024-02-23 21:37:40 [message]: {"type":"text","id":"496383724766625809","quoteToken":"kfAhN3PcDwrhws-SIHibZPDDvwZPP6ZqOTlBMTe6_FUxpz6w-RkkeevhfW4JdXfWeRk7YC23vsqqnTutU1i5yKNrVh5elXDr0SLARZzPI0MU1kTnBvBoZ41CsNBj77-4lbNe8_X_SYpKG42xF8FeXQ","text":"aw"}
+2024-02-23 21:37:40 [action]: replyMessage aw => 7e0304e5aacc40c5b9e381de756c6170
+2024-02-23 21:37:40 [message]: {"type":"text","id":"496383725001507109","quoteToken":"G41tcWw125fA6nDYfz-Sh_1BZpnUo989rZJao5qnJpc8KLiHo0Z26XhWd2VZnTa8j_MdAdWFEeM3tZ-_gxaAYIeymuirVcuvF20L6ZK3UdfI4LBlThHlx-NVeGdhXu7QuluuNLv2HuUB7Vo2U0xsuA","text":"d"}
+2024-02-23 21:37:40 [action]: replyMessage d => 6a5ceb8eb86d40bf811314725ef7c8f5
+2024-02-23 21:38:02 [message]: {"type":"text","id":"496383762414698673","quoteToken":"wKikgf2kzrs3WIudRXac1fopQuRk0aXShX8bglx0kTrlJswx7PYUIQuUGwyDQta6QnVwd8HJh0j_xQydKlMMZItkCZH-ERADd6mmmakT3BM0lfONi71UAZ_Oc6qoKiwP-rhm9465Y4ZLzEhUqYShTA","text":"w"}
+2024-02-23 21:38:02 [action]: replyMessage w => b87f40a8a4d84abf8203638c0eb8237c
+2024-02-23 21:38:02 [message]: {"type":"text","id":"496383762616811538","quoteToken":"RaufMEmh_uy9heVLkkTEIiMfqAttm2o5W1ZoreUKsRt5k7jjACqHZWrt-e-Cgmjsot55rpXtJO8CharTXzaepFFILpXMJtwYDlu8exoGwLlWc1nex_jZBeFa0yFgFjA8UOf5ohiD02A5tz2B7YoabA","text":"w"}
+2024-02-23 21:38:02 [action]: replyMessage w => 6a7b7bdeaec848ad99cdf1cff8dee86c
+2024-02-23 21:38:03 [message]: {"type":"text","id":"496383762850906666","quoteToken":"ftjE29mbOwat614iXYQRcQNuRAa3D0noq3b2lj5ximQBhT8VFPACC70sVhJ6BBwI7QBGpa2XzjVAlFVMDu2OapMGXCBHmzkBHDSJdlw6hCwWboBHvawO8EI5vrDZEHod8e1iT0o_KpM3DTO7d3LvLg","text":"w"}
+2024-02-23 21:38:03 [action]: replyMessage w => cf9e24d9c78f4bd892f310cc525f36c5
+2024-02-23 21:38:57 [logs]: Logger.js initialized
+2024-02-23 21:38:58 [server]: Server listening on port 3000
+2024-02-23 21:38:59 [message]: {"type":"text","id":"496383857507958837","quoteToken":"ozqaMDaK8_et0ChVkOhFbt1HThVfXtOwSVxRCCnoFWF11TMcDGAC3nXPzIDj7l947OV8IiJ4gjcKgcvJnIEPGeFC4GG7XWcmy37OUDbRGw5Erx3oqFuraOkxpwEleJ-kWQCVZ2cn28KOno5vd3pkLQ","text":"awd"}
+2024-02-23 21:38:59 [action]: replyMessage awd => e9b6cab5c1bd4f808b3f9e6a84a995fe
+2024-02-23 21:38:59 [error]: {"message":"Request failed with status code 400","name":"AxiosError","stack":"AxiosError: Request failed with status code 400\n    at settle (file:///D:/Desktop/Codes/MentallyChill/node_modules/axios/lib/core/settle.js:19:12)\n    at IncomingMessage.handleStreamEnd (file:///D:/Desktop/Codes/MentallyChill/node_modules/axios/lib/adapters/http.js:589:11)\n    at IncomingMessage.emit (node:events:531:35)\n    at endReadableNT (node:internal/streams/readable:1696:12)\n    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)\n    at Axios.request (file:///D:/Desktop/Codes/MentallyChill/node_modules/axios/lib/core/Axios.js:45:41)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)","config":{"transitional":{"silentJSONParsing":true,"forcedJSONParsing":true,"clarifyTimeoutError":false},"adapter":["xhr","http"],"transformRequest":[null],"transformResponse":[null],"timeout":0,"xsrfCookieName":"XSRF-TOKEN","xsrfHeaderName":"X-XSRF-TOKEN","maxContentLength":-1,"maxBodyLength":-1,"env":{},"headers":{"Accept":"application/json, text/plain, */*","Content-Type":"application/json","Authorization":"Bearer GzWkhxhMvqYSICzVefC/PiXqeFPU0A7mDUnd3JLzizzo0Y+tJXy3GFRy4ezdhgfmhSQLQoQpNLo1HHQ/3K4XzsqttUz7lNmPIqooVsVv/z4jsbszRLb11cKg7df+aQL1n6Ndj2xezeuH+iPrSO/dGwdB04t89/1O/w1cDnyilFU=","User-Agent":"axios/1.6.7","Content-Length":"2045","Accept-Encoding":"gzip, compress, deflate, br"},"method":"post","url":"https://api.line.me/v2/bot/message/reply","data":"{\"replyToken\":\"e9b6cab5c1bd4f808b3f9e6a84a995fe\",\"messages\":[{\"type\":\"bubble\",\"hero\":{\"type\":\"image\",\"url\":\"https://scdn.line-apps.com/n/channel_devcenter/img/fx/01_1_cafe.png\",\"size\":\"full\",\"aspectRatio\":\"20:13\",\"aspectMode\":\"cover\",\"action\":{\"type\":\"uri\",\"uri\":\"http://linecorp.com/\"}},\"body\":{\"type\":\"box\",\"layout\":\"vertical\",\"contents\":[{\"type\":\"text\",\"text\":\"Brown Cafe\",\"weight\":\"bold\",\"size\":\"xl\"},{\"type\":\"box\",\"layout\":\"baseline\",\"margin\":\"md\",\"contents\":[{\"type\":\"icon\",\"size\":\"sm\",\"url\":\"https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png\"},{\"type\":\"icon\",\"size\":\"sm\",\"url\":\"https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png\"},{\"type\":\"icon\",\"size\":\"sm\",\"url\":\"https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png\"},{\"type\":\"icon\",\"size\":\"sm\",\"url\":\"https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png\"},{\"type\":\"icon\",\"size\":\"sm\",\"url\":\"https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gray_star_28.png\"},{\"type\":\"text\",\"text\":\"4.0\",\"size\":\"sm\",\"color\":\"#999999\",\"margin\":\"md\",\"flex\":0}]},{\"type\":\"box\",\"layout\":\"vertical\",\"margin\":\"lg\",\"spacing\":\"sm\",\"contents\":[{\"type\":\"box\",\"layout\":\"baseline\",\"spacing\":\"sm\",\"contents\":[{\"type\":\"text\",\"text\":\"Place\",\"color\":\"#aaaaaa\",\"size\":\"sm\",\"flex\":1},{\"type\":\"text\",\"text\":\"Miraina Tower, 4-1-6 Shinjuku, Tokyo\",\"wrap\":true,\"color\":\"#666666\",\"size\":\"sm\",\"flex\":5}]},{\"type\":\"box\",\"layout\":\"baseline\",\"spacing\":\"sm\",\"contents\":[{\"type\":\"text\",\"text\":\"Time\",\"color\":\"#aaaaaa\",\"size\":\"sm\",\"flex\":1},{\"type\":\"text\",\"text\":\"10:00 - 23:00\",\"wrap\":true,\"color\":\"#666666\",\"size\":\"sm\",\"flex\":5}]}]}]},\"footer\":{\"type\":\"box\",\"layout\":\"vertical\",\"spacing\":\"sm\",\"contents\":[{\"type\":\"button\",\"style\":\"link\",\"height\":\"sm\",\"action\":{\"type\":\"uri\",\"label\":\"CALL\",\"uri\":\"https://linecorp.com\"}},{\"type\":\"button\",\"style\":\"link\",\"height\":\"sm\",\"action\":{\"type\":\"uri\",\"label\":\"WEBSITE\",\"uri\":\"https://linecorp.com\"}},{\"type\":\"box\",\"layout\":\"vertical\",\"contents\":[],\"margin\":\"sm\"}],\"flex\":0}}]}"},"code":"ERR_BAD_REQUEST","status":400}
+2024-02-23 21:41:41 [logs]: Logger.js initialized
+2024-02-23 21:41:41 [server]: Server listening on port 3000
+2024-02-23 21:41:44 [message]: {"type":"text","id":"496384135070220817","quoteToken":"oocfRa8AiKpFtw8Mam3wnfpUcdyBHYXg-odp1Sh7FPHMiiCKJSe6gttujYFwxtI0Je0nKldjssmJ36rfpqheBQk9th5U1eT1YN0hQtjEtk0cXuKgRrQzCxeHGyCdOdPh4bcmLa3KpYXMmWJnB-7bYA","text":"awd"}
+2024-02-23 21:41:44 [action]: replyMessage awd => 22ab8e79f56a45f5aa9516e24f93eec3
+2024-02-23 21:41:44 [error]: {"message":"Request failed with status code 400","name":"AxiosError","stack":"AxiosError: Request failed with status code 400\n    at settle (file:///D:/Desktop/Codes/MentallyChill/node_modules/axios/lib/core/settle.js:19:12)\n    at IncomingMessage.handleStreamEnd (file:///D:/Desktop/Codes/MentallyChill/node_modules/axios/lib/adapters/http.js:589:11)\n    at IncomingMessage.emit (node:events:531:35)\n    at endReadableNT (node:internal/streams/readable:1696:12)\n    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)\n    at Axios.request (file:///D:/Desktop/Codes/MentallyChill/node_modules/axios/lib/core/Axios.js:45:41)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)","config":{"transitional":{"silentJSONParsing":true,"forcedJSONParsing":true,"clarifyTimeoutError":false},"adapter":["xhr","http"],"transformRequest":[null],"transformResponse":[null],"timeout":0,"xsrfCookieName":"XSRF-TOKEN","xsrfHeaderName":"X-XSRF-TOKEN","maxContentLength":-1,"maxBodyLength":-1,"env":{},"headers":{"Accept":"application/json, text/plain, */*","Content-Type":"application/json","Authorization":"Bearer GzWkhxhMvqYSICzVefC/PiXqeFPU0A7mDUnd3JLzizzo0Y+tJXy3GFRy4ezdhgfmhSQLQoQpNLo1HHQ/3K4XzsqttUz7lNmPIqooVsVv/z4jsbszRLb11cKg7df+aQL1n6Ndj2xezeuH+iPrSO/dGwdB04t89/1O/w1cDnyilFU=","User-Agent":"axios/1.6.7","Content-Length":"2072","Accept-Encoding":"gzip, compress, deflate, br"},"method":"post","url":"https://api.line.me/v2/bot/message/reply","data":"{\"replyToken\":\"22ab8e79f56a45f5aa9516e24f93eec3\",\"messages\":[{\"type\":\"flex\",\"contents\":{\"type\":\"bubble\",\"hero\":{\"type\":\"image\",\"url\":\"https://scdn.line-apps.com/n/channel_devcenter/img/fx/01_1_cafe.png\",\"size\":\"full\",\"aspectRatio\":\"20:13\",\"aspectMode\":\"cover\",\"action\":{\"type\":\"uri\",\"uri\":\"http://linecorp.com/\"}},\"body\":{\"type\":\"box\",\"layout\":\"vertical\",\"contents\":[{\"type\":\"text\",\"text\":\"Brown Cafe\",\"weight\":\"bold\",\"size\":\"xl\"},{\"type\":\"box\",\"layout\":\"baseline\",\"margin\":\"md\",\"contents\":[{\"type\":\"icon\",\"size\":\"sm\",\"url\":\"https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png\"},{\"type\":\"icon\",\"size\":\"sm\",\"url\":\"https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png\"},{\"type\":\"icon\",\"size\":\"sm\",\"url\":\"https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png\"},{\"type\":\"icon\",\"size\":\"sm\",\"url\":\"https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png\"},{\"type\":\"icon\",\"size\":\"sm\",\"url\":\"https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gray_star_28.png\"},{\"type\":\"text\",\"text\":\"4.0\",\"size\":\"sm\",\"color\":\"#999999\",\"margin\":\"md\",\"flex\":0}]},{\"type\":\"box\",\"layout\":\"vertical\",\"margin\":\"lg\",\"spacing\":\"sm\",\"contents\":[{\"type\":\"box\",\"layout\":\"baseline\",\"spacing\":\"sm\",\"contents\":[{\"type\":\"text\",\"text\":\"Place\",\"color\":\"#aaaaaa\",\"size\":\"sm\",\"flex\":1},{\"type\":\"text\",\"text\":\"Miraina Tower, 4-1-6 Shinjuku, Tokyo\",\"wrap\":true,\"color\":\"#666666\",\"size\":\"sm\",\"flex\":5}]},{\"type\":\"box\",\"layout\":\"baseline\",\"spacing\":\"sm\",\"contents\":[{\"type\":\"text\",\"text\":\"Time\",\"color\":\"#aaaaaa\",\"size\":\"sm\",\"flex\":1},{\"type\":\"text\",\"text\":\"10:00 - 23:00\",\"wrap\":true,\"color\":\"#666666\",\"size\":\"sm\",\"flex\":5}]}]}]},\"footer\":{\"type\":\"box\",\"layout\":\"vertical\",\"spacing\":\"sm\",\"contents\":[{\"type\":\"button\",\"style\":\"link\",\"height\":\"sm\",\"action\":{\"type\":\"uri\",\"label\":\"CALL\",\"uri\":\"https://linecorp.com\"}},{\"type\":\"button\",\"style\":\"link\",\"height\":\"sm\",\"action\":{\"type\":\"uri\",\"label\":\"WEBSITE\",\"uri\":\"https://linecorp.com\"}},{\"type\":\"box\",\"layout\":\"vertical\",\"contents\":[],\"margin\":\"sm\"}],\"flex\":0}}}]}"},"code":"ERR_BAD_REQUEST","status":400}
+2024-02-23 21:41:50 [message]: {"type":"text","id":"496384144633233554","quoteToken":"rdKn2cggGjGdcVVu3AWMJkJbGf5AXcPlvmXjXzvhU9ih7Uzn-Kq4huCv48slsoFEFwuTpd_ACAjmzulafIyABvM1Xbpran5meGtryYBzfwwoKhAOChRgOmPBrLrL4KujhmBcJFsts1_dXOhetuu6Fw","text":"awdawdawd"}
+2024-02-23 21:41:50 [action]: replyMessage awdawdawd => 4e237d0c0ca4441991962c7edd3442a7
+2024-02-23 21:41:50 [error]: {"message":"Request failed with status code 400","name":"AxiosError","stack":"AxiosError: Request failed with status code 400\n    at settle (file:///D:/Desktop/Codes/MentallyChill/node_modules/axios/lib/core/settle.js:19:12)\n    at IncomingMessage.handleStreamEnd (file:///D:/Desktop/Codes/MentallyChill/node_modules/axios/lib/adapters/http.js:589:11)\n    at IncomingMessage.emit (node:events:531:35)\n    at endReadableNT (node:internal/streams/readable:1696:12)\n    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)\n    at Axios.request (file:///D:/Desktop/Codes/MentallyChill/node_modules/axios/lib/core/Axios.js:45:41)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)","config":{"transitional":{"silentJSONParsing":true,"forcedJSONParsing":true,"clarifyTimeoutError":false},"adapter":["xhr","http"],"transformRequest":[null],"transformResponse":[null],"timeout":0,"xsrfCookieName":"XSRF-TOKEN","xsrfHeaderName":"X-XSRF-TOKEN","maxContentLength":-1,"maxBodyLength":-1,"env":{},"headers":{"Accept":"application/json, text/plain, */*","Content-Type":"application/json","Authorization":"Bearer GzWkhxhMvqYSICzVefC/PiXqeFPU0A7mDUnd3JLzizzo0Y+tJXy3GFRy4ezdhgfmhSQLQoQpNLo1HHQ/3K4XzsqttUz7lNmPIqooVsVv/z4jsbszRLb11cKg7df+aQL1n6Ndj2xezeuH+iPrSO/dGwdB04t89/1O/w1cDnyilFU=","User-Agent":"axios/1.6.7","Content-Length":"2072","Accept-Encoding":"gzip, compress, deflate, br"},"method":"post","url":"https://api.line.me/v2/bot/message/reply","data":"{\"replyToken\":\"4e237d0c0ca4441991962c7edd3442a7\",\"messages\":[{\"type\":\"flex\",\"contents\":{\"type\":\"bubble\",\"hero\":{\"type\":\"image\",\"url\":\"https://scdn.line-apps.com/n/channel_devcenter/img/fx/01_1_cafe.png\",\"size\":\"full\",\"aspectRatio\":\"20:13\",\"aspectMode\":\"cover\",\"action\":{\"type\":\"uri\",\"uri\":\"http://linecorp.com/\"}},\"body\":{\"type\":\"box\",\"layout\":\"vertical\",\"contents\":[{\"type\":\"text\",\"text\":\"Brown Cafe\",\"weight\":\"bold\",\"size\":\"xl\"},{\"type\":\"box\",\"layout\":\"baseline\",\"margin\":\"md\",\"contents\":[{\"type\":\"icon\",\"size\":\"sm\",\"url\":\"https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png\"},{\"type\":\"icon\",\"size\":\"sm\",\"url\":\"https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png\"},{\"type\":\"icon\",\"size\":\"sm\",\"url\":\"https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png\"},{\"type\":\"icon\",\"size\":\"sm\",\"url\":\"https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png\"},{\"type\":\"icon\",\"size\":\"sm\",\"url\":\"https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gray_star_28.png\"},{\"type\":\"text\",\"text\":\"4.0\",\"size\":\"sm\",\"color\":\"#999999\",\"margin\":\"md\",\"flex\":0}]},{\"type\":\"box\",\"layout\":\"vertical\",\"margin\":\"lg\",\"spacing\":\"sm\",\"contents\":[{\"type\":\"box\",\"layout\":\"baseline\",\"spacing\":\"sm\",\"contents\":[{\"type\":\"text\",\"text\":\"Place\",\"color\":\"#aaaaaa\",\"size\":\"sm\",\"flex\":1},{\"type\":\"text\",\"text\":\"Miraina Tower, 4-1-6 Shinjuku, Tokyo\",\"wrap\":true,\"color\":\"#666666\",\"size\":\"sm\",\"flex\":5}]},{\"type\":\"box\",\"layout\":\"baseline\",\"spacing\":\"sm\",\"contents\":[{\"type\":\"text\",\"text\":\"Time\",\"color\":\"#aaaaaa\",\"size\":\"sm\",\"flex\":1},{\"type\":\"text\",\"text\":\"10:00 - 23:00\",\"wrap\":true,\"color\":\"#666666\",\"size\":\"sm\",\"flex\":5}]}]}]},\"footer\":{\"type\":\"box\",\"layout\":\"vertical\",\"spacing\":\"sm\",\"contents\":[{\"type\":\"button\",\"style\":\"link\",\"height\":\"sm\",\"action\":{\"type\":\"uri\",\"label\":\"CALL\",\"uri\":\"https://linecorp.com\"}},{\"type\":\"button\",\"style\":\"link\",\"height\":\"sm\",\"action\":{\"type\":\"uri\",\"label\":\"WEBSITE\",\"uri\":\"https://linecorp.com\"}},{\"type\":\"box\",\"layout\":\"vertical\",\"contents\":[],\"margin\":\"sm\"}],\"flex\":0}}}]}"},"code":"ERR_BAD_REQUEST","status":400}
+2024-02-23 21:42:37 [logs]: Logger.js initialized
+2024-02-23 21:42:37 [server]: Server listening on port 3000
+2024-02-23 21:42:38 [logs]: Logger.js initialized
+2024-02-23 21:42:38 [server]: Server listening on port 3000
+2024-02-23 21:44:00 [logs]: Logger.js initialized
+2024-02-23 21:44:01 [server]: Server listening on port 3000
+2024-02-23 21:44:03 [message]: {"type":"text","id":"496384367636251142","quoteToken":"pX0skv4-wYQq2a5i07pOTettPZ5TIBIONdKs-K0LULD0SbPnfanu5f33sERLRRdl0SOMi6Gs1iFfKP3CrRj7jyA_ovQ6QXoN7j8-mcgU9sF7SN4OsgBJ3Tyni0V5SOu5Fxx1swdSuytvxAvT-bhvTA","text":"ฟไก"}
+2024-02-23 21:44:03 [action]: replyMessage ฟไก => d8916655d23b4318b2c4fe68b9f1dcc2
+2024-02-23 21:44:03 [error]: {"message":"Request failed with status code 400","name":"AxiosError","stack":"AxiosError: Request failed with status code 400\n    at settle (file:///D:/Desktop/Codes/MentallyChill/node_modules/axios/lib/core/settle.js:19:12)\n    at IncomingMessage.handleStreamEnd (file:///D:/Desktop/Codes/MentallyChill/node_modules/axios/lib/adapters/http.js:589:11)\n    at IncomingMessage.emit (node:events:531:35)\n    at endReadableNT (node:internal/streams/readable:1696:12)\n    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)\n    at Axios.request (file:///D:/Desktop/Codes/MentallyChill/node_modules/axios/lib/core/Axios.js:45:41)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)","config":{"transitional":{"silentJSONParsing":true,"forcedJSONParsing":true,"clarifyTimeoutError":false},"adapter":["xhr","http"],"transformRequest":[null],"transformResponse":[null],"timeout":0,"xsrfCookieName":"XSRF-TOKEN","xsrfHeaderName":"X-XSRF-TOKEN","maxContentLength":-1,"maxBodyLength":-1,"env":{},"headers":{"Accept":"application/json, text/plain, */*","Content-Type":"application/json","Authorization":"Bearer GzWkhxhMvqYSICzVefC/PiXqeFPU0A7mDUnd3JLzizzo0Y+tJXy3GFRy4ezdhgfmhSQLQoQpNLo1HHQ/3K4XzsqttUz7lNmPIqooVsVv/z4jsbszRLb11cKg7df+aQL1n6Ndj2xezeuH+iPrSO/dGwdB04t89/1O/w1cDnyilFU=","User-Agent":"axios/1.6.7","Content-Length":"63","Accept-Encoding":"gzip, compress, deflate, br"},"method":"post","url":"https://api.line.me/v2/bot/message/reply","data":"{\"replyToken\":\"d8916655d23b4318b2c4fe68b9f1dcc2\",\"messages\":[]}"},"code":"ERR_BAD_REQUEST","status":400}
+2024-02-23 21:45:20 [message]: {"type":"text","id":"496384497022402722","quoteToken":"dsAhika_UkTEJZt_PS4_A_t0kTcd8Xe_LAj3qIalgcd6KlMEq_V3e3d5JuBEuWWQaShH83hZy2irIq3qkGkt3UEjqZ-hY8fpL7kusdygXrkVRJylOBF4Hfghu6yGbfuKP7A0YCGLzDVPbGx4w-46ug","text":"awdawd"}
+2024-02-23 21:45:20 [action]: replyMessage awdawd => f4e23d51362147ddb574a81a94ab2ca2
+2024-02-23 21:45:20 [error]: {"message":"Request failed with status code 400","name":"AxiosError","stack":"AxiosError: Request failed with status code 400\n    at settle (file:///D:/Desktop/Codes/MentallyChill/node_modules/axios/lib/core/settle.js:19:12)\n    at IncomingMessage.handleStreamEnd (file:///D:/Desktop/Codes/MentallyChill/node_modules/axios/lib/adapters/http.js:589:11)\n    at IncomingMessage.emit (node:events:531:35)\n    at endReadableNT (node:internal/streams/readable:1696:12)\n    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)\n    at Axios.request (file:///D:/Desktop/Codes/MentallyChill/node_modules/axios/lib/core/Axios.js:45:41)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)","config":{"transitional":{"silentJSONParsing":true,"forcedJSONParsing":true,"clarifyTimeoutError":false},"adapter":["xhr","http"],"transformRequest":[null],"transformResponse":[null],"timeout":0,"xsrfCookieName":"XSRF-TOKEN","xsrfHeaderName":"X-XSRF-TOKEN","maxContentLength":-1,"maxBodyLength":-1,"env":{},"headers":{"Accept":"application/json, text/plain, */*","Content-Type":"application/json","Authorization":"Bearer GzWkhxhMvqYSICzVefC/PiXqeFPU0A7mDUnd3JLzizzo0Y+tJXy3GFRy4ezdhgfmhSQLQoQpNLo1HHQ/3K4XzsqttUz7lNmPIqooVsVv/z4jsbszRLb11cKg7df+aQL1n6Ndj2xezeuH+iPrSO/dGwdB04t89/1O/w1cDnyilFU=","User-Agent":"axios/1.6.7","Content-Length":"63","Accept-Encoding":"gzip, compress, deflate, br"},"method":"post","url":"https://api.line.me/v2/bot/message/reply","data":"{\"replyToken\":\"f4e23d51362147ddb574a81a94ab2ca2\",\"messages\":[]}"},"code":"ERR_BAD_REQUEST","status":400}
+2024-02-23 22:06:19 [message]: {"type":"text","id":"496386608283517205","quoteToken":"Dp8qcfRdaNuOKGKvr14nMaRJpJKOVCyndXS8BHFqvxgPYpRqK1Zx_t0KpxDTpA8qh2Za_WKD9lr9u4q7HiIcf6K-aIRxGEhMKdnSso838_w2ItoFV7CLAMqn3bKyUZwibS_HEAhAL4XKXwcP-HEKnw","text":"หำด"}
+2024-02-23 22:06:19 [action]: replyMessage หำด => 891b29d0b7424b3faf5306f847544dd2
+2024-02-23 22:06:19 [error]: {"message":"Request failed with status code 400","name":"AxiosError","stack":"AxiosError: Request failed with status code 400\n    at settle (file:///D:/Desktop/Codes/MentallyChill/node_modules/axios/lib/core/settle.js:19:12)\n    at IncomingMessage.handleStreamEnd (file:///D:/Desktop/Codes/MentallyChill/node_modules/axios/lib/adapters/http.js:589:11)\n    at IncomingMessage.emit (node:events:531:35)\n    at endReadableNT (node:internal/streams/readable:1696:12)\n    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)\n    at Axios.request (file:///D:/Desktop/Codes/MentallyChill/node_modules/axios/lib/core/Axios.js:45:41)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)","config":{"transitional":{"silentJSONParsing":true,"forcedJSONParsing":true,"clarifyTimeoutError":false},"adapter":["xhr","http"],"transformRequest":[null],"transformResponse":[null],"timeout":0,"xsrfCookieName":"XSRF-TOKEN","xsrfHeaderName":"X-XSRF-TOKEN","maxContentLength":-1,"maxBodyLength":-1,"env":{},"headers":{"Accept":"application/json, text/plain, */*","Content-Type":"application/json","Authorization":"Bearer GzWkhxhMvqYSICzVefC/PiXqeFPU0A7mDUnd3JLzizzo0Y+tJXy3GFRy4ezdhgfmhSQLQoQpNLo1HHQ/3K4XzsqttUz7lNmPIqooVsVv/z4jsbszRLb11cKg7df+aQL1n6Ndj2xezeuH+iPrSO/dGwdB04t89/1O/w1cDnyilFU=","User-Agent":"axios/1.6.7","Content-Length":"63","Accept-Encoding":"gzip, compress, deflate, br"},"method":"post","url":"https://api.line.me/v2/bot/message/reply","data":"{\"replyToken\":\"891b29d0b7424b3faf5306f847544dd2\",\"messages\":[]}"},"code":"ERR_BAD_REQUEST","status":400}
+2024-02-23 22:06:35 [message]: {"type":"text","id":"496386636620234977","quoteToken":"jcEdL961kAwhzTu-1de7QI-aDYdLptWvhFTO1gNuOh9FiEEr4MlgCIdXtA5kJS_wOmzbAZUxd9JwWWuYbzS7w09bA-q7CSeDOHMQa68A1Kq9zsJYrw0AgTwW7ejpqN7oc9PPtQrVFVGh3k7Ko91QbA","text":"asd"}
+2024-02-23 22:06:35 [action]: replyMessage asd => 19ff01c9d2634803b67c1365b440bc7a
+2024-02-23 22:06:36 [error]: {"message":"Request failed with status code 400","name":"AxiosError","stack":"AxiosError: Request failed with status code 400\n    at settle (file:///D:/Desktop/Codes/MentallyChill/node_modules/axios/lib/core/settle.js:19:12)\n    at IncomingMessage.handleStreamEnd (file:///D:/Desktop/Codes/MentallyChill/node_modules/axios/lib/adapters/http.js:589:11)\n    at IncomingMessage.emit (node:events:531:35)\n    at endReadableNT (node:internal/streams/readable:1696:12)\n    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)\n    at Axios.request (file:///D:/Desktop/Codes/MentallyChill/node_modules/axios/lib/core/Axios.js:45:41)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)","config":{"transitional":{"silentJSONParsing":true,"forcedJSONParsing":true,"clarifyTimeoutError":false},"adapter":["xhr","http"],"transformRequest":[null],"transformResponse":[null],"timeout":0,"xsrfCookieName":"XSRF-TOKEN","xsrfHeaderName":"X-XSRF-TOKEN","maxContentLength":-1,"maxBodyLength":-1,"env":{},"headers":{"Accept":"application/json, text/plain, */*","Content-Type":"application/json","Authorization":"Bearer GzWkhxhMvqYSICzVefC/PiXqeFPU0A7mDUnd3JLzizzo0Y+tJXy3GFRy4ezdhgfmhSQLQoQpNLo1HHQ/3K4XzsqttUz7lNmPIqooVsVv/z4jsbszRLb11cKg7df+aQL1n6Ndj2xezeuH+iPrSO/dGwdB04t89/1O/w1cDnyilFU=","User-Agent":"axios/1.6.7","Content-Length":"63","Accept-Encoding":"gzip, compress, deflate, br"},"method":"post","url":"https://api.line.me/v2/bot/message/reply","data":"{\"replyToken\":\"19ff01c9d2634803b67c1365b440bc7a\",\"messages\":[]}"},"code":"ERR_BAD_REQUEST","status":400}
+2024-02-23 22:06:44 [logs]: Logger.js initialized
+2024-02-23 22:06:44 [server]: Server listening on port 3000
+2024-02-23 22:06:44 [logs]: Logger.js initialized
+2024-02-23 22:06:44 [server]: Server listening on port 3000
+2024-02-23 22:06:46 [message]: {"type":"text","id":"496386653498114197","quoteToken":"qy0a_gmwxVCHr-4BbmMruN1fRyLhPeTk-XVPwI_y3AV3E_pLn8oZxt6U8rChqog-w1rztCe2I1-dE3VZhX-QwOIdsCamqJyXcRgSo88S0-F6tNFSsKS2in9GI9ujmOMxDtCGZecrBMSIrdtLtZWgwQ","text":"awd"}
+2024-02-23 22:06:46 [action]: replyMessage awd => a01dc95043b24cffa66cdedd4e296e43
+2024-02-23 22:06:49 [message]: {"type":"text","id":"496386660007674262","quoteToken":"KR4igccoUYASpk3T4yU_uGkT_rRDwn7M27A0nCM8avH3hbyFNAMH-r5v1YqcteSbUbIkazLyJOGibKQhokoDF40vvILOHcMRnewPykk3RKdUlqmBGc3TuQn4_BW4jGyuimdaTmes-08reNjFDBJWIw","text":"awd"}
+2024-02-23 22:06:49 [action]: replyMessage awd => 4f00d6add337407ea4bea9f6bbf2e9ee
+2024-02-23 22:07:48 [message]: {"type":"text","id":"496386757953060993","quoteToken":"Pr4G00N6k96KPrXn9baABSHOSDRIBK9qTBJmIiVizeTd9Y2wBy4h3xEKRWq6X_D2O-CbtJOEOVl-5zow8YxgSNExtjGesHXymK_k4hWWxIGNrAfsHSlDiZg_7m2Yg16GA9olJCudN0J_F-yn6fbxtA","text":"ทฟืเน"}
+2024-02-23 22:07:48 [action]: replyMessage ทฟืเน => 5fa2fcca75864334abc35078e88f4788
+2024-02-23 22:07:50 [message]: {"type":"text","id":"496386761846161556","quoteToken":"LX6lRQryyWyzHufzpTNwQN8c2OglsHaT_CPAZ4t_eSy5Abdw2y5ILmN2BmOGXChmpff8cNYbd6icEGH_oHx2upe7VRaMTpMRp_j_K-uez5RRHzkbL-b6ik8nQHnW6UnT3_hmSPuwdltnIxl96u4JeA","text":"mango"}
+2024-02-23 22:07:50 [action]: replyMessage mango => 6976aa5a84a145cfa06eb330b5df5864
+2024-02-23 22:08:10 [logs]: Logger.js initialized
+2024-02-23 22:08:10 [server]: Server listening on port 3000
+2024-02-23 22:08:12 [logs]: Logger.js initialized
+2024-02-23 22:08:13 [server]: Server listening on port 3000
+2024-02-23 22:08:17 [logs]: Logger.js initialized
+2024-02-23 22:08:17 [server]: Server listening on port 3000
+2024-02-23 22:08:19 [logs]: Logger.js initialized
+2024-02-23 22:08:19 [server]: Server listening on port 3000
+2024-02-23 22:09:13 [logs]: Logger.js initialized
+2024-02-23 22:09:13 [server]: Server listening on port 3000
+2024-02-23 22:09:23 [logs]: Logger.js initialized
+2024-02-23 22:09:23 [server]: Server listening on port 3000
+2024-02-23 22:09:27 [message]: {"type":"text","id":"496386924064801029","quoteToken":"hunJJyZ0xGTzMt4JwPYFeRbEPbTyEQpZKz0oyahS43unzYE1O_WtcAOzk16ln2uBjYx1DZ9JpBXEBDiPwRLiZMT5-BKcJi8LWmcmyBj8WGSUMdVYVlFOz63QBkIvW9NvrqwXSiCa80wjL1R2-VdHow","text":"awd"}
+2024-02-23 22:09:38 [logs]: Logger.js initialized
+2024-02-23 22:09:38 [server]: Server listening on port 3000
+2024-02-23 22:09:41 [logs]: Logger.js initialized
+2024-02-23 22:09:41 [server]: Server listening on port 3000
+2024-02-23 22:09:56 [logs]: Logger.js initialized
+2024-02-23 22:09:56 [server]: Server listening on port 3000
+2024-02-23 22:10:00 [logs]: Logger.js initialized
+2024-02-23 22:10:00 [server]: Server listening on port 3000
+2024-02-23 22:10:07 [logs]: Logger.js initialized
+2024-02-23 22:10:07 [server]: Server listening on port 3000
+2024-02-23 22:10:09 [message]: {"type":"text","id":"496386994243371477","quoteToken":"1pVt2Xk_UCOW2m8PLVSR7M3f9u9r2UPfoS2qYzWF7hE58cQucmOWPCbY45HT2TPLThoVO-6vobIhDYVqD2i5qniHU4spPrXei8KoGgMMtxdjelOXwzIMLseJjEvSUJC0tMpVOZZW-AM-CK9kx-7-ag","text":"awdawd"}
+2024-02-23 22:10:18 [logs]: Logger.js initialized
+2024-02-23 22:10:18 [server]: Server listening on port 3000
+2024-02-23 22:10:20 [message]: {"type":"text","id":"496387013184848043","quoteToken":"-XzVIwMPSsBdVoFCFLjhjfX3jjvorKtFWQqcjDWuXcfqSt7lndjHK5KS0eCbTjicUL21wHVojatJCwhLcbnNVv8kfDaQ8LUQtiJpqXZOSTQgZwWEANqpR00Hg5l0mkzC5_v6TkRvkhJy68DE484kBQ","text":"awdawd"}
+2024-02-23 22:10:20 [action]: pushMessage awdawd => U43354d20204e8cd7717133c1a03d9360
+2024-02-23 22:10:31 [logs]: Logger.js initialized
+2024-02-23 22:10:31 [server]: Server listening on port 3000
+2024-02-23 22:10:40 [logs]: Logger.js initialized
+2024-02-23 22:10:41 [server]: Server listening on port 3000
+2024-02-23 22:10:43 [logs]: Logger.js initialized
+2024-02-23 22:10:43 [server]: Server listening on port 3000
+2024-02-23 22:10:46 [logs]: Logger.js initialized
+2024-02-23 22:10:46 [server]: Server listening on port 3000
+2024-02-23 22:10:47 [logs]: Logger.js initialized
+2024-02-23 22:10:47 [server]: Server listening on port 3000
+2024-02-23 22:10:58 [logs]: Logger.js initialized
+2024-02-23 22:10:58 [server]: Server listening on port 3000
+2024-02-23 22:11:02 [logs]: Logger.js initialized
+2024-02-23 22:11:02 [server]: Server listening on port 3000
+2024-02-23 22:11:08 [logs]: Logger.js initialized
+2024-02-23 22:11:08 [server]: Server listening on port 3000
+2024-02-23 22:11:23 [logs]: Logger.js initialized
+2024-02-23 22:11:23 [server]: Server listening on port 3000
+2024-02-23 22:11:30 [logs]: Logger.js initialized
+2024-02-23 22:11:31 [server]: Server listening on port 3000
+2024-02-23 22:11:37 [logs]: Logger.js initialized
+2024-02-23 22:11:37 [server]: Server listening on port 3000
+2024-02-23 22:11:45 [logs]: Logger.js initialized
+2024-02-23 22:11:45 [server]: Server listening on port 3000
+2024-02-23 22:11:47 [logs]: Logger.js initialized
+2024-02-23 22:11:47 [server]: Server listening on port 3000
+2024-02-23 22:11:52 [logs]: Logger.js initialized
+2024-02-23 22:11:52 [server]: Server listening on port 3000
+2024-02-23 22:12:03 [logs]: Logger.js initialized
+2024-02-23 22:12:04 [server]: Server listening on port 3000
+2024-02-23 22:12:19 [logs]: Logger.js initialized
+2024-02-23 22:12:19 [server]: Server listening on port 3000
+2024-02-23 22:12:24 [logs]: Logger.js initialized
+2024-02-23 22:12:24 [server]: Server listening on port 3000
+2024-02-23 22:16:10 [logs]: Logger.js initialized
+2024-02-23 22:16:10 [server]: Server listening on port 3000
+2024-02-23 22:19:08 [logs]: Logger.js initialized
+2024-02-23 22:19:08 [server]: Server listening on port 3000
+2024-02-23 22:19:17 [message]: {"type":"text","id":"496387914574594406","quoteToken":"NjrBbdyn8XfhRbFbpdY-0GothH5MkCqvO7ruBv2t4MAJvrZoUwqv2Gln5WOvfvXE99N3dtYkcTsjpc-WtKACdTd9KgYOWNBJwXIQJ12W6BeUyUUmu7-hISdKmJLvEQuiO-9oVeqllpTBBTua6yi4oQ","text":"awd"}
+2024-02-23 22:19:27 [logs]: Logger.js initialized
+2024-02-23 22:19:27 [server]: Server listening on port 3000
+2024-02-23 22:19:32 [logs]: Logger.js initialized
+2024-02-23 22:19:32 [server]: Server listening on port 3000
+2024-02-23 22:19:59 [logs]: Logger.js initialized
+2024-02-23 22:19:59 [server]: Server listening on port 3000
+2024-02-23 22:20:01 [logs]: Logger.js initialized
+2024-02-23 22:20:01 [server]: Server listening on port 3000
+2024-02-23 22:24:33 [logs]: Logger.js initialized
+2024-02-23 22:24:33 [server]: Server listening on port 3000
+2024-02-23 22:24:38 [logs]: Logger.js initialized
+2024-02-23 22:24:38 [server]: Server listening on port 3000
+2024-02-23 22:24:58 [logs]: Logger.js initialized
+2024-02-23 22:24:58 [server]: Server listening on port 3000
+2024-02-23 22:25:00 [logs]: Logger.js initialized
+2024-02-23 22:25:01 [server]: Server listening on port 3000
+2024-02-23 22:25:17 [logs]: Logger.js initialized
+2024-02-23 22:25:17 [server]: Server listening on port 3000
+2024-02-23 22:26:00 [logs]: Logger.js initialized
+2024-02-23 22:26:00 [server]: Server listening on port 3000
+2024-02-23 22:26:00 [logs]: Logger.js initialized
+2024-02-23 22:26:01 [server]: Server listening on port 3000
+2024-02-23 22:26:11 [message]: {"type":"text","id":"496388609487405282","quoteToken":"GZIylHGlcfnaHZBwbD2wY4KQ-l01P6QNOmbwVihCGItU5uuccCUC6zYVG7S5jdpB983QfYQndMPUTZ10wY024B0vwELJL8Hhc907Nh-0Dhuk29YYXKwRFyOPQMnBnqIN-TbaRl8bQe4O2rNdalIOxw","text":"mango"}
+2024-02-23 22:26:11 [action]: pushMessage mango => U43354d20204e8cd7717133c1a03d9360
+2024-02-23 22:26:21 [logs]: Logger.js initialized
+2024-02-23 22:26:21 [server]: Server listening on port 3000
+2024-02-23 22:26:21 [logs]: Logger.js initialized
+2024-02-23 22:26:21 [server]: Server listening on port 3000
