@@ -1,57 +1,44 @@
 import axios from 'axios';
 import dotenv from 'dotenv';
-import { logger } from './logger.js';
-import { getAccessToken } from './auth.js';
+import logger from './logger.js';
+import { getAuthHeader } from './auth.js';
 dotenv.config();
 
 export default class Message {
     constructor() {
-        this.headers = {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + getAccessToken()
-        }
     }
 
-    replyMessage(replyToken, message) {
+    text(...texts) {
+        var messagesArray = [];
+        texts.forEach(text => {
+            messagesArray.push({ "type": "text", "text": String(text) });
+        });
+        return messagesArray;
+    }
 
-        logger.action("replyMessage" + " " + message + " => " + replyToken)
-
+    reply(replyToken, messagesArray) {
         let body = {
             replyToken: replyToken,
-            messages: [
-                {
-                    type: 'text',
-                    text: message
-                }
-            ]
+            messages: messagesArray
         }
-        axios.post('https://api.line.me/v2/bot/message/reply', body, { headers: this.headers }
+        axios.post('https://api.line.me/v2/bot/message/reply', body, { headers: getAuthHeader() }
         ).then((res) => {
-            console.log(res.data);
+            logger.info(JSON.stringify(res.data));
         }).catch((err) => {
             logger.error(JSON.stringify(err));
         });
     }
 
-    pushMessage(ID, message) {
-
-        logger.action("pushMessage" + " " + message + " => " + ID)
-
-
+    push(ID, messagesArray) {
         let body = {
             to: ID,
-            messages: [
-                {
-                    type: 'text',
-                    text: message
-                }
-            ]
+            messages: messagesArray
         }
 
 
-        axios.post('https://api.line.me/v2/bot/message/push', body, { headers: this.headers })
+        axios.post('https://api.line.me/v2/bot/message/push', body, { headers: getAuthHeader() })
             .then((res) => {
-                console.log(res.data);
+                logger.info(JSON.stringify(res.data));
             }).catch((err) => {
                 logger.error(JSON.stringify(err));
             });

@@ -16,6 +16,13 @@ dotenv.config();
 //     return response.data.access_token;
 // }
 
-export function getAccessToken() {
-    return process.env.CHANNEL_SECRET;
+// export function getAccessToken() {
+//     return process.env.CHANNEL_SECRET;
+// }
+
+export function getAuthHeader() {
+    return {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + process.env.CHANNEL_SECRET
+    }
 }

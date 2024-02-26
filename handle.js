@@ -1,11 +1,8 @@
-import { logger } from "./logger.js";
+import logger from "./logger.js";
 
-class HandleEvent {
+export default class HandleEvent {
     constructor(event) {
         this.event = event.events[0];
-        if (this.event.type == 'message') {
-            logger.message(JSON.stringify(this.getMessage()));
-        }
     }
 
     getEventType() {
@@ -64,6 +61,7 @@ class HandleEvent {
             return null;
         }
     }
+
     getMessageID() {
         if (this.getEventType() == 'message') {
             this.messageID = this.event.message.id;
@@ -84,6 +82,3 @@ class HandleEvent {
         }
     }
 }
-
-
-export default HandleEvent;
