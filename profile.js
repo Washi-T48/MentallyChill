@@ -14,9 +14,9 @@ export default class Profile {
         return new Promise((resolve, reject) => {
             axios.get('https://api.line.me/v2/bot/profile/' + userID, { headers: getAuthHeader() }
             ).then((res) => {
-                logger.info(JSON.stringify(res.data));
+                logger.info(res.data);
                 this.userProfile = res.data;
-                resolve(JSON.stringify(res.data));
+                resolve(res.data);
             }).catch((err) => {
                 logger.error(JSON.stringify(err));
                 reject(err);
@@ -28,7 +28,7 @@ export default class Profile {
         return new Promise((resolve, reject) => {
             axios.get('https://api.line.me/v2/bot/group/' + groupID + '/member/' + userID, { headers: getAuthHeader() }
             ).then((res) => {
-                logger.info(JSON.stringify(res.data));
+                logger.info(res.data);
                 this.userProfile = res.data;
                 resolve(res.data);
             }).catch((err) => {
@@ -42,17 +42,13 @@ export default class Profile {
         return new Promise((resolve, reject) => {
             axios.get('https://api.line.me/v2/bot/room/' + roomID + '/member/' + userID, { headers: getAuthHeader() }
             ).then((res) => {
-                logger.info(JSON.stringify(res.data));
+                logger.info(res.data);
                 this.userProfile = res.data;
                 resolve(res.data);
             }).catch((err) => {
-                logger.error(JSON.stringify(err));
+                logger.error(err);
                 reject(err);
             });
         });
-    }
-
-    getDisplayName() {
-        return this.userProfile.displayName;
     }
 }

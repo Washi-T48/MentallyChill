@@ -17,10 +17,7 @@ app.get("/", (req, res) => {
 });
 
 app.post("/webhook", async function (req, res) {
-    logger.webhook(JSON.stringify(req.body));
-    var event = new HandleEvent(req.body);
-    var profile = new Profile();
-    await profile.get(event.getUserID());
+    logger.info(JSON.stringify(req.body));
     res.sendStatus(200);
 });
 

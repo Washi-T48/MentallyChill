@@ -11,8 +11,7 @@ const logger = winston.createLogger({
         warning: 4,
         notice: 5,
         info: 6,
-        debug: 7,
-        webhook: 8
+        debug: 7
     },
     format: format.combine(
         format.timestamp({
@@ -22,9 +21,9 @@ const logger = winston.createLogger({
     ),
     transports: [
         new winston.transports.File({ filename: 'console.log' }),
-        new winston.transports.Console()
+        // new winston.transports.Console()
     ]
 });
 
 export default logger;
-logger.info('Logger.js initialized');
+logger.info('logger.js initialized');
