@@ -1,6 +1,6 @@
 # MentallyChill
- 
-npm install to get all the node_modules before running
+
+npm install
 
 npm run ngrok
 
