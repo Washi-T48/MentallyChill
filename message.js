@@ -11,7 +11,10 @@ export default class Message {
     text(...texts) {
         var messagesArray = [];
         texts.forEach(text => {
-            messagesArray.push({ "type": "text", "text": String(text) });
+            messagesArray.push({
+                "type": "text",
+                "text": String(text)
+            });
         });
         return messagesArray;
     }
@@ -21,12 +24,8 @@ export default class Message {
             replyToken: replyToken,
             messages: messagesArray
         }
-        axios.post('https://api.line.me/v2/bot/message/reply', body, { headers: getAuthHeader() }
-        ).then((res) => {
-            logger.info(JSON.stringify(res.data));
-        }).catch((err) => {
-            logger.error(JSON.stringify(err));
-        });
+        axios.post('https://api.line.me/v2/bot/message/reply', body, { headers: getAuthHeader() })
+            .then((res) => { }).catch((err) => { });
     }
 
     push(ID, messagesArray) {
@@ -37,11 +36,7 @@ export default class Message {
 
 
         axios.post('https://api.line.me/v2/bot/message/push', body, { headers: getAuthHeader() })
-            .then((res) => {
-                logger.info(JSON.stringify(res.data));
-            }).catch((err) => {
-                logger.error(JSON.stringify(err));
-            });
+            .then((res) => { }).catch((err) => { });
     }
 
 }

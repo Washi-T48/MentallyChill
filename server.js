@@ -21,13 +21,7 @@ app.post("/webhook", async function (req, res) {
     var event = new HandleEvent(req.body);
     var message = new Message();
     var profile = new Profile();
-    if (event.getText() == '!ทำแบบประเมิน') {
-        message.reply(event.getReplyToken(), message.text('ทำแบบทดสอบได้ที่ลิ้งค์นี้...'));
-    } else if (event.getText() == '!นัดหมาย') {
-        message.reply(event.getReplyToken(), message.text('กรุณารอสักครู่ เจ้าหน้าที่จะติตต่อกลับโดยเร็วที่สุด...'));
-    } else if (event.getText() == '!ติดต่อเจ้าหน้าที่') {
-        message.reply(event.getReplyToken(), message.text('หน้าสำหรับนัดหมายเจ้าหน้าที่...'));
-    }
+    console.log("CONTENT: " + (await event.getContent(event.getMessageID())));
     res.sendStatus(200);
 });
 
