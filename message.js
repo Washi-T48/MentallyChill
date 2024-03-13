@@ -13,8 +13,35 @@ export default class Message {
         texts.forEach(text => {
             messagesArray.push({
                 "type": "text",
-                "text": String(text)
+                "text": String(text),
             });
+        });
+        return messagesArray;
+    }
+
+    textSender(...textSendersArray) {
+        var messagesArray = [];
+        textSendersArray.forEach(textSender => {
+            const message = {
+                "type": "text",
+                "text": String(textSender.text),
+                "sender": {
+                }
+            }
+
+            if (textSender.hasOwnProperty('sender')) {
+                message.sender.name = String(textSender.sender);
+            }
+
+            if (textSender.hasOwnProperty('IconUrl')) {
+                message.sender.IconUrl = String(textSender.IconUrl);
+            }
+
+            if (!textSender.hasOwnProperty('sender') && !textSender.hasOwnProperty('IconUrl')) {
+                delete message.sender;
+            }
+
+            messagesArray.push(message);
         });
         return messagesArray;
     }
@@ -25,7 +52,7 @@ export default class Message {
             messages: messagesArray
         }
         axios.post('https://api.line.me/v2/bot/message/reply', body, { headers: getAuthHeader() })
-            .then((res) => { }).catch((err) => { });
+            .then((res) => { }).catch((err) => { logger.error(err) });
     }
 
     push(ID, messagesArray) {
@@ -36,7 +63,7 @@ export default class Message {
 
 
         axios.post('https://api.line.me/v2/bot/message/push', body, { headers: getAuthHeader() })
-            .then((res) => { }).catch((err) => { });
+            .then((res) => { }).catch((err) => { logger.error(err) });
     }
 
 }

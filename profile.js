@@ -17,6 +17,7 @@ export default class Profile {
                 this.userProfile = res.data;
                 resolve(res.data);
             }).catch((err) => {
+                logger.error(err);
                 reject(err);
             });
         });
@@ -29,6 +30,7 @@ export default class Profile {
                 this.userProfile = res.data;
                 resolve(res.data);
             }).catch((err) => {
+                logger.error(err);
                 reject(err);
             });
         });
@@ -41,6 +43,7 @@ export default class Profile {
                 this.userProfile = res;
                 resolve(res.data);
             }).catch((err) => {
+                logger.error(err);
                 reject(err);
             });
         });

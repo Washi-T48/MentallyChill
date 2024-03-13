@@ -21,10 +21,11 @@ app.post("/webhook", async function (req, res) {
     var event = new HandleEvent(req.body);
     var message = new Message();
     var profile = new Profile();
-    console.log("CONTENT: " + (await event.getContent(event.getMessageID())));
+    message.reply(event.getReplyToken(), message.textSender({ text: "gello" }));
     res.sendStatus(200);
 });
 
 app.listen(PORT, () => {
     logger.info(`Server listening on port ${PORT}`)
 });
+
