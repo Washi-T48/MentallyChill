@@ -5,8 +5,13 @@ html {
     min-width: 100%;
     min-height: 100%;
     background-position: center;
-    
+    font-family: ChulabhornLikitText-Regular;
   }
+
+@font-face {
+  font-family: ChulabhornLikitText-Regular;
+  src: url(../assets/fonts/ChulabhornLikitText-Regular.otf);
+}
   
   img.logo{
     position: static;
