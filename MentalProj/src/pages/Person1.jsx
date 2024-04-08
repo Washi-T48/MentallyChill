@@ -1,5 +1,6 @@
-import "./personIn1.css";
-export default function personIn() {
+import "./Person1.css";
+import React from "react";
+export default function Person1() {
     
     return (
         <div className='page'>
