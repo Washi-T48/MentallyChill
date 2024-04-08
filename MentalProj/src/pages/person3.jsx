@@ -10,18 +10,18 @@ export default function Person3() {
           <div className='content'>
             <img className='logo' src={CRAlogo}>
             </img>
-            <p>Psychiatry is the branch of medicine focused on the diagnosis, treatment and 
-              prevention of mental, emotional and 
-              behavioral disorders.</p>
+            <p>ปริญญาโท : สาขาจิตวิทยาการปรึกษา คณะศิลปศาสตร์ มหาวิทยาลัยธรรมศาสตร์<br/>
+            <br/>ปริญญาตรี : สาขาพยาบาลศาสตร์ คณะแพทยศาสตร์โรงพยาบาลรามาธิบดี มหาวิทยาลัยมหิดล<br/>
+            </p>
     
-            <p>A psychiatrist is a medical doctor (an M.D. or D.O.) who specializes in mental health, including substance use disorders. Psychiatrists are qualified to assess both the mental and physical aspects of psychological problems.</p>
+            
           </div>
     
           <div className='footer'>
             <img src={CRA03}></img>
             <div className="profile">
-              <h1>รหัส CRA01 รุ้งนภา ผาณิตรัตน์ (พี่รุ้ง)</h1>
-              <p>text</p>
+              <h1>รหัส CRA03 <br/> วิภาพร สร้อยแสง</h1>
+              <p>(พี่อ้อย)</p>
             </div>
           </div>
     

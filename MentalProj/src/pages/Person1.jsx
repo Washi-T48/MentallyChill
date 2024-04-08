@@ -22,7 +22,7 @@ export default function Person1() {
           <div className='footer'>
             <img src={CRA01}></img>
             <div className="profile">
-              <h1>รหัส CRA01 รุ้งนภา ผาณิตรัตน์ </h1>
+              <h1>รหัส CRA01 <br/> รุ้งนภา ผาณิตรัตน์ </h1>
               <p>(พี่รุ้ง)</p>
             </div>
           </div>
