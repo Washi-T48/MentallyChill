@@ -1,4 +1,4 @@
-import "./Person1.css";
+import "./person1.css";
 import React from "react";
 export default function Person1() {
     
