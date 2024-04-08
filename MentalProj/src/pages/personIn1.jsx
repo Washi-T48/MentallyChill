@@ -1,4 +1,4 @@
-import "./personIn.css";
+import "./personIn1.css";
 export default function personIn() {
     
     return (
