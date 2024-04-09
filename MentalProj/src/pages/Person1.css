@@ -67,10 +67,58 @@ html {
 
 /* Media query for screens smaller than 768px (typical mobile devices) */
 @media screen and (min-width: 350px) {
-  html {
-    font-size: large; 
+  html { 
     overflow: hidden;
     background-position: top;
+    font-size: 20px;
+  }
+  div.content p {
+    font-size: 18px;
   }
   
+}
+
+@media screen and (min-width: 768px){
+  img.logo{
+    width: 108px;
+    height: 175.5px;
+  }
+  div.footer img {
+    width: 125px;
+    height: 125px;
+  }
+  div.content p {
+    font-size: 20px;
+  }
+  .profile h1 {
+    font-size: 18px;
+    line-height: 25px;
+  }
+  .profile p {
+    font-size: 16px;
+  }
+}
+
+
+@media screen and (min-width: 1024px){
+  div.footer img {
+    width: 200px;
+    height: 200px;
+  }
+  img.logo{
+    width: 144px;
+    height: 234px;
+  }
+  div.content p {
+    font-size: 24px;
+    margin: 2rem;
+    align-content: center;
+  }
+  .profile h1 {
+    font-size: 24px;
+    line-height: normal;
+  }
+  .profile p {
+    font-size: 20px;
+  }
 }
