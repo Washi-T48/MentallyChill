@@ -86,7 +86,7 @@ export default class HandleEvent {
 
     async getContent(messageID) {
         new Promise((resolve, reject) => {
-            axios.get("https://api-data.line.me/v2/bot/message/" + messageID + "/content", body, { headers: getAuthHeader() })
+            axios.get("https://api-data.line.me/v2/bot/message/" + messageID + "/content", { headers: getAuthHeader() })
                 .then((res) => {
                     this.rawContent = res;
                     resolve(res.data);

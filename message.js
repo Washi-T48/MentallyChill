@@ -19,27 +19,32 @@ export default class Message {
         return messagesArray;
     }
 
+    flex(...flexes) {
+        var messagesArray = [];
+        flexes.forEach(flex => {
+            messagesArray.push({
+                "type": "flex",
+                "altText": String(flex.altText),
+                "contents": flex
+            });
+        });
+        console.log(messagesArray)
+        return messagesArray;
+    }
+
+
     textSender(...textSendersArray) {
         var messagesArray = [];
         textSendersArray.forEach(textSender => {
             const message = {
                 "type": "text",
-                "text": String(textSender.text),
                 "sender": {
-                }
+                    name: (textSender.hasOwnProperty('sender') ? String(textSender.sender) : ""),
+                    iconUrl: (textSender.hasOwnProperty('IconUrl') ? String(textSender.IconUrl) : "")
+                },
+                "text": (textSender.hasOwnProperty('text')) ? String(textSender.text) : String(textSender),
             }
 
-            if (textSender.hasOwnProperty('sender')) {
-                message.sender.name = String(textSender.sender);
-            }
-
-            if (textSender.hasOwnProperty('IconUrl')) {
-                message.sender.IconUrl = String(textSender.IconUrl);
-            }
-
-            if (!textSender.hasOwnProperty('sender') && !textSender.hasOwnProperty('IconUrl')) {
-                delete message.sender;
-            }
 
             messagesArray.push(message);
         });
@@ -60,8 +65,6 @@ export default class Message {
             to: ID,
             messages: messagesArray
         }
-
-
         axios.post('https://api.line.me/v2/bot/message/push', body, { headers: getAuthHeader() })
             .then((res) => { }).catch((err) => { logger.error(err) });
     }
