@@ -1,13 +1,11 @@
 html {
-    background-image: url("../images/Mental_bg.png");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+    background: url("../images/Mental_bg.png") no-repeat fixed center center / cover;;
     min-width: 100%;
     min-height: 100%;
     background-position: center;
     font-family: ChulabhornLikitText-Regular;
     overflow: auto;
+    display: block;
   }
 
 @font-face {
@@ -68,9 +66,11 @@ html {
   }
 
 /* Media query for screens smaller than 768px (typical mobile devices) */
-@media screen and (max-width: 768px) {
-  .logo {
-    max-width: 200px; /* Adjust max-width for smaller screens */
+@media screen and (min-width: 350px) {
+  html {
+    font-size: large; 
+    overflow: hidden;
+    background-position: top;
   }
   
 }
