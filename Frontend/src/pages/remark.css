@@ -65,6 +65,12 @@ div.remark-footer {
     margin-top: 18px;
 }
 
+@media screen and (min-width: 425px) {
+    html { 
+        background-position: top;
+      }
+}
+
 @media screen and (min-width: 768px){
     img.logo{
       width: 108px;
