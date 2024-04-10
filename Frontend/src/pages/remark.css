@@ -56,6 +56,7 @@ mark {
     border: none;
     font-size: 16px;
     font-weight: bold;
+    cursor: pointer;
 }
 
 div.remark-footer {
@@ -79,7 +80,7 @@ div.remark-footer {
     
   }
 
-  @media screen and (min-width: 1024px){
+@media screen and (min-width: 1024px){
     img.logo{
       width: 144px;
       height: 234px;

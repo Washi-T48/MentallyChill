@@ -1,6 +1,7 @@
 import './remark.css';
 import React from 'react'
 import CRAlogo from "../images/CRAlogo.png";
+import Remark2 from './remark2';
 export default function Remark() {
   return (
     <div className='page'>
@@ -25,7 +26,9 @@ export default function Remark() {
         </p>
       </div>
       <div className='remark-footer'>
-        <button className='btn btn-start' onClick={<></>}>Start Evaluation</button>
+        <a href='/remark2'>
+            <button className='btn btn-start'>Start Evaluation</button>
+        </a>
       </div>
     </div>
   )
