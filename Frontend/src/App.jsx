@@ -3,6 +3,7 @@ import Person1 from './pages/Person1'
 import Person2 from "./pages/person2"
 import Person3 from "./pages/person3"
 import Remark from './pages/remark'
+import Remark2 from './pages/remark2'
 import { BrowserRouter, Routes, Route} from 'react-router-dom'
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
           <Route path='/person2' element={<Person2 />} />
           <Route path='/person3' element={<Person3 />} />
           <Route path='/remark' element={<Remark/>} />
+          <Route path='/remark2' element={<Remark2 />} />
         </Routes>
       </BrowserRouter>
     </>
