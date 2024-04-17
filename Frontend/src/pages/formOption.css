@@ -57,6 +57,7 @@ html {
     width: 358px;
     height: 64px;
     border-radius: 8px;
+    cursor: pointer;
 }
 
 .f-container {

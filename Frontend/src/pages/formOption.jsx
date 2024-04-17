@@ -28,7 +28,7 @@ export default function FormOption() {
       </div>
 
       <div className='form-option'>
-        <div to='/' className='DASS21 f-container'  >
+        <div to='/' className='DASS21 f-container' onClick={DASS21} >
           <img className='ex-icon' src={EXicon}></img>
           <div className='form-name'><b>DASS-21</b>
             <br/><small>สำหรับคัดกรองภาวะซึมเศร้า, วิตกกังวล, ความเครียด</small></div>
