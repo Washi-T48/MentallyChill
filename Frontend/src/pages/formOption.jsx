@@ -3,19 +3,20 @@ import "./formOption.css"
 import CRAlogo from "../images/CRAlogo.png";
 import EXicon from "../images/excla_icon.png";
 import Enter from "../images/enter_icon.png";
-
-const DASS21 = () => {
-  const navigate = useNavigate();
-  const location = useLocation();
-
-  const handleClick= () => {
-    navigate('/Dass21');
-  };
-};
+import { useNavigate } from "react-router-dom";
 
 
 
 export default function FormOption() {
+  
+  const DASS21 = () => {
+    const navigate = useNavigate()
+
+    const goToDass21 = () => {
+      navigate('/remark')
+    }
+  }
+
   return (
     <div>
       <div className='logo'>
@@ -28,7 +29,7 @@ export default function FormOption() {
       </div>
 
       <div className='form-option'>
-        <div to='/' className='DASS21 f-container' onClick={DASS21} >
+        <div className='DASS21 f-container' onClick={() => goToDass21} >
           <img className='ex-icon' src={EXicon}></img>
           <div className='form-name'><b>DASS-21</b>
             <br/><small>สำหรับคัดกรองภาวะซึมเศร้า, วิตกกังวล, ความเครียด</small></div>
