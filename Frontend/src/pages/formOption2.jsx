@@ -1,7 +1,8 @@
 import React from 'react'
 import './formOption2.css'
 import CRAlogo from "../images/CRAlogo.png";
-import { useState} from 'react';
+import { useState,} from 'react';
+import { useNavigate} from 'react-router-dom';
 import { RxPerson } from "react-icons/rx";
 import { BsTelephoneFill } from "react-icons/bs";
 
@@ -21,9 +22,11 @@ export default function FormOption2() {
     setstep2Data((oldData) => 
       ({...oldData, [key]: value }));
     };
+  const navigate = useNavigate()
   const onSubmit = e => {
     e.preventDefault()
     console.log('submit value', step2Data)
+    navigate('/p1_dass21')
   }
 
   return (

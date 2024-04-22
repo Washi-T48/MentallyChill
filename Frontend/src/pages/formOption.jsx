@@ -9,13 +9,10 @@ import { useNavigate } from "react-router-dom";
 
 export default function FormOption() {
   
-  const DASS21 = () => {
-    const navigate = useNavigate()
-
-    const goToDass21 = () => {
-      navigate('/remark')
-    }
-  }
+  const navigateStep2 = () => {
+    // Change the URL to navigate to another page
+    window.location.href = '../formOption2';
+  };
 
   return (
     <div>
@@ -29,7 +26,7 @@ export default function FormOption() {
       </div>
 
       <div className='form-option'>
-        <div className='DASS21 f-container' onClick={() => goToDass21} >
+        <div className='DASS21 f-container' onClick={navigateStep2} >
           <img className='ex-icon' src={EXicon}></img>
           <div className='form-name'><b>DASS-21</b>
             <br/><small>สำหรับคัดกรองภาวะซึมเศร้า, วิตกกังวล, ความเครียด</small></div>

@@ -1,7 +1,10 @@
 import React from 'react'
 import "./remark2.css"
 import CRAlogo from "../images/CRAlogo.png";
+import { useNavigate } from 'react-router-dom';
+import P1_dass21 from './p1_dass21';
 export default function Remark2() {
+  const navigate = useNavigate()
   return (
     <div>
       <div className='logo'>
@@ -12,8 +15,8 @@ export default function Remark2() {
 	<br/>&nbsp;&nbsp;&nbsp;&nbsp;แบบประเมินสุขภาพจิตเป็นการประเมินด้วยตัวเอง คุณสามารถทำเมื่อใดก็ได้ ให้เลือกข้อที่คิดว่าตรงกับท่านมากที่สุด เพื่อวัดระดับภาวะซึมเศร้า ความวิตกกังวล และความเครียด ถ้าได้ผลแตกต่างกันในแต่ละครั้งถือเป็นเรื่องผิดปกติ
 
       </div>
-      <div className='remark2-footer'>
-        <button className='btn btn-acc' onClick={<></>}>Accept</button>
+      <div className='remark2-footer' >
+        <button className='btn btn-acc' onClick={() => {navigate('../formOption')}} >Accept</button>
       </div>
     </div>
   )
