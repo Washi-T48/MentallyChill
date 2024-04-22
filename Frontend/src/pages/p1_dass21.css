@@ -7,3 +7,14 @@ html {
     overflow: auto;
     display: block;
   }
+
+  .p1_dass21-content {
+    font-size: 20px;
+    padding: 14px;
+    color: white;
+    border: 1.5px;
+    border-color: white;
+    border-radius: 20px;
+    border-style: solid;
+    margin: 1rem;
+}
