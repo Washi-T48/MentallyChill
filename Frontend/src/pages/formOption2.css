@@ -100,12 +100,12 @@ input {
     position: relative;
 }
 
-.tel label, .sos-tel label, .email label {
+.tel label, .sos-tel label, .email label, .year label {
     padding-left: 28px;
     color: #333333;
 }
 
-.email, .tel, .sos-tel {
+.email, .tel, .sos-tel, .year {
     font-size: 14px;
     line-height: 17px;
     display: block;
@@ -113,7 +113,7 @@ input {
     align-items: center;
 }
 
-input.email, input.tel, input.sos-tel {
+input.email, input.tel, input.sos-tel, input.year {
     width: 320px;
     height: 51px;
     margin-top: 10px;

@@ -10,6 +10,7 @@ export default function FormOption2() {
   const [step2Data, setstep2Data] = useState({
     gender: '',
     age: '',
+    year: '',
     email: '',
     tel: '',
     sos_tel: '',
@@ -46,7 +47,8 @@ export default function FormOption2() {
                   placeholder='เพศ'
                   value={step2Data.gender}
                   name='gender'
-                  onChange={onChange}>
+                  onChange={onChange}
+                  required>
                 </input>
 
               <input 
@@ -55,9 +57,25 @@ export default function FormOption2() {
                 placeholder='อายุ'
                 value={step2Data.age}
                 name='age'
-                onChange={onChange}>
+                onChange={onChange}
+                required>
               </input>
-          </div>
+            </div>
+
+              <div className='year'>
+
+                <label>ชั้นปีการศึกษา</label>
+                <input
+                  className='year'
+                  type='text'
+                  placeholder='ชั้นปีการศึกษา'
+                  value={step2Data.year}
+                  name='year'
+                  onChange={onChange}
+                  required
+                ></input>
+
+              </div>
 
               <div className='email'>
                 
