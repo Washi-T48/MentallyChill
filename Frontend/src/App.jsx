@@ -7,7 +7,7 @@ import Remark2 from './pages/remark2'
 import { BrowserRouter, Routes, Route} from 'react-router-dom'
 import FormOption from './pages/formOption'
 import FormOption2 from './pages/formOption2'
-import P1_dass21 from './p1_dass21'
+import P1_dass21 from './pages/p1_dass21'
 function App() {
 
   return (
