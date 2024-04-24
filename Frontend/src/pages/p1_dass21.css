@@ -18,3 +18,30 @@ html {
     border-style: solid;
     margin: 1rem;
 }
+
+.p1_dass21-content h1 {
+  font-size: 24px;
+  text-align: center;
+}
+
+.p1_dass21-content p {
+  font-size: 20px;
+}
+
+.p1_dass21-content table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #ffffff;
+
+}
+
+.p1_dass21-content td {
+  padding: 4px;
+  border: 1px solid #ffffff;
+}
+
+.p1_dass21-content th {
+  background-color: #ffffff;
+  color: black;
+}
+
