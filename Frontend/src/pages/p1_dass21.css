@@ -1,0 +1,9 @@
+html {
+    background: url("../images/Mental_bg.png") no-repeat fixed center center / cover;;
+    min-width: 100%;
+    min-height: 100%;
+    background-position: center;
+    font-family: ChulabhornLikitText-Regular;
+    overflow: auto;
+    display: block;
+  }
