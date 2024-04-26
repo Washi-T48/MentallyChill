@@ -2,7 +2,7 @@ import React from 'react'
 import "./remark2.css"
 import CRAlogo from "../images/CRAlogo.png";
 import { useNavigate } from 'react-router-dom';
-import P1_dass21 from './p1_dass21';
+import P1_dass21 from './cri_dass21';
 export default function Remark2() {
   const navigate = useNavigate()
   return (

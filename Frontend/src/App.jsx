@@ -7,7 +7,7 @@ import Remark2 from './pages/remark2'
 import { BrowserRouter, Routes, Route} from 'react-router-dom'
 import FormOption from './pages/formOption'
 import FormOption2 from './pages/formOption2'
-import P1_dass21 from './pages/p1_dass21'
+import CRI_dass21 from './pages/cri_dass21'
 function App() {
 
   return (
@@ -23,7 +23,7 @@ function App() {
           <Route path='/remark2' element={<Remark2 />} />
           <Route path='/formOption' element={<FormOption/>} />
           <Route path='/formOption2' element={<FormOption2/>} />
-          <Route path='/p1_dass21' element={<P1_dass21 />} />
+          <Route path='/cri_dass21' element={<CRI_dass21 />} />
         </Routes>
       </BrowserRouter>
     </>

@@ -8,7 +8,7 @@ html {
     display: block;
   }
 
-  .p1_dass21-content {
+  .cri_dass21-content {
     font-size: 20px;
     padding: 14px;
     color: white;
@@ -19,29 +19,61 @@ html {
     margin: 1rem;
 }
 
-.p1_dass21-content h1 {
+.cri_dass21-content h1 {
   font-size: 24px;
   text-align: center;
 }
 
-.p1_dass21-content p {
+.cri_dass21-content p {
   font-size: 20px;
 }
 
-.p1_dass21-content table {
+.cri_dass21-content table {
   width: 100%;
   border-collapse: collapse;
   border: 1px solid #ffffff;
 
 }
 
-.p1_dass21-content td {
+.cri_dass21-content td {
   padding: 4px;
   border: 1px solid #ffffff;
 }
 
-.p1_dass21-content th {
+.cri_dass21-content th {
   background-color: #ffffff;
   color: black;
 }
 
+
+
+@media screen and (min-width: 350px) {
+  html { 
+      background-position: top;
+    }
+  .p1_dass21-content p {
+    font-size: 18px;
+  }
+  .p1_dass21-content th, .p1_dass21-content td {
+    font-size: 16px;
+  }
+  .p1_dass21-content h1 {
+    font-size: 20px;
+  }
+}
+
+@media screen and (min-width: 768px){
+  img.logo{
+    width: 108px;
+    height: 175.5px;
+  }
+  
+}
+
+@media screen and (min-width: 1024px){
+  img.logo{
+      width: 144px;
+      height: 234px;
+    }
+  
+}
