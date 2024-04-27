@@ -1,13 +1,11 @@
 import './remark.css';
 import React from 'react'
-import CRAlogo from "../images/CRAlogo.png";
+import Logo from './logo';
 import Remark2 from './remark2';
 export default function Remark() {
   return (
     <div className='page'>
-      <div className='logo'>
-        <img className='logo' src={CRAlogo}></img>
-      </div>
+      <Logo/>
       <div className='remark-content'>
         <h1>คำแนะนำในการเลือกผู้ให้การปรึกษา</h1>
         <p>1. ทางระบบ จะเเสดงรายการผู้ให้การปรึกษาเรียงลำดับ คุณสามารถเลือกได้จากรายชื่อ ผู้ให้การปรึกษาทั้งหมด

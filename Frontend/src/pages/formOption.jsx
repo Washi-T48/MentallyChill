@@ -1,6 +1,6 @@
 import React from 'react'
 import "./formOption.css"
-import CRAlogo from "../images/CRAlogo.png";
+import Logo from './logo';
 import EXicon from "../images/excla_icon.png";
 import Enter from "../images/enter_icon.png";
 import { useNavigate } from "react-router-dom";
@@ -16,9 +16,7 @@ export default function FormOption() {
 
   return (
     <div>
-      <div className='logo'>
-        <img className='logo' src={CRAlogo}></img>
-      </div>
+      <Logo/>
 
       <div className='step-1'>
         <h1>STEP 1 :</h1>

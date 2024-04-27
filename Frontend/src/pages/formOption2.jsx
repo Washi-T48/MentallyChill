@@ -1,6 +1,6 @@
 import React from 'react'
 import './formOption2.css'
-import CRAlogo from "../images/CRAlogo.png";
+import Logo from './logo';
 import { useState,} from 'react';
 import { useNavigate} from 'react-router-dom';
 import { RxPerson } from "react-icons/rx";
@@ -31,9 +31,7 @@ export default function FormOption2() {
 
   return (
     <div>
-      <div className='logo'>
-        <img className='logo' src={CRAlogo}></img>
-      </div>
+      <Logo/>
 
       <div className='step-2'>
         <h1>STEP 2 :</h1>

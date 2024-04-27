@@ -1,12 +1,4 @@
-html {
-    background: url("../images/Mental_bg.png") no-repeat fixed center center / cover;;
-    min-width: 100%;
-    min-height: 100%;
-    background-position: center;
-    font-family: ChulabhornLikitText-Regular;
-    overflow: auto;
-    display: block;
-  }
+
 
 div {
     margin:1rem auto;
@@ -144,6 +136,9 @@ input.email, input.tel, input.sos-tel, input.year {
     input.email, input.tel, input.sos-tel {
         width: 290px;
     }
+    html { 
+        background-position: top;
+      }
 }
 
 @media screen and (min-width: 425px) {
@@ -157,7 +152,9 @@ input.email, input.tel, input.sos-tel, input.year {
       width: 108px;
       height: 175.5px;
     }
-    
+    html { 
+        background-position: top;
+      }
   }
 
 @media screen and (min-width: 1024px){
@@ -165,4 +162,7 @@ input.email, input.tel, input.sos-tel, input.year {
       width: 144px;
       height: 234px;
     }
+    html { 
+        background-position: top;
+      }
 }

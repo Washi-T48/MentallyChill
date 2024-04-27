@@ -108,6 +108,9 @@ small {
       width: 108px;
       height: 175.5px;
     }
+    html { 
+        background-position: top;
+      }
     
   }
 
@@ -116,4 +119,7 @@ small {
       width: 144px;
       height: 234px;
     }
+    html { 
+        background-position: top;
+      }
   }

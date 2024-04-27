@@ -1,6 +1,6 @@
 import React from 'react'
 import "./cri_dass21.css"
-import CRAlogo from "../images/CRAlogo.png";
+import Logo from './logo';
 export default function CRI_dass21() {
 
   const navigateToPreviousPage = () => {
@@ -14,9 +14,7 @@ export default function CRI_dass21() {
 
   return (
     <div>
-      <div className='logo'>
-        <img className='logo' src={CRAlogo}></img>
-      </div>
+      <Logo/>
       <div className='cri_dass21-content'>
           <div className='dass21-header'>
             <h1>แบบสอบถามวัดภาวะสุขภาพจิต <br/> Depression Anxiety Stress Scales (DASS-21)</h1>
