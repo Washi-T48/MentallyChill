@@ -1,8 +1,11 @@
 import * as React from 'react';
 import Radio from '@mui/material/Radio';
+import styled from '@emotion/styled';
+
 
 export default function Radio_rate() {
-  const [selectedValue, setSelectedValue] = React.useState('a');
+  const [selectedValue, setSelectedValue] = React.useState('0'); // Change initial state to '0'
+  
   const handleChange = (event) => {
     setSelectedValue(event.target.value);
   };
@@ -11,22 +14,21 @@ export default function Radio_rate() {
     checked: selectedValue === item,
     onChange: handleChange,
     value: item,
-    name: 'size-radio-button-demo',
+    name: 'dass21-rated',
     inputProps: { 'aria-label': item },
   });
 
   return (
-    <div>
-      <Radio {...controlProps('a')} size="small" />
-      <Radio {...controlProps('b')} />
-      <Radio
-        {...controlProps('c')}
-        sx={{
-          '& .MuiSvgIcon-root': {
-            fontSize: 28,
-          },
-        }}
-      />
+    <div className='radio-container'
+    style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      0
+      <Radio {...controlProps('0')} sx={{ '& .MuiSvgIcon-root': { fontSize: 20 } }} />
+      <Radio {...controlProps('1')} sx={{ '& .MuiSvgIcon-root': { fontSize: 24 } }} />
+      <Radio {...controlProps('2')} sx={{ '& .MuiSvgIcon-root': { fontSize: 28 } }} />
+      <Radio {...controlProps('3')} sx={{ '& .MuiSvgIcon-root': { fontSize: 32 } }} />
+      <Radio {...controlProps('4')} sx={{ '& .MuiSvgIcon-root': { fontSize: 36 } }} />
+      4
     </div>
+
   );
 }

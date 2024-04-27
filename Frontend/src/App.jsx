@@ -9,6 +9,7 @@ import FormOption from './pages/formOption'
 import FormOption2 from './pages/formOption2'
 import CRI_dass21 from './pages/cri_dass21'
 import P1_dass21 from './pages/p1_dass21'
+import Radio_rate from './pages/radio_rate'
 function App() {
 
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path='/formOption2' element={<FormOption2/>} />
           <Route path='/cri_dass21' element={<CRI_dass21 />} />
           <Route path='/p1_dass21' element={<P1_dass21/>} />
+          <Route path='/radio_rate' element={<Radio_rate/>} />
 
         </Routes>
       </BrowserRouter>
