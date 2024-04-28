@@ -1,26 +1,24 @@
-import * as React from 'react';
+// Radio_rate.js
+
+import React from 'react';
 import Radio from '@mui/material/Radio';
-import styled from '@emotion/styled';
 
-
-export default function Radio_rate() {
-  const [selectedValue, setSelectedValue] = React.useState('0'); // Change initial state to '0'
-  
+export default function Radio_rate({ questionNumber, selectedValue, onRadioChange }) {
   const handleChange = (event) => {
-    setSelectedValue(event.target.value);
+    const newValue = event.target.value;
+    onRadioChange(questionNumber, newValue);
   };
 
   const controlProps = (item) => ({
     checked: selectedValue === item,
     onChange: handleChange,
     value: item,
-    name: 'dass21-rated',
+    name: `dass21-rated-${questionNumber}`,
     inputProps: { 'aria-label': item },
   });
 
   return (
-    <div className='radio-container'
-    style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+    <div className='radio-container' style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
       0
       <Radio {...controlProps('0')} sx={{ '& .MuiSvgIcon-root': { fontSize: 20 } }} />
       <Radio {...controlProps('1')} sx={{ '& .MuiSvgIcon-root': { fontSize: 24 } }} />
