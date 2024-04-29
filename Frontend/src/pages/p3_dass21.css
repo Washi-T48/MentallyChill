@@ -8,7 +8,7 @@ html {
     display: block;
   }
 
-.p1_dass21-content {
+.p3_dass21-content {
     font-size: 20px;
     padding: 14px;
     color: rgb(0, 0, 0);
@@ -20,13 +20,14 @@ html {
     background-color: white;
 }
 
-.p1_dass21-footer{
-  display: flex;
-  justify-content: end;
+.p3_dass21-footer{
   margin-top: 2rem;
+  display: flex;
+  justify-content: space-between;
 }
 
-.p1_dass21-footer .btn-next {
+.p3_dass21-footer .btn-next {
+  justify-content: end;
   text-align: center;
   background-color: #269C58;
   color: white;
@@ -40,7 +41,17 @@ html {
   cursor: pointer;
 }
 
-.radio-container {
-  margin:auto 1rem;
-  padding: 0 4px;
-}
+.p3_dass21-footer .btn-prev {
+    justify-content: start;
+    text-align: center;
+    background-color: #ebb41d;
+    color: white;
+    width: 138px;
+    height: 43px;
+    border-radius: 6px;
+    gap: 10px;
+    border: none;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+  }
