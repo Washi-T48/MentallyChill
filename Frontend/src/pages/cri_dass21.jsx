@@ -72,7 +72,7 @@ export default function CRI_dass21() {
           </div>
       </div>
       <div className='cri_dass21-footer'>
-          <Link to="/p3_dass21">
+          <Link to="/result">
             <button className='btn btn-result'>See the result</button>
           </Link>
         </div>
