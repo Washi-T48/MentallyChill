@@ -11,6 +11,7 @@ import CRI_dass21 from './pages/cri_dass21'
 import P1_dass21 from './pages/p1_dass21'
 import P2_dass21 from './pages/p2_dass21'
 import P3_dass21 from './pages/p3_dass21'
+import Result from './pages/result'
 import Radio_rate from './pages/radio_rate'
 function App() {
 
@@ -32,6 +33,7 @@ function App() {
           <Route path='/radio_rate' element={<Radio_rate/>} />
           <Route path='/p2_dass21' element={<P2_dass21/>} />
           <Route path='/p3_dass21' element={<P3_dass21/>} />
+          <Route path='/result' element={<Result/>} />
         </Routes>
       </BrowserRouter>
     </>

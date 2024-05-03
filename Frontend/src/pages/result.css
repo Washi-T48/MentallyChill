@@ -1,0 +1,123 @@
+.dass21-result-content {
+    font-size: 20px;
+    padding: 14px;
+    color: rgb(0, 0, 0);
+    border: 1.5px solid;
+    border-color: white;
+    border-radius: 20px;
+    border-style: solid;
+    margin: 1rem;
+}
+
+.mental-health {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #D62B2B54;
+    border: 1.5px solid;
+    border-radius: 20px;
+    border-color: #D62B2B54;
+    width: 310px;
+    height: 53px;
+    color: white;
+    margin-bottom: 12px;
+}
+
+.mental-health img {
+    width: 32px;
+    height: 32px;
+}
+
+.mental-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #FCFCFC54;
+    border: 1.5px solid;
+    border-radius: 20px;
+    border-color: white;
+    width: 310px;
+    height: 53px;
+    color: white;
+    margin-top: 12px;
+}
+
+.d-result span, .a-result span, .s-result span {
+    color: white;
+}
+
+.mental-detail div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.dass21-result-footer {
+    display: flex;
+    justify-content: space-around;
+    padding: 0 2rem 0 2rem;
+}
+
+.dass21-result-content .btn-next {
+    justify-content: end;
+    text-align: center;
+    background-color: #269C58;
+    color: white;
+    width: 138px;
+    height: 43px;
+    border-radius: 6px;
+    gap: 10px;
+    border: none;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .dass21-result-footer .btn-close {
+      justify-content: start;
+      text-align: center;
+      background-color: #D62B2B;
+      color: white;
+      width: 138px;
+      height: 43px;
+      border-radius: 6px;
+      gap: 10px;
+      border: none;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    @media screen and (max-width: 400px) {
+        .mental-health, .mental-group {
+            width: auto;
+        }
+        .mental-detail {
+            font-size: 16px;
+        }
+    }
+
+    @media screen and (min-width: 425px) {
+        html { 
+            background-position: top;
+          }
+        
+    }
+
+    @media screen and (min-width: 768px){
+        img.logo{
+          width: 108px;
+          height: 175.5px;
+        }
+        .mental-health, .mental-group {
+            width: auto;
+        }
+    }
+      
+    
+    @media screen and (min-width: 1024px){
+        img.logo{
+          width: 144px;
+          height: 234px;
+        }
+        
+      }
