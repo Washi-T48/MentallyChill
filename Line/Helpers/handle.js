@@ -1,6 +1,6 @@
 import axios from "axios";
-import logger from "./logger.js";
-import { getAuthHeader } from "./auth.js";
+import logger from "../Config/logger.js";
+import { getAuthHeader } from "../Routes/auth.js";
 
 export default class HandleEvent {
     constructor(event) {
@@ -83,20 +83,5 @@ export default class HandleEvent {
             return null;
         }
     }
-
-    async getContent(messageID) {
-        new Promise((resolve, reject) => {
-            axios.get("https://api-data.line.me/v2/bot/message/" + messageID + "/content", { headers: getAuthHeader() })
-                .then((res) => {
-                    this.rawContent = res;
-                    resolve(res.data);
-                    console.log("Server Responded");
-                }).catch((err) => {
-                    reject(err);
-                });
-        });
-    }
-
-    getContentType(rawContent = this.rawContent) { }
 
 }
