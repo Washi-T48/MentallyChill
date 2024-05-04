@@ -1,0 +1,29 @@
+.appoint-topic {
+    border: 1.5px solid;
+    border-color: white;
+    border-radius: 20px;
+    border-style: solid;
+    margin: 0 auto;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    background-color: white;
+    height: 53px;
+    width: 325px;
+    text-align: center;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.appoint-topic h1 {
+    font-size: 20px;
+}
+
+.appoint-form {
+    font-size: 20px;
+    padding: 14px;
+    color: rgb(0, 0, 0);
+    border: 1.5px solid;
+    border-color: white;
+    border-radius: 20px;
+    border-style: solid;
+    margin: 1rem;
+}
