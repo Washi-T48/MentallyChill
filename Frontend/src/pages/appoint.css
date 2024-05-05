@@ -23,10 +23,11 @@
     padding: 14px;
     color: rgb(0, 0, 0);
     border: 1.5px solid;
-    border-color: white;
+    border-color: #FFAD4D;
     border-radius: 20px;
     border-style: solid;
     margin: 1rem;
+    background-color: #FFAD4D;
 }
 
 input[type="date"]::-webkit-clear-button {
