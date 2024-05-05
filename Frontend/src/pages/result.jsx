@@ -38,7 +38,7 @@ export default function Result() {
             <Link to="/">
                 <button className='btn btn-close'>Close</button>
             </Link>
-            <Link to="/">
+            <Link to="/appoint">
                 <button className='btn btn-next'>Appointment</button>
             </Link>
         </div>
