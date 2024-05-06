@@ -23,7 +23,7 @@ export default function Appoint() {
         <div className="appoint-form">
             <form>
                 <div className='app-tel'>
-                    <label >หมายเลขโทรศัพท์</label>
+                    <label >หมายเลขโทรศัพท์</label><br/>
                     <input 
                         className='app-tel' 
                         type='tel'
@@ -36,29 +36,28 @@ export default function Appoint() {
                     </div>
                 <div className="app-contact">
                     <div>ช่องทางการติดต่อ</div>
-                    <label >Google Meet
                         <input 
                             className='app-contact' 
                             type='radio'
                             name='gg-meet'
                             >
                         </input>
-                        <span class="checkmark"></span>
+                    <label htmlFor="gg-meet" >Google Meet
+                        <span className="checkmark"></span><br/>
                     </label>
-
-                    <label>เบอร์โทร
                         <input 
                             className='app-contact' 
                             type='radio'
-                            name='tel'
+                            name='app-tel'
                             >
                         </input>
+                    <label htmlFor="app-tel">เบอร์โทร
                         <span className="checkmark"></span>
                     </label>
                 </div>
                 <div className="app-advisor">
                     <label>เลือกผู้ให้คำปรึกษา
-                        <select>
+                        <select >
                             <option value="CRA01">รุ้งนภา ผาณิตรัตน์ (พี่รุ้ง)</option>
                             <option value="CRA02">ดวงแก้ว เตชะกาญจนเวช (พี่ปู)</option>
                             <option value="CRA03">วิภาพร สร้อยแสง (พี่อ้อย)</option>
@@ -77,7 +76,7 @@ export default function Appoint() {
                 </div>
                 <div className="app-topic">
                     <label>เรื่องที่ต้องการปรึกษา<br/>
-                        <select>
+                        <select >
                                 <option value={"/"}>TOPIC-1</option>
                                 <option value={"/"}>TOPIC-2</option>
                                 <option value={"/"}>TOPIC-3</option>
@@ -90,12 +89,13 @@ export default function Appoint() {
                             className='app-detail' 
                             type='text'
                             name='detail'
+                            
                             >
                         </input>
                     </label>
                 </div>
                 <div className="med-his">
-                    <label>ประวัติการรับยา
+                    <label>ประวัติการรับยา<br/>
                         <input 
                             className='med-his' 
                             type='text'

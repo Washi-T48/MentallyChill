@@ -23,7 +23,7 @@
     padding: 14px;
     color: rgb(0, 0, 0);
     border: 1.5px solid;
-    border-color: #FFAD4D;
+    border-color: #ffffff;
     border-radius: 20px;
     border-style: solid;
     margin: 1rem;
@@ -63,4 +63,10 @@ input[type="date"], focus {
     box-shadow: none;
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
+}
+
+.dass21-app-footer .btn {
+    text-align: center;
+    background-color: #269C58;
+    
 }
