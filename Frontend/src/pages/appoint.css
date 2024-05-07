@@ -23,11 +23,12 @@
     padding: 14px;
     color: rgb(0, 0, 0);
     border: 1.5px solid;
-    border-color: #ffffff;
+    border-color: #00000023;
     border-radius: 20px;
     border-style: solid;
     margin: 1rem;
     background-color: #FFAD4D;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 input[type="date"]::-webkit-clear-button {
@@ -54,10 +55,11 @@ input[type="date"] {
     padding:5px;
     display: inline-block !important;
     visibility: visible !important;
-    width: 185px;
+    width: 186px;
     height: 30px;
-    border-radius: 20px;
+    border-radius: 15px;
     padding-left: 8px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 input[type="date"], focus {
@@ -68,7 +70,11 @@ input[type="date"], focus {
 .dass21-app-footer .btn {
     text-align: center;
     background-color: #269C58;
-    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    font-family: ChulabhornLikitText-Regular;
 }
 
 .appoint-form select, .appoint-form textarea {
@@ -76,9 +82,11 @@ input[type="date"], focus {
     font-size: 16px;
     border:1px solid #ecf0f1;
     width: 200px;
-    height: 32px;
+    height: 35px;
     border-radius: 15px;
     padding-left: 8px;
+    padding-right: 8px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 .appoint-form input[type = 'tel'], .appoint-form input[type='text'] {
@@ -89,6 +97,9 @@ input[type="date"], focus {
     height: 40px;
     border-radius: 15px;
     padding-left: 8px;
+    padding-right: 8px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    
 }
 
 .appoint-form input[type='tel']{

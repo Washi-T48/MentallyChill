@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import "./appoint.css"
 import Logo from './logo'
 import { Link } from 'react-router-dom'
-import CRA01 from "../images/CRA01.jpg"
+
 export default function Appoint() {
     const [appointData, setAppointData] = useState({
         tel:"",
@@ -44,7 +44,7 @@ export default function Appoint() {
                     </input>
                     </div>
                 <div className="app-contact">
-                    <div>ช่องทางการติดต่อ</div>
+                    <label>ช่องทางการติดต่อ
                         <div className="contact-container">
                             <input 
                                 className='app-contact' 
@@ -61,9 +61,9 @@ export default function Appoint() {
                                 name='contact-method'
                                 >
                             </input>
-                        <label htmlFor="app-tel">เบอร์โทร
-                        </label>
-                    </div>
+                        <label htmlFor="app-tel">เบอร์โทร</label>
+                        </div>
+                    </label>
                 </div>
                 <div className="app-advisor">
                     <label>เลือกผู้ให้คำปรึกษา<br/>
@@ -94,7 +94,7 @@ export default function Appoint() {
                     </label>
                 </div>
                 <div className="app-detail">
-                    <label>เรื่องที่ขอรับการปรึกษา
+                    <label>เรื่องที่ขอรับการปรึกษา<br/>
                         <textarea 
                             className='app-detail' 
                             type='text'
@@ -121,7 +121,7 @@ export default function Appoint() {
 
             <div className='dass21-app-footer'>
             <Link to="/">
-                <button className='btn btn-next'>จองเลย</button>
+                <button type='submit' className='btn btn-next'>จองเลย</button>
             </Link>
             </div>
         </div>
