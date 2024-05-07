@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import "./appoint.css"
 import Logo from './logo'
 import { Link } from 'react-router-dom'
-
+import CRA01 from "../images/CRA01.jpg"
 export default function Appoint() {
     const [appointData, setAppointData] = useState({
         tel:"",
@@ -39,7 +39,7 @@ export default function Appoint() {
                         <input 
                             className='app-contact' 
                             type='radio'
-                            name='gg-meet'
+                            name='contact-method'
                             >
                         </input>
                     <label htmlFor="gg-meet" >Google Meet
@@ -48,7 +48,7 @@ export default function Appoint() {
                         <input 
                             className='app-contact' 
                             type='radio'
-                            name='app-tel'
+                            name='contact-method'
                             >
                         </input>
                     <label htmlFor="app-tel">เบอร์โทร
