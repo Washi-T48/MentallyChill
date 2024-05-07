@@ -54,6 +54,10 @@ input[type="date"] {
     padding:5px;
     display: inline-block !important;
     visibility: visible !important;
+    width: 185px;
+    height: 30px;
+    border-radius: 20px;
+    padding-left: 8px;
 }
 
 input[type="date"], focus {
@@ -67,13 +71,26 @@ input[type="date"], focus {
     
 }
 
-.appoint-form select {
+.appoint-form select, .appoint-form textarea {
     font-family: ChulabhornLikitText-Regular;
     font-size: 16px;
+    border:1px solid #ecf0f1;
+    width: 200px;
+    height: 32px;
+    border-radius: 15px;
+    padding-left: 8px;
 }
 
-.app-time select {
+.appoint-form input[type = 'tel'], .appoint-form input[type='text'] {
+    font-family: ChulabhornLikitText-Regular;
+    font-size: 16px;
     border:1px solid #ecf0f1;
-    width: 159.2px;
-    height: 34.4px;
+    width: 200px;
+    height: 40px;
+    border-radius: 15px;
+    padding-left: 8px;
+}
+
+.appoint-form input[type='tel']{
+    width: auto;
 }

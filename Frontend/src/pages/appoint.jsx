@@ -14,6 +14,14 @@ export default function Appoint() {
         med_history:''
     })
 
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setAppointData((prevData) => ({
+            ...prevData,
+            [name]: value
+        }));
+    };
+
   return (
     <div>
         <Logo/>
@@ -30,33 +38,35 @@ export default function Appoint() {
                         placeholder='0000 000 0000'
                         value={appointData.tel}
                         name='tel'
+                        onChange={handleChange}
                         required
                         >
                     </input>
                     </div>
                 <div className="app-contact">
                     <div>ช่องทางการติดต่อ</div>
-                        <input 
-                            className='app-contact' 
-                            type='radio'
-                            name='contact-method'
-                            >
-                        </input>
-                    <label htmlFor="gg-meet" >Google Meet
-                        <span className="checkmark"></span><br/>
-                    </label>
-                        <input 
-                            className='app-contact' 
-                            type='radio'
-                            name='contact-method'
-                            >
-                        </input>
-                    <label htmlFor="app-tel">เบอร์โทร
-                        <span className="checkmark"></span>
-                    </label>
+                        <div className="contact-container">
+                            <input 
+                                className='app-contact' 
+                                type='radio'
+                                name='contact-method'
+                                >
+                            </input>
+                        <label htmlFor="gg-meet" >Google Meet
+                            <br/>
+                        </label>
+                            <input 
+                                className='app-contact' 
+                                type='radio'
+                                name='contact-method'
+                                >
+                            </input>
+                        <label htmlFor="app-tel">เบอร์โทร
+                        </label>
+                    </div>
                 </div>
                 <div className="app-advisor">
-                    <label>เลือกผู้ให้คำปรึกษา
+                    <label>เลือกผู้ให้คำปรึกษา<br/>
                         <select >
                             <option value="CRA01">รุ้งนภา ผาณิตรัตน์ (พี่รุ้ง)</option>
                             <option value="CRA02">ดวงแก้ว เตชะกาญจนเวช (พี่ปู)</option>
@@ -85,23 +95,26 @@ export default function Appoint() {
                 </div>
                 <div className="app-detail">
                     <label>เรื่องที่ขอรับการปรึกษา
-                        <input 
+                        <textarea 
                             className='app-detail' 
                             type='text'
                             name='detail'
-                            
+                            value={appointData.detail}
+                            onChange={handleChange}
                             >
-                        </input>
+                        </textarea>
                     </label>
                 </div>
                 <div className="med-his">
                     <label>ประวัติการรับยา<br/>
-                        <input 
+                        <textarea 
                             className='med-his' 
                             type='text'
                             name='med_history'
+                            value={appointData.med_history}
+                            onChange={handleChange}
                             >
-                        </input>
+                        </textarea>
                     </label>
                 </div>
             </form>
