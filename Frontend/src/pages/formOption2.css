@@ -58,7 +58,7 @@ input {
 
 
 .gender ,.age {
-    width: 110px;
+    width: 105px;
     height: 56px;
     border-radius: 4px;
     border-color: #F1F1F1;
@@ -106,7 +106,7 @@ input {
 }
 
 input.email, input.tel, input.sos-tel, input.year {
-    width: 320px;
+    width: 290px;
     height: 51px;
     margin-top: 10px;
     padding-left: 16px;
