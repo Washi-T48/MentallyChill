@@ -1,26 +1,32 @@
 .dass21-result-content {
     font-size: 20px;
-    padding: 14px;
-    color: rgb(0, 0, 0);
-    border: 1.5px solid;
-    border-color: white;
+    padding: 1rem;
+    color: #000;
+    border: 1.5px solid white;
     border-radius: 20px;
-    border-style: solid;
-    margin: 1rem;
+    margin: 1rem auto;
+    /* background-color: #f7f7f7; */
+    max-width: 700px;
 }
 
 .mental-health {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #D62B2B54;
-    border: 1.5px solid;
+    background-color: #d62b2b54;
+    border: 1.5px solid #d62b2b54;
     border-radius: 20px;
-    border-color: #D62B2B54;
-    width: 310px;
-    height: 53px;
+    max-width: 450px;
+    height: 80px;
     color: white;
-    margin-bottom: 12px;
+    margin-bottom: 3rem;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.mental-health h1 {
+    font-size: 24px;
+    font-stretch: 50%;
+    border: #000;
 }
 
 .mental-health img {
@@ -32,93 +38,145 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #FCFCFC54;
-    border: 1.5px solid;
+    background-color: #fcfcfc54;
+    border: 0px solid white;
     border-radius: 20px;
-    border-color: white;
-    width: 310px;
+    min-width: 300px;
+    max-width: 500px;
     height: 53px;
     color: white;
     margin-top: 12px;
+    padding: 0 10px;
 }
 
-.d-result span, .a-result span, .s-result span {
+.mental-detail {
+    animation: myAnim1 1s ease 0s 1 normal forwards;
+}
+
+.result {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 10px auto;
+    max-width: 500px;
+}
+
+.normal {
+    background-color: #4caf50;
     color: white;
 }
 
-.mental-detail div {
-    display: flex;
-    justify-content: space-between;
+.low {
+    background-color: #8bc34a;
+    color: white;
+}
+
+.moderate {
+    background-color: #ffc107;
+    
+}
+
+.high {
+    background-color: #ff9800;
+    color: white;
+}
+
+.severe {
+    background-color: #f44336;
+    color: white;
 }
 
 .dass21-result-footer {
     display: flex;
-    justify-content: space-around;
-    padding: 0 2rem 0 2rem;
+    padding: 1rem 0.5rem;
+    max-width: 400px;
+    flex-direction: column-reverse;
+    flex-wrap: wrap;
+    align-content: center;
+    align-items: center;
+    gap: 1.5rem;
 }
 
-.dass21-result-content .btn-next {
-    justify-content: end;
+.dass21-result-content .btn-next,
+.dass21-result-footer .btn-close {
     text-align: center;
-    background-color: #269C58;
     color: white;
     width: 138px;
     height: 43px;
     border-radius: 6px;
-    gap: 10px;
     border: none;
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  }
-  
-  .dass21-result-footer .btn-close {
-      justify-content: start;
-      text-align: center;
-      background-color: #D62B2B;
-      color: white;
-      width: 138px;
-      height: 43px;
-      border-radius: 6px;
-      gap: 10px;
-      border: none;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-    }
+}
 
-    @media screen and (max-width: 400px) {
-        .mental-health, .mental-group {
-            width: auto;
-        }
-        .mental-detail {
-            font-size: 16px;
-        }
-    }
-
-    @media screen and (min-width: 425px) {
-        html { 
-            background-position: top;
-          }
-        
-    }
-
-    @media screen and (min-width: 768px){
-        img.logo{
-          width: 108px;
-          height: 175.5px;
-        }
-        .mental-health, .mental-group {
-            width: auto;
-        }
-    }
-      
+.dass21-result-content .btn-next {
+    background-color: #269c58;
     
-    @media screen and (min-width: 1024px){
-        img.logo{
-          width: 144px;
-          height: 234px;
-        }
-        
-      }
+}
+
+.dass21-result-footer .btn-close {
+    background-color: #d62b2b;
+}
+
+.btn-close:hover {
+    animation: pulse 1s infinite;
+    transition: .3s;
+  }
+
+@keyframes pulse {
+    0% {
+      transform: scale(1);
+    }
+    70% {
+      transform: scale(.9);
+    }
+      100% {
+      transform: scale(1);
+    }
+  }
+
+@media screen and (max-width: 400px) {
+    /* .mental-health, .mental-group {
+        width: auto;
+    } */
+    .mental-detail {
+        font-size: 16px;
+    }
+}
+
+@keyframes myAnim1 {
+	0% {
+		opacity: 0;
+	}
+
+	100% {
+		opacity: 1;
+	}
+}
+
+@media screen and (min-width: 425px) {
+    html {
+        background-position: top;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    img.logo {
+        width: 108px;
+        height: 175.5px;
+    }
+    .mental-group {
+        width: 500px;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    img.logo {
+        width: 144px;
+        height: 234px;
+    }
+}
