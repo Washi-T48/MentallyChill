@@ -20,14 +20,14 @@ app.get("/", (req, res) => {
 
 app.post("/webhook", async function (req, res) {
     logger.info(JSON.stringify(req.body))
-    var event = new HandleEvent(req.body)
-    var message = new Message()
-    var profile = new Profile()
     try {
+        var event = new HandleEvent(req.body)
+        var message = new Message()
+        var profile = new Profile()
         console.log(event.getText())
     }
     catch (e) {
-        console.log(e)
+        logger.error(e)
     }
     res.sendStatus(200);
 });

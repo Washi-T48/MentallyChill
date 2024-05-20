@@ -12,8 +12,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon index.js",
     "ngrok": "ngrok.exe http --domain=healthy-busy-quail.ngrok-free.app 3000 --config ngrok.yml",
+    "dev": "nodemon index.js",
     "start": "node index.js"
   },
   "author": "",
