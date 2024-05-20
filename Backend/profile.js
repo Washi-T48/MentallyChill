@@ -1,7 +1,7 @@
 import axios from 'axios';
 import dotenv from 'dotenv';
-import logger from '../Config/logger.js';
-import { getAuthHeader } from '../Routes/auth.js';
+import logger from './logger.js';
+import { getAuthHeader } from './auth.js';
 dotenv.config();
 
 export default class Profile {

@@ -1,15 +1,13 @@
-import logger from './Config/logger.js'
-import HandleEvent from './Helpers/handle.js'
-import Message from './Helpers/message.js'
-import Profile from './Helpers/profile.js'
+import logger from './logger.js'
+import HandleEvent from './handle.js'
+import Message from './message.js'
+import Profile from './profile.js'
 import express, { text } from 'express'
 import dotenv from 'dotenv'
-import crypto from 'crypto'
 const app = express()
 
 dotenv.config();
-const PORT = process.env.PORT || 3000;
-const CHANNEL_SECRET = process.env.CHANNEL_SECRET;
+const PORT = process.env.PORT
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -23,12 +21,10 @@ app.post("/webhook", async function (req, res) {
     var event = new HandleEvent(req.body)
     var message = new Message()
     var profile = new Profile()
-    console.log(event.getText())
     res.sendStatus(200);
 });
 
 app.listen(PORT, () => {
-    console.log(`Server listening on port ${PORT}`)
     logger.info(`Server listening on port ${PORT}`)
 });
 
