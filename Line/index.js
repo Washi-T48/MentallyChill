@@ -23,7 +23,12 @@ app.post("/webhook", async function (req, res) {
     var event = new HandleEvent(req.body)
     var message = new Message()
     var profile = new Profile()
-    console.log(event.getText())
+    try {
+        console.log(event.getText())
+    }
+    catch (e) {
+        console.log(e)
+    }
     res.sendStatus(200);
 });
 
