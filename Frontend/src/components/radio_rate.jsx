@@ -1,9 +1,11 @@
-// Radio_rate.js
+import React from "react";
+import Radio from "@mui/material/Radio";
 
-import React from 'react';
-import Radio from '@mui/material/Radio';
-
-export default function Radio_rate({ questionNumber, selectedValue, onRadioChange }) {
+export default function Radio_rate({
+  questionNumber,
+  selectedValue,
+  onRadioChange,
+}) {
   const handleChange = (event) => {
     const newValue = event.target.value;
     onRadioChange(questionNumber, newValue);
@@ -14,19 +16,40 @@ export default function Radio_rate({ questionNumber, selectedValue, onRadioChang
     onChange: handleChange,
     value: item,
     name: `dass21-rated-${questionNumber}`,
-    inputProps: { 'aria-label': item },
+    inputProps: { "aria-label": item },
   });
 
   return (
-    <div className='radio-container' style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+    <div
+      className="radio-container"
+      style={{
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+      }}
+    >
       0
-      <Radio {...controlProps('0')} sx={{ '& .MuiSvgIcon-root': { fontSize: 20 } }} />
-      <Radio {...controlProps('1')} sx={{ '& .MuiSvgIcon-root': { fontSize: 24 } }} />
-      <Radio {...controlProps('2')} sx={{ '& .MuiSvgIcon-root': { fontSize: 28 } }} />
-      <Radio {...controlProps('3')} sx={{ '& .MuiSvgIcon-root': { fontSize: 32 } }} />
-      <Radio {...controlProps('4')} sx={{ '& .MuiSvgIcon-root': { fontSize: 36 } }} />
+      <Radio
+        {...controlProps("0")}
+        sx={{ "& .MuiSvgIcon-root": { fontSize: 20 } }}
+      />
+      <Radio
+        {...controlProps("1")}
+        sx={{ "& .MuiSvgIcon-root": { fontSize: 24 } }}
+      />
+      <Radio
+        {...controlProps("2")}
+        sx={{ "& .MuiSvgIcon-root": { fontSize: 28 } }}
+      />
+      <Radio
+        {...controlProps("3")}
+        sx={{ "& .MuiSvgIcon-root": { fontSize: 32 } }}
+      />
+      <Radio
+        {...controlProps("4")}
+        sx={{ "& .MuiSvgIcon-root": { fontSize: 36 } }}
+      />
       4
     </div>
-
   );
 }
