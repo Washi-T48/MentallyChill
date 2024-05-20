@@ -2,9 +2,60 @@ import React, { useEffect, useState } from "react";
 import Logo from "../components/logo";
 import Radio_rate from "../components/radio_rate";
 import "./p2_dass21.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 export default function P2_dass21() {
   const [selectedValues, setSelectedValues] = useState({});
+
+  const navigate = useNavigate();
+
+  const areAllQuestionsAnswered = () => {
+    // Check if all questions have been answered
+    const totalQuestions = 14; // Update this if you have more or fewer questions
+    for (let i = 8; i <= totalQuestions; i++) {
+      if (!selectedValues[i]) {
+        return false;
+      }
+    }
+    return true;
+  };
+
+  const calculateScores = () => {
+    const categories = JSON.parse(localStorage.getItem("dass21Scores")) || {
+      d: 0,
+      a: 0,
+      s: 0,
+    };
+    const categoryMapping = {
+      8: "s",
+      9: "a",
+      10: "d",
+      11: "s",
+      12: "s",
+      13: "d",
+      14: "s",
+    };
+
+    for (const [question, value] of Object.entries(selectedValues)) {
+      const category = categoryMapping[question];
+      if (category) {
+        categories[category] += parseInt(value, 10);
+      }
+    }
+
+    return categories;
+  };
+
+  const handleNextClick = (event) => {
+    if (!areAllQuestionsAnswered()) {
+      alert("Please answer all questions before proceeding.");
+      event.preventDefault();
+    } else {
+      const scores = calculateScores();
+      console.log(scores);
+      localStorage.setItem("dass21Scores", JSON.stringify(scores));
+      navigate("/p3_dass21");
+    }
+  };
 
   useEffect(() => {
     // Retrieve selected values from local storage when component mounts
@@ -106,12 +157,13 @@ export default function P2_dass21() {
           />
         </form>
         <div className="p2_dass21-footer">
-          <Link to="/p1_dass21">
-            <button className="btn btn-prev">Back</button>
-          </Link>
-          <Link to="/p3_dass21">
-            <button className="btn btn-next">Next</button>
-          </Link>
+          <button className="btn btn-prev" onClick={() => navigate(-1)}>
+            Back
+          </button>
+
+          <button className="btn btn-next" onClick={handleNextClick}>
+            Next
+          </button>
         </div>
       </div>
     </div>

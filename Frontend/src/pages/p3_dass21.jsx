@@ -2,12 +2,37 @@ import React, { useEffect, useState } from "react";
 import Logo from "../components/logo";
 import Radio_rate from "../components/radio_rate";
 import "./p3_dass21.css";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
 export default function P3_dass21() {
   const [selectedValues, setSelectedValues] = useState({});
 
+  const navigate = useNavigate();
+
+  const areAllQuestionsAnswered = () => {
+    const totalQuestions = 21;
+    for (let i = 15; i <= totalQuestions; i++) {
+      if (!selectedValues[i]) {
+        return false;
+      }
+    }
+    return true;
+  };
+
+  const handleNextClick = (event) => {
+    if (!areAllQuestionsAnswered()) {
+      alert("Please answer all questions before proceeding.");
+      event.preventDefault();
+    } else {
+      // Calculate scores and save to localStorage
+      const scores = calculateScores();
+      console.log(scores);
+      localStorage.setItem("dass21Scores", JSON.stringify(scores));
+      navigate("/cri_dass21");
+    }
+  };
+
   useEffect(() => {
-    // Retrieve selected values from local storage when component mounts
     const storedValues = localStorage.getItem("selectedValues");
     if (storedValues) {
       setSelectedValues(JSON.parse(storedValues));
@@ -15,15 +40,39 @@ export default function P3_dass21() {
   }, []);
 
   const handleRadioChange = (questionNumber, value) => {
-    // Update selected values
     setSelectedValues({ ...selectedValues, [questionNumber]: value });
     console.log(`Question ${questionNumber}:`, value);
   };
 
   useEffect(() => {
-    // Save selected values to local storage whenever it changes
     localStorage.setItem("selectedValues", JSON.stringify(selectedValues));
   }, [selectedValues]);
+
+  const calculateScores = () => {
+    const scores = JSON.parse(localStorage.getItem("dass21Scores")) || {
+      d: 0,
+      a: 0,
+      s: 0,
+    };
+    const categoryMapping = {
+      15: "a",
+      16: "d",
+      17: "d",
+      18: "s",
+      19: "a",
+      20: "a",
+      21: "d",
+    };
+
+    for (const [question, value] of Object.entries(selectedValues)) {
+      const category = categoryMapping[question];
+      if (category) {
+        scores[category] += parseInt(value, 10);
+      }
+    }
+
+    return scores;
+  };
 
   return (
     <div>
@@ -49,28 +98,28 @@ export default function P3_dass21() {
         </p>
         <form className="dass21-2">
           <br />
-          <label>15.ฉันรู้สึกหวาดกลัวหรือเสียขวัญ (a)</label>
+          <label>15. ฉันรู้สึกหวาดกลัวหรือเสียขวัญ (a)</label>
           <Radio_rate
             questionNumber={15}
-            selectedValue={selectedValues[8]}
+            selectedValue={selectedValues[15]}
             onRadioChange={handleRadioChange}
           />
           <br />
-          <label>16.ฉันไม่สามารถมีความกระตือรือร้นในสิ่งใดได้ (d) </label>
+          <label>16. ฉันไม่สามารถมีความกระตือรือร้นในสิ่งใดได้ (d)</label>
           <Radio_rate
             questionNumber={16}
             selectedValue={selectedValues[16]}
             onRadioChange={handleRadioChange}
           />
           <br />
-          <label>17.ฉันรู้สึกว่าตัวเองไม่มีค่ามาก (d) </label>
+          <label>17. ฉันรู้สึกว่าตัวเองไม่มีค่ามาก (d)</label>
           <Radio_rate
             questionNumber={17}
             selectedValue={selectedValues[17]}
             onRadioChange={handleRadioChange}
           />
           <br />
-          <label>18.ฉันรู้สึกหงุดหงิดอารมณ์เสีย (s) </label>
+          <label>18. ฉันรู้สึกหงุดหงิดอารมณ์เสีย (s)</label>
           <Radio_rate
             questionNumber={18}
             selectedValue={selectedValues[18]}
@@ -78,8 +127,8 @@ export default function P3_dass21() {
           />
           <br />
           <label>
-            19.ฉันรู้สึกว่าสภาพหัวใจขาดการออกกำลังกาย (เช่น
-            ความรู้สึกของอัตราการเต้นของหัวใจเพิ่มขึ้น, หัวใจเต้นผิดจังหวะ) (a){" "}
+            19. ฉันรู้สึกว่าสภาพหัวใจขาดการออกกำลังกาย (เช่น
+            ความรู้สึกของอัตราการเต้นของหัวใจเพิ่มขึ้น, หัวใจเต้นผิดจังหวะ) (a)
           </label>
           <Radio_rate
             questionNumber={19}
@@ -87,14 +136,14 @@ export default function P3_dass21() {
             onRadioChange={handleRadioChange}
           />
           <br />
-          <label>20.ฉันรู้สึกกลัวโดยไม่มีเหตุผล (a) </label>
+          <label>20. ฉันรู้สึกกลัวโดยไม่มีเหตุผล (a)</label>
           <Radio_rate
             questionNumber={20}
             selectedValue={selectedValues[20]}
             onRadioChange={handleRadioChange}
           />
           <br />
-          <label>21.ฉันรู้สึกว่าชีวิตไม่มีความหมาย (d) </label>
+          <label>21. ฉันรู้สึกว่าชีวิตไม่มีความหมาย (d)</label>
           <Radio_rate
             questionNumber={21}
             selectedValue={selectedValues[21]}
@@ -102,12 +151,17 @@ export default function P3_dass21() {
           />
         </form>
         <div className="p3_dass21-footer">
-          <Link to="/p2_dass21">
-            <button className="btn btn-prev">Back</button>
-          </Link>
-          <Link to="/cri_dass21">
-            <button className="btn btn-next">Submit</button>
-          </Link>
+          <button className="btn btn-prev" onClick={() => navigate(-1)}>
+            Back
+          </button>
+
+          <button
+            type="submit"
+            className="btn btn-next"
+            onClick={handleNextClick}
+          >
+            Submit
+          </button>
         </div>
       </div>
     </div>
