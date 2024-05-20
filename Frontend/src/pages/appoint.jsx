@@ -48,7 +48,11 @@ export default function Appoint() {
       <div className="appoint-form">
         <form onSubmit={onSubmit}>
           <div className="app-tel">
-            <label>หมายเลขโทรศัพท์</label>
+            <label>
+              หมายเลขโทรศัพท์<mark> *</mark>
+            </label>
+            <br />
+            <small>Example: 000 000 0000</small>
             <br />
             <input
               className="app-tel"
@@ -60,10 +64,11 @@ export default function Appoint() {
               onChange={handleChange}
               required
             />
-            <small>Format: 000 000 0000</small>
           </div>
           <div className="app-contact">
-            <label>ช่องทางการติดต่อ</label>
+            <label>
+              ช่องทางการติดต่อ<mark> *</mark>
+            </label>
             <div className="contact-container">
               <ul style={{ listStyleType: "none", padding: 0 }}>
                 <CustomRadioButton
@@ -89,7 +94,7 @@ export default function Appoint() {
           </div>
           <div className="app-advisor">
             <label>
-              เลือกผู้ให้คำปรึกษา
+              เลือกผู้ให้คำปรึกษา<mark> *</mark>
               <br />
               <select
                 name="medDoctor"
@@ -110,7 +115,7 @@ export default function Appoint() {
           </div>
           <div className="app-time">
             <label>
-              วันที่และเวลา
+              วันที่และเวลา<mark> *</mark>
               <br />
               <input
                 type="date"
@@ -135,7 +140,7 @@ export default function Appoint() {
           </div>
           <div className="app-topic">
             <label>
-              เรื่องที่ต้องการปรึกษา
+              เรื่องที่ต้องการปรึกษา<mark> *</mark>
               <br />
               <select
                 name="topic"
