@@ -1,17 +1,10 @@
 import React from "react";
 import "./cri_dass21.css";
 import Logo from "../components/logo";
-import P3_dass21 from "./p3_dass21";
-import { Link } from "react-router-dom";
-export default function CRI_dass21() {
-  const navigateToPreviousPage = () => {
-    // Navigate to the previous page
-    window.location.href = "/another-page";
-  };
 
-  const navigateToNextPage = () => {
-    window.location.href = "/";
-  };
+import { Link, useNavigate } from "react-router-dom";
+export default function CRI_dass21() {
+  const navigate = useNavigate();
 
   return (
     <div>
@@ -79,9 +72,9 @@ export default function CRI_dass21() {
         </div>
       </div>
       <div className="cri_dass21-footer">
-        <Link to="/result">
-          <button className="btn btn-result">See the result</button>
-        </Link>
+        <button className="btn btn-result" onClick={() => navigate("/result")}>
+          See the result
+        </button>
       </div>
     </div>
   );
