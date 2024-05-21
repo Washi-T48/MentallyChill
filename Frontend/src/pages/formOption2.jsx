@@ -103,6 +103,7 @@ export default function FormOption2() {
               name="tel"
               onChange={onChange}
             />
+            <small>Ex: 000 000 0000</small>
           </div>
 
           <div className="sos-tel">
@@ -116,6 +117,7 @@ export default function FormOption2() {
               name="sos_tel"
               onChange={onChange}
             />
+            <small>Ex: 000 000 0000</small>
           </div>
           <div className="next-btn">
             <button type="submit" className="btn btn-next">
