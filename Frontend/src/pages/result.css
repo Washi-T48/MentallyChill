@@ -61,6 +61,11 @@
     border-radius: 10px;
     margin: 10px auto;
     max-width: 500px;
+    
+}
+
+.result span {
+    text-shadow: 1px 1px #000000;
 }
 
 .normal {
