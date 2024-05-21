@@ -1,0 +1,192 @@
+
+
+div {
+    margin:1rem auto;
+}
+
+input {
+    font-family: ChulabhornLikitText-Regular;
+}
+
+.step-2 {
+    color: white;
+    width: 325px;
+    height: 83px;
+    border-radius: 20px;
+    border-color: white;
+    border: 1.5px;
+    border-style: solid;
+    margin: 0 auto;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.step-2 h1 {
+    font-size: 24px;
+    text-align: center;
+    line-height: 16px;
+    font-weight: bold;
+    margin-bottom: 0px;
+}
+
+.step-2 p {
+    font-size: 15px;
+    text-align: center;
+    line-height: 16px;
+    font-weight: lighter;
+   
+}
+
+.form-fill {
+    margin: 0 auto;
+    text-align: center;
+    border-radius: 4px;
+    max-width: 400px;
+}
+
+.form-fill label {
+    text-align: left;
+    display: block;
+}
+
+::placeholder {
+    font-size: 16px;
+    font-family: ChulabhornLikitText-Regular;
+    font-weight: 400px;
+}
+
+
+
+.gender ,.age {
+    max-width: 100px;
+    height: 50px;
+    border-radius: 4px;
+    border-color: #F1F1F1;
+    margin: 0px 0.6rem;
+    line-height: 24px;
+    padding-left: 40px;
+}
+
+.ioperson {
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    box-sizing:border-box;
+    top:50%;
+    margin: 0 1rem;
+    transform: translateY(-50%);
+}
+
+/* .teleicon {
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    box-sizing:border-box;
+    top:calc(50%);
+    left:45px;
+    transform: translateY(-50%);
+} */
+
+.gender-age {
+    margin: 1rem auto;
+    position: relative;
+}
+
+.tel label, .sos-tel label, .email label, .year label {
+    padding-left: 28px;
+    color: #333333;
+}
+
+.email, .tel, .sos-tel, .year {
+    font-size: 14px;
+    line-height: 17px;
+    display: block;
+    margin: 1rem auto;
+    align-items: center;
+}
+
+input.email, input.tel, input.sos-tel, input.year {
+    width: 290px;
+    height: 51px;
+    margin-top: 10px;
+    padding-left: 16px;
+
+}
+
+.tel small, .sos-tel small {
+    margin: 0.2rem auto;
+    color: #333333;
+}
+
+input.tel , input.sos-tel{
+    margin-bottom: 0.1rem;
+}
+
+.btn-next {
+    text-align: center;
+    background-color: #269C58;
+    color: white;
+    width: 138px;
+    height: 43px;
+    border-radius: 6px;
+    gap: 10px;
+    border: none;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    transition: .3s;
+}
+
+.btn-next:hover {
+    animation: pulse 1s infinite;
+    transition: .3s;
+  }
+
+@keyframes pulse {
+    0% {
+      transform: scale(1);
+    }
+    70% {
+      transform: scale(.9);
+    }
+      100% {
+      transform: scale(1);
+    }
+  }
+
+
+@media screen and (max-width: 395px) {
+    input.email, input.tel, input.sos-tel {
+        width: 290px;
+    }
+    html { 
+        background-position: top;
+      }
+}
+
+@media screen and (min-width: 425px) {
+    html { 
+        background-position: top;
+      }
+}
+
+@media screen and (min-width: 768px){
+    img.logo{
+      width: 108px;
+      height: 175.5px;
+    }
+    html { 
+        background-position: top;
+      }
+  }
+
+@media screen and (min-width: 1024px){
+    img.logo{
+      width: 144px;
+      height: 234px;
+    }
+    html { 
+        background-position: top;
+      }
+}

@@ -1,4 +1,4 @@
-import "./person1.css";
+import "./person.css";
 import React from "react";
 import CRA03 from "../images/CRA03.jpg";
 import CRAlogo from "../images/CRAlogo.png";

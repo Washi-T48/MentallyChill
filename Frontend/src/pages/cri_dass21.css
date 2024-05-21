@@ -1,0 +1,118 @@
+html {
+    background: url("../images/Mental_bg.png") no-repeat fixed center center / cover;;
+    min-width: 100%;
+    min-height: 100%;
+    background-position: center;
+    font-family: ChulabhornLikitText-Regular;
+    overflow: auto;
+    display: block;
+  }
+
+  .cri_dass21-content {
+    font-size: 20px;
+    padding: 14px;
+    color: white;
+    border: 0.2rem;
+    border-color: white;
+    border-radius: 20px;
+    border-style: solid;
+    margin: 1rem auto;
+    max-width: 700px;
+    padding: 1.5rem;
+}
+
+.cri_dass21-content h1 {
+  font-size: 24px;
+  text-align: center;
+  text-shadow: 1px 1px #000000;
+}
+
+.cri_dass21-content p {
+  font-size: 20px;
+}
+
+.cri_dass21-content table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #ffffff;
+
+}
+
+.cri_dass21-content td {
+  padding: 4px;
+  border: 1px solid #ffffff;
+}
+
+.cri_dass21-content th {
+  background-color: #ffffff;
+  color: black;
+}
+
+.cri_dass21-footer {
+    display: grid;
+    justify-content: center;
+    margin-bottom: 24px;
+    margin-top: 1.5rem;
+}
+
+.btn-result {
+    text-align: center;
+    background-color: #269C58;
+    color: white;
+    width: 159px;
+    height: 43px;
+    border-radius: 6px;
+    border: none;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-result:hover {
+  animation: pulse 1s infinite;
+  transition: .3s;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  70% {
+    transform: scale(.9);
+  }
+    100% {
+    transform: scale(1);
+  }
+}
+
+@media screen and (min-width: 350px) {
+  html { 
+      background-position: top;
+    }
+  .p1_dass21-content p {
+    font-size: 18px;
+  }
+  .p1_dass21-content th, .p1_dass21-content td {
+    font-size: 16px;
+  }
+  .p1_dass21-content h1 {
+    font-size: 20px;
+  }
+}
+
+
+@media screen and (min-width: 768px){
+  img.logo{
+    width: 108px;
+    height: 175.5px;
+  }
+  
+}
+
+@media screen and (min-width: 1024px){
+  img.logo{
+      width: 144px;
+      height: 234px;
+    }
+  
+}
