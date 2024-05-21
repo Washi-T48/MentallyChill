@@ -69,6 +69,13 @@ html {
     align-items: center;
 }
 
+.ST5,
+.f9Q,
+.f8Q,
+.YMM {
+    background-color: #C5C6D0;
+}
+
 .form-name {
     font-size: 12px;
     width: 258px;
@@ -78,6 +85,23 @@ small {
     font-size: 11px;
 
 }
+
+.DASS21:hover {
+    animation: pulse 1s infinite;
+    transition: .3s;
+  }
+
+@keyframes pulse {
+    0% {
+      transform: scale(1);
+    }
+    70% {
+      transform: scale(.9);
+    }
+      100% {
+      transform: scale(1);
+    }
+  }
 
 @media screen and (max-width: 375px) {
     .f-container {

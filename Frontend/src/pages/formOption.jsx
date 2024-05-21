@@ -33,25 +33,25 @@ export default function FormOption() {
         <div className="ST5 f-container">
           <img className="ex-icon" src={EXicon}></img>
           <div className="form-name">
-            <b>ST-5</b>
+            <b>ST-5</b> (not available)
             <br />
             <small>สำหรับประเมินความเครียด</small>
           </div>
           <img className="ent-icon" src={Enter}></img>
         </div>
-        <div className="9Q f-container">
+        <div className="f9Q f-container">
           <img className="ex-icon" src={EXicon}></img>
           <div className="form-name">
-            <b>9Q</b>
+            <b>9Q</b> (not available)
             <br />
             <small>สำหรับประเมินโรคซึมเศร้า</small>
           </div>
           <img className="ent-icon" src={Enter}></img>
         </div>
-        <div className="8Q f-container">
+        <div className="f8Q f-container">
           <img className="ex-icon" src={EXicon}></img>
           <div className="form-name">
-            <b>8Q</b>
+            <b>8Q</b> (not available)
             <br />
             <small>สำหรับประเมินความเสี่ยงในการฆ่าตัวตาย</small>
           </div>
@@ -60,7 +60,7 @@ export default function FormOption() {
         <div className="YMM f-container">
           <img className="ex-icon" src={EXicon}></img>
           <div className="form-name">
-            <b>Young Minds Matter (YMM)</b>
+            <b>Young Minds Matter (YMM)</b> (not available)
             <br />
             <small>แบบสำรวจสุขภาพจิตและความเป็นอยู่ที่ดีของเด็ก</small>
           </div>
