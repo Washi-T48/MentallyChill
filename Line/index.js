@@ -4,11 +4,10 @@ import Message from './Helpers/message.js'
 import Profile from './Helpers/profile.js'
 import express from 'express'
 import dotenv from 'dotenv'
-import crypto from 'crypto'
 const app = express()
 
 dotenv.config();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 6969;
 const CHANNEL_SECRET = process.env.CHANNEL_SECRET;
 
 app.use(express.json());
