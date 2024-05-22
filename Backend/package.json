@@ -1,10 +1,20 @@
 {
+  "type": "module",
+  "dependencies": {
+    "@line/liff": "^2.23.2",
+    "axios": "^1.6.7",
+    "dotenv": "^16.4.1",
+    "express": "^4.18.2",
+    "nodemon": "^3.0.3"
+  },
   "name": "mentalproj_backend",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon index.js",
+    "ngrok": "ngrok.exe http --domain=healthy-busy-quail.ngrok-free.app 3000 --config ngrok.yml",
+    "start": "node index.js"
   },
   "author": "",
   "license": "ISC"
