@@ -2,7 +2,7 @@ import logger from './Config/logger.js'
 import HandleEvent from './Helpers/handle.js'
 import Message from './Helpers/message.js'
 import Profile from './Helpers/profile.js'
-import express, { text } from 'express'
+import express from 'express'
 import dotenv from 'dotenv'
 import crypto from 'crypto'
 const app = express()
