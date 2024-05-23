@@ -3,6 +3,7 @@
   "dependencies": {
     "@line/liff": "^2.23.2",
     "axios": "^1.6.7",
+    "cookie-parser": "^1.4.6",
     "dotenv": "^16.4.1",
     "express": "^4.18.2",
     "nodemon": "^3.0.3"
@@ -13,7 +14,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon index.js",
-    "ngrok": "ngrok.exe http --domain=healthy-busy-quail.ngrok-free.app 3000 --config ngrok.yml",
+    "ngrok": "ngrok.exe start --all --config ngrok.yml",
     "start": "node index.js"
   },
   "author": "",
