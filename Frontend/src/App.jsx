@@ -1,10 +1,14 @@
-import { useState } from "react";
+import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+import { ProfileProvider } from "./ProfileContext";
 import Person1 from "./pages/Person1";
 import Person2 from "./pages/person2";
 import Person3 from "./pages/person3";
+
 import Remark from "./pages/remark";
 import Remark2 from "./pages/remark2";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 import FormOption from "./pages/formOption";
 import FormOption2 from "./pages/formOption2";
 import CRI_dass21 from "./pages/cri_dass21";
@@ -16,9 +20,13 @@ import Appoint from "./pages/appoint";
 import Radio_rate from "./components/radio_rate";
 import Confirm_app from "./pages/confirm_app";
 import Finish_app from "./pages/finish_app";
+
+import LineLiff from "./lineLiff";
+import LineDis from "./LineDIS";
+
 function App() {
   return (
-    <>
+    <ProfileProvider>
       <BrowserRouter>
         <Routes>
           <Route index element={<FormOption />} />
@@ -39,9 +47,11 @@ function App() {
           <Route path="/appoint" element={<Appoint />} />
           <Route path="/confirm_app" element={<Confirm_app />} />
           <Route path="/finish_app" element={<Finish_app />} />
+          <Route path="/lineLiff" element={<LineLiff />} />
+          <Route path="/LineDis" element={<LineDis />} />
         </Routes>
       </BrowserRouter>
-    </>
+    </ProfileProvider>
   );
 }
 
