@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import { ProfileProvider } from "./ProfileContext";
+import { ProfileProvider } from "./LIFF/ProfileContext";
 import Person1 from "./pages/Person1";
 import Person2 from "./pages/person2";
 import Person3 from "./pages/person3";
@@ -21,8 +21,8 @@ import Radio_rate from "./components/radio_rate";
 import Confirm_app from "./pages/confirm_app";
 import Finish_app from "./pages/finish_app";
 
-import LineLiff from "./lineLiff";
-import LineDis from "./LineDIS";
+import LineLiff from "./LIFF/lineLiff";
+import LineDis from "./LIFF/LineDIS";
 
 function App() {
   return (

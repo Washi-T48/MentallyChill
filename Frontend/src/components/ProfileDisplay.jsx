@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { ProfileContext } from "../ProfileContext";
+import { ProfileContext } from "../LIFF/ProfileContext";
 
 const ProfileDisplay = () => {
   const { profile } = useContext(ProfileContext);

@@ -15,7 +15,7 @@ const LineLiff = () => {
           liff.login();
         } else {
           const userProfile = await liff.getProfile();
-          const uid = liff.getDecodedIDToken().sub; // Get the user ID (uid)
+          const uid = liff.getDecodedIDToken().sub; // Get uid
           setProfile({ ...userProfile, uid });
           console.log("Profile:", userProfile, "UID:", uid);
         }
