@@ -40,6 +40,7 @@ CREATE TABLE forms_result (
     result_id varchar NOT NULL,
     user_id varchar NULL,
     result_date varchar NULL,
+    forms_type varchar NULL,
     "result" json NULL,
     CONSTRAINT forms_result_pk PRIMARY KEY (result_id),
     CONSTRAINT forms_result_fk FOREIGN KEY (user_id) REFERENCES "user"(user_id)
