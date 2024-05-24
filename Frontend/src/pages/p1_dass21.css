@@ -1,0 +1,58 @@
+html {
+    background: url("../images/Mental_bg.png") no-repeat fixed center center / cover;;
+    min-width: 100%;
+    min-height: 100%;
+    background-position: center;
+    font-family: ChulabhornLikitText-Regular;
+    overflow: auto;
+    display: block;
+  }
+
+.p1_dass21-content {
+    font-size: 20px;
+    padding: 1.5rem;
+    color: rgb(0, 0, 0);
+    border: 1.5px solid;
+    border-color: white;
+    border-radius: 20px;
+    border-style: solid;
+    margin: 1rem auto;
+    background-color: white;
+    max-width: 400px;
+}
+
+.p1_dass21-content p {
+  font-size: 16px;
+  border: 1px solid black;
+  padding: 8px;
+}
+
+.dass21-1 {
+  font-size: 18px;
+}
+
+.p1_dass21-footer{
+  display: flex;
+  justify-content: end;
+  margin-top: 2rem;
+}
+
+.p1_dass21-footer .btn-next {
+  text-align: center;
+  background-color: #269C58;
+  color: white;
+  width: 138px;
+  height: 43px;
+  border-radius: 6px;
+  gap: 10px;
+  border: none;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.radio-container {
+  margin:auto 1rem;
+  
+}

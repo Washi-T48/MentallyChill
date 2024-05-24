@@ -1,0 +1,103 @@
+html {
+    background: url("../images/Mental_bg.png") no-repeat fixed center center / cover;;
+    min-width: 100%;
+    min-height: 100%;
+    background-position: center;
+    font-family: ChulabhornLikitText-Regular;
+    overflow: auto;
+    display: block;
+  }
+
+img.logo{
+    position: static;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 72px;
+    height: 117px;
+}
+
+div.remark-content h1 {
+    font-size: 20px;
+    text-align: center;
+}
+
+div.remark-content p {
+    font-size: 16px;
+    line-height: 28px;
+    text-align: start;
+    font-weight: lighter;
+}
+
+mark {
+    color: red;
+    background: none;
+}
+
+.remark-content {
+    
+    padding: 14px;
+    color: white;
+    border: 1.5px;
+    border-color: white;
+    border-radius: 20px;
+    border-style: solid;
+    margin: 1rem;
+}
+
+.btn-start {
+    text-align: center;
+    background-color: #269C58;
+    color: white;
+    width: 240px;
+    height: 43px;
+    border-radius: 6px;
+    gap: 10px;
+    border: none;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+div.remark-footer {
+    display: grid;
+    justify-content: center;
+    margin-bottom: 24px;
+    margin-top: 18px;
+}
+
+@media screen and (min-width: 425px) {
+    html { 
+        background-position: top;
+      }
+}
+
+@media screen and (min-width: 768px){
+    img.logo{
+      width: 108px;
+      height: 175.5px;
+    }
+    
+  }
+
+@media screen and (min-width: 1024px){
+    img.logo{
+      width: 144px;
+      height: 234px;
+    }
+    h1 {
+        font-size: 28px;
+    }
+    p {
+        font-size: 22px;
+        line-height: 32px;
+    }
+    .btn-start {
+        width: 360px;
+        height: 64.5px;
+        font-size: 24px;
+    }
+    .remark-content{
+        padding: 24px;
+    }
+  }

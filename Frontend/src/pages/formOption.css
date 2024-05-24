@@ -1,0 +1,149 @@
+html {
+    background: url("../images/Mental_bg.png") no-repeat fixed center center / cover;;
+    min-width: 100%;
+    min-height: 100%;
+    background-position: center;
+    font-family: ChulabhornLikitText-Regular;
+    overflow: auto;
+    display: block;
+  }
+
+.step-1 {
+    color: white;
+    width: 325px;
+    height: 83px;
+    border-radius: 20px;
+    border-color: white;
+    border: 1.5px;
+    border-style: solid;
+    margin: 0 auto;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.step-1 h1 {
+    font-size: 24px;
+    text-align: center;
+    line-height: 16px;
+    font-weight: bold;
+    margin-bottom: 0px;
+}
+
+.step-1 p {
+    font-size: 15px;
+    text-align: center;
+    line-height: 16px;
+    font-weight: lighter;
+   
+}
+
+.ex-icon {
+    width: 32px;
+    height: 32px;
+    align-self: center;
+    margin: 1rem;
+}
+
+.ent-icon {
+    width: 20px;
+    height: 20px;
+    margin: 1rem;
+}
+.f-container {
+    display: grid;
+    background-color: #1F1F1F;
+    margin: 1rem;
+    color: white;
+    width: 358px;
+    height: 64px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.f-container {
+    display: flex;
+    margin: auto;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    
+    align-items: center;
+}
+
+.ST5,
+.f9Q,
+.f8Q,
+.YMM {
+    background-color: #C5C6D0;
+}
+
+.form-name {
+    font-size: 12px;
+    width: 258px;
+}
+
+small {
+    font-size: 11px;
+
+}
+
+.DASS21:hover {
+    animation: pulse 1s infinite;
+    transition: .3s;
+  }
+
+@keyframes pulse {
+    0% {
+      transform: scale(1);
+    }
+    70% {
+      transform: scale(.9);
+    }
+      100% {
+      transform: scale(1);
+    }
+  }
+
+@media screen and (max-width: 375px) {
+    .f-container {
+        width: 300px;
+    }
+    .step-1 {
+        width: 300px;
+    }
+    .step-1 h1 {
+        font-size: 20px;
+    }
+    .step-1 p {
+        font-size: 14px;
+    }
+}
+
+@media screen and (min-width: 425px) {
+    html { 
+        background-position: top;
+      }
+    img.logo {
+        align-items: center;
+    }
+}
+
+@media screen and (min-width: 768px){
+    img.logo{
+      width: 108px;
+      height: 175.5px;
+    }
+    html { 
+        background-position: top;
+      }
+    
+  }
+
+  @media screen and (min-width: 1024px){
+    img.logo{
+      width: 144px;
+      height: 234px;
+    }
+    html { 
+        background-position: top;
+      }
+  }

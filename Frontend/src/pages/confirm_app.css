@@ -1,0 +1,66 @@
+.cf-content {
+    font-size: 20px;
+    padding: 14px;
+    color: rgb(0, 0, 0);
+    border: 1px;
+    border-color: white;
+    border-style: solid;
+    background-color: white;
+    margin: 1rem auto;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    animation: myAnim 1s ease 0s 1 normal forwards;
+    max-width: 400px;
+    max-height: 1200px;
+}
+
+.cf-detail {
+    border: 1px solid black;
+    margin: 0.5rem;
+    padding: 12px;
+}
+
+.cf-content h1 {
+    font-size: 28px;
+}
+
+.cf-detail p {
+    font-size: 18px;
+}
+
+.cf-ps {
+    font-size: 12px;
+}
+
+.btn-close {
+    justify-content: start;
+      text-align: center;
+      background-color: #D62B2B;
+      color: white;
+      width: 138px;
+      height: 43px;
+      border-radius: 6px;
+      gap: 10px;
+      border: none;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    }
+
+.dass21-app-footer .btn-next {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+
+
+@keyframes myAnim {
+	0% {
+		transform: scaleY(0);
+		transform-origin: 100% 0%;
+	}
+
+	100% {
+		transform: scaleY(1);
+		transform-origin: 100% 0%;
+	}
+}

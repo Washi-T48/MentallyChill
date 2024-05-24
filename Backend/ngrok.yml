@@ -1,2 +1,14 @@
-version: "2"
+version: 2
 authtoken: 2bg4M0poLk2ehLC9PtfXnxaRh1m_UorG3n62covh5iaBkahV
+
+tunnels:
+  backend:
+    addr: 3000
+    proto: http
+  line:
+    addr: 6969
+    proto: http
+    domain: together-hardy-dove.ngrok-free.app
+  frontend:
+    addr: 8080
+    proto: http
