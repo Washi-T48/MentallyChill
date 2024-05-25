@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./formOption2.css";
 import Logo from "../components/logo";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { RxPerson } from "react-icons/rx";
 import { BsTelephoneFill } from "react-icons/bs";
+import axios from "axios";
+import liff from "@line/liff";
 
 export default function FormOption2() {
   const [step2Data, setStep2Data] = useState({
@@ -15,6 +16,27 @@ export default function FormOption2() {
     tel: "",
     sos_tel: "",
   });
+
+  const [lineProfile, setLineProfile] = useState(null);
+
+  useEffect(() => {
+    // Initialize LIFF
+    liff
+      .init({ liffId: "2005311386-6GQLXp7Z" })
+      .then(() => {
+        if (!liff.isLoggedIn()) {
+          liff.login();
+        } else {
+          liff
+            .getProfile()
+            .then((profile) => {
+              setLineProfile(profile);
+            })
+            .catch((err) => console.error(err));
+        }
+      })
+      .catch((err) => console.error("LIFF initialization failed", err));
+  }, []);
 
   const onChange = (evt) => {
     const key = evt.target.name;
@@ -28,7 +50,23 @@ export default function FormOption2() {
   const onSubmit = (e) => {
     e.preventDefault();
     console.log("submit value", step2Data);
-    navigate("/p1_dass21");
+
+    // Combine LIFF data with form data
+    const dataToSubmit = {
+      ...step2Data,
+      lineProfile,
+    };
+
+    // Send data to backend
+    axios
+      .post("/your-backend-endpoint", dataToSubmit)
+      .then((response) => {
+        console.log("Data sent successfully:", response.data);
+        navigate("/p1_dass21");
+      })
+      .catch((error) => {
+        console.error("Error sending data:", error);
+      });
   };
 
   return (
@@ -97,13 +135,13 @@ export default function FormOption2() {
             <input
               className="tel"
               type="tel"
-              pattern="[0-9]{3} [0-9]{3} [0-9]{4}"
-              placeholder="000 000 0000"
+              pattern="[0-9]{3}[0-9]{3}[0-9]{4}"
+              placeholder="0000000000"
               value={step2Data.tel}
               name="tel"
               onChange={onChange}
             />
-            <small>Ex: 000 000 0000</small>
+            <small>Ex: 0000000000</small>
           </div>
 
           <div className="sos-tel">
@@ -111,13 +149,13 @@ export default function FormOption2() {
             <input
               className="sos-tel"
               type="tel"
-              pattern="[0-9]{3} [0-9]{3} [0-9]{4}"
-              placeholder="000 000 0000"
+              pattern="[0-9]{3}[0-9]{3}[0-9]{4}"
+              placeholder="0000000000"
               value={step2Data.sos_tel}
               name="sos_tel"
               onChange={onChange}
             />
-            <small>Ex: 000 000 0000</small>
+            <small>Ex: 0000000000</small>
           </div>
           <div className="next-btn">
             <button type="submit" className="btn btn-next">

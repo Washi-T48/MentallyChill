@@ -52,13 +52,13 @@ export default function Appoint() {
               หมายเลขโทรศัพท์<mark> *</mark>
             </label>
             <br />
-            <small>Example: 000 000 0000</small>
+            <small>Example: 0000000000</small>
             <br />
             <input
               className="app-tel"
               type="tel"
-              placeholder="000 000 0000"
-              pattern="[0-9]{3} [0-9]{3} [0-9]{4}"
+              placeholder="0000000000"
+              pattern="[0-9]{3}[0-9]{3}[0-9]{4}"
               value={appointData.tel}
               name="tel"
               onChange={handleChange}
