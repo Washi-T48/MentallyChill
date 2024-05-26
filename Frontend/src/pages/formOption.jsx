@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./formOption.css";
 import Logo from "../components/logo";
 import EXicon from "../images/excla_icon.png";
@@ -6,9 +6,14 @@ import Enter from "../images/enter_icon.png";
 import { useNavigate } from "react-router-dom";
 
 export default function FormOption() {
-  const navigateStep2 = () => {
-    // Change the URL to navigate to another page
-    window.location.href = "../formOption2";
+  const [formType, setFormType] = useState({
+    forms_type: "",
+  });
+  const navigateStep2 = (formName) => {
+    setFormType({ forms_type: formName });
+
+    console.log("formName: " + formName);
+    window.location.href = `../formOption2?form_type=${formName}`;
   };
 
   return (
@@ -21,7 +26,10 @@ export default function FormOption() {
       </div>
 
       <div className="form-option">
-        <div className="DASS21 f-container" onClick={navigateStep2}>
+        <div
+          className="DASS21 f-container"
+          onClick={() => navigateStep2("DASS-21")}
+        >
           <img className="ex-icon" src={EXicon}></img>
           <div className="form-name">
             <b>DASS-21</b>
