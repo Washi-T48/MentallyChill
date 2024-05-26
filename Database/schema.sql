@@ -17,10 +17,10 @@ CREATE TABLE users (
     CONSTRAINT users_pk PRIMARY KEY (user_id)
 );
 CREATE TABLE appointment (
-    booking_id varchar NOT NULL DEFAULT gen_random_uuid(),
+    booking_id varchar DEFAULT gen_random_uuid() NOT NULL,
     user_id varchar NULL,
     staff_id varchar NULL,
-    created_date timestamp NULL,
+    created_date timestamp DEFAULT CURRENT_TIMESTAMP NULL,
     appointment_date timestamp NULL,
     status_id varchar NULL,
     topic text NULL,
