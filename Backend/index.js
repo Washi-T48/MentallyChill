@@ -2,7 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv'
 import cookieParser from 'cookie-parser';
 
-// import auth from './Routes/auth.js';
+import appointmentRouter from './Routes/appointment.js';
 
 const app = express();
 
@@ -14,11 +14,11 @@ app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 
 app.all("/", (req, res) => {
-    console.log("GET /");
+    console.log("GET / ");
     res.sendStatus(200)
 });
 
-app.use("/", auth);
+app.use("/api", appointmentRouter);
 
 app.listen(PORT, () => {
     console.log(`Server started on port ${PORT}`);

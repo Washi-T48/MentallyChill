@@ -13,4 +13,15 @@ const pool = new Pool({
     connectionTimeoutMillis: process.env.DB_CONNECTION_TIMEOUT
 });
 
+const testConnection = async () => {
+    try {
+        const client = await pool.connect();
+        console.log('Connected to database');
+        client.release();
+    } catch (err) {
+        console.error('Error connecting to database', err);
+    }
+};
+
+testConnection();
 export default pool;
