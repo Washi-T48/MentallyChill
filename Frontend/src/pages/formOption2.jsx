@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "./formOption2.css";
 import Logo from "../components/logo";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { RxPerson } from "react-icons/rx";
 import { BsTelephoneFill } from "react-icons/bs";
-import axios from "axios";
-import liff from "@line/liff";
 
 export default function FormOption2() {
   const [step2Data, setStep2Data] = useState({
@@ -16,27 +15,6 @@ export default function FormOption2() {
     tel: "",
     sos_tel: "",
   });
-
-  const [lineProfile, setLineProfile] = useState(null);
-
-  useEffect(() => {
-    // Initialize LIFF
-    liff
-      .init({ liffId: "2005311386-6GQLXp7Z" })
-      .then(() => {
-        if (!liff.isLoggedIn()) {
-          liff.login();
-        } else {
-          liff
-            .getProfile()
-            .then((profile) => {
-              setLineProfile(profile);
-            })
-            .catch((err) => console.error(err));
-        }
-      })
-      .catch((err) => console.error("LIFF initialization failed", err));
-  }, []);
 
   const onChange = (evt) => {
     const key = evt.target.name;
@@ -50,23 +28,7 @@ export default function FormOption2() {
   const onSubmit = (e) => {
     e.preventDefault();
     console.log("submit value", step2Data);
-
-    // Combine LIFF data with form data
-    const dataToSubmit = {
-      ...step2Data,
-      lineProfile,
-    };
-
-    // Send data to backend
-    axios
-      .post("/your-backend-endpoint", dataToSubmit)
-      .then((response) => {
-        console.log("Data sent successfully:", response.data);
-        navigate("/p1_dass21");
-      })
-      .catch((error) => {
-        console.error("Error sending data:", error);
-      });
+    navigate("/p1_dass21");
   };
 
   return (
