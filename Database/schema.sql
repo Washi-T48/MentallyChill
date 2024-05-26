@@ -45,3 +45,53 @@ CREATE TABLE forms_result (
     CONSTRAINT forms_result_pk PRIMARY KEY (result_id),
     CONSTRAINT forms_result_fk FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
+-- ESSENTIAL DATA
+INSERT INTO staff (
+        staff_id,
+        "name",
+        surname,
+        nickname,
+        image,
+        description
+    )
+VALUES (
+        'CRA01',
+        'รุ้งนภา',
+        'ผาณิตรัตน์',
+        'พี่รุ้ง',
+        NULL,
+        NULL
+    ),
+    (
+        'CRA02',
+        'ดวงแก้ว',
+        'เตชะกาญจนเวช',
+        'พี่ปู',
+        NULL,
+        NULL
+    ),
+    (
+        'CRA03',
+        'วิภาพร',
+        'สร้อยแสง',
+        'พี่อ้อย',
+        NULL,
+        NULL
+    );
+-- SAMPLE USER DATA
+-- INSERT INTO users (
+--         user_id,
+--         gender,
+--         age,
+--         email,
+--         phone,
+--         phone_emergency
+--     )
+-- VALUES (
+--         'U5c8fda9b0a3084f1e96c427817fea0a6',
+--         'male',
+--         21,
+--         'mango@mango.com',
+--         '0694204200',
+--         '0694204201'
+--     );
