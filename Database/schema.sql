@@ -15,6 +15,7 @@ CREATE TABLE users (
     phone varchar NULL,
     phone_emergency varchar NULL,
     grade_level varchar NULL,
+    created timestamp DEFAULT CURRENT_TIMESTAMP NULL,
     CONSTRAINT users_pk PRIMARY KEY (user_id)
 );
 CREATE TABLE appointment (
@@ -23,7 +24,7 @@ CREATE TABLE appointment (
     staff_id varchar NULL,
     created_date timestamp DEFAULT CURRENT_TIMESTAMP NULL,
     appointment_date timestamp NULL,
-    status_id varchar NULL,
+    "status" varchar NULL,
     topic text NULL,
     details text NULL,
     contact varchar NULL,
