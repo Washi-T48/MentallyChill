@@ -29,6 +29,7 @@ export default function FormOption2() {
               ...prevData,
               uid: profile.userId,
             }));
+            localStorage.setItem("uid", profile.userId);
           });
         } else {
           liff.login();
