@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./formOption2.css";
 import Logo from "../components/logo";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { RxPerson } from "react-icons/rx";
 import { BsTelephoneFill } from "react-icons/bs";
+import liff from "@line/liff";
 
 export default function FormOption2() {
   const [step2Data, setStep2Data] = useState({
@@ -14,16 +14,34 @@ export default function FormOption2() {
     email: "",
     tel: "",
     sos_tel: "",
+    uid: "",
   });
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    liff
+      .init({ liffId: "2005311386-6GQLXp7Z" })
+      .then(() => {
+        if (liff.isLoggedIn()) {
+          liff.getProfile().then((profile) => {
+            setStep2Data((prevData) => ({
+              ...prevData,
+              uid: profile.userId,
+            }));
+          });
+        } else {
+          liff.login();
+        }
+      })
+      .catch((err) => console.error("Error initializing LIFF:", err));
+  }, []);
 
   const onChange = (evt) => {
     const key = evt.target.name;
     const value = evt.target.value;
-    console.log(`Changing ${key} to ${value}`);
     setStep2Data((oldData) => ({ ...oldData, [key]: value }));
   };
-
-  const navigate = useNavigate();
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -43,6 +61,9 @@ export default function FormOption2() {
       <div className="form-fill">
         <form onSubmit={onSubmit}>
           <div className="gender-age">
+            <div className="form_uid">
+              UID: <small>{step2Data.uid}</small>
+            </div>
             <RxPerson className="ioperson" />
             <input
               className="gender"
@@ -93,7 +114,6 @@ export default function FormOption2() {
 
           <div className="tel">
             <label>เบอร์ติดต่อ (Optional)</label>
-            {/* <BsTelephoneFill className='teleicon'/> */}
             <input
               className="tel"
               type="tel"

@@ -50,36 +50,9 @@ export default function Appoint() {
     setCurrentDate(formattedDate);
   }, []);
 
-  const onSubmit = async (e) => {
+  const onSubmit = (e) => {
     e.preventDefault();
-
-    // Convert date and time
-    const formattedDate = new Date(appointData.date)
-      .toISOString()
-      .split("T")[0];
-    const formattedTime = appointData.time + ":00";
-
-    const dataToSubmit = {
-      ...appointData,
-      date: formattedDate,
-      time: formattedTime,
-    };
-
-    // Validate if the selected time slot is still available
-    const isAvailable = await checkSlotAvailability(
-      appointData.medDoctor,
-      appointData.date,
-      appointData.time
-    );
-
-    if (isAvailable) {
-      console.log("submit value", dataToSubmit);
-      navigate("/confirm_app", { state: { appointData: dataToSubmit } });
-    } else {
-      alert(
-        "The selected time slot is no longer available. Please choose another time slot."
-      );
-    }
+    navigate("/confirm_app", { state: { appointData } });
   };
 
   const handleChange = (e) => {
@@ -89,10 +62,10 @@ export default function Appoint() {
       [name]: value,
     }));
 
-    // Fetch available time slots when the date or doctor changes
+    // Mock fetching available time slots when the date or doctor changes
     if (name === "date" || name === "medDoctor") {
       if (appointData.medDoctor && appointData.date) {
-        fetchAvailableTimeSlots(appointData.medDoctor, appointData.date);
+        fetchAvailableTimeSlots();
       }
     }
   };
@@ -102,35 +75,22 @@ export default function Appoint() {
       ...prevData,
       [name]: value,
     }));
+
+    if (name === "contactMethod" && value === "Google Meet") {
+      setAppointData((prevData) => ({
+        ...prevData,
+        tel: "",
+      }));
+    }
   };
 
-  const fetchAvailableTimeSlots = async (doctor, date) => {
+  const fetchAvailableTimeSlots = () => {
     setLoadingSlots(true);
-    // Replace with API call to fetch available time slots
-    const availableTimeSlots = await mockFetchTimeSlots(doctor, date);
-    setTimeSlots(availableTimeSlots);
-    setLoadingSlots(false);
-  };
-
-  // simulate fetching available time slots from an API
-  const mockFetchTimeSlots = async (doctor, date) => {
-    // Simulate an API call with a delay
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(["09:00", "10:00", "11:00", "13:00", "14:00"]);
-      }, 1000);
-    });
-  };
-
-  // simulate checking slot availability from an API
-  const checkSlotAvailability = async (doctor, date, time) => {
-    // Simulate an API call with a delay
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        // assume all slots are available
-        resolve(true);
-      }, 500);
-    });
+    // Mock API call to fetch available time slots
+    setTimeout(() => {
+      setTimeSlots(["09:00", "10:00", "11:00", "13:00", "14:00"]);
+      setLoadingSlots(false);
+    }, 1000);
   };
 
   return (
@@ -145,24 +105,27 @@ export default function Appoint() {
             UID: <small>{appointData.uid}</small>
           </div>
 
-          <div className="app-tel">
-            <label>
-              หมายเลขโทรศัพท์<mark> *</mark>
-            </label>
-            <br />
-            <small>Example: 0000000000</small>
-            <br />
-            <input
-              className="app-tel"
-              type="tel"
-              placeholder="0000000000"
-              pattern="[0-9]{3}[0-9]{3}[0-9]{4}"
-              value={appointData.tel}
-              name="tel"
-              onChange={handleChange}
-              required
-            />
-          </div>
+          {appointData.contactMethod !== "Google Meet" && (
+            <div className="app-tel">
+              <label>
+                หมายเลขโทรศัพท์<mark> *</mark>
+              </label>
+              <br />
+              <small>Example: 0000000000</small>
+              <br />
+              <input
+                className="app-tel"
+                type="tel"
+                placeholder="0000000000"
+                pattern="[0-9]{3}[0-9]{3}[0-9]{4}"
+                value={appointData.tel}
+                name="tel"
+                onChange={handleChange}
+                required
+              />
+            </div>
+          )}
+
           <div className="app-contact">
             <label>
               ช่องทางการติดต่อ<mark> *</mark>
