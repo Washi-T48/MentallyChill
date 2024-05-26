@@ -2,7 +2,8 @@ import express from 'express';
 import dotenv from 'dotenv'
 import cookieParser from 'cookie-parser';
 
-import appointmentRouter from './Routes/appointment.js';
+import userRouter from './Routes/userRoutes.js';
+import appointmentRouter from './Routes/appointmentRoutes.js';
 
 const app = express();
 
@@ -19,6 +20,7 @@ app.all("/", (req, res) => {
 });
 
 app.use("/appointment", appointmentRouter);
+app.use("/user", userRouter);
 
 app.listen(PORT, () => {
     console.log(`Server started on port ${PORT}`);

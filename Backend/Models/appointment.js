@@ -18,7 +18,7 @@ const deleteAppointment = async (booking_id) => {
 
 const lookupAppointment = async (booking_id) => {
     const appointment = await pool.query(
-        `SELECT * FROM appointment WHERE booking_id = $1`,
+        `SELECT * FROM appointment WHERE booking_id = $1 ORDER BY appointment_date DESC`,
         [booking_id]
     );
     return (appointment["rows"]);
@@ -26,21 +26,28 @@ const lookupAppointment = async (booking_id) => {
 
 const userAppointments = async (uid) => {
     const appointments = await pool.query(
-        `SELECT * FROM appointment WHERE user_id = $1`,
+        `SELECT * FROM appointment WHERE user_id = $1 ORDER BY appointment_date DESC`,
         [uid]
     );
     return (appointments["rows"]);
 };
 const allAppointments = async () => {
     const appointments = await pool.query(
-        `SELECT * FROM appointment`
+        `SELECT * FROM appointment ORDER BY appointment_date DESC`
     );
     return (appointments["rows"]);
 };
 
 const upcomingAppointments = async () => {
     const appointments = await pool.query(
-        `SELECT * FROM appointment WHERE appointment_date > NOW()`
+        `SELECT * FROM appointment WHERE appointment_date > NOW() ORDER BY appointment_date ASC`
+    );
+    return (appointments["rows"]);
+};
+
+const pastAppointments = async () => {
+    const appointments = await pool.query(
+        `SELECT * FROM appointment WHERE appointment_date < NOW() ORDER BY appointment_date DESC`
     );
     return (appointments["rows"]);
 };
@@ -51,5 +58,6 @@ export {
     lookupAppointment,
     userAppointments,
     allAppointments,
-    upcomingAppointments
+    upcomingAppointments,
+    pastAppointments,
 };
