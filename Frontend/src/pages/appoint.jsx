@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./appoint.css";
 import Logo from "../components/logo";
 import { useNavigate } from "react-router-dom";
@@ -16,12 +16,49 @@ export default function Appoint() {
     medHistory: "",
   });
 
+  const [timeSlots, setTimeSlots] = useState([]);
+  const [loadingSlots, setLoadingSlots] = useState(false);
+  const [currentDate, setCurrentDate] = useState("");
+
   const navigate = useNavigate();
 
-  const onSubmit = (e) => {
+  useEffect(() => {
+    // Set the current date in YYYY-MM-DD format
+    const today = new Date();
+    const formattedDate = today.toISOString().split("T")[0];
+    setCurrentDate(formattedDate);
+  }, []);
+
+  const onSubmit = async (e) => {
     e.preventDefault();
-    console.log("submit value", appointData);
-    navigate("/confirm_app", { state: { appointData } });
+
+    // Convert date and time to PostgreSQL format
+    const formattedDate = new Date(appointData.date)
+      .toISOString()
+      .split("T")[0];
+    const formattedTime = appointData.time + ":00"; // Assuming time is in HH:MM format
+
+    const dataToSubmit = {
+      ...appointData,
+      date: formattedDate,
+      time: formattedTime,
+    };
+
+    // Validate if the selected time slot is still available
+    const isAvailable = await checkSlotAvailability(
+      appointData.medDoctor,
+      appointData.date,
+      appointData.time
+    );
+
+    if (isAvailable) {
+      console.log("submit value", dataToSubmit);
+      navigate("/confirm_app", { state: { appointData: dataToSubmit } });
+    } else {
+      alert(
+        "The selected time slot is no longer available. Please choose another time slot."
+      );
+    }
   };
 
   const handleChange = (e) => {
@@ -30,6 +67,13 @@ export default function Appoint() {
       ...prevData,
       [name]: value,
     }));
+
+    // Fetch available time slots when the date or doctor changes
+    if (name === "date" || name === "medDoctor") {
+      if (appointData.medDoctor && appointData.date) {
+        fetchAvailableTimeSlots(appointData.medDoctor, appointData.date);
+      }
+    }
   };
 
   const handleRadioSelect = (name, value) => {
@@ -37,6 +81,35 @@ export default function Appoint() {
       ...prevData,
       [name]: value,
     }));
+  };
+
+  const fetchAvailableTimeSlots = async (doctor, date) => {
+    setLoadingSlots(true);
+    // Replace with your actual API call to fetch available time slots
+    const availableTimeSlots = await mockFetchTimeSlots(doctor, date);
+    setTimeSlots(availableTimeSlots);
+    setLoadingSlots(false);
+  };
+
+  // Mock function to simulate fetching available time slots from an API
+  const mockFetchTimeSlots = async (doctor, date) => {
+    // Simulate an API call with a delay
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(["09:00", "10:00", "11:00", "13:00", "14:00"]);
+      }, 1000);
+    });
+  };
+
+  // Mock function to simulate checking slot availability from an API
+  const checkSlotAvailability = async (doctor, date, time) => {
+    // Simulate an API call with a delay
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        // assume all slots are available
+        resolve(true);
+      }, 500);
+    });
   };
 
   return (
@@ -74,6 +147,7 @@ export default function Appoint() {
                 <CustomRadioButton
                   label="Google Meet"
                   value="Google Meet"
+                  name="contactMethod"
                   selected={appointData.contactMethod === "Google Meet"}
                   onSelect={(value) =>
                     handleRadioSelect("contactMethod", value)
@@ -83,6 +157,7 @@ export default function Appoint() {
                 <CustomRadioButton
                   label="เบอร์โทร"
                   value="เบอร์โทร"
+                  name="contactMethod"
                   selected={appointData.contactMethod === "เบอร์โทร"}
                   onSelect={(value) =>
                     handleRadioSelect("contactMethod", value)
@@ -121,6 +196,7 @@ export default function Appoint() {
                 type="date"
                 name="date"
                 value={appointData.date}
+                min={currentDate} // Prevent selection of past dates
                 onChange={handleChange}
                 required
               />
@@ -130,12 +206,18 @@ export default function Appoint() {
                 value={appointData.time}
                 onChange={handleChange}
                 required
+                disabled={
+                  !appointData.date || !appointData.medDoctor || loadingSlots
+                }
               >
                 <option value="">เลือกเวลา</option>
-                <option value="TIME-1">TIME-1</option>
-                <option value="TIME-2">TIME-2</option>
-                <option value="TIME-3">TIME-3</option>
+                {timeSlots.map((slot) => (
+                  <option key={slot} value={slot}>
+                    {slot}
+                  </option>
+                ))}
               </select>
+              {loadingSlots && <p>Loading available time slots...</p>}
             </label>
           </div>
           <div className="app-topic">
