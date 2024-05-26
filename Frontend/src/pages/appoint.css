@@ -36,6 +36,9 @@
     max-height: 1400px;
 }
 
+small {
+    font-size: 12px;
+}
 
 input[type="date"]::-webkit-clear-button {
     display: none;
