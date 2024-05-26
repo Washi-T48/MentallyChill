@@ -59,8 +59,8 @@ export default function Result() {
                   {type === "d"
                     ? "อาการซึมเศร้า (D)"
                     : type === "a"
-                    ? "ความวิตกกังวล (A)"
-                    : "ความเครียด (S)"}
+                      ? "ความวิตกกังวล (A)"
+                      : "ความเครียด (S)"}
                 </span>
                 <div> {scores[type]} คะแนน </div>
                 <div>{label}</div>

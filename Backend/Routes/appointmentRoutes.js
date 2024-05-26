@@ -105,4 +105,15 @@ appointmentRouter.get("/past", async (req, res) => {
     }
 });
 
+appointmentRouter.get("/recent", async (req, res) => {
+    try {
+        const appointments = await recentAppointments();
+        res.status(200).json(appointments);
+    }
+    catch (error) {
+        logger.error(error);
+        res.sendStatus(500);
+    }
+});
+
 export default appointmentRouter;
