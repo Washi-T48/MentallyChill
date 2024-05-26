@@ -4,6 +4,7 @@ import logger from '../Config/logger.js';
 import { newAppointment } from '../Models/appointment.js';
 import { deleteAppointment } from '../Models/appointment.js';
 import { lookupAppointment } from '../Models/appointment.js';
+import { updateAppointment } from '../Models/appointment.js';
 import { userAppointments } from '../Models/appointment.js';
 import { allAppointments } from '../Models/appointment.js';
 import { upcomingAppointments } from '../Models/appointment.js';
@@ -19,7 +20,7 @@ appointmentRouter.post("/new", async (req, res) => {
     }
     catch (error) {
         logger.error(error);
-        res.status(500);
+        res.sendStatus(500);
     }
 });
 
@@ -31,7 +32,19 @@ appointmentRouter.delete("/delete", async (req, res) => {
     }
     catch (error) {
         logger.error(error);
-        res.status(500);
+        res.sendStatus(500);
+    }
+});
+
+appointmentRouter.put("/update", async (req, res) => {
+    try {
+        const { booking_id, date, time, topic, detail, medHistory } = req.body;
+        const appointment = await updateAppointment(booking_id, date, time, topic, detail, medHistory);
+        res.status(200).json(appointment);
+    }
+    catch (error) {
+        logger.error(error);
+        res.sendStatus(500);
     }
 });
 
@@ -43,7 +56,7 @@ appointmentRouter.get("/lookup", async (req, res) => {
     }
     catch (error) {
         logger.error(error);
-        res.status(500);
+        res.sendStatus(500);
     }
 });
 
@@ -55,7 +68,7 @@ appointmentRouter.get("/user", async (req, res) => {
     }
     catch (error) {
         logger.error(error);
-        res.status(500);
+        res.sendStatus(500);
     }
 });
 
@@ -66,7 +79,7 @@ appointmentRouter.get("/all", async (req, res) => {
     }
     catch (error) {
         logger.error(error);
-        res.status(500);
+        res.sendStatus(500);
     }
 });
 
@@ -77,7 +90,7 @@ appointmentRouter.get("/upcoming", async (req, res) => {
     }
     catch (error) {
         logger.error(error);
-        res.status(500);
+        res.sendStatus(500);
     }
 });
 
@@ -88,7 +101,7 @@ appointmentRouter.get("/past", async (req, res) => {
     }
     catch (error) {
         logger.error(error);
-        res.status(500);
+        res.sendStatus(500);
     }
 });
 

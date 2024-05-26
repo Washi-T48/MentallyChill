@@ -16,6 +16,14 @@ const deleteAppointment = async (booking_id) => {
     return (appointment["rows"][0])
 };
 
+const updateAppointment = async (booking_id, date, time, topic, detail, medHistory) => {
+    const appointment = await pool.query(
+        `UPDATE appointment SET appointment_date = $1, topic = $2, details = $3, medical_history = $4 WHERE booking_id = $5 RETURNING *`,
+        [String(date) + " " + String(time), topic, detail, medHistory, booking_id]
+    );
+    return (appointment["rows"][0])
+};
+
 const lookupAppointment = async (booking_id) => {
     const appointment = await pool.query(
         `SELECT * FROM appointment WHERE booking_id = $1 ORDER BY appointment_date DESC`,
@@ -55,6 +63,7 @@ const pastAppointments = async () => {
 export {
     newAppointment,
     deleteAppointment,
+    updateAppointment,
     lookupAppointment,
     userAppointments,
     allAppointments,

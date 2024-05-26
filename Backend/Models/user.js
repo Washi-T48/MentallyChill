@@ -13,7 +13,7 @@ const deleteUser = async (uid) => {
         `DELETE FROM users WHERE user_id = $1`,
         [uid]
     );
-    return (user["rows"][0])
+    return (user)
 };
 
 const lookupUser = async (uid) => {
@@ -31,18 +31,9 @@ const allUsers = async () => {
     return (users["rows"]);
 };
 
-const existUser = async (uid) => {
-    const user = await pool.query(
-        `SELECT EXISTS(SELECT 1 FROM users WHERE user_id = $1)`,
-        [uid]
-    );
-    return (user["rows"].length > 0);
-};
-
 export {
     newUser,
     deleteUser,
     lookupUser,
     allUsers,
-    existUser,
 };
