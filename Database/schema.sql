@@ -17,7 +17,7 @@ CREATE TABLE users (
     CONSTRAINT users_pk PRIMARY KEY (user_id)
 );
 CREATE TABLE appointment (
-    booking_id varchar NOT NULL,
+    booking_id varchar NOT NULL DEFAULT gen_random_uuid(),
     user_id varchar NULL,
     staff_id varchar NULL,
     created_date timestamp NULL,
