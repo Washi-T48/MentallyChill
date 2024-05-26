@@ -12,6 +12,13 @@ export default function Confirm_app() {
     return <div>ไม่มีข้อมูลการนัดหมาย</div>;
   }
 
+  const onConfirm = () => {
+    // Mock sending data to the server
+    console.log("Confirmed appointment data:", appointData);
+
+    navigate("/finish_app");
+  };
+
   // Extract hours and minutes
   const formattedTime = appointData.time.slice(0, 5);
 
@@ -38,11 +45,7 @@ export default function Confirm_app() {
         <button className="btn btn-close" onClick={() => navigate(-1)}>
           แก้ไขข้อมูล
         </button>
-        <button
-          type="submit"
-          className="btn btn-next"
-          onClick={() => navigate("/finish_app")}
-        >
+        <button type="button" className="btn btn-next" onClick={onConfirm}>
           ยืนยัน
         </button>
       </div>

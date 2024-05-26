@@ -23,10 +23,17 @@ import Finish_app from "./pages/finish_app";
 
 import LineLiff from "./LIFF/lineLiff";
 import LineDis from "./LIFF/LineDIS";
+import LiffInit from "./LIFF/LiffInit";
 
 function App() {
+  const handleLiffInit = (liff) => {
+    if (!liff.isLoggedIn()) {
+      liff.login();
+    }
+  };
   return (
     <ProfileProvider>
+      <LiffInit liffId="2005311386-6GQLXp7Z" onInit={handleLiffInit} />
       <BrowserRouter>
         <Routes>
           <Route index element={<FormOption />} />

@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./formOption2.css";
 import Logo from "../components/logo";
 import { useNavigate } from "react-router-dom";
 import { RxPerson } from "react-icons/rx";
 import { BsTelephoneFill } from "react-icons/bs";
-import axios from "axios";
 import liff from "@line/liff";
 
 export default function FormOption2() {
@@ -15,58 +14,39 @@ export default function FormOption2() {
     email: "",
     tel: "",
     sos_tel: "",
+    uid: "",
   });
 
-  const [lineProfile, setLineProfile] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    // Initialize LIFF
     liff
       .init({ liffId: "2005311386-6GQLXp7Z" })
       .then(() => {
-        if (!liff.isLoggedIn()) {
-          liff.login();
+        if (liff.isLoggedIn()) {
+          liff.getProfile().then((profile) => {
+            setStep2Data((prevData) => ({
+              ...prevData,
+              uid: profile.userId,
+            }));
+          });
         } else {
-          liff
-            .getProfile()
-            .then((profile) => {
-              setLineProfile(profile);
-            })
-            .catch((err) => console.error(err));
+          liff.login();
         }
       })
-      .catch((err) => console.error("LIFF initialization failed", err));
+      .catch((err) => console.error("Error initializing LIFF:", err));
   }, []);
 
   const onChange = (evt) => {
     const key = evt.target.name;
     const value = evt.target.value;
-    console.log(`Changing ${key} to ${value}`);
     setStep2Data((oldData) => ({ ...oldData, [key]: value }));
   };
-
-  const navigate = useNavigate();
 
   const onSubmit = (e) => {
     e.preventDefault();
     console.log("submit value", step2Data);
-
-    // Combine LIFF data with form data
-    const dataToSubmit = {
-      ...step2Data,
-      lineProfile,
-    };
-
-    // Send data to backend
-    axios
-      .post("/your-backend-endpoint", dataToSubmit)
-      .then((response) => {
-        console.log("Data sent successfully:", response.data);
-        navigate("/p1_dass21");
-      })
-      .catch((error) => {
-        console.error("Error sending data:", error);
-      });
+    navigate("/p1_dass21");
   };
 
   return (
@@ -81,6 +61,9 @@ export default function FormOption2() {
       <div className="form-fill">
         <form onSubmit={onSubmit}>
           <div className="gender-age">
+            <div className="form_uid">
+              UID: <small>{step2Data.uid}</small>
+            </div>
             <RxPerson className="ioperson" />
             <input
               className="gender"
@@ -131,7 +114,6 @@ export default function FormOption2() {
 
           <div className="tel">
             <label>เบอร์ติดต่อ (Optional)</label>
-            {/* <BsTelephoneFill className='teleicon'/> */}
             <input
               className="tel"
               type="tel"
