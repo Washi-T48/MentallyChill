@@ -18,7 +18,7 @@ app.all("/", (req, res) => {
     res.sendStatus(200)
 });
 
-app.use("/api", appointmentRouter);
+app.use("/appointment", appointmentRouter);
 
 app.listen(PORT, () => {
     console.log(`Server started on port ${PORT}`);
