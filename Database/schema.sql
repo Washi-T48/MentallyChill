@@ -14,6 +14,7 @@ CREATE TABLE users (
     email varchar NULL,
     phone varchar NULL,
     phone_emergency varchar NULL,
+    grade_level varchar NULL,
     CONSTRAINT users_pk PRIMARY KEY (user_id)
 );
 CREATE TABLE appointment (
