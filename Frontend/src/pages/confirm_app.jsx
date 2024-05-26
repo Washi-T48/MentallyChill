@@ -12,6 +12,9 @@ export default function Confirm_app() {
     return <div>ไม่มีข้อมูลการนัดหมาย</div>;
   }
 
+  // Extract hours and minutes
+  const formattedTime = appointData.time.slice(0, 5);
+
   return (
     <div>
       <div className="cf-content">
@@ -22,7 +25,7 @@ export default function Confirm_app() {
           <p>ช่องทางการติดต่อ: &nbsp;{appointData.contactMethod}</p>
           <p>ผู้ให้คำปรึกษา: &nbsp;{appointData.medDoctor}</p>
           <p>วันที่: &nbsp;{appointData.date}</p>
-          <p>เวลา: &nbsp;{appointData.time}</p>
+          <p>เวลา: &nbsp;{formattedTime} น.</p>
           <p>เรื่องที่ต้องการปรึกษา: &nbsp;{appointData.topic}</p>
           <p>รายละเอียด: &nbsp;{appointData.detail}</p>
           <p>ประวัติการรับยา: &nbsp;{appointData.medHistory}</p>
