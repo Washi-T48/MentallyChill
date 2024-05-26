@@ -6,6 +6,7 @@ div {
 
 input {
     font-family: ChulabhornLikitText-Regular;
+    font-size: 16px;
 }
 
 .step-2 {
@@ -72,9 +73,10 @@ input {
     height: 24px;
     position: absolute;
     box-sizing:border-box;
-    top:75%;
     margin: 0 1rem;
-    transform: translateY(-50%);
+    display: flex;
+    margin-left: 36px;
+    margin-top: 16px;
 }
 
 .form_uid {

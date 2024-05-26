@@ -8,13 +8,13 @@ import liff from "@line/liff";
 
 export default function FormOption2() {
   const [step2Data, setStep2Data] = useState({
+    uid: "",
     gender: "",
     age: "",
     year: "",
     email: "",
     tel: "",
     sos_tel: "",
-    uid: "",
   });
 
   const navigate = useNavigate();
@@ -29,6 +29,7 @@ export default function FormOption2() {
               ...prevData,
               uid: profile.userId,
             }));
+            localStorage.setItem("uid", profile.userId);
           });
         } else {
           liff.login();
