@@ -3,9 +3,11 @@ import "./appoint.css";
 import Logo from "../components/logo";
 import { useNavigate } from "react-router-dom";
 import CustomRadioButton from "../components/CustomRadioButton";
+import liff from "@line/liff";
 
 export default function Appoint() {
   const [appointData, setAppointData] = useState({
+    uid: "",
     tel: "",
     contactMethod: "",
     medDoctor: "",
@@ -23,6 +25,25 @@ export default function Appoint() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    liff
+      .init({ liffId: "2005311386-dnvmKNjJ" })
+      .then(() => {
+        if (liff.isLoggedIn()) {
+          liff
+            .getProfile()
+            .then((profile) => {
+              setAppointData((prevData) => ({
+                ...prevData,
+                uid: profile.userId,
+              }));
+            })
+            .catch((err) => console.error("Error getting profile:", err));
+        } else {
+          liff.login();
+        }
+      })
+      .catch((err) => console.error("Error initializing LIFF:", err));
+
     // Set the current date in YYYY-MM-DD format
     const today = new Date();
     const formattedDate = today.toISOString().split("T")[0];
@@ -32,11 +53,11 @@ export default function Appoint() {
   const onSubmit = async (e) => {
     e.preventDefault();
 
-    // Convert date and time to PostgreSQL format
+    // Convert date and time
     const formattedDate = new Date(appointData.date)
       .toISOString()
       .split("T")[0];
-    const formattedTime = appointData.time + ":00"; // Assuming time is in HH:MM format
+    const formattedTime = appointData.time + ":00";
 
     const dataToSubmit = {
       ...appointData,
@@ -85,13 +106,13 @@ export default function Appoint() {
 
   const fetchAvailableTimeSlots = async (doctor, date) => {
     setLoadingSlots(true);
-    // Replace with your actual API call to fetch available time slots
+    // Replace with API call to fetch available time slots
     const availableTimeSlots = await mockFetchTimeSlots(doctor, date);
     setTimeSlots(availableTimeSlots);
     setLoadingSlots(false);
   };
 
-  // Mock function to simulate fetching available time slots from an API
+  // simulate fetching available time slots from an API
   const mockFetchTimeSlots = async (doctor, date) => {
     // Simulate an API call with a delay
     return new Promise((resolve) => {
@@ -101,7 +122,7 @@ export default function Appoint() {
     });
   };
 
-  // Mock function to simulate checking slot availability from an API
+  // simulate checking slot availability from an API
   const checkSlotAvailability = async (doctor, date, time) => {
     // Simulate an API call with a delay
     return new Promise((resolve) => {
@@ -120,6 +141,10 @@ export default function Appoint() {
       </div>
       <div className="appoint-form">
         <form onSubmit={onSubmit}>
+          <div className="userid">
+            UID: <small>{appointData.uid}</small>
+          </div>
+
           <div className="app-tel">
             <label>
               หมายเลขโทรศัพท์<mark> *</mark>
