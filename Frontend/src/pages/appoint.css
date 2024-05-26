@@ -148,6 +148,10 @@ input[type='radio'] {
     width: 20px;
 }
 
+.userid {
+    font-size: 18px;
+}
+
 .appoint-form select{
     display: flex;
     justify-content: center;
