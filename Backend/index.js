@@ -20,7 +20,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(consoleLogExpress);
 
 app.all("/", (req, res) => {
-    console.log("ALL / ");
     res.sendStatus(200)
 });
 

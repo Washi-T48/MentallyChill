@@ -1,14 +1,7 @@
 import express from 'express';
 import logger from '../Middleware/logger.js';
 
-import { newAppointment } from '../Models/appointment.js';
-import { deleteAppointment } from '../Models/appointment.js';
-import { lookupAppointment } from '../Models/appointment.js';
-import { updateAppointment } from '../Models/appointment.js';
-import { userAppointments } from '../Models/appointment.js';
-import { allAppointments } from '../Models/appointment.js';
-import { upcomingAppointments } from '../Models/appointment.js';
-import { pastAppointments } from '../Models/appointment.js';
+import { newAppointment, deleteAppointment, lookupAppointment, updateAppointment, userAppointments, allAppointments, upcomingAppointments, pastAppointments } from '../Models/appointment.js';
 
 const appointmentRouter = express.Router();
 
@@ -97,17 +90,6 @@ appointmentRouter.get("/upcoming", async (req, res) => {
 appointmentRouter.get("/past", async (req, res) => {
     try {
         const appointments = await pastAppointments();
-        res.status(200).json(appointments);
-    }
-    catch (error) {
-        logger.error(error);
-        res.sendStatus(500);
-    }
-});
-
-appointmentRouter.get("/recent", async (req, res) => {
-    try {
-        const appointments = await recentAppointments();
         res.status(200).json(appointments);
     }
     catch (error) {

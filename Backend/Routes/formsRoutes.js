@@ -1,11 +1,7 @@
 import express from 'express';
 import logger from '../Config/logger.js';
 
-import newFormResult from '../Models/forms_result.js';
-import deleteFormResult from '../Models/forms_result.js';
-import lookupFormResult from '../Models/forms_result.js';
-import userFormResults from '../Models/forms_result.js';
-import allFormResults from '../Models/forms_result.js';
+import { newFormResult, deleteFormResult, lookupFormResult, userFormResults, allFormResults } from '../Models/forms_result.js';
 
 const formsRouter = express.Router();
 

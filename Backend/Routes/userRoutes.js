@@ -1,10 +1,7 @@
 import express from 'express';
 import logger from '../Middleware/logger.js';
 
-import { newUser } from '../Models/user.js';
-import { deleteUser } from '../Models/user.js';
-import { lookupUser } from '../Models/user.js';
-import { allUsers } from '../Models/user.js';
+import { newUser, deleteUser, lookupUser, allUsers } from '../Models/user.js';
 
 const userRouter = express.Router();
 
