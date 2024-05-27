@@ -15,7 +15,7 @@ app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 
 app.all("/", (req, res) => {
-    console.log("GET / ");
+    console.log("ALL / ");
     res.sendStatus(200)
 });
 
