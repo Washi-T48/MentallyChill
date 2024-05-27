@@ -32,9 +32,17 @@ const lookupStaff = async (staff_id) => {
     return (staff["rows"]);
 };
 
+const allStaff = async () => {
+    const staff = await pool.query(
+        `SELECT * FROM staff ORDER BY created DESC`
+    );
+    return (staff["rows"]);
+};
+
 export {
     newStaff,
     deleteStaff,
     updateStaff,
-    lookupStaff
+    lookupStaff,
+    allStaff,
 };

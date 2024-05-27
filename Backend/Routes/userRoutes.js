@@ -1,7 +1,7 @@
 import express from 'express';
 import logger from '../Middleware/logger.js';
 
-import { newUser, deleteUser, lookupUser, allUsers } from '../Models/user.js';
+import { newUser, deleteUser, updateUser, lookupUser, allUsers } from '../Models/user.js';
 
 const userRouter = express.Router();
 
@@ -21,6 +21,18 @@ userRouter.delete("/delete", async (req, res) => {
     const { uid } = req.body;
     try {
         const user = await deleteUser(uid);
+        res.status(200).json(user);
+    }
+    catch (error) {
+        logger.error(error);
+        res.sendStatus(500);
+    }
+});
+
+userRouter.put("/update", async (req, res) => {
+    const { uid, gender, age, year, email, tel, sos_tel } = req.body;
+    try {
+        const user = await updateUser(uid, gender, age, year, email, tel, sos_tel)
         res.status(200).json(user);
     }
     catch (error) {
