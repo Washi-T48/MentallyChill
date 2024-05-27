@@ -1,5 +1,5 @@
 import express from 'express';
-import logger from '../Config/logger.js';
+import logger from '../Middleware/logger.js';
 
 import { newAppointment } from '../Models/appointment.js';
 import { deleteAppointment } from '../Models/appointment.js';

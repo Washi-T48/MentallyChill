@@ -6,6 +6,8 @@ import cookieParser from 'cookie-parser';
 import userRouter from './Routes/userRoutes.js';
 import appointmentRouter from './Routes/appointmentRoutes.js';
 
+import logger, { consoleLogExpress } from './Middleware/logger.js';
+
 const app = express();
 
 dotenv.config();
@@ -15,6 +17,7 @@ app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
+app.use(consoleLogExpress);
 
 app.all("/", (req, res) => {
     console.log("ALL / ");
@@ -25,5 +28,5 @@ app.use("/appointment", appointmentRouter);
 app.use("/user", userRouter);
 
 app.listen(PORT, () => {
-    console.log(`Server started on port ${PORT}`);
+    logger.info(`Server started on port ${PORT}`);
 });

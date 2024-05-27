@@ -1,5 +1,6 @@
 import dotenv from 'dotenv';
 import pkg from 'pg';
+import logger from '../Middleware/logger.js';
 const { Pool } = pkg;
 
 dotenv.config();
@@ -16,12 +17,13 @@ const pool = new Pool({
 const testConnection = async () => {
     try {
         const client = await pool.connect();
-        console.log('Connected to database');
+        logger.info('Connected to database');
         client.release();
     } catch (err) {
-        console.error('Error connecting to database', err);
+        logger.error('Error connecting to database', err);
     }
 };
 
 testConnection();
+
 export default pool;

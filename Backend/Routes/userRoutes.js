@@ -1,5 +1,5 @@
 import express from 'express';
-import logger from '../Config/logger.js';
+import logger from '../Middleware/logger.js';
 
 import { newUser } from '../Models/user.js';
 import { deleteUser } from '../Models/user.js';
