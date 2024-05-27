@@ -3,8 +3,14 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: 'ChulabhornLikitText-Regular';
+  font-family: ChulabhornLikitText-Regular;
   src: url(../assets/fonts/ChulabhornLikitText-Regular.otf);
+  font-family: ChulabhornLikitText-Bold;
+  src: url(../assets/fonts/ChulabhornLikitText-Bold.otf);
+}
+
+*{
+  font-family: ChulabhornLikitText-Bold, ChulabhornLikitText-Regular,;
 }
 
 #root {
