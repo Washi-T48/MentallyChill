@@ -95,9 +95,7 @@ export default function DashboardPage() {
           <div className="">
             <div className="grid grid-cols-3 gap-x-48 m-10">
               <div className="border-4 border-[#D29701] rounded-md bg-[#FFFFFF] h-full w-80 p-5 text-2xl">
-                <div className="grid gap-y pb-5 font-chula">
-                  Booking request
-                </div>
+                <div className="grid gap-y pb-5">Booking request</div>
                 <div>9</div>
               </div>
               <div className="border-4 border-[#038400] rounded-md bg-[#FFFFFF] h-full w-80 p-5 text-2xl">
@@ -105,7 +103,7 @@ export default function DashboardPage() {
                 <div>9</div>
               </div>
             </div>
-            <div className="grid grid-cols-3 gap-x-48 m-10">
+            <div className="grid grid-cols-3 gap-x-48 mx-10 my-5 mb-20">
               <div className="border-4 border-[#EAE000] rounded-md bg-[#FFFFFF] h-full w-80 p-5 text-2xl">
                 <div className="grid gap-y-2 pb-5">Yellow result</div>
                 <div>1</div>
@@ -119,34 +117,60 @@ export default function DashboardPage() {
                 <div>1</div>
               </div>
             </div>
-            <div className="grid grid-cols-2 m-10">
-              <div className="gap-y-2">Recent Diagnosis</div>
-              <div className="gap-y-2">Recent Diagnosis</div>
-            </div>
-            {/* <div className="flex flex-row">
-                <table>
+            <div className="grid grid-cols-2 mx-10 my-5 gap-5">
+              <div className="">
+                <div className="mb-3 text-2xl">Recent Diagnosis</div>
+                <table className="w-full">
                   <thead>
-                    <tr>
-                      <th>Booking No</th>
-                      <th>UID</th>
-                      <th>Location</th>
-                      <th>Topic</th>
-                      <th>Date</th>
+                    <tr className="bg-emerald-400">
+                      <th className="py-2 px-4">Booking No</th>
+                      <th className="py-2 px-4">Topic</th>
+                      <th className="py-2 px-4">Date</th>
                     </tr>
                   </thead>
                   <tbody>
                     {recentDiagnosis.map((diag, index) => (
-                      <tr key={index}>
-                        <td>{diag.bookingNo}</td>
-                        <td>{diag.uid}</td>
-                        <td>{diag.location}</td>
-                        <td>{diag.topic}</td>
-                        <td>{diag.date}</td>
+                      <tr
+                        key={index}
+                        className={`${
+                          index % 2 === 0 ? "bg-white" : "bg-gray-100"
+                        } text-center`}
+                      >
+                        <td className="py-2 px-4">{diag.bookingNo}</td>
+                        <td className="py-2 px-4">{diag.topic}</td>
+                        <td className="py-2 px-4">{diag.date}</td>
                       </tr>
                     ))}
                   </tbody>
                 </table>
-              </div> */}
+              </div>
+              <div>
+                <div className="mb-3 text-2xl">Recent Diagnosis</div>
+                <table className="w-full">
+                  <thead>
+                    <tr className="bg-sky-300">
+                      <th className="py-2 px-4">UID</th>
+                      <th className="py-2 px-4">Form Type</th>
+                      <th className="py-2 px-4">Date</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {recentBookingInfo.map((book, index) => (
+                      <tr
+                        key={index}
+                        className={`${
+                          index % 2 === 0 ? "bg-white" : "bg-gray-100"
+                        } text-center`}
+                      >
+                        <td className="py-2 px-4">{book.uid}</td>
+                        <td className="py-2 px-4">{book.formType}</td>
+                        <td className="py-2 px-4">{book.date}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </div>
         </div>
       </div>

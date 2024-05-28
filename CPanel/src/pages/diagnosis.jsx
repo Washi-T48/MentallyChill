@@ -2,6 +2,13 @@ import Topbar from "../components/topbar";
 import Sidebar from "../components/sidebar";
 import Dropdown from "../components/dropdown";
 import { useState } from "react";
+import axios from "axios";
+
+const apiUrl = "http://sardines.thddns.net:7275/forms_result";
+
+const response = await axios.get(`${apiUrl}/all`);
+const dat = response.data;
+console.log(dat, "data");
 
 export default function DiagnosisPage() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -9,82 +16,82 @@ export default function DiagnosisPage() {
   const [selectedResult, setSelectedResult] = useState("");
   const rowsPerPage = 10;
 
-  const data = [
-    {
-      uid: "001",
-      formType: "Type A",
-      result: "Red",
-      date: "2024-05-25",
-    },
-    {
-      uid: "002",
-      formType: "Type B",
-      result: "Green",
-      date: "2024-05-26",
-    },
-    {
-      uid: "003",
-      formType: "Type B",
-      result: "Yellow",
-      date: "2024-05-26",
-    },
-    {
-      uid: "004",
-      formType: "Type B",
-      result: "Green",
-      date: "2024-05-26",
-    },
-    {
-      uid: "005",
-      formType: "Type A",
-      result: "Green",
-      date: "2024-05-26",
-    },
-    {
-      uid: "006",
-      formType: "Type A",
-      result: "Green",
-      date: "2024-05-26",
-    },
-    {
-      uid: "007",
-      formType: "Type C",
-      result: "Yellow",
-      date: "2024-05-26",
-    },
-    {
-      uid: "008",
-      formType: "Type C",
-      result: "Red",
-      date: "2024-05-26",
-    },
-    {
-      uid: "009",
-      formType: "Type B",
-      result: "Red",
-      date: "2024-05-26",
-    },
-    {
-      uid: "010",
-      formType: "Type B",
-      result: "Green",
-      date: "2024-05-26",
-    },
-    {
-      uid: "011",
-      formType: "Type A",
-      result: "Yellow",
-      date: "2024-05-26",
-    },
-    {
-      uid: "012",
-      formType: "Type C",
-      result: "Yellow",
-      date: "2024-05-26",
-    },
-  ];
+  // const data = [
+  //   {
+  //     uid: "001",
+  //     formType: "Type A",
+  //     result: "Red",
+  //     date: "2024-05-25",
+  //   },
+  //   {
+  //     uid: "002",
+  //     formType: "Type B",
+  //     result: "Green",
+  //     date: "2024-05-26",
+  //   },
+  //   {
+  //     uid: "003",
+  //     formType: "Type B",
+  //     result: "Yellow",
+  //     date: "2024-05-26",
+  //   },
+  //   {
+  //     uid: "004",
+  //     formType: "Type B",
+  //     result: "Green",
+  //     date: "2024-05-26",
+  //   },
+  //   {
+  //     uid: "005",
+  //     formType: "Type A",
+  //     result: "Green",
+  //     date: "2024-05-26",
+  //   },
+  //   {
+  //     uid: "006",
+  //     formType: "Type A",
+  //     result: "Green",
+  //     date: "2024-05-26",
+  //   },
+  //   {
+  //     uid: "007",
+  //     formType: "Type C",
+  //     result: "Yellow",
+  //     date: "2024-05-26",
+  //   },
+  //   {
+  //     uid: "008",
+  //     formType: "Type C",
+  //     result: "Red",
+  //     date: "2024-05-26",
+  //   },
+  //   {
+  //     uid: "009",
+  //     formType: "Type B",
+  //     result: "Red",
+  //     date: "2024-05-26",
+  //   },
+  //   {
+  //     uid: "010",
+  //     formType: "Type B",
+  //     result: "Green",
+  //     date: "2024-05-26",
+  //   },
+  //   {
+  //     uid: "011",
+  //     formType: "Type A",
+  //     result: "Yellow",
+  //     date: "2024-05-26",
+  //   },
+  //   {
+  //     uid: "012",
+  //     formType: "Type C",
+  //     result: "Yellow",
+  //     date: "2024-05-26",
+  //   },
+  // ];
 
-  const filteredData = data.filter((item) => {
+  const filteredData = dat.filter((item) => {
     return (
       (selectedFormType ? item.formType === selectedFormType : true) &&
       (selectedResult ? item.result === selectedResult : true)
@@ -226,10 +233,10 @@ export default function DiagnosisPage() {
           <table className="w-full">
             <thead>
               <tr className="bg-[#FF6900]">
-                <th className="py-2 px-4 text-3xl text-center ">UID</th>
+                <th className="py-2 px-4 text-3xl text-center ">Date</th>
                 <th className="py-2 px-4 text-3xl text-center ">Form Type</th>
                 <th className="py-2 px-4 text-3xl text-center ">Result</th>
-                <th className="py-2 px-4 text-3xl text-center ">Date</th>
+                <th className="py-2 px-4 text-3xl text-center ">UID</th>
               </tr>
             </thead>
             <tbody>
@@ -238,14 +245,18 @@ export default function DiagnosisPage() {
                   key={index}
                   className="bg-[#D3D3D3] border border-[#FFFFFF] border-4"
                 >
-                  <td className="py-2 px-4 text-center text-xl">{row.uid}</td>
                   <td className="py-2 px-4 text-center text-xl">
-                    {row.formType}
+                    {row.created.substr(0, 10)}
+                  </td>
+                  <td className="py-2 px-4 text-center text-xl">
+                    {row.forms_type}
                   </td>
                   <td className="py-2 px-4 text-center text-xl">
                     {row.result}
                   </td>
-                  <td className="py-2 px-4 text-center text-xl">{row.date}</td>
+                  <td className="py-2 px-4 text-center text-xl">
+                    {row.user_id}
+                  </td>
                 </tr>
               ))}
             </tbody>
