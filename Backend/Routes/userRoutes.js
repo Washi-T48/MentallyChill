@@ -5,6 +5,10 @@ import { newUser, deleteUser, updateUser, lookupUser, allUsers } from '../Models
 
 const userRouter = express.Router();
 
+userRouter.all("/", async (req, res) => {
+    res.sendStatus(400);
+});
+
 userRouter.post("/new", async (req, res) => {
     const { uid, gender, age, year, email, tel, sos_tel } = req.body;
     try {

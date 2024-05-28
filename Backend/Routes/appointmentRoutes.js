@@ -5,6 +5,10 @@ import { newAppointment, deleteAppointment, lookupAppointment, updateAppointment
 
 const appointmentRouter = express.Router();
 
+appointmentRouter.all("/", async (req, res) => {
+    res.sendStatus(400);
+});
+
 appointmentRouter.post("/new", async (req, res) => {
     try {
         const { uid, tel, contactMethod, medDoctor, date, time, topic, detail, medHistory } = req.body;

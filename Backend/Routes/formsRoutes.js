@@ -5,10 +5,14 @@ import { newFormResult, deleteFormResult, lookupFormResult, userFormResult, allF
 
 const formsRouter = express.Router();
 
+formsRouter.all("/", async (req, res) => {
+    res.sendStatus(400);
+});
+
 formsRouter.post("/new", async (req, res) => {
     try {
-        const { uid, form_id, result } = req.body;
-        const newFormResultResult = await newFormResult(uid, form_id, result);
+        const { uid, form_type, result } = req.body;
+        const newFormResultResult = await newFormResult(uid, form_type, result);
         res.status(200).json(newFormResultResult);
     }
     catch (error) {

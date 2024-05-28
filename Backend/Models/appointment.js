@@ -48,7 +48,7 @@ const allAppointments = async () => {
 
 const upcomingAppointments = async () => {
     const appointments = await pool.query(
-        `SELECT * FROM appointment WHERE appointment_date > NOW() where status = 'accepted' ORDER BY appointment_date ASC`
+        `SELECT * FROM appointment WHERE appointment_date > NOW() where status = 'feedback' ORDER BY appointment_date ASC`
     );
     return (appointments["rows"]);
 }

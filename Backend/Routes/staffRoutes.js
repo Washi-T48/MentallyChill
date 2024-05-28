@@ -5,6 +5,10 @@ import { newStaff, deleteStaff, updateStaff, lookupStaff, allStaffs } from '../M
 
 const staffRouter = express.Router();
 
+staffRouter.all('/', async (req, res) => {
+    res.sendStatus(400);
+});
+
 staffRouter.post('/new', async (req, res) => {
     try {
         const { name, surname, nickname, description } = req.body;
