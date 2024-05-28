@@ -92,7 +92,7 @@ export default function FormOption2() {
             <input
               className="year"
               type="text"
-              placeholder="ชั้นปีการศึกษา"
+              placeholder="ชั้นปีการศึกษา เช่น ม.5"
               value={step2Data.year}
               name="year"
               onChange={onChange}
