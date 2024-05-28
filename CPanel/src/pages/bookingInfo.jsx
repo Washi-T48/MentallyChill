@@ -259,7 +259,7 @@ export default function BookingInfoPage() {
               ))}
             </tbody>
           </table>
-          <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex justify-center w-full">
+          <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 flex justify-center w-full">
             <button
               className="py-2 px-4 mx-2 bg-gray-200 rounded"
               onClick={handlePrevPage}
