@@ -1,6 +1,6 @@
-import Topbar from "./topbar";
-import Sidebar from "./sidebar";
-import Dropdown from "./dropdown";
+import Topbar from "../components/topbar";
+import Sidebar from "../components/sidebar";
+import Dropdown from "../components/dropdown";
 import { useState } from "react";
 
 export default function DiagnosisPage() {
@@ -226,10 +226,10 @@ export default function DiagnosisPage() {
           <table className="w-full">
             <thead>
               <tr className="bg-[#FF6900]">
-                <th className="py-2 px-4 text-3xl text-center">UID</th>
-                <th className="py-2 px-4 text-3xl text-center">Form Type</th>
-                <th className="py-2 px-4 text-3xl text-center">Result</th>
-                <th className="py-2 px-4 text-3xl text-center">Date</th>
+                <th className="py-2 px-4 text-3xl text-center ">UID</th>
+                <th className="py-2 px-4 text-3xl text-center ">Form Type</th>
+                <th className="py-2 px-4 text-3xl text-center ">Result</th>
+                <th className="py-2 px-4 text-3xl text-center ">Date</th>
               </tr>
             </thead>
             <tbody>

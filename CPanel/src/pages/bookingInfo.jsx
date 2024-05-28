@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
-import Topbar from "./topbar";
-import Sidebar from "./sidebar";
-import Dropdown from "./dropdown";
+import Topbar from "../components/topbar";
+import Sidebar from "../components/sidebar";
+import Dropdown from "../components/dropdown";
 import { MdOutlineCheckBoxOutlineBlank } from "react-icons/md";
 import { MdOutlineCheckBox } from "react-icons/md";
 import { MdOutlineIndeterminateCheckBox } from "react-icons/md";
@@ -21,6 +21,7 @@ export default function BookingInfoPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedLocation, setSelectedLocation] = useState("");
   const [selectedTopic, setSelectedTopic] = useState("");
+  const [selectedStatus, setSelectedStatus] = useState("");
   const rowsPerPage = 10;
 
   const handleSelectLocation = (option) => {
@@ -33,9 +34,14 @@ export default function BookingInfoPage() {
     setCurrentPage(1); // Reset to the first page
   };
 
+  const handleSelectStatus = (option) => {
+    setSelectedStatus(option);
+    setCurrentPage(1); // Reset to the first page
+  };
   const clearAllFilters = () => {
     setSelectedLocation("");
     setSelectedTopic("");
+    setSelectedStatus("");
     setCurrentPage(1); // Reset to the first page
   };
 
@@ -159,7 +165,8 @@ export default function BookingInfoPage() {
   const filteredData = data.filter((item) => {
     return (
       (selectedLocation ? item.location === selectedLocation : true) &&
-      (selectedTopic ? item.topic === selectedTopic : true)
+      (selectedTopic ? item.topic === selectedTopic : true) &&
+      (selectedStatus ? item.status === selectedStatus : true)
     );
   });
 
@@ -207,6 +214,12 @@ export default function BookingInfoPage() {
               options={["Topic 1", "Topic 2", "Topic 3"]}
               onSelect={handleSelectTopic}
               selected={selectedTopic}
+            />
+            <Dropdown
+              placehold={"Status"}
+              options={["Pending", "Feedback", "Completed", "Declined"]}
+              onSelect={handleSelectStatus}
+              selected={selectedStatus}
             />
             <button
               className="py-2 px-4 bg-red-500 text-white rounded"
