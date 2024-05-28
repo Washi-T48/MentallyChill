@@ -36,6 +36,9 @@
     max-height: 1400px;
 }
 
+small {
+    font-size: 12px;
+}
 
 input[type="date"]::-webkit-clear-button {
     display: none;
@@ -145,7 +148,11 @@ input.app-contact {
 }
 
 input[type='radio'] {
-    width: 20px;
+    width: 40px;
+}
+
+.userid {
+    font-size: 18px;
 }
 
 .appoint-form select{

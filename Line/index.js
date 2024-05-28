@@ -13,7 +13,8 @@ const CHANNEL_SECRET = process.env.CHANNEL_SECRET;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.get("/", (req, res) => {
+app.all("/", (req, res) => {
+    console.log("GET / ");
     res.sendStatus(200)
 });
 
@@ -24,11 +25,12 @@ app.post("/webhook", async function (req, res) {
         var message = new Message()
         var profile = new Profile()
         console.log(event.getUserID())
+        message.reply(event.getReplyToken(), message.text(event.getUserID()))
     }
     catch (e) {
         logger.error(e)
+        res.sendStatus(500);
     }
-    res.sendStatus(200);
 });
 
 app.listen(PORT, () => {

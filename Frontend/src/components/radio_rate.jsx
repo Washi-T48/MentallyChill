@@ -45,11 +45,7 @@ export default function Radio_rate({
         {...controlProps("3")}
         sx={{ "& .MuiSvgIcon-root": { fontSize: 32 } }}
       />
-      <Radio
-        {...controlProps("4")}
-        sx={{ "& .MuiSvgIcon-root": { fontSize: 36 } }}
-      />
-      4
+      3
     </div>
   );
 }

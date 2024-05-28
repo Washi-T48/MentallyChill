@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function P3_dass21() {
   const [selectedValues, setSelectedValues] = useState({});
+  const [uid, setUid] = useState("");
 
   const navigate = useNavigate();
 
@@ -26,8 +27,12 @@ export default function P3_dass21() {
     } else {
       // Calculate scores and save to localStorage
       const scores = calculateScores();
-      console.log(scores);
-      localStorage.setItem("dass21Scores", JSON.stringify(scores));
+      const payload = {
+        uid,
+        ...scores,
+      };
+      console.log(payload);
+      localStorage.setItem("dass21Scores", JSON.stringify(payload)); // Save the payload
       navigate("/cri_dass21");
     }
   };
@@ -36,6 +41,11 @@ export default function P3_dass21() {
     const storedValues = localStorage.getItem("selectedValues");
     if (storedValues) {
       setSelectedValues(JSON.parse(storedValues));
+    }
+
+    const storedUid = localStorage.getItem("uid");
+    if (storedUid) {
+      setUid(storedUid);
     }
   }, []);
 
@@ -49,7 +59,7 @@ export default function P3_dass21() {
   }, [selectedValues]);
 
   const calculateScores = () => {
-    const scores = JSON.parse(localStorage.getItem("dass21Scores")) || {
+    const scores = {
       d: 0,
       a: 0,
       s: 0,

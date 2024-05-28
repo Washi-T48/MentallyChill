@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./appoint.css";
 import Logo from "../components/logo";
 import { useNavigate } from "react-router-dom";
 import CustomRadioButton from "../components/CustomRadioButton";
+import liff from "@line/liff";
 
 export default function Appoint() {
   const [appointData, setAppointData] = useState({
+    uid: "",
     tel: "",
     contactMethod: "",
     medDoctor: "",
@@ -16,11 +18,40 @@ export default function Appoint() {
     medHistory: "",
   });
 
+  const [timeSlots, setTimeSlots] = useState([]);
+  const [loadingSlots, setLoadingSlots] = useState(false);
+  const [currentDate, setCurrentDate] = useState("");
+
   const navigate = useNavigate();
+
+  useEffect(() => {
+    liff
+      .init({ liffId: "2005311386-dnvmKNjJ" })
+      .then(() => {
+        if (liff.isLoggedIn()) {
+          liff
+            .getProfile()
+            .then((profile) => {
+              setAppointData((prevData) => ({
+                ...prevData,
+                uid: profile.userId,
+              }));
+            })
+            .catch((err) => console.error("Error getting profile:", err));
+        } else {
+          liff.login();
+        }
+      })
+      .catch((err) => console.error("Error initializing LIFF:", err));
+
+    // Set the current date in YYYY-MM-DD format
+    const today = new Date();
+    const formattedDate = today.toISOString().split("T")[0];
+    setCurrentDate(formattedDate);
+  }, []);
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log("submit value", appointData);
     navigate("/confirm_app", { state: { appointData } });
   };
 
@@ -30,6 +61,13 @@ export default function Appoint() {
       ...prevData,
       [name]: value,
     }));
+
+    // Mock fetching available time slots when the date or doctor changes
+    if (name === "date" || name === "medDoctor") {
+      if (appointData.medDoctor && appointData.date) {
+        fetchAvailableTimeSlots();
+      }
+    }
   };
 
   const handleRadioSelect = (name, value) => {
@@ -37,6 +75,22 @@ export default function Appoint() {
       ...prevData,
       [name]: value,
     }));
+
+    if (name === "contactMethod" && value === "Google Meet") {
+      setAppointData((prevData) => ({
+        ...prevData,
+        tel: "",
+      }));
+    }
+  };
+
+  const fetchAvailableTimeSlots = () => {
+    setLoadingSlots(true);
+    // Mock API call to fetch available time slots
+    setTimeout(() => {
+      setTimeSlots(["09:00", "10:00", "11:00", "13:00", "14:00"]);
+      setLoadingSlots(false);
+    }, 1000);
   };
 
   return (
@@ -47,24 +101,31 @@ export default function Appoint() {
       </div>
       <div className="appoint-form">
         <form onSubmit={onSubmit}>
-          <div className="app-tel">
-            <label>
-              หมายเลขโทรศัพท์<mark> *</mark>
-            </label>
-            <br />
-            <small>Example: 000 000 0000</small>
-            <br />
-            <input
-              className="app-tel"
-              type="tel"
-              placeholder="000 000 0000"
-              pattern="[0-9]{3} [0-9]{3} [0-9]{4}"
-              value={appointData.tel}
-              name="tel"
-              onChange={handleChange}
-              required
-            />
+          <div className="userid">
+            UID: <small>{appointData.uid}</small>
           </div>
+
+          {appointData.contactMethod !== "Google Meet" && (
+            <div className="app-tel">
+              <label>
+                หมายเลขโทรศัพท์<mark> *</mark>
+              </label>
+              <br />
+              <small>Example: 0000000000</small>
+              <br />
+              <input
+                className="app-tel"
+                type="tel"
+                placeholder="0000000000"
+                pattern="[0-9]{3}[0-9]{3}[0-9]{4}"
+                value={appointData.tel}
+                name="tel"
+                onChange={handleChange}
+                required
+              />
+            </div>
+          )}
+
           <div className="app-contact">
             <label>
               ช่องทางการติดต่อ<mark> *</mark>
@@ -74,6 +135,7 @@ export default function Appoint() {
                 <CustomRadioButton
                   label="Google Meet"
                   value="Google Meet"
+                  name="contactMethod"
                   selected={appointData.contactMethod === "Google Meet"}
                   onSelect={(value) =>
                     handleRadioSelect("contactMethod", value)
@@ -83,6 +145,7 @@ export default function Appoint() {
                 <CustomRadioButton
                   label="เบอร์โทร"
                   value="เบอร์โทร"
+                  name="contactMethod"
                   selected={appointData.contactMethod === "เบอร์โทร"}
                   onSelect={(value) =>
                     handleRadioSelect("contactMethod", value)
@@ -109,7 +172,9 @@ export default function Appoint() {
                 <option value="CRA02">
                   CRA02 ดวงแก้ว เตชะกาญจนเวช (พี่ปู)
                 </option>
-                <option value="CRA03">CRA03 วิภาพร สร้อยแสง (พี่อ้อย)</option>
+                <option value="CRA03">
+                  CRA03 วิภาพร สร้อยแสง (พี่อ้อย)
+                </option>
               </select>
             </label>
           </div>
@@ -121,6 +186,7 @@ export default function Appoint() {
                 type="date"
                 name="date"
                 value={appointData.date}
+                min={currentDate} // Prevent selection of past dates
                 onChange={handleChange}
                 required
               />
@@ -130,12 +196,18 @@ export default function Appoint() {
                 value={appointData.time}
                 onChange={handleChange}
                 required
+                disabled={
+                  !appointData.date || !appointData.medDoctor || loadingSlots
+                }
               >
                 <option value="">เลือกเวลา</option>
-                <option value="TIME-1">TIME-1</option>
-                <option value="TIME-2">TIME-2</option>
-                <option value="TIME-3">TIME-3</option>
+                {timeSlots.map((slot) => (
+                  <option key={slot} value={slot}>
+                    {slot}
+                  </option>
+                ))}
               </select>
+              {loadingSlots && <p>Loading available time slots...</p>}
             </label>
           </div>
           <div className="app-topic">

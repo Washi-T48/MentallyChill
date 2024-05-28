@@ -6,6 +6,7 @@ div {
 
 input {
     font-family: ChulabhornLikitText-Regular;
+    font-size: 16px;
 }
 
 .step-2 {
@@ -41,13 +42,15 @@ input {
     margin: 0 auto;
     text-align: center;
     border-radius: 4px;
-    max-width: 400px;
+    max-width: 360px;
 }
 
 .form-fill label {
     text-align: left;
     display: block;
 }
+
+
 
 ::placeholder {
     font-size: 16px;
@@ -72,9 +75,15 @@ input {
     height: 24px;
     position: absolute;
     box-sizing:border-box;
-    top:50%;
     margin: 0 1rem;
-    transform: translateY(-50%);
+    display: flex;
+    margin-left: 36px;
+    margin-top: 16px;
+}
+
+.form_uid {
+    font-size: 20px;
+    color: white;
 }
 
 /* .teleicon {

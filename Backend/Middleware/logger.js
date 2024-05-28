@@ -1,7 +1,6 @@
-import winston, { format, loggers } from 'winston';
+import winston, { format } from 'winston';
 
 const logger = winston.createLogger({
-    // levels: winston.config.syslog.levels,
     levels: {
         emerg: 0,
         alert: 1,
@@ -10,7 +9,8 @@ const logger = winston.createLogger({
         warning: 4,
         notice: 5,
         info: 6,
-        debug: 7
+        debug: 7,
+        console: 8
     },
     format: format.combine(
         format.timestamp({
@@ -20,9 +20,13 @@ const logger = winston.createLogger({
     ),
     transports: [
         new winston.transports.File({ filename: 'console.log' }),
-        // new winston.transports.Console()
+        new winston.transports.Console({ level: 'console' }),
     ]
 });
 
+export const consoleLogExpress = (res, req, next) => {
+    logger.console(`${res.method} ${res.originalUrl}`);
+    next();
+};
+
 export default logger;
-logger.info('logger.js initialized');
