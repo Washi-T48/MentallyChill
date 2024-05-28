@@ -59,7 +59,8 @@ export default function P3_dass21() {
   }, [selectedValues]);
 
   const calculateScores = () => {
-    const scores = {
+    // Retrieve existing scores from localStorage
+    const scores = JSON.parse(localStorage.getItem("dass21Scores")) || {
       d: 0,
       a: 0,
       s: 0,
