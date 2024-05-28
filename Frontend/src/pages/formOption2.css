@@ -42,13 +42,15 @@ input {
     margin: 0 auto;
     text-align: center;
     border-radius: 4px;
-    max-width: 400px;
+    max-width: 360px;
 }
 
 .form-fill label {
     text-align: left;
     display: block;
 }
+
+
 
 ::placeholder {
     font-size: 16px;
