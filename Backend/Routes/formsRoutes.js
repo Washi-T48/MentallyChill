@@ -1,7 +1,7 @@
 import express from 'express';
-import logger from '../Config/logger.js';
+import logger from '../Middleware/logger.js';
 
-import { newFormResult, deleteFormResult, lookupFormResult, userFormResults, allFormResults } from '../Models/forms_result.js';
+import { newFormResult, deleteFormResult, lookupFormResult, userFormResult, allFormResults } from '../Models/forms_result.js';
 
 const formsRouter = express.Router();
 
@@ -29,9 +29,9 @@ formsRouter.delete("/delete", async (req, res) => {
     }
 });
 
-formsRouter.get("/lookup", async (req, res) => {
+formsRouter.get("/lookup/:result_id", async (req, res) => {
     try {
-        const { result_id } = req.body;
+        const result_id = req.params['result_id'];
         const formResult = await lookupFormResult(result_id);
         res.status(200).json(formResult);
     }
@@ -41,10 +41,10 @@ formsRouter.get("/lookup", async (req, res) => {
     }
 });
 
-formsRouter.get("/user", async (req, res) => {
+formsRouter.get("/user/:uid", async (req, res) => {
     try {
-        const { uid } = req.body;
-        const formResults = await userFormResults(uid);
+        const uid = req.params['uid'];
+        const formResults = await userFormResult(uid);
         res.status(200).json(formResults);
     }
     catch (error) {

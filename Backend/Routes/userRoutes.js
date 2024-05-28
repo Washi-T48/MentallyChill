@@ -41,8 +41,8 @@ userRouter.put("/update", async (req, res) => {
     }
 });
 
-userRouter.get("/lookup", async (req, res) => {
-    const { uid } = req.body;
+userRouter.get("/lookup/:uid", async (req, res) => {
+    const uid = req.params['uid'];
     try {
         const user = await lookupUser(uid);
         res.status(200).json(user);

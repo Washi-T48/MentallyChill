@@ -48,6 +48,13 @@ const allAppointments = async () => {
 
 const upcomingAppointments = async () => {
     const appointments = await pool.query(
+        `SELECT * FROM appointment WHERE appointment_date > NOW() where status = 'accepted' ORDER BY appointment_date ASC`
+    );
+    return (appointments["rows"]);
+}
+
+const newAppointments = async () => {
+    const appointments = await pool.query(
         `SELECT * FROM appointment WHERE appointment_date > NOW() ORDER BY appointment_date ASC`
     );
     return (appointments["rows"]);
@@ -60,6 +67,22 @@ const pastAppointments = async () => {
     return (appointments["rows"]);
 };
 
+const respondAppointment = async (booking_id, status, pre_note) => {
+    const appointment = await pool.query(
+        `UPDATE appointment SET status = $2, pre_note = $3 WHERE booking_id = $1 RETURNING *`,
+        [booking_id, status, pre_note]
+    );
+    return (appointment["rows"][0])
+}
+
+const postAppointment = async (booking_id, status, post_note, post_feedback, post_conclusion) => {
+    const appointment = await pool.query(
+        `UPDATE appointment SET status = $2, post_note = $3, post_feedback = $4, post_conclusion = $5 WHERE booking_id = $1 RETURNING *`,
+        [booking_id, status, post_note, post_feedback, post_conclusion]
+    );
+    return (appointment["rows"][0])
+}
+
 export {
     newAppointment,
     deleteAppointment,
@@ -68,5 +91,8 @@ export {
     userAppointments,
     allAppointments,
     upcomingAppointments,
+    newAppointments,
     pastAppointments,
+    respondAppointment,
+    postAppointment,
 };

@@ -1,7 +1,7 @@
 import express from 'express';
 import logger from '../Middleware/logger.js';
 
-import { newStaff, deleteStaff, updateStaff, lookupStaff, allStaff } from '../Models/staff.js';
+import { newStaff, deleteStaff, updateStaff, lookupStaff, allStaffs } from '../Models/staff.js';
 
 const staffRouter = express.Router();
 
@@ -41,9 +41,9 @@ staffRouter.put('/update', async (req, res) => {
     }
 });
 
-staffRouter.get('/lookup', async (req, res) => {
+staffRouter.get('/lookup/:staff_id', async (req, res) => {
     try {
-        const { staff_id } = req.body;
+        const staff_id = req.params['staff_id'];
         const staff = await lookupStaff(staff_id);
         res.status(200).json(staff);
     }
@@ -55,8 +55,8 @@ staffRouter.get('/lookup', async (req, res) => {
 
 staffRouter.get('/all', async (req, res) => {
     try {
-        const staff = await allStaff();
-        res.status(200).json(staff);
+        const staffs = await allStaffs();
+        res.status(200).json(staffs);
     }
     catch (error) {
         logger.error(error);

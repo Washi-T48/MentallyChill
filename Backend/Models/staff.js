@@ -18,8 +18,8 @@ const deleteStaff = async (staff_id) => {
 
 const updateStaff = async (staff_id, name, surname, nickname, description) => {
     const staff = await pool.query(
-        `UPDATE staff SET name = $1, surname = $2, nickname = $3, description = $4 WHERE staff_id = $5 RETURNING *`,
-        [name, surname, nickname, description, staff_id]
+        `UPDATE staff SET name = $2, surname = $3, nickname = $4, description = $5 WHERE staff_id = $1 RETURNING *`,
+        [staff_id, name, surname, nickname, description]
     );
     return (staff["rows"][0])
 };
@@ -32,7 +32,7 @@ const lookupStaff = async (staff_id) => {
     return (staff["rows"]);
 };
 
-const allStaff = async () => {
+const allStaffs = async () => {
     const staff = await pool.query(
         `SELECT * FROM staff ORDER BY created DESC`
     );
@@ -44,5 +44,5 @@ export {
     deleteStaff,
     updateStaff,
     lookupStaff,
-    allStaff,
+    allStaffs,
 };

@@ -24,7 +24,7 @@ const lookupFormResult = async (result_id) => {
     return (formResult["rows"]);
 }
 
-const userFormResults = async (uid) => {
+const userFormResult = async (uid) => {
     const formResults = await pool.query(
         `SELECT * FROM forms_result WHERE user_id = $1 ORDER BY created DESC`,
         [uid]
@@ -43,6 +43,6 @@ export {
     newFormResult,
     deleteFormResult,
     lookupFormResult,
-    userFormResults,
+    userFormResult,
     allFormResults,
 };
