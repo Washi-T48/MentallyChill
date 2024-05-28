@@ -209,7 +209,7 @@ export default function BookingInfoPage() {
             <div className="text-4xl">Filter : </div>
             <Dropdown
               placehold={"Topic"}
-              options={["Topic 1", "Topic 2", "Topic 3"]}
+              options={["Mussy", "Mango", "Many"]}
               onSelect={handleSelectTopic}
               selected={selectedTopic}
             />

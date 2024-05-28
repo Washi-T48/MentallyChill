@@ -1,14 +1,36 @@
 import Topbar from "../components/topbar";
 import Sidebar from "../components/sidebar";
 import Dropdown from "../components/dropdown";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 
-const apiUrl = "http://sardines.thddns.net:7275/forms_result";
+const apiUrl = "http://sardines.thddns.net:7275/forms";
 
 const response = await axios.get(`${apiUrl}/all`);
 const dat = response.data;
 console.log(dat, "data");
+
+const getSeverity = (score, type) => {
+  if (type === "d") {
+    if (score >= 14) return { label: "รุนแรงที่สุด", color: "severe" };
+    if (score >= 11) return { label: "รุนแรง", color: "high" };
+    if (score >= 7) return { label: "ปานกลาง", color: "moderate" };
+    if (score >= 5) return { label: "ระดับต่ำ", color: "low" };
+    return { label: "ปกติ", color: "normal" };
+  } else if (type === "a") {
+    if (score >= 10) return { label: "รุนแรงที่สุด", color: "severe" };
+    if (score >= 8) return { label: "รุนแรง", color: "high" };
+    if (score >= 6) return { label: "ปานกลาง", color: "moderate" };
+    if (score >= 4) return { label: "ระดับต่ำ", color: "low" };
+    return { label: "ปกติ", color: "normal" };
+  } else if (type === "s") {
+    if (score >= 17) return { label: "รุนแรงที่สุด", color: "severe" };
+    if (score >= 13) return { label: "รุนแรง", color: "high" };
+    if (score >= 10) return { label: "ปานกลาง", color: "moderate" };
+    if (score >= 8) return { label: "ระดับต่ำ", color: "low" };
+    return { label: "ปกติ", color: "normal" };
+  }
+};
 
 export default function DiagnosisPage() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -205,6 +227,12 @@ export default function DiagnosisPage() {
   // };
 
   const Content = () => {
+    useEffect(() => {
+      getSeverity(14, "d");
+      getSeverity(10, "a");
+      getSeverity(8, "s");
+    }, []);
+
     return (
       <>
         <div className="flex flex-col flex-1 m-10 relative">
@@ -252,7 +280,7 @@ export default function DiagnosisPage() {
                     {row.forms_type}
                   </td>
                   <td className="py-2 px-4 text-center text-xl">
-                    {row.result}
+                    D:{row.result.d} A:{row.result.a} S:{row.result.s}
                   </td>
                   <td className="py-2 px-4 text-center text-xl">
                     {row.user_id}
