@@ -104,28 +104,6 @@ export default function Appoint() {
           <div className="userid">
             UID: <small>{appointData.uid}</small>
           </div>
-
-          {appointData.contactMethod !== "Google Meet" && (
-            <div className="app-tel">
-              <label>
-                หมายเลขโทรศัพท์<mark> *</mark>
-              </label>
-              <br />
-              <small>Example: 0000000000</small>
-              <br />
-              <input
-                className="app-tel"
-                type="tel"
-                placeholder="0000000000"
-                pattern="[0-9]{3}[0-9]{3}[0-9]{4}"
-                value={appointData.tel}
-                name="tel"
-                onChange={handleChange}
-                required
-              />
-            </div>
-          )}
-
           <div className="app-contact">
             <label>
               ช่องทางการติดต่อ<mark> *</mark>
@@ -155,6 +133,27 @@ export default function Appoint() {
               </ul>
             </div>
           </div>
+          {appointData.contactMethod !== "Google Meet" && (
+            <div className="app-tel">
+              <label>
+                หมายเลขโทรศัพท์<mark> *</mark>
+              </label>
+              <br />
+              <small>Example: 0000000000</small>
+              <br />
+              <input
+                className="app-tel"
+                type="tel"
+                placeholder="0000000000"
+                pattern="[0-9]{3}[0-9]{3}[0-9]{4}"
+                value={appointData.tel}
+                name="tel"
+                onChange={handleChange}
+                required
+              />
+            </div>
+          )}
+
           <div className="app-advisor">
             <label>
               เลือกผู้ให้คำปรึกษา<mark> *</mark>
