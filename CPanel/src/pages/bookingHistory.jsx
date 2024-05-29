@@ -25,16 +25,15 @@ const Content = ({
             <div>
               <div className="flex flex-row justify-between text-2xl font-medium mb-4">
                 <div>Booking No.XXXX</div>
-                <div>Location : Online</div>
-                <div>Topic : Topic 2</div>
+                <div>Topic : XXX</div>
                 <div className="flex flex-row gap-3">
                   <div>27/05/2567</div>
                   <div>11:27 AM</div>
                 </div>
               </div>
-              <div className="flex flex-row gap-96 text-2xl font-medium mb-4 border-t-4 border-[#FFFFFF]">
+              <div className="grid grid-cols-2 text-2xl font-medium mb-4 pt-3 border-t-4 border-[#FFFFFF]">
                 <div>Note</div>
-                <div className="pl-80">Personal Feedback</div>
+                <div>Personal Feedback</div>
               </div>
               <div className="flex flex-row gap-3 mb-4">
                 <div className="w-full">

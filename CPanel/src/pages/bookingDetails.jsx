@@ -31,7 +31,7 @@ const Content = ({ handleClick, reasonNote, setReasonNote }) => {
                   <div className="text-2xl font-medium mb-4">
                     เรื่องที่ขอรับการปรึกษา :
                   </div>
-                  <div className="flex w-full h-60 bg-gray-100 break-all p-2">
+                  <div className="flex w-full h-60 bg-stone-300 break-all p-2">
                     Hello
                     Worldlenmgeioklgbeuigio;ehngiosdsdasdasdasdsdfnelgkeogl'eogmeogjmoegeormgoeasdasddledmgoemnogegioeigjeigbniwlkmfwmfok
                   </div>
@@ -40,7 +40,7 @@ const Content = ({ handleClick, reasonNote, setReasonNote }) => {
                   <div className="text-2xl font-medium mb-4">
                     ประวัติการรับยา :
                   </div>
-                  <div className="flex w-full h-60 bg-gray-100 break-all p-2">
+                  <div className="flex w-full h-60 bg-stone-300 break-all p-2">
                     Hello
                     Worldlenmgeioklgbeuigio;ehngiosdsdasdasdasdsdfnelgkeogl'eogmeogjmoegeormgoe
                   </div>
@@ -67,7 +67,7 @@ const Content = ({ handleClick, reasonNote, setReasonNote }) => {
                   Accept
                 </button>
                 <button
-                  className="bg-[#FF0000] rounded-full px-10 py-2"
+                  className="bg-stone-500 rounded-full px-10 py-2 text-white"
                   onClick={() => handleClick("Declined")}
                 >
                   Decline
