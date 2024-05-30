@@ -26,7 +26,7 @@ export default function Dropdown({ placehold, options, onSelect, selected }) {
   return (
     <div className="relative" ref={dropdownRef}>
       <button
-        className={`py-2 pl-2 bg-white border rounded ${isOpen ? "mr-12" : ""}`}
+        className={`py-2 pl-2 bg-white border rounded ${isOpen ? "" : ""}`}
         onClick={() => setIsOpen(!isOpen)}
       >
         <div className="flex flex-row">

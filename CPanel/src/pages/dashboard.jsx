@@ -119,7 +119,7 @@ export default function DashboardPage() {
             </div>
             <div className="grid grid-cols-2 mx-10 my-5 gap-5">
               <div className="">
-                <div className="mb-3 text-2xl">Recent Diagnosis</div>
+                <div className="mb-3 text-2xl">Recent Booking</div>
                 <table className="w-full">
                   <thead>
                     <tr className="bg-emerald-400">
