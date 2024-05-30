@@ -281,7 +281,7 @@ export default function BookingInfoPage() {
                   } ${
                     row.status === "Declined"
                       ? "bg-red-300"
-                      : "hover:bg-gray-500 hover:text-white"
+                      : "hover:bg-gray-500 hover:text-white hover:cursor-pointer"
                   }`}
                   onClick={() => gotoDetail(row.status)}
                 >

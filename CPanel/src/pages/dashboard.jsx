@@ -94,27 +94,27 @@ export default function DashboardPage() {
           </div>
           <div className="">
             <div className="grid grid-cols-3 gap-x-48 m-10">
-              <div className="border-4 border-[#D29701] rounded-md bg-[#FFFFFF] h-full w-80 p-5 text-2xl">
-                <div className="grid gap-y pb-5">Booking request</div>
-                <div>9</div>
+              <div className="flex flex-row items-end justify-between border-4 border-sky-400 rounded-md bg-sky-400 h-full w-80 p-5">
+                <div className="text-lg text-gray-200">Booking request</div>
+                <div className="text-7xl text-white">27</div>
               </div>
-              <div className="border-4 border-[#038400] rounded-md bg-[#FFFFFF] h-full w-80 p-5 text-2xl">
-                <div className="grid gap-y pb-5">Diagnosis done</div>
-                <div>9</div>
+              <div className="flex flex-row items-end justify-between border-4 border-violet-400 rounded-md bg-violet-400 h-full w-80 p-5">
+                <div className="text-lg text-gray-200">Diagnosis done</div>
+                <div className="text-7xl text-white">56</div>
               </div>
             </div>
             <div className="grid grid-cols-3 gap-x-48 mx-10 my-5 mb-20">
-              <div className="border-4 border-[#EAE000] rounded-md bg-[#FFFFFF] h-full w-80 p-5 text-2xl">
-                <div className="grid gap-y-2 pb-5">Yellow result</div>
-                <div>1</div>
+              <div className="flex flex-row items-end justify-between border-4 border-green-500 rounded-md bg-green-500 h-full w-80 p-5">
+                <div className="text-lg text-gray-200">Mild</div>
+                <div className="text-7xl text-white">56</div>
               </div>
-              <div className="border-4 border-[#2CDE29] rounded-md bg-[#FFFFFF] h-full w-80 p-5 text-2xl">
-                <div className="grid gap-y-2 pb-5">Green result</div>
-                <div>1</div>
+              <div className="flex flex-row items-end justify-between border-4 border-amber-400 rounded-md bg-amber-400 h-full w-80 p-5">
+                <div className="text-lg text-gray-200">Moderate</div>
+                <div className="text-7xl text-white">56</div>
               </div>
-              <div className="border-4 border-[#DF0000] rounded-md bg-[#FFFFFF] h-full w-80 p-5 text-2xl">
-                <div className="grid gap-y-2 pb-5">Red result</div>
-                <div>1</div>
+              <div className="flex flex-row items-end justify-between border-4 border-rose-400 rounded-md bg-rose-400 h-full w-80 p-5">
+                <div className="text-lg text-gray-200">Severe</div>
+                <div className="text-7xl text-white">56</div>
               </div>
             </div>
             <div className="grid grid-cols-2 mx-10 my-5 gap-5">
