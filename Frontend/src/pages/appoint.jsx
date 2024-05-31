@@ -25,7 +25,7 @@ export default function Appoint() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    liff
+    /* liff
       .init({ liffId: "2005311386-dnvmKNjJ" })
       .then(() => {
         if (liff.isLoggedIn()) {
@@ -42,7 +42,7 @@ export default function Appoint() {
           liff.login();
         }
       })
-      .catch((err) => console.error("Error initializing LIFF:", err));
+      .catch((err) => console.error("Error initializing LIFF:", err)); */
 
     // Set the current date in YYYY-MM-DD format
     const today = new Date();
@@ -52,6 +52,11 @@ export default function Appoint() {
 
   const onSubmit = (e) => {
     e.preventDefault();
+    // Check selected date
+    if (appointData.date < currentDate) {
+      alert("Please select a valid date.");
+      return;
+    }
     navigate("/confirm_app", { state: { appointData } });
   };
 
