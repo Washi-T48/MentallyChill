@@ -33,7 +33,7 @@ function App() {
   };
   return (
     <ProfileProvider>
-      <LiffInit liffId="2005311386-6GQLXp7Z" onInit={handleLiffInit} />
+      {/* <LiffInit liffId="2005311386-6GQLXp7Z" onInit={handleLiffInit} /> */}
       <BrowserRouter>
         <Routes>
           <Route index element={<FormOption />} />
