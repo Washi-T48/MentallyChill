@@ -1,9 +1,9 @@
 import pool from "../Config/db.js";
 
-const newUser = async (uid, gender, age, year, email, tel, sos_tel) => {
+const newUser = async (uid, line_uid, gender, age, year, email, tel, sos_tel) => {
     const newUser = await pool.query(
-        `INSERT INTO users (user_id, gender, age, grade_level, email, phone, phone_emergency) VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING *`,
-        [uid, gender, age, year, email, tel, sos_tel]
+        `INSERT INTO users (user_id, line_uid, gender, age, grade_level, email, phone, phone_emergency) VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING *`,
+        [uid, line_uid, gender, age, year, email, tel, sos_tel]
     );
     return (newUser["rows"][0]);
 };
@@ -39,10 +39,29 @@ const allUsers = async () => {
     return (users["rows"]);
 };
 
+const getUserID = async (uid) => {
+    const user = await pool.query(
+        `SELECT user_id FROM users WHERE line_uid = $1`,
+        [uid]
+    );
+    return (user["rows"][0]);
+}
+
+// ONLY FOR SUBMISSION USING LINE_UID [FRONTEND ONLY]
+const registerUser = async (uid, gender, age, year, email, tel, sos_tel) => {
+    const newUser = await pool.query(
+        `INSERT INTO users (line_uid, gender, age, grade_level, email, phone, phone_emergency) VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING *`,
+        [uid, gender, age, year, email, tel, sos_tel]
+    );
+    return (newUser["rows"][0]);
+};
+
 export {
     newUser,
     deleteUser,
     updateUser,
     lookupUser,
     allUsers,
+    getUserID,
+    registerUser,
 };

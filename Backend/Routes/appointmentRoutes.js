@@ -1,9 +1,15 @@
 import express from 'express';
 import logger from '../Middleware/logger.js';
 
-import { newAppointment, deleteAppointment, lookupAppointment, updateAppointment, userAppointments, allAppointments, upcomingAppointments, newAppointments, pastAppointments, respondAppointment, postAppointment } from '../Models/appointment.js';
+import { newAppointment, deleteAppointment, lookupAppointment, updateAppointment, userAppointments, allAppointments, upcomingAppointments, newAppointments, pastAppointments, respondAppointment, postAppointment, submitAppointment } from '../Models/appointment.js';
 
 const appointmentRouter = express.Router();
+
+appointmentRouter.all("/", async (req, res) => {
+    res.sendStatus(400);
+});
+
+//USE USER_ID FOR UID BY DEFAULT
 
 appointmentRouter.post("/new", async (req, res) => {
     try {
@@ -125,6 +131,19 @@ appointmentRouter.post("/post", async (req, res) => {
     try {
         const { booking_id, status, post_note, post_feedback, post_conclusion } = req.body;
         const appointment = await postAppointment(booking_id, status, post_note, post_feedback, post_conclusion);
+        res.status(200).json(appointment);
+    }
+    catch (error) {
+        logger.error(error);
+        res.sendStatus(500);
+    }
+});
+
+// ONLY FOR FRONTEND SUBMISSION, PLEASE USE LINE_UID FOR UID [FRONTEND ONLY]
+appointmentRouter.post("/submit", async (req, res) => {
+    try {
+        const { uid, tel, contactMethod, medDoctor, date, time, topic, detail, medHistory } = req.body;
+        const appointment = await submitAppointment(uid, tel, contactMethod, medDoctor, date, time, topic, detail, medHistory);
         res.status(200).json(appointment);
     }
     catch (error) {
