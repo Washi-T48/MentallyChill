@@ -185,18 +185,24 @@ export default function DiagnosisPage() {
           </div>
           <table className="w-full">
             <thead>
-              <tr className="bg-[#FF6900]">
-                <th className="py-2 px-4 text-3xl text-center ">Date</th>
+              <tr className="bg-[#003087] text-white">
+                <th className="py-2 px-4 text-3xl text-center rounded-tl-xl">
+                  Date
+                </th>
                 <th className="py-2 px-4 text-3xl text-center ">Form Type</th>
                 <th className="py-2 px-4 text-3xl text-center ">Result</th>
-                <th className="py-2 px-4 text-3xl text-center ">UID</th>
+                <th className="py-2 px-4 text-3xl text-center rounded-tr-xl">
+                  UID
+                </th>
               </tr>
             </thead>
             <tbody>
               {paginatedData.map((row, index) => (
                 <tr
                   key={index}
-                  className="bg-[#D3D3D3] border border-[#FFFFFF] border-4"
+                  className={`transition ease-in-out duration-150 border-2 ${
+                    index % 2 === 0 ? "bg-zinc-200" : "bg-gray-300"
+                  } `}
                 >
                   <td className="py-2 px-4 text-center text-xl">
                     {/* {row.created.substr(0, 10)} */}
@@ -242,7 +248,7 @@ export default function DiagnosisPage() {
 
   return (
     <>
-      <div className="flex flex-col flex-1 h-dvh">
+      <div className="flex flex-col flex-1 h-dvh w-full">
         <Topbar />
         <div className="flex flex-row flex-1">
           <div className="flex relative w-72">

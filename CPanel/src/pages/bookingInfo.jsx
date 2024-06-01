@@ -206,7 +206,7 @@ export default function BookingInfoPage() {
 
     return (
       <>
-        <div className="flex flex-col flex-1 m-10 relative">
+        <div className="flex flex-col flex-1 m-10 relative w-full">
           <div className="grid grid-cols-2">
             <div>
               <div className="text-5xl mb-10">Booking Information</div>
@@ -248,12 +248,12 @@ export default function BookingInfoPage() {
                 <div>Feedback</div>
               </div>
               <div className="flex flex-row items-center gap-3 text-xl justify-start">
-                <MdOutlineIndeterminateCheckBox className="text-3xl bg-green-400" />
-                =<div>Complete</div>
+                <MdOutlineCheckBox className="text-3xl bg-green-400" />=
+                <div>Complete</div>
               </div>
               <div className="flex flex-row items-center gap-3 text-xl justify-start">
-                <MdOutlineCheckBox className="text-3xl bg-red-400" />=
-                <div>Decline</div>
+                <MdOutlineIndeterminateCheckBox className="text-3xl bg-red-400" />
+                =<div>Decline</div>
               </div>
             </div>
           </div>
@@ -280,7 +280,7 @@ export default function BookingInfoPage() {
                     index % 2 === 0 ? "bg-zinc-200" : "bg-gray-300"
                   } ${
                     row.status === "Declined"
-                      ? "bg-red-300"
+                      ? ""
                       : "hover:bg-gray-500 hover:text-white hover:cursor-pointer"
                   }`}
                   onClick={() => gotoDetail(row.status)}
@@ -334,7 +334,7 @@ export default function BookingInfoPage() {
 
   return (
     <>
-      <div className="flex flex-col flex-1 h-dvh">
+      <div className="flex flex-col flex-1 h-dvh w-full ">
         <Topbar />
         <div className="flex flex-row flex-1">
           <div className="flex relative w-72">

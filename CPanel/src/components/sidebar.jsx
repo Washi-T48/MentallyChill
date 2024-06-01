@@ -78,7 +78,7 @@ export default function Sidebar() {
             onClick={() => checkActive("dashboard")}
             className={`flex items-center justify-center p-5 rounded-md cursor-pointer w-full text-2xl ${
               isDashboardActive
-                ? "bg-[#FFE6A6] text-[#FF6900]"
+                ? "bg-[#003087] text-white"
                 : "hover:bg-gray-300"
             }`}
           >
@@ -88,7 +88,7 @@ export default function Sidebar() {
             onClick={() => checkActive("diagnosis")}
             className={`flex items-center justify-center p-5 rounded-md cursor-pointer w-full text-2xl ${
               isDiagnosisActive
-                ? "bg-[#FFE6A6] text-[#FF6900]"
+                ? "bg-[#003087] text-white"
                 : "hover:bg-gray-300"
             }`}
           >
@@ -97,9 +97,7 @@ export default function Sidebar() {
           <div
             onClick={() => checkActive("booking")}
             className={`flex items-center justify-center p-5 rounded-md cursor-pointer w-full text-2xl ${
-              isBookingActive
-                ? "bg-[#FFE6A6] text-[#FF6900]"
-                : "hover:bg-gray-300"
+              isBookingActive ? "bg-[#003087] text-white" : "hover:bg-gray-300"
             }`}
           >
             Booking info

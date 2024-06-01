@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Topbar from "../components/topbar";
 import Sidebar from "../components/sidebar";
 
-const Content = ({ handleClick, reasonNote, setReasonNote }) => {
+const Content = ({ handleClick, reasonNote, setReasonNote, handleSubmit }) => {
   return (
     <>
       <div className="flex flex-col flex-1 m-10">
@@ -31,27 +31,28 @@ const Content = ({ handleClick, reasonNote, setReasonNote }) => {
                   <div className="text-2xl font-medium mb-4">
                     เรื่องที่ขอรับการปรึกษา :
                   </div>
-                  <div className="flex w-full h-60 bg-stone-300 break-all p-2">
-                    Hello
-                    Worldlenmgeioklgbeuigio;ehngiosdsdasdasdasdsdfnelgkeogl'eogmeogjmoegeormgoeasdasddledmgoemnogegioeigjeigbniwlkmfwmfok
+                  <div className="flex w-full h-60 bg-stone-300 break-all p-2 overflow-y-auto">
+                    Hello Worldlenmgeioklgbeuigio;ehngiosdsdasdasdasdsdfnelgkeog
                   </div>
                 </div>
                 <div className="w-full">
                   <div className="text-2xl font-medium mb-4">
                     ประวัติการรับยา :
                   </div>
-                  <div className="flex w-full h-60 bg-stone-300 break-all p-2">
+                  <div className="flex w-full h-60 bg-stone-300 break-all p-2 overflow-y-auto">
                     Hello
                     Worldlenmgeioklgbeuigio;ehngiosdsdasdasdasdsdfnelgkeogl'eogmeogjmoegeormgoe
                   </div>
                 </div>
                 <div className="w-full">
                   <div className="text-2xl font-medium mb-4">Reason / Note</div>
-                  <textarea
-                    className="flex w-full h-60 bg-gray-100 break-all p-2"
-                    value={reasonNote}
-                    onChange={(e) => setReasonNote(e.target.value)}
-                  />
+                  <form onSubmit={handleSubmit}>
+                    <textarea
+                      className="flex w-full h-60 bg-gray-100 break-all p-2 overflow-y-auto"
+                      value={reasonNote}
+                      onChange={(e) => setReasonNote(e.target.value)}
+                    />
+                  </form>
                 </div>
               </div>
             </div>
@@ -86,17 +87,31 @@ export default function BookingDetailsPage() {
   const [status, setStatus] = useState("Pending");
   const [reasonNote, setReasonNote] = useState("");
 
+  const data = {
+    reasonNote: reasonNote,
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const data = {
+      reasonNote: reasonNote,
+    };
+
+    console.log(data);
+  };
+
   const handleClick = (status) => {
     switch (status) {
       case "Feedback":
         console.log("Feedback");
-        console.log(reasonNote);
+        console.log(data);
         setStatus("Feedback");
         navigate("/bookinginfo");
         break;
       case "Declined":
         console.log("Declined");
-        console.log(reasonNote);
+        console.log(data);
         setStatus("Declined");
         navigate("/bookinginfo");
         break;
@@ -117,6 +132,7 @@ export default function BookingDetailsPage() {
             handleClick={handleClick}
             reasonNote={reasonNote}
             setReasonNote={setReasonNote}
+            handleSubmit={handleSubmit}
           />
         </div>
       </div>
