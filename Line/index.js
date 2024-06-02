@@ -10,8 +10,8 @@ import https from 'https'
 import fs from 'fs'
 
 const options = {
-    key: fs.readFileSync('./ssl/private-key.pem'),
-    cert: fs.readFileSync('./ssl/certificate.pem')
+    key: fs.readFileSync('./ssl/server.key'),
+    cert: fs.readFileSync('./ssl/server.cert')
 }
 
 const app = express()
