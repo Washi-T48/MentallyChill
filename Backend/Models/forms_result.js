@@ -42,8 +42,8 @@ const allFormResults = async () => {
 // ONLY FOR SUBMISSION USING LINE_UID [FRONTEND ONLY]
 const submitForms = async (uid, form_id, result) => {
     const newFormResult = await pool.query(
-        `INSERT INTO forms_result (user_id, forms_type, result) VALUES ((SELECT user_id FROM users WHERE line_uid = $1), $2, $3) RETURNING *`,
-        [line_uid, form_id, result]
+        `INSERT INTO forms_result (user_id, forms_type, result) VALUES ((SELECT user_id FROM users WHERE users.line_uid = $1), $2, $3) RETURNING *`,
+        [uid, form_id, result]
     );
     return (newFormResult["rows"][0]);
 }
