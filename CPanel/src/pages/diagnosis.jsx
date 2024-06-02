@@ -207,7 +207,9 @@ export default function DiagnosisPage() {
                   key={index}
                   className={`transition ease-in-out duration-150 border-2 ${
                     index % 2 === 0 ? "bg-zinc-200" : "bg-gray-300"
-                  } `}
+                  }
+                   `}
+                  onClick={() => handleClick(row.uid)}
                 >
                   <td className="py-2 px-4 text-center text-xl">
                     {row.created.substr(0, 10)}

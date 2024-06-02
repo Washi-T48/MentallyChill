@@ -58,13 +58,13 @@ export default function BookingInfoPage() {
 
   const getStatusClass = (status) => {
     switch (status) {
-      case "Pending":
+      case "pending":
         return "bg-amber-300";
-      case "Feedback":
+      case "feedback":
         return "bg-blue-400";
-      case "Completed":
+      case "completed":
         return "bg-green-400";
-      case "Declined":
+      case "declined":
         return "bg-red-400";
       default:
         return "bg-[#D3D3D3]";
@@ -194,11 +194,11 @@ export default function BookingInfoPage() {
 
   const Content = () => {
     const gotoDetail = (status) => {
-      if (status === "Pending") {
+      if (status === "pending") {
         navigate("/bookingdetails");
-      } else if (status === "Feedback") {
+      } else if (status === "feedback") {
         navigate("/bookinghistory");
-      } else if (status === "Completed") {
+      } else if (status === "completed") {
         navigate("/bookinghistorydone");
       }
       // For "Declined" status, stay on the same page
