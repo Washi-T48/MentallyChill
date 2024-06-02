@@ -32,88 +32,94 @@ import axios from "axios";
 //   }
 // };
 
+const apiUrl = "http://sardines.thddns.net:7275/forms";
+
+const response = await axios.get(`${apiUrl}/all`);
+const dat = response.data;
+console.log(dat, "data");
+
 export default function DiagnosisPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedFormType, setSelectedFormType] = useState("");
   const [selectedResult, setSelectedResult] = useState("");
   const rowsPerPage = 10;
 
-  const data = [
-    {
-      uid: "001",
-      formType: "Type A",
-      result: "Red",
-      date: "2024-05-25",
-    },
-    {
-      uid: "002",
-      formType: "Type B",
-      result: "Green",
-      date: "2024-05-26",
-    },
-    {
-      uid: "003",
-      formType: "Type B",
-      result: "Yellow",
-      date: "2024-05-26",
-    },
-    {
-      uid: "004",
-      formType: "Type B",
-      result: "Green",
-      date: "2024-05-26",
-    },
-    {
-      uid: "005",
-      formType: "Type A",
-      result: "Green",
-      date: "2024-05-26",
-    },
-    {
-      uid: "006",
-      formType: "Type A",
-      result: "Green",
-      date: "2024-05-26",
-    },
-    {
-      uid: "007",
-      formType: "Type C",
-      result: "Yellow",
-      date: "2024-05-26",
-    },
-    {
-      uid: "008",
-      formType: "Type C",
-      result: "Red",
-      date: "2024-05-26",
-    },
-    {
-      uid: "009",
-      formType: "Type B",
-      result: "Red",
-      date: "2024-05-26",
-    },
-    {
-      uid: "010",
-      formType: "Type B",
-      result: "Green",
-      date: "2024-05-26",
-    },
-    {
-      uid: "011",
-      formType: "Type A",
-      result: "Yellow",
-      date: "2024-05-26",
-    },
-    {
-      uid: "012",
-      formType: "Type C",
-      result: "Yellow",
-      date: "2024-05-26",
-    },
-  ];
+  // const data = [
+  //   {
+  //     uid: "001",
+  //     formType: "Type A",
+  //     result: "Red",
+  //     date: "2024-05-25",
+  //   },
+  //   {
+  //     uid: "002",
+  //     formType: "Type B",
+  //     result: "Green",
+  //     date: "2024-05-26",
+  //   },
+  //   {
+  //     uid: "003",
+  //     formType: "Type B",
+  //     result: "Yellow",
+  //     date: "2024-05-26",
+  //   },
+  //   {
+  //     uid: "004",
+  //     formType: "Type B",
+  //     result: "Green",
+  //     date: "2024-05-26",
+  //   },
+  //   {
+  //     uid: "005",
+  //     formType: "Type A",
+  //     result: "Green",
+  //     date: "2024-05-26",
+  //   },
+  //   {
+  //     uid: "006",
+  //     formType: "Type A",
+  //     result: "Green",
+  //     date: "2024-05-26",
+  //   },
+  //   {
+  //     uid: "007",
+  //     formType: "Type C",
+  //     result: "Yellow",
+  //     date: "2024-05-26",
+  //   },
+  //   {
+  //     uid: "008",
+  //     formType: "Type C",
+  //     result: "Red",
+  //     date: "2024-05-26",
+  //   },
+  //   {
+  //     uid: "009",
+  //     formType: "Type B",
+  //     result: "Red",
+  //     date: "2024-05-26",
+  //   },
+  //   {
+  //     uid: "010",
+  //     formType: "Type B",
+  //     result: "Green",
+  //     date: "2024-05-26",
+  //   },
+  //   {
+  //     uid: "011",
+  //     formType: "Type A",
+  //     result: "Yellow",
+  //     date: "2024-05-26",
+  //   },
+  //   {
+  //     uid: "012",
+  //     formType: "Type C",
+  //     result: "Yellow",
+  //     date: "2024-05-26",
+  //   },
+  // ];
 
-  const filteredData = data.filter((item) => {
+  const filteredData = dat.filter((item) => {
     return (
       (selectedFormType ? item.formType === selectedFormType : true) &&
       (selectedResult ? item.result === selectedResult : true)
@@ -204,20 +210,23 @@ export default function DiagnosisPage() {
                   } `}
                 >
                   <td className="py-2 px-4 text-center text-xl">
-                    {/* {row.created.substr(0, 10)} */}
-                    {row.date}
+                    {row.created.substr(0, 10)}
+                    {/* {row.date} */}
                   </td>
                   <td className="py-2 px-4 text-center text-xl">
-                    {/* {row.forms_type} */}
-                    {row.formType}
+                    {row.forms_type}
+                    {/* {row.formType} */}
                   </td>
                   <td className="py-2 px-4 text-center text-xl">
                     {/* D:{row.result.d} A:{row.result.a} S:{row.result.s} */}
-                    {row.result}
+                    {row.result
+                      ? `D: ${row.result.d} A: ${row.result.a} S: ${row.result.s}`
+                      : "null"}
+                    {/* {row.result} */}
                   </td>
                   <td className="py-2 px-4 text-center text-xl">
-                    {/* {row.user_id} */}
-                    {row.uid}
+                    {row.user_id}
+                    {/* {row.uid} */}
                   </td>
                 </tr>
               ))}
