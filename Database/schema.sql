@@ -6,6 +6,7 @@ CREATE TABLE staff (
     image varchar NULL,
     description text NULL,
     created timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+    "password" varchar NULL,
     CONSTRAINT staff_pk PRIMARY KEY (staff_id)
 );
 CREATE SEQUENCE users_user_id_seq START WITH 1 INCREMENT BY 1 NO MINVALUE NO MAXVALUE;
@@ -89,30 +90,30 @@ ALTER SEQUENCE forms_result_result_id_seq OWNED BY forms_result.result_id;
 --         NULL
 --     );
 -- SAMPLE USER DATA
-INSERT INTO users (
-        --         line_uid,
-        --         gender,
-        --         age,
-        --         email,
-        --         phone,
-        --         phone_emergency,
-        --         grade_level
-        --     )
-        -- VALUES (
-        --         'U5c8fda9b0a3084f1e96c427817fea0a6',
-        --         'male',
-        --         21,
-        --         'mango@mango.com',
-        --         '0694204200',
-        --         '0694204201',
-        --         'undergraduate'
-        --     ),
-        --     (
-        --         'U43354d20204e8cd7717133c1a03d9360',
-        --         'female',
-        --         12,
-        --         'orange@mango.com',
-        --         '0694204202',
-        --         '0694204203',
-        --         'M.2'
-        --     );
+-- INSERT INTO users (
+--                 line_uid,
+--                 gender,
+--                 age,
+--                 email,
+--                 phone,
+--                 phone_emergency,
+--                 grade_level
+--             )
+--         VALUES (
+--                 'U5c8fda9b0a3084f1e96c427817fea0a6',
+--                 'male',
+--                 21,
+--                 'mango@mango.com',
+--                 '0694204200',
+--                 '0694204201',
+--                 'undergraduate'
+--             ),
+--             (
+--                 'U43354d20204e8cd7717133c1a03d9360',
+--                 'female',
+--                 12,
+--                 'orange@mango.com',
+--                 '0694204202',
+--                 '0694204203',
+--                 'M.2'
+--             );
