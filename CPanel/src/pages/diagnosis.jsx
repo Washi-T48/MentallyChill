@@ -157,7 +157,6 @@ export default function DiagnosisPage() {
     //   getSeverity(10, "a");
     //   getSeverity(8, "s");
     // }, []);
-
     return (
       <>
         <div className="flex flex-col flex-1 m-10 relative">
@@ -248,7 +247,7 @@ export default function DiagnosisPage() {
 
   return (
     <>
-      <div className="flex flex-col flex-1 h-dvh w-full">
+      <div className="flex flex-col flex-1 h-dvh">
         <Topbar />
         <div className="flex flex-row flex-1">
           <div className="flex relative w-72">
