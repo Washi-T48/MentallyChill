@@ -4,16 +4,6 @@ import Message from './Helpers/message.js'
 import Profile from './Helpers/profile.js'
 import express from 'express'
 import dotenv from 'dotenv'
-
-// SSL
-import https from 'https'
-import fs from 'fs'
-
-const options = {
-    key: fs.readFileSync('./ssl/server.key'),
-    cert: fs.readFileSync('./ssl/server.cert')
-}
-
 const app = express()
 
 dotenv.config();
@@ -43,10 +33,8 @@ app.post("/webhook", async function (req, res) {
     }
 });
 
-const server = https.createServer(options, app)
-
-server.listen(PORT, () => {
-    logger.info(`Server started on port ${PORT}`);
-    console.log(`Server started on port ${PORT}`);
+app.listen(PORT, () => {
+    console.log(`Server listening on port ${PORT}`)
+    logger.info(`Server listening on port ${PORT}`)
 });
 
