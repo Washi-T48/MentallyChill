@@ -9,11 +9,11 @@ import { IoChatboxEllipsesSharp } from "react-icons/io5";
 import { useState } from "react";
 import axios from "axios";
 
-// const apiUrl = "http://sardines.thddns.net:7275/appointment";
+const apiUrl = "http://sardines.thddns.net:7275/appointment";
 
-// const response = await axios.get(`${apiUrl}/all`);
-// const dat = response.data;
-// console.log(dat, "data");
+const response = await axios.get(`${apiUrl}/all`);
+const dat = response.data;
+console.log(dat, "data");
 
 export default function BookingInfoPage() {
   const navigate = useNavigate();
@@ -40,15 +40,15 @@ export default function BookingInfoPage() {
 
   const getStatusIcon = (status) => {
     switch (status) {
-      case "Pending":
+      case "pending":
         return <MdOutlineCheckBoxOutlineBlank className="bg-amber-300" />;
-      case "Feedback":
+      case "feedback":
         setBooked(true);
         console.log(booked);
         return <IoChatboxEllipsesSharp className="bg-violet-400" />;
-      case "Declined":
+      case "declined":
         return <MdOutlineIndeterminateCheckBox className="bg-red-400" />;
-      case "Completed":
+      case "completed":
         setBooked(true);
         return <MdOutlineCheckBox className="bg-green-400" />;
       default:
@@ -71,106 +71,106 @@ export default function BookingInfoPage() {
     }
   };
 
-  const data = [
-    {
-      status: "Pending",
-      bookingNo: "1",
-      uid: "001",
-      topic: "Study",
-      date: "2024-05-25",
-      time: "09:00",
-    },
-    {
-      status: "Feedback",
-      bookingNo: "2",
-      uid: "002",
-      topic: "Bullying",
-      date: "2024-05-26",
-      time: "10:00",
-    },
-    {
-      status: "Declined",
-      bookingNo: "3",
-      uid: "003",
-      topic: "Family",
-      date: "2024-05-26",
-      time: "11:00",
-    },
-    {
-      status: "Pending",
-      bookingNo: "4",
-      uid: "004",
-      topic: "Study",
-      date: "2024-05-26",
-      time: "12:00",
-    },
-    {
-      status: "Completed",
-      bookingNo: "5",
-      uid: "005",
-      topic: "Drugs",
-      date: "2024-05-27",
-      time: "13:00",
-    },
-    {
-      status: "Feedback",
-      bookingNo: "6",
-      uid: "006",
-      topic: "Relationship",
-      date: "2024-05-28",
-      time: "14:00",
-    },
-    {
-      status: "Completed",
-      bookingNo: "6",
-      uid: "006",
-      topic: "Family",
-      date: "2024-05-28",
-      time: "15:00",
-    },
-    {
-      status: "Completed",
-      bookingNo: "6",
-      uid: "006",
-      topic: "Family",
-      date: "2024-05-28",
-      time: "16:00",
-    },
-    {
-      status: "Declined",
-      bookingNo: "6",
-      uid: "006",
-      topic: "Family",
-      date: "2024-05-28",
-      time: "17:00",
-    },
-    {
-      status: "Declined",
-      bookingNo: "10",
-      uid: "010",
-      topic: "Drugs",
-      date: "2024-05-28",
-      time: "18:00",
-    },
-    {
-      status: "Feedback",
-      bookingNo: "11",
-      uid: "011",
-      topic: "Drugs",
-      date: "2024-05-28",
-      time: "19:00",
-    },
-    {
-      status: "Pending",
-      bookingNo: "12",
-      uid: "012",
-      topic: "Study",
-      date: "2024-05-28",
-      time: "20:00",
-    },
-  ];
+  // const data = [
+  //   {
+  //     status: "Pending",
+  //     bookingNo: "1",
+  //     uid: "001",
+  //     topic: "Study",
+  //     date: "2024-05-25",
+  //     time: "09:00",
+  //   },
+  //   {
+  //     status: "Feedback",
+  //     bookingNo: "2",
+  //     uid: "002",
+  //     topic: "Bullying",
+  //     date: "2024-05-26",
+  //     time: "10:00",
+  //   },
+  //   {
+  //     status: "Declined",
+  //     bookingNo: "3",
+  //     uid: "003",
+  //     topic: "Family",
+  //     date: "2024-05-26",
+  //     time: "11:00",
+  //   },
+  //   {
+  //     status: "Pending",
+  //     bookingNo: "4",
+  //     uid: "004",
+  //     topic: "Study",
+  //     date: "2024-05-26",
+  //     time: "12:00",
+  //   },
+  //   {
+  //     status: "Completed",
+  //     bookingNo: "5",
+  //     uid: "005",
+  //     topic: "Drugs",
+  //     date: "2024-05-27",
+  //     time: "13:00",
+  //   },
+  //   {
+  //     status: "Feedback",
+  //     bookingNo: "6",
+  //     uid: "006",
+  //     topic: "Relationship",
+  //     date: "2024-05-28",
+  //     time: "14:00",
+  //   },
+  //   {
+  //     status: "Completed",
+  //     bookingNo: "6",
+  //     uid: "006",
+  //     topic: "Family",
+  //     date: "2024-05-28",
+  //     time: "15:00",
+  //   },
+  //   {
+  //     status: "Completed",
+  //     bookingNo: "6",
+  //     uid: "006",
+  //     topic: "Family",
+  //     date: "2024-05-28",
+  //     time: "16:00",
+  //   },
+  //   {
+  //     status: "Declined",
+  //     bookingNo: "6",
+  //     uid: "006",
+  //     topic: "Family",
+  //     date: "2024-05-28",
+  //     time: "17:00",
+  //   },
+  //   {
+  //     status: "Declined",
+  //     bookingNo: "10",
+  //     uid: "010",
+  //     topic: "Drugs",
+  //     date: "2024-05-28",
+  //     time: "18:00",
+  //   },
+  //   {
+  //     status: "Feedback",
+  //     bookingNo: "11",
+  //     uid: "011",
+  //     topic: "Drugs",
+  //     date: "2024-05-28",
+  //     time: "19:00",
+  //   },
+  //   {
+  //     status: "Pending",
+  //     bookingNo: "12",
+  //     uid: "012",
+  //     topic: "Study",
+  //     date: "2024-05-28",
+  //     time: "20:00",
+  //   },
+  // ];
 
-  const filteredData = data.filter((item) => {
+  const filteredData = dat.filter((item) => {
     return (
       (selectedTopic ? item.topic === selectedTopic : true) &&
       (selectedStatus ? item.status === selectedStatus : true)
@@ -287,24 +287,23 @@ export default function BookingInfoPage() {
                 >
                   <td className={`pl-24 text-center text-3xl`}>
                     {getStatusIcon(row.status)}
-                    {/* {row.appointment_date.substring(0, 10)} */}
                   </td>
                   <td className="py-2 text-center text-xl">
-                    {/* {row.appointment_date.substring(0, 10)} */}
-                    {row.date}
+                    {row.appointment_date.substring(0, 10)}
+                    {/* {row.date} */}
                   </td>
                   <td className="py-2 px-4 text-center text-xl">{row.topic}</td>
                   <td className="py-2 px-4 text-center text-xl">
-                    {/* {row.appointment_date.substring(11, 16)} */}
-                    {row.time}
+                    {row.appointment_date.substring(11, 16)}
+                    {/* {row.time} */}
                   </td>
                   <td className="py-2 px-4 text-center text-xl">
-                    {/* {row.user_id} */}
-                    {row.uid}
+                    {row.user_id}
+                    {/* {row.uid} */}
                   </td>
                   <td className="py-2 px-4 text-center text-xl">
-                    {/* {row.booking_id} */}
-                    {row.bookingNo}
+                    {row.booking_id}
+                    {/* {row.bookingNo} */}
                   </td>
                 </tr>
               ))}
