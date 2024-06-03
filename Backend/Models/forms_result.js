@@ -56,6 +56,13 @@ const diagnosisCount = async (uid) => {
     return (diagnosisCount["rows"][0]);
 }
 
+const getFormsType = async () => {
+    const formsType = await pool.query(
+        `SELECT DISTINCT forms_type FROM forms_result`
+    );
+    return (formsType["rows"]);
+}
+
 export {
     newFormResult,
     deleteFormResult,
@@ -64,4 +71,5 @@ export {
     allFormResults,
     submitForms,
     diagnosisCount,
+    getFormsType,
 };
