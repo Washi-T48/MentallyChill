@@ -8,6 +8,6 @@ export default defineConfig({
     include: ['@emotion/styled', '@emotion/react'],
   },
   server: {
-    port: 8080,
+    port: 80,
   }
 });
