@@ -1,5 +1,5 @@
 # docker build -t frontend .
-# docker run -p 8080:8080 -d line
+# docker run -p 8080:8080 -d frontend
 
 FROM node:latest
 WORKDIR /usr/src/app
