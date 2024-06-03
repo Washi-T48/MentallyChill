@@ -48,6 +48,14 @@ const submitForms = async (uid, form_id, result) => {
     return (newFormResult["rows"][0]);
 }
 
+const diagnosisCount = async (uid) => {
+    const diagnosisCount = await pool.query(
+        `SELECT COUNT(*) FROM forms_result`,
+        [uid]
+    );
+    return (diagnosisCount["rows"][0]);
+}
+
 export {
     newFormResult,
     deleteFormResult,
@@ -55,4 +63,5 @@ export {
     userFormResult,
     allFormResults,
     submitForms,
+    diagnosisCount,
 };

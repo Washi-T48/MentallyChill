@@ -92,6 +92,13 @@ const submitAppointment = async (uid, tel, contactMethod, medDoctor, date, time,
     return (newAppointment["rows"][0]);
 }
 
+const bookingCount = async () => {
+    const count = await pool.query(
+        `SELECT COUNT(*) FROM appointment`
+    );
+    return (count["rows"][0]);
+}
+
 export {
     newAppointment,
     deleteAppointment,
@@ -105,4 +112,5 @@ export {
     respondAppointment,
     postAppointment,
     submitAppointment,
+    bookingCount,
 };

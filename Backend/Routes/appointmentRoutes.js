@@ -152,4 +152,15 @@ appointmentRouter.post("/submit", async (req, res) => {
     }
 });
 
+appointmentRouter.get("/count", async (req, res) => {
+    try {
+        const appointments = await allAppointments();
+        res.status(200).json(appointments.length);
+    }
+    catch (error) {
+        logger.error(error);
+        res.sendStatus(500);
+    }
+});
+
 export default appointmentRouter;

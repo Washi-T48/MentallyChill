@@ -83,4 +83,15 @@ formsRouter.post("/submit", async (req, res) => {
     }
 });
 
+formsRouter.get("/count", async (req, res) => {
+    try {
+        const diagnosisCount = await diagnosisCount();
+        res.status(200).json(diagnosisCount);
+    }
+    catch (error) {
+        logger.error(error);
+        res.sendStatus(500);
+    }
+});
+
 export default formsRouter;
