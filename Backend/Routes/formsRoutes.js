@@ -8,6 +8,7 @@ import {
   userFormResult,
   allFormResults,
   submitForms,
+  diagnosisCount,
 } from "../Models/forms_result.js";
 
 const formsRouter = express.Router();
@@ -83,6 +84,16 @@ formsRouter.post("/submit", async (req, res) => {
     res.sendStatus(500);
   }
   return res.status(200).json({ success: true });
+});
+
+formsRouter.get("/count", async (req, res) => {
+  try {
+    const submitResult = await diagnosisCount();
+    res.status(200).json(submitResult);
+  } catch (error) {
+    logger.error(error);
+    res.sendStatus(500);
+  }
 });
 
 export default formsRouter;
