@@ -5,6 +5,9 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   optimizeDeps: {
-    include: ['@emotion/styled','@emotion/react'],
+    include: ['@emotion/styled', '@emotion/react'],
   },
-})
+  server: {
+    port: 8080,
+  }
+});
