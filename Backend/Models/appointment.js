@@ -99,6 +99,13 @@ const bookingCount = async () => {
     return (count["rows"][0]);
 }
 
+const getTopic = async () => {
+    const topics = await pool.query(
+        `SELECT DISTINCT topic FROM appointment`
+    );
+    return (topics["rows"]);
+}
+
 export {
     newAppointment,
     deleteAppointment,
@@ -113,4 +120,5 @@ export {
     postAppointment,
     submitAppointment,
     bookingCount,
+    getTopic,
 };

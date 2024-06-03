@@ -58,7 +58,7 @@ const diagnosisCount = async (uid) => {
 
 const getFormsType = async () => {
     const formsType = await pool.query(
-        `SELECT UNIQUE forms_type FROM forms_result`
+        `SELECT DISTINCT forms_type FROM forms_result`
     );
     return (formsType["rows"]);
 }

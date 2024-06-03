@@ -1,7 +1,7 @@
 import express from 'express';
 import logger from '../Middleware/logger.js';
 
-import { newAppointment, deleteAppointment, lookupAppointment, updateAppointment, userAppointments, allAppointments, upcomingAppointments, newAppointments, pastAppointments, respondAppointment, postAppointment, submitAppointment, bookingCount } from '../Models/appointment.js';
+import { newAppointment, deleteAppointment, lookupAppointment, updateAppointment, userAppointments, allAppointments, upcomingAppointments, newAppointments, pastAppointments, respondAppointment, postAppointment, submitAppointment, bookingCount, getTopic } from '../Models/appointment.js';
 
 const appointmentRouter = express.Router();
 
@@ -155,6 +155,17 @@ appointmentRouter.post("/submit", async (req, res) => {
 appointmentRouter.get("/count", async (req, res) => {
     try {
         const appointments = await bookingCount();
+        res.status(200).json(appointments);
+    }
+    catch (error) {
+        logger.error(error);
+        res.sendStatus(500);
+    }
+});
+
+appointmentRouter.get("/topic", async (req, res) => {
+    try {
+        const appointments = await getTopic();
         res.status(200).json(appointments);
     }
     catch (error) {
