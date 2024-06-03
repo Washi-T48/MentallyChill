@@ -1,4 +1,4 @@
-# docker build -t line .
+# docker build -t frontend .
 # docker run -p 8080:8080 -d line
 
 FROM node:latest
