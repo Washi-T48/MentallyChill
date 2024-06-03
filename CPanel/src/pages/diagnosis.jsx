@@ -32,100 +32,45 @@ import axios from "axios";
 //   }
 // };
 
-const apiUrl = "http://ligma.sombat.cc:3000/forms"; // Added 'http://'
-
-const response = await axios.get(`${apiUrl}/all`);
-const dat = response.data;
-try {
-  console.log(dat, "data");
-} catch (error) {
-  console.error("Error fetching data:", error);
-}
-
 export default function DiagnosisPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedFormType, setSelectedFormType] = useState("");
   const [selectedResult, setSelectedResult] = useState("");
+  const [data, setData] = useState([]);
+  const [formTypeData, setFormTypeData] = useState([]);
   const rowsPerPage = 10;
 
-  // const data = [
-  //   {
-  //     uid: "001",
-  //     formType: "Type A",
-  //     result: "Red",
-  //     date: "2024-05-25",
-  //   },
-  //   {
-  //     uid: "002",
-  //     formType: "Type B",
-  //     result: "Green",
-  //     date: "2024-05-26",
-  //   },
-  //   {
-  //     uid: "003",
-  //     formType: "Type B",
-  //     result: "Yellow",
-  //     date: "2024-05-26",
-  //   },
-  //   {
-  //     uid: "004",
-  //     formType: "Type B",
-  //     result: "Green",
-  //     date: "2024-05-26",
-  //   },
-  //   {
-  //     uid: "005",
-  //     formType: "Type A",
-  //     result: "Green",
-  //     date: "2024-05-26",
-  //   },
-  //   {
-  //     uid: "006",
-  //     formType: "Type A",
-  //     result: "Green",
-  //     date: "2024-05-26",
-  //   },
-  //   {
-  //     uid: "007",
-  //     formType: "Type C",
-  //     result: "Yellow",
-  //     date: "2024-05-26",
-  //   },
-  //   {
-  //     uid: "008",
-  //     formType: "Type C",
-  //     result: "Red",
-  //     date: "2024-05-26",
-  //   },
-  //   {
-  //     uid: "009",
-  //     formType: "Type B",
-  //     result: "Red",
-  //     date: "2024-05-26",
-  //   },
-  //   {
-  //     uid: "010",
-  //     formType: "Type B",
-  //     result: "Green",
-  //     date: "2024-05-26",
-  //   },
-  //   {
-  //     uid: "011",
-  //     formType: "Type A",
-  //     result: "Yellow",
-  //     date: "2024-05-26",
-  //   },
-  //   {
-  //     uid: "012",
-  //     formType: "Type C",
-  //     result: "Yellow",
-  //     date: "2024-05-26",
-  //   },
-  // ];
+  const apiUrl = "http://ligma.sombat.cc:3000/forms"; // Added 'http://'
 
-  const filteredData = dat.filter((item) => {
+  const formtypeList = formTypeData.map((item) => item.forms_type);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`${apiUrl}/all`);
+        setData(response.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    const fetchform = async () => {
+      try {
+        const response = await axios.get(`${apiUrl}/type`);
+        setFormTypeData(response.data);
+        console.log(response.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchform();
+    fetchData();
+  }, []);
+
+  const filteredData = data.filter((item) => {
     return (
-      (selectedFormType ? item.formType === selectedFormType : true) &&
+      (selectedFormType ? item.forms_type === selectedFormType : true) &&
       (selectedResult ? item.result === selectedResult : true)
     );
   });
@@ -150,10 +95,10 @@ export default function DiagnosisPage() {
     setCurrentPage(1); // Reset to the first page
   };
 
-  const handleSelectResult = (option) => {
-    setSelectedResult(option);
-    setCurrentPage(1); // Reset to the first page
-  };
+  // const handleSelectResult = (option) => {
+  //   setSelectedResult(option);
+  //   setCurrentPage(1); // Reset to the first page
+  // };
 
   const clearAllFilters = () => {
     setSelectedFormType("");
@@ -162,11 +107,6 @@ export default function DiagnosisPage() {
   };
 
   const Content = () => {
-    // useEffect(() => {
-    //   getSeverity(14, "d");
-    //   getSeverity(10, "a");
-    //   getSeverity(8, "s");
-    // }, []);
     return (
       <>
         <div className="flex flex-col flex-1 m-10 relative">
@@ -175,7 +115,7 @@ export default function DiagnosisPage() {
             <div className="text-4xl">Filter : </div>
             <Dropdown
               placehold={"Form Type"}
-              options={["Type A", "Type B", "Type C"]}
+              options={formtypeList}
               onSelect={handleSelectLocation}
               selected={selectedFormType}
             />
@@ -213,7 +153,6 @@ export default function DiagnosisPage() {
                     index % 2 === 0 ? "bg-zinc-200" : "bg-gray-300"
                   }
                    `}
-                  onClick={() => handleClick(row.uid)}
                 >
                   <td className="py-2 px-4 text-center text-xl">
                     {row.created.substr(0, 10)}

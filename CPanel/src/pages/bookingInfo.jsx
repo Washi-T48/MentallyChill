@@ -16,11 +16,14 @@ const apiUrl = "http://ligma.sombat.cc:3000/appointment"; // Added 'http://'
 export default function BookingInfoPage() {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
-  const [booked, setBooked] = useState(false);
+  // const [booked, setBooked] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedTopic, setSelectedTopic] = useState("");
   const [selectedStatus, setSelectedStatus] = useState("");
+  const [topicData, setTopicData] = useState([]);
   const rowsPerPage = 10;
+
+  const topicList = topicData.map((item) => item.topic);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -31,6 +34,17 @@ export default function BookingInfoPage() {
         console.error("Error fetching data:", error);
       }
     };
+
+    const fetchtopic = async () => {
+      try {
+        const response = await axios.get(`${apiUrl}/topic`);
+        setTopicData(response.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchtopic();
     fetchData();
   }, []);
 
@@ -55,12 +69,10 @@ export default function BookingInfoPage() {
       case "pending":
         return <MdOutlineCheckBoxOutlineBlank className="bg-amber-300" />;
       case "feedback":
-        setBooked(true);
         return <IoChatboxEllipsesSharp className="bg-violet-400" />;
       case "decline":
         return <MdOutlineIndeterminateCheckBox className="bg-red-400" />;
       case "complete":
-        setBooked(true);
         return <MdOutlineCheckBox className="bg-green-400" />;
       default:
         return null;
@@ -110,13 +122,7 @@ export default function BookingInfoPage() {
               <div className="text-4xl">Filter : </div>
               <Dropdown
                 placehold={"Topic"}
-                options={[
-                  "Study",
-                  "Relationship",
-                  "Family",
-                  "Bullying",
-                  "Drugs",
-                ]}
+                options={topicList}
                 onSelect={handleSelectTopic}
                 selected={selectedTopic}
               />
@@ -176,7 +182,7 @@ export default function BookingInfoPage() {
                   index % 2 === 0 ? "bg-zinc-200" : "bg-gray-300"
                 } ${
                   row.status === "decline"
-                    ? ""
+                    ? "hover:cursor-default"
                     : "hover:bg-gray-500 hover:text-white hover:cursor-pointer"
                 }`}
                 onClick={() => gotoDetail(row.status, row.booking_id)}
