@@ -1,10 +1,10 @@
-# docker build -t backend .
-# docker run -p 3000:3000 -d backend
+# docker build -t cpanel .
+# docker run -p 5173:5173 -d cpanel
 
 FROM node:latest
 WORKDIR /usr/src/app
 COPY package*.json ./
 RUN npm install
 COPY . .
-EXPOSE 3000
+EXPOSE 5173
 ENTRYPOINT [ "npm", "run", "start"]
