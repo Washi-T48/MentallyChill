@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, useParams } from "react-router-dom";
 
 export default function Sidebar() {
   const [isDashboardActive, setIsDashboardActive] = useState(true);
@@ -7,6 +7,8 @@ export default function Sidebar() {
   const [isBookingActive, setIsBookingActive] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+
+  const { bookingId } = useParams();
 
   useEffect(() => {
     switch (location.pathname) {
@@ -25,22 +27,25 @@ export default function Sidebar() {
         setIsDiagnosisActive(false);
         setIsBookingActive(true);
         break;
-      case "/bookingdetails":
+      case "/bookingdetails/":
         setIsDashboardActive(false);
         setIsDiagnosisActive(false);
         setIsBookingActive(true);
         break;
-      case "/bookinghistory":
+      case "/bookinghistory/":
         setIsDashboardActive(false);
         setIsDiagnosisActive(false);
         setIsBookingActive(true);
         break;
-      case "/bookinghistorydone":
+      case "/bookinghistorydone/":
         setIsDashboardActive(false);
         setIsDiagnosisActive(false);
         setIsBookingActive(true);
         break;
       default:
+        setIsDashboardActive(false);
+        setIsDiagnosisActive(false);
+        setIsBookingActive(true);
         break;
     }
   }, [location.pathname]);

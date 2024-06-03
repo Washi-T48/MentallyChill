@@ -6,6 +6,7 @@ import BookingDetailsPage from "./pages/bookingDetails";
 import BookingHistoryPage from "./pages/bookingHistory";
 import BookingHistoryDonePage from "./pages/bookingHistoryDone";
 import SignInPage from "./pages/signin";
+import Topbar from "./components/topbar";
 
 function App() {
   return (
@@ -17,14 +18,20 @@ function App() {
           <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/diagnosis" element={<DiagnosisPage />} />
           <Route path="/bookinginfo" element={<BookingInfoPage />} />
-          <Route path="/bookingdetails" element={<BookingDetailsPage />} />
-          <Route path="/bookinghistory" element={<BookingHistoryPage />} />
           <Route
-            path="/bookinghistorydone"
+            path="/bookingdetails/:bookingId"
+            element={<BookingDetailsPage />}
+          />
+          <Route
+            path="/bookinghistory/:bookingId"
+            element={<BookingHistoryPage />}
+          />
+          <Route
+            path="/bookinghistorydone/:bookingId"
             element={<BookingHistoryDonePage />}
           />
           <Route
-            path="/bookinghistorydone"
+            path="/bookinghistorydone/:bookingId"
             element={<BookingHistoryDonePage />}
           />
         </Routes>

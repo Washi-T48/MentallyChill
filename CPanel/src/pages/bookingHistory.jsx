@@ -1,7 +1,8 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import Topbar from "../components/topbar";
 import Sidebar from "../components/sidebar";
+import axios from "axios";
 
 const Content = ({
   handleClick,
@@ -11,24 +12,25 @@ const Content = ({
   setCon,
   feed,
   setFeed,
+  bookingId,
+  data,
 }) => {
   return (
     <>
       <div className="flex flex-col flex-1 m-10">
         <div className="text-5xl mb-10">Booking History</div>
         <div className="flex flex-row justify-between mb-10 p-3 bg-[#FFF3C7] border border-[#FFF3C7] border-4 rounded-lg">
-          <div className="text-4xl font-semibold">Booking No.XXXX</div>
-          <div className="text-4xl font-semibold">User ID. 001</div>
+          <div className="text-4xl font-semibold">Booking ID : {bookingId}</div>
+          <div className="text-4xl font-semibold">User ID : {data.user_id}</div>
         </div>
         <div className="flex flex-col flex-1 bg-[#FFAD4D] border border-[#FFAD4D] border-4 rounded-lg h-full ">
           <div className="p-4 flex flex-col justify-between h-full">
             <div>
               <div className="flex flex-row justify-between text-2xl font-medium mb-4">
-                <div>Booking No.XXXX</div>
-                <div>Topic : XXX</div>
+                <div>Topic : {data.topic}</div>
                 <div className="flex flex-row gap-3">
                   <div>27/05/2567</div>
-                  <div>11:27 AM</div>
+                  <div>xxx</div>
                 </div>
               </div>
               <div className="grid grid-cols-2 text-2xl font-medium mb-4 pt-3 border-t-4 border-[#FFFFFF]">
@@ -62,13 +64,13 @@ const Content = ({
               <div className="flex flex-row justify-between gap-4">
                 <button
                   className="bg-[#24DB36] rounded-full px-10 py-2"
-                  onClick={() => handleClick("Save")}
+                  onClick={() => handleClick("pass")}
                 >
                   Save
                 </button>
                 <button
                   className="bg-[#FF0000] rounded-full px-10 py-2"
-                  onClick={() => handleClick("Cancel")}
+                  onClick={() => handleClick("not")}
                 >
                   Cancel
                 </button>
@@ -83,24 +85,59 @@ const Content = ({
 
 export default function BookingHistoryPage() {
   const navigate = useNavigate();
-  const [status, setStatus] = useState("Pending");
   const [note, setNote] = useState("");
   const [con, setCon] = useState("");
   const [feed, setFeed] = useState("");
+  const [status, setStatus] = useState("Pending");
+  const { bookingId } = useParams();
+  const apiUrl = "http://ligma.sombat.cc:3000/appointment";
+  const [alldata, setAlldata] = useState([]);
 
-  const handleClick = (status) => {
-    switch (status) {
-      case "Save":
-        console.log(status);
-        console.log("Note: " + note);
-        console.log("Conclusion: " + con);
-        console.log("Feedback: " + feed);
-        navigate("/bookinginfo");
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`${apiUrl}/lookup/${bookingId}`);
+        const data = response.data[0];
+        console.log(data, "data");
+        console.log(data, "uid");
+        setAlldata(data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, [bookingId]);
+
+  useEffect(() => {
+    if (status !== "Pending") {
+      const postData = async () => {
+        try {
+          const response = await axios.post(`${apiUrl}/post`, {
+            booking_id: bookingId,
+            status: status,
+            post_note: note,
+            post_feedback: feed,
+            post_conclusion: con,
+          });
+          console.log("Response:", response.data);
+          navigate("/bookinginfo");
+        } catch (error) {
+          console.error("Error:", error);
+        }
+      };
+
+      postData();
+    }
+  }, [status, bookingId, navigate]);
+
+  const handleClick = (stat) => {
+    switch (stat) {
+      case "pass":
+        setStatus("complete");
         break;
-      case "Cancel":
-        console.log(status);
-        console.log("Cancel");
-        navigate("/bookinginfo");
+      case "not":
+        setStatus("feedback");
         break;
       default:
         break;
@@ -123,6 +160,9 @@ export default function BookingHistoryPage() {
             setCon={setCon}
             feed={feed}
             setFeed={setFeed}
+            bookingId={bookingId}
+            status={status}
+            data={alldata}
           />
         </div>
       </div>

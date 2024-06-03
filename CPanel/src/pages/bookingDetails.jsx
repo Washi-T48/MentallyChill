@@ -1,30 +1,44 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Topbar from "../components/topbar";
 import Sidebar from "../components/sidebar";
+import axios from "axios";
+import { useParams } from "react-router-dom";
 
-const Content = ({ handleClick, reasonNote, setReasonNote, handleSubmit }) => {
+const Content = ({
+  handleClick,
+  reasonNote,
+  setReasonNote,
+  handleSubmit,
+  bookingId,
+  data,
+}) => {
+  const appointmentDate = data.appointment_date
+    ? data.appointment_date.substring(0, 10)
+    : "Not available";
+
+  const appointmentTime = data.appointment_date
+    ? data.appointment_date.substring(11, 16)
+    : "Not available";
+
   return (
     <>
       <div className="flex flex-col flex-1 m-10">
         <div className="text-5xl mb-10">Booking Details</div>
         <div className="flex flex-row justify-between mb-10 p-3 bg-[#FFF3C7] border border-[#FFF3C7] border-4 rounded-lg">
-          <div className="text-4xl font-semibold">Booking No.XXXX</div>
-          <div className="text-4xl font-semibold">User ID. 001</div>
+          <div className="text-4xl font-semibold">Booking ID : {bookingId}</div>
+          <div className="text-4xl font-semibold">User ID : {data.user_id}</div>
         </div>
         <div className="flex flex-col flex-1 bg-[#FFAD4D] border border-[#FFAD4D] border-4 rounded-lg h-full ">
           <div className="p-4 flex flex-col justify-between h-full">
             <div>
               <div className="flex flex-row justify-between text-2xl font-medium mb-4">
-                <div>ผู้ให้คำปรึกษาที่ต้องการพบ : นพ.สมชาย</div>
-                <div>27/05/2567</div>
+                <div>ผู้ให้คำปรึกษาที่ต้องการพบ : {data.staff_id}</div>
+                <div>{appointmentDate}</div>
               </div>
               <div className="flex flex-row justify-between text-2xl font-medium mb-4">
-                <div>Location : Online</div>
-                <div>11:27 AM</div>
-              </div>
-              <div className="text-2xl font-medium mb-4 w-1/2">
-                Topic : Topic 2
+                <div>Topic : {data.topic}</div>
+                <div>{appointmentTime}</div>
               </div>
               <div className="flex flex-row gap-3 mb-4">
                 <div className="w-full h-full">
@@ -32,7 +46,7 @@ const Content = ({ handleClick, reasonNote, setReasonNote, handleSubmit }) => {
                     เรื่องที่ขอรับการปรึกษา :
                   </div>
                   <div className="flex w-full h-60 bg-stone-300 break-all p-2 overflow-y-auto">
-                    Hello Worldlenmgeioklgbeuigio;ehngiosdsdasdasdasdsdfnelgkeog
+                    {data.details}
                   </div>
                 </div>
                 <div className="w-full">
@@ -40,8 +54,7 @@ const Content = ({ handleClick, reasonNote, setReasonNote, handleSubmit }) => {
                     ประวัติการรับยา :
                   </div>
                   <div className="flex w-full h-60 bg-stone-300 break-all p-2 overflow-y-auto">
-                    Hello
-                    Worldlenmgeioklgbeuigio;ehngiosdsdasdasdasdsdfnelgkeogl'eogmeogjmoegeormgoe
+                    {data.medical_history}
                   </div>
                 </div>
                 <div className="w-full">
@@ -58,7 +71,7 @@ const Content = ({ handleClick, reasonNote, setReasonNote, handleSubmit }) => {
             </div>
             <div className="flex flex-row justify-between border-t-4 border-[#FFFFFF] pt-3">
               <div className="text-2xl font-medium">
-                หมายเลขโทรศัพท์ติดต่อ : xxxxxxxxxx
+                หมายเลขโทรศัพท์ติดต่อ : {data.contact}
               </div>
               <div className="flex flex-row justify-between gap-4">
                 <button
@@ -86,34 +99,65 @@ export default function BookingDetailsPage() {
   const navigate = useNavigate();
   const [status, setStatus] = useState("Pending");
   const [reasonNote, setReasonNote] = useState("");
+  const { bookingId } = useParams();
+  const apiUrl = "http://ligma.sombat.cc:3000/appointment"; // Added 'http://'
+  const [alldata, setAlldata] = useState([]);
 
-  const data = {
-    reasonNote: reasonNote,
-  };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`${apiUrl}/lookup/${bookingId}`);
+        const data = response.data[0];
+        console.log(data, "data");
+        console.log(data, "uid");
+        setAlldata(data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, [bookingId]);
+
+  useEffect(() => {
+    if (status !== "Pending") {
+      const postData = async () => {
+        try {
+          const response = await axios.post(`${apiUrl}/respond`, {
+            booking_id: bookingId,
+            status: status,
+            pre_note: reasonNote,
+          });
+          console.log("Response:", response.data);
+          navigate("/bookinginfo");
+        } catch (error) {
+          console.error("Error:", error);
+        }
+      };
+
+      postData();
+    }
+  }, [status, bookingId, reasonNote, navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const data = {
+    const noted = {
       reasonNote: reasonNote,
     };
 
-    console.log(data);
+    console.log(noted);
   };
 
-  const handleClick = (status) => {
-    switch (status) {
+  const handleClick = (stat) => {
+    switch (stat) {
       case "Feedback":
         console.log("Feedback");
-        console.log(data);
-        setStatus("Feedback");
-        navigate("/bookinginfo");
+        setStatus("feedback");
         break;
       case "Declined":
         console.log("Declined");
-        console.log(data);
-        setStatus("Declined");
-        navigate("/bookinginfo");
+        setStatus("decline");
         break;
       default:
         break;
@@ -133,6 +177,9 @@ export default function BookingDetailsPage() {
             reasonNote={reasonNote}
             setReasonNote={setReasonNote}
             handleSubmit={handleSubmit}
+            bookingId={bookingId}
+            status={status}
+            data={alldata}
           />
         </div>
       </div>

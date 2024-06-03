@@ -32,11 +32,15 @@ import axios from "axios";
 //   }
 // };
 
-const apiUrl = "http://sardines.thddns.net:7275/forms";
+const apiUrl = "http://ligma.sombat.cc:3000/forms"; // Added 'http://'
 
 const response = await axios.get(`${apiUrl}/all`);
 const dat = response.data;
-console.log(dat, "data");
+try {
+  console.log(dat, "data");
+} catch (error) {
+  console.error("Error fetching data:", error);
+}
 
 export default function DiagnosisPage() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -175,12 +179,12 @@ export default function DiagnosisPage() {
               onSelect={handleSelectLocation}
               selected={selectedFormType}
             />
-            <Dropdown
+            {/* <Dropdown
               placehold={"Result"}
               options={["Red", "Yellow", "Green"]}
               onSelect={handleSelectResult}
               selected={selectedResult}
-            />
+            /> */}
             <button
               className="py-2 px-4 bg-red-500 text-white rounded"
               onClick={clearAllFilters}
