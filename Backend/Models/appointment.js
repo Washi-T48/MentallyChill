@@ -94,7 +94,7 @@ const submitAppointment = async (uid, tel, contactMethod, medDoctor, date, time,
 
 const bookingCount = async () => {
     const count = await pool.query(
-        `SELECT COUNT(*) FROM appointment`
+        `SELECT COUNT(*) FROM appointment WHERE status NOT IN ('cenceled', 'finished')`
     );
     return (count["rows"][0]);
 }

@@ -1,7 +1,7 @@
 import express from 'express';
 import logger from '../Middleware/logger.js';
 
-import { newFormResult, deleteFormResult, lookupFormResult, userFormResult, allFormResults, submitForms } from '../Models/forms_result.js';
+import { newFormResult, deleteFormResult, lookupFormResult, userFormResult, allFormResults, submitForms, diagnosisCount } from '../Models/forms_result.js';
 
 const formsRouter = express.Router();
 
@@ -85,8 +85,8 @@ formsRouter.post("/submit", async (req, res) => {
 
 formsRouter.get("/count", async (req, res) => {
     try {
-        const diagnosisCount = await diagnosisCount();
-        res.status(200).json(diagnosisCount);
+        const submitResult = await diagnosisCount();
+        res.status(200).json(submitResult);
     }
     catch (error) {
         logger.error(error);
