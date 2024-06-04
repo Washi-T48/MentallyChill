@@ -15,6 +15,13 @@ const Content = ({
   bookingId,
   data,
 }) => {
+  const appointmentDate = data.appointment_date
+    ? data.appointment_date.substring(0, 10)
+    : "Not available";
+
+  const appointmentTime = data.appointment_date
+    ? data.appointment_date.substring(11, 16)
+    : "Not available";
   return (
     <>
       <div className="flex flex-col flex-1 m-10">
@@ -29,8 +36,8 @@ const Content = ({
               <div className="flex flex-row justify-between text-2xl font-medium mb-4">
                 <div>Topic : {data.topic}</div>
                 <div className="flex flex-row gap-3">
-                  <div>27/05/2567</div>
-                  <div>xxx</div>
+                  <div>{appointmentDate}</div>
+                  <div>{appointmentTime}</div>
                 </div>
               </div>
               <div className="grid grid-cols-2 text-2xl font-medium mb-4 pt-3 border-t-4 border-[#FFFFFF]">
