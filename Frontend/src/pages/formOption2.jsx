@@ -19,7 +19,7 @@ export default function FormOption2() {
 
   const navigate = useNavigate();
 
-  useEffect(() => {
+  /* useEffect(() => {
     liff
       .init({ liffId: "2005311386-6GQLXp7Z" })
       .then(() => {
@@ -36,7 +36,7 @@ export default function FormOption2() {
         }
       })
       .catch((err) => console.error("Error initializing LIFF:", err));
-  }, []);
+  }, []); */
 
   const onChange = (evt) => {
     const key = evt.target.name;
@@ -61,20 +61,24 @@ export default function FormOption2() {
 
       <div className="form-fill">
         <form onSubmit={onSubmit}>
+          <div className="form_uid">
+            UID: <small>{step2Data.uid}</small>
+            <br />
+          </div>
           <div className="gender-age">
-            <div className="form_uid">
-              UID: <small>{step2Data.uid}</small>
-            </div>
             <RxPerson className="ioperson" />
-            <input
+            <select
               className="gender"
-              type="text"
-              placeholder="เพศ"
               value={step2Data.gender}
               name="gender"
               onChange={onChange}
               required
-            />
+            >
+              <option value="">เพศ</option>
+              <option value="ชาย">ชาย</option>
+              <option value="หญิง">หญิง</option>
+              <option value="อื่นๆ">อื่นๆ</option>
+            </select>
 
             <input
               className="age"
@@ -89,17 +93,30 @@ export default function FormOption2() {
 
           <div className="year">
             <label>ชั้นปีการศึกษา</label>
-            <input
+            <select
               className="year"
-              type="text"
-              placeholder="ชั้นปีการศึกษา"
               value={step2Data.year}
               name="year"
               onChange={onChange}
               required
-            />
+            >
+              <option value="">เลือกชั้นปีการศึกษา</option>
+              <option value="ป.1">ป.1</option>
+              <option value="ป.2">ป.2</option>
+              <option value="ป.3">ป.3</option>
+              <option value="ป.4">ป.4</option>
+              <option value="ป.5">ป.5</option>
+              <option value="ป.6">ป.6</option>
+              {/* <option value="ม.1">ม.1</option>
+              <option value="ม.2">ม.2</option>
+              <option value="ม.3">ม.3</option>
+              <option value="ม.4">ม.4</option>
+              <option value="ม.5">ม.5</option>
+              <option value="ม.6">ม.6</option>
+              <option value="มหาวิทยาลัย">มหาวิทยาลัย</option> */}
+              <option value="others">อื่นๆ</option>
+            </select>
           </div>
-
           <div className="email">
             <label>อีเมล (Optional)</label>
             <input

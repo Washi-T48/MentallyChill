@@ -1,22 +1,23 @@
 .cf-content {
     font-size: 20px;
-    padding: 14px;
-    color: rgb(0, 0, 0);
-    border: 1px;
-    border-color: white;
-    border-style: solid;
-    background-color: white;
+    
+    color: rgb(255, 255, 255);/**/
+    /* border: 1px; */
+    /* border-color: white;
+    border-style: solid; */
+    /* background-color: white; */
     margin: 1rem auto;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    /* box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; */
     animation: myAnim 1s ease 0s 1 normal forwards;
     max-width: 400px;
     max-height: 1200px;
 }
 
 .cf-detail {
-    border: 1px solid black;
+    border: 1.5px solid rgb(255, 255, 255); /**/
     margin: 0.5rem;
-    padding: 12px;
+    padding: 16px;
+    border-radius: 20px;/**/
 }
 
 .cf-content h1 {
@@ -29,6 +30,7 @@
 
 .cf-ps {
     font-size: 12px;
+    padding-left: 12px;
 }
 
 .btn-close {
@@ -51,9 +53,13 @@
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
+.dass21-app-footer {
+    display: flex;
+    max-width: 500px;
+}
 
 
-@keyframes myAnim {
+/* @keyframes myAnim {
 	0% {
 		transform: scaleY(0);
 		transform-origin: 100% 0%;
@@ -63,4 +69,4 @@
 		transform: scaleY(1);
 		transform-origin: 100% 0%;
 	}
-}
+} */
