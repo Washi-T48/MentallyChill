@@ -2,6 +2,9 @@ import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import "./confirm_app.css";
 import Logo from "../components/logo";
+import axios from "axios";
+
+const VITE_API_PATH = import.meta.env.VITE_API_PATH
 
 export default function Confirm_app() {
   const location = useLocation();
@@ -13,9 +16,8 @@ export default function Confirm_app() {
   }
 
   const onConfirm = () => {
-    // Mock sending data to the server
     console.log("Confirmed appointment data:", appointData);
-
+    axios.post(`${VITE_API_PATH}/forms/new`, appointData);
     navigate("/finish_app");
   };
 

@@ -176,7 +176,9 @@ export default function Appoint() {
                 <option value="CRA02">
                   CRA02 ดวงแก้ว เตชะกาญจนเวช (พี่ปู)
                 </option>
-                <option value="CRA03">CRA03 วิภาพร สร้อยแสง (พี่อ้อย)</option>
+                <option value="CRA03">
+                  CRA03 วิภาพร สร้อยแสง (พี่อ้อย)
+                </option>
               </select>
             </label>
           </div>

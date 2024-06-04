@@ -3,6 +3,9 @@ import Logo from "../components/logo";
 import Radio_rate from "../components/radio_rate";
 import "./p3_dass21.css";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+
+const VITE_API_PATH = import.meta.env.VITE_API_PATH
 
 export default function P3_dass21() {
   const [selectedValues, setSelectedValues] = useState({});
@@ -31,7 +34,12 @@ export default function P3_dass21() {
         uid,
         ...scores,
       };
-      console.log(payload);
+      axios.post(`${VITE_API_PATH}/forms/submit`, {
+        uid: uid,
+        form_type: "dass21",
+        result: JSON.stringify(payload),
+      });
+      console.log("Payload:", payload);
       localStorage.setItem("dass21Scores", JSON.stringify(payload)); // Save the payload
       navigate("/cri_dass21");
     }

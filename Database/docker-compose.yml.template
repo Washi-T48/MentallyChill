@@ -1,0 +1,12 @@
+services:
+  postgres:
+    image: postgres:latest
+    container_name: "postgresql"
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: "admin"
+      POSTGRES_PASSWORD: "yourpasswordhere"
+      POSTGRES_DB: "ligma"
+    volumes:
+      - ./data:/var/lib/postgresql/data

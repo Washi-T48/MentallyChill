@@ -1,5 +1,4 @@
 import winston, { format, loggers } from 'winston';
-import util from 'util';
 
 const logger = winston.createLogger({
     // levels: winston.config.syslog.levels,
