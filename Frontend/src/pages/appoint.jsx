@@ -25,7 +25,7 @@ export default function Appoint() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    /* liff
+    liff
       .init({ liffId: "2005311386-dnvmKNjJ" })
       .then(() => {
         if (liff.isLoggedIn()) {
@@ -42,8 +42,7 @@ export default function Appoint() {
           liff.login();
         }
       })
-      .catch((err) => console.error("Error initializing LIFF:", err)); */
-
+      .catch((err) => console.error("Error initializing LIFF:", err));
     // Set the current date in YYYY-MM-DD format
     const today = new Date();
     const formattedDate = today.toISOString().split("T")[0];
