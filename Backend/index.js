@@ -3,12 +3,14 @@ import cors from 'cors';
 import dotenv from 'dotenv'
 import cookieParser from 'cookie-parser';
 
+import authRouter from './Routes/authRoutes.js';
 import userRouter from './Routes/userRoutes.js';
 import staffRouter from './Routes/staffRoutes.js';
 import formsRouter from './Routes/formsRoutes.js';
 import appointmentRouter from './Routes/appointmentRoutes.js';
 
 import logger, { consoleLogExpress } from './Middleware/logger.js';
+import authMiddleware from './Middleware/auth.js';
 
 const app = express();
 
@@ -23,17 +25,18 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
-app.use(express.urlencoded({ extended: true }));
 app.use(consoleLogExpress);
+app.use(express.urlencoded({ extended: true }));
 
 app.all("/", (req, res) => {
     res.sendStatus(200)
 });
 
-app.use("/user", userRouter);
-app.use("/staff", staffRouter);
-app.use("/forms", formsRouter);
-app.use("/appointment", appointmentRouter);
+app.use("/auth", authRouter)
+app.use("/user", authMiddleware, userRouter);
+app.use("/staff", authMiddleware, staffRouter);
+app.use("/forms", authMiddleware, formsRouter);
+app.use("/appointment", authMiddleware, appointmentRouter);
 
 app.listen(PORT, () => {
     logger.info(`Server started on port ${PORT}`);

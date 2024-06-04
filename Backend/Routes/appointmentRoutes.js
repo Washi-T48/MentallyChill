@@ -6,7 +6,7 @@ import { newAppointment, deleteAppointment, lookupAppointment, updateAppointment
 const appointmentRouter = express.Router();
 
 appointmentRouter.all("/", async (req, res) => {
-    res.sendStatus(400);
+    res.sendStatus(200);
 });
 
 //USE USER_ID FOR UID BY DEFAULT

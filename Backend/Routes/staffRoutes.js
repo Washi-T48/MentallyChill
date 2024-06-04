@@ -6,7 +6,7 @@ import { newStaff, deleteStaff, updateStaff, lookupStaff, allStaffs } from '../M
 const staffRouter = express.Router();
 
 staffRouter.all('/', async (req, res) => {
-    res.sendStatus(400);
+    res.sendStatus(200);
 });
 
 staffRouter.post('/new', async (req, res) => {
