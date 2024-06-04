@@ -7,6 +7,8 @@ import BookingHistoryPage from "./pages/bookingHistory";
 import BookingHistoryDonePage from "./pages/bookingHistoryDone";
 import SignInPage from "./pages/signin";
 
+import ProtectedRoute from "./components/protectedroute";
+
 function App() {
   return (
     <>
@@ -14,25 +16,12 @@ function App() {
         <Routes>
           <Route path="/" element={<SignInPage />} />
           <Route path="/signin" element={<SignInPage />} />
-          <Route path="/dashboard" element={<DashboardPage />} />
-          <Route path="/diagnosis" element={<DiagnosisPage />} />
-          <Route path="/bookinginfo" element={<BookingInfoPage />} />
-          <Route
-            path="/bookingdetails/:bookingId"
-            element={<BookingDetailsPage />}
-          />
-          <Route
-            path="/bookinghistory/:bookingId"
-            element={<BookingHistoryPage />}
-          />
-          <Route
-            path="/bookinghistorydone/:bookingId"
-            element={<BookingHistoryDonePage />}
-          />
-          <Route
-            path="/bookinghistorydone/:bookingId"
-            element={<BookingHistoryDonePage />}
-          />
+          <Route path="/dashboard" element={<ProtectedRoute element={DashboardPage} />} />
+          <Route path="/diagnosis" element={<ProtectedRoute element={DiagnosisPage} />} />
+          <Route path="/bookinginfo" element={<ProtectedRoute element={BookingInfoPage} />} />
+          <Route path="/bookingdetails/:bookingId" element={<ProtectedRoute element={BookingDetailsPage} />} />
+          <Route path="/bookinghistory/:bookingId" element={<ProtectedRoute element={BookingHistoryPage} />} />
+          <Route path="/bookinghistorydone/:bookingId" element={<ProtectedRoute element={BookingHistoryDonePage} />} />
         </Routes>
       </BrowserRouter>
     </>
