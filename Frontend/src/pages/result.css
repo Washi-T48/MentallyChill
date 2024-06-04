@@ -74,7 +74,7 @@
 }
 
 .low {
-    background-color: #8bc34a;
+    background-color: #4caf50;
     color: white;
 }
 
@@ -84,7 +84,7 @@
 }
 
 .high {
-    background-color: #ff9800;
+    background-color: #f44336;
     color: white;
 }
 
@@ -95,13 +95,14 @@
 
 .dass21-result-footer {
     display: flex;
+    flex-direction: row;
     padding: 1rem 0.5rem;
     max-width: 400px;
-    flex-direction: column-reverse;
     flex-wrap: wrap;
     align-content: center;
     align-items: center;
     gap: 1.5rem;
+    justify-content: center;
 }
 
 .dass21-result-content .btn-next,

@@ -1,8 +1,22 @@
 import "./remark.css";
-import React from "react";
+import React, { useEffect } from "react";
 import Logo from "../components/logo";
 import Remark2 from "./remark2";
+import liff from "@line/liff";
 export default function Remark() {
+  /* useEffect(() => {
+    liff
+      .init({ liffId: "2005311386-9El7MZb5" })
+      .then(() => {
+        if (liff.isLoggedIn()) {
+          console.log("logged in");
+        } else {
+          liff.login();
+        }
+      })
+      .catch((err) => console.error("Error initializing LIFF:", err));
+  }, []); */
+
   return (
     <div className="page">
       <Logo />

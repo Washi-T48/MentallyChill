@@ -31,7 +31,7 @@ export default function Radio_rate({
       0
       <Radio
         {...controlProps("0")}
-        sx={{ "& .MuiSvgIcon-root": { fontSize: 20 } }}
+        sx={{ "& .MuiSvgIcon-root": { fontSize: 24 } }}
       />
       <Radio
         {...controlProps("1")}
@@ -39,11 +39,11 @@ export default function Radio_rate({
       />
       <Radio
         {...controlProps("2")}
-        sx={{ "& .MuiSvgIcon-root": { fontSize: 28 } }}
+        sx={{ "& .MuiSvgIcon-root": { fontSize: 24 } }}
       />
       <Radio
         {...controlProps("3")}
-        sx={{ "& .MuiSvgIcon-root": { fontSize: 32 } }}
+        sx={{ "& .MuiSvgIcon-root": { fontSize: 24 } }}
       />
       3
     </div>

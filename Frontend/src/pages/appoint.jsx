@@ -25,7 +25,7 @@ export default function Appoint() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    liff
+    /* liff
       .init({ liffId: "2005311386-dnvmKNjJ" })
       .then(() => {
         if (liff.isLoggedIn()) {
@@ -42,7 +42,7 @@ export default function Appoint() {
           liff.login();
         }
       })
-      .catch((err) => console.error("Error initializing LIFF:", err));
+      .catch((err) => console.error("Error initializing LIFF:", err)); */
 
     // Set the current date in YYYY-MM-DD format
     const today = new Date();
@@ -52,6 +52,11 @@ export default function Appoint() {
 
   const onSubmit = (e) => {
     e.preventDefault();
+    // Check selected date
+    if (appointData.date < currentDate) {
+      alert("Please select a valid date.");
+      return;
+    }
     navigate("/confirm_app", { state: { appointData } });
   };
 
@@ -104,28 +109,6 @@ export default function Appoint() {
           <div className="userid">
             UID: <small>{appointData.uid}</small>
           </div>
-
-          {appointData.contactMethod !== "Google Meet" && (
-            <div className="app-tel">
-              <label>
-                หมายเลขโทรศัพท์<mark> *</mark>
-              </label>
-              <br />
-              <small>Example: 0000000000</small>
-              <br />
-              <input
-                className="app-tel"
-                type="tel"
-                placeholder="0000000000"
-                pattern="[0-9]{3}[0-9]{3}[0-9]{4}"
-                value={appointData.tel}
-                name="tel"
-                onChange={handleChange}
-                required
-              />
-            </div>
-          )}
-
           <div className="app-contact">
             <label>
               ช่องทางการติดต่อ<mark> *</mark>
@@ -155,6 +138,27 @@ export default function Appoint() {
               </ul>
             </div>
           </div>
+          {appointData.contactMethod !== "Google Meet" && (
+            <div className="app-tel">
+              <label>
+                หมายเลขโทรศัพท์<mark> *</mark>
+              </label>
+              <br />
+              <small>Example: 0000000000</small>
+              <br />
+              <input
+                className="app-tel"
+                type="tel"
+                placeholder="0000000000"
+                pattern="[0-9]{3}[0-9]{3}[0-9]{4}"
+                value={appointData.tel}
+                name="tel"
+                onChange={handleChange}
+                required
+              />
+            </div>
+          )}
+
           <div className="app-advisor">
             <label>
               เลือกผู้ให้คำปรึกษา<mark> *</mark>

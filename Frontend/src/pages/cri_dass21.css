@@ -98,6 +98,13 @@ html {
   .p1_dass21-content h1 {
     font-size: 20px;
   }
+  
+}
+
+@media screen and (max-width: 425px) {
+  .cri_dass21-content th{
+    font-size: 14px;
+  }
 }
 
 
