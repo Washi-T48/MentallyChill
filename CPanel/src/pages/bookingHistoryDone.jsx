@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import Topbar from "../components/topbar";
-import Sidebar from "../components/sidebar";
 import axios from "axios";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import Sidebar from "../components/sidebar";
+import Topbar from "../components/topbar";
 
 const Content = ({
   handleClick,
@@ -84,13 +84,13 @@ export default function BookingHistoryDonePage() {
   const [con, setCon] = useState("");
   const [feed, setFeed] = useState("");
   const { bookingId } = useParams();
-  const apiUrl = "http://ligma.sombat.cc:3000/appointment";
+  const apiUrl = import.meta.env.VITE_API_PATH;
   const [alldata, setAlldata] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${apiUrl}/lookup/${bookingId}`);
+        const response = await axios.get(`${apiUrl}/appointment/lookup/${bookingId}`);
         const data = response.data[0];
         console.log(data, "data");
         setAlldata(data);

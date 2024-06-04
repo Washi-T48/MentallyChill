@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import Topbar from "../components/topbar";
-import Sidebar from "../components/sidebar";
 import axios from "axios";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import Sidebar from "../components/sidebar";
+import Topbar from "../components/topbar";
 
 const Content = ({
   handleClick,
@@ -97,13 +97,13 @@ export default function BookingHistoryPage() {
   const [feed, setFeed] = useState("");
   const [status, setStatus] = useState("Pending");
   const { bookingId } = useParams();
-  const apiUrl = "http://ligma.sombat.cc:3000/appointment";
+  const apiUrl = import.meta.env.VITE_API_PATH; 
   const [alldata, setAlldata] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${apiUrl}/lookup/${bookingId}`);
+        const response = await axios.get(`${apiUrl}/appointment/lookup/${bookingId}`);
         const data = response.data[0];
         console.log(data, "data");
         console.log(data, "uid");
@@ -120,7 +120,7 @@ export default function BookingHistoryPage() {
     if (status !== "Pending") {
       const postData = async () => {
         try {
-          const response = await axios.post(`${apiUrl}/post`, {
+          const response = await axios.post(`${apiUrl}/appointment/post`, {
             booking_id: bookingId,
             status: status,
             post_note: note,

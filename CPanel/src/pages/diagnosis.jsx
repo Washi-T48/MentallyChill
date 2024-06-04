@@ -1,8 +1,8 @@
-import Topbar from "../components/topbar";
-import Sidebar from "../components/sidebar";
-import Dropdown from "../components/dropdown";
-import { useState, useEffect } from "react";
 import axios from "axios";
+import { useEffect, useState } from "react";
+import Dropdown from "../components/dropdown";
+import Sidebar from "../components/sidebar";
+import Topbar from "../components/topbar";
 
 // const apiUrl = "http://sardines.thddns.net:7275/forms";
 
@@ -40,14 +40,14 @@ export default function DiagnosisPage() {
   const [formTypeData, setFormTypeData] = useState([]);
   const rowsPerPage = 10;
 
-  const apiUrl = "http://ligma.sombat.cc:3000/forms"; // Added 'http://'
+  const apiUrl = import.meta.env.VITE_API_PATH;
 
   const formtypeList = formTypeData.map((item) => item.forms_type);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${apiUrl}/all`);
+        const response = await axios.get(`${apiUrl}/forms/all`);
         setData(response.data);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -56,7 +56,7 @@ export default function DiagnosisPage() {
 
     const fetchform = async () => {
       try {
-        const response = await axios.get(`${apiUrl}/type`);
+        const response = await axios.get(`${apiUrl}/forms/type`);
         setFormTypeData(response.data);
         console.log(response.data);
       } catch (error) {

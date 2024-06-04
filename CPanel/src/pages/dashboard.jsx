@@ -1,7 +1,7 @@
-import Topbar from "../components/topbar";
-import Sidebar from "../components/sidebar";
-import { useState, useEffect } from "react";
 import axios from "axios";
+import { useEffect, useState } from "react";
+import Sidebar from "../components/sidebar";
+import Topbar from "../components/topbar";
 
 export default function DashboardPage() {
   const [bookingdata, setBookingData] = useState([]);
@@ -11,12 +11,13 @@ export default function DashboardPage() {
   const [lowCount, setLowCount] = useState(0);
   const [mediumCount, setMediumCount] = useState(0);
   const [highCount, setHighCount] = useState(0);
+  const apiUrl = import.meta.env.VITE_API_PATH;
 
   useEffect(() => {
     const fetchDiagData = async () => {
       try {
         const response = await axios.get(
-          `http://ligma.sombat.cc:3000/forms/all`
+          `${apiUrl}/forms/all`
         );
         setDiagData(response.data);
       } catch (error) {
@@ -27,7 +28,7 @@ export default function DashboardPage() {
     const fetchCountDiag = async () => {
       try {
         const response = await axios.get(
-          `http://ligma.sombat.cc:3000/forms/count`
+          `${apiUrl}/forms/count`
         );
         const data = response.data.count;
         setCountDiag(data);
@@ -39,7 +40,7 @@ export default function DashboardPage() {
     const fetchBookingData = async () => {
       try {
         const response = await axios.get(
-          `http://ligma.sombat.cc:3000/appointment/all`
+          `${apiUrl}/appointment/all`
         );
         setBookingData(response.data);
       } catch (error) {
@@ -50,7 +51,7 @@ export default function DashboardPage() {
     const fetchCountBooking = async () => {
       try {
         const response = await axios.get(
-          `http://ligma.sombat.cc:3000/appointment/count`
+          `${apiUrl}/appointment/count`
         );
         const data = response.data.count;
         setCountBooking(data);
