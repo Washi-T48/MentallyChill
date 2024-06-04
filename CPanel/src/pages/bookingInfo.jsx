@@ -133,7 +133,7 @@ export default function BookingInfoPage() {
                 selected={selectedStatus}
               />
               <button
-                className="py-2 px-4 bg-red-500 rounded"
+                className="py-2 px-4 bg-red-500 rounded text-white"
                 onClick={clearAllFilters}
               >
                 Clear All Filters
