@@ -6,7 +6,6 @@ import BookingDetailsPage from "./pages/bookingDetails";
 import BookingHistoryPage from "./pages/bookingHistory";
 import BookingHistoryDonePage from "./pages/bookingHistoryDone";
 import SignInPage from "./pages/signin";
-import Topbar from "./components/topbar";
 
 function App() {
   return (
