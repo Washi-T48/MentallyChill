@@ -1,18 +1,17 @@
-import { useNavigate } from "react-router-dom";
-import Topbar from "../components/topbar";
-import Sidebar from "../components/sidebar";
-import Dropdown from "../components/dropdown";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { IoChatboxEllipsesSharp } from "react-icons/io5";
 import {
-  MdOutlineCheckBoxOutlineBlank,
   MdOutlineCheckBox,
+  MdOutlineCheckBoxOutlineBlank,
   MdOutlineIndeterminateCheckBox,
 } from "react-icons/md";
-import { IoChatboxEllipsesSharp } from "react-icons/io5";
-import { useState, useEffect } from "react";
-import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import Dropdown from "../components/dropdown";
+import Sidebar from "../components/sidebar";
+import Topbar from "../components/topbar";
 
-const apiUrl = "http://ligma.sombat.cc:3000/appointment"; // Added 'http://'
-
+const apiUrl = import.meta.env.VITE_API_PATH;
 export default function BookingInfoPage() {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
@@ -28,7 +27,7 @@ export default function BookingInfoPage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${apiUrl}/all`);
+        const response = await axios.get(`${apiUrl}/appointment/all`);
         setData(response.data);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -37,7 +36,7 @@ export default function BookingInfoPage() {
 
     const fetchtopic = async () => {
       try {
-        const response = await axios.get(`${apiUrl}/topic`);
+        const response = await axios.get(`${apiUrl}/appointment/topic`);
         setTopicData(response.data);
       } catch (error) {
         console.error("Error fetching data:", error);
