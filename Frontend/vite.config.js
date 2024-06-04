@@ -7,7 +7,4 @@ export default defineConfig({
   optimizeDeps: {
     include: ['@emotion/styled', '@emotion/react'],
   },
-  server: {
-    port: 80,
-  }
 });
