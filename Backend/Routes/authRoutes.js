@@ -34,7 +34,7 @@ authRouter.post('/login', async (req, res) => {
     }
 });
 
-authRouter.post('/register', authMiddleware, async (req, res) => {
+authRouter.post('/register', async (req, res) => {
     try {
         const { staff_id, password } = req.body;
         if (!staff_id || !password) { return res.sendStatus(400) }
