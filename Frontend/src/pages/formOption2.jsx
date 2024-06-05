@@ -19,7 +19,7 @@ export default function FormOption2() {
 
   const navigate = useNavigate();
 
-  /* useEffect(() => {
+  useEffect(() => {
     liff
       .init({ liffId: "2005311386-6GQLXp7Z" })
       .then(() => {
@@ -36,7 +36,7 @@ export default function FormOption2() {
         }
       })
       .catch((err) => console.error("Error initializing LIFF:", err));
-  }, []); */
+  }, []);
 
   const onChange = (evt) => {
     const key = evt.target.name;
