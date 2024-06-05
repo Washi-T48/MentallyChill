@@ -7,4 +7,4 @@ COPY package*.json ./
 RUN npm install
 COPY . .
 EXPOSE 80
-ENTRYPOINT [ "npm", "run", "start"]
+ENTRYPOINT [ "npm", "run", "dev"]
