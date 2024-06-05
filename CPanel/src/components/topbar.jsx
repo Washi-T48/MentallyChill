@@ -1,9 +1,14 @@
-import { useNavigate } from "react-router-dom";
+import axios from "./axioscreds";
 
 export default function Topbar() {
-  const navigate = useNavigate();
-  const gotoSignIn = () => {
-    navigate("/signin");
+  const onLogout = () => {
+    axios.post("/auth/logout")
+      .then(() => {
+        window.location.href = "/";
+      })
+      .catch(error => {
+        console.error("Error logging out:", error);
+      });
   };
 
   return (
@@ -15,7 +20,7 @@ export default function Topbar() {
         <h1 className="text-2xl font-bold text-[#FFFFFF]">Admin</h1>
         <button
           className="ml-4 text-lg mr-5 border border-4 border-[#FFFFFF] bg-[#FFFFFF] p-1 rounded-xl"
-          onClick={gotoSignIn}
+          onClick={onLogout}
         >
           Logout
         </button>

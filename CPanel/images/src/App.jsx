@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route , Navigate} from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import DashboardPage from './pages/dashboard';
 import DiagnosisPage from './pages/diagnosis';
 import BookingInfoPage from "./pages/bookingInfo";
@@ -7,11 +7,11 @@ import BookingHistoryPage from "./pages/bookingHistory";
 import BookingHistoryDonePage from "./pages/bookingHistoryDone";
 
 function App() {
-  return (  
+  return (
     <>
       <BrowserRouter>
         <Routes>
-        <Route path='/' element={<DashboardPage />} />
+          <Route path='/' element={<DashboardPage />} />
           <Route path='/dashboard' element={<DashboardPage />} />
           <Route path='/diagnosis' element={<DiagnosisPage />} />
           <Route path='/bookinginfo' element={<BookingInfoPage />} />

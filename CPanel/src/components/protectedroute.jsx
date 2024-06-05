@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import { Navigate } from "react-router-dom";
-import axios from "axios";
+import axios from "./axioscreds";
 
 const isAuthenticated = async () => {
     try {
-        const response = await axios.get(import.meta.env.VITE_API_PATH + "/auth/check", { withCredentials: true });
+        const response = await axios.get("/auth/check");
         return response.status === 200;
     } catch (err) {
         return false;

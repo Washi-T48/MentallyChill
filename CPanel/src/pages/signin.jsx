@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import axios from "../components/axioscreds";
 
 export default function SignInPage() {
   useEffect(() => {
@@ -14,12 +15,17 @@ export default function SignInPage() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.target);
-    console.log({
-      username: data.get("username"),
-      password: data.get("password"),
-    });
+    axios.post("/auth/login", {
+      staff_id: data.get("username"),
+      password: data.get("password")
+    })
+      .then(() => {
+        navigate("/dashboard");
+      })
+      .catch(error => {
+        window.alert("Invalid username or password. Please try again.");
+      });
     event.target.reset();
-    navigate("/dashboard");
   };
 
   return (

@@ -1,19 +1,10 @@
-import axios from "axios";
+import axios from "../components/axioscreds";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Sidebar from "../components/sidebar";
 import Topbar from "../components/topbar";
 
-const Content = ({
-  handleClick,
-  note,
-  setNote,
-  con,
-  setCon,
-  feed,
-  setFeed,
-  bookingId,
-  data,
+const Content = ({ handleClick, note, setNote, con, setCon, feed, setFeed, bookingId, data,
 }) => {
   const appointmentDate = data.appointment_date
     ? data.appointment_date.substring(0, 10)
@@ -84,13 +75,12 @@ export default function BookingHistoryDonePage() {
   const [con, setCon] = useState("");
   const [feed, setFeed] = useState("");
   const { bookingId } = useParams();
-  const apiUrl = import.meta.env.VITE_API_PATH;
   const [alldata, setAlldata] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${apiUrl}/appointment/lookup/${bookingId}`);
+        const response = await axios.get(`/appointment/lookup/${bookingId}`);
         const data = response.data[0];
         console.log(data, "data");
         setAlldata(data);
