@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
+import axios from "./axioscreds";
 
 const Count = () => {
   const [data, setData] = useState([]);
@@ -11,9 +11,7 @@ const Count = () => {
     // Fetch data from the API using axios
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          `http://ligma.sombat.cc:3000/forms/all`
-        );
+        const response = await axios.get(`/forms/all`);
         setData(response.data);
       } catch (error) {
         console.error("Error fetching data", error);

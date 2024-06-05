@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "../components/axioscreds";
 import { useEffect, useState } from "react";
 import Dropdown from "../components/dropdown";
 import Sidebar from "../components/sidebar";
@@ -40,14 +40,12 @@ export default function DiagnosisPage() {
   const [formTypeData, setFormTypeData] = useState([]);
   const rowsPerPage = 10;
 
-  const apiUrl = import.meta.env.VITE_API_PATH;
-
   const formtypeList = formTypeData.map((item) => item.forms_type);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${apiUrl}/forms/all`);
+        const response = await axios.get(`/forms/all`);
         setData(response.data);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -56,7 +54,7 @@ export default function DiagnosisPage() {
 
     const fetchform = async () => {
       try {
-        const response = await axios.get(`${apiUrl}/forms/type`);
+        const response = await axios.get(`/forms/type`);
         setFormTypeData(response.data);
         console.log(response.data);
       } catch (error) {
@@ -149,9 +147,8 @@ export default function DiagnosisPage() {
               {paginatedData.map((row, index) => (
                 <tr
                   key={index}
-                  className={`transition ease-in-out duration-150 border-2 ${
-                    index % 2 === 0 ? "bg-zinc-200" : "bg-gray-300"
-                  }
+                  className={`transition ease-in-out duration-150 border-2 ${index % 2 === 0 ? "bg-zinc-200" : "bg-gray-300"
+                    }
                    `}
                 >
                   <td className="py-2 px-4 text-center text-xl">

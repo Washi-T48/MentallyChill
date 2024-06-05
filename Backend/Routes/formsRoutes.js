@@ -15,7 +15,7 @@ import {
 const formsRouter = express.Router();
 
 formsRouter.all("/", async (req, res) => {
-    res.sendStatus(400);
+    res.sendStatus(200);
 });
 
 //USE USER_ID FOR UID BY DEFAULT

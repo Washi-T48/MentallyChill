@@ -1,17 +1,12 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { IoChatboxEllipsesSharp } from "react-icons/io5";
-import {
-  MdOutlineCheckBox,
-  MdOutlineCheckBoxOutlineBlank,
-  MdOutlineIndeterminateCheckBox,
-} from "react-icons/md";
+import { MdOutlineCheckBox, MdOutlineCheckBoxOutlineBlank, MdOutlineIndeterminateCheckBox, } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import Dropdown from "../components/dropdown";
 import Sidebar from "../components/sidebar";
 import Topbar from "../components/topbar";
 
-const apiUrl = import.meta.env.VITE_API_PATH;
 export default function BookingInfoPage() {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
@@ -27,7 +22,7 @@ export default function BookingInfoPage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${apiUrl}/appointment/all`);
+        const response = await axios.get(`/appointment/all`);
         setData(response.data);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -36,7 +31,7 @@ export default function BookingInfoPage() {
 
     const fetchtopic = async () => {
       try {
-        const response = await axios.get(`${apiUrl}/appointment/topic`);
+        const response = await axios.get(`/appointment/topic`);
         setTopicData(response.data);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -177,13 +172,11 @@ export default function BookingInfoPage() {
             {paginatedData.map((row, index) => (
               <tr
                 key={index}
-                className={`transition ease-in-out duration-150 border-2 ${
-                  index % 2 === 0 ? "bg-zinc-200" : "bg-gray-300"
-                } ${
-                  row.status === "decline"
+                className={`transition ease-in-out duration-150 border-2 ${index % 2 === 0 ? "bg-zinc-200" : "bg-gray-300"
+                  } ${row.status === "decline"
                     ? "hover:cursor-default"
                     : "hover:bg-gray-500 hover:text-white hover:cursor-pointer"
-                }`}
+                  }`}
                 onClick={() => gotoDetail(row.status, row.booking_id)}
               >
                 <td className="pl-24 text-center text-3xl">

@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "../components/axioscreds";
 import { useEffect, useState } from "react";
 import Sidebar from "../components/sidebar";
 import Topbar from "../components/topbar";
@@ -11,13 +11,12 @@ export default function DashboardPage() {
   const [lowCount, setLowCount] = useState(0);
   const [mediumCount, setMediumCount] = useState(0);
   const [highCount, setHighCount] = useState(0);
-  const apiUrl = import.meta.env.VITE_API_PATH;
 
   useEffect(() => {
     const fetchDiagData = async () => {
       try {
         const response = await axios.get(
-          `${apiUrl}/forms/all`
+          `/forms/all`
         );
         setDiagData(response.data);
       } catch (error) {
@@ -28,7 +27,7 @@ export default function DashboardPage() {
     const fetchCountDiag = async () => {
       try {
         const response = await axios.get(
-          `${apiUrl}/forms/count`
+          `/forms/count`
         );
         const data = response.data.count;
         setCountDiag(data);
@@ -40,7 +39,7 @@ export default function DashboardPage() {
     const fetchBookingData = async () => {
       try {
         const response = await axios.get(
-          `${apiUrl}/appointment/all`
+          `/appointment/all`
         );
         setBookingData(response.data);
       } catch (error) {
@@ -51,7 +50,7 @@ export default function DashboardPage() {
     const fetchCountBooking = async () => {
       try {
         const response = await axios.get(
-          `${apiUrl}/appointment/count`
+          `/appointment/count`
         );
         const data = response.data.count;
         setCountBooking(data);

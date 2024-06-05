@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "../components/axioscreds";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Sidebar from "../components/sidebar";
@@ -99,13 +99,12 @@ export default function BookingDetailsPage() {
   const [status, setStatus] = useState("Pending");
   const [reasonNote, setReasonNote] = useState("");
   const { bookingId } = useParams();
-  const apiUrl = import.meta.env.VITE_API_PATH;
   const [alldata, setAlldata] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${apiUrl}/appointment/lookup/${bookingId}`);
+        const response = await axios.get(`/appointment/lookup/${bookingId}`);
         const data = response.data[0];
         console.log(data, "data");
         console.log(data, "uid");
@@ -122,7 +121,7 @@ export default function BookingDetailsPage() {
     if (status !== "Pending") {
       const postData = async () => {
         try {
-          const response = await axios.post(`${apiUrl}/appointment/respond`, {
+          const response = await axios.post(`/appointment/respond`, {
             booking_id: bookingId,
             status: status,
             pre_note: reasonNote,
