@@ -1,10 +1,10 @@
 # docker build -t cpanel .
-# docker run -p 5173:5173 -d cpanel
+# docker run -p 80:80 -d cpanel
 
 FROM node:latest
 WORKDIR /usr/src/app
 COPY package*.json ./
 RUN npm install
 COPY . .
-EXPOSE 5173
+EXPOSE 80
 ENTRYPOINT [ "npm", "run", "start"]
