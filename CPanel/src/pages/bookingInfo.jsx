@@ -149,7 +149,7 @@ export default function BookingInfoPage() {
             </div>
             <div className="flex flex-row items-center gap-3 text-xl justify-start">
               <MdOutlineIndeterminateCheckBox className="text-3xl bg-red-400" />
-              =<div>ปฎิเสธ</div>
+              =<div>ปฏิเสธ</div>
             </div>
           </div>
         </div>

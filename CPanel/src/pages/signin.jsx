@@ -38,7 +38,7 @@ export default function SignInPage() {
             alt="Your Company"
           />
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-            Sign in to your account
+            ลงชื่อเข้าสู่ระบบ
           </h2>
         </div>
 
@@ -49,7 +49,7 @@ export default function SignInPage() {
                 htmlFor="username"
                 className="block text-sm font-medium leading-6 text-gray-900"
               >
-                Username
+                ชื่อผู้ใช้
               </label>
               <div className="mt-2">
                 <input
@@ -69,7 +69,7 @@ export default function SignInPage() {
                   htmlFor="password"
                   className="block text-sm font-medium leading-6 text-gray-900"
                 >
-                  Password
+                  รหัสผ่าน
                 </label>
               </div>
               <div className="mt-2">
@@ -89,7 +89,7 @@ export default function SignInPage() {
                 type="submit"
                 className="mt-12 flex w-full justify-center rounded-md bg-[#003087] px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-[#0049CC] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
-                Sign in
+                เข้าสู่ระบบ
               </button>
             </div>
           </form>
