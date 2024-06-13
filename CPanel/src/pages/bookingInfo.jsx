@@ -157,7 +157,7 @@ export default function BookingInfoPage() {
           <thead>
             <tr className="bg-[#003087] text-white">
               <th className="py-2 px-4 text-3xl text-center rounded-tl-xl">
-                Status
+                สถานะ
               </th>
               <th className="py-2 px-4 text-3xl text-center">วันที่</th>
               <th className="py-2 px-4 text-3xl text-center">หัวข้อ</th>
