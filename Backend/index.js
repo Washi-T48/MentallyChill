@@ -42,10 +42,10 @@ app.all("/", (req, res) => {
 });
 
 app.use("/auth", authRouter)
-app.use("/user", userRouter);
-app.use("/staff", staffRouter);
-app.use("/forms", formsRouter);
-app.use("/appointment", appointmentRouter);
+app.use("/user", authMiddleware, userRouter);
+app.use("/staff", authMiddleware, staffRouter);
+app.use("/forms", authMiddleware, formsRouter);
+app.use("/appointment", authMiddleware, appointmentRouter);
 
 app.listen(PORT, () => {
     logger.info(`Server started on port ${PORT}`);
