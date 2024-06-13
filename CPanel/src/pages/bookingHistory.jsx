@@ -25,24 +25,24 @@ const Content = ({
   return (
     <>
       <div className="flex flex-col flex-1 m-10">
-        <div className="text-5xl mb-10">Booking History</div>
+        <div className="text-5xl mb-10">ประวัติการจอง</div>
         <div className="flex flex-row justify-between mb-10 p-3 bg-[#FFF3C7] border border-[#FFF3C7] border-4 rounded-lg">
-          <div className="text-4xl font-semibold">Booking ID : {bookingId}</div>
-          <div className="text-4xl font-semibold">User ID : {data.user_id}</div>
+          <div className="text-4xl font-semibold">เลขที่การจอง : {bookingId}</div>
+          <div className="text-4xl font-semibold">เลขที่ผู้ใช้ : {data.user_id}</div>
         </div>
         <div className="flex flex-col flex-1 bg-[#FFAD4D] border border-[#FFAD4D] border-4 rounded-lg h-full ">
           <div className="p-4 flex flex-col justify-between h-full">
             <div>
               <div className="flex flex-row justify-between text-2xl font-medium mb-4">
-                <div>Topic : {data.topic}</div>
+                <div>หัวข้อ : {data.topic}</div>
                 <div className="flex flex-row gap-3">
                   <div>{appointmentDate}</div>
                   <div>{appointmentTime}</div>
                 </div>
               </div>
               <div className="grid grid-cols-2 text-2xl font-medium mb-4 pt-3 border-t-4 border-[#FFFFFF]">
-                <div>Note</div>
-                <div>Personal Feedback</div>
+                <div>โน้ต</div>
+                <div>ความคิดเห็นส่วนตัว</div>
               </div>
               <div className="flex flex-row gap-3 mb-4">
                 <div className="w-full">
@@ -51,7 +51,7 @@ const Content = ({
                     value={note}
                     onChange={(e) => setNote(e.target.value)}
                   />
-                  <div className="text-2xl font-medium mb-4">Conclusion</div>
+                  <div className="text-2xl font-medium mb-4">สรุปผล</div>
                   <textarea
                     className="flex w-full h-16 bg-gray-100 break-all p-2"
                     value={con}
@@ -73,13 +73,13 @@ const Content = ({
                   className="bg-[#24DB36] rounded-full px-10 py-2"
                   onClick={() => handleClick("pass")}
                 >
-                  Save
+                  บันทึก
                 </button>
                 <button
                   className="bg-[#FF0000] rounded-full px-10 py-2"
                   onClick={() => handleClick("not")}
                 >
-                  Cancel
+                  ยกเลิก
                 </button>
               </div>
             </div>

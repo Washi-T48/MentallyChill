@@ -108,11 +108,11 @@ export default function DiagnosisPage() {
     return (
       <>
         <div className="flex flex-col flex-1 m-10 relative">
-          <div className="text-5xl mb-10">Diagnosis</div>
+          <div className="text-5xl mb-10">การวินิจฉัย</div>
           <div className="flex flex-row gap-4 mb-10 items-center">
-            <div className="text-4xl">Filter : </div>
+            <div className="text-4xl">ตัวกรอง : </div>
             <Dropdown
-              placehold={"Form Type"}
+              placehold={"ประเภทแบบฟอร์ม"}
               options={formtypeList}
               onSelect={handleSelectLocation}
               selected={selectedFormType}
@@ -127,19 +127,19 @@ export default function DiagnosisPage() {
               className="py-2 px-4 bg-red-500 text-white rounded"
               onClick={clearAllFilters}
             >
-              Clear All Filters
+              ล้างการกรอง
             </button>
           </div>
           <table className="w-full">
             <thead>
               <tr className="bg-[#003087] text-white">
                 <th className="py-2 px-4 text-3xl text-center rounded-tl-xl">
-                  Date
+                  วันที่
                 </th>
-                <th className="py-2 px-4 text-3xl text-center ">Form Type</th>
-                <th className="py-2 px-4 text-3xl text-center ">Result</th>
+                <th className="py-2 px-4 text-3xl text-center ">ประเภทแบบฟอร์ม</th>
+                <th className="py-2 px-4 text-3xl text-center ">ผลการวินิจฉัย</th>
                 <th className="py-2 px-4 text-3xl text-center rounded-tr-xl">
-                  UID
+                  เลขที่ผู้ใช้
                 </th>
               </tr>
             </thead>
@@ -176,19 +176,19 @@ export default function DiagnosisPage() {
           </table>
           <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 flex justify-center w-full">
             <button
-              className="py-2 px-4 mx-2 bg-gray-200 rounded"
+              className="py-2 px-4 mx-2 bg-[#003087] text-white rounded"
               onClick={handlePrevPage}
               disabled={currentPage === 1}
             >
-              Previous
+              ก่อนหน้า
             </button>
             <span className="py-2 px-4 mx-2">{`Page ${currentPage} of ${totalPages}`}</span>
             <button
-              className="py-2 px-4 mx-2 bg-gray-200 rounded"
+              className="py-2 px-4 mx-2 bg-[#003087] text-white rounded"
               onClick={handleNextPage}
               disabled={currentPage === totalPages}
             >
-              Next
+              ถัดไป
             </button>
           </div>
         </div>

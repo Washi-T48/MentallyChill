@@ -87,7 +87,7 @@ export default function Sidebar() {
                 : "hover:bg-gray-300"
             }`}
           >
-            Dashboard
+            แผงควบคุม
           </div>
           <div
             onClick={() => checkActive("diagnosis")}
@@ -97,7 +97,7 @@ export default function Sidebar() {
                 : "hover:bg-gray-300"
             }`}
           >
-            Diagnosis
+            การวินิจฉัย
           </div>
           <div
             onClick={() => checkActive("booking")}
@@ -105,7 +105,7 @@ export default function Sidebar() {
               isBookingActive ? "bg-[#003087] text-white" : "hover:bg-gray-300"
             }`}
           >
-            Booking info
+            การจอง
           </div>
         </div>
       </div>

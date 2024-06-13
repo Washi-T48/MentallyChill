@@ -16,31 +16,31 @@ const Content = ({ handleClick, note, setNote, con, setCon, feed, setFeed, booki
   return (
     <>
       <div className="m-10 w-full flex flex-col">
-        <div className="text-5xl mb-10">Booking History Done</div>
+        <div className="text-5xl mb-10">ประวัติการจอง</div>
         <div className="flex flex-row justify-between text-4xl bg-[#FFF3C7] p-3 rounded-lg border border-4 border-[#FFF3C7] mb-10">
-          <div>Booking ID : {bookingId}</div>
-          <div className="col-start-3">User ID : {data.user_id}</div>
+          <div>เลขที่การจอง : {bookingId}</div>
+          <div className="col-start-3">เลขที่ผู้ใช้ : {data.user_id}</div>
         </div>
         <div className="flex flex-col flex-1 bg-[#FFAD4D] border border-[#FFAD4D] border-4 rounded-lg h-full ">
           <div className="p-4 flex flex-col justify-between h-full">
             <div>
               <div className="flex flex-row justify-between text-2xl font-medium mb-4">
-                <div>Topic : {data.topic}</div>
+                <div>หัวข้อ : {data.topic}</div>
                 <div className="flex flex-row gap-3">
                   <div>{appointmentDate}</div>
                   <div>{appointmentTime}</div>
                 </div>
               </div>
               <div className="grid grid-cols-2 text-2xl font-medium mb-4 pt-3 border-t-4 border-[#FFFFFF]">
-                <div>Note</div>
-                <div>Personal Feedback</div>
+                <div>โน้ต</div>
+                <div>ความคิดเห็นส่วนตัว</div>
               </div>
               <div className="flex flex-row gap-3 mb-4">
                 <div className="w-full">
                   <div className="flex w-full h-60 bg-gray-300 break-all p-2 mb-2 overflow-y-auto">
                     {data.post_note}
                   </div>
-                  <div className="text-2xl font-medium mb-4">Conclusion</div>
+                  <div className="text-2xl font-medium mb-4">สรุปผล</div>
                   <div className="flex w-full h-16 bg-gray-300 break-all p-2 overflow-y-auto">
                     {data.post_conclusion}
                   </div>
@@ -58,7 +58,7 @@ const Content = ({ handleClick, note, setNote, con, setCon, feed, setFeed, booki
                   className="bg-[#FF0000] rounded-full px-10 py-2"
                   onClick={() => handleClick()}
                 >
-                  Back
+                  ย้อนกลับ
                 </button>
               </div>
             </div>

@@ -111,17 +111,17 @@ export default function BookingInfoPage() {
       <div className="flex flex-col flex-1 m-10 relative w-full">
         <div className="grid grid-cols-2">
           <div>
-            <div className="text-5xl mb-10">Booking Information</div>
+            <div className="text-5xl mb-10">การจอง</div>
             <div className="flex flex-row gap-4 mb-10 items-center">
               <div className="text-4xl">Filter : </div>
               <Dropdown
-                placehold={"Topic"}
+                placehold={"หัวข้อ"}
                 options={topicList}
                 onSelect={handleSelectTopic}
                 selected={selectedTopic}
               />
               <Dropdown
-                placehold={"Status"}
+                placehold={"สถานะ"}
                 options={["pending", "feedback", "complete", "decline"]}
                 onSelect={handleSelectStatus}
                 selected={selectedStatus}
@@ -130,26 +130,26 @@ export default function BookingInfoPage() {
                 className="py-2 px-4 bg-red-500 rounded text-white"
                 onClick={clearAllFilters}
               >
-                Clear All Filters
+                ล้างการกรอง
               </button>
             </div>
           </div>
           <div className="grid grid-col justify-end mb-5">
             <div className="flex flex-row items-center gap-3 text-xl justify-start">
               <MdOutlineCheckBoxOutlineBlank className="text-3xl bg-amber-300" />
-              =<div>Pending</div>
+              =<div>รอการยืนยัน</div>
             </div>
             <div className="flex flex-row items-center gap-3 text-xl justify-start">
               <IoChatboxEllipsesSharp className="text-3xl bg-violet-400" />=
-              <div>Feedback</div>
+              <div>รอการสรุปผล</div>
             </div>
             <div className="flex flex-row items-center gap-3 text-xl justify-start">
               <MdOutlineCheckBox className="text-3xl bg-green-400" />=
-              <div>Complete</div>
+              <div>เสร็จสิ้น</div>
             </div>
             <div className="flex flex-row items-center gap-3 text-xl justify-start">
               <MdOutlineIndeterminateCheckBox className="text-3xl bg-red-400" />
-              =<div>Decline</div>
+              =<div>ปฎิเสธ</div>
             </div>
           </div>
         </div>
@@ -159,12 +159,12 @@ export default function BookingInfoPage() {
               <th className="py-2 px-4 text-3xl text-center rounded-tl-xl">
                 Status
               </th>
-              <th className="py-2 px-4 text-3xl text-center">Date</th>
-              <th className="py-2 px-4 text-3xl text-center">Topic</th>
-              <th className="py-2 px-4 text-3xl text-center">Time</th>
-              <th className="py-2 px-4 text-3xl text-center">UID</th>
+              <th className="py-2 px-4 text-3xl text-center">วันที่</th>
+              <th className="py-2 px-4 text-3xl text-center">หัวข้อ</th>
+              <th className="py-2 px-4 text-3xl text-center">เวลา</th>
+              <th className="py-2 px-4 text-3xl text-center">เลขที่ผู้ใช้</th>
               <th className="py-2 px-4 text-3xl text-center rounded-tr-xl">
-                Booking ID
+                เลขที่การจอง
               </th>
             </tr>
           </thead>
@@ -199,19 +199,19 @@ export default function BookingInfoPage() {
         </table>
         <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 flex justify-center w-full">
           <button
-            className="py-2 px-4 mx-2 bg-gray-200 rounded"
+            className="py-2 px-4 mx-2 bg-[#003087] text-white rounded"
             onClick={handlePrevPage}
             disabled={currentPage === 1}
           >
-            Previous
+            ก่อนหน้า
           </button>
           <span className="py-2 px-4 mx-2">{`Page ${currentPage} of ${totalPages}`}</span>
           <button
-            className="py-2 px-4 mx-2 bg-gray-200 rounded"
+            className="py-2 px-4 mx-2 bg-[#003087] text-white rounded"
             onClick={handleNextPage}
             disabled={currentPage === totalPages}
           >
-            Next
+            ถัดไป
           </button>
         </div>
       </div>

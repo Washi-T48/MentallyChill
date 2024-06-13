@@ -147,37 +147,37 @@ export default function DashboardPage() {
           <div className="">
             <div className="grid grid-cols-3 gap-x-48 m-10">
               <div className="flex flex-row items-end justify-between border-4 border-sky-400 rounded-md bg-sky-400 h-full w-80 p-5">
-                <div className="text-lg text-gray-200">Booking request</div>
+                <div className="text-lg text-gray-200">คำขอการจอง</div>
                 <div className="text-7xl text-white">{countBooking}</div>
               </div>
               <div className="flex flex-row items-end justify-between border-4 border-violet-400 rounded-md bg-violet-400 h-full w-80 p-5">
-                <div className="text-lg text-gray-100">Diagnosis done</div>
+                <div className="text-lg text-gray-100">จำนวนการวินิจฉัย</div>
                 <div className="text-7xl text-white">{countDiag}</div>
               </div>
             </div>
             <div className="grid grid-cols-3 gap-x-48 mx-10 my-5 mb-20">
               <div className="flex flex-row items-end justify-between border-4 border-green-500 rounded-md bg-green-500 h-full w-80 p-5">
-                <div className="text-lg text-gray-100">Mild</div>
+                <div className="text-lg text-gray-100">ระดับปกติ</div>
                 <div className="text-7xl text-white">{lowCount}</div>
               </div>
               <div className="flex flex-row items-end justify-between border-4 border-amber-400 rounded-md bg-amber-400 h-full w-80 p-5">
-                <div className="text-lg text-gray-100">Moderate</div>
+                <div className="text-lg text-gray-100">ระดับปานกลาง</div>
                 <div className="text-7xl text-white">{mediumCount}</div>
               </div>
               <div className="flex flex-row items-end justify-between border-4 border-rose-400 rounded-md bg-rose-400 h-full w-80 p-5">
-                <div className="text-lg text-gray-100">Severe</div>
+                <div className="text-lg text-gray-100">ระดับร้ายแรง</div>
                 <div className="text-7xl text-white">{highCount}</div>
               </div>
             </div>
             <div className="grid grid-cols-2 mx-10 my-5 gap-5">
               <div className="">
-                <div className="mb-3 text-2xl">Recent Booking</div>
+                <div className="mb-3 text-2xl">การจองครั้งล่าสุด</div>
                 <table className="w-full">
                   <thead>
                     <tr className="bg-emerald-400">
-                      <th className="py-2 px-4">Booking No</th>
-                      <th className="py-2 px-4">Topic</th>
-                      <th className="py-2 px-4">Date</th>
+                      <th className="py-2 px-4">เลขที่การจอง</th>
+                      <th className="py-2 px-4">หัวข้อ</th>
+                      <th className="py-2 px-4">วันที่</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -199,13 +199,13 @@ export default function DashboardPage() {
                 </table>
               </div>
               <div>
-                <div className="mb-3 text-2xl">Recent Diagnosis</div>
+                <div className="mb-3 text-2xl">การวินิจฉัยครั้งล่าสุด</div>
                 <table className="w-full">
                   <thead>
                     <tr className="bg-sky-300">
-                      <th className="py-2 px-4">UID</th>
-                      <th className="py-2 px-4">Form Type</th>
-                      <th className="py-2 px-4">Date</th>
+                      <th className="py-2 px-4">เลขที่ผู้ใช้</th>
+                      <th className="py-2 px-4">ประเภทแบบฟอร์ม</th>
+                      <th className="py-2 px-4">วันที่</th>
                     </tr>
                   </thead>
                   <tbody>

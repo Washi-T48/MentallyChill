@@ -23,10 +23,10 @@ const Content = ({
   return (
     <>
       <div className="flex flex-col flex-1 m-10">
-        <div className="text-5xl mb-10">Booking Details</div>
+        <div className="text-5xl mb-10">รายละเอียดการจอง</div>
         <div className="flex flex-row justify-between mb-10 p-3 bg-[#FFF3C7] border border-[#FFF3C7] border-4 rounded-lg">
-          <div className="text-4xl font-semibold">Booking ID : {bookingId}</div>
-          <div className="text-4xl font-semibold">User ID : {data.user_id}</div>
+          <div className="text-4xl font-semibold">เลขที่การจอง : {bookingId}</div>
+          <div className="text-4xl font-semibold">เลขที่ผู้ใช้ : {data.user_id}</div>
         </div>
         <div className="flex flex-col flex-1 bg-[#FFAD4D] border border-[#FFAD4D] border-4 rounded-lg h-full ">
           <div className="p-4 flex flex-col justify-between h-full">
@@ -36,7 +36,7 @@ const Content = ({
                 <div>{appointmentDate}</div>
               </div>
               <div className="flex flex-row justify-between text-2xl font-medium mb-4">
-                <div>Topic : {data.topic}</div>
+                <div>หัวข้อ : {data.topic}</div>
                 <div>{appointmentTime}</div>
               </div>
               <div className="flex flex-row gap-3 mb-4">
@@ -50,14 +50,14 @@ const Content = ({
                 </div>
                 <div className="w-full">
                   <div className="text-2xl font-medium mb-4">
-                    ประวัติการรับยา :
+                    ประวัติการปรึกษาทางการแพทย์ :
                   </div>
                   <div className="flex w-full h-60 bg-stone-300 break-all p-2 overflow-y-auto">
                     {data.medical_history}
                   </div>
                 </div>
                 <div className="w-full">
-                  <div className="text-2xl font-medium mb-4">Reason / Note</div>
+                  <div className="text-2xl font-medium mb-4">โน้ต :</div>
                   <form onSubmit={handleSubmit}>
                     <textarea
                       className="flex w-full h-60 bg-gray-100 break-all p-2 overflow-y-auto"
@@ -77,13 +77,13 @@ const Content = ({
                   className="bg-[#24DB36] rounded-full px-10 py-2"
                   onClick={() => handleClick("Feedback")}
                 >
-                  Accept
+                  ยืนยัน
                 </button>
                 <button
                   className="bg-stone-500 rounded-full px-10 py-2 text-white"
                   onClick={() => handleClick("Declined")}
                 >
-                  Decline
+                  ปฏิเสธ
                 </button>
               </div>
             </div>

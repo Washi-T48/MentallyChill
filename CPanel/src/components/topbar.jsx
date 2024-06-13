@@ -22,7 +22,7 @@ export default function Topbar() {
           className="ml-4 text-lg mr-5 border border-4 border-[#FFFFFF] bg-[#FFFFFF] p-1 rounded-xl"
           onClick={onLogout}
         >
-          Logout
+          ออกจากระบบ
         </button>
       </div>
     </div>
