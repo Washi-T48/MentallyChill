@@ -159,7 +159,7 @@ export default function BookingInfoPage() {
               <th className="py-2 px-4 text-3xl text-center rounded-tl-xl">
                 สถานะ
               </th>
-              <th className="py-2 px-4 text-3xl text-center">วันที่xx</th>
+              <th className="py-2 px-4 text-3xl text-center">วันที่</th>
               <th className="py-2 px-4 text-3xl text-center">หัวข้อ</th>
               <th className="py-2 px-4 text-3xl text-center">เวลา</th>
               <th className="py-2 px-4 text-3xl text-center">เลขที่ผู้ใช้</th>
