@@ -101,24 +101,24 @@ export default function FormOption2() {
               required
             >
               <option value="">เลือกชั้นปีการศึกษา</option>
-              <option value="ป.1">ป.1</option>
+              {/* <option value="ป.1">ป.1</option>
               <option value="ป.2">ป.2</option>
               <option value="ป.3">ป.3</option>
               <option value="ป.4">ป.4</option>
               <option value="ป.5">ป.5</option>
-              <option value="ป.6">ป.6</option>
-              {/* <option value="ม.1">ม.1</option>
+              <option value="ป.6">ป.6</option> */}
+              <option value="ม.1">ม.1</option>
               <option value="ม.2">ม.2</option>
               <option value="ม.3">ม.3</option>
               <option value="ม.4">ม.4</option>
               <option value="ม.5">ม.5</option>
               <option value="ม.6">ม.6</option>
-              <option value="มหาวิทยาลัย">มหาวิทยาลัย</option> */}
-              <option value="others">อื่นๆ</option>
+              {/* <option value="มหาวิทยาลัย">มหาวิทยาลัย</option>
+              <option value="others">อื่นๆ</option> */}
             </select>
           </div>
           <div className="email">
-            <label>อีเมล (Optional)</label>
+            <label>อีเมล </label>
             <input
               className="email"
               type="email"
@@ -127,11 +127,12 @@ export default function FormOption2() {
               name="email"
               pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$"
               onChange={onChange}
+              required
             />
           </div>
 
           <div className="tel">
-            <label>เบอร์ติดต่อ (Optional)</label>
+            <label>เบอร์ติดต่อ </label>
             <input
               className="tel"
               type="tel"
@@ -140,6 +141,7 @@ export default function FormOption2() {
               value={step2Data.tel}
               name="tel"
               onChange={onChange}
+              required
             />
             <small>Ex: 0000000000</small>
           </div>
@@ -159,7 +161,7 @@ export default function FormOption2() {
           </div>
           <div className="next-btn">
             <button type="submit" className="btn btn-next">
-              Next
+              ต่อไป
             </button>
           </div>
         </form>
