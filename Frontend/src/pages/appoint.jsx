@@ -21,6 +21,7 @@ export default function Appoint() {
   const [timeSlots, setTimeSlots] = useState([]);
   const [loadingSlots, setLoadingSlots] = useState(false);
   const [currentDate, setCurrentDate] = useState("");
+  const [error, setError] = useState("");
 
   const navigate = useNavigate();
 
@@ -43,19 +44,25 @@ export default function Appoint() {
         }
       })
       .catch((err) => console.error("Error initializing LIFF:", err));
-    // Set the current date in YYYY-MM-DD format
+
     const today = new Date();
     const formattedDate = today.toISOString().split("T")[0];
     setCurrentDate(formattedDate);
   }, []);
 
+  useEffect(() => {
+    if (appointData.date && appointData.medDoctor) {
+      fetchAvailableTimeSlots();
+    }
+  }, [appointData.date, appointData.medDoctor]);
+
   const onSubmit = (e) => {
     e.preventDefault();
-    // Check selected date
     if (appointData.date < currentDate) {
-      alert("Please select a valid date.");
+      setError("Please select a valid date.");
       return;
     }
+    setError("");
     navigate("/confirm_app", { state: { appointData } });
   };
 
@@ -65,13 +72,6 @@ export default function Appoint() {
       ...prevData,
       [name]: value,
     }));
-
-    // Mock fetching available time slots when the date or doctor changes
-    if (name === "date" || name === "medDoctor") {
-      if (appointData.medDoctor && appointData.date) {
-        fetchAvailableTimeSlots();
-      }
-    }
   };
 
   const handleRadioSelect = (name, value) => {
@@ -90,7 +90,6 @@ export default function Appoint() {
 
   const fetchAvailableTimeSlots = () => {
     setLoadingSlots(true);
-    // Mock API call to fetch available time slots
     setTimeout(() => {
       setTimeSlots(["09:00", "10:00", "11:00", "13:00", "14:00"]);
       setLoadingSlots(false);
@@ -149,7 +148,7 @@ export default function Appoint() {
                 className="app-tel"
                 type="tel"
                 placeholder="0000000000"
-                pattern="[0-9]{3}[0-9]{3}[0-9]{4}"
+                pattern="[0-9]{10}"
                 value={appointData.tel}
                 name="tel"
                 onChange={handleChange}
@@ -175,9 +174,7 @@ export default function Appoint() {
                 <option value="CRA02">
                   CRA02 ดวงแก้ว เตชะกาญจนเวช (พี่ปู)
                 </option>
-                <option value="CRA03">
-                  CRA03 วิภาพร สร้อยแสง (พี่อ้อย)
-                </option>
+                <option value="CRA03">CRA03 วิภาพร สร้อยแสง (พี่อ้อย)</option>
               </select>
             </label>
           </div>
@@ -189,7 +186,7 @@ export default function Appoint() {
                 type="date"
                 name="date"
                 value={appointData.date}
-                min={currentDate} // Prevent selection of past dates
+                min={currentDate}
                 onChange={handleChange}
                 required
               />
@@ -215,7 +212,7 @@ export default function Appoint() {
           </div>
           <div className="app-topic">
             <label>
-              เรื่องที่ต้องการปรึกษา<mark> *</mark>
+              ประเด็นที่ต้องการปรึกษา<mark> *</mark>
               <br />
               <select
                 name="topic"
@@ -224,21 +221,32 @@ export default function Appoint() {
                 required
               >
                 <option value="">เลือกหัวข้อ</option>
-                <option value="TOPIC-1">TOPIC-1</option>
-                <option value="TOPIC-2">TOPIC-2</option>
-                <option value="TOPIC-3">TOPIC-3</option>
+                <option value="พัฒนาการเรียน">พัฒนาการเรียน</option>
+                <option value="สุขภาพจิตและความเครียด">
+                  สุขภาพจิตและความเครียด
+                </option>
+                <option value="ความสัมพันธ์">ความสัมพันธ์</option>
+                <option value="สถานะการเงิน">สถานะการเงิน</option>
+                <option value="ติดโทรศัพท์มือถือ / อินเตอร์เน็ต /เกมส์ / สารเสพติด">
+                  ติดโทรศัพท์มือถือ / อินเตอร์เน็ต /เกมส์ / สารเสพติด
+                </option>
+                <option value="ความยืดหยุ่นทางจิตใจ">
+                  ความยืดหยุ่นทางจิตใจ
+                </option>
+                <option value="เพศทางเลือก">เพศทางเลือก</option>
               </select>
             </label>
           </div>
           <div className="app-detail">
             <label>
-              เรื่องที่ขอรับการปรึกษา
+              รายละเอียดที่ขอรับการปรึกษา
               <br />
               <textarea
                 className="app-detail"
                 name="detail"
                 value={appointData.detail}
                 onChange={handleChange}
+                placeholder="รายละเอียด เช่น อาการที่เกิดขึ้น"
                 required
               />
             </label>
@@ -256,6 +264,8 @@ export default function Appoint() {
               />
             </label>
           </div>
+
+          {error && <p className="error-message">{error}</p>}
 
           <div className="dass21-app-footer">
             <button type="submit" className="btn btn-next">
