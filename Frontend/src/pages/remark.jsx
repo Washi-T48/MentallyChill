@@ -61,7 +61,7 @@ export default function Remark() {
       </div>
       <div className="remark-footer">
         <a href="/remark2">
-          <button className="btn btn-start">Start Evaluation</button>
+          <button className="btn btn-start">ทำแบบประเมิน</button>
         </a>
       </div>
     </div>

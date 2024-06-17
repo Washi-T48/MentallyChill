@@ -27,7 +27,7 @@ export default function Remark2() {
             navigate("../formOption1");
           }}
         >
-          Accept
+          ยอมรับ
         </button>
       </div>
     </div>

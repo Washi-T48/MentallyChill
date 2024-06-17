@@ -105,6 +105,10 @@
     justify-content: center;
 }
 
+.btn-next {
+    font-size: 14px;
+}
+
 .dass21-result-content .btn-next,
 .dass21-result-footer .btn-close {
     text-align: center;

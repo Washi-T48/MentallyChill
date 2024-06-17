@@ -73,7 +73,7 @@ export default function CRI_dass21() {
       </div>
       <div className="cri_dass21-footer">
         <button className="btn btn-result" onClick={() => navigate("/result")}>
-          See the result
+          ดูผลการประเมิน
         </button>
       </div>
     </div>
