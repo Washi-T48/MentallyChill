@@ -6,6 +6,7 @@ import axios from "axios";
 
 import Logo from "../components/logo";
 import Radio_rate from "../components/radio_rate";
+import Loading from "../components/Loading";
 
 import "./p3_dass21.css";
 
@@ -25,6 +26,7 @@ const VITE_API_PATH = import.meta.env.VITE_API_PATH;
 export default function P3_dass21() {
   const [selectedValues, setSelectedValues] = useState({});
   const [uid, setUid] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -89,21 +91,32 @@ export default function P3_dass21() {
       });
       event.preventDefault();
     } else {
+      setIsLoading(true);
       const scores = calculateScores();
       const payload = {
         uid,
         ...scores,
       };
-      axios.post(`${VITE_API_PATH}/forms/submit`, {
-        uid: uid,
-        form_type: "dass21",
-        result: JSON.stringify(payload),
-      });
-      console.log("Payload:", payload);
-      localStorage.setItem("dass21Scores", JSON.stringify(scores)); // Save the scores
-      navigate("/cri_dass21");
+      axios
+        .post(`${VITE_API_PATH}/forms/submit`, {
+          uid: uid,
+          form_type: "dass21",
+          result: JSON.stringify(payload),
+        })
+        .then(() => {
+          localStorage.setItem("dass21Scores", JSON.stringify(scores)); // Save the scores
+          navigate("/cri_dass21");
+        })
+        .catch((error) => {
+          console.error("Error submitting form:", error);
+          setIsLoading(false);
+        });
     }
   };
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <div>
@@ -144,10 +157,10 @@ export default function P3_dass21() {
         </form>
         <div className="p3_dass21-footer">
           <button className="btn btn-prev" onClick={() => navigate(-1)}>
-            ย้อนกลับ
+            Back
           </button>
           <button className="btn btn-next" onClick={handleNextClick}>
-            ส่ง
+            Submit
           </button>
         </div>
       </div>

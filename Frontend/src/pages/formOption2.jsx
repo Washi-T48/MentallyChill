@@ -4,6 +4,8 @@ import Logo from "../components/logo";
 import { useNavigate } from "react-router-dom";
 import { RxPerson } from "react-icons/rx";
 import { BsTelephoneFill } from "react-icons/bs";
+import Loading from "../components/Loading";
+
 import liff from "@line/liff";
 
 export default function FormOption2() {
@@ -16,8 +18,6 @@ export default function FormOption2() {
     tel: "",
     sos_tel: "",
   });
-
-  const navigate = useNavigate();
 
   /* useEffect(() => {
     liff
@@ -38,6 +38,10 @@ export default function FormOption2() {
       .catch((err) => console.error("Error initializing LIFF:", err));
   }, []); */
 
+  const [loading, setLoading] = useState(false);
+
+  const navigate = useNavigate();
+
   const onChange = (evt) => {
     const key = evt.target.name;
     const value = evt.target.value;
@@ -46,9 +50,17 @@ export default function FormOption2() {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log("submit value", step2Data);
-    navigate("/p1_dass21");
+    setLoading(true);
+    setTimeout(() => {
+      console.log("submit value", step2Data);
+      setLoading(false);
+      navigate("/p1_dass21");
+    }, 500);
   };
+
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <div>
