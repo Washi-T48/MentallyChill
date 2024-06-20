@@ -3,7 +3,35 @@ import "./appoint.css";
 import Logo from "../components/logo";
 import { useNavigate } from "react-router-dom";
 import CustomRadioButton from "../components/CustomRadioButton";
+import Loading from "../components/Loading";
 import liff from "@line/liff";
+
+const topics = {
+  พัฒนาการเรียน: [
+    "พัฒนาประสิทธิภาพการเรียน",
+    "การจัดการเวลา",
+    "ค้นหาศักยภาพตนเอง",
+    "สภาพแวดล้อมหรือบรรยากาศการเรียน",
+    "หมดไฟ-แรงใจในการเรียน(Burnout – Brownout)",
+  ],
+  สุขภาพจิตและความเครียด: [
+    "การเป็นที่ยอมรับ / คุณค่าในตนเอง",
+    "ความเครียดจากการเรียน-ความกดดัน-ภาระงาน",
+    "ภาวะทางอารมณ์ / ซึมเศร้า / การสูญเสีย",
+  ],
+  ความสัมพันธ์: [
+    "ความสัมพันธ์กับอาจารย์",
+    "ความสัมพันธ์กับเพื่อน",
+    "ครอบครัว",
+    "ความรัก",
+    "เพศสัมพันธ์",
+  ],
+  อื่นๆ: [],
+  สถานะการเงิน: [],
+  "ติดโทรศัพท์มือถือ / อินเตอร์เน็ต /เกมส์ / สารเสพติด": [],
+  ความยืดหยุ่นทางจิตใจ: [],
+  เพศทางเลือก: [],
+};
 
 export default function Appoint() {
   const [appointData, setAppointData] = useState({
@@ -15,11 +43,13 @@ export default function Appoint() {
     time: "",
     topic: "",
     detail: "",
+    subtopic: "",
     medHistory: "",
   });
 
   const [timeSlots, setTimeSlots] = useState([]);
   const [loadingSlots, setLoadingSlots] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [currentDate, setCurrentDate] = useState("");
   const [error, setError] = useState("");
 
@@ -63,15 +93,37 @@ export default function Appoint() {
       return;
     }
     setError("");
-    navigate("/confirm_app", { state: { appointData } });
+    setLoading(true);
+
+    // Combine subtopic and detail into one detail field
+    let combinedDetail = appointData.subtopic
+      ? `${appointData.subtopic} - ${appointData.detail}`
+      : appointData.detail;
+    let updatedAppointData = { ...appointData, detail: combinedDetail };
+
+    console.log(updatedAppointData);
+
+    setTimeout(() => {
+      setLoading(false);
+      navigate("/confirm_app", { state: { appointData: updatedAppointData } });
+    }, 1000);
   };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setAppointData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+    setAppointData((prevData) => {
+      if (name === "topic" && !hasSubtopics(value)) {
+        return {
+          ...prevData,
+          [name]: value,
+          subtopic: "",
+        };
+      }
+      return {
+        ...prevData,
+        [name]: value,
+      };
+    });
   };
 
   const handleRadioSelect = (name, value) => {
@@ -95,6 +147,12 @@ export default function Appoint() {
       setLoadingSlots(false);
     }, 1000);
   };
+
+  const hasSubtopics = (topic) => topics[topic]?.length > 0;
+
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <div>
@@ -220,23 +278,36 @@ export default function Appoint() {
                 onChange={handleChange}
                 required
               >
-                <option value="">เลือกหัวข้อ</option>
-                <option value="พัฒนาการเรียน">พัฒนาการเรียน</option>
-                <option value="สุขภาพจิตและความเครียด">
-                  สุขภาพจิตและความเครียด
-                </option>
-                <option value="ความสัมพันธ์">ความสัมพันธ์</option>
-                <option value="สถานะการเงิน">สถานะการเงิน</option>
-                <option value="ติดโทรศัพท์มือถือ / อินเตอร์เน็ต /เกมส์ / สารเสพติด">
-                  ติดโทรศัพท์มือถือ / อินเตอร์เน็ต /เกมส์ / สารเสพติด
-                </option>
-                <option value="ความยืดหยุ่นทางจิตใจ">
-                  ความยืดหยุ่นทางจิตใจ
-                </option>
-                <option value="เพศทางเลือก">เพศทางเลือก</option>
+                <option value="">เลือกประเด็นที่ต้องการปรึกษา</option>
+                {Object.keys(topics).map((topic) => (
+                  <option key={topic} value={topic}>
+                    {topic}
+                  </option>
+                ))}
               </select>
             </label>
           </div>
+          {hasSubtopics(appointData.topic) && (
+            <div className="app-detail">
+              <label>
+                ประเด็นย่อย
+                <br />
+                <select
+                  name="subtopic"
+                  value={appointData.subtopic}
+                  onChange={handleChange}
+                  required
+                >
+                  <option value="">เลือกประเด็นย่อย</option>
+                  {topics[appointData.topic].map((subtopic) => (
+                    <option key={subtopic} value={subtopic}>
+                      {subtopic}
+                    </option>
+                  ))}
+                </select>
+              </label>
+            </div>
+          )}
           <div className="app-detail">
             <label>
               รายละเอียดที่ขอรับการปรึกษา

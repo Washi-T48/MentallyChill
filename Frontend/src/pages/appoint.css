@@ -37,6 +37,10 @@
     max-height: 1400px;
 }
 
+.appoint-form p {
+    font-size: 14px;
+}
+
 .appoint-form label, .appoint-form small, .userid {
     color: white;
 }
