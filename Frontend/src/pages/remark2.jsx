@@ -35,7 +35,7 @@ export default function Remark2() {
         ถ้าได้ผลแตกต่างกันในแต่ละครั้งถือเป็นเรื่องผิดปกติ
       </div>
       <div className="remark2-footer">
-        <button className="btn btn-acc" onClick={handleAccept}>
+        <button className="btn btn-next" onClick={handleAccept}>
           ยอมรับ
         </button>
       </div>
