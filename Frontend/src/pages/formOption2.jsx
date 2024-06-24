@@ -3,9 +3,7 @@ import "./formOption2.css";
 import Logo from "../components/logo";
 import { useNavigate } from "react-router-dom";
 import { RxPerson } from "react-icons/rx";
-import { BsTelephoneFill } from "react-icons/bs";
 import Loading from "../components/Loading";
-
 import liff from "@line/liff";
 
 export default function FormOption2() {
@@ -19,28 +17,37 @@ export default function FormOption2() {
     sos_tel: "",
   });
 
-  /* useEffect(() => {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
     liff
       .init({ liffId: "2005311386-6GQLXp7Z" })
       .then(() => {
         if (liff.isLoggedIn()) {
-          liff.getProfile().then((profile) => {
-            setStep2Data((prevData) => ({
-              ...prevData,
-              uid: profile.userId,
-            }));
-            localStorage.setItem("uid", profile.userId);
-          });
+          liff
+            .getProfile()
+            .then((profile) => {
+              setStep2Data((prevData) => ({
+                ...prevData,
+                uid: profile.userId,
+              }));
+              localStorage.setItem("uid", profile.userId);
+            })
+            .catch((err) => {
+              console.error("Error getting profile:", err);
+              setError("Failed to get profile information.");
+            });
         } else {
           liff.login();
         }
       })
-      .catch((err) => console.error("Error initializing LIFF:", err));
-  }, []); */
-
-  const [loading, setLoading] = useState(false);
-
-  const navigate = useNavigate();
+      .catch((err) => {
+        console.error("Error initializing LIFF:", err);
+        setError("Failed to initialize LIFF. Please try again later.");
+      });
+  }, []);
 
   const onChange = (evt) => {
     const key = evt.target.name;
@@ -65,11 +72,12 @@ export default function FormOption2() {
   return (
     <div>
       <Logo />
-
       <div className="step-2">
         <h1>STEP 2 :</h1>
         <p>กรอกข้อมูลผู้ขอรับคำปรึกษาเบื้องต้น</p>
       </div>
+
+      {error && <p className="error-message">{error}</p>}
 
       <div className="form-fill">
         <form onSubmit={onSubmit}>
@@ -85,6 +93,7 @@ export default function FormOption2() {
               name="gender"
               onChange={onChange}
               required
+              aria-label="Gender"
             >
               <option value="">เพศ</option>
               <option value="ชาย">ชาย</option>
@@ -100,6 +109,7 @@ export default function FormOption2() {
               name="age"
               onChange={onChange}
               required
+              aria-label="Age"
             />
           </div>
 
@@ -111,24 +121,18 @@ export default function FormOption2() {
               name="year"
               onChange={onChange}
               required
+              aria-label="Year"
             >
               <option value="">เลือกชั้นปีการศึกษา</option>
-              {/* <option value="ป.1">ป.1</option>
-              <option value="ป.2">ป.2</option>
-              <option value="ป.3">ป.3</option>
-              <option value="ป.4">ป.4</option>
-              <option value="ป.5">ป.5</option>
-              <option value="ป.6">ป.6</option> */}
               <option value="ม.1">ม.1</option>
               <option value="ม.2">ม.2</option>
               <option value="ม.3">ม.3</option>
               <option value="ม.4">ม.4</option>
               <option value="ม.5">ม.5</option>
               <option value="ม.6">ม.6</option>
-              {/* <option value="มหาวิทยาลัย">มหาวิทยาลัย</option>
-              <option value="others">อื่นๆ</option> */}
             </select>
           </div>
+
           <div className="email">
             <label>อีเมล </label>
             <input
@@ -140,6 +144,7 @@ export default function FormOption2() {
               pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$"
               onChange={onChange}
               required
+              aria-label="Email"
             />
           </div>
 
@@ -154,6 +159,7 @@ export default function FormOption2() {
               name="tel"
               onChange={onChange}
               required
+              aria-label="Telephone"
             />
             <small>Ex: 0000000000</small>
           </div>
@@ -168,9 +174,11 @@ export default function FormOption2() {
               value={step2Data.sos_tel}
               name="sos_tel"
               onChange={onChange}
+              aria-label="Emergency Telephone"
             />
             <small>Ex: 0000000000</small>
           </div>
+
           <div className="next-btn">
             <button type="submit" className="btn btn-next">
               ต่อไป
