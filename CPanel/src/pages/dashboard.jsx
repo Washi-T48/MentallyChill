@@ -138,13 +138,13 @@ export default function DashboardPage() {
 
   return (
     <>
-      <div className="flex flex-col flex-1 h-dvh w-80">
+      <div className="flex flex-col flex-1 h-dvh">
         <Topbar />
         <div className="flex flex-row flex-1">
           <div className="flex relative w-72">
             <Sidebar />
           </div>
-          <div className="">
+          <div className="w-full">
             <div className="grid grid-cols-3 gap-x-48 m-10">
               <div className="flex flex-row items-end justify-between border-4 border-sky-400 rounded-md bg-sky-400 h-full w-80 p-5">
                 <div className="text-lg text-gray-200">คำขอการจอง</div>
