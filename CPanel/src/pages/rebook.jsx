@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import Sidebar from "../components/sidebar";
 import Topbar from "../components/topbar";
 import Dropdown from "../components/dropdown";
+import Calendar from "../components/calendar";
 
 const Content = ({
   handleClick,
@@ -84,13 +85,12 @@ const Content = ({
                 </div>
                 <div className="w-full">
                   <div className="text-2xl font-medium mb-4">โน้ต :</div>
-                  <form onSubmit={handleSubmit}>
-                    <textarea
-                      className="flex w-full h-60 bg-gray-100 break-all p-2 overflow-y-auto"
-                      value={reasonNote}
-                      onChange={(e) => setReasonNote(e.target.value)}
-                    />
-                  </form>
+                  <Calendar onDateSelect={handleDateSelect} />
+        {selectedDate && (
+          <div className="mt-4 text-center">
+            <p>Selected Date: {selectedDate.toDateString()}</p>
+          </div>
+        )}
                 </div>
               </div>
             </div>
