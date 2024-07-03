@@ -191,18 +191,18 @@ export default function BookingInfoPage() {
                 <td className="pl-24 text-center text-3xl">
                   {getStatusIcon(row.status)}
                 </td>
-                <td className="text-center text-xl">
+                <td className="py-1 text-center text-xl">
                   {row.appointment_date.substring(0, 10)}
                 </td>
-                <td className="px-4 text-center text-xl">{row.topic}</td>
-                <td className="px-4 text-center text-xl">
+                <td className="py-1 px-4 text-center text-xl">{row.topic}</td>
+                <td className="py-1 px-4 text-center text-xl">
                   {row.appointment_date.substring(11, 16)}
                 </td>
-                <td className="px-4 text-center text-xl">{row.user_id}</td>
-                <td className="px-4 text-center text-xl">
+                <td className="py-1 px-4 text-center text-xl">{row.user_id}</td>
+                <td className="py-1 px-4 text-center text-xl">
                   {row.booking_id}
                 </td>
-                <td className="px-4 text-center text-md">
+                <td className="py-1 px-4 text-center text-md">
                 <button 
     onClick={(event) => handleRebook(event, row.booking_id)}
     className="py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-700 transition duration-200 ease-in-out"
