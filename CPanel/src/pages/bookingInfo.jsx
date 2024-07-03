@@ -107,6 +107,10 @@ export default function BookingInfoPage() {
       // For "Declined" status, stay on the same page
     };
 
+    const handleRebook = () => {
+      console.log("Rebook");
+    };
+
     return (
       <div className="flex flex-col flex-1 m-10 relative w-full">
         <div className="grid grid-cols-2">
@@ -166,6 +170,9 @@ export default function BookingInfoPage() {
               <th className="py-2 px-4 text-3xl text-center rounded-tr-xl">
                 เลขที่การจอง
               </th>
+              <th className="py-2 px-4 text-3xl text-center rounded-tr-xl">
+                จองอีกครั้ง
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -192,6 +199,9 @@ export default function BookingInfoPage() {
                 <td className="py-2 px-4 text-center text-xl">{row.user_id}</td>
                 <td className="py-2 px-4 text-center text-xl">
                   {row.booking_id}
+                </td>
+                <td className="py-2 px-4 text-center text-xl">
+                  <button> จองอีกครั้ง </button>
                 </td>
               </tr>
             ))}
