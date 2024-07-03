@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Sidebar from "../components/sidebar";
 import Topbar from "../components/topbar";
+import Dropdown from "../components/dropdown";
 
 const Content = ({
   handleClick,
@@ -20,6 +21,19 @@ const Content = ({
     ? data.appointment_date.substring(11, 16)
     : "Not available";
 
+  const [selectedTopic, setSelectedTopic] = useState("");
+  const [selectedMed, setSelectedMed] = useState("");
+  const medList = ["CRA01", "CRA02", "CRA03", "CRA04", "CRA05"];
+  const topicList = ["Topic 1", "Topic 2", "Topic 3"];
+
+  const handleSelectMed = (option) => {
+    setSelectedMed(option);
+  };
+
+  const handleSelectTopic = (option) => {
+    setSelectedTopic(option);
+  };
+
   return (
     <>
       <div className="flex flex-col flex-1 m-10">
@@ -32,12 +46,20 @@ const Content = ({
           <div className="p-4 flex flex-col justify-between h-full">
             <div>
               <div className="flex flex-row justify-between text-2xl font-medium mb-4">
-                <div>ผู้ให้คำปรึกษาที่ต้องการพบ : {data.staff_id}</div>
-                <div>{appointmentDate}</div>
+                <div>ผู้ให้คำปรึกษาที่ต้องการพบ :</div>
+                <Dropdown
+                options={medList}
+                onSelect={handleSelectMed}
+                selected={selectedMed}
+              />
               </div>
               <div className="flex flex-row justify-between text-2xl font-medium mb-4">
                 <div>หัวข้อ : {data.topic}</div>
-                <div>{appointmentTime}</div>
+                <Dropdown
+                options={topicList}
+                onSelect={handleSelectTopic}
+                selected={selectedTopic}
+              />
               </div>
               <div className="flex flex-row gap-3 mb-4">
                 <div className="w-full h-full">
@@ -46,14 +68,6 @@ const Content = ({
                   </div>
                   <div className="flex w-full h-60 bg-stone-300 break-all p-2 overflow-y-auto">
                     {data.details}
-                  </div>
-                </div>
-                <div className="w-full">
-                  <div className="text-2xl font-medium mb-4">
-                    ประวัติการปรึกษาทางการแพทย์ :
-                  </div>
-                  <div className="flex w-full h-60 bg-stone-300 break-all p-2 overflow-y-auto">
-                    {data.medical_history}
                   </div>
                 </div>
                 <div className="w-full">
