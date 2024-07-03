@@ -75,13 +75,20 @@ export default function DashboardPage() {
       let medium = 0;
       let high = 0;
 
+      let resD = 0;
+      let resA = 0;
+      let resS = 0;
+
       diagdata.forEach((entry) => {
         const { d, a, s } = entry.result;
 
         // Convert values to numbers
         const dNum = Number(d);
+        resD += dNum;
         const aNum = Number(a);
+        resA += aNum;
         const sNum = Number(s);
+        resS += sNum;
 
         let drank = 0;
         let arank = 0;
@@ -125,10 +132,9 @@ export default function DashboardPage() {
         }
       });
 
-
-      setResD(dNum);
-      setResA(aNum);
-      setResS(sNum);
+      setResD(resD);
+      setResA(resA);
+      setResS(resS);
       setLowCount(low);
       setMediumCount(medium);
       setHighCount(high);
