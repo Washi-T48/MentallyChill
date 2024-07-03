@@ -107,8 +107,10 @@ export default function BookingInfoPage() {
       // For "Declined" status, stay on the same page
     };
 
-    const handleRebook = () => {
-      console.log("Rebook");
+    const handleRebook = (event, bookingId) => {
+      event.stopPropagation(); // Prevent the row's onClick from firing
+      console.log(`Rebook booking with ID: ${bookingId}`);
+      // Implement your rebooking logic here
     };
 
     return (
@@ -201,7 +203,7 @@ export default function BookingInfoPage() {
                   {row.booking_id}
                 </td>
                 <td className="py-2 px-4 text-center text-xl">
-                  <button onClick={() => handleRebook()}> จองอีกครั้ง </button>
+                <button onClick={(event) => handleRebook(event, row.booking_id)}> จองอีกครั้ง </button>
                 </td>
               </tr>
             ))}
