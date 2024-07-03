@@ -70,16 +70,28 @@ const Content = ({
               />
               </div>
               <div className="flex flex-row gap-3 mb-4">
-                {/* <div className="w-full h-full">
-                  <div className="text-2xl font-medium mb-4">
-                    เรื่องที่ขอรับการปรึกษา :
-                  </div>
-                  <div className="flex w-full h-60 bg-stone-300 break-all p-2 overflow-y-auto">
-                    {data.details}
-                  </div>
-                </div> */}
                 <div className="w-full">
-                  <div className="text-2xl font-medium mb-4">โน้ต :</div>
+                    <div className="flex flex-row text-2xl font-medium mb-4 items-center gap-3">
+                        <div>หัวข้อ :</div>
+                        <Dropdown
+                        placehold={"หัวข้อ"}
+                        options={topicList}
+                        onSelect={handleSelectTopic}
+                        selected={selectedTopic}
+                    />
+                    </div>
+                    <div className="flex flex-row text-2xl font-medium mb-4 items-center gap-3">
+                        <div>หัวข้อ :</div>
+                        <Dropdown
+                        placehold={"หัวข้อ"}
+                        options={topicList}
+                        onSelect={handleSelectTopic}
+                        selected={selectedTopic}
+                    />
+                    </div>
+                </div>
+                <div className="w-full">
+                <div className="text-2xl font-medium mb-4">โน้ต :</div>
                   <form onSubmit={handleSubmit}>
                     <textarea
                       className="flex w-full h-60 bg-gray-100 break-all p-2 overflow-y-auto"
@@ -87,15 +99,6 @@ const Content = ({
                       onChange={(e) => setReasonNote(e.target.value)}
                     />
                   </form>
-                </div>
-                <div className="w-full">
-                  <div className="text-2xl font-medium mb-4">โน้ต :</div>
-                  <Calendar onDateSelect={handleDateSelect} />
-        {selectedDate && (
-          <div className="mt-4 text-center">
-            <p>Selected Date: {selectedDate.toDateString()}</p>
-          </div>
-        )}
                 </div>
               </div>
             </div>
