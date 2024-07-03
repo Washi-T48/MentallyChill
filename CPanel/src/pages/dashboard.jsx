@@ -169,7 +169,7 @@ export default function DashboardPage() {
                 <div className="text-7xl text-white">{highCount}</div>
               </div>
             </div>
-            <div className="grid grid-cols-3 gap-x-48 mx-10 my-5 mb-20">
+            <div className="grid grid-cols-3 gap-x-48 mx-10 my-5 mb-10">
               <div className="flex flex-row items-end justify-between border-4 border-green-500 rounded-md bg-green-500 h-full w-80 p-5">
                 <div className="text-lg text-gray-100">ระดับปกติ</div>
                 <div className="text-7xl text-white">{lowCount}</div>
