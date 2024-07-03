@@ -64,13 +64,23 @@ const Content = ({
               />
               </div>
               <div className="flex flex-row gap-3 mb-4">
-                <div className="w-full h-full">
+                {/* <div className="w-full h-full">
                   <div className="text-2xl font-medium mb-4">
                     เรื่องที่ขอรับการปรึกษา :
                   </div>
                   <div className="flex w-full h-60 bg-stone-300 break-all p-2 overflow-y-auto">
                     {data.details}
                   </div>
+                </div> */}
+                <div className="w-full">
+                  <div className="text-2xl font-medium mb-4">โน้ต :</div>
+                  <form onSubmit={handleSubmit}>
+                    <textarea
+                      className="flex w-full h-60 bg-gray-100 break-all p-2 overflow-y-auto"
+                      value={reasonNote}
+                      onChange={(e) => setReasonNote(e.target.value)}
+                    />
+                  </form>
                 </div>
                 <div className="w-full">
                   <div className="text-2xl font-medium mb-4">โน้ต :</div>
