@@ -29,7 +29,7 @@ export default function Dropdown({ placehold, options, onSelect, selected }) {
         className={`py-2 pl-2 bg-white border rounded ${isOpen ? "" : ""}`}
         onClick={() => setIsOpen(!isOpen)}
       >
-        <div className="flex flex-row">
+        <div className="flex flex-row text-gray-500">
           {selected || placehold} <RiArrowDropDownLine className="text-2xl" />
         </div>
         {isOpen && (
