@@ -110,6 +110,8 @@ export default function BookingInfoPage() {
     const handleRebook = (event, bookingId) => {
       event.stopPropagation(); // Prevent the row's onClick from firing
       console.log(`Rebook booking with ID: ${bookingId}`);
+      navigate(`/rebook/${bookingId}`);
+      
       // Implement your rebooking logic here
     };
 
@@ -203,13 +205,15 @@ export default function BookingInfoPage() {
                   {row.booking_id}
                 </td>
                 <td className="py-1 px-4 text-center text-md">
-                <button 
-    onClick={(event) => handleRebook(event, row.booking_id)}
-    className="py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-700 transition duration-200 ease-in-out"
-  >
-    จองอีกครั้ง
-  </button>
-                </td>
+      {row.status === "complete" && (
+        <button
+          onClick={(event) => handleRebook(event, row.booking_id)}
+          className="py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-700 transition duration-200 ease-in-out"
+        >
+          จองอีกครั้ง
+        </button>
+      )}
+    </td>
               </tr>
             ))}
           </tbody>
