@@ -45,17 +45,19 @@ const Content = ({
         <div className="flex flex-col flex-1 bg-[#FFAD4D] border border-[#FFAD4D] border-4 rounded-lg h-full ">
           <div className="p-4 flex flex-col justify-between h-full">
             <div>
-              <div className="flex flex-row justify-between text-2xl font-medium mb-4">
+              <div className="flex flex-row text-2xl font-medium mb-4">
                 <div>ผู้ให้คำปรึกษาที่ต้องการพบ :</div>
                 <Dropdown
+                className="px-4 py-2"
                 options={medList}
                 onSelect={handleSelectMed}
                 selected={selectedMed}
               />
               </div>
-              <div className="flex flex-row justify-between text-2xl font-medium mb-4">
+              <div className="flex flex-row text-2xl font-medium mb-4">
                 <div>หัวข้อ : {data.topic}</div>
                 <Dropdown
+                className="px-4 py-2"
                 options={topicList}
                 onSelect={handleSelectTopic}
                 selected={selectedTopic}
