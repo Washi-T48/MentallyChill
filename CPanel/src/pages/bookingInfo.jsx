@@ -193,15 +193,15 @@ export default function BookingInfoPage() {
                 <td className="pl-24 text-center text-3xl">
                   {getStatusIcon(row.status)}
                 </td>
-                <td className="py-1 text-center text-xl">
+                <td className="py-1.5 text-center text-xl">
                   {row.appointment_date.substring(0, 10)}
                 </td>
-                <td className="py-1 px-4 text-center text-xl">{row.topic}</td>
-                <td className="py-1 px-4 text-center text-xl">
+                <td className="py-1.5 px-4 text-center text-xl">{row.topic}</td>
+                <td className="py-1.5 px-4 text-center text-xl">
                   {row.appointment_date.substring(11, 16)}
                 </td>
-                <td className="py-1 px-4 text-center text-xl">{row.user_id}</td>
-                <td className="py-1 px-4 text-center text-xl">
+                <td className="py-1.5 px-4 text-center text-xl">{row.user_id}</td>
+                <td className="py-1.5 px-4 text-center text-xl">
                   {row.booking_id}
                 </td>
                 <td className="py-1 px-4 text-center text-md">
