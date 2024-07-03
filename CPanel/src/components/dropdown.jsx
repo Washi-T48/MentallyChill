@@ -4,6 +4,8 @@ import { RiArrowDropDownLine } from "react-icons/ri";
 export default function Dropdown({ placehold, options, onSelect, selected }) {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
+  const displayText = selected || placehold;
+  const textColor = selected ? 'text-black' : 'text-gray-500';
 
   const handleSelect = (option) => {
     onSelect(option);
@@ -29,8 +31,9 @@ export default function Dropdown({ placehold, options, onSelect, selected }) {
         className={`py-2 pl-2 bg-white border rounded ${isOpen ? "" : ""}`}
         onClick={() => setIsOpen(!isOpen)}
       >
-        <div className="flex flex-row text-gray-500">
-          {selected || placehold} <RiArrowDropDownLine className="text-2xl" />
+        <div className="flex flex-row">
+          <span className={textColor}>{displayText}</span> 
+          <RiArrowDropDownLine className="text-2xl" />
         </div>
         {isOpen && (
           <div className="absolute left-0 mt-2 bg-white border rounded">
