@@ -105,13 +105,11 @@
     justify-content: center;
 }
 
-/* .dass21-result-footer small {
+.result-small {
+    display: flex;
     font-size: 16px;
-    
-    padding: 1rem 0.5rem;
-    border: 1px solid white;
-    border-radius: 10px;
-} */
+    justify-content: center;
+}
 
 .btn-next {
     font-size: 14px;

@@ -76,11 +76,11 @@ export default function Result() {
         <button className="btn btn-next" onClick={() => navigate("/appoint")}>
           นัดหมายพบเจ้าหน้าที่
         </button>
-        {/* <small>
-          * ข้อมูลที่ใช้ในการรับบริการการปรึกษา
-          จะเป็นความลับและไม่ส่งผลต่อผลการเรียน{" "}
-        </small> */}
       </div>
+      <small className="result-small">
+        * ข้อมูลที่ใช้ในการรับบริการการปรึกษา
+        จะเป็นความลับและไม่ส่งผลต่อผลการเรียน{" "}
+      </small>
     </div>
   );
 }
