@@ -201,7 +201,7 @@ export default function BookingInfoPage() {
                   {row.booking_id}
                 </td>
                 <td className="py-2 px-4 text-center text-xl">
-                  <button> จองอีกครั้ง </button>
+                  <button onClick={() => handleRebook()}> จองอีกครั้ง </button>
                 </td>
               </tr>
             ))}
