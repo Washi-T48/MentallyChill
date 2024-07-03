@@ -24,6 +24,7 @@ const Content = ({
 
   const [selectedTopic, setSelectedTopic] = useState("");
   const [selectedMed, setSelectedMed] = useState("");
+  const [selectedDate, setSelectedDate] = useState(null);
   const medList = ["CRA01", "CRA02", "CRA03", "CRA04", "CRA05"];
   const topicList = ["Topic 1", "Topic 2", "Topic 3"];
 
@@ -33,6 +34,10 @@ const Content = ({
 
   const handleSelectTopic = (option) => {
     setSelectedTopic(option);
+  };
+
+  const handleDateSelect = (date) => {
+    setSelectedDate(date);
   };
 
   return (
