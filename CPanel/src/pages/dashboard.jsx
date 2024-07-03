@@ -8,6 +8,9 @@ export default function DashboardPage() {
   const [diagdata, setDiagData] = useState([]);
   const [countDiag, setCountDiag] = useState(0);
   const [countBooking, setCountBooking] = useState(0);
+  const [resD, setResD] = useState(0);
+  const [resA, setResA] = useState(0);
+  const [resS, setResS] = useState(0);
   const [lowCount, setLowCount] = useState(0);
   const [mediumCount, setMediumCount] = useState(0);
   const [highCount, setHighCount] = useState(0);
@@ -122,6 +125,10 @@ export default function DashboardPage() {
         }
       });
 
+
+      setResD(dNum);
+      setResA(aNum);
+      setResS(sNum);
       setLowCount(low);
       setMediumCount(medium);
       setHighCount(high);
@@ -155,7 +162,7 @@ export default function DashboardPage() {
                 <div className="text-7xl text-white">{countDiag}</div>
               </div>
             </div>
-            <div className="grid grid-cols-3 gap-x-48 mx-10 my-5 mb-20">
+            <div className="grid grid-cols-3 gap-x-48 mx-10 my-5 mb-10">
               <div className="flex flex-row items-end justify-between border-4 border-green-500 rounded-md bg-green-500 h-full w-80 p-5">
                 <div className="text-lg text-gray-100">ระดับปกติ</div>
                 <div className="text-7xl text-white">{lowCount}</div>
@@ -171,16 +178,16 @@ export default function DashboardPage() {
             </div>
             <div className="grid grid-cols-3 gap-x-48 mx-10 my-5 mb-10">
               <div className="flex flex-row items-end justify-between border-4 border-green-500 rounded-md bg-green-500 h-full w-80 p-5">
-                <div className="text-lg text-gray-100">ระดับปกติ</div>
-                <div className="text-7xl text-white">{lowCount}</div>
+                <div className="text-lg text-gray-100">D</div>
+                <div className="text-7xl text-white">{resD}</div>
               </div>
               <div className="flex flex-row items-end justify-between border-4 border-amber-400 rounded-md bg-amber-400 h-full w-80 p-5">
-                <div className="text-lg text-gray-100">ระดับปานกลาง</div>
-                <div className="text-7xl text-white">{mediumCount}</div>
+                <div className="text-lg text-gray-100">A</div>
+                <div className="text-7xl text-white">{resA}</div>
               </div>
               <div className="flex flex-row items-end justify-between border-4 border-rose-400 rounded-md bg-rose-400 h-full w-80 p-5">
-                <div className="text-lg text-gray-100">ระดับร้ายแรง</div>
-                <div className="text-7xl text-white">{highCount}</div>
+                <div className="text-lg text-gray-100">S</div>
+                <div className="text-7xl text-white">{resS}</div>
               </div>
             </div>
             <div className="grid grid-cols-2 mx-10 my-5 gap-5">
