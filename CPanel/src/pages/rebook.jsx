@@ -48,18 +48,18 @@ const Content = ({
               <div className="flex flex-row text-2xl font-medium mb-4 items-center">
                 <div>ผู้ให้คำปรึกษาที่ต้องการพบ :</div>
                 <Dropdown
-                className="px-4 py-2 placeholder-transparent"
-                placehold={"CRA01"}
+                className="mx-4 px-4 py-2 placeholder-transparent"
+                placehold={"     "}
                 options={medList}
                 onSelect={handleSelectMed}
                 selected={selectedMed}
               />
               </div>
               <div className="flex flex-row text-2xl font-medium mb-4 items-center">
-                <div>หัวข้อ : {data.topic}</div>
+                <div>หัวข้อ :</div>
                 <Dropdown
-                className="px-4 py-2 placeholder-transparent"
-                placehold={"Topic 1"}
+                className="mx-4 px-4 py-2 placeholder-transparent"
+                placehold={"     "}
                 options={topicList}
                 onSelect={handleSelectTopic}
                 selected={selectedTopic}
