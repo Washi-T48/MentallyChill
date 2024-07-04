@@ -8,6 +8,7 @@ import userRouter from './Routes/userRoutes.js';
 import staffRouter from './Routes/staffRoutes.js';
 import formsRouter from './Routes/formsRoutes.js';
 import appointmentRouter from './Routes/appointmentRoutes.js';
+import timetableRouter from './Routes/timetableRoutes.js'
 
 import logger, { consoleLogExpress } from './Middleware/logger.js';
 import authMiddleware from './Middleware/auth.js';
@@ -46,6 +47,7 @@ app.use("/user", authMiddleware, userRouter);
 app.use("/staff", authMiddleware, staffRouter);
 app.use("/forms", authMiddleware, formsRouter);
 app.use("/appointment", authMiddleware, appointmentRouter);
+app.use("/timetable", authMiddleware, timetableRouter);
 
 app.listen(PORT, () => {
     logger.info(`Server started on port ${PORT}`);
