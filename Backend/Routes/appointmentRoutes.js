@@ -1,7 +1,22 @@
 import express from 'express';
 import logger from '../Middleware/logger.js';
 
-import { newAppointment, deleteAppointment, lookupAppointment, updateAppointment, userAppointments, allAppointments, upcomingAppointments, newAppointments, pastAppointments, respondAppointment, postAppointment, submitAppointment, bookingCount, getTopic } from '../Models/appointment.js';
+import {
+    newAppointment,
+    deleteAppointment,
+    lookupAppointment,
+    updateAppointment,
+    userAppointments,
+    allAppointments,
+    upcomingAppointments,
+    newAppointments,
+    pastAppointments,
+    respondAppointment,
+    postAppointment,
+    submitAppointment,
+    bookingCount,
+    getTopic
+} from '../Models/appointment.js';
 
 const appointmentRouter = express.Router();
 
