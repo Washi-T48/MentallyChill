@@ -13,6 +13,7 @@ const Content = ({
   handleSubmit,
   bookingId,
   data,
+  appointData,
 }) => {
   const appointmentDate = data.appointment_date
     ? data.appointment_date.substring(0, 10)
@@ -241,6 +242,7 @@ export default function RebookPage() {
             bookingId={bookingId}
             status={status}
             data={alldata}
+            appointData={appointData}
           />
         </div>
       </div>
