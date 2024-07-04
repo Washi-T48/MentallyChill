@@ -160,7 +160,7 @@ export default function P3_dass21() {
             ย้อนกลับ
           </button>
           <button className="btn btn-next" onClick={handleNextClick}>
-            ต่อไป
+            ส่ง
           </button>
         </div>
       </div>
