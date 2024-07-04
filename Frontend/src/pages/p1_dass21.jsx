@@ -1,68 +1,73 @@
 import React, { useEffect, useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
+
 import Logo from "../components/logo";
 import Radio_rate from "../components/radio_rate";
+
 import "./p1_dass21.css";
-import { useNavigate } from "react-router-dom";
+
+const TOTAL_QUESTIONS = 7;
+const CATEGORY_MAPPING = {
+  1: "s",
+  2: "a",
+  3: "d",
+  4: "a",
+  5: "d",
+  6: "s",
+  7: "a",
+};
 
 export default function P1_dass21() {
   const [selectedValues, setSelectedValues] = useState({});
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Retrieve selected values from local storage when component mounts
     const storedValues = localStorage.getItem("selectedValues");
     if (storedValues) {
       setSelectedValues(JSON.parse(storedValues));
     }
   }, []);
 
-  const handleRadioChange = (questionNumber, value) => {
-    // Update selected values
-    setSelectedValues({ ...selectedValues, [questionNumber]: value });
-    console.log(`Question ${questionNumber}:`, value);
-  };
-
   useEffect(() => {
-    // Save selected values to local storage whenever it changes
     localStorage.setItem("selectedValues", JSON.stringify(selectedValues));
   }, [selectedValues]);
 
+  const handleRadioChange = (questionNumber, value) => {
+    setSelectedValues((prevValues) => ({
+      ...prevValues,
+      [questionNumber]: value,
+    }));
+    console.log(`Question ${questionNumber}:`, value);
+  };
+
   const areAllQuestionsAnswered = () => {
-    // Check if all questions have been answered
-    const totalQuestions = 7; // Update this if you have more or fewer questions
-    for (let i = 1; i <= totalQuestions; i++) {
-      if (!selectedValues[i]) {
-        return false;
-      }
-    }
-    return true;
+    return Object.keys(selectedValues).length === TOTAL_QUESTIONS;
   };
 
   const calculateScores = () => {
-    const categories = { d: 0, a: 0, s: 0 };
-    const categoryMapping = {
-      1: "s",
-      2: "a",
-      3: "d",
-      4: "a",
-      5: "d",
-      6: "s",
-      7: "a",
-    };
-
-    for (const [question, value] of Object.entries(selectedValues)) {
-      const category = categoryMapping[question];
-      if (category) {
-        categories[category] += parseInt(value, 10);
-      }
-    }
-
-    return categories;
+    return Object.entries(selectedValues).reduce(
+      (scores, [question, value]) => {
+        const category = CATEGORY_MAPPING[question];
+        scores[category] += parseInt(value, 10);
+        return scores;
+      },
+      { d: 0, a: 0, s: 0 }
+    );
   };
 
   const handleNextClick = (event) => {
     if (!areAllQuestionsAnswered()) {
-      alert("Please answer all questions before proceeding.");
+      toast.error("โปรดตอบคำถามให้ครบทุกข้อ!", {
+        position: "top-right",
+        hideProgressBar: true,
+        height: "100%",
+        style: {
+          fontSize: "16px",
+          fontFamily: "ChulabhornLikitText-Regular",
+        },
+      });
       event.preventDefault();
     } else {
       const scores = calculateScores();
@@ -95,65 +100,38 @@ export default function P1_dass21() {
           <br />
         </p>
         <form className="dass21-1">
-          <br />
-          <label>1. ฉันพบว่ามันยากที่จะรู้สึกผ่อนคลาย (s)</label>
-          <Radio_rate
-            questionNumber={1}
-            selectedValue={selectedValues[1]}
-            onRadioChange={handleRadioChange}
-          />
-          <br />
-          <label>2. ฉันรู้ตัวว่าปากแห้ง (a)</label>
-          <Radio_rate
-            questionNumber={2}
-            selectedValue={selectedValues[2]}
-            onRadioChange={handleRadioChange}
-          />
-          <br />
-          <label>3. ฉันดูเหมือนจะไม่มีความรู้สึกดีๆ เลย (d)</label>
-          <Radio_rate
-            questionNumber={3}
-            selectedValue={selectedValues[3]}
-            onRadioChange={handleRadioChange}
-          />
-          <br />
-          <label>
-            4. ฉันมีอาการหายใจลำบาก (เช่น หายใจเร็วเกินไป หายใจไม่ออก
-            ในกรณีที่ไม่ได้ออกกําลังกาย) (a)
-          </label>
-          <Radio_rate
-            questionNumber={4}
-            selectedValue={selectedValues[4]}
-            onRadioChange={handleRadioChange}
-          />
-          <br />
-          <label>5. ฉันพบว่ามันยากที่จะคิดริเริ่มที่จะทำสิ่งต่าง ๆ (d)</label>
-          <Radio_rate
-            questionNumber={5}
-            selectedValue={selectedValues[5]}
-            onRadioChange={handleRadioChange}
-          />
-          <br />
-          <label>6. ฉันมักจะตอบสนองต่อสถานการณ์มากเกินไป (s)</label>
-          <Radio_rate
-            questionNumber={6}
-            selectedValue={selectedValues[6]}
-            onRadioChange={handleRadioChange}
-          />
-          <br />
-          <label>7. ฉันมีอาการสั่น (เช่น มือสั่น) (a)</label>
-          <Radio_rate
-            questionNumber={7}
-            selectedValue={selectedValues[7]}
-            onRadioChange={handleRadioChange}
-          />
+          {[...Array(TOTAL_QUESTIONS)].map((_, i) => (
+            <div key={i}>
+              <label>{`${i + 1}. ${getQuestionText(i + 1)}`}</label>
+              <Radio_rate
+                questionNumber={i + 1}
+                selectedValue={selectedValues[i + 1]}
+                onRadioChange={handleRadioChange}
+              />
+              <br />
+            </div>
+          ))}
         </form>
         <div className="p1_dass21-footer">
           <button className="btn btn-next" onClick={handleNextClick}>
-            Next
+            ต่อไป
           </button>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 }
+
+const getQuestionText = (questionNumber) => {
+  const questions = {
+    1: "ฉันพบว่ามันยากที่จะรู้สึกผ่อนคลาย (s)",
+    2: "ฉันรู้ตัวว่าปากแห้ง (a)",
+    3: "ฉันดูเหมือนจะไม่มีความรู้สึกดีๆ เลย (d)",
+    4: "ฉันมีอาการหายใจลำบาก (เช่น หายใจเร็วเกินไป หายใจไม่ออก ในกรณีที่ไม่ได้ออกกําลังกาย) (a)",
+    5: "ฉันพบว่ามันยากที่จะคิดริเริ่มที่จะทำสิ่งต่าง ๆ (d)",
+    6: "ฉันมักจะตอบสนองต่อสถานการณ์มากเกินไป (s)",
+    7: "ฉันมีอาการสั่น (เช่น มือสั่น) (a)",
+  };
+  return questions[questionNumber];
+};

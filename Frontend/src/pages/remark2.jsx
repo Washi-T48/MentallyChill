@@ -1,10 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import "./remark2.css";
 import Logo from "../components/logo";
 import { useNavigate } from "react-router-dom";
-import P1_dass21 from "./cri_dass21";
+import Loading from "../components/Loading";
+
 export default function Remark2() {
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+
+  const handleAccept = () => {
+    setLoading(true);
+    setTimeout(() => {
+      navigate("../formOption1");
+    }, 1000);
+  };
+
+  if (loading) {
+    return <Loading />;
+  }
+
   return (
     <div>
       <Logo />
@@ -21,13 +35,8 @@ export default function Remark2() {
         ถ้าได้ผลแตกต่างกันในแต่ละครั้งถือเป็นเรื่องผิดปกติ
       </div>
       <div className="remark2-footer">
-        <button
-          className="btn btn-acc"
-          onClick={() => {
-            navigate("../formOption1");
-          }}
-        >
-          Accept
+        <button className="btn btn-next" onClick={handleAccept}>
+          ยอมรับ
         </button>
       </div>
     </div>

@@ -1,28 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import "./confirm_app.css";
 import Logo from "../components/logo";
 import axios from "axios";
+import Loading from "../components/Loading";
 
-const VITE_API_PATH = import.meta.env.VITE_API_PATH
+const VITE_API_PATH = import.meta.env.VITE_API_PATH;
 
 export default function Confirm_app() {
   const location = useLocation();
   const { appointData } = location.state || {};
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   if (!appointData) {
     return <div>ไม่มีข้อมูลการนัดหมาย</div>;
   }
 
-  const onConfirm = () => {
+  const onConfirm = async () => {
+    setLoading(true);
     console.log("Confirmed appointment data:", appointData);
-    axios.post(`${VITE_API_PATH}/forms/new`, appointData);
-    navigate("/finish_app");
+    try {
+      await axios.post(`${VITE_API_PATH}/forms/new`, appointData);
+      navigate("/finish_app");
+    } catch (error) {
+      console.error("Error confirming appointment:", error);
+      setLoading(false);
+    }
   };
 
   // Extract hours and minutes
   const formattedTime = appointData.time.slice(0, 5);
+
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <div>
