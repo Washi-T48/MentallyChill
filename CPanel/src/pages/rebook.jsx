@@ -24,7 +24,7 @@ const Content = ({
 
   const [selectedTopic, setSelectedTopic] = useState("");
   const [selectedMed, setSelectedMed] = useState("");
-  const [selectedDate, setSelectedDate] = useState(null);
+  const [currentDate, setCurrentDate] = useState("");
   const medList = ["CRA01", "CRA02", "CRA03", "CRA04", "CRA05"];
   const topicList = ["Topic 1", "Topic 2", "Topic 3"];
 
@@ -36,8 +36,19 @@ const Content = ({
     setSelectedTopic(option);
   };
 
-  const handleDateSelect = (date) => {
-    setSelectedDate(date);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setAppointData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+
+    // Mock fetching available time slots when the date or doctor changes
+    if (name === "date" || name === "medDoctor") {
+      if (appointData.medDoctor && appointData.date) {
+        fetchAvailableTimeSlots();
+      }
+    }
   };
 
   return (
@@ -74,7 +85,14 @@ const Content = ({
                 <div className="w-full">
                     <div className="flex flex-row text-2xl font-medium mb-4 items-center gap-3">
                         <div>วันที่ :</div>
-                        <input type="date" name="date" min="2024-07-03" required value />
+                        <input
+                type="date"
+                name="date"
+                value={appointData.date}
+                min={currentDate} // Prevent selection of past dates
+                onChange={handleChange}
+                required
+              />
                     </div>
                     <div className="flex flex-row text-2xl font-medium mb-4 items-center gap-3">
                         <div>เวลา :</div>
@@ -133,6 +151,18 @@ export default function RebookPage() {
   const [reasonNote, setReasonNote] = useState("");
   const { bookingId } = useParams();
   const [alldata, setAlldata] = useState([]);
+
+  const [appointData, setAppointData] = useState({
+    uid: "",
+    tel: "",
+    contactMethod: "",
+    medDoctor: "",
+    date: "",
+    time: "",
+    topic: "",
+    detail: "",
+    medHistory: "",
+  });
 
   useEffect(() => {
     const fetchData = async () => {
