@@ -67,6 +67,7 @@ const Content = ({
                 options={topicList}
                 onSelect={handleSelectTopic}
                 selected={selectedTopic}
+                zIndex={100} // Provide a base zIndex
               />
               </div>
               <div className="flex flex-row gap-3 mb-4">
@@ -78,6 +79,7 @@ const Content = ({
                         options={topicList}
                         onSelect={handleSelectTopic}
                         selected={selectedTopic}
+                        zIndex={90}
                     />
                     </div>
                     <div className="flex flex-row text-2xl font-medium mb-4 items-center gap-3">
@@ -87,6 +89,7 @@ const Content = ({
                         options={topicList}
                         onSelect={handleSelectTopic}
                         selected={selectedTopic}
+                        zIndex={80}
                     />
                     </div>
                 </div>
