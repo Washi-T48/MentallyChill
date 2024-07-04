@@ -36,7 +36,7 @@ export default function Dropdown({ placehold, options, onSelect, selected }) {
           <RiArrowDropDownLine className="text-2xl" />
         </div>
         {isOpen && (
-          <div className="absolute left-0 mt-2 bg-white border rounded">
+          <div className="absolute left-0 mt-2 bg-white border rounded z-10">
             {options.map((option, index) => (
               <div
                 key={index}
