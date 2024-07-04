@@ -73,17 +73,11 @@ const Content = ({
               <div className="flex flex-row gap-3 mb-4">
                 <div className="w-full">
                     <div className="flex flex-row text-2xl font-medium mb-4 items-center gap-3">
-                        <div>หัวข้อ :</div>
-                        <Dropdown
-                        placehold={"หัวข้อ"}
-                        options={topicList}
-                        onSelect={handleSelectTopic}
-                        selected={selectedTopic}
-                        zIndex={90}
-                    />
+                        <div>วันที่ :</div>
+                        <input type="date" name="date" min="2024-07-03" required value />
                     </div>
                     <div className="flex flex-row text-2xl font-medium mb-4 items-center gap-3">
-                        <div>หัวข้อ :</div>
+                        <div>เวลา :</div>
                         <Dropdown
                         placehold={"หัวข้อ"}
                         options={topicList}
@@ -93,7 +87,7 @@ const Content = ({
                     />
                     </div>
                 </div>
-                <div className="w-full">
+                {/* <div className="w-full">
                 <div className="text-2xl font-medium mb-4">โน้ต :</div>
                   <form onSubmit={handleSubmit}>
                     <textarea
@@ -102,7 +96,7 @@ const Content = ({
                       onChange={(e) => setReasonNote(e.target.value)}
                     />
                   </form>
-                </div>
+                </div> */}
               </div>
             </div>
             <div className="flex flex-row justify-between border-t-4 border-[#FFFFFF] pt-3">
