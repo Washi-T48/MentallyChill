@@ -4,7 +4,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import Sidebar from "../components/sidebar";
 import Topbar from "../components/topbar";
 import Dropdown from "../components/dropdown";
-import Calendar from "../components/calendar";
 
 const Content = ({
   handleClick,
@@ -69,7 +68,7 @@ const Content = ({
                 <Dropdown
                 placehold={"ผู้ให้คำปรึกษา"}
                 options={medList}
-                onSelect={handleSelectMed}
+                onSelect={handleChange}
                 selected={selectedMed}
               />
               </div>
@@ -98,13 +97,22 @@ const Content = ({
                     </div>
                     <div className="flex flex-row text-2xl font-medium mb-4 items-center gap-3">
                         <div>เวลา :</div>
-                        <Dropdown
-                        placehold={"หัวข้อ"}
-                        options={topicList}
-                        onSelect={handleSelectTopic}
-                        selected={selectedTopic}
-                        zIndex={80}
-                    />
+                        <select
+                name="time"
+                value={appointData.time}
+                onChange={handleChange}
+                required
+                disabled={
+                  !appointData.date || !appointData.medDoctor
+                }
+              >
+                <option value="">เลือกเวลา</option>
+                {timeSlots.map((slot) => (
+                  <option key={slot} value={slot}>
+                    {slot}
+                  </option>
+                ))}
+              </select>
                     </div>
                 </div>
                 {/* <div className="w-full">
