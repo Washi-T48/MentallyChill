@@ -15,8 +15,11 @@ import {
     postAppointment,
     submitAppointment,
     bookingCount,
-    getTopic
+    getTopic,
 } from '../Models/appointment.js';
+
+
+import { getStaffTimeByDate } from '../Models/timetable.js';
 
 const appointmentRouter = express.Router();
 
@@ -189,4 +192,15 @@ appointmentRouter.get("/topic", async (req, res) => {
     }
 });
 
+appointmentRouter.post("/fetchTimeslot", async (req, res) => {
+    try {
+        const { staff_id, date } = req.body;
+        const timeslots = await getStaffTimeByDate(staff_id, date);
+        res.status(200).json(timeslots);
+    }
+    catch (error) {
+        logger.error(error);
+        res.sendStatus(500);
+    }
+});
 export default appointmentRouter;

@@ -56,6 +56,14 @@ const checkStaffAvailable = async (staff_id, date, time_start, time_end) => {
     return (timetable["rows"]);
 }
 
+const getStaffTimeByDate = async (staff_id, date) => {
+    const timetable = await pool.query(
+        `SELECT * FROM timetable WHERE staff_id = $1 AND lower(time_range)::DATE = $2::date`,
+        [staff_id, date]
+    );
+    return (timetable["rows"]);
+}
+
 export {
     newTimeTable,
     getTimeTable,
@@ -63,5 +71,6 @@ export {
     getTimetableByStaffID,
     getTimetableByDate,
     allTimetable,
-    checkStaffAvailable
+    checkStaffAvailable,
+    getStaffTimeByDate,
 }
