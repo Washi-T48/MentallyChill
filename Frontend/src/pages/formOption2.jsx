@@ -22,31 +22,39 @@ export default function FormOption2() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    liff
-      .init({ liffId: "2005311386-6GQLXp7Z" })
-      .then(() => {
-        if (liff.isLoggedIn()) {
-          liff
-            .getProfile()
-            .then((profile) => {
-              setStep2Data((prevData) => ({
-                ...prevData,
-                uid: profile.userId,
-              }));
-              localStorage.setItem("uid", profile.userId);
-            })
-            .catch((err) => {
-              console.error("Error getting profile:", err);
-              setError("Failed to get profile information.");
-            });
-        } else {
-          liff.login();
-        }
-      })
-      .catch((err) => {
-        console.error("Error initializing LIFF:", err);
-        setError("Failed to initialize LIFF. Please try again later.");
-      });
+    const uid = localStorage.getItem("uid");
+    if (uid) {
+      setStep2Data((prevData) => ({
+        ...prevData,
+        uid: uid,
+      }));
+    } else {
+      liff
+        .init({ liffId: "2005311386-6GQLXp7Z" })
+        .then(() => {
+          if (liff.isLoggedIn()) {
+            liff
+              .getProfile()
+              .then((profile) => {
+                setStep2Data((prevData) => ({
+                  ...prevData,
+                  uid: profile.userId,
+                }));
+                localStorage.setItem("uid", profile.userId);
+              })
+              .catch((err) => {
+                console.error("Error getting profile:", err);
+                setError("Failed to get profile information.");
+              });
+          } else {
+            liff.login();
+          }
+        })
+        .catch((err) => {
+          console.error("Error initializing LIFF:", err);
+          setError("Failed to initialize LIFF. Please try again later.");
+        });
+    }
   }, []);
 
   const onChange = (evt) => {
