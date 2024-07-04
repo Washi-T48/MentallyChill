@@ -1,49 +1,33 @@
 import React, { useEffect, useState } from "react";
-import Logo from "../components/logo";
-import Radio_rate from "../components/radio_rate";
-import "./p3_dass21.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const VITE_API_PATH = import.meta.env.VITE_API_PATH
+import Logo from "../components/logo";
+import Radio_rate from "../components/radio_rate";
+import Loading from "../components/Loading";
+
+import "./p3_dass21.css";
+
+const QUESTIONS_RANGE = [15, 16, 17, 18, 19, 20, 21];
+const CATEGORY_MAPPING = {
+  15: "a",
+  16: "d",
+  17: "d",
+  18: "s",
+  19: "a",
+  20: "a",
+  21: "d",
+};
+
+const VITE_API_PATH = import.meta.env.VITE_API_PATH;
 
 export default function P3_dass21() {
   const [selectedValues, setSelectedValues] = useState({});
   const [uid, setUid] = useState("");
-
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
-
-  const areAllQuestionsAnswered = () => {
-    const totalQuestions = 21;
-    for (let i = 15; i <= totalQuestions; i++) {
-      if (!selectedValues[i]) {
-        return false;
-      }
-    }
-    return true;
-  };
-
-  const handleNextClick = (event) => {
-    if (!areAllQuestionsAnswered()) {
-      alert("Please answer all questions before proceeding.");
-      event.preventDefault();
-    } else {
-      // Calculate scores and save to localStorage
-      const scores = calculateScores();
-      const payload = {
-        uid,
-        ...scores,
-      };
-      axios.post(`${VITE_API_PATH}/forms/submit`, {
-        uid: uid,
-        form_type: "dass21",
-        result: JSON.stringify(payload),
-      });
-      console.log("Payload:", payload);
-      localStorage.setItem("dass21Scores", JSON.stringify(payload)); // Save the payload
-      navigate("/cri_dass21");
-    }
-  };
 
   useEffect(() => {
     const storedValues = localStorage.getItem("selectedValues");
@@ -57,41 +41,82 @@ export default function P3_dass21() {
     }
   }, []);
 
-  const handleRadioChange = (questionNumber, value) => {
-    setSelectedValues({ ...selectedValues, [questionNumber]: value });
-    console.log(`Question ${questionNumber}:`, value);
-  };
-
   useEffect(() => {
     localStorage.setItem("selectedValues", JSON.stringify(selectedValues));
   }, [selectedValues]);
 
+  const handleRadioChange = (questionNumber, value) => {
+    setSelectedValues((prevValues) => ({
+      ...prevValues,
+      [questionNumber]: value,
+    }));
+    console.log(`Question ${questionNumber}:`, value);
+  };
+
+  const areAllQuestionsAnswered = () => {
+    return QUESTIONS_RANGE.every((question) =>
+      selectedValues.hasOwnProperty(question)
+    );
+  };
+
   const calculateScores = () => {
-    // Retrieve existing scores from localStorage
-    const scores = JSON.parse(localStorage.getItem("dass21Scores")) || {
+    const previousScores = JSON.parse(localStorage.getItem("dass21Scores")) || {
       d: 0,
       a: 0,
       s: 0,
     };
-    const categoryMapping = {
-      15: "a",
-      16: "d",
-      17: "d",
-      18: "s",
-      19: "a",
-      20: "a",
-      21: "d",
-    };
-
-    for (const [question, value] of Object.entries(selectedValues)) {
-      const category = categoryMapping[question];
-      if (category) {
-        scores[category] += parseInt(value, 10);
-      }
-    }
-
-    return scores;
+    const updatedScores = Object.entries(selectedValues).reduce(
+      (scores, [question, value]) => {
+        const category = CATEGORY_MAPPING[question];
+        if (category) {
+          scores[category] += parseInt(value, 10);
+        }
+        return scores;
+      },
+      { ...previousScores }
+    );
+    return updatedScores;
   };
+
+  const handleNextClick = (event) => {
+    if (!areAllQuestionsAnswered()) {
+      toast.error("โปรดตอบคำถามให้ครบทุกข้อ!", {
+        position: "top-right",
+        hideProgressBar: true,
+        autoClose: 5000,
+        style: {
+          fontSize: "16px",
+          fontFamily: "ChulabhornLikitText-Regular",
+        },
+      });
+      event.preventDefault();
+    } else {
+      setIsLoading(true);
+      const scores = calculateScores();
+      const payload = {
+        uid,
+        ...scores,
+      };
+      axios
+        .post(`${VITE_API_PATH}/forms/submit`, {
+          uid: uid,
+          form_type: "dass21",
+          result: JSON.stringify(payload),
+        })
+        .then(() => {
+          localStorage.setItem("dass21Scores", JSON.stringify(scores)); // Save the scores
+          navigate("/cri_dass21");
+        })
+        .catch((error) => {
+          console.error("Error submitting form:", error);
+          setIsLoading(false);
+        });
+    }
+  };
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <div>
@@ -112,77 +137,47 @@ export default function P3_dass21() {
           <br />
           2 หมายถึง ตรงกับข้าพเจ้า หรือเกิดขึ้นบ่อย
           <br />
-          3 หมายถึง ตรงกับข้าพเจ้ามาก หรือเกิดขึ้นบ่อยมากที่สุด
+          3 หมายถึง ตรงกับข้าพเจ้าอย่างมาก หรือเกิดขึ้นบ่อยมากที่สุด
           <br />
         </p>
-        <form className="dass21-2">
-          <br />
-          <label>15. ฉันรู้สึกหวาดกลัวหรือเสียขวัญ (a)</label>
-          <Radio_rate
-            questionNumber={15}
-            selectedValue={selectedValues[15]}
-            onRadioChange={handleRadioChange}
-          />
-          <br />
-          <label>16. ฉันไม่สามารถมีความกระตือรือร้นในสิ่งใดได้ (d)</label>
-          <Radio_rate
-            questionNumber={16}
-            selectedValue={selectedValues[16]}
-            onRadioChange={handleRadioChange}
-          />
-          <br />
-          <label>17. ฉันรู้สึกว่าตัวเองไม่มีค่ามาก (d)</label>
-          <Radio_rate
-            questionNumber={17}
-            selectedValue={selectedValues[17]}
-            onRadioChange={handleRadioChange}
-          />
-          <br />
-          <label>18. ฉันรู้สึกหงุดหงิดอารมณ์เสีย (s)</label>
-          <Radio_rate
-            questionNumber={18}
-            selectedValue={selectedValues[18]}
-            onRadioChange={handleRadioChange}
-          />
-          <br />
-          <label>
-            19. ฉันรู้สึกว่าสภาพหัวใจขาดการออกกำลังกาย (เช่น
-            ความรู้สึกของอัตราการเต้นของหัวใจเพิ่มขึ้น, หัวใจเต้นผิดจังหวะ) (a)
-          </label>
-          <Radio_rate
-            questionNumber={19}
-            selectedValue={selectedValues[19]}
-            onRadioChange={handleRadioChange}
-          />
-          <br />
-          <label>20. ฉันรู้สึกกลัวโดยไม่มีเหตุผล (a)</label>
-          <Radio_rate
-            questionNumber={20}
-            selectedValue={selectedValues[20]}
-            onRadioChange={handleRadioChange}
-          />
-          <br />
-          <label>21. ฉันรู้สึกว่าชีวิตไม่มีความหมาย (d)</label>
-          <Radio_rate
-            questionNumber={21}
-            selectedValue={selectedValues[21]}
-            onRadioChange={handleRadioChange}
-          />
+        <form className="dass21-3">
+          {QUESTIONS_RANGE.map((questionNumber) => (
+            <div key={questionNumber}>
+              <label>{`${questionNumber}. ${getQuestionText(
+                questionNumber
+              )}`}</label>
+              <Radio_rate
+                questionNumber={questionNumber}
+                selectedValue={selectedValues[questionNumber]}
+                onRadioChange={handleRadioChange}
+              />
+              <br />
+            </div>
+          ))}
         </form>
         <div className="p3_dass21-footer">
           <button className="btn btn-prev" onClick={() => navigate(-1)}>
             Back
           </button>
-
-          <button
-            type="submit"
-            className="btn btn-next"
-            onClick={handleNextClick}
-          >
+          <button className="btn btn-next" onClick={handleNextClick}>
             Submit
           </button>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 }
+
+const getQuestionText = (questionNumber) => {
+  const questions = {
+    15: "ฉันรู้สึกหวาดกลัวหรือเสียขวัญ (a)",
+    16: "ฉันไม่สามารถมีความกระตือรือร้นในสิ่งใดได้ (d)",
+    17: "ฉันรู้สึกว่าตัวเองไม่มีค่ามาก (d)",
+    18: "ฉันรู้สึกหงุดหงิดอารมณ์เสีย (s)",
+    19: "ฉันรู้สึกว่าสภาพหัวใจขาดการออกกำลังกาย (เช่น ความรู้สึกของอัตราการเต้นของหัวใจเพิ่มขึ้น, หัวใจเต้นผิดจังหวะ) (a)",
+    20: "ฉันรู้สึกกลัวโดยไม่มีเหตุผล (a)",
+    21: "ฉันรู้สึกว่าชีวิตไม่มีความหมาย (d)",
+  };
+  return questions[questionNumber];
+};

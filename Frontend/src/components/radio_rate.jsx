@@ -28,24 +28,22 @@ export default function Radio_rate({
         alignItems: "center",
       }}
     >
-      0
-      <Radio
-        {...controlProps("0")}
-        sx={{ "& .MuiSvgIcon-root": { fontSize: 24 } }}
-      />
-      <Radio
-        {...controlProps("1")}
-        sx={{ "& .MuiSvgIcon-root": { fontSize: 24 } }}
-      />
-      <Radio
-        {...controlProps("2")}
-        sx={{ "& .MuiSvgIcon-root": { fontSize: 24 } }}
-      />
-      <Radio
-        {...controlProps("3")}
-        sx={{ "& .MuiSvgIcon-root": { fontSize: 24 } }}
-      />
-      3
+      {["0", "1", "2", "3"].map((item) => (
+        <div
+          key={item}
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <Radio
+            {...controlProps(item)}
+            sx={{ "& .MuiSvgIcon-root": { fontSize: 28 } }}
+          />
+          <span>{item}</span>
+        </div>
+      ))}
     </div>
   );
 }

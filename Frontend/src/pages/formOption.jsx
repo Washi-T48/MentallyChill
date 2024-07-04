@@ -4,17 +4,22 @@ import Logo from "../components/logo";
 import EXicon from "../images/excla_icon.png";
 import Enter from "../images/enter_icon.png";
 import { useNavigate } from "react-router-dom";
+import Loading from "../components/Loading";
 
 export default function FormOption() {
-  const [formType, setFormType] = useState({
-    forms_type: "",
-  });
-  const navigateStep2 = (formName) => {
-    setFormType({ forms_type: formName });
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
-    console.log("formName: " + formName);
-    window.location.href = `../formOption2?form_type=${formName}`;
+  const navigateStep2 = (formName) => {
+    setLoading(true);
+    setTimeout(() => {
+      window.location.href = `../formOption2?form_type=${formName}`;
+    }, 500);
   };
+
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <div>

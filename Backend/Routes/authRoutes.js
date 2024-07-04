@@ -3,7 +3,12 @@ import express from 'express';
 import logger from '../Middleware/logger.js';
 import dotenv from 'dotenv';
 import authMiddleware from '../Middleware/auth.js';
-import { findStaff, registerStaff, comparePassword } from '../Models/auth.js';
+
+import {
+    findStaff,
+    registerStaff,
+    comparePassword
+} from '../Models/auth.js';
 
 
 const authRouter = express.Router();
@@ -59,7 +64,7 @@ authRouter.get('/check', authMiddleware, async (req, res) => {
     }
 });
 
-authRouter.post('/logout', authMiddleware, async (req, res) => {
+authRouter.all('/logout', authMiddleware, async (req, res) => {
     try {
         res.clearCookie('token');
         res.status(200).json({ token: null });

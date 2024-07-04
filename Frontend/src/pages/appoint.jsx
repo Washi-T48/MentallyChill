@@ -3,7 +3,35 @@ import "./appoint.css";
 import Logo from "../components/logo";
 import { useNavigate } from "react-router-dom";
 import CustomRadioButton from "../components/CustomRadioButton";
+import Loading from "../components/Loading";
 import liff from "@line/liff";
+
+const topics = {
+  พัฒนาการเรียน: [
+    "พัฒนาประสิทธิภาพการเรียน",
+    "การจัดการเวลา",
+    "ค้นหาศักยภาพตนเอง",
+    "สภาพแวดล้อมหรือบรรยากาศการเรียน",
+    "หมดไฟ-แรงใจในการเรียน(Burnout – Brownout)",
+  ],
+  สุขภาพจิตและความเครียด: [
+    "การเป็นที่ยอมรับ / คุณค่าในตนเอง",
+    "ความเครียดจากการเรียน-ความกดดัน-ภาระงาน",
+    "ภาวะทางอารมณ์ / ซึมเศร้า / การสูญเสีย",
+  ],
+  ความสัมพันธ์: [
+    "ความสัมพันธ์กับอาจารย์",
+    "ความสัมพันธ์กับเพื่อน",
+    "ครอบครัว",
+    "ความรัก",
+    "เพศสัมพันธ์",
+  ],
+  สถานะการเงิน: [],
+  "ติดโทรศัพท์มือถือ / อินเตอร์เน็ต /เกมส์ / สารเสพติด": [],
+  ความยืดหยุ่นทางจิตใจ: [],
+  เพศทางเลือก: [],
+  อื่นๆ: [],
+};
 
 export default function Appoint() {
   const [appointData, setAppointData] = useState({
@@ -15,17 +43,20 @@ export default function Appoint() {
     time: "",
     topic: "",
     detail: "",
+    subtopic: "",
     medHistory: "",
   });
 
   const [timeSlots, setTimeSlots] = useState([]);
   const [loadingSlots, setLoadingSlots] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [currentDate, setCurrentDate] = useState("");
+  const [error, setError] = useState("");
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    liff
+    /*  liff
       .init({ liffId: "2005311386-dnvmKNjJ" })
       .then(() => {
         if (liff.isLoggedIn()) {
@@ -42,36 +73,57 @@ export default function Appoint() {
           liff.login();
         }
       })
-      .catch((err) => console.error("Error initializing LIFF:", err));
-    // Set the current date in YYYY-MM-DD format
+      .catch((err) => console.error("Error initializing LIFF:", err)); */
+
     const today = new Date();
     const formattedDate = today.toISOString().split("T")[0];
     setCurrentDate(formattedDate);
   }, []);
 
+  useEffect(() => {
+    if (appointData.date && appointData.medDoctor) {
+      fetchAvailableTimeSlots();
+    }
+  }, [appointData.date, appointData.medDoctor]);
+
   const onSubmit = (e) => {
     e.preventDefault();
-    // Check selected date
     if (appointData.date < currentDate) {
-      alert("Please select a valid date.");
+      setError("Please select a valid date.");
       return;
     }
-    navigate("/confirm_app", { state: { appointData } });
+    setError("");
+    setLoading(true);
+
+    // Combine subtopic and detail into one detail field
+    let combinedDetail = appointData.subtopic
+      ? `${appointData.subtopic} - ${appointData.detail}`
+      : appointData.detail;
+    let updatedAppointData = { ...appointData, detail: combinedDetail };
+
+    console.log(updatedAppointData);
+
+    setTimeout(() => {
+      setLoading(false);
+      navigate("/confirm_app", { state: { appointData: updatedAppointData } });
+    }, 1000);
   };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setAppointData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-
-    // Mock fetching available time slots when the date or doctor changes
-    if (name === "date" || name === "medDoctor") {
-      if (appointData.medDoctor && appointData.date) {
-        fetchAvailableTimeSlots();
+    setAppointData((prevData) => {
+      if (name === "topic" && !hasSubtopics(value)) {
+        return {
+          ...prevData,
+          [name]: value,
+          subtopic: "",
+        };
       }
-    }
+      return {
+        ...prevData,
+        [name]: value,
+      };
+    });
   };
 
   const handleRadioSelect = (name, value) => {
@@ -90,12 +142,17 @@ export default function Appoint() {
 
   const fetchAvailableTimeSlots = () => {
     setLoadingSlots(true);
-    // Mock API call to fetch available time slots
     setTimeout(() => {
       setTimeSlots(["09:00", "10:00", "11:00", "13:00", "14:00"]);
       setLoadingSlots(false);
     }, 1000);
   };
+
+  const hasSubtopics = (topic) => topics[topic]?.length > 0;
+
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <div>
@@ -149,7 +206,7 @@ export default function Appoint() {
                 className="app-tel"
                 type="tel"
                 placeholder="0000000000"
-                pattern="[0-9]{3}[0-9]{3}[0-9]{4}"
+                pattern="[0-9]{10}"
                 value={appointData.tel}
                 name="tel"
                 onChange={handleChange}
@@ -175,9 +232,7 @@ export default function Appoint() {
                 <option value="CRA02">
                   CRA02 ดวงแก้ว เตชะกาญจนเวช (พี่ปู)
                 </option>
-                <option value="CRA03">
-                  CRA03 วิภาพร สร้อยแสง (พี่อ้อย)
-                </option>
+                <option value="CRA03">CRA03 วิภาพร สร้อยแสง (พี่อ้อย)</option>
               </select>
             </label>
           </div>
@@ -189,7 +244,7 @@ export default function Appoint() {
                 type="date"
                 name="date"
                 value={appointData.date}
-                min={currentDate} // Prevent selection of past dates
+                min={currentDate}
                 onChange={handleChange}
                 required
               />
@@ -215,7 +270,7 @@ export default function Appoint() {
           </div>
           <div className="app-topic">
             <label>
-              เรื่องที่ต้องการปรึกษา<mark> *</mark>
+              ประเด็นที่ต้องการปรึกษา<mark> *</mark>
               <br />
               <select
                 name="topic"
@@ -223,22 +278,46 @@ export default function Appoint() {
                 onChange={handleChange}
                 required
               >
-                <option value="">เลือกหัวข้อ</option>
-                <option value="TOPIC-1">TOPIC-1</option>
-                <option value="TOPIC-2">TOPIC-2</option>
-                <option value="TOPIC-3">TOPIC-3</option>
+                <option value="">เลือกประเด็นที่ต้องการปรึกษา</option>
+                {Object.keys(topics).map((topic) => (
+                  <option key={topic} value={topic}>
+                    {topic}
+                  </option>
+                ))}
               </select>
             </label>
           </div>
+          {hasSubtopics(appointData.topic) && (
+            <div className="app-detail">
+              <label>
+                ประเด็นย่อย
+                <br />
+                <select
+                  name="subtopic"
+                  value={appointData.subtopic}
+                  onChange={handleChange}
+                  required
+                >
+                  <option value="">เลือกประเด็นย่อย</option>
+                  {topics[appointData.topic].map((subtopic) => (
+                    <option key={subtopic} value={subtopic}>
+                      {subtopic}
+                    </option>
+                  ))}
+                </select>
+              </label>
+            </div>
+          )}
           <div className="app-detail">
             <label>
-              เรื่องที่ขอรับการปรึกษา
+              รายละเอียดที่ขอรับการปรึกษา
               <br />
               <textarea
                 className="app-detail"
                 name="detail"
                 value={appointData.detail}
                 onChange={handleChange}
+                placeholder="รายละเอียด เช่น อาการที่เกิดขึ้น"
                 required
               />
             </label>
@@ -256,6 +335,8 @@ export default function Appoint() {
               />
             </label>
           </div>
+
+          {error && <p className="error-message">{error}</p>}
 
           <div className="dass21-app-footer">
             <button type="submit" className="btn btn-next">

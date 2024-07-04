@@ -179,6 +179,10 @@ input.tel , input.sos-tel{
     transition: .3s;
 }
 
+.btn {
+    font-family: ChulabhornLikitText-Regular;
+}
+
 .btn-next:hover {
     animation: pulse 1s infinite;
     transition: .3s;

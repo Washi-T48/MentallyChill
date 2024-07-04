@@ -3,3 +3,7 @@
     align-items: center;
     justify-content: space-between;
 }
+
+.radio-container span {
+    font-size: 18px;
+}

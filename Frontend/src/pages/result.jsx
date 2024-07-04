@@ -59,8 +59,8 @@ export default function Result() {
                   {type === "d"
                     ? "อาการซึมเศร้า (D)"
                     : type === "a"
-                      ? "ความวิตกกังวล (A)"
-                      : "ความเครียด (S)"}
+                    ? "ความวิตกกังวล (A)"
+                    : "ความเครียด (S)"}
                 </span>
                 <div> {scores[type]} คะแนน </div>
                 <div>{label}</div>
@@ -71,12 +71,16 @@ export default function Result() {
       </div>
       <div className="dass21-result-footer">
         <Link to="/">
-          <button className="btn btn-close">Close</button>
+          <button className="btn btn-close">ปิด</button>
         </Link>
         <button className="btn btn-next" onClick={() => navigate("/appoint")}>
-          Appointment
+          นัดหมายพบเจ้าหน้าที่
         </button>
       </div>
+      <small className="result-small">
+        * ข้อมูลที่ใช้ในการรับบริการการปรึกษา
+        จะเป็นความลับและไม่ส่งผลต่อผลการเรียน{" "}
+      </small>
     </div>
   );
 }
