@@ -71,6 +71,7 @@ const Content = ({
                 options={medList}
                 onSelect={handleChange}
                 selected={selectedMed}
+                name="medDoctor"
               />
               </div>
               <div className="flex flex-row text-2xl font-medium mb-4 items-center gap-3">
