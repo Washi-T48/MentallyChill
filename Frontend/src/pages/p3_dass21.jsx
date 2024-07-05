@@ -157,10 +157,10 @@ export default function P3_dass21() {
         </form>
         <div className="p3_dass21-footer">
           <button className="btn btn-prev" onClick={() => navigate(-1)}>
-            Back
+            ย้อนกลับ
           </button>
           <button className="btn btn-next" onClick={handleNextClick}>
-            Submit
+            ส่ง
           </button>
         </div>
       </div>

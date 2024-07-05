@@ -107,10 +107,14 @@ input {
 
 select.gender {
     max-width: 200px;
+    min-width: 110px;
     height: 55px;
+    min-height: 55px;
     font-family: ChulabhornLikitText-Regular;
     font-size: 16px;
     padding-left: 50px;
+    -webkit-appearance: none;
+    appearance: none;
 }
 
 .tel label, .sos-tel label, .email label, .year label {

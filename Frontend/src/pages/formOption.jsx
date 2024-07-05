@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./formOption.css";
 import Logo from "../components/logo";
 import EXicon from "../images/excla_icon.png";
 import Enter from "../images/enter_icon.png";
 import { useNavigate } from "react-router-dom";
 import Loading from "../components/Loading";
+import liff from "@line/liff";
 
 export default function FormOption() {
   const [loading, setLoading] = useState(false);
@@ -16,6 +17,28 @@ export default function FormOption() {
       window.location.href = `../formOption2?form_type=${formName}`;
     }, 500);
   };
+
+  useEffect(() => {
+    liff
+      .init({ liffId: "2005311386-6GQLXp7Z" })
+      .then(() => {
+        if (liff.isLoggedIn()) {
+          liff
+            .getProfile()
+            .then((profile) => {
+              localStorage.setItem("uid", profile.userId);
+            })
+            .catch((err) => {
+              console.error("Error getting profile:", err);
+            });
+        } else {
+          liff.login();
+        }
+      })
+      .catch((err) => {
+        console.error("Error initializing LIFF:", err);
+      });
+  }, []);
 
   if (loading) {
     return <Loading />;
