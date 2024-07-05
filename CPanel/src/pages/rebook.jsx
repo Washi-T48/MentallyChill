@@ -127,7 +127,7 @@ const Content = ({
                 </div> */}
               </div>
             </div>
-            <div className="flex flex-row justify-between border-t-4 border-[#FFFFFF] pt-3">
+            {/* <div className="flex flex-row justify-between border-t-4 border-[#FFFFFF] pt-3">
               <div className="flex flex-row items-center gap-3 text-2xl font-medium">
                 <div>หมายเลขโทรศัพท์ติดต่อ :</div>
                 <input type="text" className="border border-gray-300 p-2 rounded placeholder-gray-200"
@@ -147,7 +147,7 @@ const Content = ({
                   ปฏิเสธ
                 </button>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
