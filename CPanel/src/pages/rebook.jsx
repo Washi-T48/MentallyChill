@@ -26,6 +26,7 @@ const Content = ({
   const [selectedTopic, setSelectedTopic] = useState("");
   const [selectedMed, setSelectedMed] = useState("");
   const [currentDate, setCurrentDate] = useState("");
+  const timeSlots = ["10:00", "10:30", "11:00", "11:30"];
   const medList = ["CRA01", "CRA02", "CRA03", "CRA04", "CRA05"];
   const topicList = ["Topic 1", "Topic 2", "Topic 3"];
 
