@@ -69,7 +69,7 @@ const Content = ({
                 <Dropdown
                 name="medDoctor" 
                 value={appointData.medDoctor}
-                onChange={handleChange}
+                onSelect={handleChange}
                 options={medList}
                 placehold={"ผู้ให้คำปรึกษา"}
                 required
