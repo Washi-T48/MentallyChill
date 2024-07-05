@@ -67,11 +67,13 @@ const Content = ({
               <div className="flex flex-row text-2xl font-medium mb-4 items-center gap-3">
                 <div>ผู้ให้คำปรึกษาที่ต้องการพบ :</div>
                 <Dropdown
-                placehold={"ผู้ให้คำปรึกษา"}
+                name="medDoctor" 
+                value={appointData.medDoctor}
+                onChange={handleChange}
                 options={medList}
-                onSelect={handleChange}
-                selected={selectedMed}
-                name="medDoctor"
+                placehold={"ผู้ให้คำปรึกษา"}
+                required
+                
               />
               </div>
               <div className="flex flex-row text-2xl font-medium mb-4 items-center gap-3">
