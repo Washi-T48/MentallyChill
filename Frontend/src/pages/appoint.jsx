@@ -95,17 +95,11 @@ export default function Appoint() {
     setError("");
     setLoading(true);
 
-    // Combine subtopic and detail into one detail field
-    let combinedDetail = appointData.subtopic
-      ? `${appointData.subtopic} - ${appointData.detail}`
-      : appointData.detail;
-    let updatedAppointData = { ...appointData, detail: combinedDetail };
-
-    console.log(updatedAppointData);
+    console.log(appointData);
 
     setTimeout(() => {
       setLoading(false);
-      navigate("/confirm_app", { state: { appointData: updatedAppointData } });
+      navigate("/confirm_app", { state: { appointData } });
     }, 1000);
   };
 
