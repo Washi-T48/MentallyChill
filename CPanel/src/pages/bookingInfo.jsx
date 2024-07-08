@@ -407,7 +407,7 @@ export default function BookingInfoPage() {
               </button>
               <input
                 type="text"
-                placeholder="Search by User ID"
+                placeholder="ค้นหาโดยเลขที่ผู้ใช้"
                 value={searchTerm}
                 onChange={handleSearchTermChange}
                 className="py-2 px-4 rounded border"
