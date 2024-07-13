@@ -18,19 +18,19 @@ const app = express();
 dotenv.config();
 const PORT = process.env.PORT || 3000;
 
-const corsOptions = {
-    origin: [
-        'http://localhost',
-        'http://localhost:3000',
-        'http://localhost:5173',
-        'http://ligma.sombat.cc',
-        'http://ligma.sombat.cc:3000',
-        'http://ligma.sombat.cc:5173',
-        'http://together-hardy-dove.ngrok-free.app',
-        'https://together-hardy-dove.ngrok-free.app',
-    ],
-    credentials: true,
-}
+// const corsOptions = {
+//     origin: [
+//         'http://localhost',
+//         'http://localhost:3000',
+//         'http://localhost:5173',
+//         'http://ligma.sombat.cc',
+//         'http://ligma.sombat.cc:3000',
+//         'http://ligma.sombat.cc:5173',
+//         'http://together-hardy-dove.ngrok-free.app',
+//         'https://together-hardy-dove.ngrok-free.app',
+//     ],
+//     credentials: true,
+// }
 
 app.use(cors(corsOptions));
 app.use(express.json());
