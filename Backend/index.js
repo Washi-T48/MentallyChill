@@ -13,6 +13,13 @@ import timetableRouter from './Routes/timetableRoutes.js'
 import logger, { consoleLogExpress } from './Middleware/logger.js';
 import authMiddleware from './Middleware/auth.js';
 
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 const app = express();
 
 dotenv.config();
@@ -35,9 +42,9 @@ app.use("/appointment", appointmentRouter);
 app.use("/timetable", timetableRouter);
 
 https.createServer({
-    key: process.env.SSL_KEY,
-    cert: process.env.SSL_CERT,
-    ca: process.env.SSL_CA,
+    key: fs.readFileSync(path.resolve(__dirname, '../certs', 'privkey.pem')),
+    cert: fs.readFileSync(path.resolve(__dirname, '../certs', 'cert.pem')),
+    ca: fs.readFileSync(path.resolve(__dirname, '../certs', 'chain.pem')),
 }, app).listen(PORT, () => {
     logger.info(`Server started on port ${PORT}`);
 });
