@@ -8,9 +8,12 @@ import BookingHistoryPage from "./pages/bookingHistory";
 import BookingHistoryDonePage from "./pages/bookingHistoryDone";
 import SignInPage from "./pages/signin";
 import RebookPage from "./pages/rebook";
+import Calendar from "./components/calendar";
+
 
 import AuthCheck from "./components/authCheck";
 import ProtectedRoute from "./components/protectedroute";
+
 
 function App() {
 
@@ -43,6 +46,7 @@ function App() {
           <Route path="/rebook/:bookingId" element={<ProtectedRoute element={RebookPage} />} />
           <Route path="/bookinghistory/:bookingId" element={<ProtectedRoute element={BookingHistoryPage} />} />
           <Route path="/bookinghistorydone/:bookingId" element={<ProtectedRoute element={BookingHistoryDonePage} />} />
+          <Route path="/assigndate" element={<ProtectedRoute element={Calendar} />} />
         </Routes>
       </BrowserRouter>
     </>
