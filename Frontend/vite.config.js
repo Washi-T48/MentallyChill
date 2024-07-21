@@ -11,9 +11,9 @@ export default defineConfig({
   },
   server: {
     https: {
-      key: fs.readFileSync(path.resolve(__dirname, '../certs', 'privkey.pem')),
-      cert: fs.readFileSync(path.resolve(__dirname, '../certs', 'cert.pem')),
-      ca: fs.readFileSync(path.resolve(__dirname, '../certs', 'chain.pem')),
+      key: fs.readFileSync(path.resolve(__dirname, './certs', 'privkey.pem')),
+      cert: fs.readFileSync(path.resolve(__dirname, './certs', 'cert.pem')),
+      ca: fs.readFileSync(path.resolve(__dirname, './certs', 'chain.pem')),
     },
     host: '0.0.0.0',
     port: 443,
