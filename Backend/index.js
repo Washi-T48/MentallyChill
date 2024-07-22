@@ -22,6 +22,7 @@ const corsOptions = {
     origin: [
         'http://localhost',
         'http://localhost:3000',
+        'http://localhost:80',
         'http://localhost:5173',
         'http://ligma.sombat.cc',
         'http://ligma.sombat.cc:3000',

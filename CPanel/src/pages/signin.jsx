@@ -20,6 +20,7 @@ export default function SignInPage() {
       password: data.get("password")
     })
       .then(() => {
+        console.log("Login successful");
         navigate("/dashboard");
       })
       .catch(error => {
