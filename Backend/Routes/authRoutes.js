@@ -28,7 +28,11 @@ authRouter.post('/login', async (req, res) => {
 
         if (await comparePassword(password, staff.password)) {
             const token = jwt.sign({ staff_id: staff.staff_id }, process.env.JWT_SECRET, { expiresIn: '3h' });
-            res.cookie('token', token, { httpOnly: true });
+            res.cookie('token', token, {
+                httpOnly: true,
+                secure: true,
+                sameSite: 'None',
+            });
             res.status(200).json({ token });
         } else {
             res.sendStatus(401);
