@@ -1,6 +1,5 @@
 import axios from "axios";
-import logger from "../Config/logger.js";
-import { getAuthHeader } from "../Routes/auth.js";
+import { getAuthHeader } from '../Config/lineAuth.js';
 
 export default class HandleEvent {
     constructor(event) {
