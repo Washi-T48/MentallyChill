@@ -2,7 +2,7 @@ import Calendar from "../components/calendar";
 import Sidebar from "../components/sidebar";
 import Topbar from "../components/topbar";
 
-export default function DashboardPage() {
+export default function AssignDatePage() {
   return (
     <>
     <div className="flex flex-col flex-1 h-dvh">
@@ -11,7 +11,7 @@ export default function DashboardPage() {
             <div className="flex relative w-72">
                 <Sidebar />
             </div>
-            <div className="flex items-center justify-center bg-gray-100">
+            <div className="flex w-full items-center justify-center bg-gray-100">
                 <Calendar />
             </div>
         </div>
