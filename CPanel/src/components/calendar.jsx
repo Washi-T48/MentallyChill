@@ -76,8 +76,8 @@
 
 
 
-// src/Calendar.js
 import React, { useState } from 'react';
+import TimeSelectorModal from './timeselector';
 
 const daysInMonth = (month, year) => new Date(year, month + 1, 0).getDate();
 const getFirstDayOfMonth = (month, year) => new Date(year, month, 1).getDay();
@@ -86,10 +86,12 @@ const Calendar = () => {
   const today = new Date();
   const [currentMonth, setCurrentMonth] = useState(today.getMonth());
   const [currentYear, setCurrentYear] = useState(today.getFullYear());
+  const [selectedDay, setSelectedDay] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleClick = (day) => {
-    const date = new Date(currentYear, currentMonth, day);
-    console.log(date.toDateString());
+    setSelectedDay(day);
+    setIsModalOpen(true);
   };
 
   const handlePreviousMonth = () => {
@@ -126,7 +128,7 @@ const Calendar = () => {
           Next
         </button>
       </div>
-      <div className="grid grid-cols-7 gap-1 flex-grow items-center justify-center">
+      <div className="grid grid-cols-7 gap-1 flex-grow">
         {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((day, index) => (
           <div key={index} className="text-center font-bold p-2">
             {day}
@@ -139,14 +141,23 @@ const Calendar = () => {
           <div
             key={day}
             onClick={() => handleClick(day)}
-            className="cursor-pointer p-2 text-center rounded hover:bg-blue-100 h-20"
+            className="cursor-pointer p-2 text-center rounded hover:bg-blue-100 h-20 flex items-center justify-center"
           >
             {day}
           </div>
         ))}
       </div>
+      {isModalOpen && (
+        <TimeSelectorModal
+          day={selectedDay}
+          month={currentMonth}
+          year={currentYear}
+          onClose={() => setIsModalOpen(false)}
+        />
+      )}
     </div>
   );
 };
 
 export default Calendar;
+
