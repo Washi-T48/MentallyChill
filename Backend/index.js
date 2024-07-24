@@ -2,6 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv'
 import cookieParser from 'cookie-parser';
 import https from 'https';
+import cors from 'cors';
 
 import authRouter from './Routes/authRoutes.js';
 import userRouter from './Routes/userRoutes.js';
@@ -25,6 +26,10 @@ const app = express();
 dotenv.config();
 const PORT = process.env.PORT || 3000;
 
+app.use(cors({
+    origin: 'https://sombat.cc:443',
+    credentials: true
+}));
 app.use(express.json());
 app.use(cookieParser());
 app.use(consoleLogExpress);
