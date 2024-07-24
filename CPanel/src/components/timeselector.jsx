@@ -18,6 +18,7 @@ const TimeSelectorModal = ({ day, month, year, onClose }) => {
   const [startTime, setStartTime] = useState('');
   const [endTime, setEndTime] = useState('');
   const [filteredEndTimes, setFilteredEndTimes] = useState([]);
+  const [staffdata, setStaffdata] = useState(null);
   const timeSlots = generateTimeSlots();
 
   useEffect(() => {
@@ -29,12 +30,27 @@ const TimeSelectorModal = ({ day, month, year, onClose }) => {
     }
   }, [startTime]);
 
+  useEffect(() => {
+    const fetchStaffData = async () => {
+      try {
+        const response = await axios.get('/auth/check');
+        setStaffdata(response.data);
+        console.log(response.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchStaffData();
+  }, []);
+
   const handleSave = () => {
     console.log(`Date: ${year}-${month + 1}-${day}`);
     console.log(`Start Time: ${startTime}`);
     console.log(`End Time: ${endTime}`);
     try {
       axios.post('/timetable/new', {
+        staff_id: staffdata.staff_id,
         date: `${year}-${month + 1}-${day}`,
         time_start: startTime,
         time_end: endTime,
