@@ -61,7 +61,7 @@ authRouter.post('/register', authMiddleware, async (req, res) => {
 
 authRouter.get('/check', authMiddleware, async (req, res) => {
     try {
-        res.sendStatus(200);
+        res.status(200);
     } catch (err) {
         logger.error(err);
         res.sendStatus(500);
