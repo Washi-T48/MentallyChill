@@ -102,7 +102,7 @@ export default function P3_dass21() {
           uid: uid,
           form_type: "dass21",
           result: JSON.stringify(payload),
-        })
+        }, { withCredentials: true })
         .then(() => {
           localStorage.setItem("dass21Scores", JSON.stringify(scores)); // Save the scores
           navigate("/cri_dass21");
