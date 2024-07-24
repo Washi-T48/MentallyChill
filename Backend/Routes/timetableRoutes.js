@@ -76,4 +76,16 @@ timetableRouter.post('/check', async (req, res) => {
     }
 });
 
+timetableRouter.post('/getByStaffID', async (req, res) => {
+    try {
+        const { staff_id } = req.body;
+        const timetable = await getTimetableByStaffID(staff_id);
+        res.status(200).json(timetable);
+    }
+    catch (error) {
+        logger.error(error);
+        res.sendStatus(500);
+    }
+});
+
 export default timetableRouter;
