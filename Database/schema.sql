@@ -56,6 +56,23 @@ CREATE TABLE forms_result (
     CONSTRAINT forms_result_fk FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
 ALTER SEQUENCE forms_result_result_id_seq OWNED BY forms_result.result_id;
+CREATE SEQUENCE timetable_timetable_id_seq START WITH 1 INCREMENT BY 1 NO MINVALUE NO MAXVALUE;
+CREATE TABLE timetable (
+    timetable_id varchar NOT NULL DEFAULT nextval('timetable_timetable_id_seq'),
+    staff_id varchar NOT NULL,
+    created timestamp DEFAULT CURRENT_TIMESTAMP NULL,
+    time_range tsrange NOT NULL,
+    CONSTRAINT forms_result_pk PRIMARY KEY (timetable_id),
+    CONSTRAINT timetable_fk FOREIGN KEY (staff_id) REFERENCES staff(staff_id)
+);
+ALTER SEQUENCE timetable_id_seq OWNED BY timetable.timetable_id;
+CREATE SEQUENCE subtopic_id_seq START WITH 1 INCREMENT BY 1 NO MINVALUE NO MAXVALUE;
+
+CREATE TABLE subtopic (
+    subtopic_id varchar NOT NULL DEFAULT nextval('subtopic_subtopic_id_seq'),
+    created timestap DEFAULT CURRENT_TIMESTAMP NULL,
+    topic var
+)
 -- ESSENTIAL DATA
 -- INSERT INTO staff (
 --         staff_id,
