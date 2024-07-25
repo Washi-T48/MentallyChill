@@ -54,8 +54,8 @@ timetableRouter.get('/all', async (req, res) => {
 
 timetableRouter.delete('/delete', async (req, res) => {
     try {
-        const { staff_id } = req.body;
-        const timetable = await deleteTimeTable(staff_id);
+        const { timetable_id } = req.body;
+        const timetable = await deleteTimeTable(timetable_id);
         res.status(200).json(timetable);
     }
     catch (error) {
