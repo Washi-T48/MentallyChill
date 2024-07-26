@@ -20,7 +20,7 @@ const getTimeTable = async (timetable_id) => {
 const deleteTimeTable = async (timetable_id) => {
     const timeTable = await pool.query(
         `DELETE FROM timetable WHERE timetable_id = $1`,
-        [staff_id]
+        [timetable_id]
     );
     return (timeTable["rows"][0])
 };
