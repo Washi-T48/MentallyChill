@@ -74,7 +74,9 @@ export default function AssignDatePage() {
                   <thead>
                     <tr className="bg-emerald-400">
                       <th className="py-2 px-4">เจ้าหน้าที่</th>
-                      <th className="py-2 px-4">วันที่และเวลา</th>
+                      <th className="py-2 px-4">วันที่</th>
+                      <th className="py-2 px-4">เวลาเริ่มต้น</th>
+                      <th className="py-2 px-4">เวลาสิ้นสุด</th>
                       <th className="py-2 px-4">ลบเวลา</th>
                     </tr>
                   </thead>
@@ -87,7 +89,9 @@ export default function AssignDatePage() {
                         } text-center`}
                       >
                         <td className="py-2 px-4">{time.staff_id}</td>
-                        <td className="py-2 px-4">{time.time_range}</td>
+                        <td className="py-2 px-4">{time.date}</td>
+                        <td className="py-2 px-4">{time.time_start}</td>
+                        <td className="py-2 px-4">{time.time_end}</td>
                         <td className="py-2 px-4"><button
                           onClick={() => handleDelete(time.timetable_id)}
                           className="py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-700 transition duration-200 ease-in-out"

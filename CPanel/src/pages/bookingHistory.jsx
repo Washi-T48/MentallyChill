@@ -26,21 +26,21 @@ const Content = ({
     <>
       <div className="flex flex-col flex-1 m-10">
         <div className="text-5xl mb-10">ประวัติการจอง</div>
-        <div className="flex flex-row justify-between mb-10 p-3 bg-[#FFF3C7] border border-[#FFF3C7] border-4 rounded-lg">
+        <div className="flex flex-row justify-between mb-10 p-3 bg-[#FFAD4D] border border-[#FFF3C7] border-4 rounded-lg">
           <div className="text-4xl font-semibold">เลขที่การจอง : {bookingId}</div>
           <div className="text-4xl font-semibold">เลขที่ผู้ใช้ : {data.user_id}</div>
         </div>
-        <div className="flex flex-col flex-1 bg-[#FFAD4D] border border-[#FFAD4D] border-4 rounded-lg h-full ">
+        <div className="flex flex-col flex-1 bg-[#003087] border border-[#003087] border-4 rounded-lg h-full ">
           <div className="p-4 flex flex-col justify-between h-full">
             <div>
-              <div className="flex flex-row justify-between text-2xl font-medium mb-4">
+              <div className="flex flex-row justify-between text-2xl font-medium mb-4 text-white">
                 <div>หัวข้อ : {data.topic}</div>
                 <div className="flex flex-row gap-3">
                   <div>{appointmentDate}</div>
                   <div>{appointmentTime}</div>
                 </div>
               </div>
-              <div className="grid grid-cols-2 text-2xl font-medium mb-4 pt-3 border-t-4 border-[#FFFFFF]">
+              <div className="grid grid-cols-2 text-2xl font-medium mb-4 pt-3 border-t-4 border-[#FFFFFF] text-white">
                 <div>โน้ต</div>
                 <div>ความคิดเห็นส่วนตัว</div>
               </div>
@@ -51,7 +51,7 @@ const Content = ({
                     value={note}
                     onChange={(e) => setNote(e.target.value)}
                   />
-                  <div className="text-2xl font-medium mb-4">สรุปผล</div>
+                  <div className="text-2xl font-medium mb-4 text-white">สรุปผล</div>
                   <textarea
                     className="flex w-full h-16 bg-gray-100 break-all p-2"
                     value={con}
