@@ -3,8 +3,8 @@ import pool from '../Config/db.js';
 const newTimeTable = async (staff_id, date, time_start, time_end) => {
     const timerange = "[" + String(date) + " " + String(time_start) + ", " + String(date) + " " + String(time_end) + "]";
     const newTimeTable = await pool.query(
-        `INSERT INTO timetable (staff_id, time_range) VALUES($1, $2) RETURNING *`,
-        [staff_id, timerange]
+        `INSERT INTO timetable (staff_id, time_range, time_start, time_end, date) VALUES($1, $2, $3, $4, $5) RETURNING *`,
+        [staff_id, timerange, time_start, time_end, date]
     );
     return (newTimeTable["rows"][0]);
 };

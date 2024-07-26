@@ -1,6 +1,5 @@
-import axios from './axioscreds'
+import axios from './axioscreds';
 import React, { useState, useEffect } from 'react';
-
 
 const generateTimeSlots = () => {
   const times = [];
@@ -14,11 +13,11 @@ const generateTimeSlots = () => {
   return times;
 };
 
-const TimeSelectorModal = ({ day, month, year, onClose }) => {
+const TimeSelectorModal = ({ day, month, year, onClose, onSave }) => {
   const [startTime, setStartTime] = useState('');
   const [endTime, setEndTime] = useState('');
   const [filteredEndTimes, setFilteredEndTimes] = useState([]);
-  const [staffdata, setStaffdata] = useState(null);
+  const [staffData, setStaffData] = useState(null);
   const timeSlots = generateTimeSlots();
 
   useEffect(() => {
@@ -34,29 +33,27 @@ const TimeSelectorModal = ({ day, month, year, onClose }) => {
     const fetchStaffData = async () => {
       try {
         const response = await axios.get('/auth/check');
-        setStaffdata(response.data);
-        console.log(response.data);
+        setStaffData(response.data);
       } catch (error) {
-        console.error("Error fetching data:", error);
+        console.error('Error fetching data:', error);
       }
     };
 
     fetchStaffData();
   }, []);
 
-  const handleSave = () => {
-    console.log(`Date: ${year}-${month + 1}-${day}`);
-    console.log(`Start Time: ${startTime}`);
-    console.log(`End Time: ${endTime}`);
+  const handleSave = async () => {
+    const date = `${year}-${(month + 1).toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
     try {
-      axios.post('/timetable/new', {
-        staff_id: staffdata.staff_id,
-        date: `${year}-${month + 1}-${day}`,
+      await axios.post('/timetable/new', {
+        staff_id: staffData.staff_id,
+        date,
         time_start: startTime,
         time_end: endTime,
       });
+      onSave(date);
     } catch (error) {
-      console.error(error);
+      console.error('Error saving data:', error);
     }
     onClose();
   };
@@ -119,3 +116,4 @@ const TimeSelectorModal = ({ day, month, year, onClose }) => {
 };
 
 export default TimeSelectorModal;
+

@@ -40,7 +40,7 @@ export default function AssignDatePage() {
     };
 
     fetchTimeTableData();
-  }, [staffdata]); // Dependency array with staffdata ensures this runs when staffdata changes
+  }, [staffdata, timetabledata]); // Dependency array with staffdata ensures this runs when staffdata changes
 
 
   const handleDelete = async (t_id) => {
@@ -49,6 +49,8 @@ export default function AssignDatePage() {
         data: { timetable_id: t_id }
       });
       console.log("hello");
+      // Update the timetable data after deletion
+      setTimetabledata(prevData => prevData.filter(time => time.timetable_id !== t_id));
     } catch (error) {
       console.error('There has been a problem with your axios operation:', error);
     }
@@ -67,11 +69,12 @@ export default function AssignDatePage() {
                 <Calendar />
               </div>
               <div className="text-2xl pb-5">ตารางเวลา</div>
-              <table className="w-full">
+              {timetabledata.length > 0 ? (
+                <table className="w-full">
                   <thead>
                     <tr className="bg-emerald-400">
                       <th className="py-2 px-4">เจ้าหน้าที่</th>
-                      <th className="py-2 px-4">วันที่</th>
+                      <th className="py-2 px-4">วันที่และเวลา</th>
                       <th className="py-2 px-4">ลบเวลา</th>
                     </tr>
                   </thead>
@@ -86,15 +89,18 @@ export default function AssignDatePage() {
                         <td className="py-2 px-4">{time.staff_id}</td>
                         <td className="py-2 px-4">{time.time_range}</td>
                         <td className="py-2 px-4"><button
-                      onClick={() => handleDelete(index)}
-                      className="py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-700 transition duration-200 ease-in-out"
-                    >
-                      ลบเวลา
-                    </button></td>
+                          onClick={() => handleDelete(time.timetable_id)}
+                          className="py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-700 transition duration-200 ease-in-out"
+                        >
+                          ลบเวลา
+                        </button></td>
                       </tr>
                     ))}
                   </tbody>
                 </table>
+              ) : (
+                <div className="text-center text-gray-500">ไม่มีเวลาที่ลงไว้</div>
+              )}
             </div>
         </div>
     </div>
