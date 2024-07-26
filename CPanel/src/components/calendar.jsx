@@ -358,7 +358,7 @@ const Calendar = () => {
     };
 
     fetchAssignedDates();
-  }, [staffdata]);
+  }, [staffdata, assignedDates]);
 
   const handleClick = (day) => {
     setSelectedDay(day);
