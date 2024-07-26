@@ -188,17 +188,17 @@ export default function BookingInfoPage() {
         <table className="w-full">
           <thead>
             <tr className="bg-[#003087] text-white">
-              <th className="py-2 px-4 text-3xl text-center rounded-tl-xl">
+              <th className="py-2 px-4 text-2xl text-center rounded-tl-xl">
                 สถานะ
               </th>
-              <th className="py-2 px-4 text-3xl text-center">วันที่</th>
-              <th className="py-2 px-4 text-3xl text-center">หัวข้อ</th>
-              <th className="py-2 px-4 text-3xl text-center">เวลา</th>
-              <th className="py-2 px-4 text-3xl text-center">เลขที่ผู้ใช้</th>
-              <th className="py-2 px-4 text-3xl text-center">
+              <th className="py-2 px-4 text-2xl text-center">วันที่</th>
+              <th className="py-2 px-4 text-2xl text-center">หัวข้อ</th>
+              <th className="py-2 px-4 text-2xl text-center">เวลา</th>
+              <th className="py-2 px-4 text-2xl text-center">เลขที่ผู้ใช้</th>
+              <th className="py-2 px-4 text-2xl text-center">
                 เลขที่การจอง
               </th>
-              <th className="py-2 px-4 text-3xl text-center rounded-tr-xl">
+              <th className="py-2 px-4 text-2xl text-center rounded-tr-xl">
                 จองอีกครั้ง
               </th>
             </tr>
