@@ -31,10 +31,8 @@ export default function AssignDatePage() {
           const response = await axios.post('/timetable/getByStaffID', {
             staff_id: staffdata.staff_id
           });
-
-          const timetable = response.data;
-          console.log(timetable);
-          setTimetabledata(timetable); // Set the timetable data to state if needed
+          setTimetabledata(response.data); // Set the timetable data to state if needed
+          console.log(response.data);
         } catch (error) {
           console.error('There has been a problem with your axios operation:', error);
         }
@@ -44,6 +42,17 @@ export default function AssignDatePage() {
     fetchTimeTableData();
   }, [staffdata]); // Dependency array with staffdata ensures this runs when staffdata changes
 
+
+  const handleDelete = async (t_id) => {
+    try {
+      const response = await axios.delete('/timetable/delete', {
+        data: { timetable_id: t_id }
+      });
+      console.log("hello");
+    } catch (error) {
+      console.error('There has been a problem with your axios operation:', error);
+    }
+  };
 
   return (
     <>
@@ -63,6 +72,7 @@ export default function AssignDatePage() {
                     <tr className="bg-emerald-400">
                       <th className="py-2 px-4">เจ้าหน้าที่</th>
                       <th className="py-2 px-4">วันที่</th>
+                      <th className="py-2 px-4">ลบเวลา</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -75,6 +85,12 @@ export default function AssignDatePage() {
                       >
                         <td className="py-2 px-4">{time.staff_id}</td>
                         <td className="py-2 px-4">{time.time_range}</td>
+                        <td className="py-2 px-4"><button
+                      onClick={() => handleDelete(index)}
+                      className="py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-700 transition duration-200 ease-in-out"
+                    >
+                      ลบเวลา
+                    </button></td>
                       </tr>
                     ))}
                   </tbody>

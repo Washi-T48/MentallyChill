@@ -10,7 +10,7 @@ export default function Topbar() {
       try {
         const response = await axios.get('/auth/check');
         setStaffdata(response.data);
-        console.log(response.data);
+        // console.log(response.data);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
