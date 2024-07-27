@@ -89,9 +89,9 @@ export default function AssignDatePage() {
                         } text-center`}
                       >
                         <td className="py-2 px-4">{time.staff_id}</td>
-                        <td className="py-2 px-4">{time.date}</td>
-                        <td className="py-2 px-4">{time.time_start}</td>
-                        <td className="py-2 px-4">{time.time_end}</td>
+                        <td className="py-2 px-4">{new Date(time.date).toISOString().split('T')[0]}</td>
+                        <td className="py-2 px-4">{time.time_start.split(':').slice(0, 2).join(':')}</td>
+                        <td className="py-2 px-4">{time.time_end.split(':').slice(0, 2).join(':')}</td>
                         <td className="py-2 px-4"><button
                           onClick={() => handleDelete(time.timetable_id)}
                           className="py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-700 transition duration-200 ease-in-out"

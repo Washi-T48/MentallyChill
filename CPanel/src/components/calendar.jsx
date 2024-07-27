@@ -422,7 +422,10 @@ const Calendar = () => {
         ))}
         {days.map((day) => {
           const dateString = `${currentYear}-${(currentMonth + 1).toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
-          const isAssigned = assignedDates.includes(dateString);
+          // const isAssigned = assignedDates.includes(dateString);
+          const isAssigned = assignedDates.some(assignedDate => {
+            return new Date(assignedDate).toISOString().split('T')[0] === dateString;
+          });
 
           return (
             <div
