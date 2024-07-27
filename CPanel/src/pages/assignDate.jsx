@@ -32,7 +32,6 @@ export default function AssignDatePage() {
             staff_id: staffdata.staff_id
           });
           setTimetabledata(response.data); // Set the timetable data to state if needed
-          console.log(response.data);
         } catch (error) {
           console.error('There has been a problem with your axios operation:', error);
         }
@@ -48,13 +47,12 @@ export default function AssignDatePage() {
       const response = await axios.delete('/timetable/delete', {
         data: { timetable_id: t_id }
       });
-      console.log("hello");
-      // Update the timetable data after deletion
-      setTimetabledata(prevData => prevData.filter(time => time.timetable_id !== t_id));
+
     } catch (error) {
       console.error('There has been a problem with your axios operation:', error);
     }
   };
+  
 
   return (
     <>
@@ -89,7 +87,8 @@ export default function AssignDatePage() {
                         } text-center`}
                       >
                         <td className="py-2 px-4">{time.staff_id}</td>
-                        <td className="py-2 px-4">{new Date(time.date).toISOString().split('T')[0]}</td>
+                        {/* <td className="py-2 px-4">{new Date(time.date).toISOString().split('T')[0]}</td> */}
+                        <td className="py-2 px-4">{time.date}</td>
                         <td className="py-2 px-4">{time.time_start.split(':').slice(0, 2).join(':')}</td>
                         <td className="py-2 px-4">{time.time_end.split(':').slice(0, 2).join(':')}</td>
                         <td className="py-2 px-4"><button
