@@ -3,7 +3,7 @@ import dotenv from 'dotenv'
 import cookieParser from 'cookie-parser';
 import https from 'https';
 
-import lineWebhookRouter from './Routes/lineWebhookRoutes.js';
+import lineRouter from './Routes/lineRoutes.js';
 
 import authRouter from './Routes/authRoutes.js';
 import userRouter from './Routes/userRoutes.js';
@@ -36,7 +36,7 @@ app.all("/", (req, res) => {
     res.sendStatus(200)
 });
 
-app.use("/webhook", authMiddleware, lineWebhookRouter);
+app.use("/line", lineRouter);
 app.use("/auth", authRouter)
 app.use("/user", userRouter);
 app.use("/staff", staffRouter);
