@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 
 const generateTimeSlots = () => {
   const times = [];
-  for (let i = 6; i < 24; i++) {
+  for (let i = 6; i < 24; i++) { // change frome 0 AM to 11 PM to 6 AM to 11 PM
     for (let j = 0; j < 60; j += 30) {
       const hour = i.toString().padStart(2, '0');
       const minute = j.toString().padStart(2, '0');
