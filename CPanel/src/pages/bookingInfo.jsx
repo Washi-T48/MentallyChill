@@ -118,15 +118,6 @@ export default function BookingInfoPage() {
     setCurrentUserId(null);
   };
 
-  const handleModalSubmit = async (formData) => {
-    try {
-      await axios.post(`/appointment/new`, formData);
-      console.log('Rebook successful');
-      setIsModalOpen(false);
-    } catch (error) {
-      console.error('Error rebooking appointment:', error);
-    }
-  };
 
   const Content = () => {
     const gotoDetail = (status, bookingId) => {
@@ -278,7 +269,10 @@ export default function BookingInfoPage() {
       <Modal
         isOpen={isModalOpen}
         onClose={handleModalClose}
-        onSubmit={handleModalSubmit}
+        onSubmit={() => {
+          setIsModalOpen(false);
+          setCurrentPage(1);
+        }}
         userId={currentUserId}
         topicData= "นัดหมายเพิ่มเติม"
         statusdata= "pending"
