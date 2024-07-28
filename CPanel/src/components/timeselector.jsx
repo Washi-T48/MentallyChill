@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 
 const generateTimeSlots = () => {
   const times = [];
-  for (let i = 0; i < 24; i++) {
+  for (let i = 6; i < 24; i++) {
     for (let j = 0; j < 60; j += 30) {
       const hour = i.toString().padStart(2, '0');
       const minute = j.toString().padStart(2, '0');
