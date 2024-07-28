@@ -11,7 +11,7 @@ const Calendar = ({ setFetchTrigger }) => {
   const [currentYear, setCurrentYear] = useState(today.getFullYear());
   const [selectedDay, setSelectedDay] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [assignedDates, setAssignedDates] = useState([]);
+  const [assignedDates, setAssignedDates] = useState({});
   const [staffdata, setStaffdata] = useState(null);
 
   const dayColors = ['bg-rose-400', 'bg-amber-300', 'bg-fuchsia-300', 'bg-lime-300', 'bg-orange-300', 'bg-cyan-300', 'bg-purple-300'];
@@ -49,7 +49,12 @@ const Calendar = ({ setFetchTrigger }) => {
           const response = await axios.post('/timetable/getByStaffID', {
             staff_id: staffdata.staff_id
           });
-          const dates = response.data.map(entry => entry.date.split(' ')[0]);
+          const dates = response.data.reduce((acc, entry) => {
+            const date = entry.date.split(' ')[0];
+            if (!acc[date]) acc[date] = [];
+            acc[date].push({ start: entry.time_start, end: entry.time_end });
+            return acc;
+          }, {});
           setAssignedDates(dates);
         } catch (error) {
           console.error('Error fetching assigned dates:', error);
@@ -61,11 +66,6 @@ const Calendar = ({ setFetchTrigger }) => {
   }, [staffdata]);
 
   const handleClick = (day) => {
-    const dateString = `${currentYear}-${(currentMonth + 1).toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
-    if (assignedDates.includes(dateString)) {
-      alert('This date is already assigned.');
-      return;
-    }
     setSelectedDay(day);
     setIsModalOpen(true);
   };
@@ -122,13 +122,13 @@ const Calendar = ({ setFetchTrigger }) => {
         ))}
         {days.map((day) => {
           const dateString = `${currentYear}-${(currentMonth + 1).toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
-          const isAssigned = assignedDates.includes(dateString);
+          const isAssigned = assignedDates[dateString];
 
           return (
             <div
               key={day}
               onClick={() => handleClick(day)}
-              className={`cursor-pointer p-2 text-center rounded hover:bg-blue-100 h-20 flex items-center justify-center ${isAssigned ? 'bg-green-300' : ''}`}
+              className={`cursor-pointer p-2 text-center rounded hover:bg-blue-100 h-20 flex flex-col items-center justify-center ${isAssigned ? 'bg-green-300' : ''}`}
             >
               {day}
             </div>
@@ -141,9 +141,14 @@ const Calendar = ({ setFetchTrigger }) => {
           month={currentMonth}
           year={currentYear}
           onClose={() => setIsModalOpen(false)}
-          onSave={(date) => {
-            setAssignedDates((prevDates) => [...prevDates, date]);
-            setFetchTrigger((prev) => !prev); // Toggle fetchTrigger
+          onSave={(date, start, end) => {
+            setAssignedDates((prevDates) => {
+              const updatedDates = { ...prevDates };
+              if (!updatedDates[date]) updatedDates[date] = [];
+              updatedDates[date].push({ start, end });
+              return updatedDates;
+            });
+            setFetchTrigger((prev) => !prev);
           }}
         />
       )}
