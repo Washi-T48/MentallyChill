@@ -26,7 +26,7 @@ const Content = ({
     <>
       <div className="flex flex-col flex-1 m-10">
         <div className="text-5xl mb-10">ประวัติการจอง</div>
-        <div className="flex flex-row justify-between mb-10 p-3 bg-[##FFF3C7] border border-[#FFF3C7] border-4 rounded-lg">
+        <div className="flex flex-row justify-between mb-10 p-3 bg-[#FFF3C7] border border-[#FFF3C7] border-4 rounded-lg">
           <div className="text-4xl font-semibold">เลขที่การจอง : {bookingId}</div>
           <div className="text-4xl font-semibold">เลขที่ผู้ใช้ : {data.user_id}</div>
         </div>
