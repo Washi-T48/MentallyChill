@@ -8,6 +8,7 @@ export default function Modal({ isOpen, onClose, onSubmit, userId, topicData, st
   const [appointmentDate, setAppointmentDate] = useState('');
   const [timeSlots, setTimeSlots] = useState([]);
   const [contactMethod, setContactMethod] = useState('เบอร์โทร');
+  const [formSubmitted, setFormSubmitted] = useState(false);
 
   useEffect(() => {
     if (isOpen) {
@@ -38,6 +39,12 @@ export default function Modal({ isOpen, onClose, onSubmit, userId, topicData, st
     }
   }, [selectedStaff, appointmentDate]);
 
+  useEffect(() => {
+    if (formSubmitted) {
+      window.location.reload();
+    }
+  }, [formSubmitted]);
+
   if (!isOpen) return null;
 
   const handleSubmit = (event) => {
@@ -45,12 +52,11 @@ export default function Modal({ isOpen, onClose, onSubmit, userId, topicData, st
     const formData = new FormData(event.target);
     const formProps = Object.fromEntries(formData.entries());
     const [staff_id] = selectedStaff.split(' - ');
-    console.log (staff_id);
 
     const appointmentData = {
       uid: userId,
       tel: contactMethod === 'เบอร์โทร' ? formProps.tel : '',
-      medDoctor : staff_id,
+      medDoctor: staff_id,
       contactMethod: formProps.contactMethod,
       date: formProps.appointmentDate,
       time: formProps.appointmentTime,
@@ -62,6 +68,7 @@ export default function Modal({ isOpen, onClose, onSubmit, userId, topicData, st
     axios.post('/appointment/new', appointmentData)
       .then(response => {
         onSubmit(response.data);
+        setFormSubmitted(true);
       })
       .catch(error => {
         console.error('Error submitting appointment:', error);
@@ -177,13 +184,13 @@ export default function Modal({ isOpen, onClose, onSubmit, userId, topicData, st
               className="mr-4 py-2 px-4 bg-gray-300 rounded"
               onClick={onClose}
             >
-              Cancel
+              ยกเลิก
             </button>
             <button
               type="submit"
               className="py-2 px-4 bg-blue-500 text-white rounded"
             >
-              Submit
+              ยืนยันการจอง
             </button>
           </div>
         </form>
