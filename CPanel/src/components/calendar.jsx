@@ -5,7 +5,7 @@ import TimeSelectorModal from './timeselector';
 const daysInMonth = (month, year) => new Date(year, month + 1, 0).getDate();
 const getFirstDayOfMonth = (month, year) => new Date(year, month, 1).getDay();
 
-const Calendar = () => {
+const Calendar = ({ setFetchTrigger }) => {
   const today = new Date();
   const [currentMonth, setCurrentMonth] = useState(today.getMonth());
   const [currentYear, setCurrentYear] = useState(today.getFullYear());
@@ -49,7 +49,6 @@ const Calendar = () => {
           const response = await axios.post('/timetable/getByStaffID', {
             staff_id: staffdata.staff_id
           });
-          // const dates = response.data;
           const dates = response.data.map(entry => entry.date.split(' ')[0]);
           setAssignedDates(dates);
         } catch (error) {
@@ -59,7 +58,7 @@ const Calendar = () => {
     };
 
     fetchAssignedDates();
-  }, [staffdata , assignedDates]);
+  }, [staffdata]);
 
   const handleClick = (day) => {
     const dateString = `${currentYear}-${(currentMonth + 1).toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
@@ -144,7 +143,7 @@ const Calendar = () => {
           onClose={() => setIsModalOpen(false)}
           onSave={(date) => {
             setAssignedDates((prevDates) => [...prevDates, date]);
-            setIsModalOpen(false); // Close modal after saving
+            setFetchTrigger((prev) => !prev); // Toggle fetchTrigger
           }}
         />
       )}
