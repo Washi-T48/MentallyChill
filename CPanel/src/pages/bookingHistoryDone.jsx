@@ -17,7 +17,7 @@ const Content = ({ handleClick, note, setNote, con, setCon, feed, setFeed, booki
     <>
       <div className="m-10 w-full flex flex-col">
         <div className="text-5xl mb-10">ประวัติการจอง</div>
-        <div className="flex flex-row justify-between text-4xl bg-[#FFAD4D] p-3 rounded-lg border border-4 border-[#FFF3C7] mb-10">
+        <div className="flex flex-row justify-between text-4xl bg-[#FFF3C7] p-3 rounded-lg border border-4 border-[#FFF3C7] mb-10">
           <div>เลขที่การจอง : {bookingId}</div>
           <div className="col-start-3">เลขที่ผู้ใช้ : {data.user_id}</div>
         </div>

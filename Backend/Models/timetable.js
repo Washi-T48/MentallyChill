@@ -58,7 +58,7 @@ const checkStaffAvailable = async (staff_id, date, time_start, time_end) => {
 
 const getStaffTimeByDate = async (staff_id, date) => {
     const timetable = await pool.query(
-        `SELECT *, left(lower(time_range)::varchar, 10) as date, lower(time_range)::time as time_start, upper(time_range)::time as time_end FROM timetable WHERE staff_id = $1 AND left(lower(time_range)::varchar, 10) as date = $2::date`,
+        `SELECT *, left(lower(time_range)::varchar, 10) as date, lower(time_range)::time as time_start, upper(time_range)::time as time_end FROM timetable WHERE staff_id = $1 AND left(lower(time_range)::varchar, 10) = $2`,
         [staff_id, date]
     );
     return (timetable["rows"]);

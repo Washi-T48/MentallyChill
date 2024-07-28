@@ -1,28 +1,28 @@
-import axios from "axios";
-import { useEffect, useState, useRef } from "react";
-import { IoChatboxEllipsesSharp } from "react-icons/io5";
-import {
-  MdOutlineCheckBox,
-  MdOutlineCheckBoxOutlineBlank,
-  MdOutlineIndeterminateCheckBox,
-} from "react-icons/md";
-import { useNavigate } from "react-router-dom";
-import Dropdown from "../components/dropdown";
-import Sidebar from "../components/sidebar";
-import Topbar from "../components/topbar";
+import React, { useState, useEffect, useRef } from 'react';
+import axios from 'axios';
+import { IoChatboxEllipsesSharp } from 'react-icons/io5';
+import { MdOutlineCheckBox, MdOutlineCheckBoxOutlineBlank, MdOutlineIndeterminateCheckBox } from 'react-icons/md';
+import { useNavigate } from 'react-router-dom';
+import Dropdown from '../components/dropdown';
+import Sidebar from '../components/sidebar';
+import Topbar from '../components/topbar';
+import Modal from '../components/rebook';
 
 export default function BookingInfoPage() {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [selectedTopic, setSelectedTopic] = useState("");
-  const [selectedStatus, setSelectedStatus] = useState("");
-  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedTopic, setSelectedTopic] = useState('');
+  const [selectedStatus, setSelectedStatus] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
   const [topicData, setTopicData] = useState([]);
   const rowsPerPage = 10;
   const topicList = topicData.map((item) => item.topic);
 
   const searchInputRef = useRef(null);
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentUserId, setCurrentUserId] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -30,7 +30,7 @@ export default function BookingInfoPage() {
         const response = await axios.get(`/appointment/all`);
         setData(response.data);
       } catch (error) {
-        console.error("Error fetching data:", error);
+        console.error('Error fetching data:', error);
       }
     };
 
@@ -39,7 +39,7 @@ export default function BookingInfoPage() {
         const response = await axios.get(`/appointment/topic`);
         setTopicData(response.data);
       } catch (error) {
-        console.error("Error fetching topic data:", error);
+        console.error('Error fetching topic data:', error);
       }
     };
 
@@ -49,7 +49,7 @@ export default function BookingInfoPage() {
 
   useEffect(() => {
     if (searchInputRef.current) {
-      searchInputRef.current.focus(); 
+      searchInputRef.current.focus();
     }
   }, [searchTerm]);
 
@@ -69,21 +69,21 @@ export default function BookingInfoPage() {
   };
 
   const clearAllFilters = () => {
-    setSelectedTopic("");
-    setSelectedStatus("");
-    setSearchTerm("");
+    setSelectedTopic('');
+    setSelectedStatus('');
+    setSearchTerm('');
     setCurrentPage(1); // Reset to the first page
   };
 
   const getStatusIcon = (status) => {
     switch (status) {
-      case "pending":
+      case 'pending':
         return <MdOutlineCheckBoxOutlineBlank className="bg-amber-300" />;
-      case "feedback":
+      case 'feedback':
         return <IoChatboxEllipsesSharp className="bg-violet-400" />;
-      case "decline":
+      case 'decline':
         return <MdOutlineIndeterminateCheckBox className="bg-red-400" />;
-      case "complete":
+      case 'complete':
         return <MdOutlineCheckBox className="bg-green-400" />;
       default:
         return null;
@@ -112,23 +112,38 @@ export default function BookingInfoPage() {
     (currentPage - 1) * rowsPerPage,
     currentPage * rowsPerPage
   );
+  
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+    setCurrentUserId(null);
+  };
+
+  const handleModalSubmit = async (formData) => {
+    try {
+      await axios.post(`/appointment/new`, formData);
+      console.log('Rebook successful');
+      setIsModalOpen(false);
+    } catch (error) {
+      console.error('Error rebooking appointment:', error);
+    }
+  };
 
   const Content = () => {
     const gotoDetail = (status, bookingId) => {
-      if (status === "pending") {
+      if (status === 'pending') {
         navigate(`/bookingdetails/${bookingId}`);
-      } else if (status === "feedback") {
+      } else if (status === 'feedback') {
         navigate(`/bookinghistory/${bookingId}`);
-      } else if (status === "complete") {
+      } else if (status === 'complete') {
         navigate(`/bookinghistorydone/${bookingId}`);
       }
       // For "Declined" status, stay on the same page
     };
 
-    const handleRebook = (event, bookingId) => {
-      event.stopPropagation(); 
-      console.log(`Rebook booking with ID: ${bookingId}`);
-      navigate(`/rebook/${bookingId}`);
+    const handleRebook = (event, userId) => {
+      event.stopPropagation();
+      setCurrentUserId(userId);
+      setIsModalOpen(true);
     };
 
     return (
@@ -139,14 +154,14 @@ export default function BookingInfoPage() {
             <div className="flex flex-row gap-4 mb-10 items-center">
               <div className="text-4xl">Filter : </div>
               <Dropdown
-                placehold={"หัวข้อ"}
+                placehold={'หัวข้อ'}
                 options={topicList}
                 onSelect={handleSelectTopic}
                 selected={selectedTopic}
               />
               <Dropdown
-                placehold={"สถานะ"}
-                options={["pending", "feedback", "complete", "decline"]}
+                placehold={'สถานะ'}
+                options={['pending', 'feedback', 'complete', 'decline']}
                 onSelect={handleSelectStatus}
                 selected={selectedStatus}
               />
@@ -188,19 +203,13 @@ export default function BookingInfoPage() {
         <table className="w-full">
           <thead>
             <tr className="bg-[#003087] text-white">
-              <th className="py-2 px-4 text-2xl text-center rounded-tl-xl">
-                สถานะ
-              </th>
+              <th className="py-2 px-4 text-2xl text-center rounded-tl-xl">สถานะ</th>
               <th className="py-2 px-4 text-2xl text-center">วันที่</th>
               <th className="py-2 px-4 text-2xl text-center">หัวข้อ</th>
               <th className="py-2 px-4 text-2xl text-center">เวลา</th>
               <th className="py-2 px-4 text-2xl text-center">เลขที่ผู้ใช้</th>
-              <th className="py-2 px-4 text-2xl text-center">
-                เลขที่การจอง
-              </th>
-              <th className="py-2 px-4 text-2xl text-center rounded-tr-xl">
-                จองอีกครั้ง
-              </th>
+              <th className="py-2 px-4 text-2xl text-center">เลขที่การจอง</th>
+              <th className="py-2 px-4 text-2xl text-center rounded-tr-xl">จองอีกครั้ง</th>
             </tr>
           </thead>
           <tbody>
@@ -208,34 +217,24 @@ export default function BookingInfoPage() {
               <tr
                 key={index}
                 className={`transition ease-in-out duration-150 border-2 ${
-                  index % 2 === 0 ? "bg-zinc-200" : "bg-gray-300"
+                  index % 2 === 0 ? 'bg-zinc-200' : 'bg-gray-300'
                 } ${
-                  row.status === "decline"
-                    ? "hover:cursor-default"
-                    : "hover:bg-gray-500 hover:text-white hover:cursor-pointer"
+                  row.status === 'decline'
+                    ? 'hover:cursor-default'
+                    : 'hover:bg-gray-500 hover:text-white hover:cursor-pointer'
                 }`}
                 onClick={() => gotoDetail(row.status, row.booking_id)}
               >
-                <td className="pl-24 text-center text-3xl">
-                  {getStatusIcon(row.status)}
-                </td>
-                <td className="py-1.5 text-center text-xl">
-                  {row.appointment_date.substring(0, 10)}
-                </td>
+                <td className="pl-24 text-center text-3xl">{getStatusIcon(row.status)}</td>
+                <td className="py-1.5 text-center text-xl">{row.appointment_date.substring(0, 10)}</td>
                 <td className="py-1.5 px-4 text-center text-xl">{row.topic}</td>
-                <td className="py-1.5 px-4 text-center text-xl">
-                  {row.appointment_date.substring(11, 16)}
-                </td>
-                <td className="py-1.5 px-4 text-center text-xl">
-                  {row.user_id}
-                </td>
-                <td className="py-1.5 px-4 text-center text-xl">
-                  {row.booking_id}
-                </td>
+                <td className="py-1.5 px-4 text-center text-xl">{row.appointment_date.substring(11, 16)}</td>
+                <td className="py-1.5 px-4 text-center text-xl">{row.user_id}</td>
+                <td className="py-1.5 px-4 text-center text-xl">{row.booking_id}</td>
                 <td className="py-1 px-4 text-center text-md">
-                  {row.status === "complete" && (
+                  {row.status === 'complete' && (
                     <button
-                      onClick={(event) => handleRebook(event, row.booking_id)}
+                      onClick={(event) => handleRebook(event, row.user_id)}
                       className="py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-700 transition duration-200 ease-in-out"
                     >
                       จองอีกครั้ง
@@ -276,6 +275,14 @@ export default function BookingInfoPage() {
         </div>
         <Content />
       </div>
+      <Modal
+        isOpen={isModalOpen}
+        onClose={handleModalClose}
+        onSubmit={handleModalSubmit}
+        userId={currentUserId}
+        topicData= "นัดหมายเพิ่มเติม"
+        statusdata= "pending"
+      />
     </div>
   );
 }
