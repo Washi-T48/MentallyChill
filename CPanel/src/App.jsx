@@ -8,8 +8,7 @@ import BookingHistoryPage from "./pages/bookingHistory";
 import BookingHistoryDonePage from "./pages/bookingHistoryDone";
 import SignInPage from "./pages/signin";
 import AssignDatePage from "./pages/assignDate";
-import Calendar from "./components/calendar";
-
+import RegisterPage from "./pages/register";
 
 import AuthCheck from "./components/authCheck";
 import ProtectedRoute from "./components/protectedroute";
@@ -46,6 +45,7 @@ function App() {
           <Route path="/bookinghistory/:bookingId" element={<ProtectedRoute element={BookingHistoryPage} />} />
           <Route path="/bookinghistorydone/:bookingId" element={<ProtectedRoute element={BookingHistoryDonePage} />} />
           <Route path="/assigndate" element={<ProtectedRoute element={AssignDatePage} />} />
+          <Route path="/register" element={<ProtectedRoute element={RegisterPage} />} />
         </Routes>
       </BrowserRouter>
     </>

@@ -6,6 +6,7 @@ export default function Sidebar() {
   const [isDiagnosisActive, setIsDiagnosisActive] = useState(false);
   const [isBookingActive, setIsBookingActive] = useState(false);
   const [isAssignDate, setIsAssignDate] = useState(false);
+  const [isRegisterActive, setIsRegisterActive] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -18,48 +19,63 @@ export default function Sidebar() {
         setIsDiagnosisActive(false);
         setIsBookingActive(false);
         setIsAssignDate(false);
+        setIsRegisterActive(false);
         break;
       case "/diagnosis":
         setIsDashboardActive(false);
         setIsDiagnosisActive(true);
         setIsBookingActive(false);
         setIsAssignDate(false);
+        setIsRegisterActive(false);
         break;
       case "/bookinginfo":
         setIsDashboardActive(false);
         setIsDiagnosisActive(false);
         setIsBookingActive(true);
         setIsAssignDate(false);
+        setIsRegisterActive(false);
         break;
       case "/bookingdetails/":
         setIsDashboardActive(false);
         setIsDiagnosisActive(false);
         setIsBookingActive(true);
         setIsAssignDate(false);
+        setIsRegisterActive(false);
         break;
       case "/bookinghistory/":
         setIsDashboardActive(false);
         setIsDiagnosisActive(false);
         setIsBookingActive(true);
         setIsAssignDate(false);
+        setIsRegisterActive(false);
         break;
       case "/bookinghistorydone/":
         setIsDashboardActive(false);
         setIsDiagnosisActive(false);
         setIsBookingActive(true);
         setIsAssignDate(false);
+        setIsRegisterActive(false);
         break;
       case "/assigndate":
         setIsDashboardActive(false);
         setIsDiagnosisActive(false);
         setIsBookingActive(false);
         setIsAssignDate(true);
+        setIsRegisterActive(false);
+        break;
+      case "/register":
+        setIsDashboardActive(false);
+        setIsDiagnosisActive(false);
+        setIsBookingActive(false);
+        setIsAssignDate(false);
+        setIsRegisterActive(true);
         break;
       default:
         setIsDashboardActive(false);
         setIsDiagnosisActive(false);
         setIsBookingActive(true);
         setIsAssignDate(false);
+        setIsRegisterActive(false);
         break;
     }
   }, [location.pathname]);
@@ -71,6 +87,8 @@ export default function Sidebar() {
         setIsDiagnosisActive(false);
         setIsBookingActive(false);
         setIsAssignDate(false);
+        setIsRegisterActive(false);
+
         navigate("/dashboard");
         break;
       case "diagnosis":
@@ -78,6 +96,8 @@ export default function Sidebar() {
         setIsDiagnosisActive(true);
         setIsBookingActive(false);
         setIsAssignDate(false);
+        setIsRegisterActive(false);
+
         navigate("/diagnosis");
         break;
       case "booking":
@@ -85,6 +105,8 @@ export default function Sidebar() {
         setIsDiagnosisActive(false);
         setIsBookingActive(true);
         setIsAssignDate(false);
+        setIsRegisterActive(false);
+
         navigate("/bookinginfo");
         break;
       case "assigndate":
@@ -92,7 +114,16 @@ export default function Sidebar() {
         setIsDiagnosisActive(false);
         setIsBookingActive(false);
         setIsAssignDate(true);
+        setIsRegisterActive(false);
         navigate("/assigndate");
+        break;
+      case "register":
+        setIsDashboardActive(false);
+        setIsDiagnosisActive(false);
+        setIsBookingActive(false);
+        setIsAssignDate(false);
+        setIsRegisterActive(true);
+        navigate("/register");
         break;
       default:
         break;
@@ -138,6 +169,14 @@ export default function Sidebar() {
             }`}
           >
             ลงเวลา
+          </div>
+          <div
+            onClick={() => checkActive("register")}
+            className={`flex items-center justify-center p-5 rounded-md cursor-pointer w-full text-2xl ${
+              isRegisterActive ? "bg-[#003087] text-white" : "hover:bg-gray-300"
+            }`}
+          >
+            เพิ่มเจ้าหน้าที่
           </div>
         </div>
       </div>
