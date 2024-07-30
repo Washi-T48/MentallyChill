@@ -10,6 +10,8 @@ import {
     comparePassword
 } from '../Models/auth.js';
 
+import { newStaff, updateStaff } from '../Models/staff.js';
+
 
 const authRouter = express.Router();
 dotenv.config();
@@ -45,13 +47,19 @@ authRouter.post('/login', async (req, res) => {
 
 authRouter.post('/register', authMiddleware, async (req, res) => {
     try {
-        const { staff_id, password } = req.body;
+        const { staff_id, name, surname, nickname, password } = req.body;
         if (!staff_id || !password) { return res.sendStatus(400) }
         const staff = await findStaff(staff_id);
-        if (!staff) { return res.sendStatus(401) };
-        if (staff && staff.password) { return res.status(409).send('Account already registered') };
-        const newStaff = await registerStaff(staff_id, password);
-        res.status(201).json(newStaff);
+        if (!staff) {
+            const createStaff = await newStaff(staff_id, name, surname, nickname);
+            const updatePassword = await registerStaff(staff_id, password);
+            res.status(200).send(updatePassword)
+        } else if (staff && !staff.password) {
+            const updatePassword = await registerStaff(staff_id, password);
+            res.status(200).send(updatePassword)
+        } else {
+            res.status(401).send('Account already exists');
+        }
     }
     catch (err) {
         logger.error(err);
