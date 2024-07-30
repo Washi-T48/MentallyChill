@@ -11,6 +11,15 @@ export default function DashboardPage() {
   const [resD, setResD] = useState(0);
   const [resA, setResA] = useState(0);
   const [resS, setResS] = useState(0);
+  const [countdlow, setCountdlow] = useState(0);
+  const [countdmedium, setCountdmedium] = useState(0);
+  const [countdhigh, setCountdhigh] = useState(0);
+  const [countalow, setCountalow] = useState(0);
+  const [countamedium, setCountamedium] = useState(0);
+  const [countahigh, setCountahigh] = useState(0);
+  const [countslow, setCountslow] = useState(0);
+  const [countsmedium, setCountsmedium] = useState(0);
+  const [countshigh, setCountshigh] = useState(0);
   const [lowCount, setLowCount] = useState(0);
   const [mediumCount, setMediumCount] = useState(0);
   const [highCount, setHighCount] = useState(0);
@@ -79,6 +88,16 @@ export default function DashboardPage() {
       let resA = 0;
       let resS = 0;
 
+      let dlow = 0;
+        let dmedium = 0;
+        let dhigh = 0;
+        let alow = 0;
+        let amedium = 0;
+        let ahigh = 0;
+        let slow = 0;
+        let smedium = 0;
+        let shigh = 0;
+
       diagdata.forEach((entry) => {
         const { d, a, s } = entry.result;
 
@@ -94,31 +113,41 @@ export default function DashboardPage() {
         let arank = 0;
         let srank = 0;
 
+
         // Find the maximum value
         // const maxValue = Math.max(dNum, aNum, sNum);
 
         if (dNum >= 0 && dNum <= 6) {
           drank = 1;
+          dlow++;
         } else if (dNum >= 7 && dNum <= 13) {
           drank = 2;
+          dmedium++;
         } else if (dNum >= 14) {
           drank = 3;
+          dhigh++;
         }
 
         if (aNum >= 0 && aNum <= 5) {
           arank = 1;
+          alow++;
         } else if (aNum >= 6 && aNum <= 9) {
           arank = 2;
+          amedium++;
         } else if (aNum >= 10) {
           arank = 3;
+          ahigh++;
         }
 
         if (sNum >= 0 && sNum <= 9) {
           srank = 1;
+          slow++;
         } else if (sNum >= 10 && sNum <= 16) {
           srank = 2;
+          smedium++;
         } else if (sNum >= 17) {
           srank = 3;
+          shigh++;
         }
 
         const maxValue = Math.max(drank, arank, srank);
@@ -135,6 +164,15 @@ export default function DashboardPage() {
       setResD(resD);
       setResA(resA);
       setResS(resS);
+      setCountdlow(dlow);
+      setCountdmedium(dmedium);
+      setCountdhigh(dhigh);
+      setCountalow(alow);
+      setCountamedium(amedium);
+      setCountahigh(ahigh);
+      setCountslow(slow);
+      setCountsmedium(smedium);
+      setCountshigh(shigh);
       setLowCount(low);
       setMediumCount(medium);
       setHighCount(high);
@@ -183,17 +221,45 @@ export default function DashboardPage() {
               </div>
             </div>
             <div className="grid grid-cols-3 gap-x-48 mx-10 my-5 mb-10">
-              <div className="flex flex-row items-end justify-between border-4 border-green-500 rounded-md bg-green-500 h-full w-80 p-5">
-                <div className="text-lg text-gray-100">D</div>
-                <div className="text-7xl text-white">{resD}</div>
+              <div className="flex flex-row items-end justify-between border-4 border-green-500 rounded-md bg-blue-900 h-full w-80 p-5">
+                <div className="text-lg text-gray-100">ความซึมเศร้า ต่ำ</div>
+                <div className="text-7xl text-white">{countdlow}</div>
               </div>
-              <div className="flex flex-row items-end justify-between border-4 border-amber-400 rounded-md bg-amber-400 h-full w-80 p-5">
-                <div className="text-lg text-gray-100">A</div>
-                <div className="text-7xl text-white">{resA}</div>
+              <div className="flex flex-row items-end justify-between border-4 border-amber-400 rounded-md bg-blue-900 h-full w-80 p-5">
+                <div className="text-lg text-gray-100">ความซึมเศร้า ปานกลาง</div>
+                <div className="text-7xl text-white">{countdmedium}</div>
               </div>
-              <div className="flex flex-row items-end justify-between border-4 border-rose-400 rounded-md bg-rose-400 h-full w-80 p-5">
-                <div className="text-lg text-gray-100">S</div>
-                <div className="text-7xl text-white">{resS}</div>
+              <div className="flex flex-row items-end justify-between border-4 border-rose-400 rounded-md bg-blue-900 h-full w-80 p-5">
+                <div className="text-lg text-gray-100">ความซึมเศร้า สูง</div>
+                <div className="text-7xl text-white">{countdhigh}</div>
+              </div>
+            </div>
+            <div className="grid grid-cols-3 gap-x-48 mx-10 my-5 mb-10">
+              <div className="flex flex-row items-end justify-between border-4 border-green-500 rounded-md bg-yellow-500 h-full w-80 p-5">
+                <div className="text-lg text-gray-100">ความวิตกกังวล ต่ำ</div>
+                <div className="text-7xl text-white">{countalow}</div>
+              </div>
+              <div className="flex flex-row items-end justify-between border-4 border-amber-400 rounded-md bg-yellow-500 h-full w-80 p-5">
+                <div className="text-lg text-gray-100">ความวิตกกังวล ปานกลาง</div>
+                <div className="text-7xl text-white">{countamedium}</div>
+              </div>
+              <div className="flex flex-row items-end justify-between border-4 border-rose-400 rounded-md bg-yellow-500 h-full w-80 p-5">
+                <div className="text-lg text-gray-100">ความวิตกกังวล สูง</div>
+                <div className="text-7xl text-white">{countahigh}</div>
+              </div>
+            </div>
+            <div className="grid grid-cols-3 gap-x-48 mx-10 my-5 mb-10">
+              <div className="flex flex-row items-end justify-between border-4 border-green-500 rounded-md bg-red-700 h-full w-80 p-5">
+                <div className="text-lg text-gray-100">ความเครียด ต่ำ</div>
+                <div className="text-7xl text-white">{countslow}</div>
+              </div>
+              <div className="flex flex-row items-end justify-between border-4 border-amber-400 rounded-md bg-red-700 h-full w-80 p-5">
+                <div className="text-lg text-gray-100">ความเครียด ปานกลาง</div>
+                <div className="text-7xl text-white">{countsmedium}</div>
+              </div>
+              <div className="flex flex-row items-end justify-between border-4 border-rose-400 rounded-md bg-red-700 h-full w-80 p-5">
+                <div className="text-lg text-gray-100">ความเครียด สูง</div>
+                <div className="text-7xl text-white">{countshigh}</div>
               </div>
             </div>
             <div className="grid grid-cols-2 mx-10 my-5 gap-5">
