@@ -7,7 +7,7 @@ import axios from "../components/axioscreds";
 export default function AssignDatePage() {
   const [timetabledata, setTimetabledata] = useState([]);
   const [staffdata, setStaffdata] = useState(null);
-  const [fetchTrigger, setFetchTrigger] = useState(false); // State to trigger fetch
+  const [fetchTrigger, setFetchTrigger] = useState(false);
 
   useEffect(() => {
     const fetchStaffData = async () => {
@@ -38,14 +38,14 @@ export default function AssignDatePage() {
     };
 
     fetchTimeTableData();
-  }, [staffdata, fetchTrigger]); // Dependency array includes fetchTrigger
+  }, [staffdata, fetchTrigger]);
 
   const handleDelete = async (t_id) => {
     try {
       const response = await axios.delete('/timetable/delete', {
         data: { timetable_id: t_id }
       });
-      setFetchTrigger(!fetchTrigger); // Toggle fetchTrigger to re-fetch data
+      setFetchTrigger(!fetchTrigger);
     } catch (error) {
       console.error('There has been a problem with your axios operation:', error);
     }
