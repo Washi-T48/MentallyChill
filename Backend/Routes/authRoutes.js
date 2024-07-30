@@ -54,9 +54,6 @@ authRouter.post('/register', authMiddleware, async (req, res) => {
             const createStaff = await newStaff(staff_id, name, surname, nickname);
             const updatePassword = await registerStaff(staff_id, password);
             res.status(200).send(updatePassword)
-        } else if (staff && !staff.password) {
-            const updatePassword = await registerStaff(staff_id, password);
-            res.status(200).send(updatePassword)
         } else {
             res.status(401).send('Account already exists');
         }
