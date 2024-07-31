@@ -221,43 +221,43 @@ export default function DashboardPage() {
               </div>
             </div>
             <div className="grid grid-cols-3 gap-x-48 mx-10 my-5 mb-10">
-              <div className="flex flex-row items-end justify-between border-4 border-green-500 rounded-md bg-blue-900 h-full w-80 p-5">
+              <div className="flex flex-row items-end justify-between border-4 border-green-500 rounded-md bg-blue-300 h-full w-80 p-5">
                 <div className="text-lg text-gray-100">ความซึมเศร้า ต่ำ</div>
                 <div className="text-7xl text-white">{countdlow}</div>
               </div>
-              <div className="flex flex-row items-end justify-between border-4 border-amber-400 rounded-md bg-blue-900 h-full w-80 p-5">
+              <div className="flex flex-row items-end justify-between border-4 border-amber-400 rounded-md bg-blue-300 h-full w-80 p-5">
                 <div className="text-lg text-gray-100">ความซึมเศร้า ปานกลาง</div>
                 <div className="text-7xl text-white">{countdmedium}</div>
               </div>
-              <div className="flex flex-row items-end justify-between border-4 border-rose-400 rounded-md bg-blue-900 h-full w-80 p-5">
+              <div className="flex flex-row items-end justify-between border-4 border-rose-400 rounded-md bg-blue-300 h-full w-80 p-5">
                 <div className="text-lg text-gray-100">ความซึมเศร้า สูง</div>
                 <div className="text-7xl text-white">{countdhigh}</div>
               </div>
             </div>
             <div className="grid grid-cols-3 gap-x-48 mx-10 my-5 mb-10">
-              <div className="flex flex-row items-end justify-between border-4 border-green-500 rounded-md bg-yellow-500 h-full w-80 p-5">
+              <div className="flex flex-row items-end justify-between border-4 border-green-500 rounded-md bg-violet-300 h-full w-80 p-5">
                 <div className="text-lg text-gray-100">ความวิตกกังวล ต่ำ</div>
                 <div className="text-7xl text-white">{countalow}</div>
               </div>
-              <div className="flex flex-row items-end justify-between border-4 border-amber-400 rounded-md bg-yellow-500 h-full w-80 p-5">
+              <div className="flex flex-row items-end justify-between border-4 border-amber-400 rounded-md bg-violet-300 h-full w-80 p-5">
                 <div className="text-lg text-gray-100">ความวิตกกังวล ปานกลาง</div>
                 <div className="text-7xl text-white">{countamedium}</div>
               </div>
-              <div className="flex flex-row items-end justify-between border-4 border-rose-400 rounded-md bg-yellow-500 h-full w-80 p-5">
+              <div className="flex flex-row items-end justify-between border-4 border-rose-400 rounded-md bg-violet-300 h-full w-80 p-5">
                 <div className="text-lg text-gray-100">ความวิตกกังวล สูง</div>
                 <div className="text-7xl text-white">{countahigh}</div>
               </div>
             </div>
             <div className="grid grid-cols-3 gap-x-48 mx-10 my-5 mb-10">
-              <div className="flex flex-row items-end justify-between border-4 border-green-500 rounded-md bg-red-700 h-full w-80 p-5">
+              <div className="flex flex-row items-end justify-between border-4 border-green-500 rounded-md bg-rose-300  h-full w-80 p-5">
                 <div className="text-lg text-gray-100">ความเครียด ต่ำ</div>
                 <div className="text-7xl text-white">{countslow}</div>
               </div>
-              <div className="flex flex-row items-end justify-between border-4 border-amber-400 rounded-md bg-red-700 h-full w-80 p-5">
+              <div className="flex flex-row items-end justify-between border-4 border-amber-400 rounded-md bg-rose-300  h-full w-80 p-5">
                 <div className="text-lg text-gray-100">ความเครียด ปานกลาง</div>
                 <div className="text-7xl text-white">{countsmedium}</div>
               </div>
-              <div className="flex flex-row items-end justify-between border-4 border-rose-400 rounded-md bg-red-700 h-full w-80 p-5">
+              <div className="flex flex-row items-end justify-between border-4 border-rose-400 rounded-md bg-rose-300  h-full w-80 p-5">
                 <div className="text-lg text-gray-100">ความเครียด สูง</div>
                 <div className="text-7xl text-white">{countshigh}</div>
               </div>
