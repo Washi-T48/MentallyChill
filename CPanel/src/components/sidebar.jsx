@@ -176,7 +176,7 @@ export default function Sidebar() {
               isRegisterActive ? "bg-[#003087] text-white" : "hover:bg-gray-300"
             }`}
           >
-            เพิ่มเจ้าหน้าที่
+            เพิ่มบัญชีเจ้าหน้าที่
           </div>
         </div>
       </div>
