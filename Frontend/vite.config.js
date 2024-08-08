@@ -10,12 +10,21 @@ export default defineConfig({
     include: ['@emotion/styled', '@emotion/react'],
   },
   server: {
+    open: true,
+    host: '0.0.0.0',
+    port: 443,
     https: {
       key: fs.readFileSync(path.resolve(__dirname, './certs', 'privkey.pem')),
       cert: fs.readFileSync(path.resolve(__dirname, './certs', 'cert.pem')),
       ca: fs.readFileSync(path.resolve(__dirname, './certs', 'chain.pem')),
     },
-    host: '0.0.0.0',
-    port: 443,
-  },
+    proxy: {
+      '/api': {
+        target: 'https://sombat.cc:3000/',
+        changeOrigin: true,
+        secure: false,
+        rewrite: (path) => path.replace(/^\/api/, ''),
+      },
+    }
+  }
 });
