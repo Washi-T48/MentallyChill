@@ -36,7 +36,7 @@ app.use(cookieParser());
 app.use(consoleLogExpress);
 app.use(express.urlencoded({ extended: true }));
 
-app.use("/", authMiddleware, publicRouter);
+app.use("/", publicRouter);
 app.use("/auth", authMiddleware, authRouter)
 app.use("/user", authMiddleware, userRouter);
 app.use("/staff", authMiddleware, staffRouter);

@@ -22,7 +22,7 @@ export default defineConfig({
       '/api': {
         target: 'https://sombat.cc:3000/',
         changeOrigin: true,
-        secure: false,
+        secure: true,
         rewrite: (path) => path.replace(/^\/api/, ''),
       },
     }
