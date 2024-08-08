@@ -1,9 +1,9 @@
 import express from 'express';
-import logger from '../Middleware/logger';
+import logger from '../Middleware/logger.js';
 
 import {
     submitForms,
-} from '../Models/forms_result';
+} from '../Models/forms_result.js';
 
 const publicRouter = express.Router();
 
