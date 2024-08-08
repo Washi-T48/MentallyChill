@@ -4,6 +4,7 @@ import cookieParser from 'cookie-parser';
 import https from 'https';
 import cors from 'cors';
 
+import publicRouter from './Routes/publicRoutes.js';
 import authRouter from './Routes/authRoutes.js';
 import userRouter from './Routes/userRoutes.js';
 import staffRouter from './Routes/staffRoutes.js';
@@ -35,16 +36,13 @@ app.use(cookieParser());
 app.use(consoleLogExpress);
 app.use(express.urlencoded({ extended: true }));
 
-app.all("/", (req, res) => {
-    res.sendStatus(200)
-});
-
-app.use("/auth", authRouter)
-app.use("/user", userRouter);
-app.use("/staff", staffRouter);
-app.use("/forms", formsRouter);
-app.use("/appointment", appointmentRouter);
-app.use("/timetable", timetableRouter);
+app.use("/", authMiddleware, publicRouter);
+app.use("/auth", authMiddleware, authRouter)
+app.use("/user", authMiddleware, userRouter);
+app.use("/staff", authMiddleware, staffRouter);
+app.use("/forms", authMiddleware, formsRouter);
+app.use("/appointment", authMiddleware, appointmentRouter);
+app.use("/timetable", authMiddleware, timetableRouter);
 
 https.createServer({
     key: fs.readFileSync(path.resolve(__dirname, './certs', 'privkey.pem')),
