@@ -5,6 +5,10 @@ import {
     submitForms,
 } from '../Models/forms_result.js';
 
+import {
+    submitAppointment,
+} from '../Models/appointment.js';
+
 const publicRouter = express.Router();
 
 publicRouter.all('/', async (req, res) => {
@@ -34,7 +38,7 @@ publicRouter.post('/login', async (req, res) => {
 });
 
 // COPIED FROM FORMS ROUTES
-publicRouter.post('/submit', async (req, res) => {
+publicRouter.post('/submitForms', async (req, res) => {
     try {
         const { uid, form_type, result } = req.body;
         const submitResult = await submitForms(uid, form_type, result);
@@ -44,6 +48,18 @@ publicRouter.post('/submit', async (req, res) => {
         res.sendStatus(500);
     }
     return res.status(200);
+});
+
+publicRouter.post("/submitAppointment", async (req, res) => {
+    try {
+        const { uid, tel, contactMethod, medDoctor, date, time, topic, detail, medHistory } = req.body;
+        const appointment = await submitAppointment(uid, tel, contactMethod, medDoctor, date, time, topic, detail, medHistory);
+        res.status(200).json(appointment);
+    }
+    catch (error) {
+        logger.error(error);
+        res.sendStatus(500);
+    }
 });
 
 export default publicRouter;
