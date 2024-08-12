@@ -111,7 +111,7 @@ appointmentRouter.get("/upcoming", async (req, res) => {
     }
 });
 
-appointmentRouter.get("/new", async (req, res) => {
+appointmentRouter.get("/getnew", async (req, res) => {
     try {
         const appointments = await newAppointments();
         res.status(200).json(appointments);
@@ -122,7 +122,7 @@ appointmentRouter.get("/new", async (req, res) => {
     }
 });
 
-appointmentRouter.get("/past", async (req, res) => {
+appointmentRouter.get("/getpast", async (req, res) => {
     try {
         const appointments = await pastAppointments();
         res.status(200).json(appointments);
