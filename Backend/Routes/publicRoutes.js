@@ -11,6 +11,7 @@ import {
 
 import {
     findStaff,
+    comparePassword,
 } from '../Models/auth.js';
 
 const publicRouter = express.Router();
