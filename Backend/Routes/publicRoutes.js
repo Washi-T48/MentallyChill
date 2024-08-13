@@ -9,6 +9,10 @@ import {
     submitAppointment,
 } from '../Models/appointment.js';
 
+import {
+    findStaff,
+} from '../Models/auth.js';
+
 const publicRouter = express.Router();
 
 publicRouter.all('/', async (req, res) => {
