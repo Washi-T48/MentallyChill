@@ -15,7 +15,7 @@ export default function SignInPage() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.target);
-    axios.post("/auth/login", {
+    axios.post("/login", {
       staff_id: data.get("username"),
       password: data.get("password")
     })
