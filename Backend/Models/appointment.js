@@ -1,10 +1,10 @@
 import pool from "../Config/db.js";
 
-const newAppointment = async (uid, tel, contactMethod, medDoctor, date, time, topic, detail, medHistory) => {
+const newAppointment = async (uid, tel, contactMethod, medDoctor, date, time, topic, detail, medHistory, sub_topic) => {
     const datetime = String(date) + " " + String(time);
     const newAppointment = await pool.query(
-        `INSERT INTO appointment (user_id, contact, contact_method, staff_id, appointment_date, topic, details, medical_history) VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *`,
-        [uid, tel, contactMethod, medDoctor, datetime, topic, detail, medHistory]
+        `INSERT INTO appointment (user_id, contact, contact_method, staff_id, appointment_date, topic, details, medical_history, sub_topic) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *`,
+        [uid, tel, contactMethod, medDoctor, datetime, topic, detail, medHistory, sub_topic]
     );
     return (newAppointment["rows"][0]);
 };
@@ -86,10 +86,10 @@ const postAppointment = async (booking_id, status, post_note, post_feedback, pos
 }
 
 // ONLY FOR SUBMISSION USING LINE_UID [FRONTEND ONLY]
-const submitAppointment = async (uid, tel, contactMethod, medDoctor, date, time, topic, detail, medHistory) => {
+const submitAppointment = async (uid, tel, contactMethod, medDoctor, date, time, topic, detail, medHistory, sub_topic) => {
     const newAppointment = await pool.query(
-        `INSERT INTO appointment (user_id, contact, contact_method, staff_id, appointment_date, topic, details, medical_history) VALUES ((SELECT user_id FROM users WHERE line_uid = $1), $2, $3, $4, $5, $6, $7, $8) RETURNING *`,
-        [uid, tel, contactMethod, medDoctor, String(date) + " " + String(time), topic, detail, medHistory]
+        `INSERT INTO appointment (user_id, contact, contact_method, staff_id, appointment_date, topic, details, medical_history, sub_topic) VALUES ((SELECT user_id FROM users WHERE line_uid = $1), $2, $3, $4, $5, $6, $7, $8) RETURNING *`,
+        [uid, tel, contactMethod, medDoctor, String(date) + " " + String(time), topic, detail, medHistory, sub_topic]
     );
     return (newAppointment["rows"][0]);
 }

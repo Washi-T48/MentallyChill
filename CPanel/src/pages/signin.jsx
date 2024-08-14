@@ -20,6 +20,7 @@ export default function SignInPage() {
       password: data.get("password")
     })
       .then(() => {
+        console.log("Login successful");
         navigate("/dashboard");
       })
       .catch(error => {
@@ -49,7 +50,7 @@ export default function SignInPage() {
                 htmlFor="username"
                 className="block text-sm font-medium leading-6 text-gray-900"
               >
-                ชื่อผู้ใช้
+                บัญขีผู้ใช้
               </label>
               <div className="mt-2">
                 <input

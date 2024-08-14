@@ -27,10 +27,23 @@ const app = express();
 dotenv.config();
 const PORT = process.env.PORT || 3000;
 
-app.use(cors({
-    origin: 'https://sombat.cc:443/',
-    credentials: true
-}));
+const corsOptions = {
+    origin: [
+        'https://sombat.cc',
+        'http://localhost',
+        'http://localhost:3000',
+        'http://localhost:80',
+        'http://localhost:5173',
+        'http://ligma.sombat.cc',
+        'http://ligma.sombat.cc:3000',
+        'http://ligma.sombat.cc:5173',
+        'http://together-hardy-dove.ngrok-free.app',
+        'https://together-hardy-dove.ngrok-free.app',
+    ],
+    credentials: true,
+}
+
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
 app.use(consoleLogExpress);

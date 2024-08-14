@@ -9,6 +9,7 @@ import {
     getTimetableByDate,
     allTimetable,
     checkStaffAvailable,
+    getStaffTimeByDate
 } from '../Models/timetable.js';
 
 const timetableRouter = express.Router();
@@ -54,8 +55,8 @@ timetableRouter.get('/all', async (req, res) => {
 
 timetableRouter.delete('/delete', async (req, res) => {
     try {
-        const { staff_id } = req.body;
-        const timetable = await deleteTimeTable(staff_id);
+        const { timetable_id } = req.body;
+        const timetable = await deleteTimeTable(timetable_id);
         res.status(200).json(timetable);
     }
     catch (error) {
@@ -71,6 +72,29 @@ timetableRouter.post('/check', async (req, res) => {
         res.status(200).json(timetable);
     }
     catch (error) {
+        logger.error(error);
+        res.sendStatus(500);
+    }
+});
+
+timetableRouter.post('/getByStaffID', async (req, res) => {
+    try {
+        const { staff_id } = req.body;
+        const timetable = await getTimetableByStaffID(staff_id);
+        res.status(200).json(timetable);
+    }
+    catch (error) {
+        logger.error(error);
+        res.sendStatus(500);
+    }
+});
+
+timetableRouter.post('/getStaffTimeByDate', async (req, res) => {
+    try {
+        const { staff_id, date } = req.body;
+        const timetable = await getStaffTimeByDate(staff_id, date);
+        res.status(200).json(timetable);
+    } catch (error) {
         logger.error(error);
         res.sendStatus(500);
     }
