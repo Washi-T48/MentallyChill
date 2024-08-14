@@ -44,7 +44,7 @@ authRouter.post('/register', authMiddleware, async (req, res) => {
         const { staff_id, password } = req.body;
         if (!staff_id || !password) { return res.sendStatus(400) }
         const staff = await findStaff(staff_id);
-        if (!staff) { return res.sendStatus(401) };
+        if (!staff) { return res.sendStatus(500) };
         if (staff && staff.password) { return res.status(409).send('Account already registered') };
         const newStaff = await registerStaff(staff_id, password);
         res.status(201).json(newStaff);
