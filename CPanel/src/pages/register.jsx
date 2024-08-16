@@ -37,7 +37,6 @@ export default function RegisterPage() {
             }
         }
     };
-    
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -65,8 +64,8 @@ export default function RegisterPage() {
     const Content = () => {
         return (
             <>
-                <div className="flex flex-col flex-1 m-10 relative">
-                    <div className="text-5xl mb-10">เพิ่มบัญชีเจ้าหน้าที่</div>
+                <div className="flex flex-col flex-1 m-5 md:m-10 relative">
+                    <div className="text-2xl md:text-5xl mb-6 md:mb-10">เพิ่มบัญชีเจ้าหน้าที่</div>
                     <form onSubmit={handleSubmit}>
                         <div className="mb-4">
                             <label htmlFor="staff_id" className="block text-gray-700 text-sm font-bold mb-2">บัญขีผู้ใช้</label>
@@ -131,10 +130,10 @@ export default function RegisterPage() {
                         {errorMessage && <p className="text-red-500 text-xs italic">{errorMessage}</p>}
                         <button 
                             type="submit" 
-                            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                            className="w-full md:w-auto bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                             disabled={loading}
                         >
-                            {loading ? 'Submitting...' : 'Submit'}
+                            {loading ? 'กำลังเพิ่มเจ้าหน้าที่...' : 'เพิ่มเจ้าหน้าที่'}
                         </button>
                     </form>
                 </div>
@@ -151,7 +150,7 @@ export default function RegisterPage() {
                     <div className="text-lg font-semibold mb-4 whitespace-pre-line">{message}</div>
                     <button 
                         onClick={onClose} 
-                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                        className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                     >
                         Close
                     </button>
@@ -164,8 +163,8 @@ export default function RegisterPage() {
         <>
             <div className="flex flex-col flex-1 h-dvh">
                 <Topbar/>
-                <div className="flex flex-row flex-1">
-                    <div className="flex relative w-72">
+                <div className="flex flex-col md:flex-row flex-1">
+                    <div className="flex relative w-full md:w-72">
                         <Sidebar/>
                     </div>
                     <Content/>
