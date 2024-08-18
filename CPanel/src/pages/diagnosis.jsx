@@ -4,34 +4,6 @@ import Dropdown from "../components/dropdown";
 import Sidebar from "../components/sidebar";
 import Topbar from "../components/topbar";
 
-// const apiUrl = "http://sardines.thddns.net:7275/forms";
-
-// const response = await axios.get(`${apiUrl}/all`);
-// const dat = response.data;
-// console.log(dat, "data");
-
-// const getSeverity = (score, type) => {
-//   if (type === "d") {
-//     if (score >= 14) return { label: "รุนแรงที่สุด", color: "severe" };
-//     if (score >= 11) return { label: "รุนแรง", color: "high" };
-//     if (score >= 7) return { label: "ปานกลาง", color: "moderate" };
-//     if (score >= 5) return { label: "ระดับต่ำ", color: "low" };
-//     return { label: "ปกติ", color: "normal" };
-//   } else if (type === "a") {
-//     if (score >= 10) return { label: "รุนแรงที่สุด", color: "severe" };
-//     if (score >= 8) return { label: "รุนแรง", color: "high" };
-//     if (score >= 6) return { label: "ปานกลาง", color: "moderate" };
-//     if (score >= 4) return { label: "ระดับต่ำ", color: "low" };
-//     return { label: "ปกติ", color: "normal" };
-//   } else if (type === "s") {
-//     if (score >= 17) return { label: "รุนแรงที่สุด", color: "severe" };
-//     if (score >= 13) return { label: "รุนแรง", color: "high" };
-//     if (score >= 10) return { label: "ปานกลาง", color: "moderate" };
-//     if (score >= 8) return { label: "ระดับต่ำ", color: "low" };
-//     return { label: "ปกติ", color: "normal" };
-//   }
-// };
-
 export default function DiagnosisPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedFormType, setSelectedFormType] = useState("");
