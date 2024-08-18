@@ -15,15 +15,16 @@ export default function SignInPage() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.target);
-    axios.post("/auth/login", {
-      staff_id: data.get("username"),
-      password: data.get("password")
-    })
+    axios
+      .post("/auth/login", {
+        staff_id: data.get("username"),
+        password: data.get("password"),
+      })
       .then(() => {
         console.log("Login successful");
         navigate("/dashboard");
       })
-      .catch(error => {
+      .catch((error) => {
         window.alert("Invalid username or password. Please try again.");
       });
     event.target.reset();
@@ -32,9 +33,9 @@ export default function SignInPage() {
   return (
     <>
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 pb-40 lg:px-8">
-        <div className="sm:mx-auto sm:w-full sm:max-w-sm ">
+        <div className="sm:mx-auto sm:w-full sm:max-w-md lg:max-w-lg xl:max-w-xl">
           <img
-            className="mx-auto h-56 w-auto"
+            className="mx-auto h-40 w-auto lg:h-56"
             src="./images/CRAlogo.png"
             alt="Your Company"
           />
@@ -43,7 +44,7 @@ export default function SignInPage() {
           </h2>
         </div>
 
-        <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+        <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-md lg:max-w-lg xl:max-w-xl">
           <form className="space-y-6" onSubmit={handleSubmit} method="POST">
             <div>
               <label

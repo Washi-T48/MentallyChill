@@ -28,9 +28,10 @@ export default function Modal({ isOpen, onClose, onSubmit, userId, topicData, st
 
   useEffect(() => {
     if (selectedStaff && appointmentDate) {
-      const [staff_id] = selectedStaff.split(' - ');
-      axios.post('/timetable/getStaffTimeByDate', { staff_id, date: appointmentDate })
+      console.log(selectedStaff);
+      axios.post('/timetable/getStaffTimeByDate', { staff_id: selectedStaff, date: appointmentDate })
         .then(response => {
+          console.log(response.data);
           setTimeSlots(response.data);
         })
         .catch(error => {
@@ -38,6 +39,7 @@ export default function Modal({ isOpen, onClose, onSubmit, userId, topicData, st
         });
     }
   }, [selectedStaff, appointmentDate]);
+  
 
   useEffect(() => {
     if (formSubmitted) {
@@ -62,7 +64,7 @@ export default function Modal({ isOpen, onClose, onSubmit, userId, topicData, st
       time: formProps.appointmentTime,
       topic: topicData,
       detail: formProps.detail,
-      medHistory: formProps.medHistory
+      medHistory: formProps.medHistory,
     };
 
     axios.post('/appointment/new', appointmentData)
@@ -92,8 +94,11 @@ export default function Modal({ isOpen, onClose, onSubmit, userId, topicData, st
               name="medDoctor"
               placehold="เลือกผู้ให้คำปรึกษา"
               options={staffList.map(staff => staff.label)}
-              onSelect={setSelectedStaff}
-              selected={selectedStaff}
+              onSelect={(label) => {
+                const selected = staffList.find(staff => staff.label === label);
+                setSelectedStaff(selected.value);
+              }}
+              selected={staffList.find(staff => staff.value === selectedStaff)?.label || ''}
               required
             />
           </div>
