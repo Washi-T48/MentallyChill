@@ -339,7 +339,7 @@ return (
         <div className="p-4 md:p-10">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
             <StatCard title="คำขอการจอง" value={countBooking} color="sky" />
-            <StatCard title="จำนวนการวินิจฉัย" value={countDiag} color="violet" />
+            <StatCard title="จำนวนผลการประเมิน" value={countDiag} color="violet" />
             <StatCard title="ระดับปกติ" value={lowCount} color="green" />
             <StatCard title="ระดับปานกลาง" value={mediumCount} color="amber" />
             <StatCard title="ระดับร้ายแรง" value={highCount} color="rose" />
