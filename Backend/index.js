@@ -5,6 +5,7 @@ import https from 'https';
 import cors from 'cors';
 
 import publicRouter from './Routes/publicRoutes.js';
+import lineRouter from './Routes/lineRoutes.js';
 import authRouter from './Routes/authRoutes.js';
 import userRouter from './Routes/userRoutes.js';
 import staffRouter from './Routes/staffRoutes.js';
@@ -50,21 +51,22 @@ app.use(consoleLogExpress);
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/", publicRouter);
-app.use("/auth", authMiddleware, authRouter)
-app.use("/user", authMiddleware, userRouter);
-app.use("/staff", authMiddleware, staffRouter);
-app.use("/forms", authMiddleware, formsRouter);
-app.use("/appointment", authMiddleware, appointmentRouter);
-app.use("/timetable", authMiddleware, timetableRouter);
+app.use("/line", lineRouter);
+app.use("/auth", authRouter)
+app.use("/user", userRouter);
+app.use("/staff", staffRouter);
+app.use("/forms", formsRouter);
+app.use("/appointment", appointmentRouter);
+app.use("/timetable", timetableRouter);
 
-https.createServer({
-    key: fs.readFileSync(path.resolve(__dirname, './certs', 'privkey.pem')),
-    cert: fs.readFileSync(path.resolve(__dirname, './certs', 'cert.pem')),
-    ca: fs.readFileSync(path.resolve(__dirname, './certs', 'chain.pem')),
-}, app).listen(PORT, () => {
-    logger.info(`Server started on port ${PORT}`);
-});
-
-// app.listen(PORT, () => {
+// https.createServer({
+//     key: fs.readFileSync(path.resolve(__dirname, './certs', 'privkey.pem')),
+//     cert: fs.readFileSync(path.resolve(__dirname, './certs', 'cert.pem')),
+//     ca: fs.readFileSync(path.resolve(__dirname, './certs', 'chain.pem')),
+// }, app).listen(PORT, () => {
 //     logger.info(`Server started on port ${PORT}`);
 // });
+
+app.listen(PORT, () => {
+    logger.info(`Server started on port ${PORT}`);
+});

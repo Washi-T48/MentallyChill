@@ -1,7 +1,6 @@
 import axios from 'axios';
 import dotenv from 'dotenv';
-import logger from '../Config/logger.js';
-import { getAuthHeader } from '../Routes/auth.js';
+import { getAuthHeader } from '../Config/lineAuth.js';
 dotenv.config();
 
 export default class Profile {
@@ -17,7 +16,6 @@ export default class Profile {
                 this.userProfile = res.data;
                 resolve(res.data);
             }).catch((err) => {
-                logger.error(err);
                 reject(err);
             });
         });
@@ -30,7 +28,6 @@ export default class Profile {
                 this.userProfile = res.data;
                 resolve(res.data);
             }).catch((err) => {
-                logger.error(err);
                 reject(err);
             });
         });
@@ -43,7 +40,6 @@ export default class Profile {
                 this.userProfile = res;
                 resolve(res.data);
             }).catch((err) => {
-                logger.error(err);
                 reject(err);
             });
         });
