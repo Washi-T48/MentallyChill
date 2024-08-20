@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Dropdown from './dropdown';
 
-export default function Modal({ isOpen, onClose, onSubmit, userId, topicData, statusdata }) {
+export default function Modal({ isOpen, onClose, onSubmit, userId, topicData }) {
   const [staffList, setStaffList] = useState([]);
   const [selectedStaff, setSelectedStaff] = useState('');
   const [appointmentDate, setAppointmentDate] = useState('');
   const [timeSlots, setTimeSlots] = useState([]);
-  const [contactMethod, setContactMethod] = useState('เบอร์โทร');
+  const [contactMethod, setContactMethod] = useState('');
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
     if (isOpen) {
@@ -28,10 +29,8 @@ export default function Modal({ isOpen, onClose, onSubmit, userId, topicData, st
 
   useEffect(() => {
     if (selectedStaff && appointmentDate) {
-      console.log(selectedStaff);
       axios.post('/timetable/getStaffTimeByDate', { staff_id: selectedStaff, date: appointmentDate })
         .then(response => {
-          console.log(response.data);
           setTimeSlots(response.data);
         })
         .catch(error => {
@@ -39,7 +38,6 @@ export default function Modal({ isOpen, onClose, onSubmit, userId, topicData, st
         });
     }
   }, [selectedStaff, appointmentDate]);
-  
 
   useEffect(() => {
     if (formSubmitted) {
@@ -51,6 +49,43 @@ export default function Modal({ isOpen, onClose, onSubmit, userId, topicData, st
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    setErrorMessage('');
+
+    if (!contactMethod) {
+      setErrorMessage('กรุณาเลือกวิธีการติดต่อ'); 
+      return;
+    }
+
+    if (!selectedStaff) {
+      setErrorMessage('กรุณาเลือกผู้ให้คำปรึกษา');
+      return;
+    }
+
+    if (!appointmentDate) {
+      setErrorMessage('กรุณาเลือกวันที่');
+      return;
+    }
+
+    if (!event.target.appointmentTime.value) {
+      setErrorMessage('กรุณาเลือกเวลา');
+      return;
+    }
+
+    if (contactMethod === 'เบอร์โทร' && !event.target.tel.value) {
+      setErrorMessage('กรุณากรอกเบอร์โทร');
+      return;
+    }
+
+    if (!event.target.detail.value) {
+      setErrorMessage('กรุณากรอกรายละเอียด');
+      return;
+    }
+
+    if (!event.target.medHistory.value) {
+      setErrorMessage('กรุณากรอกประวัติการรับยา');
+      return
+    }
+
     const formData = new FormData(event.target);
     const formProps = Object.fromEntries(formData.entries());
     const [staff_id] = selectedStaff.split(' - ');
@@ -59,7 +94,7 @@ export default function Modal({ isOpen, onClose, onSubmit, userId, topicData, st
       uid: userId,
       tel: contactMethod === 'เบอร์โทร' ? formProps.tel : '',
       medDoctor: staff_id,
-      contactMethod: formProps.contactMethod,
+      contactMethod: contactMethod,
       date: formProps.appointmentDate,
       time: formProps.appointmentTime,
       topic: topicData,
@@ -102,31 +137,7 @@ export default function Modal({ isOpen, onClose, onSubmit, userId, topicData, st
               required
             />
           </div>
-          <div className="mb-4">
-            <div>วิธีการติดต่อ</div>
-            <div>
-              <label>
-                <input
-                  type="radio"
-                  name="contactMethod"
-                  value="เบอร์โทร"
-                  checked={contactMethod === 'เบอร์โทร'}
-                  onChange={(e) => setContactMethod(e.target.value)}
-                />
-                เบอร์โทร
-              </label>
-              <label className="ml-4">
-                <input
-                  type="radio"
-                  name="contactMethod"
-                  value="Google Meets"
-                  checked={contactMethod === 'Google Meets'}
-                  onChange={(e) => setContactMethod(e.target.value)}
-                />
-                Google Meets
-              </label>
-            </div>
-          </div>
+
           {contactMethod === 'เบอร์โทร' && (
             <div className="mb-4">
               <div>เบอร์ติดต่อ</div>
@@ -183,6 +194,21 @@ export default function Modal({ isOpen, onClose, onSubmit, userId, topicData, st
               )}
             </select>
           </div>
+          <div className="mb-4">
+            <div>วิธีการติดต่อ</div>
+            <Dropdown
+              name="contactMethod"
+              placehold="เลือกวิธีการติดต่อ"
+              options={['เบอร์โทร', 'Google Meets']}
+              onSelect={(option) => setContactMethod(option)}
+              selected={contactMethod || 'เลือกวิธีการติดต่อ'}
+              required
+            />
+            {errorMessage && (
+              <p className="text-red-500 mt-2">{errorMessage}</p>
+            )}
+          </div>
+
           <div className="flex justify-end">
             <button
               type="button"
