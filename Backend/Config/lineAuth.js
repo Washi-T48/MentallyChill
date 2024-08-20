@@ -6,6 +6,6 @@ dotenv.config();
 export function getAuthHeader() {
     return {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + process.env.LINE_CHANNEL_SECRET
+        'Authorization': 'Bearer ' + process.env.LINE_CHANNEL_TOKEN
     }
 }
