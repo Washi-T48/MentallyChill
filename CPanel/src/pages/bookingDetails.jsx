@@ -28,20 +28,20 @@ const Content = ({
           <div className="text-4xl font-semibold">เลขที่การจอง : {bookingId}</div>
           <div className="text-4xl font-semibold">เลขที่ผู้ใช้ : {data.user_id}</div>
         </div>
-        <div className="flex flex-col flex-1 bg-[#FFAD4D] border border-[#FFAD4D] border-4 rounded-lg h-full ">
+        <div className="flex flex-col flex-1 bg-[#003087] border border-[#003087] border-4 rounded-lg h-full ">
           <div className="p-4 flex flex-col justify-between h-full">
             <div>
-              <div className="flex flex-row justify-between text-2xl font-medium mb-4">
+              <div className="flex flex-row justify-between text-2xl font-medium mb-4 text-white">
                 <div>ผู้ให้คำปรึกษาที่ต้องการพบ : {data.staff_id}</div>
                 <div>{appointmentDate}</div>
               </div>
-              <div className="flex flex-row justify-between text-2xl font-medium mb-4">
+              <div className="flex flex-row justify-between text-2xl font-medium mb-4 text-white">
                 <div>หัวข้อ : {data.topic}</div>
                 <div>{appointmentTime}</div>
               </div>
               <div className="flex flex-row gap-3 mb-4">
                 <div className="w-full h-full">
-                  <div className="text-2xl font-medium mb-4">
+                  <div className="text-2xl font-medium mb-4 text-white">
                     เรื่องที่ขอรับการปรึกษา :
                   </div>
                   <div className="flex w-full h-60 bg-stone-300 break-all p-2 overflow-y-auto">
@@ -49,7 +49,7 @@ const Content = ({
                   </div>
                 </div>
                 <div className="w-full">
-                  <div className="text-2xl font-medium mb-4">
+                  <div className="text-2xl font-medium mb-4 text-white">
                     ประวัติการปรึกษาทางการแพทย์ :
                   </div>
                   <div className="flex w-full h-60 bg-stone-300 break-all p-2 overflow-y-auto">
@@ -57,7 +57,7 @@ const Content = ({
                   </div>
                 </div>
                 <div className="w-full">
-                  <div className="text-2xl font-medium mb-4">โน้ต :</div>
+                  <div className="text-2xl font-medium mb-4 text-white">โน้ต :</div>
                   <form onSubmit={handleSubmit}>
                     <textarea
                       className="flex w-full h-60 bg-gray-100 break-all p-2 overflow-y-auto"
@@ -69,7 +69,7 @@ const Content = ({
               </div>
             </div>
             <div className="flex flex-row justify-between border-t-4 border-[#FFFFFF] pt-3">
-              <div className="text-2xl font-medium">
+              <div className="text-2xl font-medium text-white">
                 หมายเลขโทรศัพท์ติดต่อ : {data.contact}
               </div>
               <div className="flex flex-row justify-between gap-4">

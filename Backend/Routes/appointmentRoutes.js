@@ -31,8 +31,8 @@ appointmentRouter.all("/", async (req, res) => {
 
 appointmentRouter.post("/new", async (req, res) => {
     try {
-        const { uid, tel, contactMethod, medDoctor, date, time, topic, detail, medHistory } = req.body;
-        const newAppointmentResult = await newAppointment(uid, tel, contactMethod, medDoctor, date, time, topic, detail, medHistory);
+        const { uid, tel, contactMethod, medDoctor, date, time, topic, detail, medHistory, sub_topic } = req.body;
+        const newAppointmentResult = await newAppointment(uid, tel, contactMethod, medDoctor, date, time, topic, detail, medHistory, sub_topic);
         res.status(200).json(newAppointmentResult);
     }
     catch (error) {
@@ -111,7 +111,7 @@ appointmentRouter.get("/upcoming", async (req, res) => {
     }
 });
 
-appointmentRouter.get("/new", async (req, res) => {
+appointmentRouter.get("/getnew", async (req, res) => {
     try {
         const appointments = await newAppointments();
         res.status(200).json(appointments);
@@ -122,7 +122,7 @@ appointmentRouter.get("/new", async (req, res) => {
     }
 });
 
-appointmentRouter.get("/past", async (req, res) => {
+appointmentRouter.get("/getpast", async (req, res) => {
     try {
         const appointments = await pastAppointments();
         res.status(200).json(appointments);
@@ -160,8 +160,8 @@ appointmentRouter.post("/post", async (req, res) => {
 // ONLY FOR FRONTEND SUBMISSION, PLEASE USE LINE_UID FOR UID [FRONTEND ONLY]
 appointmentRouter.post("/submit", async (req, res) => {
     try {
-        const { uid, tel, contactMethod, medDoctor, date, time, topic, detail, medHistory } = req.body;
-        const appointment = await submitAppointment(uid, tel, contactMethod, medDoctor, date, time, topic, detail, medHistory);
+        const { uid, tel, contactMethod, medDoctor, date, time, topic, detail, medHistory, sub_topic } = req.body;
+        const appointment = await submitAppointment(uid, tel, contactMethod, medDoctor, date, time, topic, detail, medHistory, sub_topic);
         res.status(200).json(appointment);
     }
     catch (error) {

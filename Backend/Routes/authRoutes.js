@@ -10,6 +10,8 @@ import {
     comparePassword
 } from '../Models/auth.js';
 
+import { newStaff, updateStaff } from '../Models/staff.js';
+
 
 const authRouter = express.Router();
 dotenv.config();
@@ -28,7 +30,11 @@ authRouter.post('/login', async (req, res) => {
 
         if (await comparePassword(password, staff.password)) {
             const token = jwt.sign({ staff_id: staff.staff_id }, process.env.JWT_SECRET, { expiresIn: '3h' });
-            res.cookie('token', token, { httpOnly: true });
+            res.cookie('token', token, {
+                httpOnly: true,
+                secure: true,
+                sameSite: 'None',
+            });
             res.status(200).json({ token });
         } else {
             res.sendStatus(401);
@@ -41,10 +47,10 @@ authRouter.post('/login', async (req, res) => {
 
 authRouter.post('/register', authMiddleware, async (req, res) => {
     try {
-        const { staff_id, password } = req.body;
+        const { staff_id, name, surname, nickname, password } = req.body;
         if (!staff_id || !password) { return res.sendStatus(400) }
         const staff = await findStaff(staff_id);
-        if (!staff) { return res.sendStatus(401) };
+        if (!staff) { return res.sendStatus(500) };
         if (staff && staff.password) { return res.status(409).send('Account already registered') };
         const newStaff = await registerStaff(staff_id, password);
         res.status(201).json(newStaff);
@@ -57,7 +63,7 @@ authRouter.post('/register', authMiddleware, async (req, res) => {
 
 authRouter.get('/check', authMiddleware, async (req, res) => {
     try {
-        res.sendStatus(200);
+        res.send(jwt.decode(req.cookies.token)).status(200);
     } catch (err) {
         logger.error(err);
         res.sendStatus(500);

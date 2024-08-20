@@ -1,9 +1,9 @@
 import pool from '../Config/db.js';
 
-const newStaff = async (name, surname, nickname, description) => {
+const newStaff = async (staff_id, name, surname, nickname) => {
     const newStaff = await pool.query(
-        `INSERT INTO staff (name, surname, nickname, description) VALUES($1, $2, $3, $4) RETURNING *`,
-        [name, surname, nickname, description]
+        `INSERT INTO staff (staff_id, name, surname, nickname) VALUES($1, $2, $3, $4) RETURNING *`,
+        [staff_id, name, surname, nickname]
     );
     return (newStaff["rows"][0]);
 };
@@ -16,10 +16,10 @@ const deleteStaff = async (staff_id) => {
     return (staff["rows"][0])
 };
 
-const updateStaff = async (staff_id, name, surname, nickname, description) => {
+const updateStaff = async (staff_id, name, surname, nickname) => {
     const staff = await pool.query(
-        `UPDATE staff SET name = $2, surname = $3, nickname = $4, description = $5 WHERE staff_id = $1 RETURNING *`,
-        [staff_id, name, surname, nickname, description]
+        `UPDATE staff SET name = $2, surname = $3, nickname = $4 WHERE staff_id = $1 RETURNING *`,
+        [staff_id, name, surname, nickname]
     );
     return (staff["rows"][0])
 };

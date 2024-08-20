@@ -16,6 +16,7 @@ const authMiddleware = (req, res, next) => {
         logger.error(err);
         return res.sendStatus(401);
     }
+    // next();
 };
 
 export default authMiddleware;
