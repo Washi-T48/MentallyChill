@@ -1,1 +1,4 @@
 /certs/*
+Line/.env
+/Line/node_modules
+Line/console.log
