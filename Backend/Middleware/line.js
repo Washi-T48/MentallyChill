@@ -10,7 +10,7 @@ const lineSignatureValidate = async (req, res, next) => {
         .update(JSON.stringify(req.body))
         .digest("base64").toString();
     if (signature === req.headers["x-line-signature"]) { next(); }
-    else { logger.alert("INVALID WEBHOOK SIGNATURE"); res.sendStatus(401); }
+    else { logger.alert("INVALID WEBHOOK SIGNATURE"); res.sendStatus(400); }
 };
 
 export default lineSignatureValidate;

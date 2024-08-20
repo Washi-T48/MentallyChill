@@ -27,7 +27,6 @@ export default class Message {
                 "contents": flex
             });
         });
-        console.log(messagesArray)
         return messagesArray;
     }
 

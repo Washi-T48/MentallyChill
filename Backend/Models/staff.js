@@ -26,7 +26,7 @@ const updateStaff = async (staff_id, name, surname, nickname) => {
 
 const lookupStaff = async (staff_id) => {
     const staff = await pool.query(
-        `SELECT * FROM staff WHERE staff_id = $1 ORDER BY created DESC`,
+        `SELECT staff_id, name, surname, nickname, image, description FROM staff WHERE staff_id = $1 ORDER BY created DESC`,
         [staff_id]
     );
     return (staff["rows"]);

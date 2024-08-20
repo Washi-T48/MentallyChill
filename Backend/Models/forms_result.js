@@ -1,5 +1,6 @@
 import e from "express";
 import pool from "../Config/db.js";
+import lineRouter from "../Routes/lineRoutes.js";
 
 const newFormResult = async (uid, form_id, result) => {
     const newFormResult = await pool.query(
@@ -19,7 +20,7 @@ const deleteFormResult = async (result_id) => {
 
 const lookupFormResult = async (result_id) => {
     const formResult = await pool.query(
-        `SELECT * FROM forms_result WHERE result_id = $1 ORDER BY created DESC`,
+        `SELECT * FROM forms_result INNER JOIN users ON users.user_id = forms_result.user_id WHERE result_id = $1`,
         [result_id]
     );
     return (formResult["rows"]);
@@ -41,11 +42,12 @@ const allFormResults = async () => {
 }
 
 // ONLY FOR SUBMISSION USING LINE_UID [FRONTEND ONLY]
-const submitForms = async (uid, form_id, result) => {
+const submitForms = async (uid, forms_type, result) => {
     const newFormResult = await pool.query(
-        `INSERT INTO forms_result (user_id, forms_type, result) VALUES ((SELECT user_id FROM users WHERE users.line_uid = $1), $2, $3) RETURNING *`,
-        [uid, form_id, result]
+        `INSERT INTO forms_result (user_id, forms_type, result) VALUES ($1, $2, $3) RETURNING *`,
+        [uid, forms_type, result]
     );
+
     return (newFormResult["rows"][0]);
 }
 
