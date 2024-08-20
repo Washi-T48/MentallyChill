@@ -22,7 +22,7 @@ async function formResultNotify(result_id) {
 
 async function appointmentNotify(booking_id) {
     const appointmentInfo = await lookupAppointment(booking_id);
-    const { user_id, staff_id, date, time, status, contact_method, line_uid } = appointmentInfo[0];
+    const { staff_id, date, time, status, contact_method, line_uid } = appointmentInfo[0];
     const staff = await lookupStaff(staff_id);
     const staffInfo = `${staff[0].name} ${staff[0].surname} (${staff[0].nickname})`;
     const notify = new Message();
@@ -49,7 +49,24 @@ async function appointmentNotify(booking_id) {
                         },
                         {
                             "type": "text",
-                            "text": "วันที่ ",
+                            "text": "เลขที่",
+                            "contents": [
+                                {
+                                    "type": "span",
+                                    "text": "เลขที่ ",
+                                    "size": "lg",
+                                    "weight": "bold"
+                                },
+                                {
+                                    "type": "span",
+                                    "text": booking_id
+                                }
+                            ],
+                            "wrap": true
+                        },
+                        {
+                            "type": "text",
+                            "text": "วันที่",
                             "contents": [
                                 {
                                     "type": "span",
@@ -66,7 +83,7 @@ async function appointmentNotify(booking_id) {
                         },
                         {
                             "type": "text",
-                            "text": "เวลา ",
+                            "text": "เวลา",
                             "contents": [
                                 {
                                     "type": "span",
@@ -83,7 +100,7 @@ async function appointmentNotify(booking_id) {
                         },
                         {
                             "type": "text",
-                            "text": "ผู้ให้คำปรึกษา ",
+                            "text": "ผู้ให้คำปรึกษา",
                             "contents": [
                                 {
                                     "type": "span",
@@ -100,7 +117,7 @@ async function appointmentNotify(booking_id) {
                         },
                         {
                             "type": "text",
-                            "text": "ช่องทาง ",
+                            "text": "ช่องทาง",
                             "contents": [
                                 {
                                     "type": "span",
@@ -117,7 +134,7 @@ async function appointmentNotify(booking_id) {
                         },
                         {
                             "type": "text",
-                            "text": "สถานะ ",
+                            "text": "สถานะ",
                             "contents": [
                                 {
                                     "type": "span",
@@ -138,8 +155,6 @@ async function appointmentNotify(booking_id) {
         )
     );
 }
-
-
 
 export {
     formResultNotify,
