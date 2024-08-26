@@ -65,10 +65,10 @@ export default function DiagnosisPage() {
     setCurrentPage(1); // Reset to the first page
   };
 
-  // const handleSelectResult = (option) => {
-  //   setSelectedResult(option);
-  //   setCurrentPage(1); // Reset to the first page
-  // };
+  const handleSelectResult = (option) => {
+    setSelectedResult(option);
+    setCurrentPage(1); // Reset to the first page
+  };
 
   const clearAllFilters = () => {
     setSelectedFormType("");
@@ -80,7 +80,7 @@ export default function DiagnosisPage() {
     return (
       <>
         <div className="flex flex-col flex-1 m-10 relative">
-          <div className="text-5xl mb-10">การวินิจฉัย</div>
+          <div className="text-5xl mb-10">ผลการประเมิน</div>
           <div className="flex flex-row gap-4 mb-10 items-center">
             <div className="text-4xl">ตัวกรอง : </div>
             <Dropdown
@@ -89,12 +89,12 @@ export default function DiagnosisPage() {
               onSelect={handleSelectLocation}
               selected={selectedFormType}
             />
-            {/* <Dropdown
+            {<Dropdown
               placehold={"Result"}
               options={["Red", "Yellow", "Green"]}
               onSelect={handleSelectResult}
               selected={selectedResult}
-            /> */}
+            />}
             <button
               className="py-2 px-4 bg-red-500 text-white rounded"
               onClick={clearAllFilters}

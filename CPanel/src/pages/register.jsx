@@ -8,28 +8,24 @@ export default function RegisterPage() {
     const [errorMessage, setErrorMessage] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
     const [modalOpen, setModalOpen] = useState(false);
+    const [imageFile, setImageFile] = useState(null); // Add state for the image file
 
     const handleRegister = async (data) => {
         try {
             setLoading(true);
             setErrorMessage('');
             setSuccessMessage('');
-            console.log('Sending registration request:', data);
             const response = await axios.post('/auth/register', data, { withCredentials: true });
-            console.log('Received response:', response);
             setLoading(false);
             if (response.status === 200 || response.status === 201) {
-                console.log('Registration successful:', data);
-                const successMessage = `ทำการเพิ่มบัญชีผู้ใช้สำเร็จ\nบัญชีผู้ใช้ : ${data.staff_id}\nรหัสผ่าน: ${data.password}`;
+                const successMessage = `ทำการเพิ่มบัญชีผู้ใช้สำเร็จ\nบัญชีผู้ใช้ : ${data.get('staff_id')}\nรหัสผ่าน: ${data.get('password')}`;
                 setSuccessMessage(successMessage);
                 setModalOpen(true);
             } else {
-                console.log('Unexpected response status:', response.status);
                 setErrorMessage('การเพิ่มบัญชีเจ้าหน้าที่ไม่สำเร็จ กรุณาลองอีกครั้ง');
             }
         } catch (error) {
             setLoading(false);
-            console.error('Registration error:', error);
             if (error.response && error.response.data) {
                 setErrorMessage(error.response.data);
             } else {
@@ -41,40 +37,52 @@ export default function RegisterPage() {
     const handleSubmit = (event) => {
         event.preventDefault();
         const { staff_id, name, surname, nickname, password, confirm_password } = event.target.elements;
-
+    
         if (password.value !== confirm_password.value) {
             setErrorMessage('รหัสผ่านไม่ตรงกัน');
             return;
         }
-
-        const data = {
-            staff_id: staff_id.value,
-            name: name.value,
-            surname: surname.value,
-            nickname: nickname.value,
-            password: password.value,
-        };
-        handleRegister(data);
+    
+        const formData = new FormData();
+        formData.append('staff_id', staff_id.value);
+        formData.append('name', name.value);
+        formData.append('surname', surname.value);
+        formData.append('nickname', nickname.value);
+        formData.append('password', password.value);
+        
+        if (imageFile) {
+            formData.append('image', imageFile);
+        } else {
+            setErrorMessage('โปรดเลือกรูปภาพ');
+            return;
+        }
+    
+        handleRegister(formData);
     };
+    
 
     const handleCloseModal = () => {
         setModalOpen(false);
     };
 
-    const Content = () => {
-        return (
-            <>
+    return (
+        <div className="flex flex-col flex-1 h-dvh">
+            <Topbar/>
+            <div className="flex flex-col md:flex-row flex-1">
+                <div className="flex relative w-full md:w-72">
+                    <Sidebar/>
+                </div>
                 <div className="flex flex-col flex-1 m-5 md:m-10 relative">
                     <div className="text-2xl md:text-5xl mb-6 md:mb-10">เพิ่มบัญชีเจ้าหน้าที่</div>
                     <form onSubmit={handleSubmit}>
                         <div className="mb-4">
-                            <label htmlFor="staff_id" className="block text-gray-700 text-sm font-bold mb-2">บัญขีผู้ใช้</label>
+                            <label htmlFor="image" className="block text-gray-700 text-sm font-bold mb-2">Upload Image</label>
                             <input 
-                                type="text" 
-                                id="staff_id" 
-                                name="staff_id" 
-                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                required
+                                type="file" 
+                                id="image" 
+                                name="image" 
+                                accept="image/*"
+                                onChange={(e) => setImageFile(e.target.files[0])} // Set imageFile state when a file is selected
                             />
                         </div>
                         <div className="mb-4">
@@ -103,6 +111,16 @@ export default function RegisterPage() {
                                 type="text" 
                                 id="nickname" 
                                 name="nickname" 
+                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                required
+                            />
+                        </div>
+                        <div className="mb-4">
+                            <label htmlFor="staff_id" className="block text-gray-700 text-sm font-bold mb-2">บัญขีผู้ใช้</label>
+                            <input 
+                                type="text" 
+                                id="staff_id" 
+                                name="staff_id" 
                                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 required
                             />
@@ -137,44 +155,30 @@ export default function RegisterPage() {
                         </button>
                     </form>
                 </div>
-            </>
-        );
-    };
-
-    const Modal = ({ isOpen, onClose, message }) => {
-        if (!isOpen) return null;
-    
-        return (
-            <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-                <div className="bg-white p-6 rounded shadow-lg max-w-sm w-full">
-                    <div className="text-lg font-semibold mb-4 whitespace-pre-line">{message}</div>
-                    <button 
-                        onClick={onClose} 
-                        className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                    >
-                        Close
-                    </button>
-                </div>
             </div>
-        );
-    };
+            <Modal 
+                isOpen={modalOpen}
+                onClose={handleCloseModal}
+                message={successMessage}
+            />
+        </div>
+    );
+}
+
+const Modal = ({ isOpen, onClose, message }) => {
+    if (!isOpen) return null;
 
     return (
-        <>
-            <div className="flex flex-col flex-1 h-dvh">
-                <Topbar/>
-                <div className="flex flex-col md:flex-row flex-1">
-                    <div className="flex relative w-full md:w-72">
-                        <Sidebar/>
-                    </div>
-                    <Content/>
-                </div>
-                <Modal 
-                    isOpen={modalOpen}
-                    onClose={handleCloseModal}
-                    message={successMessage}
-                />
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+            <div className="bg-white p-6 rounded shadow-lg max-w-sm w-full">
+                <div className="text-lg font-semibold mb-4 whitespace-pre-line">{message}</div>
+                <button 
+                    onClick={onClose} 
+                    className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                >
+                    Close
+                </button>
             </div>
-        </>
-    ); 
-}
+        </div>
+    );
+};

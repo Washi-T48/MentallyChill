@@ -83,84 +83,82 @@ export default function DashboardPage() {
       let low = 0;
       let medium = 0;
       let high = 0;
-
+  
       let resD = 0;
       let resA = 0;
       let resS = 0;
-
+  
       let dlow = 0;
-        let dmedium = 0;
-        let dhigh = 0;
-        let alow = 0;
-        let amedium = 0;
-        let ahigh = 0;
-        let slow = 0;
-        let smedium = 0;
-        let shigh = 0;
-
+      let dmedium = 0;
+      let dhigh = 0;
+      let alow = 0;
+      let amedium = 0;
+      let ahigh = 0;
+      let slow = 0;
+      let smedium = 0;
+      let shigh = 0;
+  
       diagdata.forEach((entry) => {
-        const { d, a, s } = entry.result;
-
-        // Convert values to numbers
-        const dNum = Number(d);
-        resD += dNum;
-        const aNum = Number(a);
-        resA += aNum;
-        const sNum = Number(s);
-        resS += sNum;
-
-        let drank = 0;
-        let arank = 0;
-        let srank = 0;
-
-
-        // Find the maximum value
-        // const maxValue = Math.max(dNum, aNum, sNum);
-
-        if (dNum >= 0 && dNum <= 6) {
-          drank = 1;
-          dlow++;
-        } else if (dNum >= 7 && dNum <= 13) {
-          drank = 2;
-          dmedium++;
-        } else if (dNum >= 14) {
-          drank = 3;
-          dhigh++;
-        }
-
-        if (aNum >= 0 && aNum <= 5) {
-          arank = 1;
-          alow++;
-        } else if (aNum >= 6 && aNum <= 9) {
-          arank = 2;
-          amedium++;
-        } else if (aNum >= 10) {
-          arank = 3;
-          ahigh++;
-        }
-
-        if (sNum >= 0 && sNum <= 9) {
-          srank = 1;
-          slow++;
-        } else if (sNum >= 10 && sNum <= 16) {
-          srank = 2;
-          smedium++;
-        } else if (sNum >= 17) {
-          srank = 3;
-          shigh++;
-        }
-
-        const maxValue = Math.max(drank, arank, srank);
-
-        if (maxValue === 1) {
-          low++;
-        } else if (maxValue === 2) {
-          medium++;
-        } else if (maxValue === 3) {
-          high++;
+        if (entry.result) {
+          const { d, a, s } = entry.result;
+  
+          // Convert values to numbers
+          const dNum = Number(d);
+          resD += dNum;
+          const aNum = Number(a);
+          resA += aNum;
+          const sNum = Number(s);
+          resS += sNum;
+  
+          let drank = 0;
+          let arank = 0;
+          let srank = 0;
+  
+          if (dNum >= 0 && dNum <= 6) {
+            drank = 1;
+            dlow++;
+          } else if (dNum >= 7 && dNum <= 13) {
+            drank = 2;
+            dmedium++;
+          } else if (dNum >= 14) {
+            drank = 3;
+            dhigh++;
+          }
+  
+          if (aNum >= 0 && aNum <= 5) {
+            arank = 1;
+            alow++;
+          } else if (aNum >= 6 && aNum <= 9) {
+            arank = 2;
+            amedium++;
+          } else if (aNum >= 10) {
+            arank = 3;
+            ahigh++;
+          }
+  
+          if (sNum >= 0 && sNum <= 9) {
+            srank = 1;
+            slow++;
+          } else if (sNum >= 10 && sNum <= 16) {
+            srank = 2;
+            smedium++;
+          } else if (sNum >= 17) {
+            srank = 3;
+            shigh++;
+          }
+  
+          const maxValue = Math.max(drank, arank, srank);
+  
+          if (maxValue === 1) {
+            low++;
+          } else if (maxValue === 2) {
+            medium++;
+          } else if (maxValue === 3) {
+            high++;
+          }
         }
       });
-
+  
       setResD(resD);
       setResA(resA);
       setResS(resS);
@@ -177,10 +175,10 @@ export default function DashboardPage() {
       setMediumCount(medium);
       setHighCount(high);
     };
-
+  
     classifyAndCount();
   }, [diagdata]);
-
+  
   // Get recent diagnosis data with maximum 5 rows
   const recentDiagnosis = diagdata.slice(0, 5);
 

@@ -1,21 +1,25 @@
 import express from 'express';
 import logger from '../Middleware/logger.js';
+import multer from 'multer';
 
 import { newStaff, deleteStaff, updateStaff, lookupStaff, allStaffs } from '../Models/staff.js';
 
 const staffRouter = express.Router();
+const upload = multer({ storage: multer.memoryStorage() });
+
 
 staffRouter.all('/', async (req, res) => {
     res.sendStatus(200);
 });
 
-staffRouter.post('/new', async (req, res) => {
+staffRouter.post('/new', upload.single('image'), async (req, res) => {
     try {
-        const { name, surname, nickname, description } = req.body;
-        const newStaffResult = await newStaff(name, surname, nickname, description);
+        const { staff_id, name, surname, nickname, password } = req.body;
+        const image = req.file.buffer.toString('base64');
+
+        const newStaffResult = await newStaff(staff_id, name, surname, nickname, image, password);
         res.status(200).json(newStaffResult);
-    }
-    catch (error) {
+    } catch (error) {
         logger.error(error);
         res.sendStatus(500);
     }

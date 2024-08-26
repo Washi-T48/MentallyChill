@@ -3,6 +3,9 @@ import express from 'express';
 import logger from '../Middleware/logger.js';
 import dotenv from 'dotenv';
 import authMiddleware from '../Middleware/auth.js';
+import multer from 'multer';
+
+const upload = multer({ dest: 'uploads/' });
 
 import {
     findStaff,
@@ -45,20 +48,27 @@ authRouter.post('/login', async (req, res) => {
     }
 });
 
-authRouter.post('/register', authMiddleware, async (req, res) => {
+authRouter.post('/register', authMiddleware, upload.single('image'), async (req, res) => {
     try {
+        console.log('Incoming request body:', req.body);
+        console.log('Uploaded file:', req.file);
+
         const { staff_id, name, surname, nickname, password } = req.body;
-        if (!staff_id || !password) { return res.sendStatus(400) }
+
+        if (!staff_id || !password) {
+            console.log('Missing staff_id or password');
+            return res.sendStatus(400);
+        }
+
         const staff = await findStaff(staff_id);
         if (!staff) {
-            const createStaff = await newStaff(staff_id, name, surname, nickname);
+            const createStaff = await newStaff(staff_id, name, surname, nickname, req.file.filename);
             const updatePassword = await registerStaff(staff_id, password);
-            res.status(200).send(updatePassword)
+            res.status(200).send(updatePassword);
         } else {
             res.status(401).send('Account already exists');
         }
-    }
-    catch (err) {
+    } catch (err) {
         logger.error(err);
         res.sendStatus(500);
     }
