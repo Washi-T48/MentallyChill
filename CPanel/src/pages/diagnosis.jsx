@@ -1,8 +1,9 @@
 import axios from "../components/axioscreds";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Dropdown from "../components/dropdown";
 import Sidebar from "../components/sidebar";
 import Topbar from "../components/topbar";
+import { useLocation } from "react-router-dom";
 
 export default function DiagnosisPage() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -10,7 +11,14 @@ export default function DiagnosisPage() {
   const [selectedResult, setSelectedResult] = useState("");
   const [data, setData] = useState([]);
   const [formTypeData, setFormTypeData] = useState([]);
+  const [sortOrder, setSortOrder] = useState("desc"); // New state for sorting
   const rowsPerPage = 10;
+  const [searchTerm, setSearchTerm] = useState('');
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const userIdFromQuery = queryParams.get('user_id');
+
+  const searchInputRef = useRef(null);
 
   const formtypeList = formTypeData.map((item) => item.forms_type);
 
@@ -38,10 +46,38 @@ export default function DiagnosisPage() {
     fetchData();
   }, []);
 
-  const filteredData = data.filter((item) => {
+  useEffect(() => {
+    if (searchInputRef.current) {
+      searchInputRef.current.focus();
+    }
+  }, [searchTerm]);
+
+  useEffect(() => {
+    if (userIdFromQuery) {
+      setSearchTerm(userIdFromQuery);
+    }
+  }, [userIdFromQuery]);
+
+  // Sort the data based on the created date
+  const sortedData = data.sort((a, b) => {
+    const dateA = new Date(a.created);
+    const dateB = new Date(b.created);
+    return sortOrder === "asc" ? dateA - dateB : dateB - dateA;
+  });
+
+  // const filteredData = sortedData.filter((item) => {
+  //   return (
+  //     (selectedFormType ? item.forms_type === selectedFormType : true) &&
+  //     (selectedResult ? item.result === selectedResult : true) &&
+  //     (searchTerm ? item.user_id.includes(searchTerm.toLowerCase()) : true)
+  //   );
+  // });
+
+  const filteredData = sortedData.filter((item) => {
     return (
       (selectedFormType ? item.forms_type === selectedFormType : true) &&
-      (selectedResult ? item.result === selectedResult : true)
+      (selectedResult ? item.result === selectedResult : true) &&
+      (searchTerm ? item.user_id.includes(searchTerm.toLowerCase()) : true)
     );
   });
 
@@ -76,6 +112,16 @@ export default function DiagnosisPage() {
     setCurrentPage(1); // Reset to the first page
   };
 
+  const toggleSortOrder = () => {
+    setSortOrder((prevOrder) => (prevOrder === "asc" ? "desc" : "asc"));
+    setCurrentPage(1); // Reset to the first page
+  };
+
+  const handleSearchTermChange = (event) => {
+    setSearchTerm(event.target.value);
+    setCurrentPage(1); // Reset to the first page
+  };
+
   const Content = () => {
     return (
       <>
@@ -89,27 +135,41 @@ export default function DiagnosisPage() {
               onSelect={handleSelectLocation}
               selected={selectedFormType}
             />
-            {<Dropdown
+            <Dropdown
               placehold={"Result"}
               options={["Red", "Yellow", "Green"]}
               onSelect={handleSelectResult}
               selected={selectedResult}
-            />}
+            />
             <button
               className="py-2 px-4 bg-red-500 text-white rounded"
               onClick={clearAllFilters}
             >
               ล้างการกรอง
             </button>
+            <input
+                type="search"
+                placeholder="ค้นหาโดยเลขที่ผู้ใช้"
+                onChange={handleSearchTermChange}
+                value={searchTerm}
+                ref={searchInputRef}
+                className="py-2 px-4 rounded border"
+              />
           </div>
           <table className="w-full">
             <thead>
               <tr className="bg-[#003087] text-white">
                 <th className="py-2 px-4 text-3xl text-center rounded-tl-xl">
                   วันที่
+                  <button
+                    onClick={toggleSortOrder}
+                    className="ml-2 py-1 px-2 bg-gray-300 text-black rounded text-2xl"
+                  >
+                    {sortOrder === "asc" ? "▲" : "▼"}
+                  </button>
                 </th>
-                <th className="py-2 px-4 text-3xl text-center ">ประเภทแบบฟอร์ม</th>
-                <th className="py-2 px-4 text-3xl text-center ">ผลการวินิจฉัย</th>
+                <th className="py-2 px-4 text-3xl text-center">ประเภทแบบฟอร์ม</th>
+                <th className="py-2 px-4 text-3xl text-center">ผลการวินิจฉัย</th>
                 <th className="py-2 px-4 text-3xl text-center rounded-tr-xl">
                   เลขที่ผู้ใช้
                 </th>
@@ -120,27 +180,21 @@ export default function DiagnosisPage() {
                 <tr
                   key={index}
                   className={`transition ease-in-out duration-150 border-2 ${index % 2 === 0 ? "bg-zinc-200" : "bg-gray-300"
-                    }
-                   `}
+                    }`}
                 >
                   <td className="py-2 px-4 text-center text-xl">
                     {row.created.substr(0, 10)}
-                    {/* {row.date} */}
                   </td>
                   <td className="py-2 px-4 text-center text-xl">
                     {row.forms_type}
-                    {/* {row.formType} */}
                   </td>
                   <td className="py-2 px-4 text-center text-xl">
-                    {/* D:{row.result.d} A:{row.result.a} S:{row.result.s} */}
                     {row.result
                       ? `D: ${row.result.d} A: ${row.result.a} S: ${row.result.s}`
                       : "null"}
-                    {/* {row.result} */}
                   </td>
                   <td className="py-2 px-4 text-center text-xl">
                     {row.user_id}
-                    {/* {row.uid} */}
                   </td>
                 </tr>
               ))}
@@ -182,3 +236,4 @@ export default function DiagnosisPage() {
     </>
   );
 }
+

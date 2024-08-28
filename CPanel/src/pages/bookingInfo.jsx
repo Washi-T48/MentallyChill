@@ -220,7 +220,19 @@ export default function BookingInfoPage() {
                 <td className="py-1.5 text-center text-xl">{row.appointment_date.substring(0, 10)}</td>
                 <td className="py-1.5 px-4 text-center text-xl">{row.topic}</td>
                 <td className="py-1.5 px-4 text-center text-xl">{row.appointment_date.substring(11, 16)}</td>
-                <td className="py-1.5 px-4 text-center text-xl">{row.user_id}</td>
+                {/* <td className="py-1.5 px-4 text-center text-xl">{row.user_id}</td> */}
+                <td className="py-1.5 px-4 text-center text-xl">
+  <button
+    onClick={(e) => {
+      e.stopPropagation(); // Prevents the event from triggering other click handlers
+      navigate(`/diagnosis?user_id=${row.user_id}`);
+    }}
+    className="py-1 px-3 bg-blue-500 text-white rounded hover:bg-blue-700 transition duration-200 ease-in-out z-100"
+  >
+    {row.user_id}
+  </button>
+</td>
+
                 <td className="py-1.5 px-4 text-center text-xl">{row.booking_id}</td>
                 <td className="py-1 px-4 text-center text-md">
                   {row.status === 'complete' && (
