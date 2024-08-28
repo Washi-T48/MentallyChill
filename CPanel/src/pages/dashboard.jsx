@@ -185,147 +185,6 @@ export default function DashboardPage() {
   // Get recent booking information with maximum 5 rows
   const recentBookingInfo = bookingdata.slice(0, 5);
 
-//   return (
-//     <>
-//       <div className="flex flex-col flex-1 h-dvh">
-//         <Topbar />
-//         <div className="flex flex-row flex-1">
-//           <div className="flex relative w-72">
-//             <Sidebar />
-//           </div>
-//           <div className="w-full">
-//             <div className="grid grid-cols-3 gap-x-48 m-10">
-//               <div className="flex flex-row items-end justify-between border-4 border-sky-400 rounded-md bg-sky-400 h-full w-80 p-5">
-//                 <div className="text-lg text-gray-200">คำขอการจอง</div>
-//                 <div className="text-7xl text-white">{countBooking}</div>
-//               </div>
-//               <div className="flex flex-row items-end justify-between border-4 border-violet-400 rounded-md bg-violet-400 h-full w-80 p-5">
-//                 <div className="text-lg text-gray-100">จำนวนการวินิจฉัย</div>
-//                 <div className="text-7xl text-white">{countDiag}</div>
-//               </div>
-//             </div>
-//             <div className="grid grid-cols-3 gap-x-48 mx-10 my-5 mb-10">
-//               <div className="flex flex-row items-end justify-between border-4 border-green-500 rounded-md bg-green-500 h-full w-80 p-5">
-//                 <div className="text-lg text-gray-100">ระดับปกติ</div>
-//                 <div className="text-7xl text-white">{lowCount}</div>
-//               </div>
-//               <div className="flex flex-row items-end justify-between border-4 border-amber-400 rounded-md bg-amber-400 h-full w-80 p-5">
-//                 <div className="text-lg text-gray-100">ระดับปานกลาง</div>
-//                 <div className="text-7xl text-white">{mediumCount}</div>
-//               </div>
-//               <div className="flex flex-row items-end justify-between border-4 border-rose-400 rounded-md bg-rose-400 h-full w-80 p-5">
-//                 <div className="text-lg text-gray-100">ระดับร้ายแรง</div>
-//                 <div className="text-7xl text-white">{highCount}</div>
-//               </div>
-//             </div>
-//             <div className="grid grid-cols-3 gap-x-48 mx-10 my-5 mb-10">
-//               <div className="flex flex-row items-end justify-between border-4 border-green-500 rounded-md bg-blue-300 h-full w-80 p-5">
-//                 <div className="text-lg text-gray-100">ความซึมเศร้า ต่ำ</div>
-//                 <div className="text-7xl text-white">{countdlow}</div>
-//               </div>
-//               <div className="flex flex-row items-end justify-between border-4 border-amber-400 rounded-md bg-blue-300 h-full w-80 p-5">
-//                 <div className="text-lg text-gray-100">ความซึมเศร้า ปานกลาง</div>
-//                 <div className="text-7xl text-white">{countdmedium}</div>
-//               </div>
-//               <div className="flex flex-row items-end justify-between border-4 border-rose-400 rounded-md bg-blue-300 h-full w-80 p-5">
-//                 <div className="text-lg text-gray-100">ความซึมเศร้า สูง</div>
-//                 <div className="text-7xl text-white">{countdhigh}</div>
-//               </div>
-//             </div>
-//             <div className="grid grid-cols-3 gap-x-48 mx-10 my-5 mb-10">
-//               <div className="flex flex-row items-end justify-between border-4 border-green-500 rounded-md bg-violet-300 h-full w-80 p-5">
-//                 <div className="text-lg text-gray-100">ความวิตกกังวล ต่ำ</div>
-//                 <div className="text-7xl text-white">{countalow}</div>
-//               </div>
-//               <div className="flex flex-row items-end justify-between border-4 border-amber-400 rounded-md bg-violet-300 h-full w-80 p-5">
-//                 <div className="text-lg text-gray-100">ความวิตกกังวล ปานกลาง</div>
-//                 <div className="text-7xl text-white">{countamedium}</div>
-//               </div>
-//               <div className="flex flex-row items-end justify-between border-4 border-rose-400 rounded-md bg-violet-300 h-full w-80 p-5">
-//                 <div className="text-lg text-gray-100">ความวิตกกังวล สูง</div>
-//                 <div className="text-7xl text-white">{countahigh}</div>
-//               </div>
-//             </div>
-//             <div className="grid grid-cols-3 gap-x-48 mx-10 my-5 mb-10">
-//               <div className="flex flex-row items-end justify-between border-4 border-green-500 rounded-md bg-rose-300  h-full w-80 p-5">
-//                 <div className="text-lg text-gray-100">ความเครียด ต่ำ</div>
-//                 <div className="text-7xl text-white">{countslow}</div>
-//               </div>
-//               <div className="flex flex-row items-end justify-between border-4 border-amber-400 rounded-md bg-rose-300  h-full w-80 p-5">
-//                 <div className="text-lg text-gray-100">ความเครียด ปานกลาง</div>
-//                 <div className="text-7xl text-white">{countsmedium}</div>
-//               </div>
-//               <div className="flex flex-row items-end justify-between border-4 border-rose-400 rounded-md bg-rose-300  h-full w-80 p-5">
-//                 <div className="text-lg text-gray-100">ความเครียด สูง</div>
-//                 <div className="text-7xl text-white">{countshigh}</div>
-//               </div>
-//             </div>
-//             <div className="grid grid-cols-2 mx-10 my-5 gap-5">
-//               <div className="">
-//                 <div className="mb-3 text-2xl">การจองครั้งล่าสุด</div>
-//                 <table className="w-full">
-//                   <thead>
-//                     <tr className="bg-emerald-400">
-//                       <th className="py-2 px-4">เลขที่การจอง</th>
-//                       <th className="py-2 px-4">หัวข้อ</th>
-//                       <th className="py-2 px-4">วันที่</th>
-//                     </tr>
-//                   </thead>
-//                   <tbody>
-//                     {recentBookingInfo.map((book, index) => (
-//                       <tr
-//                         key={index}
-//                         className={`${
-//                           index % 2 === 0 ? "bg-white" : "bg-gray-100"
-//                         } text-center`}
-//                       >
-//                         <td className="py-2 px-4">{book.booking_id}</td>
-//                         <td className="py-2 px-4">{book.topic}</td>
-//                         <td className="py-2 px-4">
-//                           {book.appointment_date.substring(0, 10)}
-//                         </td>
-//                       </tr>
-//                     ))}
-//                   </tbody>
-//                 </table>
-//               </div>
-//               <div>
-//                 <div className="mb-3 text-2xl">การวินิจฉัยครั้งล่าสุด</div>
-//                 <table className="w-full">
-//                   <thead>
-//                     <tr className="bg-sky-300">
-//                       <th className="py-2 px-4">เลขที่ผู้ใช้</th>
-//                       <th className="py-2 px-4">ประเภทแบบฟอร์ม</th>
-//                       <th className="py-2 px-4">วันที่</th>
-//                     </tr>
-//                   </thead>
-//                   <tbody>
-//                     {recentDiagnosis.map((diag, index) => (
-//                       <tr
-//                         key={index}
-//                         className={`${
-//                           index % 2 === 0 ? "bg-white" : "bg-gray-100"
-//                         } text-center`}
-//                       >
-//                         <td className="py-2 px-4">{diag.user_id}</td>
-//                         <td className="py-2 px-4">{diag.forms_type}</td>
-//                         <td className="py-2 px-4">
-//                           {diag.created.substring(0, 10)}
-//                         </td>
-//                       </tr>
-//                     ))}
-//                   </tbody>
-//                 </table>
-//               </div>
-//             </div>
-//           </div>
-//         </div>
-//       </div>
-//     </>
-//   );
-// }
-
-
 return (
   <div className="flex flex-col min-h-screen">
     <Topbar />
@@ -348,7 +207,7 @@ return (
             low={countdlow} 
             medium={countdmedium} 
             high={countdhigh} 
-            bgColor="sky"
+            bgColor="blue"
           />
           <CategoryStats 
             title="ความวิตกกังวล" 
@@ -364,6 +223,7 @@ return (
             high={countshigh} 
             bgColor="rose"
           />
+          
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8">
             <DataTable 
@@ -386,23 +246,23 @@ return (
 );
 }
 
-function StatCard({ title, value, color }) {
-return (
-  <div className={`flex flex-col justify-between border-4 border-${color}-400 rounded-md bg-${color}-400 p-4 h-32`}>
-    <div className="text-lg text-gray-200">{title}</div>
-    <div className="text-4xl md:text-5xl lg:text-6xl text-white">{value}</div>
-  </div>
-);
+function StatCard({ title, value, color, tone = 400 }) {
+  return (
+    <div className={`flex flex-col justify-between border-4 border-${color}-${tone} rounded-md bg-${color}-${tone} p-4 h-32`}>
+      <div className="text-lg text-gray-200">{title}</div>
+      <div className="text-4xl md:text-5xl lg:text-6xl text-white">{value}</div>
+    </div>
+  );
 }
 
 function CategoryStats({ title, low, medium, high, bgColor }) {
-return (
-  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 my-8">
-    <StatCard title={`${title} ต่ำ`} value={low} color={bgColor} />
-    <StatCard title={`${title} ปานกลาง`} value={medium} color={bgColor} />
-    <StatCard title={`${title} สูง`} value={high} color={bgColor} />
-  </div>
-);
+  return (
+    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 my-8">
+      <StatCard title={`${title} ต่ำ`} value={low} color={bgColor} tone={300} />
+      <StatCard title={`${title} ปานกลาง`} value={medium} color={bgColor} tone={400} />
+      <StatCard title={`${title} รุนแรง`} value={high} color={bgColor} tone={500} />
+    </div>
+  );
 }
 
 function DataTable({ title, data, columns, bgColor }) {
