@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import CookieConsent from "react-cookie-consent";
 
 import { ProfileProvider } from "./LIFF/ProfileContext";
 import Person1 from "./pages/Person1";
@@ -23,7 +24,6 @@ import Finish_app from "./pages/finish_app";
 
 import LineLiff from "./LIFF/lineLiff";
 import LineDis from "./LIFF/LineDIS";
-import LiffInit from "./LIFF/LiffInit";
 
 function App() {
   const handleLiffInit = (liff) => {
@@ -31,6 +31,7 @@ function App() {
       liff.login();
     }
   };
+
   return (
     <ProfileProvider>
       {/* <LiffInit liffId="2005311386-6GQLXp7Z" onInit={handleLiffInit} /> */}
@@ -58,6 +59,32 @@ function App() {
           <Route path="/LineDis" element={<LineDis />} />
         </Routes>
       </BrowserRouter>
+
+      <CookieConsent
+        location="bottom"
+        buttonText="Accept"
+        declineButtonText="Decline"
+        cookieName="myAwesomeCookieConsent"
+        style={{ background: "#2B373B" }}
+        buttonStyle={{
+          background: "#FFD700",
+          color: "#4e503b",
+          fontSize: "18px",
+          borderRadius: "5px",
+          padding: "10px 20px",
+          border: "none",
+          cursor: "pointer",
+        }}
+        expires={150}
+      >
+        This website uses cookies to enhance the user experience.{" "}
+        {/* <a
+          href="/privacy-policy"
+          style={{ color: "#FFD700", textDecoration: "underline" }}
+        >
+          Learn More
+        </a> */}
+      </CookieConsent>
     </ProfileProvider>
   );
 }
