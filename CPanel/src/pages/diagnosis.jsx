@@ -136,8 +136,8 @@ export default function DiagnosisPage() {
               selected={selectedFormType}
             />
             <Dropdown
-              placehold={"Result"}
-              options={["Red", "Yellow", "Green"]}
+              placehold={"ผลการประเมิน"}
+              options={["ร้ายแรง", "ปานกลาง", "ปกติ"]}
               onSelect={handleSelectResult}
               selected={selectedResult}
             />
@@ -169,7 +169,7 @@ export default function DiagnosisPage() {
                   </button>
                 </th>
                 <th className="py-2 px-4 text-3xl text-center">ประเภทแบบฟอร์ม</th>
-                <th className="py-2 px-4 text-3xl text-center">ผลการวินิจฉัย</th>
+                <th className="py-2 px-4 text-3xl text-center">ผลการประเมิน</th>
                 <th className="py-2 px-4 text-3xl text-center rounded-tr-xl">
                   เลขที่ผู้ใช้
                 </th>

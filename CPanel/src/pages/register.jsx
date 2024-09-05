@@ -56,8 +56,8 @@ export default function RegisterPage() {
         } else {
             setErrorMessage('โปรดเลือกรูปภาพ');
             return;
-        }
-
+        } 
+        
         handleRegister(formData);
     };
 
@@ -87,7 +87,7 @@ export default function RegisterPage() {
                     <div className="text-2xl md:text-5xl mb-6 md:mb-10">เพิ่มบัญชีเจ้าหน้าที่</div>
                     <form onSubmit={handleSubmit}>
                         <div className="mb-4">
-                            <label htmlFor="image" className="block text-gray-700 text-sm font-bold mb-2">Upload Image</label>
+                            <label htmlFor="image" className="block text-gray-700 text-sm font-bold mb-2">รูปภาภเจ้าหน้าที่</label>
                             <input 
                                 type="file" 
                                 id="image" 

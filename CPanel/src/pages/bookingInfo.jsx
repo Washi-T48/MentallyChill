@@ -47,6 +47,13 @@ export default function BookingInfoPage() {
     fetchtopic();
   }, []);
 
+  const statusOptions = [
+    { label: 'รอการยืนยัน', value: 'pending' },
+    { label: 'รอการสรุปผล', value: 'feedback' },
+    { label: 'เสร็จสิ้น', value: 'complete' },
+    { label: 'ปฏิเสธ', value: 'decline' },
+  ];
+
   useEffect(() => {
     if (searchInputRef.current) {
       searchInputRef.current.focus();
@@ -58,9 +65,9 @@ export default function BookingInfoPage() {
     setCurrentPage(1); // Reset to the first page
   };
 
-  const handleSelectStatus = (option) => {
-    setSelectedStatus(option);
-    setCurrentPage(1); // Reset to the first page
+  const handleSelectStatus = (value) => {
+    setSelectedStatus(value);
+    setCurrentPage(1); 
   };
 
   const handleSearchTermChange = (event) => {
@@ -74,6 +81,7 @@ export default function BookingInfoPage() {
     setSearchTerm('');
     setCurrentPage(1); // Reset to the first page
   };
+
 
   const getStatusIcon = (status) => {
     switch (status) {
@@ -152,9 +160,9 @@ export default function BookingInfoPage() {
               />
               <Dropdown
                 placehold={'สถานะ'}
-                options={['pending', 'feedback', 'complete', 'decline']}
-                onSelect={handleSelectStatus}
-                selected={selectedStatus}
+                options={statusOptions.map(option => option.label)}
+                onSelect={(option) => handleSelectStatus(statusOptions.find(status => status.label === option).value)}
+                selected={statusOptions.find((opt) => opt.value === selectedStatus)?.label || ''}
               />
               <button
                 className="py-2 px-4 bg-red-500 rounded text-white"
@@ -222,16 +230,16 @@ export default function BookingInfoPage() {
                 <td className="py-1.5 px-4 text-center text-xl">{row.appointment_date.substring(11, 16)}</td>
                 {/* <td className="py-1.5 px-4 text-center text-xl">{row.user_id}</td> */}
                 <td className="py-1.5 px-4 text-center text-xl">
-  <button
-    onClick={(e) => {
-      e.stopPropagation(); // Prevents the event from triggering other click handlers
-      navigate(`/diagnosis?user_id=${row.user_id}`);
-    }}
-    className="py-1 px-3 bg-blue-500 text-white rounded hover:bg-blue-700 transition duration-200 ease-in-out z-100"
-  >
-    {row.user_id}
-  </button>
-</td>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation(); // Prevents the event from triggering other click handlers
+                      navigate(`/diagnosis?user_id=${row.user_id}`);
+                    }}
+                    className="py-1 px-3 bg-blue-500 text-white rounded hover:bg-blue-700 transition duration-200 ease-in-out z-100"
+                  >
+                    {row.user_id}
+                  </button>
+                </td>
 
                 <td className="py-1.5 px-4 text-center text-xl">{row.booking_id}</td>
                 <td className="py-1 px-4 text-center text-md">
