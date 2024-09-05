@@ -39,7 +39,7 @@ export default function P1_dass21() {
       ...prevValues,
       [questionNumber]: value,
     }));
-    console.log(`Question ${questionNumber}:`, value);
+    /* console.log(`Question ${questionNumber}:`, value); */
   };
 
   const areAllQuestionsAnswered = () => {
