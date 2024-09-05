@@ -25,7 +25,7 @@ export default function SignInPage() {
         navigate("/dashboard");
       })
       .catch((error) => {
-        window.alert("Invalid username or password. Please try again.");
+        window.alert("บัญชีผู้ใช้หรือรหัสผ่านของท่านไม่ถูกต้อง กรุณาลองใหม่อีก");
       });
     event.target.reset();
   };
