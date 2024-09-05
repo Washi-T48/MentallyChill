@@ -6,10 +6,8 @@ import { ProfileProvider } from "./LIFF/ProfileContext";
 import Person1 from "./pages/Person1";
 import Person2 from "./pages/person2";
 import Person3 from "./pages/person3";
-
 import Remark from "./pages/remark";
 import Remark2 from "./pages/remark2";
-
 import FormOption from "./pages/formOption";
 import FormOption2 from "./pages/formOption2";
 import CRI_dass21 from "./pages/cri_dass21";
@@ -21,24 +19,15 @@ import Appoint from "./pages/appoint";
 import Radio_rate from "./components/radio_rate";
 import Confirm_app from "./pages/confirm_app";
 import Finish_app from "./pages/finish_app";
-
 import LineLiff from "./LIFF/lineLiff";
 import LineDis from "./LIFF/LineDIS";
 
 function App() {
-  const handleLiffInit = (liff) => {
-    if (!liff.isLoggedIn()) {
-      liff.login();
-    }
-  };
-
   return (
     <ProfileProvider>
-      {/* <LiffInit liffId="2005311386-6GQLXp7Z" onInit={handleLiffInit} /> */}
       <BrowserRouter>
         <Routes>
           <Route index element={<FormOption />} />
-
           <Route path="/person1" element={<Person1 />} />
           <Route path="/person2" element={<Person2 />} />
           <Route path="/person3" element={<Person3 />} />
@@ -58,33 +47,51 @@ function App() {
           <Route path="/lineLiff" element={<LineLiff />} />
           <Route path="/LineDis" element={<LineDis />} />
         </Routes>
-      </BrowserRouter>
 
-      <CookieConsent
-        location="bottom"
-        buttonText="Accept"
-        declineButtonText="Decline"
-        cookieName="myAwesomeCookieConsent"
-        style={{ background: "#2B373B" }}
-        buttonStyle={{
-          background: "#FFD700",
-          color: "#4e503b",
-          fontSize: "18px",
-          borderRadius: "5px",
-          padding: "10px 20px",
-          border: "none",
-          cursor: "pointer",
-        }}
-        expires={150}
-      >
-        This website uses cookies to enhance the user experience.{" "}
-        {/* <a
-          href="/privacy-policy"
-          style={{ color: "#FFD700", textDecoration: "underline" }}
+        <CookieConsent
+          flipButtons={true}
+          enableDeclineButton
+          location="bottom"
+          buttonText="ฉันเข้าใจ"
+          declineButtonText="ยกเลิก"
+          cookieName="myCookieConsent"
+          style={{
+            background: "#2B373B",
+            fontSize: "14px",
+            color: "#ffffff",
+            alignItems: "center",
+            margin: "0",
+          }}
+          buttonStyle={{
+            background: "#FFD700",
+            color: "#4e503b",
+            fontSize: "14px",
+            fontFamily: "ChulabhornLikitText-Regular",
+            borderRadius: "5px",
+            padding: "10px 20px",
+            border: "none",
+            cursor: "pointer",
+          }}
+          declineButtonStyle={{
+            background: "#F8F8F8",
+            color: "#4e503b",
+            fontSize: "14px",
+            fontFamily: "ChulabhornLikitText-Regular",
+            borderRadius: "5px",
+            padding: "10px 20px",
+            border: "none",
+            cursor: "pointer",
+          }}
+          expires={150}
+          id="cookie"
         >
-          Learn More
-        </a> */}
-      </CookieConsent>
+          <b style={{ fontSize: "16px" }}>เว็บไซต์นี้มีการใช้งานคุกกี้</b>
+          <br />
+          <br />
+          เราใช้คุกกี้เพื่อเพิ่มประสิทธิภาพ
+          และประสบการณ์ที่ดีในการใช้งานเว็บไซต์
+        </CookieConsent>
+      </BrowserRouter>
     </ProfileProvider>
   );
 }
