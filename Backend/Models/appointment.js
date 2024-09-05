@@ -27,7 +27,7 @@ const updateAppointment = async (booking_id, date, time, topic, detail, medHisto
 
 const lookupAppointment = async (booking_id) => {
     const appointment = await pool.query(
-        `SELECT * FROM appointment WHERE booking_id = $1 ORDER BY appointment_date DESC`,
+        `SELECT *, TO_CHAR(appointment.appointment_date, 'DD/MM/YYYY') as date, TO_CHAR(appointment.appointment_date, 'HH24:MI') as time, staff.name, staff.surname, staff.nickname FROM appointment INNER JOIN users ON users.user_id = appointment.user_id INNER JOIN staff ON staff.staff_id = appointment.staff_id WHERE booking_id = $1 `,
         [booking_id]
     );
     return (appointment["rows"]);
