@@ -50,7 +50,7 @@ const Content = ({
                 </div>
                 <div className="w-full">
                   <div className="text-2xl font-medium mb-4 text-white">
-                    ประวัติการปรึกษาทางการแพทย์ :
+                    ประวัติการปรึกษาแพทย์ :
                   </div>
                   <div className="flex w-full h-60 bg-stone-300 break-all p-2 overflow-y-auto">
                     {data.medical_history}
