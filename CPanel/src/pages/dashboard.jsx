@@ -189,16 +189,16 @@ return (
   <div className="flex flex-col min-h-screen">
     <Topbar />
     <div className="flex flex-1 flex-row">
-      <div className="flex relative md:w-72">
+      <div className="flex relative w-72">
         <Sidebar />
       </div>
       <div className="w-full overflow-x-hidden">
         <div className="p-4 md:p-10">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
-            <StatCard title="คำขอการจอง" value={countBooking} color="sky" />
+            <StatCard title="คำขอการจอง" value={countBooking} color="blue" tone="500"/>
             <StatCard title="จำนวนผลการประเมิน" value={countDiag} color="violet" />
             <StatCard title="ระดับปกติ" value={lowCount} color="green" />
-            <StatCard title="ระดับปานกลาง" value={mediumCount} color="amber" />
+            <StatCard title="ระดับปานกลาง" value={mediumCount} color="orange" tone="300" />
             <StatCard title="ระดับร้ายแรง" value={highCount} color="rose" />
           </div>
 
@@ -208,6 +208,7 @@ return (
             medium={countdmedium} 
             high={countdhigh} 
             bgColor="blue"
+            tone="500"
           />
           <CategoryStats 
             title="ความวิตกกังวล" 
@@ -221,7 +222,7 @@ return (
             low={countslow} 
             medium={countsmedium} 
             high={countshigh} 
-            bgColor="rose"
+            bgColor="red"
           />
           
 
@@ -230,13 +231,13 @@ return (
               title="การจองครั้งล่าสุด" 
               data={recentBookingInfo} 
               columns={["เลขที่การจอง", "หัวข้อ", "วันที่"]} 
-              bgColor="emerald"
+              bgColor="green"
             />
             <DataTable 
               title="การวินิจฉัยครั้งล่าสุด" 
               data={recentDiagnosis} 
               columns={["เลขที่ผู้ใช้", "ประเภทแบบฟอร์ม", "วันที่"]} 
-              bgColor="sky"
+              bgColor="violet"
             />
           </div>
         </div>
@@ -248,19 +249,19 @@ return (
 
 function StatCard({ title, value, color, tone = 400 }) {
   return (
-    <div className={`flex flex-col justify-between border-4 border-${color}-${tone} rounded-md bg-${color}-${tone} p-4 h-32`}>
-      <div className="text-lg text-gray-200">{title}</div>
-      <div className="text-4xl md:text-5xl lg:text-6xl text-white">{value}</div>
+    <div className={`flex flex-col justify-between border-4 border-white rounded-md bg-${color}-${tone} p-4 h-32`}>
+      <div className="text-lg text-white drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">{title}</div>
+      <div className="text-4xl md:text-5xl lg:text-6xl text-white drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">{value}</div>
     </div>
   );
 }
 
-function CategoryStats({ title, low, medium, high, bgColor }) {
+function CategoryStats({ title, low, medium, high, bgColor, tone }) {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 my-8">
-      <StatCard title={`${title} ต่ำ`} value={low} color={bgColor} tone={300} />
-      <StatCard title={`${title} ปานกลาง`} value={medium} color={bgColor} tone={400} />
-      <StatCard title={`${title} รุนแรง`} value={high} color={bgColor} tone={500} />
+      <StatCard title={`${title} ต่ำ`} value={low} color={bgColor} tone={tone} />
+      <StatCard title={`${title} ปานกลาง`} value={medium} color={bgColor} tone={tone} />
+      <StatCard title={`${title} รุนแรง`} value={high} color={bgColor} tone={tone} />
     </div>
   );
 }
@@ -268,18 +269,18 @@ function CategoryStats({ title, low, medium, high, bgColor }) {
 function DataTable({ title, data, columns, bgColor }) {
   return (
     <div className="overflow-x-auto">
-      <h2 className="text-2xl mb-3">{title}</h2>
+      <h2 className="text-2xl mb-3 ">{title}</h2>
       <table className="w-full">
         <thead>
           <tr className={`bg-${bgColor}-400`}>
             {columns.map((col, index) => (
-              <th key={index} className="py-2 px-4">{col}</th>
+              <th key={index} className="py-2 px-4 text-white drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">{col}</th>
             ))}
           </tr>
         </thead>
         <tbody>
           {data.map((item, index) => (
-            <tr key={index} className={index % 2 === 0 ? "bg-white" : "bg-gray-100"}>
+            <tr key={index} className={index % 2 === 0 ? "bg-white " : "bg-gray-100"}>
               {columns.map((col, cellIndex) => {
                 let value;
                 switch(col) {

@@ -612,7 +612,7 @@ export default function BookingInfoPage() {
   return (
     <div className="grid min-h-screen">
       <Topbar />
-      <div className="flex flex-1">
+      <div className="flex flex-1 h-[897px]">
         <div className={`flex relative w-72`}>
           <Sidebar />
         </div>
