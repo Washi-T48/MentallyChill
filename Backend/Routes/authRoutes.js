@@ -9,7 +9,8 @@ const upload = multer({ storage: multer.memoryStorage() });
 import {
     findStaff,
     registerStaff,
-    comparePassword
+    comparePassword,
+    changePassword
 } from '../Models/auth.js';
 
 import { newStaff, updateStaff } from '../Models/staff.js';
@@ -83,6 +84,17 @@ authRouter.all('/logout', authMiddleware, async (req, res) => {
     try {
         res.clearCookie('token');
         res.status(200).json({ token: null });
+    } catch (err) {
+        logger.error(err);
+        res.sendStatus(500);
+    }
+});
+
+authRouter.post('/changePassword', authMiddleware, async (req, res) => {
+    try {
+        const { staff_id, password } = req.body;
+        const staff = await changePassword(staff_id, password);
+        res.status(200).json(staff);
     } catch (err) {
         logger.error(err);
         res.sendStatus(500);
