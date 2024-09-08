@@ -201,12 +201,10 @@ return (
             <StatCard title="ระดับปานกลาง" value={mediumCount} color="orange" tone="300" />
             <StatCard title="ระดับร้ายแรง" value={highCount} color="rose" />
           </div> */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-8">
-            {/* Top row with 2 columns */}
-            <StatCard title="คำขอการจอง" value={countBooking} color="blue" tone="500" />
-            <StatCard className="lg:col-span-2" title="จำนวนผลการประเมินเย" value={countDiag} color="violet" />
-
-            {/* Bottom row with 3 columns */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+            <StatCard title="คำขอการจอง" value={countBooking} color="blue" tone="500"/>
+            <StatCard title="จำนวนผลการประเมิน" value={countDiag} color="violet" />
+            <div className="hidden lg:block"></div> {/* Empty div for the third column in the first row */}
             <StatCard title="ระดับปกติ" value={lowCount} color="green" />
             <StatCard title="ระดับปานกลาง" value={mediumCount} color="orange" tone="300" />
             <StatCard title="ระดับร้ายแรง" value={highCount} color="rose" />
