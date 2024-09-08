@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { RxPerson } from "react-icons/rx";
 import Loading from "../components/Loading";
 import liff from "@line/liff";
+import axios from "axios";
 
 export default function FormOption2() {
   const [step2Data, setStep2Data] = useState({
@@ -63,14 +64,22 @@ export default function FormOption2() {
     setStep2Data((oldData) => ({ ...oldData, [key]: value }));
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setTimeout(() => {
-      console.log("submit value", step2Data);
-      setLoading(false);
+    setError(null);
+
+    try {
+      const response = await axios.post(`${VITE_API_PATH}/user/register`, step2Data);
+      console.log("User registered successfully:", response.data);
+
       navigate("/p1_dass21");
-    }, 500);
+    } catch (error) {
+      console.error("Error registering user:", error);
+      setError("Failed to register user. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   if (loading) {
