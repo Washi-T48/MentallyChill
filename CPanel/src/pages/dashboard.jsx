@@ -204,7 +204,7 @@ return (
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-8">
             {/* Top row with 2 columns */}
             <StatCard title="คำขอการจอง" value={countBooking} color="blue" tone="500" />
-            <StatCard className="lg:col-span-2" title="จำนวนผลการประเมิน" value={countDiag} color="violet" />
+            <StatCard className="lg:col-span-2" title="จำนวนผลการประเมินเย" value={countDiag} color="violet" />
 
             {/* Bottom row with 3 columns */}
             <StatCard title="ระดับปกติ" value={lowCount} color="green" />
