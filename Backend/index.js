@@ -36,6 +36,7 @@ const corsOptions = {
         'https://mindcra.com',
         'https://www.mindcra.com',
         'https://mindcra.com:444',
+        'https://www.mindcra.com:444',
     ],
     credentials: true,
 }
