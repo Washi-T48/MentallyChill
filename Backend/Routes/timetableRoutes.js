@@ -9,7 +9,8 @@ import {
     getTimetableByDate,
     allTimetable,
     checkStaffAvailable,
-    getStaffTimeByDate
+    getStaffTimeByDate,
+    checkdupicateTime
 } from '../Models/timetable.js';
 
 const timetableRouter = express.Router();
@@ -93,6 +94,17 @@ timetableRouter.post('/getStaffTimeByDate', async (req, res) => {
     try {
         const { staff_id, date } = req.body;
         const timetable = await getStaffTimeByDate(staff_id, date);
+        res.status(200).json(timetable);
+    } catch (error) {
+        logger.error(error);
+        res.sendStatus(500);
+    }
+});
+
+timetableRouter.post('/checkDuplicate', async (req, res) => {
+    try {
+        const { staff_id, date, time_start, time_end } = req.body;
+        const timetable = await checkdupicateTime(staff_id, date, time_start, time_end);
         res.status(200).json(timetable);
     } catch (error) {
         logger.error(error);
