@@ -6,7 +6,6 @@ import {
     getTimeTable,
     deleteTimeTable,
     getTimetableByStaffID,
-    getTimetableByDate,
     allTimetable,
     checkStaffAvailable,
     getStaffTimeByDate,
