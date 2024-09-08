@@ -58,7 +58,7 @@ const getStaffTimeByDate = async (staff_id, date) => {
 
 const checkdupicateTime = async (staff_id, date, time_start, time_end) => {
     const timetable = await pool.query(
-        `SELECT *, left(lower(time_range)::varchar, 10) as date, lower(time_range)::time as time_start, upper(time_range)::time as time_end FROM timetable WHERE staff_id = $1 AND time_range && $2::tstzrange`,
+        `SELECT *, left(lower(time_range)::varchar, 10) as date, lower(time_range)::time as time_start, upper(time_range)::time as time_end FROM timetable WHERE staff_id = $1 AND time_range @> $2::tstzrange`,
         [staff_id, "[" + date + " " + time_start + ", " + date + " " + time_end + "]"]
     );
     return (timetable["rows"]);
