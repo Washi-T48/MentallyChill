@@ -18,6 +18,7 @@ const TimeSelectorModal = ({ day, month, year, onClose, onSave }) => {
   const [endTime, setEndTime] = useState('');
   const [filteredEndTimes, setFilteredEndTimes] = useState([]);
   const [staffData, setStaffData] = useState(null);
+  const [warning, setWarning] = useState('');
   const timeSlots = generateTimeSlots();
 
   useEffect(() => {
