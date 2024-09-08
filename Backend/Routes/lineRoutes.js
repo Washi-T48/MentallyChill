@@ -9,7 +9,7 @@ import { url } from "inspector";
 
 const lineRouter = express.Router();
 
-lineRouter.post("/webhook", async (req, lineSignatureValidate, res) => {
+lineRouter.post("/webhook", lineSignatureValidate, async (req, res) => {
     try {
         //INSERT TRIGGERS HERE
         res.sendStatus(200);
