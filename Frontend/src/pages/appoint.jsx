@@ -57,7 +57,7 @@ export default function Appoint() {
 
   useEffect(() => {
     liff
-      .init({ liffId: "2005311386-dnvmKNjJ" })
+      .init({ liffId: "2006283577-J1qnq04Q" })
       .then(() => {
         if (liff.isLoggedIn()) {
           liff

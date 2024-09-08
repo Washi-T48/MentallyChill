@@ -1,14 +1,32 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import Dropdown from './dropdown';
 
 export default function Modal({ isOpen, onClose, onSubmit, userId, topicData, statusdata }) {
   const [staffList, setStaffList] = useState([]);
   const [selectedStaff, setSelectedStaff] = useState('');
   const [appointmentDate, setAppointmentDate] = useState('');
   const [timeSlots, setTimeSlots] = useState([]);
-  const [contactMethod, setContactMethod] = useState('เบอร์โทร');
+  const [contactMethod, setContactMethod] = useState('');
   const [formSubmitted, setFormSubmitted] = useState(false);
+
+  function Dropdown({ options, onSelect, selected, name, placehold }) {
+    return (
+      <select
+        name={name}
+        value={selected || ''}
+        onChange={(e) => onSelect(e.target.value, e)}
+        className="w-full border rounded p-2"
+        required
+      >
+        <option value="" disabled>{placehold}</option>
+        {options.map((option, index) => (
+          <option key={index} value={option}>
+            {option}
+          </option>
+        ))}
+      </select>
+    );
+  }
 
   useEffect(() => {
     if (isOpen) {
@@ -28,9 +46,10 @@ export default function Modal({ isOpen, onClose, onSubmit, userId, topicData, st
 
   useEffect(() => {
     if (selectedStaff && appointmentDate) {
-      const [staff_id] = selectedStaff.split(' - ');
-      axios.post('/timetable/getStaffTimeByDate', { staff_id, date: appointmentDate })
+      console.log(selectedStaff);
+      axios.post('/timetable/getStaffTimeByDate', { staff_id: selectedStaff, date: appointmentDate })
         .then(response => {
+          console.log(response.data);
           setTimeSlots(response.data);
         })
         .catch(error => {
@@ -49,6 +68,7 @@ export default function Modal({ isOpen, onClose, onSubmit, userId, topicData, st
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    
     const formData = new FormData(event.target);
     const formProps = Object.fromEntries(formData.entries());
     const [staff_id] = selectedStaff.split(' - ');
@@ -62,7 +82,7 @@ export default function Modal({ isOpen, onClose, onSubmit, userId, topicData, st
       time: formProps.appointmentTime,
       topic: topicData,
       detail: formProps.detail,
-      medHistory: formProps.medHistory
+      medHistory: formProps.medHistory,
     };
 
     axios.post('/appointment/new', appointmentData)
@@ -92,47 +112,14 @@ export default function Modal({ isOpen, onClose, onSubmit, userId, topicData, st
               name="medDoctor"
               placehold="เลือกผู้ให้คำปรึกษา"
               options={staffList.map(staff => staff.label)}
-              onSelect={setSelectedStaff}
-              selected={selectedStaff}
+              onSelect={(label) => {
+                const selected = staffList.find(staff => staff.label === label);
+                setSelectedStaff(selected.value);
+              }}
+              selected={staffList.find(staff => staff.value === selectedStaff)?.label || ''}
               required
             />
           </div>
-          <div className="mb-4">
-            <div>วิธีการติดต่อ</div>
-            <div>
-              <label>
-                <input
-                  type="radio"
-                  name="contactMethod"
-                  value="เบอร์โทร"
-                  checked={contactMethod === 'เบอร์โทร'}
-                  onChange={(e) => setContactMethod(e.target.value)}
-                />
-                เบอร์โทร
-              </label>
-              <label className="ml-4">
-                <input
-                  type="radio"
-                  name="contactMethod"
-                  value="Google Meets"
-                  checked={contactMethod === 'Google Meets'}
-                  onChange={(e) => setContactMethod(e.target.value)}
-                />
-                Google Meets
-              </label>
-            </div>
-          </div>
-          {contactMethod === 'เบอร์โทร' && (
-            <div className="mb-4">
-              <div>เบอร์ติดต่อ</div>
-              <input
-                name="tel"
-                type="text"
-                required
-                className="w-full border rounded p-2"
-              />
-            </div>
-          )}
           <div className="mb-4">
             <div>รายละเอียด</div>
             <input
@@ -178,6 +165,29 @@ export default function Modal({ isOpen, onClose, onSubmit, userId, topicData, st
               )}
             </select>
           </div>
+          <div className="mb-4">
+            <div>วิธีการติดต่อ</div>
+            <Dropdown
+              name="contactMethod"
+              placehold="เลือกวิธีการติดต่อ"
+              options={['เบอร์โทร', 'Google Meets']}
+              onSelect={(value) => setContactMethod(value)}
+              selected={contactMethod}
+              required
+            />
+          </div>
+
+          {contactMethod === 'เบอร์โทร' && (
+            <div className="mb-4">
+              <div>เบอร์ติดต่อ</div>
+              <input
+                name="tel"
+                type="text"
+                required
+                className="w-full border rounded p-2"
+              />
+            </div>
+          )}
           <div className="flex justify-end">
             <button
               type="button"

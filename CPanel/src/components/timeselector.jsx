@@ -101,14 +101,14 @@ const TimeSelectorModal = ({ day, month, year, onClose, onSave }) => {
             className="bg-red-500 text-white px-3 py-1 rounded mr-2"
             onClick={onClose}
           >
-            Cancel
+            ยกเลิก
           </button>
           <button
             className="bg-blue-500 text-white px-3 py-1 rounded"
             onClick={handleSave}
             disabled={!startTime || !endTime}
           >
-            Save
+            บันทึก
           </button>
         </div>
       </div>
