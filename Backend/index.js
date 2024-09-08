@@ -59,14 +59,10 @@ app.use("/forms", formsRouter);
 app.use("/appointment", appointmentRouter);
 app.use("/timetable", timetableRouter);
 
-// https.createServer({
-//     key: fs.readFileSync(path.resolve(__dirname, './certs', 'privkey.pem')),
-//     cert: fs.readFileSync(path.resolve(__dirname, './certs', 'cert.pem')),
-//     ca: fs.readFileSync(path.resolve(__dirname, './certs', 'chain.pem')),
-// }, app).listen(PORT, () => {
-//     logger.info(`Server started on port ${PORT}`);
-// });
-
-app.listen(PORT, () => {
+https.createServer({
+    key: fs.readFileSync(path.resolve(__dirname, './certs', 'privkey.pem')),
+    cert: fs.readFileSync(path.resolve(__dirname, './certs', 'cert.pem')),
+    ca: fs.readFileSync(path.resolve(__dirname, './certs', 'chain.pem')),
+}, app).listen(PORT, () => {
     logger.info(`Server started on port ${PORT}`);
 });
