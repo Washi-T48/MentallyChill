@@ -2,6 +2,8 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import CookieConsent from "react-cookie-consent";
 
+import "./App.css";
+
 import { ProfileProvider } from "./LIFF/ProfileContext";
 import Person1 from "./pages/Person1";
 import Person2 from "./pages/person2";
@@ -48,49 +50,59 @@ function App() {
           <Route path="/LineDis" element={<LineDis />} />
         </Routes>
 
-        <CookieConsent
-          flipButtons={true}
-          enableDeclineButton
-          location="bottom"
-          buttonText="ฉันเข้าใจ"
-          declineButtonText="ยกเลิก"
-          cookieName="myCookieConsent"
-          style={{
-            background: "#2B373B",
-            fontSize: "14px",
-            color: "#ffffff",
-            alignItems: "center",
-            margin: "0",
-          }}
-          buttonStyle={{
-            background: "#FFD700",
-            color: "#4e503b",
-            fontSize: "14px",
-            fontFamily: "ChulabhornLikitText-Regular",
-            borderRadius: "5px",
-            padding: "10px 20px",
-            border: "none",
-            cursor: "pointer",
-          }}
-          declineButtonStyle={{
-            background: "#F8F8F8",
-            color: "#4e503b",
-            fontSize: "14px",
-            fontFamily: "ChulabhornLikitText-Regular",
-            borderRadius: "5px",
-            padding: "10px 20px",
-            border: "none",
-            cursor: "pointer",
-          }}
-          expires={150}
-          id="cookie"
-        >
-          <b style={{ fontSize: "16px" }}>เว็บไซต์นี้มีการใช้งานคุกกี้</b>
-          <br />
-          <br />
-          เราใช้คุกกี้เพื่อเพิ่มประสิทธิภาพ
-          และประสบการณ์ที่ดีในการใช้งานเว็บไซต์
-        </CookieConsent>
+        <footer className="cookieConsent">
+          <CookieConsent
+            /* debug={true} */
+            flipButtons={true}
+            /* enableDeclineButton */
+            location="bottom"
+            buttonText="ฉันเข้าใจ"
+            declineButtonText="ยกเลิก"
+            cookieName="myCookieConsent"
+            buttonWrapperClasses="btn-cookie"
+            style={{
+              background: "white",
+              fontSize: "16px",
+              color: "rgba(0, 48, 135, 1)",
+              alignItems: "center",
+              margin: "0rem auto",
+              borderTopLeftRadius: "20px",
+              borderTopRightRadius: "20px",
+            }}
+            buttonStyle={{
+              background: "rgba(255, 121, 21, 1)",
+              color: "white",
+              fontSize: "16px",
+              fontStyle: "bold",
+              fontFamily: "ChulabhornLikitText-Regular",
+              borderRadius: "20px",
+              padding: "10px 20px",
+              border: "none",
+              cursor: "pointer",
+            }}
+            declineButtonStyle={{
+              background: "#F8F8F8",
+              color: "#4e503b",
+              fontSize: "14px",
+              fontFamily: "ChulabhornLikitText-Regular",
+              borderRadius: "5px",
+              padding: "10px 20px",
+              border: "none",
+              cursor: "pointer",
+            }}
+            expires={150}
+          >
+            <b style={{ fontSize: "16px" }}>เว็บไซต์นี้มีการใช้งานคุกกี้</b>
+            <br />
+            เว็บไซต์ของเรามีการใช้งานคุกกี้เพื่อจัดการให้ผู้ใช้มีประสบการณ์ที่ดีที่สุดและเพื่อพัฒนาคุณภาพการให้บริการที่ดียิ่งขึ้น&nbsp;
+            <a
+              href="https://www.cra.ac.th/th/about/pdpa"
+              style={{ color: "rgba(0, 48, 135, 0.85)" }}
+            >
+              รายละเอียดเพิ่มเติม
+            </a>
+          </CookieConsent>
+        </footer>
       </BrowserRouter>
     </ProfileProvider>
   );
