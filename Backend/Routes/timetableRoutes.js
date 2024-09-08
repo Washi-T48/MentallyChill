@@ -26,7 +26,12 @@ timetableRouter.post('/new', async (req, res) => {
     }
     catch (error) {
         logger.error(error);
-        res.sendStatus(500);
+        if (error.message === "ได้มีการเพิ่มเวลาทำงานนี้ไปแล้ว") {
+            res.status(400).json({ message: error.message });
+        } 
+        else {
+            res.sendStatus(500);
+        }
     }
 });
 

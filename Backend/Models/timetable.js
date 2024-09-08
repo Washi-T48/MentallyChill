@@ -1,6 +1,10 @@
 import pool from '../Config/db.js';
 
 const newTimeTable = async (staff_id, date, time_start, time_end) => {
+    const duplicatecheck = await checkdupicateTime(staff_id, date, time_start, time_end);
+    if (duplicatecheck.length > 0) {
+        throw new Error("ได้มีการเพิ่มเวลาทำงานนี้ไปแล้ว");
+    }
     const timerange = "[" + String(date) + " " + String(time_start) + ", " + String(date) + " " + String(time_end) + "]";
     const newTimeTable = await pool.query(
         `INSERT INTO timetable (staff_id, time_range) VALUES($1, $2) RETURNING *`,
