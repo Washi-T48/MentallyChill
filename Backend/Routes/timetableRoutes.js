@@ -21,17 +21,17 @@ timetableRouter.all('/', async (req, res) => {
 timetableRouter.post('/new', async (req, res) => {
     try {
         const { staff_id, date, time_start, time_end } = req.body;
-        const newTimeTableResult = await newTimeTable(staff_id, date, time_start, time_end);
-        res.status(200).json(newTimeTableResult);
+        const duplicatecheck = await checkdupicateTime(staff_id, date, time_start, time_end);
+        if (!(duplicatecheck.length > 0)) {
+            const newTimeTableResult = await newTimeTable(staff_id, date, time_start, time_end);
+            res.status(200).json(newTimeTableResult);
+        } else {
+            res.status(400).json('Timeslot duplicated');
+        }
     }
     catch (error) {
         logger.error(error);
-        if (error.message === "ได้มีการเพิ่มเวลาทำงานนี้ไปแล้ว") {
-            res.status(400).json({ message: error.message });
-        } 
-        else {
-            res.sendStatus(500);
-        }
+        res.sendStatus(500);
     }
 });
 
