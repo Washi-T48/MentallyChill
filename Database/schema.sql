@@ -1,5 +1,4 @@
 SET SCHEMA 'public';
-
 CREATE TABLE staff (
     staff_id varchar NOT NULL,
     "name" varchar NULL,
@@ -105,29 +104,29 @@ VALUES (
     );
 -- SAMPLE USER DATA
 INSERT INTO users (
-                line_uid,
-                gender,
-                age,
-                email,
-                phone,
-                phone_emergency,
-                grade_level
-            )
-        VALUES (
-                'U5c8fda9b0a3084f1e96c427817fea0a6',
-                'male',
-                21,
-                'mango@mango.com',
-                '0694204200',
-                '0694204201',
-                'undergraduate'
-            ),
-            (
-                'U43354d20204e8cd7717133c1a03d9360',
-                'female',
-                12,
-                'orange@mango.com',
-                '0694204202',
-                '0694204203',
-                'M.2'
-            );
+        line_uid,
+        gender,
+        age,
+        email,
+        phone,
+        phone_emergency,
+        grade_level
+    )
+VALUES (
+        'U5c8fda9b0a3084f1e96c427817fea0a6',
+        'male',
+        21,
+        'mango@mango.com',
+        '0694204200',
+        '0694204201',
+        'undergraduate'
+    ),
+    (
+        'U43354d20204e8cd7717133c1a03d9360',
+        'female',
+        12,
+        'orange@mango.com',
+        '0694204202',
+        '0694204203',
+        'M.2'
+    );

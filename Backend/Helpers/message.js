@@ -1,7 +1,6 @@
 import axios from 'axios';
 import dotenv from 'dotenv';
-import logger from '../Config/logger.js';
-import { getAuthHeader } from '../Routes/auth.js';
+import { getAuthHeader } from '../Config/lineAuth.js';
 dotenv.config();
 
 export default class Message {
@@ -57,7 +56,7 @@ export default class Message {
             messages: messagesArray
         }
         axios.post('https://api.line.me/v2/bot/message/reply', body, { headers: getAuthHeader() })
-            .then((res) => { }).catch((err) => { logger.error(err) });
+            .then((res) => { }).catch((err) => { throw err });
     }
 
     push(ID, messagesArray) {
@@ -66,7 +65,7 @@ export default class Message {
             messages: messagesArray
         }
         axios.post('https://api.line.me/v2/bot/message/push', body, { headers: getAuthHeader() })
-            .then((res) => { }).catch((err) => { logger.error(err) });
+            .then((res) => { }).catch((err) => { throw err });
     }
 
 }
