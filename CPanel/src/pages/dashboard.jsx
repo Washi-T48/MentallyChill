@@ -194,13 +194,24 @@ return (
       </div>
       <div className="w-full overflow-x-hidden">
         <div className="p-4 md:p-10">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+          {/* <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
             <StatCard title="คำขอการจอง" value={countBooking} color="blue" tone="500"/>
-            <StatCard title="จำนวนผลการประเมิน" value={countDiag} color="violet" />
+            <StatCard className="col-span-2" title="จำนวนผลการประเมิน" value={countDiag} color="violet" />
+            <StatCard title="ระดับปกติ" value={lowCount} color="green" />
+            <StatCard title="ระดับปานกลาง" value={mediumCount} color="orange" tone="300" />
+            <StatCard title="ระดับร้ายแรง" value={highCount} color="rose" />
+          </div> */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-8">
+            {/* Top row with 2 columns */}
+            <StatCard title="คำขอการจอง" value={countBooking} color="blue" tone="500" />
+            <StatCard className="lg:col-span-2" title="จำนวนผลการประเมิน" value={countDiag} color="violet" />
+
+            {/* Bottom row with 3 columns */}
             <StatCard title="ระดับปกติ" value={lowCount} color="green" />
             <StatCard title="ระดับปานกลาง" value={mediumCount} color="orange" tone="300" />
             <StatCard title="ระดับร้ายแรง" value={highCount} color="rose" />
           </div>
+
 
           <CategoryStats 
             title="ความซึมเศร้า" 
