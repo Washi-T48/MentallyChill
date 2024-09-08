@@ -26,7 +26,7 @@ timetableRouter.post('/new', async (req, res) => {
             const newTimeTableResult = await newTimeTable(staff_id, date, time_start, time_end);
             res.status(200).json(newTimeTableResult);
         } else {
-            res.status(400).json('Timeslot duplicated');
+            res.status(400).send('Timeslot duplicated');
         }
     }
     catch (error) {
