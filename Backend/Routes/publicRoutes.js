@@ -58,8 +58,8 @@ publicRouter.post('/submitForms', async (req, res) => {
 
 publicRouter.post("/submitAppointment", async (req, res) => {
     try {
-        const { uid, tel, contactMethod, medDoctor, date, time, topic, detail, medHistory } = req.body;
-        const appointment = await submitAppointment(uid, tel, contactMethod, medDoctor, date, time, topic, detail, medHistory);
+        const { uid, tel, contactMethod, medDoctor, date, time, topic, detail, medHistory, subtopic } = req.body;
+        const appointment = await submitAppointment(uid, tel, contactMethod, medDoctor, date, time, topic, detail, medHistory, subtopic);
         res.status(200).json(appointment);
     }
     catch (error) {
