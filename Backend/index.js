@@ -30,16 +30,12 @@ const PORT = process.env.PORT || 3000;
 
 const corsOptions = {
     origin: [
-        'https://sombat.cc',
         'http://localhost',
-        'http://localhost:3000',
         'http://localhost:80',
-        'http://localhost:5173',
-        'http://ligma.sombat.cc',
-        'http://ligma.sombat.cc:3000',
-        'http://ligma.sombat.cc:5173',
-        'http://together-hardy-dove.ngrok-free.app',
-        'https://together-hardy-dove.ngrok-free.app',
+        'http://localhost:3000',
+        'https://mindcra.com',
+        'https://www.mindcra.com',
+        'https://mindcra.com:444',
     ],
     credentials: true,
 }
