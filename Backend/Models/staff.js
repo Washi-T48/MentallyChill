@@ -40,10 +40,18 @@ const allStaffs = async () => {
     return (staff["rows"]);
 };
 
+const changePassword = async (staff_id, password) => {
+    const hashedPassword = await bcrypt.hash(password, 12);
+    const staff = await pool.query(`UPDATE staff SET password = $2 WHERE staff_id = $1 RETURNING *`,
+        [staff_id, hashedPassword]);
+    return staff.rows[0];
+};
+
 export {
     newStaff,
     deleteStaff,
     updateStaff,
     lookupStaff,
     allStaffs,
+    changePassword
 };
