@@ -234,7 +234,7 @@ return (
               bgColor="green"
             />
             <DataTable 
-              title="การวินิจฉัยครั้งล่าสุด" 
+              title="ผลการประเมินครั้งล่าสุด" 
               data={recentDiagnosis} 
               columns={["เลขที่ผู้ใช้", "ประเภทแบบฟอร์ม", "วันที่"]} 
               bgColor="violet"
