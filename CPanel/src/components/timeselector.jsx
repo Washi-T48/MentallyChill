@@ -46,7 +46,7 @@ const TimeSelectorModal = ({ day, month, year, onClose, onSave }) => {
   const handleSave = async () => {
     const date = `${year}-${(month + 1).toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
     try {
-      const duplicateCheck = await axios.post('/timetable/check', {
+      const duplicateCheck = await axios.post('/timetable/checkDuplicate', {
         staff_id: staffData.staff_id,
         date: date,
         time_start: startTime,
