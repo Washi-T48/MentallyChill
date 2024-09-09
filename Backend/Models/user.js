@@ -37,6 +37,7 @@ const lookupUserByLineID = async (line_uid) => {
         `SELECT * FROM users WHERE line_uid = $1`,
         [line_uid]
     );
+    console.log(user["rows"]);
     return (user["rows"]);
 };
 
