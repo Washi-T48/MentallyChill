@@ -20,6 +20,7 @@ import {
 
 
 import { getStaffTimeByDate } from '../Models/timetable.js';
+import { appointmentNotify } from '../Models/line.js';
 
 const appointmentRouter = express.Router();
 
@@ -58,6 +59,7 @@ appointmentRouter.put("/update", async (req, res) => {
         const { booking_id, date, time, topic, detail, medHistory } = req.body;
         const appointment = await updateAppointment(booking_id, date, time, topic, detail, medHistory);
         res.status(200).json(appointment);
+        await appointmentNotify(appointment.booking_id);
     }
     catch (error) {
         logger.error(error);
