@@ -85,10 +85,16 @@ export default function Appoint() {
     const fetchStaffList = async () => {
       try {
         const response = await axios.get("/allStaff");
-        setStaffList(response.data);
-        setLoadingStaff(false);
+        if (Array.isArray(response.data)) {
+          setStaffList(response.data);
+        } else {
+          console.error("Invalid staff list data:", response.data);
+          setStaffList([]);
+        }
+        setLoadingStaff(false); 
       } catch (error) {
         console.error("Failed to load staff list:", error);
+        setStaffList([]);
         setLoadingStaff(false);
       }
     };
@@ -238,6 +244,7 @@ export default function Appoint() {
                 {loadingStaff ? (
                   <option>Loading staff...</option>
                 ) : (
+                  Array.isArray(staffList) && 
                   staffList.map((staff) => (
                     <option key={staff.staff_id} value={staff.staff_id}>
                       {staff.staff_id} {staff.name} {staff.surname} ({staff.nickname})
@@ -266,20 +273,23 @@ export default function Appoint() {
                 onChange={handleChange}
                 required
                 disabled={
-                  !appointData.date || !appointData.medDoctor || loadingSlots
+                  !appointData.date || loadingSlots || timeSlots.length === 0
                 }
               >
                 <option value="">เลือกเวลา</option>
-                {timeSlots.map((slot) => (
-                  <option key={slot} value={slot}>
-                    {slot}
-                  </option>
-                ))}
+                {loadingSlots ? (
+                  <option>Loading slots...</option>
+                ) : (
+                  timeSlots.map((timeSlot) => (
+                    <option key={timeSlot} value={timeSlot}>
+                      {timeSlot}
+                    </option>
+                  ))
+                )}
               </select>
-              {loadingSlots && <p>Loading available time slots...</p>}
             </label>
           </div>
-          <div className="app-topic">
+          <div className="app-detail">
             <label>
               ประเด็นที่ต้องการปรึกษา<mark> *</mark>
               <br />
