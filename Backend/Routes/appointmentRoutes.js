@@ -163,7 +163,6 @@ appointmentRouter.post("/post", async (req, res) => {
 appointmentRouter.post("/submit", async (req, res) => {
     try {
         const { uid, tel, contactMethod, medDoctor, date, time, topic, detail, medHistory, subtopic } = req.body;
-        console.log(await lookupUserByLineID(uid))
         if ((await lookupUserByLineID(uid)).length > 0) {
             console.log("User exists")
             const appointment = await submitAppointment(uid, tel, contactMethod, medDoctor, date, time, topic, detail, medHistory, subtopic);
