@@ -27,7 +27,7 @@ const updateAppointment = async (booking_id, date, time, topic, detail, medHisto
 
 const lookupAppointment = async (booking_id) => {
     const appointment = await pool.query(
-        `SELECT *, TO_CHAR(appointment.appointment_date, 'DD/MM/YYYY') as date, TO_CHAR(appointment.appointment_date, 'HH24:MI') as time, staff.name, staff.surname, staff.nickname FROM appointment INNER JOIN users ON users.user_id = appointment.user_id INNER JOIN staff ON staff.staff_id = appointment.staff_id WHERE booking_id = $1 `,
+        `SELECT *, TO_CHAR(appointment.appointment_date, 'DD/MM/YYYY') as date, TO_CHAR(appointment.appointment_date, 'HH24:MI') as time FROM appointment INNER JOIN users ON users.user_id = appointment.user_id WHERE booking_id = $1 `,
         [booking_id]
     );
     return (appointment["rows"]);
@@ -89,7 +89,7 @@ const postAppointment = async (booking_id, status, post_note, post_feedback, pos
 const submitAppointment = async (uid, tel, contactMethod, medDoctor, date, time, topic, detail, medHistory, subtopic) => {
     const newAppointment = await pool.query(
         `INSERT INTO appointment (user_id, contact, contact_method, staff_id, appointment_date, topic, details, medical_history, sub_topic) VALUES ((SELECT user_id FROM users WHERE line_uid = $1), $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *`,
-        [uid, tel, contactMethod, medDoctor, String(date) + " " + String(time), topic, detail, medHistory, subtopic]
+        [uid, tel, contactMethod, medDoctor, String(date) + " " + String(time), topic, detail, medHistory, sub_topic]
     );
     return (newAppointment["rows"][0]);
 }

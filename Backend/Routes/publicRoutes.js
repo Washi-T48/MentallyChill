@@ -15,6 +15,11 @@ import {
     comparePassword,
 } from '../Models/auth.js';
 
+import {
+    formResultNotify,
+    appointmentNotify,
+} from "../Models/line.js";
+
 const publicRouter = express.Router();
 
 publicRouter.all('/', async (req, res) => {
@@ -46,8 +51,9 @@ publicRouter.post('/login', async (req, res) => {
 // COPIED FROM FORMS ROUTES
 publicRouter.post('/submitForms', async (req, res) => {
     try {
-        const { uid, form_type, result } = req.body;
-        const submitResult = await submitForms(uid, form_type, result);
+        const { uid, forms_type, result } = req.body;
+        const submitResult = await submitForms(uid, forms_type, result);
+        await formResultNotify(submitResult.result_id);
         res.status(200).json(submitResult);
     } catch (error) {
         logger.error(error);
@@ -60,6 +66,7 @@ publicRouter.post("/submitAppointment", async (req, res) => {
     try {
         const { uid, tel, contactMethod, medDoctor, date, time, topic, detail, medHistory, subtopic } = req.body;
         const appointment = await submitAppointment(uid, tel, contactMethod, medDoctor, date, time, topic, detail, medHistory, subtopic);
+      await appointmentNotify(appointment.booking_id);
         res.status(200).json(appointment);
     }
     catch (error) {
