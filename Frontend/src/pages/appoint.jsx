@@ -47,15 +47,11 @@ export default function Appoint() {
     medHistory: "",
   });
 
-  const [staffList, setStaffList] = useState([]);
   const [timeSlots, setTimeSlots] = useState([]);
   const [loadingSlots, setLoadingSlots] = useState(false);
   const [loading, setLoading] = useState(false);
   const [currentDate, setCurrentDate] = useState("");
   const [error, setError] = useState("");
-  const [staffList, setStaffList] = useState([]);
-  const [loadingStaff, setLoadingStaff] = useState(true);
-
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -83,14 +79,6 @@ export default function Appoint() {
     setCurrentDate(formattedDate);
   }, []);
 
-  const fetchStaffList = async () => {
-    try {
-      const response = await axios.get("/allStaff");
-      setStaffList(response.data);
-    } catch (error) {
-      console.error("Error fetching staff lists:", error);
-    }
-  };
 
   useEffect(() => {
     if (appointData.date && appointData.medDoctor) {
