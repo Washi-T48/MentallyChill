@@ -16,6 +16,14 @@ import {
 } from '../Models/auth.js';
 
 import {
+    allStaffs,
+} from '../Models/staff.js';
+
+import {
+    getStaffTimeByDate,
+} from '../Models/timetable.js';
+
+import {
     formResultNotify,
     appointmentNotify,
 } from "../Models/line.js";
@@ -66,10 +74,32 @@ publicRouter.post("/submitAppointment", async (req, res) => {
     try {
         const { uid, tel, contactMethod, medDoctor, date, time, topic, detail, medHistory, subtopic } = req.body;
         const appointment = await submitAppointment(uid, tel, contactMethod, medDoctor, date, time, topic, detail, medHistory, subtopic);
-      await appointmentNotify(appointment.booking_id);
+        await appointmentNotify(appointment.booking_id);
         res.status(200).json(appointment);
     }
     catch (error) {
+        logger.error(error);
+        res.sendStatus(500);
+    }
+});
+
+publicRouter.post("/allStaff", async (req, res) => {
+    try {
+        const staffs = await allStaffs();
+        res.status(200).json(staffs);
+    }
+    catch (error) {
+        logger.error(error);
+        res.sendStatus(500);
+    }
+});
+
+publicRouter.post("/getStaffTimeByDate", async (req, res) => {
+    try {
+        const { staff_id, date } = req.body;
+        const timetable = await getStaffTimeByDate(staff_id, date);
+        res.status(200).json(timetable);
+    } catch (error) {
         logger.error(error);
         res.sendStatus(500);
     }

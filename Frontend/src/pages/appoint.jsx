@@ -61,7 +61,7 @@ export default function Appoint() {
 
   useEffect(() => {
     axios
-      .get("/staff/all")
+      .get("/allStaff")
       .then((response) => {
         console.log(response.data);
         const formattedStaffList = response.data.map((staff) => ({
@@ -78,7 +78,7 @@ export default function Appoint() {
   useEffect(() => {
     if (selectedStaff && appointmentDate) {
       axios
-        .post("/timetable/getStaffTimeByDate", {
+        .post("/getStaffTimeByDate", {
           staff_id: selectedStaff,
           date: appointmentDate,
         })
