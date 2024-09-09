@@ -70,6 +70,7 @@ export default function FormOption2() {
     setError(null);
 
     try {
+      const VITE_API_PATH = import.meta.env.VITE_API_PATH;
       const response = await axios.post(`${VITE_API_PATH}/user/register`, step2Data);
       console.log("User registered successfully:", response.data);
 
