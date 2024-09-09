@@ -73,6 +73,7 @@ publicRouter.post('/submitForms', async (req, res) => {
 publicRouter.post("/submitAppointment", async (req, res) => {
     try {
         const { uid, tel, contactMethod, medDoctor, date, time, topic, detail, medHistory, subtopic } = req.body;
+        console.log({ uid, tel, contactMethod, medDoctor, date, time, topic, detail, medHistory, subtopic })
         const appointment = await submitAppointment(uid, tel, contactMethod, medDoctor, date, time, topic, detail, medHistory, subtopic);
         await appointmentNotify(appointment.booking_id);
         res.status(200).json(appointment);
