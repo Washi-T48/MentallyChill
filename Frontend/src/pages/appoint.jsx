@@ -52,6 +52,7 @@ export default function Appoint() {
   const [loading, setLoading] = useState(false);
   const [currentDate, setCurrentDate] = useState("");
   const [error, setError] = useState("");
+  const [allStaff, setAllStaff] = useState([]);
 
   const navigate = useNavigate();
 
@@ -85,6 +86,21 @@ export default function Appoint() {
       fetchAvailableTimeSlots();
     }
   }, [appointData.date, appointData.medDoctor]);
+
+  useEffect(() => {
+    const fetchStaffData = async () => {
+      try {
+        const response = await axios.get(
+          `/allStaff`
+        );
+        setAllStaff(response.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchStaffData();
+  }, []);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -213,7 +229,7 @@ export default function Appoint() {
             <label>
               เลือกผู้ให้คำปรึกษา<mark> *</mark>
               <br />
-              <select
+              {/* <select
                 name="medDoctor"
                 value={appointData.medDoctor}
                 onChange={handleChange}
@@ -227,6 +243,19 @@ export default function Appoint() {
                   CRA02 ดวงแก้ว เตชะกาญจนเวช (พี่ปู)
                 </option>
                 <option value="CRA03">CRA03 วิภาพร สร้อยแสง (พี่อ้อย)</option>
+              </select> */}
+              <select
+                name="medDoctor"
+                value={appointData.medDoctor}
+                onChange={handleChange}
+                required
+              >
+                <option value="">เลือกผู้ให้คำปรึกษา</option>
+                {allStaff.map((staff) => (
+                  <option key={staff.staff_id} value={staff.staff_id}>
+                    {`${staff.staff_id} ${staff.name} ${staff.surname} (${staff.nickname})`}
+                  </option>
+                ))}
               </select>
             </label>
           </div>
