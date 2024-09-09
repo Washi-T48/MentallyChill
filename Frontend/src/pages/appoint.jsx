@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import CustomRadioButton from "../components/CustomRadioButton";
 import Loading from "../components/Loading";
 import liff from "@line/liff";
-import axios from "axios";
+// import axios from "axios";
 
 const topics = {
   พัฒนาการเรียน: [
@@ -88,21 +88,21 @@ export default function Appoint() {
     }
   }, [appointData.date, appointData.medDoctor]);
 
-  useEffect(() => {
-    const fetchStaffData = async () => {
-      try {
-        const response = await axios.get(
-          `https://mindcra.com:3000/allStaff`
-        );
-        setAllStaff(response.data);
-        console.log(response.data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchStaffData = async () => {
+  //     try {
+  //       const response = await axios.get(
+  //         `https://mindcra.com:3000/allStaff`
+  //       );
+  //       setAllStaff(response.data);
+  //       console.log(response.data);
+  //     } catch (error) {
+  //       console.error("Error fetching data:", error);
+  //     }
+  //   };
 
-    fetchStaffData();
-  }, []);
+  //   fetchStaffData();
+  // }, []);
 
 
   const onSubmit = (e) => {
@@ -233,7 +233,7 @@ export default function Appoint() {
             <label>
               เลือกผู้ให้คำปรึกษา<mark> *</mark>
               <br />
-              {/* <select
+              <select
                 name="medDoctor"
                 value={appointData.medDoctor}
                 onChange={handleChange}
@@ -247,8 +247,8 @@ export default function Appoint() {
                   CRA02 ดวงแก้ว เตชะกาญจนเวช (พี่ปู)
                 </option>
                 <option value="CRA03">CRA03 วิภาพร สร้อยแสง (พี่อ้อย)</option>
-              </select> */}
-              <select
+              </select>
+              {/* <select
                 name="medDoctor"
                 value={appointData.medDoctor}
                 onChange={handleChange}
@@ -260,7 +260,7 @@ export default function Appoint() {
                     {`${staff.staff_id} ${staff.name} ${staff.surname} (${staff.nickname})`}
                   </option>
                 ))}
-              </select>
+              </select> */}
             </label>
           </div>
           <div className="app-time">
