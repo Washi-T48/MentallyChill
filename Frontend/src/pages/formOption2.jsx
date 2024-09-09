@@ -72,11 +72,8 @@ export default function FormOption2() {
     try {
       const VITE_API_PATH = import.meta.env.VITE_API_PATH;
       const response = await axios.post(`${VITE_API_PATH}/user/register`, step2Data);
-      console.log("User registered successfully:", response.data);
-
       navigate("/p1_dass21");
     } catch (error) {
-      console.error("Error registering user:", error);
       setError("Failed to register user. Please try again.");
     } finally {
       setLoading(false);
