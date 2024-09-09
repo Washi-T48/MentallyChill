@@ -1,7 +1,7 @@
 import express from 'express';
 import logger from '../Middleware/logger.js';
 
-import { newUser, deleteUser, updateUser, lookupUser, allUsers, getUserID, registerUser, lookupUserByLineID, updateUserByLineID, updateUserByLineID } from '../Models/user.js';
+import { newUser, deleteUser, updateUser, lookupUser, allUsers, getUserID, registerUser, lookupUserByLineID, updateUserByLineID } from '../Models/user.js';
 
 const userRouter = express.Router();
 
