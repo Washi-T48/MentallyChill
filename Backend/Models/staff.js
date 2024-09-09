@@ -1,12 +1,13 @@
 import pool from '../Config/db.js';
 
-const newStaff = async (staff_id, name, surname, nickname) => {
-    const newStaff = await pool.query(
-        `INSERT INTO staff (staff_id, name, surname, nickname) VALUES($1, $2, $3, $4) RETURNING *`,
-        [staff_id, name, surname, nickname]
+const newStaff = async (staff_id, name, surname, nickname, image) => {
+    const result = await pool.query(`
+        INSERT INTO staff (staff_id, name, surname, nickname, image) VALUES ($1, $2, $3, $4, $5) RETURNING *`,
+        [staff_id, name, surname, nickname, image]
     );
-    return (newStaff["rows"][0]);
+    return result.rows[0];
 };
+
 
 const deleteStaff = async (staff_id) => {
     const staff = await pool.query(

@@ -4,9 +4,9 @@ import Logo from "../components/logo";
 import Remark2 from "./remark2";
 import liff from "@line/liff";
 export default function Remark() {
-  /* useEffect(() => {
+  useEffect(() => {
     liff
-      .init({ liffId: "2005311386-9El7MZb5" })
+      .init({ liffId: "2006283577-y6727Dan" })
       .then(() => {
         if (liff.isLoggedIn()) {
           console.log("logged in");
@@ -15,7 +15,7 @@ export default function Remark() {
         }
       })
       .catch((err) => console.error("Error initializing LIFF:", err));
-  }, []); */
+  }, []);
 
   return (
     <div className="page">

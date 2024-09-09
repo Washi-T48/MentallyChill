@@ -4,6 +4,7 @@ import Logo from "../components/logo";
 import { useNavigate } from "react-router-dom";
 import CustomRadioButton from "../components/CustomRadioButton";
 import Loading from "../components/Loading";
+import axios from "axios";
 import liff from "@line/liff";
 
 const topics = {
@@ -47,17 +48,52 @@ export default function Appoint() {
     medHistory: "",
   });
 
+  const [staffList, setStaffList] = useState([]);
+  const [selectedStaff, setSelectedStaff] = useState("");
   const [timeSlots, setTimeSlots] = useState([]);
   const [loadingSlots, setLoadingSlots] = useState(false);
   const [loading, setLoading] = useState(false);
   const [currentDate, setCurrentDate] = useState("");
   const [error, setError] = useState("");
+  const [appointmentDate, setAppointmentDate] = useState("");
 
   const navigate = useNavigate();
 
   useEffect(() => {
+    axios
+      .get("/staff/all")
+      .then((response) => {
+        console.log(response.data);
+        const formattedStaffList = response.data.map((staff) => ({
+          value: staff.staff_id,
+          label: `${staff.name} ${staff.surname} - ${staff.nickname}`,
+        }));
+        setStaffList(formattedStaffList);
+      })
+      .catch((error) => {
+        console.error("Error fetching staff data:", error);
+      });
+  }, []);
+
+  useEffect(() => {
+    if (selectedStaff && appointmentDate) {
+      axios
+        .post("/timetable/getStaffTimeByDate", {
+          staff_id: selectedStaff,
+          date: appointmentDate,
+        })
+        .then((response) => {
+          setTimeSlots(response.data);
+        })
+        .catch((error) => {
+          console.error("Error fetching timetable data:", error);
+        });
+    }
+  }, [selectedStaff, appointmentDate]);
+
+  useEffect(() => {
     liff
-      .init({ liffId: "2005311386-dnvmKNjJ" })
+      .init({ liffId: "2006283577-J1qnq04Q" })
       .then(() => {
         if (liff.isLoggedIn()) {
           liff
@@ -80,12 +116,6 @@ export default function Appoint() {
     setCurrentDate(formattedDate);
   }, []);
 
-  useEffect(() => {
-    if (appointData.date && appointData.medDoctor) {
-      fetchAvailableTimeSlots();
-    }
-  }, [appointData.date, appointData.medDoctor]);
-
   const onSubmit = (e) => {
     e.preventDefault();
     if (appointData.date < currentDate) {
@@ -105,19 +135,18 @@ export default function Appoint() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setAppointData((prevData) => {
-      if (name === "topic" && !hasSubtopics(value)) {
-        return {
-          ...prevData,
-          [name]: value,
-          subtopic: "",
-        };
-      }
-      return {
-        ...prevData,
-        [name]: value,
-      };
-    });
+    setAppointData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+
+    if (name === "date") {
+      setAppointmentDate(value);
+    }
+
+    if (name === "medDoctor") {
+      setSelectedStaff(value);
+    }
   };
 
   const handleRadioSelect = (name, value) => {
@@ -132,14 +161,6 @@ export default function Appoint() {
         tel: "",
       }));
     }
-  };
-
-  const fetchAvailableTimeSlots = () => {
-    setLoadingSlots(true);
-    setTimeout(() => {
-      setTimeSlots(["09:00", "10:00", "11:00", "13:00", "14:00"]);
-      setLoadingSlots(false);
-    }, 1000);
   };
 
   const hasSubtopics = (topic) => topics[topic]?.length > 0;
@@ -220,16 +241,15 @@ export default function Appoint() {
                 required
               >
                 <option value="">เลือกผู้ให้คำปรึกษา</option>
-                <option value="CRA01">
-                  CRA01 รุ้งนภา ผาณิตรัตน์ (พี่รุ้ง)
-                </option>
-                <option value="CRA02">
-                  CRA02 ดวงแก้ว เตชะกาญจนเวช (พี่ปู)
-                </option>
-                <option value="CRA03">CRA03 วิภาพร สร้อยแสง (พี่อ้อย)</option>
+                {staffList.map((staff) => (
+                  <option key={staff.value} value={staff.value}>
+                    {staff.label}
+                  </option>
+                ))}
               </select>
             </label>
           </div>
+
           <div className="app-time">
             <label>
               วันที่และเวลา<mark> *</mark>
@@ -262,6 +282,7 @@ export default function Appoint() {
               {loadingSlots && <p>Loading available time slots...</p>}
             </label>
           </div>
+
           <div className="app-topic">
             <label>
               ประเด็นที่ต้องการปรึกษา<mark> *</mark>
@@ -282,18 +303,17 @@ export default function Appoint() {
             </label>
           </div>
           {hasSubtopics(appointData.topic) && (
-            <div className="app-detail">
+            <div className="app-topic">
               <label>
-                ประเด็นย่อย
+                หัวข้อย่อย
                 <br />
                 <select
                   name="subtopic"
                   value={appointData.subtopic}
                   onChange={handleChange}
-                  required
                 >
-                  <option value="">เลือกประเด็นย่อย</option>
-                  {topics[appointData.topic].map((subtopic) => (
+                  <option value="">เลือกหัวข้อย่อย</option>
+                  {topics[appointData.topic]?.map((subtopic) => (
                     <option key={subtopic} value={subtopic}>
                       {subtopic}
                     </option>
@@ -302,31 +322,16 @@ export default function Appoint() {
               </label>
             </div>
           )}
+
           <div className="app-detail">
             <label>
-              รายละเอียดที่ขอรับการปรึกษา
+              รายละเอียดเพิ่มเติม
               <br />
               <textarea
-                className="app-detail"
-                name="detail"
                 value={appointData.detail}
+                name="detail"
                 onChange={handleChange}
-                placeholder="รายละเอียด เช่น อาการที่เกิดขึ้น"
-                required
-              />
-            </label>
-          </div>
-          <div className="med-his">
-            <label>
-              ประวัติการรับยา
-              <br />
-              <textarea
-                className="med-his"
-                name="medHistory"
-                value={appointData.medHistory}
-                onChange={handleChange}
-                required
-              />
+              ></textarea>
             </label>
           </div>
 

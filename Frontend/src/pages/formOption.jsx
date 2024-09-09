@@ -20,7 +20,7 @@ export default function FormOption() {
 
   useEffect(() => {
     liff
-      .init({ liffId: "2005311386-6GQLXp7Z" })
+      .init({ liffId: "2006283577-Pq2z2JeQ" })
       .then(() => {
         if (liff.isLoggedIn()) {
           liff

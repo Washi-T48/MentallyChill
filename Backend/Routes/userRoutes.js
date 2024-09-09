@@ -1,7 +1,7 @@
 import express from 'express';
 import logger from '../Middleware/logger.js';
 
-import { newUser, deleteUser, updateUser, lookupUser, allUsers, getUserID, registerUser } from '../Models/user.js';
+import { newUser, deleteUser, updateUser, lookupUser, allUsers, getUserID, registerUser, lookupUserByLineID, updateUserByLineID } from '../Models/user.js';
 
 const userRouter = express.Router();
 
@@ -87,8 +87,13 @@ userRouter.get("/getID/:uid", async (req, res) => {
 userRouter.post("/register", async (req, res) => {
     try {
         const { uid, gender, age, year, email, tel, sos_tel } = req.body;
-        const newUserResult = await registerUser(uid, gender, age, year, email, tel, sos_tel);
-        res.status(200).json(newUserResult);
+        if (await lookupUserByLineID(uid).length != 0) {
+            const updatedUserResult = await updateUserByLineID(uid, gender, age, year, email, tel, sos_tel)
+            res.status(200).send('User already registered')
+        } else {
+            const newUserResult = await registerUser(uid, gender, age, year, email, tel, sos_tel);
+            res.status(200).json(newUserResult);
+        }
     }
     catch (error) {
         logger.error(error);

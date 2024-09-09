@@ -152,7 +152,7 @@ export default function Sidebar() {
                 : "hover:bg-gray-300"
             }`}
           >
-            การวินิจฉัย
+            ผลการประเมิน
           </div>
           <div
             onClick={() => checkActive("booking")}

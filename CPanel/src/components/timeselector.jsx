@@ -18,6 +18,7 @@ const TimeSelectorModal = ({ day, month, year, onClose, onSave }) => {
   const [endTime, setEndTime] = useState('');
   const [filteredEndTimes, setFilteredEndTimes] = useState([]);
   const [staffData, setStaffData] = useState(null);
+  const [warning, setWarning] = useState('');
   const timeSlots = generateTimeSlots();
 
   useEffect(() => {
@@ -45,6 +46,16 @@ const TimeSelectorModal = ({ day, month, year, onClose, onSave }) => {
   const handleSave = async () => {
     const date = `${year}-${(month + 1).toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
     try {
+      const duplicateCheck = await axios.post('/timetable/checkDuplicate', {
+        staff_id: staffData.staff_id,
+        date: date,
+        time_start: startTime,
+        time_end: endTime,
+      });
+      if (duplicateCheck.data.length > 0) {
+        setWarning('ช่วงเวลาที่เลือกซ้ำกับช่วงเวลาอื่น');
+        return;
+      }
       await axios.post('/timetable/new', {
         staff_id: staffData.staff_id,
         date: date,
@@ -52,7 +63,6 @@ const TimeSelectorModal = ({ day, month, year, onClose, onSave }) => {
         time_end: endTime,
       });
       onSave(date);
-      console.log(date);
     } catch (error) {
       console.error('Error saving data:', error);
     }
@@ -65,6 +75,7 @@ const TimeSelectorModal = ({ day, month, year, onClose, onSave }) => {
         <h2 className="text-xl font-bold mb-4">
           เลือกเวลาในวันที่ {new Date(year, month, day).toDateString()}
         </h2>
+        {warning && <p className="text-red-500 mb-4">{warning}</p>}
         <div className="mb-4">
           <label className="block mb-2">เวลาเริ่มต้น</label>
           <select
@@ -101,14 +112,14 @@ const TimeSelectorModal = ({ day, month, year, onClose, onSave }) => {
             className="bg-red-500 text-white px-3 py-1 rounded mr-2"
             onClick={onClose}
           >
-            Cancel
+            ยกเลิก
           </button>
           <button
             className="bg-blue-500 text-white px-3 py-1 rounded"
             onClick={handleSave}
             disabled={!startTime || !endTime}
           >
-            Save
+            บันทึก
           </button>
         </div>
       </div>
