@@ -21,6 +21,7 @@ import {
 
 import { getStaffTimeByDate } from '../Models/timetable.js';
 import { appointmentNotify } from '../Models/line.js';
+import { lookupUserByLineID } from '../Models/user.js';
 
 const appointmentRouter = express.Router();
 
@@ -163,8 +164,15 @@ appointmentRouter.post("/post", async (req, res) => {
 appointmentRouter.post("/submit", async (req, res) => {
     try {
         const { uid, tel, contactMethod, medDoctor, date, time, topic, detail, medHistory, subtopic } = req.body;
-        const appointment = await submitAppointment(uid, tel, contactMethod, medDoctor, date, time, topic, detail, medHistory, subtopic);
-        res.status(200).json(appointment);
+        if ((await lookupUserByLineID(uid)).length > 0) {
+            const appointment = await submitAppointment(uid, tel, contactMethod, medDoctor, date, time, topic, detail, medHistory, subtopic);
+            res.status(200).json(appointment);
+        } else {
+            const newUserResult = await registerUser(uid, tel)
+            console.log(newUserResult)
+            const appointment = await submitAppointment(uid, tel, contactMethod, medDoctor, date, time, topic, detail, medHistory, subtopic);
+            res.status(200).json(appointment);
+        }
     }
     catch (error) {
         logger.error(error);
