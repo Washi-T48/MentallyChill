@@ -92,7 +92,7 @@ export default function Appoint() {
     const fetchStaffData = async () => {
       try {
         const response = await axios.get(
-          `https://mindcra.com:3000/allStaff`
+          `/allStaff`
         );
         setAllStaff(response.data);
         console.log(response.data);
