@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import CustomRadioButton from "../components/CustomRadioButton";
 import Loading from "../components/Loading";
 import liff from "@line/liff";
+import axios from "axios";
 
 const topics = {
   พัฒนาการเรียน: [
@@ -52,6 +53,8 @@ export default function Appoint() {
   const [loading, setLoading] = useState(false);
   const [currentDate, setCurrentDate] = useState("");
   const [error, setError] = useState("");
+  const [staffList, setStaffList] = useState([]);
+  const [loadingStaff, setLoadingStaff] = useState(true);
 
   const navigate = useNavigate();
 
@@ -78,6 +81,18 @@ export default function Appoint() {
     const today = new Date();
     const formattedDate = today.toISOString().split("T")[0];
     setCurrentDate(formattedDate);
+
+    const fetchStaffList = async () => {
+      try {
+        const response = await axios.get("/allStaff");
+        setStaffList(response.data);
+        setLoadingStaff(false);
+      } catch (error) {
+        console.error("Failed to load staff list:", error);
+        setLoadingStaff(false);
+      }
+    };
+    fetchStaffList();
   }, []);
 
   useEffect(() => {
@@ -220,13 +235,15 @@ export default function Appoint() {
                 required
               >
                 <option value="">เลือกผู้ให้คำปรึกษา</option>
-                <option value="CRA01">
-                  CRA01 รุ้งนภา ผาณิตรัตน์ (พี่รุ้ง)
-                </option>
-                <option value="CRA02">
-                  CRA02 ดวงแก้ว เตชะกาญจนเวช (พี่ปู)
-                </option>
-                <option value="CRA03">CRA03 วิภาพร สร้อยแสง (พี่อ้อย)</option>
+                {loadingStaff ? (
+                  <option>Loading staff...</option>
+                ) : (
+                  staffList.map((staff) => (
+                    <option key={staff.staff_id} value={staff.staff_id}>
+                      {staff.staff_id} {staff.name} {staff.surname} ({staff.nickname})
+                    </option>
+                  ))
+                )}
               </select>
             </label>
           </div>
