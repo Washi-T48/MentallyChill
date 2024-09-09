@@ -101,26 +101,33 @@ export default function Appoint() {
       }
     };
 
+    fetchStaffData();
+  }, []);
+
+  useEffect(() => {
     const fetchTimeslot = async () => {
-      try {
-        const response = await axios.post(
-          'https://mindcra.com:3000/getStaffTimeByDate',
-          {
-            staff_id: appointData.medDoctor,
-            date: appointData.date
-          }
-        );
-        setTimeSlots(response.data);
-        console.log(response.data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-        setError("Failed to fetch timetable data");
+      if (appointData.medDoctor && appointData.date) {
+        setLoadingSlots(true);
+        try {
+          const response = await axios.post(
+            'https://mindcra.com:3000/getStaffTimeByDate',
+            {
+              staff_id: appointData.medDoctor,
+              date: appointData.date
+            }
+          );
+          setTimeSlots(response.data);
+          setLoadingSlots(false);
+        } catch (error) {
+          console.error("Error fetching time slots:", error);
+          setError("Failed to fetch time slots");
+          setLoadingSlots(false);
+        }
       }
     };
 
-    fetchStaffData();
     fetchTimeslot();
-  }, []);
+  }, [appointData.medDoctor, appointData.date]);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -139,6 +146,24 @@ export default function Appoint() {
     }, 1000);
   };
 
+  // const handleChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setAppointData((prevData) => {
+  //     if (name === "topic" && !hasSubtopics(value)) {
+  //       return {
+  //         ...prevData,
+  //         [name]: value,
+  //         subtopic: "",
+  //       };
+  //     }
+  //     return {
+  //       ...prevData,
+  //       [name]: value,
+  //     };
+  //   });
+  // };
+
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setAppointData((prevData) => {
@@ -149,13 +174,21 @@ export default function Appoint() {
           subtopic: "",
         };
       }
+      // Reset time when date or medDoctor changes
+      if (name === "date" || name === "medDoctor") {
+        return {
+          ...prevData,
+          [name]: value,
+          time: "",
+        };
+      }
       return {
         ...prevData,
         [name]: value,
       };
     });
   };
-
+  
   const handleRadioSelect = (name, value) => {
     setAppointData((prevData) => ({
       ...prevData,
