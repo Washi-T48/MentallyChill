@@ -88,7 +88,7 @@ userRouter.post("/register", async (req, res) => {
     try {
         const { uid, gender, age, year, email, tel, sos_tel } = req.body;
         if (await lookupUserByLineID(uid).length != 0) {
-            updateUser(uid, gender, age, year, email, tel, sos_tel)
+            const updated = await updateUser(uid, gender, age, year, email, tel, sos_tel)
         } else {
             const newUserResult = await registerUser(uid, gender, age, year, email, tel, sos_tel);
             res.status(200).json(newUserResult);
