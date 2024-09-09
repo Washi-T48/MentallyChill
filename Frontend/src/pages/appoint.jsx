@@ -82,11 +82,11 @@ export default function Appoint() {
     setCurrentDate(formattedDate);
   }, []);
 
-  useEffect(() => {
-    if (appointData.date && appointData.medDoctor) {
-      fetchAvailableTimeSlots();
-    }
-  }, [appointData.date, appointData.medDoctor]);
+  // useEffect(() => {
+  //   if (appointData.date && appointData.medDoctor) {
+  //     fetchAvailableTimeSlots();
+  //   }
+  // }, [appointData.date, appointData.medDoctor]);
 
   useEffect(() => {
     const fetchStaffData = async () => {
@@ -101,7 +101,25 @@ export default function Appoint() {
       }
     };
 
+    const fetchTimeslot = async () => {
+      try {
+        const response = await axios.post(
+          'https://mindcra.com:3000/getStaffTimeByDate',
+          {
+            staff_id: appointData.medDoctor,
+            date: appointData.date
+          }
+        );
+        setTimeSlots(response.data);
+        console.log(response.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        setError("Failed to fetch timetable data");
+      }
+    };
+
     fetchStaffData();
+    fetchTimeslot();
   }, []);
 
   const onSubmit = (e) => {
@@ -152,13 +170,13 @@ export default function Appoint() {
     }
   };
 
-  const fetchAvailableTimeSlots = () => {
-    setLoadingSlots(true);
-    setTimeout(() => {
-      setTimeSlots(["09:00", "10:00", "11:00", "13:00", "14:00"]);
-      setLoadingSlots(false);
-    }, 1000);
-  };
+  // const fetchAvailableTimeSlots = () => {
+  //   setLoadingSlots(true);
+  //   setTimeout(() => {
+  //     setTimeSlots(["09:00", "10:00", "11:00", "13:00", "14:00"]);
+  //     setLoadingSlots(false);
+  //   }, 1000);
+  // };
 
   const hasSubtopics = (topic) => topics[topic]?.length > 0;
 
