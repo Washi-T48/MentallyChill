@@ -94,7 +94,7 @@ publicRouter.post("/submitAppointment", async (req, res) => {
     }
 });
 
-publicRouter.get("/allStaff", async (req, res) => {
+publicRouter.get("allStaff", async (req, res) => {
     try {
         const staffs = await allStaffs();
         res.status(200).json(staffs);
