@@ -87,6 +87,7 @@ userRouter.get("/getID/:uid", async (req, res) => {
 userRouter.post("/register", async (req, res) => {
     try {
         const { uid, gender, age, year, email, tel, sos_tel } = req.body;
+        console.log(await lookupUserByLineID(uid));
         if ((await lookupUserByLineID(uid)).length > 0) {
             const updatedUserResult = await updateUserByLineID(uid, gender, age, year, email, tel, sos_tel)
             res.status(200).send('User already registered')
