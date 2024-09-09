@@ -100,7 +100,7 @@ export default function P3_dass21() {
       axios
         .post(`${VITE_API_PATH}/submitForms`, {
           uid: uid,
-          form_type: "dass21",
+          forms_type: "dass21",
           result: JSON.stringify(payload),
         })
         .then(() => {
