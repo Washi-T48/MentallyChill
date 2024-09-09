@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import CustomRadioButton from "../components/CustomRadioButton";
 import Loading from "../components/Loading";
 import liff from "@line/liff";
-import axios from "axios"; // เพิ่มการ import axios
 
 const topics = {
   พัฒนาการเรียน: [
@@ -48,7 +47,6 @@ export default function Appoint() {
     medHistory: "",
   });
 
-  const [staffList, setStaffList] = useState([]);
   const [timeSlots, setTimeSlots] = useState([]);
   const [loadingSlots, setLoadingSlots] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -80,17 +78,7 @@ export default function Appoint() {
     const today = new Date();
     const formattedDate = today.toISOString().split("T")[0];
     setCurrentDate(formattedDate);
-    fetchStaffList();
   }, []);
-
-  const fetchStaffList = async () => {
-    try {
-      const response = await axios.get("/allStaff");
-      setStaffList(response.data);
-    } catch (error) {
-      console.error("Error fetching staff lists:", error);
-    }
-  };
 
   useEffect(() => {
     if (appointData.date && appointData.medDoctor) {
@@ -232,11 +220,13 @@ export default function Appoint() {
                 required
               >
                 <option value="">เลือกผู้ให้คำปรึกษา</option>
-                {staffList.map((staff) => (
-                  <option key={staff.staff_id} value={staff.staff_id}>
-                    {staff.name} {staff.surname} - {staff.nickname}
-                  </option>
-                ))}
+                <option value="CRA01">
+                  CRA01 รุ้งนภา ผาณิตรัตน์ (พี่รุ้ง)
+                </option>
+                <option value="CRA02">
+                  CRA02 ดวงแก้ว เตชะกาญจนเวช (พี่ปู)
+                </option>
+                <option value="CRA03">CRA03 วิภาพร สร้อยแสง (พี่อ้อย)</option>
               </select>
             </label>
           </div>
