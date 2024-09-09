@@ -32,6 +32,14 @@ const lookupUser = async (uid) => {
     return (user["rows"]);
 };
 
+const lookupUserByLineID = async (line_uid) => {
+    const user = await pool.query(
+        `SELECT * FROM users WHERE line_uid = $1`,
+        [line_uid]
+    );
+    return (user["rows"]);
+};
+
 const allUsers = async () => {
     const users = await pool.query(
         `SELECT * FROM users ORDER BY created DESC`
@@ -64,4 +72,5 @@ export {
     allUsers,
     getUserID,
     registerUser,
+    lookupUserByLineID,
 };
