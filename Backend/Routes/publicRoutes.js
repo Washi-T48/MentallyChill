@@ -28,6 +28,11 @@ import {
     appointmentNotify,
 } from "../Models/line.js";
 
+import {
+    lookupUserByLineID,
+    registerUser,
+} from '../Models/user.js';
+
 const publicRouter = express.Router();
 
 publicRouter.all('/', async (req, res) => {
