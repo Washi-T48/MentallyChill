@@ -63,7 +63,7 @@ export default function Appoint() {
     axios
       .get("/allStaff")
       .then((response) => {
-        console.log(response);
+        console.log(response.data);
         const formattedStaffList = response.data.map((staff) => ({
           value: staff.staff_id,
           label: `${staff.name} ${staff.surname} - ${staff.nickname}`,
