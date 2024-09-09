@@ -73,9 +73,19 @@ publicRouter.post('/submitForms', async (req, res) => {
 publicRouter.post("/submitAppointment", async (req, res) => {
     try {
         const { uid, tel, contactMethod, medDoctor, date, time, topic, detail, medHistory, subtopic } = req.body;
-        const appointment = await submitAppointment(uid, tel, contactMethod, medDoctor, date, time, topic, detail, medHistory, subtopic);
-        await appointmentNotify(appointment.booking_id);
-        res.status(200).json(appointment);
+        console.log(await lookupUserByLineID(uid))
+        if ((await lookupUserByLineID(uid)).length > 0) {
+            console.log("User exists")
+            const appointment = await submitAppointment(uid, tel, contactMethod, medDoctor, date, time, topic, detail, medHistory, subtopic);
+            await appointmentNotify(appointment.booking_id);
+            res.status(200).json(appointment);
+        } else {
+            console.log("User does not exist")
+            const newUserResult = await registerUser(uid, tel)
+            console.log(newUserResult)
+            const appointment = await submitAppointment(uid, tel, contactMethod, medDoctor, date, time, topic, detail, medHistory, subtopic);
+            res.status(200).json(appointment);
+        }
     }
     catch (error) {
         logger.error(error);
