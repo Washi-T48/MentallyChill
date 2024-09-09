@@ -84,13 +84,19 @@ export default function Appoint() {
 
   useEffect(() => {
     axios.get('/allStaff')
-      .then(response => { 
-        const formattedStaffList = response.data.map(staff => ({
-          value: staff.staff_id,
-          label: `${staff.name} ${staff.surname} - ${staff.nickname}`
-        }));
-        setStaffList(formattedStaffList);
-      });
+      .then(response => {
+        console.log(response.data);
+        if (Array.isArray(response.data)) {
+          const formattedStaffList = response.data.map(staff => ({
+            value: staff.staff_id,
+            label: `${staff.name} ${staff.surname} - ${staff.nickname}`
+          }));
+          setStaffList(formattedStaffList);
+        } else {
+          console.error("Expected an array but got:", response.data);
+        }
+      })
+      .catch(err => console.error("Error fetching staff:", err));
   }, []);
 
   useEffect(() => {
