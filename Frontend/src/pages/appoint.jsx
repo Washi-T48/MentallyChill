@@ -85,7 +85,7 @@ export default function Appoint() {
 
   const fetchStaffList = async () => {
     try {
-      const response = await axios.get("/api/allStaff");
+      const response = await axios.get("/allStaff");
       setStaffList(response.data);
     } catch (error) {
       console.error("Error fetching staff list:", error);
