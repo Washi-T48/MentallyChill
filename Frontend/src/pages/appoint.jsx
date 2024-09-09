@@ -59,11 +59,11 @@ export default function Appoint() {
 
   const navigate = useNavigate();
 
-  // Fetch staff data when component mounts
   useEffect(() => {
     axios
       .get("/staff/all")
       .then((response) => {
+        console.log(response.data);
         const formattedStaffList = response.data.map((staff) => ({
           value: staff.staff_id,
           label: `${staff.name} ${staff.surname} - ${staff.nickname}`,
@@ -75,7 +75,6 @@ export default function Appoint() {
       });
   }, []);
 
-  // Fetch time slots when selected staff or date changes
   useEffect(() => {
     if (selectedStaff && appointmentDate) {
       axios
