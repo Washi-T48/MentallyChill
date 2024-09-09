@@ -82,11 +82,11 @@ export default function Appoint() {
     setCurrentDate(formattedDate);
   }, []);
 
-  // useEffect(() => {
-  //   if (appointData.date && appointData.medDoctor) {
-  //     fetchAvailableTimeSlots();
-  //   }
-  // }, [appointData.date, appointData.medDoctor]);
+  useEffect(() => {
+    if (appointData.date && appointData.medDoctor) {
+      fetchAvailableTimeSlots();
+    }
+  }, [appointData.date, appointData.medDoctor]);
 
   useEffect(() => {
     const fetchStaffData = async () => {
@@ -104,30 +104,6 @@ export default function Appoint() {
     fetchStaffData();
   }, []);
 
-  useEffect(() => {
-    const fetchTimeslot = async () => {
-      if (appointData.medDoctor && appointData.date) {
-        setLoadingSlots(true);
-        try {
-          const response = await axios.post(
-            'https://mindcra.com:3000/getStaffTimeByDate',
-            {
-              staff_id: appointData.medDoctor,
-              date: appointData.date
-            }
-          );
-          setTimeSlots(response.data);
-          setLoadingSlots(false);
-        } catch (error) {
-          console.error("Error fetching time slots:", error);
-          setError("Failed to fetch time slots");
-          setLoadingSlots(false);
-        }
-      }
-    };
-
-    fetchTimeslot();
-  }, [appointData.medDoctor, appointData.date]);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -146,24 +122,6 @@ export default function Appoint() {
     }, 1000);
   };
 
-  // const handleChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setAppointData((prevData) => {
-  //     if (name === "topic" && !hasSubtopics(value)) {
-  //       return {
-  //         ...prevData,
-  //         [name]: value,
-  //         subtopic: "",
-  //       };
-  //     }
-  //     return {
-  //       ...prevData,
-  //       [name]: value,
-  //     };
-  //   });
-  // };
-
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setAppointData((prevData) => {
@@ -174,21 +132,14 @@ export default function Appoint() {
           subtopic: "",
         };
       }
-      // Reset time when date or medDoctor changes
-      if (name === "date" || name === "medDoctor") {
-        return {
-          ...prevData,
-          [name]: value,
-          time: "",
-        };
-      }
       return {
         ...prevData,
         [name]: value,
       };
     });
   };
-  
+
+
   const handleRadioSelect = (name, value) => {
     setAppointData((prevData) => ({
       ...prevData,
@@ -203,13 +154,13 @@ export default function Appoint() {
     }
   };
 
-  // const fetchAvailableTimeSlots = () => {
-  //   setLoadingSlots(true);
-  //   setTimeout(() => {
-  //     setTimeSlots(["09:00", "10:00", "11:00", "13:00", "14:00"]);
-  //     setLoadingSlots(false);
-  //   }, 1000);
-  // };
+  const fetchAvailableTimeSlots = () => {
+    setLoadingSlots(true);
+    setTimeout(() => {
+      setTimeSlots(["09:00", "10:00", "11:00", "13:00", "14:00"]);
+      setLoadingSlots(false);
+    }, 1000);
+  };
 
   const hasSubtopics = (topic) => topics[topic]?.length > 0;
 
