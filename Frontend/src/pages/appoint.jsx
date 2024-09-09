@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import CustomRadioButton from "../components/CustomRadioButton";
 import Loading from "../components/Loading";
 import liff from "@line/liff";
-import axios from "axios";
+import axios from "axios"; // เพิ่มการ import axios
 
 const topics = {
   พัฒนาการเรียน: [
@@ -80,18 +80,17 @@ export default function Appoint() {
     const today = new Date();
     const formattedDate = today.toISOString().split("T")[0];
     setCurrentDate(formattedDate);
+    fetchStaffList();
   }, []);
 
-  useEffect(() => {
-    axios.get('/allStaff')
-      .then(response => { 
-        const formattedStaffList = response.data.map(staff => ({
-          value: staff.staff_id,
-          label: `${staff.name} ${staff.surname} - ${staff.nickname}`
-        }));
-        setStaffList(formattedStaffList);
-      });
-  }, []);
+  const fetchStaffList = async () => {
+    try {
+      const response = await axios.get("/api/allStaff");
+      setStaffList(response.data);
+    } catch (error) {
+      console.error("Error fetching staff list:", error);
+    }
+  };
 
   useEffect(() => {
     if (appointData.date && appointData.medDoctor) {
@@ -234,8 +233,8 @@ export default function Appoint() {
               >
                 <option value="">เลือกผู้ให้คำปรึกษา</option>
                 {staffList.map((staff) => (
-                  <option key={staff.value} value={staff.value}>
-                    {staff.label}
+                  <option key={staff.staff_id} value={staff.staff_id}>
+                    {staff.name} {staff.surname} - {staff.nickname}
                   </option>
                 ))}
               </select>
