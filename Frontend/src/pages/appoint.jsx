@@ -83,20 +83,17 @@ export default function Appoint() {
   }, []);
 
   useEffect(() => {
-    axios.get('/allStaff')
+    axios.get(`${VITE_API_PATH}/allStaff`)
       .then(response => {
-        if (response.headers['content-type'].includes('application/json')) {
-          if (Array.isArray(response.data)) {
-            const formattedStaffList = response.data.map(staff => ({
-              value: staff.staff_id,
-              label: `${staff.name} ${staff.surname} - ${staff.nickname}`
-            }));
-            setStaffList(formattedStaffList);
-          } else {
-            console.error("Expected an array but got:", response.data);
-          }
+        console.log(response.data);
+        if (Array.isArray(response.data)) {
+          const formattedStaffList = response.data.map(staff => ({
+            value: staff.staff_id,
+            label: `${staff.name} ${staff.surname} - ${staff.nickname}`
+          }));
+          setStaffList(formattedStaffList);
         } else {
-          console.error("Response is not JSON:", response);
+          console.error("Expected an array but got:", response.data);
         }
       })
       .catch(err => console.error("Error fetching staff:", err));
