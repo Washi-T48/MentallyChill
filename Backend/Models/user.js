@@ -69,7 +69,6 @@ const updateUserByLineID = async (uid, gender, age, year, email, tel, sos_tel) =
         `UPDATE users SET gender = $2, age = $3, grade_level = $4, email = $5, phone = $6, phone_emergency = $7 WHERE line_uid = $1 RETURNING *`,
         [uid, gender, age, year, email, tel, sos_tel]
     );
-    console.log(user["rows"][0]);
     return (user["rows"][0]);
 };
 
