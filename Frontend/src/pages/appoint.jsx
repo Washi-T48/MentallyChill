@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import CustomRadioButton from "../components/CustomRadioButton";
 import Loading from "../components/Loading";
 import liff from "@line/liff";
-import axios from "axios";
 
 const topics = {
   พัฒนาการเรียน: [
@@ -53,7 +52,7 @@ export default function Appoint() {
   const [loading, setLoading] = useState(false);
   const [currentDate, setCurrentDate] = useState("");
   const [error, setError] = useState("");
-  const [staffList, setStaffList] = useState([]);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -79,26 +78,7 @@ export default function Appoint() {
     const today = new Date();
     const formattedDate = today.toISOString().split("T")[0];
     setCurrentDate(formattedDate);
-
-
   }, []);
-
-  useEffect(() => {
-    axios.get("/allStaff")
-    .then((response) => {
-      if (Array.isArray(response.data)) {
-        setStaffList(response.data);
-      } else {
-        console.error("Unexpected response format:", response.data);
-        setStaffList([]);
-      }
-    })
-    .catch((error) => {
-      console.error("Error fetching staff data:", error.response?.data || error.message);
-      setStaffList([]);
-    });
-  }, []);
-
 
   useEffect(() => {
     if (appointData.date && appointData.medDoctor) {
@@ -155,29 +135,11 @@ export default function Appoint() {
   };
 
   const fetchAvailableTimeSlots = () => {
-    if (!appointData.date || !appointData.medDoctor) return;
     setLoadingSlots(true);
-    axios
-      .post("/getStaffTimeByDate", {
-        staff_id: appointData.medDoctor,
-        date: appointData.date,
-      })
-      .then((response) => {
-        const availableTimes = response.data;
-        if (Array.isArray(availableTimes)) {
-          setTimeSlots(availableTimes);
-        } else {
-          console.error("Unexpected response format:", response.data);
-          setTimeSlots([]);
-        }
-      })
-      .catch((error) => {
-        console.error("Error fetching available time slots:", error.response?.data || error.message);
-        setTimeSlots([]);
-      })
-      .finally(() => {
-        setLoadingSlots(false);
-      });
+    setTimeout(() => {
+      setTimeSlots(["09:00", "10:00", "11:00", "13:00", "14:00"]);
+      setLoadingSlots(false);
+    }, 1000);
   };
 
   const hasSubtopics = (topic) => topics[topic]?.length > 0;
@@ -258,11 +220,13 @@ export default function Appoint() {
                 required
               >
                 <option value="">เลือกผู้ให้คำปรึกษา</option>
-                {staffList.map((staff) => (
-                  <option key={staff.staff_id} value={staff.staff_id}>
-                    {`${staff.staff_id} ${staff.name} ${staff.surname} (${staff.nickname})`}
-                  </option>
-                ))}
+                <option value="CRA01">
+                  CRA01 รุ้งนภา ผาณิตรัตน์ (พี่รุ้ง)
+                </option>
+                <option value="CRA02">
+                  CRA02 ดวงแก้ว เตชะกาญจนเวช (พี่ปู)
+                </option>
+                <option value="CRA03">CRA03 วิภาพร สร้อยแสง (พี่อ้อย)</option>
               </select>
             </label>
           </div>
@@ -285,23 +249,20 @@ export default function Appoint() {
                 onChange={handleChange}
                 required
                 disabled={
-                  !appointData.date || loadingSlots || timeSlots.length === 0
+                  !appointData.date || !appointData.medDoctor || loadingSlots
                 }
               >
                 <option value="">เลือกเวลา</option>
-                {loadingSlots ? (
-                  <option>Loading slots...</option>
-                ) : (
-                  timeSlots.map((timeSlot) => (
-                    <option key={timeSlot} value={timeSlot}>
-                      {timeSlot}
-                    </option>
-                  ))
-                )}
+                {timeSlots.map((slot) => (
+                  <option key={slot} value={slot}>
+                    {slot}
+                  </option>
+                ))}
               </select>
+              {loadingSlots && <p>Loading available time slots...</p>}
             </label>
           </div>
-          <div className="app-detail">
+          <div className="app-topic">
             <label>
               ประเด็นที่ต้องการปรึกษา<mark> *</mark>
               <br />
