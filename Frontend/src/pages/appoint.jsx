@@ -52,6 +52,7 @@ export default function Appoint() {
   const [loading, setLoading] = useState(false);
   const [currentDate, setCurrentDate] = useState("");
   const [error, setError] = useState("");
+  const [staffList, setStaffList] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -77,6 +78,14 @@ export default function Appoint() {
     const today = new Date();
     const formattedDate = today.toISOString().split("T")[0];
     setCurrentDate(formattedDate);
+
+    axios.get("/allStaff")
+      .then((response) => {
+        setStaffList(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching staff data:", error);
+      });
   }, []);
 
 
@@ -220,13 +229,11 @@ export default function Appoint() {
                 required
               >
                 <option value="">เลือกผู้ให้คำปรึกษา</option>
-                <option value="CRA01">
-                  CRA01 รุ้งนภา ผาณิตรัตน์ (พี่รุ้ง)
-                </option>
-                <option value="CRA02">
-                  CRA02 ดวงแก้ว เตชะกาญจนเวช (พี่ปู)
-                </option>
-                <option value="CRA03">CRA03 วิภาพร สร้อยแสง (พี่อ้อย)</option>
+                {staffList.map((staff) => (
+                  <option key={staff.staff_id} value={staff.staff_id}>
+                    {`${staff.staff_id} ${staff.name} ${staff.surname} (${staff.nickname})`}
+                  </option>
+                ))}
               </select>
             </label>
           </div>
