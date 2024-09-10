@@ -252,24 +252,18 @@ export default function Appoint() {
               เลือกผู้ให้คำปรึกษา<mark> *</mark>
               <br />
               <select
-                name="time"
-                value={appointData.time}
+                name="medDoctor"
+                value={appointData.medDoctor}
                 onChange={handleChange}
                 required
-                disabled={!appointData.date || loadingSlots || timeSlots.length === 0}
               >
-                <option value="">เลือกเวลา</option>
-                {loadingSlots ? (
-                  <option>Loading slots...</option>
-                ) : (
-                  timeSlots.map((timeSlot) => (
-                    <option key={timeSlot.start} value={`${timeSlot.start} - ${timeSlot.end}`}>
-                      {`${timeSlot.start} - ${timeSlot.end}`}
-                    </option>
-                  ))
-                )}
+                <option value="">เลือกผู้ให้คำปรึกษา</option>
+                {staffList.map((staff) => (
+                  <option key={staff.staff_id} value={staff.staff_id}>
+                    {`${staff.staff_id} ${staff.name} ${staff.surname} (${staff.nickname})`}
+                  </option>
+                ))}
               </select>
-
             </label>
           </div>
           <div className="app-time">
@@ -290,21 +284,20 @@ export default function Appoint() {
                 value={appointData.time}
                 onChange={handleChange}
                 required
-                disabled={
-                  !appointData.date || loadingSlots || timeSlots.length === 0
-                }
+                disabled={!appointData.date || loadingSlots || timeSlots.length === 0}
               >
                 <option value="">เลือกเวลา</option>
                 {loadingSlots ? (
                   <option>Loading slots...</option>
                 ) : (
                   timeSlots.map((timeSlot) => (
-                    <option key={timeSlot} value={timeSlot}>
-                      {timeSlot}
+                    <option key={timeSlot.start} value={`${timeSlot.start} - ${timeSlot.end}`}>
+                      {`${timeSlot.start} - ${timeSlot.end}`}
                     </option>
                   ))
                 )}
               </select>
+
             </label>
           </div>
           <div className="app-detail">
