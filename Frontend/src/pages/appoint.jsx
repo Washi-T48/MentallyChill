@@ -165,7 +165,7 @@ export default function Appoint() {
         if (Array.isArray(availableTimes)) {
           setTimeSlots(availableTimes.map((slot) => ({
             start: slot.time_start,
-            end: slot.time_end, 
+            end: slot.time_end,
           })));
         } else {
           console.error("Unexpected response format:", response.data);
@@ -282,7 +282,7 @@ export default function Appoint() {
               <br />
               <select
                 name="time"
-                value={appointData.time}
+                value={appointData.time+7}
                 onChange={handleChange}
                 required
                 disabled={!appointData.date || loadingSlots || timeSlots.length === 0}
