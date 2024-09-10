@@ -80,6 +80,10 @@ export default function Appoint() {
     const formattedDate = today.toISOString().split("T")[0];
     setCurrentDate(formattedDate);
 
+    
+  }, []);
+
+  useEffect(() => {
     axios.get("/allStaff")
     .then((response) => {
       if (Array.isArray(response.data)) {
