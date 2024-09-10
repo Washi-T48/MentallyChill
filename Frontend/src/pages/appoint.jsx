@@ -252,18 +252,24 @@ export default function Appoint() {
               เลือกผู้ให้คำปรึกษา<mark> *</mark>
               <br />
               <select
-                name="medDoctor"
-                value={appointData.medDoctor}
+                name="time"
+                value={appointData.time}
                 onChange={handleChange}
                 required
+                disabled={!appointData.date || loadingSlots || timeSlots.length === 0}
               >
-                <option value="">เลือกผู้ให้คำปรึกษา</option>
-                {staffList.map((staff) => (
-                  <option key={staff.staff_id} value={staff.staff_id}>
-                    {`${staff.staff_id} ${staff.name} ${staff.surname} (${staff.nickname})`}
-                  </option>
-                ))}
+                <option value="">เลือกเวลา</option>
+                {loadingSlots ? (
+                  <option>Loading slots...</option>
+                ) : (
+                  timeSlots.map((timeSlot) => (
+                    <option key={timeSlot.start} value={`${timeSlot.start} - ${timeSlot.end}`}>
+                      {`${timeSlot.start} - ${timeSlot.end}`}
+                    </option>
+                  ))
+                )}
               </select>
+
             </label>
           </div>
           <div className="app-time">
