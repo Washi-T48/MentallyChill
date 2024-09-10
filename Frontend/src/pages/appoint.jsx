@@ -53,8 +53,7 @@ export default function Appoint() {
   const [loading, setLoading] = useState(false);
   const [currentDate, setCurrentDate] = useState("");
   const [error, setError] = useState("");
-  const [allStaff, setAllStaff] = useState([]);
-
+  const [staffList, setStaffList] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -80,30 +79,28 @@ export default function Appoint() {
     const today = new Date();
     const formattedDate = today.toISOString().split("T")[0];
     setCurrentDate(formattedDate);
+
+    axios.get("/allStaff")
+    .then((response) => {
+      if (Array.isArray(response.data)) {
+        setStaffList(response.data);
+      } else {
+        console.error("Unexpected response format:", response.data);
+        setStaffList([]);
+      }
+    })
+    .catch((error) => {
+      console.error("Error fetching staff data:", error);
+      setStaffList([]);
+    });
   }, []);
+
 
   useEffect(() => {
     if (appointData.date && appointData.medDoctor) {
       fetchAvailableTimeSlots();
     }
   }, [appointData.date, appointData.medDoctor]);
-
-  useEffect(() => {
-    const fetchStaffData = async () => {
-      try {
-        const response = await axios.get(
-          `/allStaff`
-        );
-        setAllStaff(response.data);
-        console.log(response.data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-
-    fetchStaffData();
-  }, []);
-
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -139,7 +136,6 @@ export default function Appoint() {
     });
   };
 
-
   const handleRadioSelect = (name, value) => {
     setAppointData((prevData) => ({
       ...prevData,
@@ -156,10 +152,18 @@ export default function Appoint() {
 
   const fetchAvailableTimeSlots = () => {
     setLoadingSlots(true);
-    setTimeout(() => {
-      setTimeSlots(["09:00", "10:00", "11:00", "13:00", "14:00"]);
+    axios.post("/getStaffTimeByDate", {
+      staff_id: appointData.medDoctor,
+      date: appointData.date,
+    })
+    .then((response) => {
+      setTimeSlots(response.data);
       setLoadingSlots(false);
-    }, 1000);
+    })
+    .catch((error) => {
+      console.error("Error fetching available time slots:", error);
+      setLoadingSlots(false);
+    });
   };
 
   const hasSubtopics = (topic) => topics[topic]?.length > 0;
@@ -233,21 +237,6 @@ export default function Appoint() {
             <label>
               เลือกผู้ให้คำปรึกษา<mark> *</mark>
               <br />
-              {/* <select
-                name="medDoctor"
-                value={appointData.medDoctor}
-                onChange={handleChange}
-                required
-              >
-                <option value="">เลือกผู้ให้คำปรึกษา</option>
-                <option value="CRA01">
-                  CRA01 รุ้งนภา ผาณิตรัตน์ (พี่รุ้ง)
-                </option>
-                <option value="CRA02">
-                  CRA02 ดวงแก้ว เตชะกาญจนเวช (พี่ปู)
-                </option>
-                <option value="CRA03">CRA03 วิภาพร สร้อยแสง (พี่อ้อย)</option>
-              </select> */}
               <select
                 name="medDoctor"
                 value={appointData.medDoctor}
@@ -255,7 +244,7 @@ export default function Appoint() {
                 required
               >
                 <option value="">เลือกผู้ให้คำปรึกษา</option>
-                {allStaff.map((staff) => (
+                {staffList.map((staff) => (
                   <option key={staff.staff_id} value={staff.staff_id}>
                     {`${staff.staff_id} ${staff.name} ${staff.surname} (${staff.nickname})`}
                   </option>
@@ -282,20 +271,23 @@ export default function Appoint() {
                 onChange={handleChange}
                 required
                 disabled={
-                  !appointData.date || !appointData.medDoctor || loadingSlots
+                  !appointData.date || loadingSlots || timeSlots.length === 0
                 }
               >
                 <option value="">เลือกเวลา</option>
-                {timeSlots.map((slot) => (
-                  <option key={slot} value={slot}>
-                    {slot}
-                  </option>
-                ))}
+                {loadingSlots ? (
+                  <option>Loading slots...</option>
+                ) : (
+                  timeSlots.map((timeSlot) => (
+                    <option key={timeSlot} value={timeSlot}>
+                      {timeSlot}
+                    </option>
+                  ))
+                )}
               </select>
-              {loadingSlots && <p>Loading available time slots...</p>}
             </label>
           </div>
-          <div className="app-topic">
+          <div className="app-detail">
             <label>
               ประเด็นที่ต้องการปรึกษา<mark> *</mark>
               <br />
