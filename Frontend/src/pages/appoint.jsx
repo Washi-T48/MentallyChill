@@ -80,7 +80,7 @@ export default function Appoint() {
     const formattedDate = today.toISOString().split("T")[0];
     setCurrentDate(formattedDate);
 
-    
+
   }, []);
 
   useEffect(() => {
@@ -94,7 +94,7 @@ export default function Appoint() {
       }
     })
     .catch((error) => {
-      console.error("Error fetching staff data:", error);
+      console.error("Error fetching staff data:", error.response?.data || error.message);
       setStaffList([]);
     });
   }, []);
