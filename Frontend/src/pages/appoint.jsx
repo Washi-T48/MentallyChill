@@ -158,28 +158,14 @@ export default function Appoint() {
   const fetchAvailableTimeSlots = () => {
     if (!appointData.date || !appointData.medDoctor) return;
     setLoadingSlots(true);
-    
-    axios.post(`${VITE_API_PATH}/getStaffTimeByDate`, {
-      staff_id: appointData.medDoctor,
-      date: appointData.date,
-    })
+    axios.post(`${VITE_API_PATH}/getStaffTimeByDate`, { staff_id: appointData.medDoctor, date: appointData.date })
       .then((response) => {
         const availableTimes = response.data;
         if (Array.isArray(availableTimes)) {
-          const formattedTimes = availableTimes.map((slot) => {
-            const start = new Date(`1970-01-01T${slot.time_start}Z`).toLocaleTimeString([], {
-              hour: '2-digit',
-              minute: '2-digit',
-              hour12: false,
-            });
-            const end = new Date(`1970-01-01T${slot.time_end}Z`).toLocaleTimeString([], {
-              hour: '2-digit',
-              minute: '2-digit',
-              hour12: false,
-            });
-            return { start, end };
-          });
-          setTimeSlots(formattedTimes);
+          setTimeSlots(availableTimes.map((slot) => ({
+            start: slot.time_start,
+            end: slot.time_end,
+          })));
         } else {
           console.error("Unexpected response format:", response.data);
           setTimeSlots([]);
@@ -192,8 +178,7 @@ export default function Appoint() {
       .finally(() => {
         setLoadingSlots(false);
       });
-  };
-  
+  };  
 
   const hasSubtopics = (topic) => topics[topic]?.length > 0;
 
@@ -312,6 +297,7 @@ export default function Appoint() {
                   ))
                 )}
               </select>
+
             </label>
           </div>
           <div className="app-detail">
