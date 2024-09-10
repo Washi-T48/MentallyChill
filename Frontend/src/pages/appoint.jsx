@@ -152,10 +152,18 @@ export default function Appoint() {
 
   const fetchAvailableTimeSlots = () => {
     setLoadingSlots(true);
-    setTimeout(() => {
-      setTimeSlots(["09:00", "10:00", "11:00", "13:00", "14:00"]);
+    axios.post("/getStaffTimeByDate", {
+      staff_id: appointData.medDoctor,
+      date: appointData.date,
+    })
+    .then((response) => {
+      setTimeSlots(response.data);
       setLoadingSlots(false);
-    }, 1000);
+    })
+    .catch((error) => {
+      console.error("Error fetching available time slots:", error);
+      setLoadingSlots(false);
+    });
   };
 
   const hasSubtopics = (topic) => topics[topic]?.length > 0;
