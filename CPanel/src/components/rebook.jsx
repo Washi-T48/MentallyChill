@@ -34,7 +34,7 @@ export default function Modal({ isOpen, onClose, onSubmit, userId, topicData, st
         .then(response => {
           const formattedStaffList = response.data.map(staff => ({
             value: staff.staff_id,
-            label: `${staff.name} ${staff.surname} - ${staff.nickname}`
+            label: `${staff.staff_id} ${staff.name} ${staff.surname} (${staff.nickname})`
           }));
           setStaffList(formattedStaffList);
         })
