@@ -81,12 +81,18 @@ export default function Appoint() {
     setCurrentDate(formattedDate);
 
     axios.get("/allStaff")
-      .then((response) => {
+    .then((response) => {
+      if (Array.isArray(response.data)) {
         setStaffList(response.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching staff data:", error);
-      });
+      } else {
+        console.error("Unexpected response format:", response.data);
+        setStaffList([]);
+      }
+    })
+    .catch((error) => {
+      console.error("Error fetching staff data:", error);
+      setStaffList([]);
+    });
   }, []);
 
 
