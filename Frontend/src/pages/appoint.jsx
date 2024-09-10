@@ -158,14 +158,11 @@ export default function Appoint() {
   const fetchAvailableTimeSlots = () => {
     if (!appointData.date || !appointData.medDoctor) return;
     setLoadingSlots(true);
-    axios.post(`${VITE_API_PATH}/getStaffTimeByDate`, {
-        staff_id: appointData.medDoctor,
-        date: appointData.date,
-      })
+    axios.post(`${VITE_API_PATH}/getStaffTimeByDate`, { staff_id: appointData.medDoctor, date: appointData.date,})
       .then((response) => {
         const availableTimes = response.data;
         if (Array.isArray(availableTimes)) {
-          setTimeSlots(availableTimes);
+          setTimeSlots(availableTimes.map((slot) => slot.time_start)); 
         } else {
           console.error("Unexpected response format:", response.data);
           setTimeSlots([]);
@@ -179,6 +176,7 @@ export default function Appoint() {
         setLoadingSlots(false);
       });
   };
+  
 
   const hasSubtopics = (topic) => topics[topic]?.length > 0;
 
