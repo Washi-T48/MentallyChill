@@ -282,7 +282,7 @@ export default function Appoint() {
               <br />
               <select
                 name="time"
-                value={appointData.time+7}
+                value={appointData.time}
                 onChange={handleChange}
                 required
                 disabled={!appointData.date || loadingSlots || timeSlots.length === 0}
