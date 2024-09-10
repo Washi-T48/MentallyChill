@@ -292,11 +292,12 @@ export default function Appoint() {
                 {loadingSlots ? (
                   <option>Loading slots...</option>
                 ) : (
-                  {timeSlots.map((slot) => (
-                    <option key={slot.timetable_id} value={slot.time_range}>
-                      {slot.time_range}
+                  timeSlots.map((timeSlot) => (
+                    <option key={timeSlot} value={timeSlot}>
+                      {timeSlot}
                     </option>
-                  ))}
+                  ))
+                )}
               </select>
             </label>
           </div>
