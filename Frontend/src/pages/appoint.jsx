@@ -80,7 +80,7 @@ export default function Appoint() {
     const formattedDate = today.toISOString().split("T")[0];
     setCurrentDate(formattedDate);
 
-    axios.get("/allStaff")
+    axios.get(`${VITE_API_PATH}/allStaff`)
     .then((response) => {
       if (Array.isArray(response.data)) {
         setStaffList(response.data);
