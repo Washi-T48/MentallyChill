@@ -558,9 +558,9 @@ export default function BookingInfoPage() {
                   onClick={() => gotoDetail(row.status, row.booking_id)}
                 >
                   <td className="pl-4 md:pl-24 text-center text-xl md:text-3xl">{getStatusIcon(row.status)}</td>
-                  <td className="py-1.5 text-center text-sm md:text-xl">{row.appointment_date.substring(0, 10)}</td>
+                  <td className="py-1.5 text-center text-sm md:text-xl">{row.bangkok_time.substring(0, 10)}</td>
                   <td className="py-1.5 px-4 text-center text-sm md:text-xl">{row.topic}</td>
-                  <td className="py-1.5 px-4 text-center text-sm md:text-xl">{row.appointment_date.substring(11, 16)}</td>
+                  <td className="py-1.5 px-4 text-center text-sm md:text-xl">{row.bangkok_time.substring(11, 16)}</td>
                   <td className="py-1.5 px-4 text-center text-sm md:text-xl">
                     <button
                       onClick={(e) => {
