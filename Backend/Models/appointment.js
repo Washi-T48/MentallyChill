@@ -43,7 +43,7 @@ const userAppointments = async (uid) => {
 
 const allAppointments = async () => {
     const appointments = await pool.query(
-        `SELECT * FROM appointment ORDER BY created DESC`
+        `SELECT *, appointment_date AT TIME ZONE 'UTC' AT TIME ZONE 'Asia/Bangkok' AS bangkok_time FROM appointment ORDER BY created DESC;`
     );
     return (appointments["rows"]);
 };
