@@ -292,7 +292,7 @@ export default function Appoint() {
                   <option>Loading slots...</option>
                 ) : (
                   timeSlots.map((timeSlot) => (
-                    <option key={timeSlot.start} value={`${timeSlot.start} - ${timeSlot.end}`}>
+                    <option key={timeSlot.start} value={`${timeSlot.start}`}>
                       {`${timeSlot.start} - ${timeSlot.end}`}
                     </option>
                   ))
