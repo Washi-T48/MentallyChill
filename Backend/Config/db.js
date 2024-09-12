@@ -18,6 +18,9 @@ const testConnection = async () => {
     try {
         const client = await pool.connect();
         logger.info('Connected to database');
+        console.log(await client.query('SELECT NOW()'));
+        console.log(await client.query('SHOW TIMEZONE'));
+        console.log(await client.query('SHOW DEFAULT_TIMEZONE'));
         client.release();
     } catch (err) {
         logger.error('Error connecting to database', err);
@@ -25,5 +28,6 @@ const testConnection = async () => {
 };
 
 testConnection();
+await pool.query(`SET TIME ZONE 'Asia/Bankgok';`);
 
 export default pool;
