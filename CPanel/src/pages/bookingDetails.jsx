@@ -4,6 +4,11 @@ import { useNavigate, useParams } from "react-router-dom";
 import Sidebar from "../components/sidebar";
 import Topbar from "../components/topbar";
 
+const formatTimeWithOffset = (dateString, offsetHours) => {
+  const date = new Date(dateString);
+  date.setHours(date.getHours() + offsetHours);
+  return date.toISOString().substring(11, 16);
+};
 const Content = ({
   handleClick,
   reasonNote,
@@ -17,7 +22,7 @@ const Content = ({
     : "Not available";
 
   const appointmentTime = data.appointment_date
-    ? data.appointment_date.substring(11, 16)
+    ? formatTimeWithOffset(data.appointment_date, 7)
     : "Not available";
 
   return (
