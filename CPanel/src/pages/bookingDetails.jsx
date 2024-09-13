@@ -37,7 +37,7 @@ const Content = ({
           <div className="p-4 flex flex-col justify-between h-full">
             <div>
               <div className="flex flex-row justify-between text-2xl font-medium mb-4 text-white">
-                <div>ผู้ให้คำปรึกษาที่ต้องการพบ : {data.name} {data.surname} - {data.nickname}</div>
+                <div>ผู้ให้คำปรึกษาที่ต้องการพบ : {data.staff_id} </div>
                 <div>{appointmentDate}</div>
               </div>
               <div className="flex flex-row justify-between text-2xl font-medium mb-4 text-white">
