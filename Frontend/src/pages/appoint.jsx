@@ -107,17 +107,22 @@ export default function Appoint() {
     }
   }, [appointData.date, appointData.medDoctor]);
 
-  const onSubmit = (e) => {
-    e.preventDefault();
+  const onSubmit = (e) => { e.preventDefault();
+      const requiredFields = ["contactMethod", "medDoctor", "date", "time", "topic", "detail", "medHistory"];
+    for (const field of requiredFields) {
+      if (!appointData[field]) {
+        setError("กรุณากรอกข้อมูลให้ครบทุกช่องที่มีเครื่องหมาย *");
+        return;
+      }
+    }
+  
     if (appointData.date < currentDate) {
       setError("Please select a valid date.");
       return;
     }
     setError("");
     setLoading(true);
-
-    console.log(appointData);
-
+    
     setTimeout(() => {
       setLoading(false);
       navigate("/confirm_app", { state: { appointData } });
@@ -285,17 +290,21 @@ export default function Appoint() {
                 value={appointData.time}
                 onChange={handleChange}
                 required
-                disabled={!appointData.date || loadingSlots || timeSlots.length === 0}
+                disabled={!appointData.date || loadingSlots}
               >
-                <option value="">เลือกเวลา</option>
                 {loadingSlots ? (
                   <option>Loading slots...</option>
+                ) : timeSlots.length === 0 ? (
+                  <option value="">ผู้ให้คำปรึกษาคนนี้ไม่มีเวลาที่ว่าง</option>
                 ) : (
-                  timeSlots.map((timeSlot) => (
-                    <option key={timeSlot.start} value={`${timeSlot.start}`}>
-                      {`${timeSlot.start} - ${timeSlot.end}`}
-                    </option>
-                  ))
+                  <>
+                    <option value="">เลือกเวลา</option>
+                    {timeSlots.map((timeSlot) => (
+                      <option key={timeSlot.start} value={`${timeSlot.start}`}>
+                        {`${timeSlot.start} - ${timeSlot.end}`}
+                      </option>
+                    ))}
+                  </>
                 )}
               </select>
 
