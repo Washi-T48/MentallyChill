@@ -117,12 +117,12 @@ export default function Appoint() {
     }
   
     if (appointData.date < currentDate) {
-      setError("Please select a valid date.");
+      setError("กรุณาเลือกวันที่ถูกต้อง");
       return;
     }
     setError("");
     setLoading(true);
-    
+
     setTimeout(() => {
       setLoading(false);
       navigate("/confirm_app", { state: { appointData } });
