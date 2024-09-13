@@ -59,9 +59,12 @@ export default function FormOption2() {
   }, []);
 
   const onChange = (evt) => {
-    const key = evt.target.name;
-    const value = evt.target.value;
-    setStep2Data((oldData) => ({ ...oldData, [key]: value }));
+    const { name, value } = evt.target;
+
+    setStep2Data((oldData) => ({
+      ...oldData,
+      [name]: value,
+    }));
   };
 
   const onSubmit = async (e) => {
@@ -69,12 +72,17 @@ export default function FormOption2() {
     setLoading(true);
     setError(null);
 
+    /* console.log("Form Data:", step2Data); */
+
     try {
       const VITE_API_PATH = import.meta.env.VITE_API_PATH;
-      const response = await axios.post(`${VITE_API_PATH}/user/register`, step2Data);
+      const response = await axios.post(
+        `${VITE_API_PATH}/user/register`,
+        step2Data
+      );
       navigate("/p1_dass21");
     } catch (error) {
-      setError("Failed to register user. Please try again.");
+      setError("เกิดข้อผิดพลาด โปรดลองอีกครั้งภายหลัง");
     } finally {
       setLoading(false);
     }
@@ -100,6 +108,7 @@ export default function FormOption2() {
             UID: <small>{step2Data.uid}</small>
             <br />
           </div>
+
           <div className="gender-age">
             <RxPerson className="ioperson" />
             <select
@@ -128,25 +137,106 @@ export default function FormOption2() {
             />
           </div>
 
-          <div className="year">
-            <label>ชั้นปีการศึกษา</label>
+          <div className="eduLevel">
+            <label>ระดับการศึกษา</label>
             <select
-              className="year"
-              value={step2Data.year}
+              className="eduLevel"
               name="year"
-              onChange={onChange}
+              value={step2Data.year.split(" ")[0] || ""} // Get first part (education level)
+              onChange={(e) => {
+                setStep2Data((oldData) => ({
+                  ...oldData,
+                  year: e.target.value, // Reset year
+                }));
+              }}
               required
-              aria-label="Year"
+              aria-label="Education Level"
             >
-              <option value="">เลือกชั้นปีการศึกษา</option>
-              <option value="ม.1">ม.1</option>
-              <option value="ม.2">ม.2</option>
-              <option value="ม.3">ม.3</option>
-              <option value="ม.4">ม.4</option>
-              <option value="ม.5">ม.5</option>
-              <option value="ม.6">ม.6</option>
+              <option value="">เลือกระดับการศึกษา</option>
+              <option value="มัธยมศึกษา">มัธยมศึกษา</option>
+              <option value="อุดมศึกษา">อุดมศึกษา</option>
             </select>
           </div>
+
+          {step2Data.year.startsWith("มัธยมศึกษา") && (
+            <div className="secondaryLevel">
+              <label>ระดับชั้น</label>
+              <select
+                className="secondaryLevel"
+                name="year"
+                value={step2Data.year.split(" ")[1] || ""} // Get second part (school year)
+                onChange={(e) => {
+                  setStep2Data((oldData) => ({
+                    ...oldData,
+                    year: `${oldData.year.split(" ")[0]} ${e.target.value}`, // Combine
+                  }));
+                }}
+                required
+                aria-label="Secondary School Level"
+              >
+                <option value="">เลือกระดับชั้น</option>
+                <option value="ม.1">ม.1</option>
+                <option value="ม.2">ม.2</option>
+                <option value="ม.3">ม.3</option>
+                <option value="ม.4">ม.4</option>
+                <option value="ม.5">ม.5</option>
+                <option value="ม.6">ม.6</option>
+              </select>
+            </div>
+          )}
+
+          {step2Data.year.startsWith("อุดมศึกษา") && (
+            <div className="faculty">
+              <label>คณะ</label>
+              <select
+                className="faculty"
+                name="year"
+                value={step2Data.year.split(" ")[1] || ""} // Get second part (faculty)
+                onChange={(e) => {
+                  setStep2Data((oldData) => ({
+                    ...oldData,
+                    year: `${oldData.year.split(" ")[0]} ${e.target.value}`, // Combine
+                  }));
+                }}
+                required
+                aria-label="Faculty"
+              >
+                <option value="">เลือกคณะ</option>
+                <option value="พยาบาล">พยาบาล</option>
+                <option value="เทคโนโลยีการแพทย์">เทคโนโลยีการแพทย์</option>
+                <option value="แพทย์ศาสตร์">แพทย์ศาสตร์</option>
+                <option value="วิศวกรรมศาสตร์">วิศวกรรมศาสตร์</option>
+                <option value="ศึกษาศาสตร์">ศึกษาศาสตร์</option>
+                <option value="วิทยาศาสตร์">วิทยาศาสตร์</option>
+              </select>
+            </div>
+          )}
+
+          {step2Data.year.split(" ")[1] === "พยาบาล" && (
+            <div className="course">
+              <label>เลือกหลักสูตร</label>
+              <select
+                className="course"
+                name="year"
+                value={step2Data.year.split(" ")[2] || ""} // Get third part
+                onChange={(e) => {
+                  setStep2Data((oldData) => ({
+                    ...oldData,
+                    year: `${oldData.year.split(" ")[0]} ${
+                      oldData.year.split(" ")[1]
+                    } ${e.target.value}`, // Combine
+                  }));
+                }}
+                required
+                aria-label="Course"
+              >
+                <option value="">เลือกหลักสูตร</option>
+                <option value="พยาบาลศาสตร์">พยาบาลศาสตร์</option>
+                <option value="ปริญญาตรีสาขาอื่น">ปริญญาตรีสาขาอื่น</option>
+                <option value="นานาชาติ">นานาชาติ</option>
+              </select>
+            </div>
+          )}
 
           <div className="email">
             <label>อีเมล </label>

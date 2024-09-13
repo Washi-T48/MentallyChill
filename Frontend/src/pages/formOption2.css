@@ -117,12 +117,12 @@ select.gender {
     appearance: none;
 }
 
-.tel label, .sos-tel label, .email label, .year label {
+.tel label, .sos-tel label, .email label, .eduLevel label, .secondaryLevel label, .faculty label, .course label{
     padding-left: 28px;
     color: #333333;
 }
 
-.email, .tel, .sos-tel, .year {
+.email, .tel, .sos-tel, .eduLevel, .secondaryLevel, .faculty, .course {
     font-size: 14px;
     line-height: 17px;
     display: block;
@@ -130,7 +130,7 @@ select.gender {
     align-items: center;
 }
 
-input.email, input.tel, input.sos-tel {
+input.email, input.tel, input.sos-tel{
     width: 290px;
     height: 51px;
     margin-top: 10px;
@@ -143,18 +143,20 @@ input.age {
     padding-left: 1rem;
 }
 
-.year select {
+.eduLevel select, .secondaryLevel select, .faculty select, .course select{
     width: 311px;
     height: 56px;
     padding-left: 16px;
+    margin-top: 10px;
 }
 
-.year select, .gender select  {
+
+.eduLevel select, .gender select, .secondaryLevel select, .faculty select, .course select  {
     font-family: ChulabhornLikitText-Regular;
     font-size: 16px;
 }
 
-.year select::placeholder {
+.eduLevel select::placeholder {
     color: #333333;
 }
 
@@ -191,6 +193,12 @@ input.tel , input.sos-tel{
     animation: pulse 1s infinite;
     transition: .3s;
   }
+
+p.error-message {
+    font-size: 14px;
+    text-align: center;
+    color: rgba(255, 0, 0, 0.633);
+}
 
 @keyframes pulse {
     0% {
