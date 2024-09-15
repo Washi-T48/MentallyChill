@@ -28,9 +28,18 @@ const changePassword = async (staff_id, password) => {
     return staff.rows[0];
 }
 
+const updateStaff = async (staff_id, name, surname, nickname) => {
+    const staff = await pool.query(
+        `UPDATE staff SET name = $2, surname = $3, nickname = $4 WHERE staff_id = $1 RETURNING *`,
+        [staff_id, name, surname, nickname]
+    );
+    return (staff["rows"][0])
+};
+
 export {
     findStaff,
     registerStaff,
     comparePassword,
-    changePassword
+    changePassword,
+    updateStaff
 };

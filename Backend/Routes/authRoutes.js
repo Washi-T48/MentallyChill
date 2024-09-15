@@ -10,10 +10,11 @@ import {
     findStaff,
     registerStaff,
     comparePassword,
-    changePassword
+    changePassword,
+    updateStaff
 } from '../Models/auth.js';
 
-import { newStaff, updateStaff } from '../Models/staff.js';
+import { newStaff, } from '../Models/staff.js';
 
 const authRouter = express.Router();
 dotenv.config();
@@ -101,7 +102,7 @@ authRouter.post('/changePassword', authMiddleware, async (req, res) => {
     }
 });
 
-authRouter.put('/updateStaff', authMiddleware, async (req, res) => {
+authRouter.post('/updateStaff', authMiddleware, async (req, res) => {
     try {
         const { staff_id, name, surname, nickname } = req.body;
         const staff = await updateStaff(staff_id, name, surname, nickname);
