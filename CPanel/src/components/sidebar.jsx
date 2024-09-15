@@ -7,7 +7,7 @@ export default function Sidebar() {
   const [isBookingActive, setIsBookingActive] = useState(false);
   const [isAssignDate, setIsAssignDate] = useState(false);
   const [isRegisterActive, setIsRegisterActive] = useState(false);
-  const [isEditProfile, setIsEditProfile] = useState(false);
+  const [isEditProfileActive, setIsEditProfileActive] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
 
