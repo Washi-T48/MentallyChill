@@ -12,6 +12,7 @@ import RegisterPage from "./pages/register";
 
 import AuthCheck from "./components/authCheck";
 import ProtectedRoute from "./components/protectedroute";
+import EditProfilePage from "./pages/editprofile";
 
 
 function App() {
@@ -46,6 +47,7 @@ function App() {
           <Route path="/bookinghistorydone/:bookingId" element={<ProtectedRoute element={BookingHistoryDonePage} />} />
           <Route path="/assigndate" element={<ProtectedRoute element={AssignDatePage} />} />
           <Route path="/register" element={<ProtectedRoute element={RegisterPage} />} />
+          <Route path="/editprofile" element={<ProtectedRoute element={EditProfilePage} />} />
         </Routes>
       </BrowserRouter>
     </>
