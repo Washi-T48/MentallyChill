@@ -108,7 +108,7 @@ export default function EditProfilePage() {
                                 id="name" 
                                 name="name" 
                                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                required
+                                
                             />
                         </div>
                         <div className="mb-4">
@@ -118,7 +118,7 @@ export default function EditProfilePage() {
                                 id="surname" 
                                 name="surname" 
                                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                required
+                                
                             />
                         </div>
                         <div className="mb-4">
@@ -128,7 +128,7 @@ export default function EditProfilePage() {
                                 id="nickname" 
                                 name="nickname" 
                                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                required
+                                
                             />
                         </div>
                         <div className="mb-4">
@@ -138,10 +138,10 @@ export default function EditProfilePage() {
                                 id="staff_id" 
                                 name="staff_id" 
                                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                required
+                                
                             />
                         </div>
-                        <div className="mb-4">
+                        {/* <div className="mb-4">
                             <label htmlFor="password" className="block text-gray-700 text-sm font-bold mb-2">รหัสผ่านใหม่</label>
                             <input 
                                 type="password" 
@@ -160,7 +160,7 @@ export default function EditProfilePage() {
                                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 required
                             />
-                        </div>
+                        </div> */}
                         {errorMessage && <p className="text-red-500 text-xs italic">{errorMessage}</p>}
                         <button 
                             type="submit" 
