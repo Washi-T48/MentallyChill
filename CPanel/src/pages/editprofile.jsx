@@ -8,8 +8,8 @@ export default function EditProfilePage() {
     const [errorMessage, setErrorMessage] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
     const [modalOpen, setModalOpen] = useState(false);
-    const [imageFile, setImageFile] = useState(null);
-    const [imageURL, setImageURL] = useState('');
+    // const [imageFile, setImageFile] = useState(null);
+    // const [imageURL, setImageURL] = useState('');
 
     const handleRegister = async (data) => {
         try {
@@ -37,40 +37,27 @@ export default function EditProfilePage() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        const { staff_id, name, surname, nickname, password, confirm_password } = event.target.elements;
-
-        if (password.value !== confirm_password.value) {
-            setErrorMessage('รหัสผ่านไม่ตรงกัน');
-            return;
-        }
+        const { staff_id, name, surname, nickname} = event.target.elements;
 
         const formData = new FormData();
         formData.append('staff_id', staff_id.value);
         formData.append('name', name.value);
         formData.append('surname', surname.value);
         formData.append('nickname', nickname.value);
-        formData.append('password', password.value);
-
-        if (imageFile) {
-            formData.append('image', imageFile);
-        } else {
-            setErrorMessage('โปรดเลือกรูปภาพ');
-            return;
-        } 
         
         handleRegister(formData);
     };
 
-    const handleFileChange = (event) => {
-        const file = event.target.files[0];
-        if (file && file.type.startsWith('image/')) {
-            setImageFile(file);
-            const imageURL = URL.createObjectURL(file);
-            setImageURL(imageURL);
-        } else {
-            setErrorMessage('โปรดเลือกไฟล์ที่ถูกต้อง');
-        }
-    };
+    // const handleFileChange = (event) => {
+    //     const file = event.target.files[0];
+    //     if (file && file.type.startsWith('image/')) {
+    //         setImageFile(file);
+    //         const imageURL = URL.createObjectURL(file);
+    //         setImageURL(imageURL);
+    //     } else {
+    //         setErrorMessage('โปรดเลือกไฟล์ที่ถูกต้อง');
+    //     }
+    // };
 
     const handleCloseModal = () => {
         setModalOpen(false);
