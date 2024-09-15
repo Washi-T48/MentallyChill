@@ -19,7 +19,7 @@ export default function EditProfilePage() {
             const response = await axios.put('/auth/updateStaff', data, { withCredentials: true });
             setLoading(false);
             if (response.status === 200 || response.status === 201) {
-                const successMessage = `ทำการแก้ไขบัญชีผู้ใช้สำเร็จ\nบัญชีผู้ใช้ : ${data.get('staff_id')}\nรหัสผ่าน: ${data.get('password')}`;
+                const successMessage = `ทำการแก้ไขบัญชีผู้ใช้สำเร็จ\nบัญชีผู้ใช้ : ${data.get('staff_id')}`;
                 setSuccessMessage(successMessage);
                 setModalOpen(true);
             } else {
