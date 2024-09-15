@@ -213,14 +213,14 @@ export default function Sidebar() {
           >
             เพิ่มบัญชีเจ้าหน้าที่
           </div>
-          <div
+          {/* <div
             onClick={() => checkActive("editprofile")}
             className={`flex items-center justify-center p-5 rounded-md cursor-pointer w-full text-2xl ${
               isEditProfileActive ? "bg-[#003087] text-white" : "hover:bg-gray-300"
             }`}
           >
             แก้ไขบัญชีเจ้าหน้าที่
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
