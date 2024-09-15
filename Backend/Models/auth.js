@@ -27,6 +27,7 @@ const changePassword = async (staff_id, password) => {
         [staff_id, hashedPassword]);
     return staff.rows[0];
 }
+
 export {
     findStaff,
     registerStaff,
