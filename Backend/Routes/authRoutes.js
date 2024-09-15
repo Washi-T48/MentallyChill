@@ -10,10 +10,11 @@ import {
     findStaff,
     registerStaff,
     comparePassword,
-    changePassword
+    changePassword,
+    updateStaff
 } from '../Models/auth.js';
 
-import { newStaff, updateStaff } from '../Models/staff.js';
+import { newStaff, } from '../Models/staff.js';
 
 const authRouter = express.Router();
 dotenv.config();
