@@ -176,7 +176,7 @@ export default function EditProfilePage() {
                 isOpen={modalOpen}
                 onClose={handleCloseModal}
                 message={successMessage}
-                imageURL={imageURL}
+                // imageURL={imageURL}
             />
         </div>
     );
@@ -189,7 +189,7 @@ const Modal = ({ isOpen, onClose, message, imageURL }) => {
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
             <div className="bg-white p-6 rounded shadow-lg max-w-sm w-full">
                 <div className="text-lg font-semibold mb-4 whitespace-pre-line">{message}</div>
-                {imageURL && <img src={imageURL} alt="Staff Image" className="mb-4 w-full h-auto rounded"/>}
+                {/* {imageURL && <img src={imageURL} alt="Staff Image" className="mb-4 w-full h-auto rounded"/>} */}
                 <button 
                     onClick={onClose} 
                     className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
