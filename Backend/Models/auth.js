@@ -40,5 +40,6 @@ export {
     findStaff,
     registerStaff,
     comparePassword,
-    changePassword
+    changePassword,
+    updateStaff
 };
