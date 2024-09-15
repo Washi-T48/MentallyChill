@@ -7,6 +7,7 @@ export default function Sidebar() {
   const [isBookingActive, setIsBookingActive] = useState(false);
   const [isAssignDate, setIsAssignDate] = useState(false);
   const [isRegisterActive, setIsRegisterActive] = useState(false);
+  const [isEditProfile, setIsEditProfile] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -20,6 +21,7 @@ export default function Sidebar() {
         setIsBookingActive(false);
         setIsAssignDate(false);
         setIsRegisterActive(false);
+        setIsEditProfile(false);
         break;
       case "/diagnosis":
         setIsDashboardActive(false);
@@ -27,6 +29,7 @@ export default function Sidebar() {
         setIsBookingActive(false);
         setIsAssignDate(false);
         setIsRegisterActive(false);
+        setIsEditProfile(false);
         break;
       case "/bookinginfo":
         setIsDashboardActive(false);
@@ -34,6 +37,7 @@ export default function Sidebar() {
         setIsBookingActive(true);
         setIsAssignDate(false);
         setIsRegisterActive(false);
+        setIsEditProfile(false);
         break;
       case "/bookingdetails/":
         setIsDashboardActive(false);
@@ -41,6 +45,7 @@ export default function Sidebar() {
         setIsBookingActive(true);
         setIsAssignDate(false);
         setIsRegisterActive(false);
+        setIsEditProfile(false);
         break;
       case "/bookinghistory/":
         setIsDashboardActive(false);
@@ -48,6 +53,7 @@ export default function Sidebar() {
         setIsBookingActive(true);
         setIsAssignDate(false);
         setIsRegisterActive(false);
+        setIsEditProfile(false);
         break;
       case "/bookinghistorydone/":
         setIsDashboardActive(false);
@@ -55,6 +61,7 @@ export default function Sidebar() {
         setIsBookingActive(true);
         setIsAssignDate(false);
         setIsRegisterActive(false);
+        setIsEditProfile(false);
         break;
       case "/assigndate":
         setIsDashboardActive(false);
@@ -62,6 +69,7 @@ export default function Sidebar() {
         setIsBookingActive(false);
         setIsAssignDate(true);
         setIsRegisterActive(false);
+        setIsEditProfile(false);
         break;
       case "/register":
         setIsDashboardActive(false);
@@ -69,6 +77,15 @@ export default function Sidebar() {
         setIsBookingActive(false);
         setIsAssignDate(false);
         setIsRegisterActive(true);
+        setIsEditProfile(false);
+        break;
+      case "/editprofile":
+        setIsDashboardActive(false);
+        setIsDiagnosisActive(false);
+        setIsBookingActive(false);
+        setIsAssignDate(false);
+        setIsRegisterActive(false);
+        setIsEditProfile(true);
         break;
       default:
         setIsDashboardActive(false);
@@ -76,6 +93,7 @@ export default function Sidebar() {
         setIsBookingActive(true);
         setIsAssignDate(false);
         setIsRegisterActive(false);
+        setIsEditProfile(false);
         break;
     }
   }, [location.pathname]);
@@ -88,6 +106,7 @@ export default function Sidebar() {
         setIsBookingActive(false);
         setIsAssignDate(false);
         setIsRegisterActive(false);
+        setIsEditProfile(false);
 
         navigate("/dashboard");
         break;
@@ -97,6 +116,7 @@ export default function Sidebar() {
         setIsBookingActive(false);
         setIsAssignDate(false);
         setIsRegisterActive(false);
+        setIsEditProfile(false);
 
         navigate("/diagnosis");
         break;
@@ -106,6 +126,7 @@ export default function Sidebar() {
         setIsBookingActive(true);
         setIsAssignDate(false);
         setIsRegisterActive(false);
+        setIsEditProfile(false);
 
         navigate("/bookinginfo");
         break;
@@ -115,6 +136,8 @@ export default function Sidebar() {
         setIsBookingActive(false);
         setIsAssignDate(true);
         setIsRegisterActive(false);
+        setIsEditProfile(false);
+
         navigate("/assigndate");
         break;
       case "register":
@@ -123,7 +146,19 @@ export default function Sidebar() {
         setIsBookingActive(false);
         setIsAssignDate(false);
         setIsRegisterActive(true);
+        setIsEditProfile(false);
+
         navigate("/register");
+        break;
+      case "editprofile":
+        setIsDashboardActive(false);
+        setIsDiagnosisActive(false);
+        setIsBookingActive(false);
+        setIsAssignDate(false);
+        setIsRegisterActive(false);
+        setIsEditProfile(true);
+
+        navigate("/editprofile");
         break;
       default:
         break;
@@ -177,6 +212,14 @@ export default function Sidebar() {
             }`}
           >
             เพิ่มบัญชีเจ้าหน้าที่
+          </div>
+          <div
+            onClick={() => checkActive("editprofile")}
+            className={`flex items-center justify-center p-5 rounded-md cursor-pointer w-full text-2xl ${
+              isEditProfileActive ? "bg-[#003087] text-white" : "hover:bg-gray-300"
+            }`}
+          >
+            แก้ไขบัญชีเจ้าหน้าที่
           </div>
         </div>
       </div>
