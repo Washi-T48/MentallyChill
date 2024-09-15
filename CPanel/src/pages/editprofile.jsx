@@ -167,7 +167,7 @@ export default function EditProfilePage() {
                             className="w-full md:w-auto bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                             disabled={loading}
                         >
-                            {loading ? 'กำลังแก้ไขบัญชีเจ้าหน้าที่...' : 'แก้ไขบัญชีเจ้าหน้าที่'}
+                            {loading ? 'กำลังแก้ไขบัญชีเจ้าหน้าที่...' : 'บันทึก'}
                         </button>
                     </form>
                 </div>
