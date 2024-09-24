@@ -4,7 +4,6 @@ import Dropdown from "../components/dropdown";
 import Sidebar from "../components/sidebar";
 import Topbar from "../components/topbar";
 import { useLocation } from "react-router-dom";
-import ExportButton from "../components/exportbutton";
 
 export default function DiagnosisPage() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -150,10 +149,7 @@ export default function DiagnosisPage() {
   const Content = () => {
     return (
       <div className="flex flex-col flex-1 p-4 md:p-10 relative">
-        <div className="flex flex-col md:flex-row gap-4">
-          <h1 className="text-3xl md:text-5xl mb-6 md:mb-10">ผลการประเมิน</h1>
-          <ExportButton />
-        </div>
+        <h1 className="text-3xl md:text-5xl mb-6 md:mb-10">ผลการประเมิน</h1>
         <div className="flex flex-col md:flex-row gap-4 mb-6 md:mb-10 items-start md:items-center">
           <h2 className="text-2xl md:text-4xl mb-2 md:mb-0">ตัวกรอง : </h2>
           <div className="flex flex-col md:flex-row gap-4 w-full md:w-auto">
