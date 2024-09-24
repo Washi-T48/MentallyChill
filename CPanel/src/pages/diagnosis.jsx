@@ -5,8 +5,6 @@ import Sidebar from "../components/sidebar";
 import Topbar from "../components/topbar";
 import ExportButton from "../components/exportbutton";
 import { useLocation } from "react-router-dom";
-import json2csv from 'json2csv';
-
 
 export default function DiagnosisPage() {
   const [currentPage, setCurrentPage] = useState(1);
