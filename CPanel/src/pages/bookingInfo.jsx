@@ -8,7 +8,6 @@ import Sidebar from '../components/sidebar';
 import Topbar from '../components/topbar';
 import Modal from '../components/rebook';
 import ExportButton from '../components/exportbutton';
-import Papa from 'papaparse';
 
 export default function BookingInfoPage() {
   const navigate = useNavigate();
@@ -171,20 +170,6 @@ export default function BookingInfoPage() {
       return date.toISOString().substring(11, 16);
     };
 
-const handleexport = () => {
-  try {
-    const csv = Papa.unparse(data);
-    const blob = new Blob([csv], { type: 'text/csv' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'booking.csv';
-    a.click();
-    URL.revokeObjectURL(url);
-  } catch (err) {
-    console.error('Error exporting CSV:', err);
-  }
-};
 
     return (
       <div className="flex flex-col flex-1 p-4 md:p-10 relative w-full">
@@ -192,7 +177,6 @@ const handleexport = () => {
           <div>
             <div className='flex flex-col md:flex-row gap-6 mb-6 text-center items-center'>
               <h1 className="text-3xl md:text-5xl">การจอง</h1>
-              <ExportButton onExport={handleexport} />
             </div>
             <div className="flex flex-col md:flex-row gap-4 mb-6 items-start md:items-center">
               <h2 className="text-2xl md:text-4xl mb-2 md:mb-0">Filter : </h2>
