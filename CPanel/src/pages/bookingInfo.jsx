@@ -8,6 +8,7 @@ import Sidebar from '../components/sidebar';
 import Topbar from '../components/topbar';
 import Modal from '../components/rebook';
 import ExportButton from '../components/exportbutton';
+import json2csv from 'json2csv';
 
 export default function BookingInfoPage() {
   const navigate = useNavigate();
@@ -170,13 +171,31 @@ export default function BookingInfoPage() {
       return date.toISOString().substring(11, 16);
     };
 
+  const handleexport = () => {
+    const fields = ['appointment_date', 'topic', 'user_id', 'booking_id', 'status'];
+    const opts = { fields };
+
+    try {
+      const csv = json2csv.parse(data, opts);
+      const blob = new Blob([csv], { type: 'text/csv' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'booking.csv';
+      a.click();
+      URL.revokeObjectURL(url); 
+    } catch (err) {
+      console.error('Error exporting CSV:', err);
+    }
+  };
+
     return (
       <div className="flex flex-col flex-1 p-4 md:p-10 relative w-full">
         <div className="grid grid-cols-1 2xl:grid-cols-2 gap-10 mb-6">
           <div>
             <div className='flex flex-col md:flex-row gap-6 mb-6 text-center items-center'>
               <h1 className="text-3xl md:text-5xl">การจอง</h1>
-              <ExportButton />
+              <ExportButton onExport={handleexport} />
             </div>
             <div className="flex flex-col md:flex-row gap-4 mb-6 items-start md:items-center">
               <h2 className="text-2xl md:text-4xl mb-2 md:mb-0">Filter : </h2>

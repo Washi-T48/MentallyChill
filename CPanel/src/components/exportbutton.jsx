@@ -1,10 +1,12 @@
 import { ExportOutlined } from '@ant-design/icons';
 import { Button, Flex, Tooltip } from 'antd';
-const ExportButton = () => (
+
+const ExportButton = ({ onExport }) => (
   <Flex gap="small" vertical>
-      <Tooltip title="export">
-        <Button type="primary" shape="circle" icon={<ExportOutlined />} />
-      </Tooltip>
+    <Tooltip title="export">
+      <Button  type="primary" shape="circle" icon={<ExportOutlined />} onClick={onExport}  />
+    </Tooltip>
   </Flex>
 );
+
 export default ExportButton;
