@@ -150,8 +150,10 @@ export default function DiagnosisPage() {
   const Content = () => {
     return (
       <div className="flex flex-col flex-1 p-4 md:p-10 relative">
-        <h1 className="text-3xl md:text-5xl mb-6 md:mb-10">ผลการประเมิน</h1>
-        <ExportButton />
+        <div className="flex flex-col md:flex-row gap-4 mb-6">
+          <h1 className="text-3xl md:text-5xl mb-6 md:mb-10">ผลการประเมิน</h1>
+          <ExportButton />
+        </div>
         <div className="flex flex-col md:flex-row gap-4 mb-6 md:mb-10 items-start md:items-center">
           <h2 className="text-2xl md:text-4xl mb-2 md:mb-0">ตัวกรอง : </h2>
           <div className="flex flex-col md:flex-row gap-4 w-full md:w-auto">
