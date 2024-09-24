@@ -8,7 +8,10 @@ import Sidebar from '../components/sidebar';
 import Topbar from '../components/topbar';
 import Modal from '../components/rebook';
 import ExportButton from '../components/exportbutton';
+<<<<<<< HEAD
 import papa from 'papaparse';
+=======
+>>>>>>> parent of f6b88bc (export bookinginfo v.1.0)
 
 export default function BookingInfoPage() {
   const navigate = useNavigate();
@@ -171,6 +174,7 @@ export default function BookingInfoPage() {
       return date.toISOString().substring(11, 16);
     };
 
+<<<<<<< HEAD
 const handleexport = () => {
   try {
     const csv = Papa.unparse(data);
@@ -186,13 +190,15 @@ const handleexport = () => {
   }
 };
 
+=======
+>>>>>>> parent of f6b88bc (export bookinginfo v.1.0)
     return (
       <div className="flex flex-col flex-1 p-4 md:p-10 relative w-full">
         <div className="grid grid-cols-1 2xl:grid-cols-2 gap-10 mb-6">
           <div>
             <div className='flex flex-col md:flex-row gap-6 mb-6 text-center items-center'>
               <h1 className="text-3xl md:text-5xl">การจอง</h1>
-              <ExportButton onExport={handleexport} />
+              <ExportButton />
             </div>
             <div className="flex flex-col md:flex-row gap-4 mb-6 items-start md:items-center">
               <h2 className="text-2xl md:text-4xl mb-2 md:mb-0">Filter : </h2>
