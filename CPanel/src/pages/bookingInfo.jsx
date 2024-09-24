@@ -175,7 +175,7 @@ export default function BookingInfoPage() {
         <div className="grid grid-cols-1 2xl:grid-cols-2 gap-10 mb-6">
           <div>
             <div className='flex flex-col md:flex-row gap-6 mb-6 text-center items-center'>
-              <h1 className="text-3xl md:text-5xl mb-6">การจอง</h1>
+              <h1 className="text-3xl md:text-5xl">การจอง</h1>
               <ExportButton />
             </div>
             <div className="flex flex-col md:flex-row gap-4 mb-6 items-start md:items-center">
