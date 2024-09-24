@@ -8,7 +8,7 @@ import Sidebar from '../components/sidebar';
 import Topbar from '../components/topbar';
 import Modal from '../components/rebook';
 import ExportButton from '../components/exportbutton';
-import json2csv from 'json2csv';
+import papa from 'papaparse';
 
 export default function BookingInfoPage() {
   const navigate = useNavigate();
@@ -171,23 +171,20 @@ export default function BookingInfoPage() {
       return date.toISOString().substring(11, 16);
     };
 
-  const handleexport = () => {
-    const fields = ['appointment_date', 'topic', 'user_id', 'booking_id', 'status'];
-    const opts = { fields };
-
-    try {
-      const csv = json2csv.parse(data, opts);
-      const blob = new Blob([csv], { type: 'text/csv' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'booking.csv';
-      a.click();
-      URL.revokeObjectURL(url); 
-    } catch (err) {
-      console.error('Error exporting CSV:', err);
-    }
-  };
+const handleexport = () => {
+  try {
+    const csv = Papa.unparse(data);
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'booking.csv';
+    a.click();
+    URL.revokeObjectURL(url);
+  } catch (err) {
+    console.error('Error exporting CSV:', err);
+  }
+};
 
     return (
       <div className="flex flex-col flex-1 p-4 md:p-10 relative w-full">
