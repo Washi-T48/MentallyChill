@@ -1,9 +1,9 @@
-import { SearchOutlined } from '@ant-design/icons';
+import { ExportOutlined } from '@ant-design/icons';
 import { Button, Flex, Tooltip } from 'antd';
 const ExportButton = () => (
   <Flex gap="small" vertical>
-      <Tooltip title="search">
-        <Button type="primary" shape="circle" icon={<SearchOutlined />} />
+      <Tooltip title="export">
+        <Button type="primary" shape="circle" icon={<ExportOutlined />} />
       </Tooltip>
   </Flex>
 );
