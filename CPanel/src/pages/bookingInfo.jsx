@@ -8,7 +8,7 @@ import Sidebar from '../components/sidebar';
 import Topbar from '../components/topbar';
 import Modal from '../components/rebook';
 import ExportButton from '../components/exportbutton';
-import papa from 'papaparse';
+import Papa from 'papaparse';
 
 export default function BookingInfoPage() {
   const navigate = useNavigate();
@@ -173,7 +173,7 @@ export default function BookingInfoPage() {
 
 const handleexport = () => {
   try {
-    const csv = papa.unparse(data);
+    const csv = Papa.unparse(data);
     const blob = new Blob([csv], { type: 'text/csv' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
