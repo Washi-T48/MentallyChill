@@ -1,7 +1,7 @@
 import express from "express";
 import logger from "../Middleware/logger.js"
 
-import { exportcsvAppointment,exportcsvformResuit } from "../Models/export";
+import { exportcsvAppointment,exportcsvformResuit } from "../Models/export.js";
 
 const exportRouter = express.Router();
 
