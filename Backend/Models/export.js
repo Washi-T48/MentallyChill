@@ -13,14 +13,21 @@ const exportcsvformResuit = async (res) => {
 }
 
 const exportcsvAppointment = async (res) => {
-    const appointments = await pool.query(
-        `SELECT * FROM appointment ORDER BY created DESC`
-    );
-    const fields = ['booking_id', 'user_id', 'appointment_date', 'status', 'pre_note', 'post_note', 'post_feedback', 'post_conclusion', 'created'];
-    const csv = json2csv.parse(appointments.rows, { fields });
-    res.setHeader('Content-disposition', 'attachment; filename=appointment.csv');
-    res.set('Content-Type', 'text/csv');
-    res.status(200).send(csv);
+    try {
+        const appointments = await pool.query(
+            `SELECT * FROM appointment ORDER BY created DESC`
+        );
+        const fields = [ 'booking_id', 'user_id', 'appointment_date', 'status', 'pre_note', 'post_note', 'post_feedback', 'post_conclusion', 'created' ];
+
+        const csv = json2csv.parse(appointments.rows, { fields });
+
+        res.setHeader('Content-Disposition', 'attachment; filename=appointment.csv');
+        res.set('Content-Type', 'text/csv');
+        res.status(200).send(csv);
+    } catch (err) {
+        console.error('Error exporting appointment data:', err);
+        res.sendStatus(500);
+    }
 }
 
 export {

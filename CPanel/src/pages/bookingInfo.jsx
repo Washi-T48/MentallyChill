@@ -124,6 +124,22 @@ export default function BookingInfoPage() {
     );
   });
 
+  const exporttocsv = async () => {
+    try {
+      const response = await axios.get('/export/exportappointment', { responseType: 'blob' });
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', 'appointment.csv');
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+    } catch (error) {
+      console.error('Error exporting data:', error);
+    }
+  };
+  
+
   const totalPages = Math.ceil(filteredData.length / rowsPerPage);
 
   const handlePrevPage = () => {
@@ -165,6 +181,7 @@ export default function BookingInfoPage() {
           <div>
             <div className='flex flex-col md:flex-row gap-6 mb-6 text-center items-center'>
               <h1 className="text-3xl md:text-5xl">การจอง</h1>
+              <ExportButton onClick={exporttocsv} />
             </div>
             <div className="flex flex-col md:flex-row gap-4 mb-6 items-start md:items-center">
               <h2 className="text-2xl md:text-4xl mb-2 md:mb-0">Filter : </h2>
