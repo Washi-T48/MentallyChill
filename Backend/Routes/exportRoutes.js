@@ -14,7 +14,7 @@ exportRouter.get ("/exportformResult", async (req, res) => {
     }
 });
 
-exportRouter.get ("/exportappointment", async (req, res) => {
+exportRouter.get ("/exportAppointment", async (req, res) => {
     try {
         await exportcsvAppointment(res);
     } catch (err) {

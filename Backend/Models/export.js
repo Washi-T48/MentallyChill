@@ -2,14 +2,20 @@ import pool from '../Config/db.js';
 import json2csv from 'json2csv';
 
 const exportcsvformResuit = async (res) => {
-    const formResults = await pool.query(
-        `SELECT * FROM forms_result ORDER BY created DESC`
-    );
-    const fields = ['result_id', 'user_id', 'forms_type', 'result', 'created'];
-    const csv = json2csv.parse(formResults.rows, { fields });
-    res.setHeader('Content-disposition', 'attachment; filename=formResult.csv');
-    res.set('Content-Type', 'text/csv');
-    res.status(200).send(csv);
+    try{
+        const formResults = await pool.query(
+            `SELECT * FROM forms_result ORDER BY created DESC`
+        );
+        const fields = ['result_id', 'user_id', 'forms_type', 'result', 'created'];
+        const csv = json2csv.parse(formResults.rows, { fields });
+        res.setHeader('Content-disposition', 'attachment; filename=formResult.csv');
+        res.set('Content-Type', 'text/csv');
+        res.status(200).send(csv);
+    }
+    catch(err){
+        console.error('Error exporting form result data:', err);
+        res.sendStatus(500);
+    }
 }
 
 const exportcsvAppointment = async (res) => {

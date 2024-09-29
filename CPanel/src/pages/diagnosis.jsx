@@ -76,6 +76,22 @@ export default function DiagnosisPage() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  const exporttocsv = async () => {
+    try {
+      const response = await axios.get('/export/exportformResult', { responseType: 'blob' });
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', 'result.csv');
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+    } catch (error) {
+      console.error('Error exporting data:', error);
+    }
+  };
+
+
   const getResultCategory = (d, a, s) => {
     const dCategory = d <= 6 ? "ปกติ" : d <= 13 ? "ปานกลาง" : "ร้ายแรง";
     const aCategory = a <= 5 ? "ปกติ" : a <= 9 ? "ปานกลาง" : "ร้ายแรง";
@@ -147,11 +163,13 @@ export default function DiagnosisPage() {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
+
   const Content = () => {
     return (
       <div className="flex flex-col flex-1 p-4 md:p-10 relative">
         <div className="flex flex-col md:flex-row gap-6 mb-6 text-center items-center">
           <h1 className="text-3xl md:text-5xl">ผลการประเมิน</h1>
+          <ExportButton onClick={exporttocsv} />
         </div>
         <div className="flex flex-col md:flex-row gap-4 mb-6 md:mb-10 items-start md:items-center">
           <h2 className="text-2xl md:text-4xl mb-2 md:mb-0">ตัวกรอง : </h2>
