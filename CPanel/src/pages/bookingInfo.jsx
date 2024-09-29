@@ -175,6 +175,17 @@ export default function BookingInfoPage() {
       }
     };
 
+    const handleRebook = (event, userId) => {
+      event.stopPropagation();
+      setCurrentUserId(userId);
+      setIsModalOpen(true);
+    };
+    const formatTimeWithOffset = (dateString, offsetHours) => {
+      const date = new Date(dateString);
+      date.setHours(date.getHours() + offsetHours);
+      return date.toISOString().substring(11, 16);
+    };
+
     return (
       <div className="flex flex-col flex-1 p-4 md:p-10 relative w-full">
         <div className="grid grid-cols-1 2xl:grid-cols-2 gap-10 mb-6">
@@ -263,7 +274,7 @@ export default function BookingInfoPage() {
                   <td className="pl-4 md:pl-24 text-center text-xl md:text-3xl">{getStatusIcon(row.status)}</td>
                   <td className="py-1.5 text-center text-sm md:text-xl">{row.appointment_date.substring(0, 10)}</td>
                   <td className="py-1.5 px-4 text-center text-sm md:text-xl">{row.topic}</td>
-                  <td className="py-1.5 px-4 text-center text-sm md:text-xl">{(row.appointment_date, 7)}</td>
+                  <td className="py-1.5 px-4 text-center text-sm md:text-xl">{formatTimeWithOffset(row.appointment_date, 7)}</td>
                   <td className="py-1.5 px-4 text-center text-sm md:text-xl">
                     <button
                       onClick={(e) => {
