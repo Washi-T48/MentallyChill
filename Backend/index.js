@@ -12,7 +12,7 @@ import staffRouter from './Routes/staffRoutes.js';
 import formsRouter from './Routes/formsRoutes.js';
 import appointmentRouter from './Routes/appointmentRoutes.js';
 import timetableRouter from './Routes/timetableRoutes.js'
-// import exportRouter from './Routes/exportRoutes.js';
+import exportRouter from './Routes/exportRoutes.js';
 
 import logger, { consoleLogExpress } from './Middleware/logger.js';
 import authMiddleware from './Middleware/auth.js';
@@ -56,7 +56,7 @@ app.use("/staff", staffRouter);
 app.use("/forms", formsRouter);
 app.use("/appointment", appointmentRouter);
 app.use("/timetable", timetableRouter);
-// app.use("/export", exportRouter);
+app.use("/export", exportRouter);
 
 https.createServer({
     key: fs.readFileSync(path.resolve(__dirname, './certs', 'privkey.pem')),
