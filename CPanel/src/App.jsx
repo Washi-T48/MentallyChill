@@ -49,7 +49,7 @@ function App() {
           <Route path="/assigndate" element={<ProtectedRoute element={AssignDatePage} />} />
           <Route path="/register" element={<ProtectedRoute element={RegisterPage} />} />
           <Route path="/editprofile" element={<ProtectedRoute element={EditProfilePage} />} />
-          <Route path="/stafflist" element={<ProtectedRoute element={StaffListPagePage} />} />
+          <Route path="/stafflist" element={<ProtectedRoute element={StaffListPage} />} />
         </Routes>
       </BrowserRouter>
     </>
