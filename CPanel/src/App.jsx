@@ -9,6 +9,7 @@ import BookingHistoryDonePage from "./pages/bookingHistoryDone";
 import SignInPage from "./pages/signin";
 import AssignDatePage from "./pages/assignDate";
 import RegisterPage from "./pages/register";
+import StaffListPage from "./pages/stafflist";
 
 import AuthCheck from "./components/authCheck";
 import ProtectedRoute from "./components/protectedroute";
@@ -48,6 +49,7 @@ function App() {
           <Route path="/assigndate" element={<ProtectedRoute element={AssignDatePage} />} />
           <Route path="/register" element={<ProtectedRoute element={RegisterPage} />} />
           <Route path="/editprofile" element={<ProtectedRoute element={EditProfilePage} />} />
+          <Route path="/stafflist" element={<ProtectedRoute element={StaffListPagePage} />} />
         </Routes>
       </BrowserRouter>
     </>
