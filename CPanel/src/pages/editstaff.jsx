@@ -50,7 +50,9 @@ export default function EditStaffPage() {
 
 const handleSave = async () => {
     try {
-      const updatedData = {};
+      const updatedData = {
+        staff_id: staffData.staff_id, // Ensure staff_id is included
+      };
       if (staffData.nickname) {
         updatedData.nickname = staffData.nickname;
       }
@@ -60,6 +62,9 @@ const handleSave = async () => {
       if (staffData.surname) {
         updatedData.surname = staffData.surname;
       }
+
+      console.log("Updated Data:", updatedData); // Log the updated data
+
       await axios.put(`/staff/update`, updatedData);
       alert("Staff data updated successfully!");
       navigate('/stafflist');
