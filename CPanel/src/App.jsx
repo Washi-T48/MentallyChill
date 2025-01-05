@@ -11,7 +11,7 @@ import AssignDatePage from "./pages/assignDate";
 import RegisterPage from "./pages/register";
 import StaffListPage from "./pages/stafflist";
 import EditStaffPage from "./pages/editstaff";
-import UserListPage from "./pages/ีuserlist";
+import UserListPage from "./pages/userlist";
 
 import AuthCheck from "./components/authCheck";
 import ProtectedRoute from "./components/protectedroute";
