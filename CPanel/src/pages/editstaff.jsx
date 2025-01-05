@@ -41,6 +41,7 @@ export default function EditStaffPage() {
     try {
       await axios.put(`/staff/update`, staffData);
       alert("Staff data updated successfully!");
+      navigate('/stafflist');
     } catch (error) {
       console.error("Error updating staff data:", error);
       alert("Failed to update staff data.");
