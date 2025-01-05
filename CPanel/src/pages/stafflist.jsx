@@ -7,52 +7,28 @@ import { useLocation } from "react-router-dom";
 
 export default function StaffListPage() {
   const [currentPage, setCurrentPage] = useState(1);
-  const [selectedFormType, setSelectedFormType] = useState("");
-  const [selectedResult, setSelectedResult] = useState("");
   const [data, setData] = useState([]);
-  const [data2, setData2] = useState([]);
-  const [formTypeData, setFormTypeData] = useState([]);
   const [sortOrder, setSortOrder] = useState("desc");
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [searchTerm, setSearchTerm] = useState('');
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
-  const userIdFromQuery = queryParams.get('user_id');
+  const staffIdFromQuery = queryParams.get('staff_id');
 
   const searchInputRef = useRef(null);
 
-  const formtypeList = formTypeData.map((item) => item.forms_type);
-
   useEffect(() => {
+
     const fetchData = async () => {
       try {
-        const response = await axios.get(`/forms/all`);
+        const response = await axios.get(`/staff/all`);
         setData(response.data);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
 
-    const fetchData2 = async () => {
-      try {
-        const response = await axios.get(`/staff/all`);
-        setData2(response.data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-
-    const fetchform = async () => {
-      try {
-        const response = await axios.get(`/forms/type`);
-        setFormTypeData(response.data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-
-    fetchform();
     fetchData();
   }, []);
 
@@ -63,10 +39,10 @@ export default function StaffListPage() {
   }, [searchTerm]);
 
   useEffect(() => {
-    if (userIdFromQuery) {
-      setSearchTerm(userIdFromQuery);
+    if (staffIdFromQuery) {
+      setSearchTerm(staffIdFromQuery);
     }
-  }, [userIdFromQuery]);
+  }, [staffIdFromQuery]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -85,30 +61,9 @@ export default function StaffListPage() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-
-  const getResultCategory = (d, a, s) => {
-    const dCategory = d <= 6 ? "ปกติ" : d <= 13 ? "ปานกลาง" : "ร้ายแรง";
-    const aCategory = a <= 5 ? "ปกติ" : a <= 9 ? "ปานกลาง" : "ร้ายแรง";
-    const sCategory = s <= 9 ? "ปกติ" : s <= 16 ? "ปานกลาง" : "ร้ายแรง";
-
-    const categories = [dCategory, aCategory, sCategory];
-    if (categories.includes("ร้ายแรง")) return "ร้ายแรง";
-    if (categories.includes("ปานกลาง")) return "ปานกลาง";
-    return "ปกติ";
-  };
-
-  const sortedData = data.sort((a, b) => {
-    const dateA = new Date(a.created);
-    const dateB = new Date(b.created);
-    return sortOrder === "asc" ? dateA - dateB : dateB - dateA;
-  });
-
   const filteredData = sortedData.filter((item) => {
-    const resultCategory = item.result ? getResultCategory(item.result.d, item.result.a, item.result.s) : "";
     return (
-      (selectedFormType ? item.forms_type === selectedFormType : true) &&
-      (selectedResult ? resultCategory === selectedResult : true) &&
-      (searchTerm ? item.user_id.includes(searchTerm.toLowerCase()) : true)
+      (searchTerm ? item.staff_id.includes(searchTerm.toLowerCase()) : true)
     );
   });
 
@@ -126,27 +81,6 @@ export default function StaffListPage() {
     (currentPage - 1) * rowsPerPage,
     currentPage * rowsPerPage
   );
-
-  const handleSelectLocation = (option) => {
-    setSelectedFormType(option);
-    setCurrentPage(1);
-  };
-
-  const handleSelectResult = (option) => {
-    setSelectedResult(option);
-    setCurrentPage(1);
-  };
-
-  const clearAllFilters = () => {
-    setSelectedFormType("");
-    setSelectedResult("");
-    setCurrentPage(1);
-  };
-
-  const toggleSortOrder = () => {
-    setSortOrder((prevOrder) => (prevOrder === "asc" ? "desc" : "asc"));
-    setCurrentPage(1);
-  };
 
   const handleSearchTermChange = (event) => {
     setSearchTerm(event.target.value);
@@ -204,18 +138,16 @@ export default function StaffListPage() {
                   }`}
                 >
                   <td className="py-2 px-4 text-center text-sm md:text-xl">
-                    {row.created.substr(0, 10)}
+                    {row.staff_id.substr(0, 10)}
                   </td>
                   <td className="py-2 px-4 text-center text-sm md:text-xl">
-                    {row.forms_type}
+                    {row.name}
                   </td>
                   <td className="py-2 px-4 text-center text-sm md:text-xl">
-                    {row.result
-                      ? `${getResultCategory(row.result.d, row.result.a, row.result.s)} (D: ${row.result.d} A: ${row.result.a} S: ${row.result.s})`
-                      : "null"}
+                    {row.nickname}
                   </td>
                   <td className="py-2 px-4 text-center text-sm md:text-xl">
-                    {row.user_id}
+                    {row.surname}
                   </td>
                 </tr>
               ))}
