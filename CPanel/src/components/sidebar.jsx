@@ -106,6 +106,15 @@ export default function Sidebar() {
         setIsEditProfileActive(false);
         setIsStaffListActive(true);
         break;
+      case "/editstaff/":
+        setIsDashboardActive(false);
+        setIsDiagnosisActive(false);
+        setIsBookingActive(false);
+        setIsAssignDate(false);
+        setIsRegisterActive(false);
+        setIsEditProfileActive(false);
+        setIsStaffListActive(true);
+        break;
       default:
         setIsDashboardActive(false);
         setIsDiagnosisActive(false);
