@@ -232,7 +232,9 @@ export default function Sidebar() {
         setIsAssignDate(false);
         setIsRegisterActive(false);
         setIsEditProfileActive(false);
+        setIsStaffListActive(false);
         setIsUserListActive(true);
+
 
         navigate("/userlist");
         break;
