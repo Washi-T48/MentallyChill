@@ -127,6 +127,7 @@ export default function Sidebar() {
     }
     if (location.pathname === "/editstaff" || location.pathname.startsWith("/editstaff/")) {
       setIsStaffListActive(true);
+      setIsBookingActive(false);
     }
   }, [location.pathname]);
 
