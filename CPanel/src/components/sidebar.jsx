@@ -8,6 +8,7 @@ export default function Sidebar() {
   const [isAssignDate, setIsAssignDate] = useState(false);
   const [isRegisterActive, setIsRegisterActive] = useState(false);
   const [isEditProfileActive, setIsEditProfileActive] = useState(false);
+  const [isStaffListActive, setIsStaffListActive] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -22,6 +23,7 @@ export default function Sidebar() {
         setIsAssignDate(false);
         setIsRegisterActive(false);
         setIsEditProfileActive(false);
+        setIsStaffListActive(false);
         break;
       case "/diagnosis":
         setIsDashboardActive(false);
@@ -30,6 +32,7 @@ export default function Sidebar() {
         setIsAssignDate(false);
         setIsRegisterActive(false);
         setIsEditProfileActive(false);
+        setIsStaffListActive(false);
         break;
       case "/bookinginfo":
         setIsDashboardActive(false);
@@ -38,6 +41,7 @@ export default function Sidebar() {
         setIsAssignDate(false);
         setIsRegisterActive(false);
         setIsEditProfileActive(false);
+        setIsStaffListActive(false);
         break;
       case "/bookingdetails/":
         setIsDashboardActive(false);
@@ -46,6 +50,7 @@ export default function Sidebar() {
         setIsAssignDate(false);
         setIsRegisterActive(false);
         setIsEditProfileActive(false);
+        setIsStaffListActive(false);
         break;
       case "/bookinghistory/":
         setIsDashboardActive(false);
@@ -54,6 +59,7 @@ export default function Sidebar() {
         setIsAssignDate(false);
         setIsRegisterActive(false);
         setIsEditProfileActive(false);
+        setIsStaffListActive(false);
         break;
       case "/bookinghistorydone/":
         setIsDashboardActive(false);
@@ -62,6 +68,7 @@ export default function Sidebar() {
         setIsAssignDate(false);
         setIsRegisterActive(false);
         setIsEditProfileActive(false);
+        setIsStaffListActive(false);
         break;
       case "/assigndate":
         setIsDashboardActive(false);
@@ -70,6 +77,7 @@ export default function Sidebar() {
         setIsAssignDate(true);
         setIsRegisterActive(false);
         setIsEditProfileActive(false);
+        setIsStaffListActive(false);
         break;
       case "/register":
         setIsDashboardActive(false);
@@ -78,6 +86,7 @@ export default function Sidebar() {
         setIsAssignDate(false);
         setIsRegisterActive(true);
         setIsEditProfileActive(false);
+        setIsStaffListActive(false);
         break;
       case "/editprofile":
         setIsDashboardActive(false);
@@ -86,6 +95,16 @@ export default function Sidebar() {
         setIsAssignDate(false);
         setIsRegisterActive(false);
         setIsEditProfileActive(true);
+        setIsStaffListActive(false);
+        break;
+      case "/stafflist":
+        setIsDashboardActive(false);
+        setIsDiagnosisActive(false);
+        setIsBookingActive(false);
+        setIsAssignDate(false);
+        setIsRegisterActive(false);
+        setIsEditProfileActive(false);
+        setIsStaffListActive(true);
         break;
       default:
         setIsDashboardActive(false);
@@ -94,6 +113,7 @@ export default function Sidebar() {
         setIsAssignDate(false);
         setIsRegisterActive(false);
         setIsEditProfileActive(false);
+        setIsStaffListActive(false);
         break;
     }
   }, [location.pathname]);
@@ -159,6 +179,16 @@ export default function Sidebar() {
         setIsEditProfileActive(true);
 
         navigate("/editprofile");
+      case "stafflist":
+        setIsDashboardActive(false);
+        setIsDiagnosisActive(false);
+        setIsBookingActive(false);
+        setIsAssignDate(false);
+        setIsRegisterActive(false);
+        setIsEditProfileActive(false);
+        setIsStaffListActive(true);
+
+        navigate("/stafflist");
         break;
       default:
         break;
@@ -204,6 +234,14 @@ export default function Sidebar() {
             }`}
           >
             ลงเวลา
+          </div>
+          <div
+            onClick={() => checkActive("register")}
+            className={`flex items-center justify-center p-5 rounded-md cursor-pointer w-full text-2xl ${
+              isStaffListActive ? "bg-[#003087] text-white" : "hover:bg-gray-300"
+            }`}
+          >
+            รายชื่อเจ้าหน้าที่
           </div>
           <div
             onClick={() => checkActive("register")}
