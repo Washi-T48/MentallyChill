@@ -11,7 +11,7 @@ export default function EditStaffPage() {
     name: "",
     surname: "",
     nickname: "",
-    permission: ""
+    // permission: ""
   });
 
   const navigate = useNavigate();
@@ -115,7 +115,7 @@ const handleSave = async () => {
                 className="py-2 px-4 rounded border w-full"
               />
             </div>
-            <div className="mb-4">
+            {/* <div className="mb-4">
               <label className="block text-lg mb-2">ตำแหน่ง</label>
               <input
                 type="text"
@@ -124,7 +124,7 @@ const handleSave = async () => {
                 onChange={handleInputChange}
                 className="py-2 px-4 rounded border w-full"
               />
-            </div>
+            </div> */}
             <div className="flex gap-4">
               <button
                 onClick={handleSave}
