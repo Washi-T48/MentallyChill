@@ -125,6 +125,9 @@ export default function Sidebar() {
         setIsStaffListActive(false);
         break;
     }
+    if (location.pathname === "/editstaff" || location.pathname.startsWith("/editstaff/")) {
+      setIsStaffListActive(true);
+    }
   }, [location.pathname]);
 
   const checkActive = (section) => {
