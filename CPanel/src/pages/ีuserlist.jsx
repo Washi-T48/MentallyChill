@@ -21,7 +21,7 @@ export default function UserListPage() {
 
     const fetchData = async () => {
       try {
-        const response = await axios.get(`/staff/all`);
+        const response = await axios.get(`/user/all`);
         setData(response.data);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -143,13 +143,22 @@ export default function UserListPage() {
                   }`}
                 >
                   <td className="py-2 px-4 text-center text-sm md:text-xl">
-                    {row.staff_id.substr(0, 10)}
+                    {row.user_id.substr(0, 10)}
                   </td>
                   <td className="py-2 px-4 text-center text-sm md:text-xl">
-                    {row.name} {row.surname}
+                    {row.gender}
                   </td>
                   <td className="py-2 px-4 text-center text-sm md:text-xl">
-                    {row.nickname}
+                    {row.age}
+                  </td>
+                  <td className="py-2 px-4 text-center text-sm md:text-xl">
+                    {row.email}
+                  </td>
+                  <td className="py-2 px-4 text-center text-sm md:text-xl">
+                    {row.phone}
+                  </td>
+                  <td className="py-2 px-4 text-center text-sm md:text-xl">
+                    {row.grade_level}
                   </td>
                   {/* <td className="py-2 px-4 text-center text-sm md:text-xl">
                     {row.permission}
