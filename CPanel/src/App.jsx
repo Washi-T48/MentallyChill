@@ -10,6 +10,7 @@ import SignInPage from "./pages/signin";
 import AssignDatePage from "./pages/assignDate";
 import RegisterPage from "./pages/register";
 import StaffListPage from "./pages/stafflist";
+import EditStaffPage from "./pages/editstaff";
 
 import AuthCheck from "./components/authCheck";
 import ProtectedRoute from "./components/protectedroute";
@@ -49,6 +50,7 @@ function App() {
           <Route path="/assigndate" element={<ProtectedRoute element={AssignDatePage} />} />
           <Route path="/register" element={<ProtectedRoute element={RegisterPage} />} />
           <Route path="/editprofile" element={<ProtectedRoute element={EditProfilePage} />} />
+          <Route path="/editstaff/:staffId" element={<ProtectedRoute element={EditStaffPage} />} />
           <Route path="/stafflist" element={<ProtectedRoute element={StaffListPage} />} />
         </Routes>
       </BrowserRouter>

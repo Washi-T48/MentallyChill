@@ -3,7 +3,7 @@ import { useEffect, useState, useRef } from "react";
 import Dropdown from "../components/dropdown";
 import Sidebar from "../components/sidebar";
 import Topbar from "../components/topbar";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export default function StaffListPage() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -14,6 +14,7 @@ export default function StaffListPage() {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const staffIdFromQuery = queryParams.get('staff_id');
+  const navigate = useNavigate();
 
   const searchInputRef = useRef(null);
 
@@ -90,6 +91,9 @@ export default function StaffListPage() {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
+  const handleEditClick = (staffId) => {
+    navigate(`/editstaff/${staffId}`);
+  };
 
   const Content = () => {
     return (
@@ -144,6 +148,14 @@ export default function StaffListPage() {
                   </td>
                   <td className="py-2 px-4 text-center text-sm md:text-xl">
                     {row.nickname}
+                  </td>
+                  <td className="py-2 px-4 text-center text-sm md:text-xl">
+                    <button
+                      onClick={() => handleEditClick(row.staff_id)}
+                      className="py-1 px-3 bg-blue-500 text-white rounded"
+                    >
+                      แก้ไข
+                    </button>
                   </td>
                 </tr>
               ))}
