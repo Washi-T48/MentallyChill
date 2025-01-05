@@ -8,7 +8,6 @@ import { useLocation } from "react-router-dom";
 export default function StaffListPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const [data, setData] = useState([]);
-  const [sortOrder, setSortOrder] = useState("desc");
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [searchTerm, setSearchTerm] = useState('');
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -61,7 +60,7 @@ export default function StaffListPage() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const filteredData = sortedData.filter((item) => {
+  const filteredData = data.filter((item) => {
     return (
       (searchTerm ? item.staff_id.includes(searchTerm.toLowerCase()) : true)
     );
