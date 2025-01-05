@@ -98,7 +98,7 @@ export default function UserListPage() {
     return (
       <div className="flex flex-col flex-1 p-4 md:p-10 relative">
         <div className="flex flex-col md:flex-row gap-6 mb-6 text-center items-center">
-          <h1 className="text-3xl md:text-5xl">รายชื่อเจ้าหน้าที่</h1>
+          <h1 className="text-3xl md:text-5xl">รายชื่อผู้ใช้</h1>
         </div>
         <div className="flex flex-col md:flex-row gap-4 mb-6 md:mb-10 items-start md:items-center">
           <h2 className="text-2xl md:text-4xl mb-2 md:mb-0">ตัวกรอง : </h2>
