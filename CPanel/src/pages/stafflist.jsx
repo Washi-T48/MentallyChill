@@ -171,18 +171,15 @@ export default function StaffListPage() {
               <tr className="bg-[#003087] text-white">
                 <th className="py-2 px-4 text-lg md:text-3xl text-center rounded-tl-xl">
                   เลขที่เจ้าหน้าที่
-                  <button
+                  {/* <button
                     onClick={toggleSortOrder}
                     className="ml-2 py-1 px-2 bg-gray-300 text-black rounded text-sm md:text-2xl"
                   >
                     {sortOrder === "asc" ? "▲" : "▼"}
-                  </button>
+                  </button> */}
                 </th>
                 <th className="py-2 px-4 text-lg md:text-3xl text-center">ชื่อเจ้าหน้าที่</th>
                 <th className="py-2 px-4 text-lg md:text-3xl text-center">ชื่อเล่น</th>
-                <th className="py-2 px-4 text-lg md:text-3xl text-center">
-                  หมายเลขโทรศัพท์
-                </th>
                 <th className="py-2 px-4 text-lg md:text-3xl text-center rounded-tr-xl">
                   แก้ไข
                 </th>
