@@ -4,7 +4,7 @@ import Sidebar from "../components/sidebar";
 import Topbar from "../components/topbar";
 import { useLocation, useNavigate } from "react-router-dom";
 
-export default function StaffListPage() {
+export default function UserListPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const [data, setData] = useState([]);
   const [rowsPerPage, setRowsPerPage] = useState(10);

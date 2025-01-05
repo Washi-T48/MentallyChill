@@ -11,6 +11,7 @@ import AssignDatePage from "./pages/assignDate";
 import RegisterPage from "./pages/register";
 import StaffListPage from "./pages/stafflist";
 import EditStaffPage from "./pages/editstaff";
+import UserListPage from "./pages/ีuserlist";
 
 import AuthCheck from "./components/authCheck";
 import ProtectedRoute from "./components/protectedroute";
@@ -52,6 +53,7 @@ function App() {
           <Route path="/editprofile" element={<ProtectedRoute element={EditProfilePage} />} />
           <Route path="/editstaff/:staffId" element={<ProtectedRoute element={EditStaffPage} />} />
           <Route path="/stafflist" element={<ProtectedRoute element={StaffListPage} />} />
+          <Route path="/userlist" element={<ProtectedRoute element={UserListPage} />} />
         </Routes>
       </BrowserRouter>
     </>
