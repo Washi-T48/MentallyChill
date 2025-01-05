@@ -11,7 +11,7 @@ export default function EditStaffPage() {
     name: "",
     surname: "",
     nickname: "",
-    // permission: ""
+    permission: ""
   });
 
   const navigate = useNavigate();
@@ -40,17 +40,6 @@ export default function EditStaffPage() {
       [name]: value
     }));
   };
-
-//   const handleSave = async () => {
-//     try {
-//       await axios.put(`/staff/update`, staffData);
-//       alert("Staff data updated successfully!");
-//       navigate('/stafflist');
-//     } catch (error) {
-//       console.error("Error updating staff data:", error);
-//       alert("Failed to update staff data.");
-//     }
-//   };
 
 const handleSave = async () => {
     try {
@@ -119,6 +108,16 @@ const handleSave = async () => {
                 type="text"
                 name="nickname"
                 value={staffData.nickname}
+                onChange={handleInputChange}
+                className="py-2 px-4 rounded border w-full"
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block text-lg mb-2">ตำแหน่ง</label>
+              <input
+                type="text"
+                name="permission"
+                value={staffData.permission}
                 onChange={handleInputChange}
                 className="py-2 px-4 rounded border w-full"
               />
