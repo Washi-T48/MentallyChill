@@ -17,12 +17,38 @@ const deleteStaff = async (staff_id) => {
     return (staff["rows"][0])
 };
 
+// const updateStaff = async (staff_id, name, surname, nickname) => {
+//     const staff = await pool.query(
+//         `UPDATE staff SET name = $2, surname = $3, nickname = $4 WHERE staff_id = $1 RETURNING *`,
+//         [staff_id, name, surname, nickname]
+//     );
+//     return (staff["rows"][0])
+// };
+
 const updateStaff = async (staff_id, name, surname, nickname) => {
-    const staff = await pool.query(
-        `UPDATE staff SET name = $2, surname = $3, nickname = $4 WHERE staff_id = $1 RETURNING *`,
-        [staff_id, name, surname, nickname]
-    );
-    return (staff["rows"][0])
+    const fields = [];
+    const values = [staff_id];
+
+    if (name) {
+        values.push(name);
+        fields.push(`name = $${values.length}`);
+    }
+    if (surname) {
+        values.push(surname);
+        fields.push(`surname = $${values.length}`);
+    }
+    if (nickname) {
+        values.push(nickname);
+        fields.push(`nickname = $${values.length}`);
+    }
+
+    if (fields.length === 0) {
+        throw new Error('No fields to update');
+    }
+
+    const query = `UPDATE staff SET ${fields.join(', ')} WHERE staff_id = $1 RETURNING *`;
+    const staff = await pool.query(query, values);
+    return staff.rows[0];
 };
 
 const lookupStaff = async (staff_id) => {
