@@ -25,7 +25,7 @@ const deleteStaff = async (staff_id) => {
 //     return (staff["rows"][0])
 // };
 
-const updateStaff = async (staff_id, name, surname, nickname) => {
+const updateStaff = async (staff_id, name, surname, nickname, permission) => {
     const fields = [];
     const values = [staff_id];
 
@@ -40,6 +40,11 @@ const updateStaff = async (staff_id, name, surname, nickname) => {
     if (nickname) {
         values.push(nickname);
         fields.push(`nickname = $${values.length}`);
+    }
+
+    if (permission) {
+        values.push(permission);
+        fields.push(`permission = $${values.length}`);
     }
 
     if (fields.length === 0) {

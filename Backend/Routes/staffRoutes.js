@@ -39,8 +39,8 @@ staffRouter.delete('/delete', async (req, res) => {
 
 staffRouter.put('/update', async (req, res) => {
     try {
-        const { staff_id, name, surname, nickname, description } = req.body;
-        const staff = await updateStaff(staff_id, name, surname, nickname, description);
+        const { staff_id, name, surname, nickname, description, permission } = req.body;
+        const staff = await updateStaff(staff_id, name, surname, nickname, description, permission);
         res.status(200).json(staff);
     }
     catch (error) {
