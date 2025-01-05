@@ -54,6 +54,7 @@ export default function EditStaffPage() {
         <div className="w-full overflow-x-hidden">
           <div className="p-4 md:p-10">
             <h1 className="text-3xl mb-6">แก้ไขข้อมูลพนักงาน</h1>
+            <p className="text-lg mb-6">Staff ID: {staffId}</p>
             <div className="mb-4">
               <label className="block text-lg mb-2">ชื่อ</label>
               <input
