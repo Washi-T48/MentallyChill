@@ -20,7 +20,11 @@ export default function EditStaffPage() {
     const fetchStaffData = async () => {
       try {
         const response = await axios.get(`/staff/lookup/${staffId}`);
-        setStaffData(response.data);
+        setStaffData((prevData) => ({
+          ...prevData,
+          ...response.data,
+          staff_id: staffId, // Ensure staff_id is set
+        }));
       } catch (error) {
         console.error("Error fetching staff data:", error);
       }
