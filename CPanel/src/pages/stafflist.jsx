@@ -140,13 +140,10 @@ export default function StaffListPage() {
                     {row.staff_id.substr(0, 10)}
                   </td>
                   <td className="py-2 px-4 text-center text-sm md:text-xl">
-                    {row.name}
+                    {row.name} {row.surname}
                   </td>
                   <td className="py-2 px-4 text-center text-sm md:text-xl">
                     {row.nickname}
-                  </td>
-                  <td className="py-2 px-4 text-center text-sm md:text-xl">
-                    {row.surname}
                   </td>
                 </tr>
               ))}
