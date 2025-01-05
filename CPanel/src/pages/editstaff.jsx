@@ -37,9 +37,30 @@ export default function EditStaffPage() {
     }));
   };
 
-  const handleSave = async () => {
+//   const handleSave = async () => {
+//     try {
+//       await axios.put(`/staff/update`, staffData);
+//       alert("Staff data updated successfully!");
+//       navigate('/stafflist');
+//     } catch (error) {
+//       console.error("Error updating staff data:", error);
+//       alert("Failed to update staff data.");
+//     }
+//   };
+
+const handleSave = async () => {
     try {
-      await axios.put(`/staff/update`, staffData);
+      const updatedData = {};
+      if (staffData.nickname) {
+        updatedData.nickname = staffData.nickname;
+      }
+      if (staffData.name) {
+        updatedData.name = staffData.name;
+      }
+      if (staffData.surname) {
+        updatedData.surname = staffData.surname;
+      }
+      await axios.put(`/staff/update`, updatedData);
       alert("Staff data updated successfully!");
       navigate('/stafflist');
     } catch (error) {
