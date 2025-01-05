@@ -236,7 +236,7 @@ export default function Sidebar() {
             ลงเวลา
           </div>
           <div
-            onClick={() => checkActive("register")}
+            onClick={() => checkActive("stafflist")}
             className={`flex items-center justify-center p-5 rounded-md cursor-pointer w-full text-2xl ${
               isStaffListActive ? "bg-[#003087] text-white" : "hover:bg-gray-300"
             }`}
