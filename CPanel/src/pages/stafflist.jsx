@@ -3,7 +3,6 @@ import { useEffect, useState, useRef } from "react";
 import Dropdown from "../components/dropdown";
 import Sidebar from "../components/sidebar";
 import Topbar from "../components/topbar";
-import ExportButton from "../components/exportbutton";
 import { useLocation } from "react-router-dom";
 
 export default function StaffListPage() {
@@ -75,21 +74,6 @@ export default function StaffListPage() {
 
     return () => window.removeEventListener('resize', handleResize);
   }, []);
-
-  const exporttocsv = async () => {
-    try {
-      const response = await axios.get('/export/exportformResult', { responseType: 'blob' });
-      const url = window.URL.createObjectURL(new Blob([response.data]));
-      const link = document.createElement('a');
-      link.href = url;
-      link.setAttribute('download', 'result.csv');
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
-    } catch (error) {
-      console.error('Error exporting data:', error);
-    }
-  };
 
 
   const getResultCategory = (d, a, s) => {
@@ -169,30 +153,9 @@ export default function StaffListPage() {
       <div className="flex flex-col flex-1 p-4 md:p-10 relative">
         <div className="flex flex-col md:flex-row gap-6 mb-6 text-center items-center">
           <h1 className="text-3xl md:text-5xl">รายชื่อเจ้าหน้าที่</h1>
-          <ExportButton onClick={exporttocsv} />
         </div>
         <div className="flex flex-col md:flex-row gap-4 mb-6 md:mb-10 items-start md:items-center">
           <h2 className="text-2xl md:text-4xl mb-2 md:mb-0">ตัวกรอง : </h2>
-          <div className="flex flex-col md:flex-row gap-4 w-full md:w-auto">
-            <Dropdown
-              placehold={"ประเภทแบบฟอร์ม"}
-              options={formtypeList}
-              onSelect={handleSelectLocation}
-              selected={selectedFormType}
-            />
-            <Dropdown
-              placehold={"ผลการประเมิน"}
-              options={["ร้ายแรง", "ปานกลาง", "ปกติ"]}
-              onSelect={handleSelectResult}
-              selected={selectedResult}
-            />
-            <button
-              className="py-2 px-4 bg-red-500 text-white rounded w-full md:w-auto"
-              onClick={clearAllFilters}
-            >
-              ล้างการกรอง
-            </button>
-          </div>
           <input
             type="search"
             placeholder="ค้นหาโดยเลขที่ผู้ใช้"
