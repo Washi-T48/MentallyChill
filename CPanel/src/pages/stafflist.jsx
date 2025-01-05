@@ -127,6 +127,7 @@ export default function StaffListPage() {
                 </th>
                 <th className="py-2 px-4 text-lg md:text-3xl text-center">ชื่อเจ้าหน้าที่</th>
                 <th className="py-2 px-4 text-lg md:text-3xl text-center">ชื่อเล่น</th>
+                <th className="py-2 px-4 text-lg md:text-3xl text-center">ตำแหน่ง</th>
                 <th className="py-2 px-4 text-lg md:text-3xl text-center rounded-tr-xl">
                   แก้ไข
                 </th>
@@ -148,6 +149,9 @@ export default function StaffListPage() {
                   </td>
                   <td className="py-2 px-4 text-center text-sm md:text-xl">
                     {row.nickname}
+                  </td>
+                  <td className="py-2 px-4 text-center text-sm md:text-xl">
+                    {row.permission}
                   </td>
                   <td className="py-2 px-4 text-center text-sm md:text-xl">
                     <button
