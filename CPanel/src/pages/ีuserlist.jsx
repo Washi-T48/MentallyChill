@@ -116,7 +116,7 @@ export default function UserListPage() {
             <thead>
               <tr className="bg-[#003087] text-white">
                 <th className="py-2 px-4 text-lg md:text-3xl text-center rounded-tl-xl">
-                  เลขที่เจ้าหน้าที่
+                  เลขที่ผู้ใช้
                   {/* <button
                     onClick={toggleSortOrder}
                     className="ml-2 py-1 px-2 bg-gray-300 text-black rounded text-sm md:text-2xl"
@@ -124,12 +124,14 @@ export default function UserListPage() {
                     {sortOrder === "asc" ? "▲" : "▼"}
                   </button> */}
                 </th>
-                <th className="py-2 px-4 text-lg md:text-3xl text-center">ชื่อเจ้าหน้าที่</th>
-                <th className="py-2 px-4 text-lg md:text-3xl text-center">ชื่อเล่น</th>
-                {/* <th className="py-2 px-4 text-lg md:text-3xl text-center">ตำแหน่ง</th> */}
-                <th className="py-2 px-4 text-lg md:text-3xl text-center rounded-tr-xl">
+                <th className="py-2 px-4 text-lg md:text-3xl text-center">เพศ</th>
+                <th className="py-2 px-4 text-lg md:text-3xl text-center">อายุ</th>
+                <th className="py-2 px-4 text-lg md:text-3xl text-center">อีเมล</th>
+                <th className="py-2 px-4 text-lg md:text-3xl text-center">หมายเลขโทรศัพท์</th>
+                <th className="py-2 px-4 text-lg md:text-3xl text-center">ชั้นปี</th>
+                {/* <th className="py-2 px-4 text-lg md:text-3xl text-center rounded-tr-xl">
                   แก้ไข
-                </th>
+                </th> */}
               </tr>
             </thead>
             <tbody>
@@ -152,14 +154,14 @@ export default function UserListPage() {
                   {/* <td className="py-2 px-4 text-center text-sm md:text-xl">
                     {row.permission}
                   </td> */}
-                  <td className="py-2 px-4 text-center text-sm md:text-xl">
+                  {/* <td className="py-2 px-4 text-center text-sm md:text-xl">
                     <button
                       onClick={() => handleEditClick(row.staff_id)}
                       className="py-1 px-3 bg-blue-500 text-white rounded"
                     >
                       แก้ไข
                     </button>
-                  </td>
+                  </td> */}
                 </tr>
               ))}
             </tbody>
