@@ -290,7 +290,7 @@ export default function Sidebar() {
             รายชื่อเจ้าหน้าที่
           </div>
           <div
-            onClick={() => checkActive("stafflist")}
+            onClick={() => checkActive("userlist")}
             className={`flex items-center justify-center p-5 rounded-md cursor-pointer w-full text-2xl ${
               isStaffListActive ? "bg-[#003087] text-white" : "hover:bg-gray-300"
             }`}
