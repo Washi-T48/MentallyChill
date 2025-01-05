@@ -62,7 +62,7 @@ export default function UserListPage() {
 
   const filteredData = data.filter((item) => {
     return (
-      (searchTerm ? item.staff_id.includes(searchTerm.toLowerCase()) : true)
+      (searchTerm ? item.user_id.includes(searchTerm.toLowerCase()) : true)
     );
   });
 
