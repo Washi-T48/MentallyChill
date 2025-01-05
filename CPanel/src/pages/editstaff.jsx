@@ -55,6 +55,9 @@ const handleSave = async () => {
       if (staffData.surname) {
         updatedData.surname = staffData.surname;
       }
+        if (staffData.permission) {
+        updatedData.permission = staffData.permission;
+      }
 
       console.log("Updated Data:", updatedData); // Log the updated data
 
