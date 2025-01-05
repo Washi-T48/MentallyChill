@@ -1,17 +1,20 @@
 import axios from "../components/axioscreds";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import Sidebar from "../components/sidebar";
 import Topbar from "../components/topbar";
 
 export default function EditStaffPage() {
   const { staffId } = useParams();
   const [staffData, setStaffData] = useState({
+    staff_id: staffId,
     name: "",
     surname: "",
     nickname: "",
-    permission: ""
+    // permission: ""
   });
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchStaffData = async () => {
@@ -36,12 +39,16 @@ export default function EditStaffPage() {
 
   const handleSave = async () => {
     try {
-      await axios.put(`/staff/${staffId}`, staffData);
+      await axios.put(`/staff/update`, staffData);
       alert("Staff data updated successfully!");
     } catch (error) {
       console.error("Error updating staff data:", error);
       alert("Failed to update staff data.");
     }
+  };
+
+  const handleCancel = () => {
+    navigate('/stafflist');
   };
 
   return (
@@ -54,7 +61,7 @@ export default function EditStaffPage() {
         <div className="w-full overflow-x-hidden">
           <div className="p-4 md:p-10">
             <h1 className="text-3xl mb-6">แก้ไขข้อมูลพนักงาน</h1>
-            <p className="text-lg mb-6">Staff ID: {staffId}</p>
+            <p className="text-3xl mb-6">เลขที่เจ้าหน้าที่: {staffId}</p>
             <div className="mb-4">
               <label className="block text-lg mb-2">ชื่อ</label>
               <input
@@ -85,22 +92,20 @@ export default function EditStaffPage() {
                 className="py-2 px-4 rounded border w-full"
               />
             </div>
-            <div className="mb-4">
-              <label className="block text-lg mb-2">สิทธิ์การเข้าถึง</label>
-              <input
-                type="text"
-                name="permission"
-                value={staffData.permission}
-                onChange={handleInputChange}
-                className="py-2 px-4 rounded border w-full"
-              />
+            <div className="flex gap-4">
+              <button
+                onClick={handleSave}
+                className="py-2 px-4 bg-blue-500 text-white rounded"
+              >
+                บันทึก
+              </button>
+              <button
+                onClick={handleCancel}
+                className="py-2 px-4 bg-gray-500 text-white rounded"
+              >
+                ยกเลิก
+              </button>
             </div>
-            <button
-              onClick={handleSave}
-              className="py-2 px-4 bg-blue-500 text-white rounded"
-            >
-              บันทึก
-            </button>
           </div>
         </div>
       </div>
