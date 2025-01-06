@@ -5,7 +5,7 @@ import { getPermission } from '../Models/auth.js';
 
 dotenv.config();
 
-const authMiddleware = (req, res, next) => {
+export default const authMiddleware = (req, res, next) => {
     const token = req.cookies.token;
     if (!token) { return res.sendStatus(401) }
 
@@ -20,7 +20,7 @@ const authMiddleware = (req, res, next) => {
     // next();
 };
 
-const adminMiddleware = async (req, res, next) => {
+export const adminMiddleware = async (req, res, next) => {
     const token = req.cookies.token;
     if (!token) { return res.sendStatus(401) }
 
@@ -36,5 +36,3 @@ const adminMiddleware = async (req, res, next) => {
     }
     // next();
 };
-
-export default authMiddleware;
