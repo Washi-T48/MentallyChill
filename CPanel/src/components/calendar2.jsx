@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import TimeSelectorModal from './TimeSelectorModal'; // Import modal component
+import TimeSelectorModal from './timeselector';
 import axios from './axioscreds';
 
 const Calendar = () => {
   const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
-  const [viewMode, setViewMode] = useState('month'); // "month" or "day"
+  const [viewMode, setViewMode] = useState('month'); 
   const [selectedDate, setSelectedDate] = useState(null);
   const [assignedTimes, setAssignedTimes] = useState([]);
 
@@ -13,7 +13,6 @@ const Calendar = () => {
 
   useEffect(() => {
     if (selectedDate) {
-      // Fetch assigned times for the selected date
       const fetchAssignedTimes = async () => {
         try {
           const date = `${selectedDate.year}-${(selectedDate.month + 1)
@@ -54,12 +53,12 @@ const Calendar = () => {
 
   const handleDayClick = (day) => {
     setSelectedDate({ day, month: currentMonth, year: currentYear });
-    setViewMode('day'); // Switch to day view
+    setViewMode('day');
   };
 
   const handleBackToMonthView = () => {
     setSelectedDate(null);
-    setViewMode('month'); // Switch to month view
+    setViewMode('month');
   };
 
   const renderMonthView = () => (
