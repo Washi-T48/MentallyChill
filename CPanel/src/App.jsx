@@ -55,7 +55,7 @@ function App() {
           <Route path="/editstaff/:staffId" element={<ProtectedRoute element={EditStaffPage} />} />
           <Route path="/stafflist" element={<ProtectedRoute element={StaffListPage} />} />
           <Route path="/userlist" element={<ProtectedRoute element={UserListPage} />} />
-          <Route path="/assigntest" element={<ProtectedRoute element={assigntest} />} />
+          {/* <Route path="/assigntest" element={<ProtectedRoute element={assigntest} />} /> */}
         </Routes>
       </BrowserRouter>
     </>
