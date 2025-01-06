@@ -57,7 +57,7 @@ const Calendar = ({ setFetchTrigger }) => {
   const handleDateClick = (info) => {
     setSelectedDate(info);
     console.log('Selected info:', info.date);
-    date = new Date(info);
+    let date = new Date(info);
     setDate(date);
     console.log('Selected date:', date);
     setDay(date.getDate());
