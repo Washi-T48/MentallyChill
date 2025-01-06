@@ -11,9 +11,10 @@ import {
     registerStaff,
     comparePassword,
     changePassword,
+    getPermission,
 } from '../Models/auth.js';
 
-import { newStaff,updateStaff } from '../Models/staff.js';
+import { newStaff, updateStaff } from '../Models/staff.js';
 
 const authRouter = express.Router();
 dotenv.config();
@@ -73,6 +74,7 @@ authRouter.post('/register', authMiddleware, upload.single('image'), async (req,
 
 authRouter.get('/check', authMiddleware, async (req, res) => {
     try {
+        console.log(Object.assign(jwt.decode(req.cookies.token), (await getPermission(jwt.decode(req.cookies.token).staff_id))));
         res.send(jwt.decode(req.cookies.token)).status(200);
     } catch (err) {
         logger.error(err);

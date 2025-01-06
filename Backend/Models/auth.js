@@ -28,9 +28,15 @@ const changePassword = async (staff_id, password) => {
     return staff.rows[0];
 }
 
+const getPermission = async (staff_id) => {
+    const roles = await pool.query(`SELECT permission FROM staff WHERE staff_id = $1`, [staff_id]);
+    return roles.rows[0];
+};
+
 export {
     findStaff,
     registerStaff,
     comparePassword,
     changePassword,
+    getPermission,
 };
