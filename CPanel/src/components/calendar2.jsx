@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import axios from './axioscreds';
-import TimeSelectorModal from './timeselector';
 
 const daysInMonth = (month, year) => new Date(year, month + 1, 0).getDate();
 const getFirstDayOfMonth = (month, year) => new Date(year, month, 1).getDay();
@@ -10,13 +9,9 @@ const Calendar = ({ setFetchTrigger }) => {
   const [currentMonth, setCurrentMonth] = useState(today.getMonth());
   const [currentYear, setCurrentYear] = useState(today.getFullYear());
   const [isHourlyView, setIsHourlyView] = useState(false);
-  const [selectedDay, setSelectedDay] = useState(null);
   const [selectedDate, setSelectedDate] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [assignedDates, setAssignedDates] = useState({});
   const [staffdata, setStaffdata] = useState(null);
-
-  const dayColors = ['bg-rose-400', 'bg-amber-300', 'bg-fuchsia-300', 'bg-lime-300', 'bg-orange-300', 'bg-cyan-300', 'bg-purple-300'];
 
   const thaiMonths = [
     'มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน',
@@ -37,7 +32,7 @@ const Calendar = ({ setFetchTrigger }) => {
         setStaffdata(response.data);
         console.log(response.data);
       } catch (error) {
-        console.error("Error fetching data:", error);
+        console.error('Error fetching staff data:', error);
       }
     };
 
@@ -49,7 +44,7 @@ const Calendar = ({ setFetchTrigger }) => {
       if (staffdata) {
         try {
           const response = await axios.post('/timetable/getByStaffID', {
-            staff_id: staffdata.staff_id
+            staff_id: staffdata.staff_id,
           });
           const dates = response.data.reduce((acc, entry) => {
             const date = entry.date.split(' ')[0];
@@ -107,15 +102,30 @@ const Calendar = ({ setFetchTrigger }) => {
         <button onClick={switchToMonthlyView} className="bg-blue-500 text-white px-3 py-1 rounded mb-4">
           กลับไปปฏิทินรายเดือน
         </button>
-        <div className="grid grid-cols-4 gap-4">
-          {hours.map((hour) => (
-            <div key={hour} className="p-2 border rounded text-center">
-              {hour}:00 - {hour + 1}:00
-              {assignedDates[date]?.some(entry => parseInt(entry.start.split(':')[0]) === hour) && (
-                <div className="bg-green-300 mt-1 p-1 rounded">Assigned</div>
-              )}
-            </div>
-          ))}
+        <div className="w-full max-w-4xl border rounded-lg shadow-md">
+          {/* All Day Section */}
+          <div className="flex items-center border-b p-2 bg-gray-100">
+            <span className="text-lg font-semibold">All Day</span>
+          </div>
+
+          {/* Hourly Slots */}
+          <div className="flex flex-col h-[700px] overflow-y-scroll">
+            {hours.map((hour) => (
+              <div
+                key={hour}
+                className="flex items-center justify-between border-b p-2 h-16"
+              >
+                <span className="text-gray-600 w-16 text-right pr-4">
+                  {hour}:00
+                </span>
+                <div className="flex-grow border-l pl-4">
+                  {assignedDates[date]?.some(
+                    (entry) => parseInt(entry.start.split(':')[0]) === hour
+                  ) && <div className="bg-green-300 p-1 rounded">Assigned</div>}
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     );
@@ -147,7 +157,7 @@ const Calendar = ({ setFetchTrigger }) => {
           </div>
           <div className="grid grid-cols-7 gap-1 flex-grow items-center">
             {['อาทิตย์', 'จันทร์', 'อังคาร', 'พุธ', 'พฤหัสบดี', 'ศุกร์', 'เสาร์'].map((day, index) => (
-              <div key={index} className={`text-lg text-center font-bold p-2 ${dayColors[index]}`}>
+              <div key={index} className="text-lg text-center font-bold p-2 bg-gray-200">
                 {day}
               </div>
             ))}
@@ -162,7 +172,9 @@ const Calendar = ({ setFetchTrigger }) => {
                 <div
                   key={day}
                   onClick={() => switchToHourlyView(day)}
-                  className={`cursor-pointer p-2 text-center rounded hover:bg-blue-100 h-20 flex flex-col items-center justify-center ${isAssigned ? 'bg-green-300' : ''}`}
+                  className={`cursor-pointer p-2 text-center rounded hover:bg-blue-100 h-20 flex flex-col items-center justify-center ${
+                    isAssigned ? 'bg-green-300' : ''
+                  }`}
                 >
                   {day}
                 </div>
