@@ -81,6 +81,15 @@ authRouter.get('/check', authMiddleware, async (req, res) => {
     }
 });
 
+authRouter.get('/permission', authMiddleware, async (req, res) => {
+    try {
+        res.send(await getPermission(jwt.decode(req.cookies.token).staff_id)).status(200);
+    } catch (err) {
+        logger.error(err);
+        res.sendStatus(500);
+    }
+});
+
 authRouter.all('/logout', authMiddleware, async (req, res) => {
     try {
         res.clearCookie('token');
