@@ -130,7 +130,9 @@ const Calendar = ({ setFetchTrigger }) => {
 
       {isModalOpen && (
         <TimeSelectorModal
-          day={selectedDate}
+          day={day}
+          month={month}
+          year={year}
           start={timeRange.start}
           end={timeRange.end}
           onClose={() => setIsModalOpen(false)}
