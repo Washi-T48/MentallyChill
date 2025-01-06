@@ -2,7 +2,7 @@ import express from 'express';
 import logger from '../Middleware/logger.js';
 import multer from 'multer';
 
-import { newStaff, deleteStaff, updateStaff, lookupStaff, allStaffs, } from '../Models/staff.js';
+import { newStaff, deleteStaff, updateStaff, lookupStaff, allStaffs, listStaffs, } from '../Models/staff.js';
 
 const staffRouter = express.Router();
 const upload = multer({ storage: multer.memoryStorage() });
@@ -63,7 +63,7 @@ staffRouter.get('/lookup/:staff_id', async (req, res) => {
 
 staffRouter.get('/all', async (req, res) => {
     try {
-        const staffs = await allStaffs();
+        const staffs = await listStaffs();
         res.status(200).json(staffs);
     }
     catch (error) {
