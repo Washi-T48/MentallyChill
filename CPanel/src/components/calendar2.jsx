@@ -57,12 +57,9 @@ const Calendar = ({ setFetchTrigger }) => {
   const handleDateClick = (info) => {
     setSelectedDate(info);
     console.log('Selected info:', info.date);
-    let date = new Date(info.date);
-    setDate(date);
-    console.log('Selected date:', date);
-    setDay(date.getDate());
-    setMonth(date.getMonth());
-    setYear(date.getFullYear());
+    setDay(info.date.getDate());
+    setMonth(info.date.getMonth());
+    setYear(info.date.getFullYear());
     console.log('Selected day:', day);
     console.log('Selected month:', month);
     console.log('Selected year:', year);
