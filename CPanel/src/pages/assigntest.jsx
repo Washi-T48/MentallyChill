@@ -4,7 +4,7 @@ import Sidebar from "../components/sidebar";
 import Topbar from "../components/topbar";
 import axios from "../components/axioscreds";
 
-export default function AssignDatePage() {
+export default function AssignTestPage() {
   const [timetabledata, setTimetabledata] = useState([]);
   const [staffdata, setStaffdata] = useState(null);
   const [fetchTrigger, setFetchTrigger] = useState(false);
