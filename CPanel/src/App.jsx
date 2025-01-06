@@ -12,7 +12,7 @@ import RegisterPage from "./pages/register";
 import StaffListPage from "./pages/stafflist";
 import EditStaffPage from "./pages/editstaff";
 import UserListPage from "./pages/userlist";
-// import assigntest from "./pages/assigntest";
+import assigntest from "./pages/assigntest";
 
 import AuthCheck from "./components/authCheck";
 import ProtectedRoute from "./components/protectedroute";
@@ -55,7 +55,7 @@ function App() {
           <Route path="/editstaff/:staffId" element={<ProtectedRoute element={EditStaffPage} />} />
           <Route path="/stafflist" element={<ProtectedRoute element={StaffListPage} />} />
           <Route path="/userlist" element={<ProtectedRoute element={UserListPage} />} />
-          {/* <Route path="/assigntest" element={<ProtectedRoute element={assigntest} />} /> */}
+          <Route path="/assigntest" element={<ProtectedRoute element={assigntest} />} />
         </Routes>
       </BrowserRouter>
     </>

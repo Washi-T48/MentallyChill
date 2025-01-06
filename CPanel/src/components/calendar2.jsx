@@ -4,7 +4,7 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import thLocale from "@fullcalendar/core/locales/th";
-import TimeSelectorModal2 from "./timeselector";
+import TimeSelectorModal from "./timeselector";
 import axios from "./axioscreds";
 
 const Calendar = ({ setFetchTrigger }) => {
@@ -79,7 +79,7 @@ const Calendar = ({ setFetchTrigger }) => {
       />
 
       {isModalOpen && (
-        <TimeSelectorModal2
+        <TimeSelectorModal
           day={selectedDate}
           start={timeRange.start}
           end={timeRange.end}
