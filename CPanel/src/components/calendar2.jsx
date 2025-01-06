@@ -1,165 +1,102 @@
-import React, { useState, useEffect } from 'react';
-import TimeSelectorModal from './timeselector';
-import axios from './axioscreds';
+import React, { useState, useEffect } from "react";
+import FullCalendar from "@fullcalendar/react";
+import dayGridPlugin from "@fullcalendar/daygrid";
+import timeGridPlugin from "@fullcalendar/timegrid";
+import interactionPlugin from "@fullcalendar/interaction";
+import thLocale from "@fullcalendar/core/locales/th";
+import TimeSelectorModal from "./timeselector";
+import axios from "./axioscreds";
 
-const Calendar = () => {
-  const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
-  const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
-  const [viewMode, setViewMode] = useState('month');
+const Calendar = ({ setFetchTrigger }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
-  const [assignedTimes, setAssignedTimes] = useState([]);
-  const [showTimeModal, setShowTimeModal] = useState(false);
-
-  const dayColors = ['bg-rose-400', 'bg-amber-300', 'bg-fuchsia-300', 'bg-lime-300', 'bg-orange-300', 'bg-cyan-300', 'bg-purple-300'];
+  const [timeRange, setTimeRange] = useState({ start: "", end: "" });
+  const [events, setEvents] = useState([]);
+  const [staffdata, setStaffdata] = useState(null);
 
   useEffect(() => {
-    if (selectedDate) {
-      const fetchAssignedTimes = async () => {
+    const fetchStaffData = async () => {
+      try {
+        const response = await axios.get("/auth/check");
+        setStaffdata(response.data);
+        console.log("Staff data:", response.data);
+      } catch (error) {
+        console.error("Error fetching staff data:", error);
+      }
+    };
+
+    fetchStaffData();
+  }, []);
+
+  useEffect(() => {
+    const fetchAssignedDates = async () => {
+      if (staffdata) {
         try {
-          const date = `${selectedDate.year}-${(selectedDate.month + 1)
-            .toString()
-            .padStart(2, '0')}-${selectedDate.day.toString().padStart(2, '0')}`;
-          const response = await axios.post('/timetable/getTimes', { date });
-          setAssignedTimes(response.data);
+          const response = await axios.post("/timetable/getByStaffID", {
+            staff_id: staffdata.staff_id,
+          });
+          const fetchedEvents = response.data.map((entry) => ({
+            title: `${entry.time_start} - ${entry.time_end}`,
+            start: `${entry.date}T${entry.time_start}`,
+            end: `${entry.date}T${entry.time_end}`,
+          }));
+          setEvents(fetchedEvents);
         } catch (error) {
-          console.error('Error fetching assigned times:', error);
+          console.error("Error fetching assigned dates:", error);
         }
-      };
+      }
+    };
 
-      fetchAssignedTimes();
-    }
-  }, [selectedDate]);
+    fetchAssignedDates();
+  }, [staffdata, setFetchTrigger]);
 
-  const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
-  const firstDayOfWeek = new Date(currentYear, currentMonth, 1).getDay();
-  const days = Array.from({ length: daysInMonth }, (_, i) => i + 1);
-
-  const handlePrevMonth = () => {
-    if (currentMonth === 0) {
-      setCurrentMonth(11);
-      setCurrentYear(currentYear - 1);
-    } else {
-      setCurrentMonth(currentMonth - 1);
-    }
+  const handleDateClick = (info) => {
+    setSelectedDate(info.dateStr);
+    setIsModalOpen(true);
   };
 
-  const handleNextMonth = () => {
-    if (currentMonth === 11) {
-      setCurrentMonth(0);
-      setCurrentYear(currentYear + 1);
-    } else {
-      setCurrentMonth(currentMonth + 1);
-    }
+  const handleTimeSelect = (info) => {
+    setSelectedDate(info.startStr.split("T")[0]);
+    setTimeRange({ start: info.startStr, end: info.endStr });
+    setIsModalOpen(true);
   };
 
-  const handleDayClick = (day) => {
-    setSelectedDate({ day, month: currentMonth, year: currentYear });
-    setShowTimeModal(true); // Show TimeSelectorModal
-  };
-
-  const handleBackToMonthView = () => {
-    setSelectedDate(null);
-    setViewMode('month');
-  };
-
-  const handleViewModeChange = () => {
-    setViewMode(viewMode === 'month' ? 'hourly' : 'month');
-  };
-
-  const renderMonthView = () => (
-    <>
-      <div className="flex justify-between items-center mb-4">
-        <button onClick={handlePrevMonth} className="bg-blue-500 text-white px-4 py-2 rounded">
-          ย้อนกลับ
-        </button>
-        <h2 className="text-lg font-bold">
-          {new Date(currentYear, currentMonth).toLocaleString('th-TH', {
-            year: 'numeric',
-            month: 'long',
-          })}
-        </h2>
-        <button onClick={handleNextMonth} className="bg-blue-500 text-white px-4 py-2 rounded">
-          ถัดไป
-        </button>
-      </div>
-      <div className="grid grid-cols-7 gap-1 flex-grow items-center">
-        {['อาทิตย์', 'จันทร์', 'อังคาร', 'พุธ', 'พฤหัสบดี', 'ศุกร์', 'เสาร์'].map((day, index) => (
-          <div key={index} className={`text-lg text-center font-bold p-2 ${dayColors[index]}`}>
-            {day}
-          </div>
-        ))}
-        {Array.from({ length: firstDayOfWeek }, (_, i) => (
-          <div key={`empty-${i}`} />
-        ))}
-        {days.map((day) => (
-          <div
-            key={day}
-            onClick={() => handleDayClick(day)}
-            className="cursor-pointer p-2 text-center rounded hover:bg-blue-100 bg-white h-20 flex items-center justify-center"
-          >
-            {day}
-          </div>
-        ))}
-      </div>
-    </>
-  );
-
-  const renderHourlyView = () => {
-    const hours = Array.from({ length: 24 }, (_, i) => `${i.toString().padStart(2, '0')}:00`);
-    return (
-      <div className="p-4">
-        <button
-          onClick={handleBackToMonthView}
-          className="bg-blue-500 text-white px-4 py-2 rounded mb-4"
-        >
-          กลับไปที่มุมมองรายเดือน
-        </button>
-        <h2 className="text-lg font-bold mb-4">
-          {`มุมมองรายชั่วโมง`}
-        </h2>
-        <div className="grid grid-cols-4 gap-4">
-          {hours.map((hour) => {
-            const isAssigned = assignedTimes.some((time) => time.start.startsWith(hour));
-            return (
-              <div
-                key={hour}
-                className={`p-4 rounded border ${isAssigned ? 'bg-green-300' : 'bg-white'} text-center`}
-              >
-                {hour}
-                {isAssigned && (
-                  <div className="text-sm text-gray-700 mt-2">
-                    {assignedTimes
-                      .filter((time) => time.start.startsWith(hour))
-                      .map((time, idx) => (
-                        <div key={idx}>
-                          {time.start} - {time.end}
-                        </div>
-                      ))}
-                  </div>
-                )}
-              </div>
-            );
-          })}
-        </div>
-      </div>
-    );
+  const handleModalSave = (start, end) => {
+    const newEvent = {
+      title: `${start} - ${end}`,
+      start: `${selectedDate}T${start}`,
+      end: `${selectedDate}T${end}`,
+    };
+    setEvents((prevEvents) => [...prevEvents, newEvent]);
+    setFetchTrigger((prev) => !prev);
+    setIsModalOpen(false);
   };
 
   return (
-    <div className="p-4">
-      <button
-        onClick={handleViewModeChange}
-        className="bg-yellow-500 text-white px-4 py-2 rounded mb-4"
-      >
-        {viewMode === 'month' ? 'ดูรายชั่วโมง' : 'ดูรายเดือน'}
-      </button>
+    <div className="bg-white p-4 rounded shadow-lg w-full max-w-4xl h-[800px]">
+      <FullCalendar
+        plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+        initialView="dayGridMonth"
+        locale={thLocale}
+        timeZone="Asia/Bangkok"
+        headerToolbar={{
+          left: "prev,next today",
+          center: "title",
+          right: "dayGridMonth,timeGridDay",
+        }}
+        events={events}
+        dateClick={handleDateClick}
+        selectable={true}
+        select={handleTimeSelect}
+      />
 
-      {viewMode === 'month' ? renderMonthView() : renderHourlyView()}
-
-      {showTimeModal && (
+      {isModalOpen && (
         <TimeSelectorModal
-          date={selectedDate}
-          onClose={() => setShowTimeModal(false)}
+          day={selectedDate}
+          start={timeRange.start}
+          end={timeRange.end}
+          onClose={() => setIsModalOpen(false)}
+          onSave={handleModalSave}
         />
       )}
     </div>
