@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from './axioscreds';
-import TimeSelectorModal from './TimeSelectorModal'; // Import the modal component
+import TimeSelectorModal from './timeselector';
 
 const daysInMonth = (month, year) => new Date(year, month + 1, 0).getDate();
 const getFirstDayOfMonth = (month, year) => new Date(year, month, 1).getDay();
@@ -13,7 +13,7 @@ const Calendar = ({ setFetchTrigger }) => {
   const [isHourlyView, setIsHourlyView] = useState(false);
   const [assignedDates, setAssignedDates] = useState({});
   const [staffData, setStaffData] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false); // State to control modal visibility
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const thaiMonths = [
     'มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน',
@@ -60,7 +60,7 @@ const Calendar = ({ setFetchTrigger }) => {
 
   const handleDayClick = (day) => {
     setSelectedDate({ day, month: currentMonth, year: currentYear });
-    setIsModalOpen(true); // Open the modal
+    setIsModalOpen(true);
   };
 
   const handleModalClose = () => {
@@ -70,7 +70,7 @@ const Calendar = ({ setFetchTrigger }) => {
   const handleSave = (date) => {
     console.log('Saved date:', date);
     setIsModalOpen(false);
-    setFetchTrigger((prev) => !prev); // Trigger fetch update
+    setFetchTrigger((prev) => !prev);
   };
 
   const handlePreviousMonth = () => {
