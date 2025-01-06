@@ -5,9 +5,10 @@ import axios from './axioscreds';
 const Calendar = () => {
   const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
-  const [viewMode, setViewMode] = useState('month'); 
+  const [viewMode, setViewMode] = useState('month');
   const [selectedDate, setSelectedDate] = useState(null);
   const [assignedTimes, setAssignedTimes] = useState([]);
+  const [showTimeModal, setShowTimeModal] = useState(false);
 
   const dayColors = ['bg-rose-400', 'bg-amber-300', 'bg-fuchsia-300', 'bg-lime-300', 'bg-orange-300', 'bg-cyan-300', 'bg-purple-300'];
 
@@ -53,12 +54,16 @@ const Calendar = () => {
 
   const handleDayClick = (day) => {
     setSelectedDate({ day, month: currentMonth, year: currentYear });
-    setViewMode('day');
+    setShowTimeModal(true); // Show TimeSelectorModal
   };
 
   const handleBackToMonthView = () => {
     setSelectedDate(null);
     setViewMode('month');
+  };
+
+  const handleViewModeChange = () => {
+    setViewMode(viewMode === 'month' ? 'hourly' : 'month');
   };
 
   const renderMonthView = () => (
@@ -99,9 +104,8 @@ const Calendar = () => {
     </>
   );
 
-  const renderDayView = () => {
+  const renderHourlyView = () => {
     const hours = Array.from({ length: 24 }, (_, i) => `${i.toString().padStart(2, '0')}:00`);
-
     return (
       <div className="p-4">
         <button
@@ -111,20 +115,15 @@ const Calendar = () => {
           กลับไปที่มุมมองรายเดือน
         </button>
         <h2 className="text-lg font-bold mb-4">
-          {`วันที่ ${selectedDate.day.toString().padStart(2, '0')}/${(selectedDate.month + 1)
-            .toString()
-            .padStart(2, '0')}/${selectedDate.year}`}
+          {`มุมมองรายชั่วโมง`}
         </h2>
         <div className="grid grid-cols-4 gap-4">
           {hours.map((hour) => {
             const isAssigned = assignedTimes.some((time) => time.start.startsWith(hour));
-
             return (
               <div
                 key={hour}
-                className={`p-4 rounded border ${
-                  isAssigned ? 'bg-green-300' : 'bg-white'
-                } text-center`}
+                className={`p-4 rounded border ${isAssigned ? 'bg-green-300' : 'bg-white'} text-center`}
               >
                 {hour}
                 {isAssigned && (
@@ -148,7 +147,21 @@ const Calendar = () => {
 
   return (
     <div className="p-4">
-      {viewMode === 'month' ? renderMonthView() : renderDayView()}
+      <button
+        onClick={handleViewModeChange}
+        className="bg-yellow-500 text-white px-4 py-2 rounded mb-4"
+      >
+        {viewMode === 'month' ? 'ดูรายชั่วโมง' : 'ดูรายเดือน'}
+      </button>
+
+      {viewMode === 'month' ? renderMonthView() : renderHourlyView()}
+
+      {showTimeModal && (
+        <TimeSelectorModal
+          date={selectedDate}
+          onClose={() => setShowTimeModal(false)}
+        />
+      )}
     </div>
   );
 };
