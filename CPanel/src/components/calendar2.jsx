@@ -54,17 +54,43 @@ const Calendar = ({ setFetchTrigger }) => {
     fetchAssignedDates();
   }, [staffdata, setFetchTrigger]);
 
+  // const handleDateClick = (info) => {
+  //   setSelectedDate(info);
+  //   console.log('Selected info:', info.date);
+  //   setDay(info.date.getDate());
+  //   setMonth(info.date.getMonth());
+  //   setYear(info.date.getFullYear());
+  //   console.log('Selected day:', day);
+  //   console.log('Selected month:', month);
+  //   console.log('Selected year:', year);
+  //   setIsModalOpen(true);
+  // };
+
   const handleDateClick = (info) => {
+    // Convert info.date to a Date object if it isn't one already
+    const date = new Date(info.date);
+  
+    // Extract day, month, and year
+    const day = date.getDate();
+    const month = date.getMonth();
+    const year = date.getFullYear();
+  
+    // Update state
     setSelectedDate(info);
+    setDay(day);
+    setMonth(month);
+    setYear(year);
+  
+    // Log values for debugging
     console.log('Selected info:', info.date);
-    setDay(info.date.getDate());
-    setMonth(info.date.getMonth());
-    setYear(info.date.getFullYear());
     console.log('Selected day:', day);
     console.log('Selected month:', month);
     console.log('Selected year:', year);
+  
+    // Open modal
     setIsModalOpen(true);
   };
+  
   
 
   const handleTimeSelect = (info) => {
