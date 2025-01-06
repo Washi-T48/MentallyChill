@@ -52,6 +52,7 @@ const Calendar = ({ setFetchTrigger }) => {
 
   const handleDateClick = (info) => {
     setSelectedDate(info);
+    console.log('Selected day:', info);
     setIsModalOpen(true);
   };
 
