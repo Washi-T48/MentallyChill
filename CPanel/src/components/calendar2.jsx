@@ -1,79 +1,40 @@
 import React, { useState, useEffect } from 'react';
+import TimeSelectorModal from './TimeSelectorModal'; // Import modal component
 import axios from './axioscreds';
-import TimeSelectorModal from './timeselector';
 
-const daysInMonth = (month, year) => new Date(year, month + 1, 0).getDate();
-const getFirstDayOfMonth = (month, year) => new Date(year, month, 1).getDay();
-
-const Calendar = ({ setFetchTrigger }) => {
-  const today = new Date();
-  const [currentMonth, setCurrentMonth] = useState(today.getMonth());
-  const [currentYear, setCurrentYear] = useState(today.getFullYear());
+const Calendar = () => {
+  const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
+  const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
+  const [viewMode, setViewMode] = useState('month'); // "month" or "day"
   const [selectedDate, setSelectedDate] = useState(null);
-  const [isHourlyView, setIsHourlyView] = useState(false);
-  const [assignedDates, setAssignedDates] = useState({});
-  const [staffData, setStaffData] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [assignedTimes, setAssignedTimes] = useState([]);
 
-  const thaiMonths = [
-    'มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน',
-    'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม', 'พฤศจิกายน', 'ธันวาคม'
-  ];
-
-  const toThaiBuddhistYear = (year) => year + 543;
+  const dayColors = ['bg-rose-400', 'bg-amber-300', 'bg-fuchsia-300', 'bg-lime-300', 'bg-orange-300', 'bg-cyan-300', 'bg-purple-300'];
 
   useEffect(() => {
-    const fetchStaffData = async () => {
-      try {
-        const response = await axios.get('/auth/check');
-        setStaffData(response.data);
-      } catch (error) {
-        console.error('Error fetching staff data:', error);
-      }
-    };
-
-    fetchStaffData();
-  }, []);
-
-  useEffect(() => {
-    const fetchAssignedDates = async () => {
-      if (staffData) {
+    if (selectedDate) {
+      // Fetch assigned times for the selected date
+      const fetchAssignedTimes = async () => {
         try {
-          const response = await axios.post('/timetable/getByStaffID', {
-            staff_id: staffData.staff_id,
-          });
-          const dates = response.data.reduce((acc, entry) => {
-            const date = entry.date.split(' ')[0];
-            if (!acc[date]) acc[date] = [];
-            acc[date].push({ start: entry.time_start, end: entry.time_end });
-            return acc;
-          }, {});
-          setAssignedDates(dates);
+          const date = `${selectedDate.year}-${(selectedDate.month + 1)
+            .toString()
+            .padStart(2, '0')}-${selectedDate.day.toString().padStart(2, '0')}`;
+          const response = await axios.post('/timetable/getTimes', { date });
+          setAssignedTimes(response.data);
         } catch (error) {
-          console.error('Error fetching assigned dates:', error);
+          console.error('Error fetching assigned times:', error);
         }
-      }
-    };
+      };
 
-    fetchAssignedDates();
-  }, [staffData]);
+      fetchAssignedTimes();
+    }
+  }, [selectedDate]);
 
-  const handleDayClick = (day) => {
-    setSelectedDate({ day, month: currentMonth, year: currentYear });
-    setIsModalOpen(true);
-  };
+  const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+  const firstDayOfWeek = new Date(currentYear, currentMonth, 1).getDay();
+  const days = Array.from({ length: daysInMonth }, (_, i) => i + 1);
 
-  const handleModalClose = () => {
-    setIsModalOpen(false);
-  };
-
-  const handleSave = (date) => {
-    console.log('Saved date:', date);
-    setIsModalOpen(false);
-    setFetchTrigger((prev) => !prev);
-  };
-
-  const handlePreviousMonth = () => {
+  const handlePrevMonth = () => {
     if (currentMonth === 0) {
       setCurrentMonth(11);
       setCurrentYear(currentYear - 1);
@@ -91,61 +52,104 @@ const Calendar = ({ setFetchTrigger }) => {
     }
   };
 
-  const days = Array.from({ length: daysInMonth(currentMonth, currentYear) }, (_, i) => i + 1);
-  const firstDay = getFirstDayOfMonth(currentMonth, currentYear);
+  const handleDayClick = (day) => {
+    setSelectedDate({ day, month: currentMonth, year: currentYear });
+    setViewMode('day'); // Switch to day view
+  };
 
-  return (
-    <div className="bg-white p-4 rounded shadow-lg w-full max-w-4xl h-[800px] flex flex-col">
-      <div className="flex flex-col items-center mb-4">
-        <div className="flex justify-between items-center w-full mb-1">
-          <button onClick={handlePreviousMonth} className="bg-blue-500 text-white px-3 py-1 rounded w-[100px]">
-            ย้อนกลับ
-          </button>
-          <div className="text-center">
-            <h2 className="text-xl font-bold pt-4">
-              {thaiMonths[currentMonth]} {toThaiBuddhistYear(currentYear)}
-            </h2>
-          </div>
-          <button onClick={handleNextMonth} className="bg-blue-500 text-white px-3 py-1 rounded w-[100px]">
-            ถัดไป
-          </button>
-        </div>
+  const handleBackToMonthView = () => {
+    setSelectedDate(null);
+    setViewMode('month'); // Switch to month view
+  };
+
+  const renderMonthView = () => (
+    <>
+      <div className="flex justify-between items-center mb-4">
+        <button onClick={handlePrevMonth} className="bg-blue-500 text-white px-4 py-2 rounded">
+          ย้อนกลับ
+        </button>
+        <h2 className="text-lg font-bold">
+          {new Date(currentYear, currentMonth).toLocaleString('th-TH', {
+            year: 'numeric',
+            month: 'long',
+          })}
+        </h2>
+        <button onClick={handleNextMonth} className="bg-blue-500 text-white px-4 py-2 rounded">
+          ถัดไป
+        </button>
       </div>
       <div className="grid grid-cols-7 gap-1 flex-grow items-center">
         {['อาทิตย์', 'จันทร์', 'อังคาร', 'พุธ', 'พฤหัสบดี', 'ศุกร์', 'เสาร์'].map((day, index) => (
-          <div key={index} className="text-lg text-center font-bold p-2 bg-gray-200">
+          <div key={index} className={`text-lg text-center font-bold p-2 ${dayColors[index]}`}>
             {day}
           </div>
         ))}
-        {Array.from({ length: firstDay }).map((_, index) => (
-          <div key={index} className="p-2"></div>
+        {Array.from({ length: firstDayOfWeek }, (_, i) => (
+          <div key={`empty-${i}`} />
         ))}
-        {days.map((day) => {
-          const dateString = `${currentYear}-${(currentMonth + 1).toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
-          const isAssigned = assignedDates[dateString];
-
-          return (
-            <div
-              key={day}
-              onClick={() => handleDayClick(day)}
-              className={`cursor-pointer p-2 text-center rounded hover:bg-blue-100 h-20 flex flex-col items-center justify-center ${
-                isAssigned ? 'bg-green-300' : ''
-              }`}
-            >
-              {day}
-            </div>
-          );
-        })}
+        {days.map((day) => (
+          <div
+            key={day}
+            onClick={() => handleDayClick(day)}
+            className="cursor-pointer p-2 text-center rounded hover:bg-blue-100 bg-white h-20 flex items-center justify-center"
+          >
+            {day}
+          </div>
+        ))}
       </div>
-      {isModalOpen && selectedDate && (
-        <TimeSelectorModal
-          day={selectedDate.day}
-          month={selectedDate.month}
-          year={selectedDate.year}
-          onClose={handleModalClose}
-          onSave={handleSave}
-        />
-      )}
+    </>
+  );
+
+  const renderDayView = () => {
+    const hours = Array.from({ length: 24 }, (_, i) => `${i.toString().padStart(2, '0')}:00`);
+
+    return (
+      <div className="p-4">
+        <button
+          onClick={handleBackToMonthView}
+          className="bg-blue-500 text-white px-4 py-2 rounded mb-4"
+        >
+          กลับไปที่มุมมองรายเดือน
+        </button>
+        <h2 className="text-lg font-bold mb-4">
+          {`วันที่ ${selectedDate.day.toString().padStart(2, '0')}/${(selectedDate.month + 1)
+            .toString()
+            .padStart(2, '0')}/${selectedDate.year}`}
+        </h2>
+        <div className="grid grid-cols-4 gap-4">
+          {hours.map((hour) => {
+            const isAssigned = assignedTimes.some((time) => time.start.startsWith(hour));
+
+            return (
+              <div
+                key={hour}
+                className={`p-4 rounded border ${
+                  isAssigned ? 'bg-green-300' : 'bg-white'
+                } text-center`}
+              >
+                {hour}
+                {isAssigned && (
+                  <div className="text-sm text-gray-700 mt-2">
+                    {assignedTimes
+                      .filter((time) => time.start.startsWith(hour))
+                      .map((time, idx) => (
+                        <div key={idx}>
+                          {time.start} - {time.end}
+                        </div>
+                      ))}
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    );
+  };
+
+  return (
+    <div className="p-4">
+      {viewMode === 'month' ? renderMonthView() : renderDayView()}
     </div>
   );
 };
