@@ -53,7 +53,7 @@ const updateStaff = async (staff_id, name, surname, nickname, permission) => {
 
 const lookupStaff = async (staff_id) => {
     const staff = await pool.query(
-        `SELECT staff_id, name, surname, nickname, image, description FROM staff WHERE staff_id = $1 ORDER BY created DESC`,
+        `SELECT staff_id, name, surname, nickname, image, description, permission FROM staff WHERE staff_id = $1 ORDER BY created DESC`,
         [staff_id]
     );
     return (staff["rows"]);
@@ -66,10 +66,20 @@ const allStaffs = async () => {
     return (staff["rows"]);
 };
 
+// SPECIFICALLY FOR SEMI-PUBLIC USE 
+
+const listStaffs = async () => {
+    const staff = await pool.query(
+        `SELECT staff_id, name, surname, nickname, image, description, created, permission FROM staff ORDER BY created DESC`
+    );
+    return (staff["rows"]);
+};
+
 export {
     newStaff,
     deleteStaff,
     updateStaff,
     lookupStaff,
     allStaffs,
+    listStaffs,
 };
