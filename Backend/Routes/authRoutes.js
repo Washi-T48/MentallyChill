@@ -32,7 +32,7 @@ authRouter.post('/login', async (req, res) => {
         if (staff && !staff.password) { return res.status(401).send('Permission denied') };
 
         if (await comparePassword(password, staff.password)) {
-            const token = jwt.sign({ staff_id: staff.staff_id }, process.env.JWT_SECRET, { expiresIn: '3h' });
+            const token = jwt.sign({ staff_id: staff.staff_id }, process.env.JWT_SECRET, { expiresIn: '1h' });
             res.cookie('token', token, {
                 httpOnly: true,
                 secure: true,
@@ -74,8 +74,7 @@ authRouter.post('/register', authMiddleware, upload.single('image'), async (req,
 
 authRouter.get('/check', authMiddleware, async (req, res) => {
     try {
-        console.log(Object.assign(jwt.decode(req.cookies.token), (await getPermission(jwt.decode(req.cookies.token).staff_id))));
-        res.send(jwt.decode(req.cookies.token)).status(200);
+        res.send(Object.assign(jwt.decode(req.cookies.token), (await getPermission(jwt.decode(req.cookies.token).staff_id)))).status(200);
     } catch (err) {
         logger.error(err);
         res.sendStatus(500);
