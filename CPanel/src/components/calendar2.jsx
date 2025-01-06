@@ -13,6 +13,10 @@ const Calendar = ({ setFetchTrigger }) => {
   const [timeRange, setTimeRange] = useState({ start: "", end: "" });
   const [events, setEvents] = useState([]);
   const [staffdata, setStaffdata] = useState(null);
+  const [date, setDate] = useState(null);
+  const [day, setDay] = useState(null);
+  const [month, setMonth] = useState(null);
+  const [year, setYear] = useState(null);
 
   useEffect(() => {
     const fetchStaffData = async () => {
@@ -52,9 +56,19 @@ const Calendar = ({ setFetchTrigger }) => {
 
   const handleDateClick = (info) => {
     setSelectedDate(info);
-    console.log('Selected day:', info.date);
+    console.log('Selected info:', info.date);
+    date = new Date(info);
+    setDate(date);
+    console.log('Selected date:', date);
+    setDay(date.getDate());
+    setMonth(date.getMonth());
+    setYear(date.getFullYear());
+    console.log('Selected day:', day);
+    console.log('Selected month:', month);
+    console.log('Selected year:', year);
     setIsModalOpen(true);
   };
+  
 
   const handleTimeSelect = (info) => {
     setSelectedDate(info.startStr.split("T")[0]);
