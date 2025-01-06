@@ -1,24 +1,7 @@
-import axios from './axioscreds';
-import React, { useState, useEffect } from 'react';
-
-const generateTimeSlots = () => {
-  const times = [];
-  for (let i = 6; i < 24; i++) { // change frome 0 AM to 11 PM to 6 AM to 11 PM
-    for (let j = 0; j < 60; j += 30) {
-      const hour = i.toString().padStart(2, '0');
-      const minute = j.toString().padStart(2, '0');
-      times.push(`${hour}:${minute}`);
-    }
-  }
-  return times;
-};
-
-const TimeSelectorModal2 = ({ day, month, year, onClose, onSave }) => {
-  const [startTime, setStartTime] = useState('');
-  const [endTime, setEndTime] = useState('');
+const TimeSelectorModal2 = ({ day, start, end, onClose, onSave }) => {
+  const [startTime, setStartTime] = useState(start || "");
+  const [endTime, setEndTime] = useState(end || "");
   const [filteredEndTimes, setFilteredEndTimes] = useState([]);
-  const [staffData, setStaffData] = useState(null);
-  const [warning, setWarning] = useState('');
   const timeSlots = generateTimeSlots();
 
   useEffect(() => {
@@ -30,52 +13,36 @@ const TimeSelectorModal2 = ({ day, month, year, onClose, onSave }) => {
     }
   }, [startTime]);
 
-  useEffect(() => {
-    const fetchStaffData = async () => {
-      try {
-        const response = await axios.get('/auth/check');
-        setStaffData(response.data);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-
-    fetchStaffData();
-  }, []);
-
-  const handleSave = async () => {
-    const date = `${year}-${(month + 1).toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
-    try {
-      const duplicateCheck = await axios.post('/timetable/checkDuplicate', {
-        staff_id: staffData.staff_id,
-        date: date,
-        time_start: startTime,
-        time_end: endTime,
-      });
-      if (duplicateCheck.data.length > 0) {
-        setWarning('ช่วงเวลาที่เลือกซ้ำกับช่วงเวลาอื่น');
-        return;
-      }
-      await axios.post('/timetable/new', {
-        staff_id: staffData.staff_id,
-        date: date,
-        time_start: startTime,
-        time_end: endTime,
-      });
-      onSave(date);
-    } catch (error) {
-      console.error('Error saving data:', error);
-    }
+  const handleSave = () => {
+    onSave(startTime, endTime);
     onClose();
+  };
+
+  const formatThaiDate = (date) => {
+    const months = [
+      "มกราคม",
+      "กุมภาพันธ์",
+      "มีนาคม",
+      "เมษายน",
+      "พฤษภาคม",
+      "มิถุนายน",
+      "กรกฎาคม",
+      "สิงหาคม",
+      "กันยายน",
+      "ตุลาคม",
+      "พฤศจิกายน",
+      "ธันวาคม",
+    ];
+    const [year, month, day] = date.split("-");
+    return `${parseInt(day)} ${months[parseInt(month) - 1]} ${parseInt(year) + 543}`;
   };
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
       <div className="bg-white p-6 rounded shadow-lg w-96">
         <h2 className="text-xl font-bold mb-4">
-          เลือกเวลาในวันที่ {new Date(year, month, day).toDateString()}
+          เลือกเวลาในวันที่ {formatThaiDate(day)}
         </h2>
-        {warning && <p className="text-red-500 mb-4">{warning}</p>}
         <div className="mb-4">
           <label className="block mb-2">เวลาเริ่มต้น</label>
           <select
@@ -108,10 +75,7 @@ const TimeSelectorModal2 = ({ day, month, year, onClose, onSave }) => {
           </select>
         </div>
         <div className="flex justify-end">
-          <button
-            className="bg-red-500 text-white px-3 py-1 rounded mr-2"
-            onClick={onClose}
-          >
+          <button className="bg-red-500 text-white px-3 py-1 rounded mr-2" onClick={onClose}>
             ยกเลิก
           </button>
           <button
