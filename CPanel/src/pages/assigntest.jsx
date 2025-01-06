@@ -60,7 +60,7 @@ export default function AssignTestPage() {
             <Sidebar />
           </div>
           <div className="flex flex-1 flex-col m-10">
-            <div className="flex flex w-full items-center justify-center pb-10">
+            <div className="flex w-full items-center justify-center pb-10">
               <Calendar setFetchTrigger={setFetchTrigger} />
             </div>
             <div className="text-2xl pb-5">ตารางเวลา</div>

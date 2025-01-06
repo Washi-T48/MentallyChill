@@ -51,7 +51,7 @@ const Calendar = ({ setFetchTrigger }) => {
   }, [staffdata, setFetchTrigger]);
 
   const handleDateClick = (info) => {
-    setSelectedDate(info.dateStr);
+    setSelectedDate(info);
     setIsModalOpen(true);
   };
 
