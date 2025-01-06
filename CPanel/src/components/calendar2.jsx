@@ -11,25 +11,44 @@ const Calendar = ({ setFetchTrigger }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
   const [timeRange, setTimeRange] = useState({ start: "", end: "" });
-  const [assignedDates, setAssignedDates] = useState({});
+  const [events, setEvents] = useState([]);
+  const [staffdata, setStaffdata] = useState(null);
+
+  useEffect(() => {
+    const fetchStaffData = async () => {
+      try {
+        const response = await axios.get("/auth/check");
+        setStaffdata(response.data);
+        console.log("Staff data:", response.data);
+      } catch (error) {
+        console.error("Error fetching staff data:", error);
+      }
+    };
+
+    fetchStaffData();
+  }, []);
 
   useEffect(() => {
     const fetchAssignedDates = async () => {
-      try {
-        const response = await axios.post("/timetable/getByStaffID", { staff_id: 1 }); 
-        const dates = response.data.reduce((acc, entry) => {
-          const date = entry.date.split(" ")[0];
-          if (!acc[date]) acc[date] = [];
-          acc[date].push({ start: entry.time_start, end: entry.time_end });
-          return acc;
-        }, {});
-        setAssignedDates(dates);
-      } catch (error) {
-        console.error("Error fetching assigned dates:", error);
+      if (staffdata) {
+        try {
+          const response = await axios.post("/timetable/getByStaffID", {
+            staff_id: staffdata.staff_id,
+          });
+          const fetchedEvents = response.data.map((entry) => ({
+            title: `${entry.time_start} - ${entry.time_end}`,
+            start: `${entry.date}T${entry.time_start}`,
+            end: `${entry.date}T${entry.time_end}`,
+          }));
+          setEvents(fetchedEvents);
+        } catch (error) {
+          console.error("Error fetching assigned dates:", error);
+        }
       }
     };
+
     fetchAssignedDates();
-  }, []);
+  }, [staffdata, setFetchTrigger]);
 
   const handleDateClick = (info) => {
     setSelectedDate(info.dateStr);
@@ -43,13 +62,12 @@ const Calendar = ({ setFetchTrigger }) => {
   };
 
   const handleModalSave = (start, end) => {
-    const date = selectedDate;
-    setAssignedDates((prev) => {
-      const updatedDates = { ...prev };
-      if (!updatedDates[date]) updatedDates[date] = [];
-      updatedDates[date].push({ start, end });
-      return updatedDates;
-    });
+    const newEvent = {
+      title: `${start} - ${end}`,
+      start: `${selectedDate}T${start}`,
+      end: `${selectedDate}T${end}`,
+    };
+    setEvents((prevEvents) => [...prevEvents, newEvent]);
     setFetchTrigger((prev) => !prev);
     setIsModalOpen(false);
   };
@@ -66,13 +84,7 @@ const Calendar = ({ setFetchTrigger }) => {
           center: "title",
           right: "dayGridMonth,timeGridDay",
         }}
-        events={Object.entries(assignedDates).flatMap(([date, times]) =>
-          times.map((time) => ({
-            title: `${time.start} - ${time.end}`,
-            start: `${date}T${time.start}`,
-            end: `${date}T${time.end}`,
-          }))
-        )}
+        events={events}
         dateClick={handleDateClick}
         selectable={true}
         select={handleTimeSelect}
