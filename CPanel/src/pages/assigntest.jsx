@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Calendar from "../components/calendar";
+import Calendar from "../components/calendar2";
 import Sidebar from "../components/sidebar";
 import Topbar from "../components/topbar";
 import axios from "../components/axioscreds";
