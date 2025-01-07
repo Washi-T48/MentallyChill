@@ -118,7 +118,15 @@ const Calendar = ({ setFetchTrigger }) => {
           start={timeRange.start}
           end={timeRange.end}
           onClose={() => setIsModalOpen(false)}
-          onSave={handleModalSave}
+          onSave={(date, start, end) => {
+            setAssignedDates((prevDates) => {
+              const updatedDates = { ...prevDates };
+              if (!updatedDates[date]) updatedDates[date] = [];
+              updatedDates[date].push({ start, end });
+              return updatedDates;
+            });
+            setFetchTrigger((prev) => !prev);
+          }}
         />
       )}
     </div>
