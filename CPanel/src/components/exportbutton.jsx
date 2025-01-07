@@ -1,12 +1,16 @@
-import { ExportOutlined } from '@ant-design/icons';
-import { Button, Flex, Tooltip } from 'antd';
+import { DownloadOutlined } from '@ant-design/icons';
+import { Button, Tooltip } from 'antd';
 
-const ExportButton = ({ onClick }) => (
-  <Flex gap="small" vertical>
-      <Tooltip title="export">
-        <Button type="primary" shape="circle" icon={<ExportOutlined />} onClick={onClick} />
-      </Tooltip>
-  </Flex>
+const SaveAsCsvButton = ({ onClick }) => (
+  <Tooltip title="บันทึกเป็น CSV">
+    <Button 
+      type="primary" 
+      icon={<DownloadOutlined />} 
+      onClick={onClick}
+    >
+      บันทึกเป็น CSV
+    </Button>
+  </Tooltip>
 );
 
-export default ExportButton;
+export default SaveAsCsvButton;
