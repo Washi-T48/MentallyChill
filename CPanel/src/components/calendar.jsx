@@ -1,41 +1,30 @@
-import React, { useState, useEffect } from 'react';
-import axios from './axioscreds';
-import TimeSelectorModal from './timeselector';
-
-const daysInMonth = (month, year) => new Date(year, month + 1, 0).getDate();
-const getFirstDayOfMonth = (month, year) => new Date(year, month, 1).getDay();
+import React, { useState, useEffect } from "react";
+import FullCalendar from "@fullcalendar/react";
+import dayGridPlugin from "@fullcalendar/daygrid";
+import timeGridPlugin from "@fullcalendar/timegrid";
+import interactionPlugin from "@fullcalendar/interaction";
+import thLocale from "@fullcalendar/core/locales/th";
+import TimeSelectorModal from "./timeselector";
+import axios from "./axioscreds";
 
 const Calendar = ({ setFetchTrigger }) => {
-  const today = new Date();
-  const [currentMonth, setCurrentMonth] = useState(today.getMonth());
-  const [currentYear, setCurrentYear] = useState(today.getFullYear());
-  const [selectedDay, setSelectedDay] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [assignedDates, setAssignedDates] = useState({});
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [timeRange, setTimeRange] = useState({ start: "", end: "" });
+  const [events, setEvents] = useState([]);
   const [staffdata, setStaffdata] = useState(null);
-
-  const dayColors = ['bg-rose-400', 'bg-amber-300', 'bg-fuchsia-300', 'bg-lime-300', 'bg-orange-300', 'bg-cyan-300', 'bg-purple-300'];
-
-  const thaiMonths = [
-    'มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน',
-    'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม', 'พฤศจิกายน', 'ธันวาคม'
-  ];
-
-  const englishMonths = [
-    'January', 'February', 'March', 'April', 'May', 'June',
-    'July', 'August', 'September', 'October', 'November', 'December'
-  ];
-
-  const toThaiBuddhistYear = (year) => year + 543;
+  const [day, setDay] = useState(null);
+  const [month, setMonth] = useState(null);
+  const [year, setYear] = useState(null);
 
   useEffect(() => {
     const fetchStaffData = async () => {
       try {
-        const response = await axios.get('/auth/check');
+        const response = await axios.get("/auth/check");
         setStaffdata(response.data);
-        console.log(response.data);
+        console.log("Staff data:", response.data);
       } catch (error) {
-        console.error("Error fetching data:", error);
+        console.error("Error fetching staff data:", error);
       }
     };
 
@@ -46,113 +35,91 @@ const Calendar = ({ setFetchTrigger }) => {
     const fetchAssignedDates = async () => {
       if (staffdata) {
         try {
-          const response = await axios.post('/timetable/getByStaffID', {
-            staff_id: staffdata.staff_id
+          const response = await axios.post("/timetable/getByStaffID", {
+            staff_id: staffdata.staff_id,
           });
-          const dates = response.data.reduce((acc, entry) => {
-            const date = entry.date.split(' ')[0];
-            if (!acc[date]) acc[date] = [];
-            acc[date].push({ start: entry.time_start, end: entry.time_end });
-            return acc;
-          }, {});
-          setAssignedDates(dates);
+          const fetchedEvents = response.data.map((entry) => ({
+            title: `${entry.time_start} - ${entry.time_end}`,
+            start: `${entry.date}T${entry.time_start}`,
+            end: `${entry.date}T${entry.time_end}`,
+          }));
+          setEvents(fetchedEvents);
         } catch (error) {
-          console.error('Error fetching assigned dates:', error);
+          console.error("Error fetching assigned dates:", error);
         }
       }
     };
 
     fetchAssignedDates();
-  }, [staffdata]);
+  }, [staffdata, setFetchTrigger]);
 
-  const handleClick = (day) => {
-    setSelectedDay(day);
+  const handleDateClick = (info) => {
+    const date = new Date(info.date);
+  
+    const day = date.getDate();
+    const month = date.getMonth();
+    const year = date.getFullYear();
+  
+    setSelectedDate(info);
+    setDay(day);
+    setMonth(month);
+    setYear(year);
+  
+    console.log('Selected info:', info.date);
     console.log('Selected day:', day);
-    console.log('Selected month:', currentMonth);
-    console.log('Selected year:', currentYear);
+    console.log('Selected month:', month);
+    console.log('Selected year:', year);
+  
+    setIsModalOpen(true);
+  };
+  
+  
+
+  const handleTimeSelect = (info) => {
+    setSelectedDate(info.startStr.split("T")[0]);
+    setTimeRange({ start: info.startStr, end: info.endStr });
     setIsModalOpen(true);
   };
 
-  const handlePreviousMonth = () => {
-    if (currentMonth === 0) {
-      setCurrentMonth(11);
-      setCurrentYear(currentYear - 1);
-    } else {
-      setCurrentMonth(currentMonth - 1);
-    }
+  const handleModalSave = (start, end) => {
+    const newEvent = {
+      title: `${start} - ${end}`,
+      start: `${selectedDate}T${start}`,
+      end: `${selectedDate}T${end}`,
+    };
+    setEvents((prevEvents) => [...prevEvents, newEvent]);
+    setIsModalOpen(false);
+    setFetchTrigger((prev) => !prev);
+    window.location.reload();
   };
-
-  const handleNextMonth = () => {
-    if (currentMonth === 11) {
-      setCurrentMonth(0);
-      setCurrentYear(currentYear + 1);
-    } else {
-      setCurrentMonth(currentMonth + 1);
-    }
-  };
-
-  const days = Array.from({ length: daysInMonth(currentMonth, currentYear) }, (_, i) => i + 1);
-  const firstDay = getFirstDayOfMonth(currentMonth, currentYear);
 
   return (
-    <div className="bg-white p-4 rounded shadow-lg w-full max-w-4xl h-[800px] flex flex-col">
-      <div className="flex flex-col items-center mb-4">
-        <div className="flex justify-between items-center w-full mb-1">
-          <button onClick={handlePreviousMonth} className="bg-blue-500 text-white px-3 py-1 rounded w-[100px]">
-            ย้อนกลับ
-          </button>
-          <div className="text-center">
-            <h2 className="text-xl font-bold pt-4">
-              {thaiMonths[currentMonth]} {toThaiBuddhistYear(currentYear)}
-            </h2>
-            <h3 className="text-lg pt-4">
-              {englishMonths[currentMonth]} {currentYear}
-            </h3>
-          </div>
-          <button onClick={handleNextMonth} className="bg-blue-500 text-white px-3 py-1 rounded w-[100px]">
-            ถัดไป
-          </button>
-        </div>
-      </div>
-      <div className="grid grid-cols-7 gap-1 flex-grow items-center">
-        {['อาทิตย์', 'จันทร์', 'อังคาร', 'พุธ', 'พฤหัสบดี', 'ศุกร์', 'เสาร์'].map((day, index) => (
-          <div key={index} className={`text-lg text-center font-bold p-2 ${dayColors[index]}`}>
-            {day}
-          </div>
-        ))}
-        {Array.from({ length: firstDay }).map((_, index) => (
-          <div key={index} className="p-2"></div>
-        ))}
-        {days.map((day) => {
-          const dateString = `${currentYear}-${(currentMonth + 1).toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
-          const isAssigned = assignedDates[dateString];
+    <div className="bg-white p-4 rounded shadow-lg w-full max-w-4xl h-[800px]">
+      <FullCalendar
+        plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+        initialView="dayGridMonth"
+        locale={thLocale}
+        timeZone="Asia/Bangkok"
+        headerToolbar={{
+          left: "prev,next today",
+          center: "title",
+          right: "dayGridMonth,timeGridDay",
+        }}
+        events={events}
+        dateClick={handleDateClick}
+        selectable={true}
+        select={handleTimeSelect}
+      />
 
-          return (
-            <div
-              key={day}
-              onClick={() => handleClick(day)}
-              className={`cursor-pointer p-2 text-center rounded hover:bg-blue-100 h-20 flex flex-col items-center justify-center ${isAssigned ? 'bg-green-300' : ''}`}
-            >
-              {day}
-            </div>
-          );
-        })}
-      </div>
       {isModalOpen && (
         <TimeSelectorModal
-          day={selectedDay}
-          month={currentMonth}
-          year={currentYear}
+          day={day}
+          month={month}
+          year={year}
+          start={timeRange.start}
+          end={timeRange.end}
           onClose={() => setIsModalOpen(false)}
-          onSave={(date, start, end) => {
-            setAssignedDates((prevDates) => {
-              const updatedDates = { ...prevDates };
-              if (!updatedDates[date]) updatedDates[date] = [];
-              updatedDates[date].push({ start, end });
-              return updatedDates;
-            });
-            setFetchTrigger((prev) => !prev);
-          }}
+          onSave={handleModalSave}
         />
       )}
     </div>
