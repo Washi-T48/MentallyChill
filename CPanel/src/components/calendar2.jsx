@@ -90,6 +90,7 @@ const Calendar = ({ setFetchTrigger }) => {
     setEvents((prevEvents) => [...prevEvents, newEvent]);
     setIsModalOpen(false);
     setFetchTrigger((prev) => !prev);
+    window.location.reload();
   };
 
   return (
