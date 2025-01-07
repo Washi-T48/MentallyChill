@@ -88,8 +88,8 @@ const Calendar = ({ setFetchTrigger }) => {
       end: `${selectedDate}T${end}`,
     };
     setEvents((prevEvents) => [...prevEvents, newEvent]);
-    setFetchTrigger((prev) => !prev);
     setIsModalOpen(false);
+    setFetchTrigger((prev) => !prev);
   };
 
   return (
@@ -118,15 +118,7 @@ const Calendar = ({ setFetchTrigger }) => {
           start={timeRange.start}
           end={timeRange.end}
           onClose={() => setIsModalOpen(false)}
-          onSave={(date, start, end) => {
-            setAssignedDates((prevDates) => {
-              const updatedDates = { ...prevDates };
-              if (!updatedDates[date]) updatedDates[date] = [];
-              updatedDates[date].push({ start, end });
-              return updatedDates;
-            });
-            setFetchTrigger((prev) => !prev);
-          }}
+          onSave={handleModalSave}
         />
       )}
     </div>
