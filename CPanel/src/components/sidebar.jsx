@@ -161,7 +161,6 @@ export default function Sidebar() {
       setIsStaffListActive(true);
       setIsBookingActive(false);
     }
-    update(permission);
   }, [location.pathname]);
 
   const checkActive = (section) => {
