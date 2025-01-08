@@ -1,7 +1,7 @@
 import Sidebar from "../components/sidebar";
 import Topbar from "../components/topbar";
 import axios from "../components/axioscreds";
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
 
 export default function RegisterPage() {
     const [loading, setLoading] = useState(false);
@@ -10,6 +10,13 @@ export default function RegisterPage() {
     const [modalOpen, setModalOpen] = useState(false);
     const [imageFile, setImageFile] = useState(null);
     const [imageURL, setImageURL] = useState('');
+    const { permission } = useContext(AuthContext);
+
+    useEffect(() => {
+        if (!permission) {
+            navigate('/dashboard');
+        }
+    }, [permission]);
 
     const handleRegister = async (data) => {
         try {
