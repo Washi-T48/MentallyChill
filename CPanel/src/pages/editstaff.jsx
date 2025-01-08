@@ -56,9 +56,9 @@ const handleSave = async () => {
       if (staffData.surname) {
         updatedData.surname = staffData.surname;
       }
-        if (staffData.permission) {
-        updatedData.permission = staffData.permission;
-      }
+      //   if (staffData.permission) {
+      //   updatedData.permission = staffData.permission;
+      // }
 
       console.log("Updated Data:", updatedData); // Log the updated data
 
@@ -116,7 +116,7 @@ const handleSave = async () => {
                 className="py-2 px-4 rounded border w-full"
               />
             </div>
-            <div className="mb-4">
+            {/* <div className="mb-4">
               <label className="block text-lg mb-2">ตำแหน่ง</label>
               <select
                 name="permission"
@@ -128,7 +128,7 @@ const handleSave = async () => {
                 <option value="administrator">ผู้ดูแลระบบ</option>
                 <option value="staff">เจ้าหน้าที่</option>
               </select>
-            </div>
+            </div> */}
             <div className="flex gap-4">
               <button
                 onClick={handleSave}
