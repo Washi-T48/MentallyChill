@@ -133,7 +133,11 @@ export default function LogPage() {
               </tr>
             </thead>
             <tbody>
-              {paginatedData.map((row, index) => (
+              {paginatedData.map((row, index) => {
+                const date = new Date(row.created); // Convert string to Date object
+                const formattedDate = date.toLocaleDateString(); // Extracts the date
+                const formattedTime = date.toLocaleTimeString(); // Extracts the time
+                return (
                 <tr
                   key={index}
                   className={`transition ease-in-out duration-150 border-2 ${
@@ -156,7 +160,8 @@ export default function LogPage() {
                     {row.created.toLocaleTimeString()}
                   </td>
                 </tr>
-              ))}
+              )
+              })}
             </tbody>
           </table>
         </div>
