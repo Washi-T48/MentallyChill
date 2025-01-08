@@ -18,6 +18,7 @@ export default function RegisterPage() {
 
     useEffect(() => {
         if (!permission) {
+            console.log('Permission not found');
             navigate('/dashboard');
         }
     }, [permission]);
