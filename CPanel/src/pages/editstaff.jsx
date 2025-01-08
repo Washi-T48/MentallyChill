@@ -15,6 +15,10 @@ export default function EditStaffPage() {
     image: ""
   });
 
+  const [imageURL, setImageURL] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [imageFile, setImageFile] = useState(null)
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -45,14 +49,15 @@ export default function EditStaffPage() {
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
-    if (file && file.type.startsWith('image/')) {
-        setImageFile(file);
-        const imageURL = URL.createObjectURL(file);
-        setImageURL(imageURL);
+    if (file && file.type.startsWith("image/")) {
+      setImageFile(file);
+      const imageURL = URL.createObjectURL(file);
+      setImageURL(imageURL);
+      setErrorMessage("");
     } else {
-        setErrorMessage('โปรดเลือกไฟล์ที่ถูกต้อง');
+      setErrorMessage("โปรดเลือกไฟล์ที่ถูกต้อง");
     }
-};
+  };
 
 
 const handleSave = async () => {
@@ -105,19 +110,29 @@ const handleSave = async () => {
             <h1 className="text-3xl mb-6">แก้ไขข้อมูลพนักงาน</h1>
             <p className="text-3xl mb-6">เลขที่เจ้าหน้าที่: {staffId}</p>
             <div className="mb-4">
-              <label htmlFor="image" className="block text-gray-700 text-sm font-bold mb-2">รูปภาพเจ้าหน้าที่</label>
-                <input 
-                  type="file" 
-                  id="image" 
-                  name="image" 
-                  accept="image/*"
-                  onChange={handleFileChange}
-                />
-                  {imageURL && (
-                    <div className="mt-4">
-                      <img src={imageURL} alt="Preview" className="h-40 w-40 object-cover" />
-                    </div>
-                  )}
+              <label
+                htmlFor="image"
+                className="block text-gray-700 text-sm font-bold mb-2"
+              >
+                รูปภาพเจ้าหน้าที่
+              </label>
+              <input
+                type="file"
+                id="image"
+                name="image"
+                accept="image/*"
+                onChange={handleFileChange}
+              />
+              {errorMessage && <p className="text-red-500">{errorMessage}</p>}
+              {imageURL && (
+                <div className="mt-4">
+                  <img
+                    src={imageURL}
+                    alt="Preview"
+                    className="h-40 w-40 object-cover"
+                  />
+                </div>
+              )}
             </div>
             <div className="mb-4">
               <label className="block text-lg mb-2">ชื่อ</label>
