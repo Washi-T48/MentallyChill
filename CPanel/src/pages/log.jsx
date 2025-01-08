@@ -117,13 +117,14 @@ export default function LogPage() {
             ref={searchInputRef}
             className="py-2 px-4 rounded border w-full md:w-auto"
           />
+          <h2 className="text-2xl md:text-4xl mb-2 md:mb-0">จัดเรียงตาม : </h2>
           <select
             value={sortOrder}
             onChange={handleSortChange}
             className="py-2 px-4 rounded border w-full md:w-auto"
           >
-            <option value="newest">Newest</option>
-            <option value="oldest">Oldest</option>
+            <option value="newest">ใหม่สุด</option>
+            <option value="oldest">เก่าสุด</option>
           </select>
         </div>
         <div className="overflow-x-auto">
