@@ -23,7 +23,7 @@ export default function SignInPage() {
       staff_id: data.get("username"),
       password: data.get("password")
     })
-      .then(() => {
+      .then((response) => {
         console.log("Login successful");
         update(response.data.permission);
         navigate("/dashboard");
