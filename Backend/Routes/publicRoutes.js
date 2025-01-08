@@ -33,6 +33,8 @@ import {
     registerUser,
 } from '../Models/user.js';
 
+import { newLog } from '../Models/log.js';
+
 const publicRouter = express.Router();
 
 publicRouter.all('/', async (req, res) => {
@@ -49,8 +51,9 @@ publicRouter.post('/login', async (req, res) => {
         if (staff && !staff.password) { return res.status(401).send('Permission denied') };
 
         if (await comparePassword(password, staff.password)) {
-            const token = jwt.sign({ staff_id: staff.staff_id }, process.env.JWT_SECRET, { expiresIn: '3h' });
+            const token = jwt.sign({ staff_id: staff.staff_id }, process.env.JWT_SECRET, { expiresIn: '1h' });
             res.cookie('token', token, { httpOnly: true });
+            newLog(jwt.decode(token).staff_id, 'Login', jwt.decode(token));
             res.status(200).json({ token });
         } else {
             res.sendStatus(401);

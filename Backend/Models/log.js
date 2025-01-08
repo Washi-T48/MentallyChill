@@ -30,9 +30,19 @@ const simpleLog = async (staff_id, action) => {
     return (log["rows"][0]);
 }
 
+//FOR FRONTEND USAGE
+
+const feLogs = async () => {
+    const logs = await pool.query(
+        `SELECT * FROM log WHERE action != 'Check' ORDER BY created DESC`
+    );
+    return (logs["rows"]);
+}
+
 export {
     newLog,
     allLogs,
     getLog,
-    simpleLog
+    simpleLog,
+    feLogs
 };

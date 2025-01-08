@@ -16,8 +16,6 @@ import {
 
 import {
     newLog,
-    allLogs,
-    getLog,
     simpleLog
 } from '../Models/log.js';
 
@@ -45,7 +43,7 @@ authRouter.post('/login', async (req, res) => {
                 secure: true,
                 sameSite: 'None',
             });
-            newLog(staff_id, 'Login', { 'ip': req.headers['x-forwarded-for'] });
+            newLog(jwt.decode(token).staff_id, 'Login', token);
             res.status(200).json({ token });
         } else {
             res.sendStatus(401);
@@ -83,6 +81,7 @@ authRouter.post('/register', authMiddleware, upload.single('image'), async (req,
 
 authRouter.get('/check', authMiddleware, async (req, res) => {
     try {
+        newLog(jwt.decode(req.cookies.token).staff_id, 'Check', jwt.decode(req.cookies.token));
         res.send(Object.assign(jwt.decode(req.cookies.token), (await getPermission(jwt.decode(req.cookies.token).staff_id)))).status(200);
     } catch (err) {
         logger.error(err);
@@ -101,8 +100,8 @@ authRouter.get('/permission', authMiddleware, async (req, res) => {
 
 authRouter.all('/logout', authMiddleware, async (req, res) => {
     try {
-        simpleLog(jwt.decode(req.cookies.token).staff_id, 'Logout');
         res.clearCookie('token');
+        simpleLog(jwt.decode(req.cookies.token).staff_id, 'Logout');
         res.status(200).json({ token: null });
     } catch (err) {
         logger.error(err);
