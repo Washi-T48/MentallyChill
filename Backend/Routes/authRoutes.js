@@ -14,6 +14,13 @@ import {
     getPermission,
 } from '../Models/auth.js';
 
+import {
+    newLog,
+    allLogs,
+    getLog,
+    simpleLog
+} from '../Models/log.js';
+
 import { newStaff, updateStaff } from '../Models/staff.js';
 
 const authRouter = express.Router();
@@ -38,6 +45,7 @@ authRouter.post('/login', async (req, res) => {
                 secure: true,
                 sameSite: 'None',
             });
+            newLog(staff_id, 'Login', { 'ip': req.headers['x-forwarded-for'], 'expire': token.exp });
             res.status(200).json({ token });
         } else {
             res.sendStatus(401);
@@ -62,6 +70,7 @@ authRouter.post('/register', authMiddleware, upload.single('image'), async (req,
         if (!staff) {
             const createStaff = await newStaff(staff_id, name, surname, nickname, image);
             const updatePassword = await registerStaff(staff_id, password);
+            newLog(staff_id, 'Register', { staff_id, name, surname, nickname });
             res.status(200).send(updatePassword);
         } else {
             res.status(401).send('Account already exists');
@@ -92,6 +101,7 @@ authRouter.get('/permission', authMiddleware, async (req, res) => {
 
 authRouter.all('/logout', authMiddleware, async (req, res) => {
     try {
+        simpleLog(jwt.decode(req.cookies.token).staff_id, 'Logout');
         res.clearCookie('token');
         res.status(200).json({ token: null });
     } catch (err) {
@@ -104,6 +114,7 @@ authRouter.post('/changePassword', authMiddleware, async (req, res) => {
     try {
         const { staff_id, password } = req.body;
         const staff = await changePassword(staff_id, password);
+        simpleLog(staff_id, 'Change Password');
         res.status(200).json(staff);
     } catch (err) {
         logger.error(err);
@@ -115,6 +126,7 @@ authRouter.post('/updateStaff', authMiddleware, async (req, res) => {
     try {
         const { staff_id, name, surname, nickname } = req.body;
         const staff = await updateStaff(staff_id, name, surname, nickname);
+        newLog(staff_id, 'Update', { staff_id, name, surname, nickname });
         res.status(200).json(staff);
     } catch (err) {
         logger.error(err);
