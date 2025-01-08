@@ -1,8 +1,9 @@
 import axios from "../components/axioscreds";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useContext } from "react";
 import Sidebar from "../components/sidebar";
 import Topbar from "../components/topbar";
 import { useLocation, useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
 
 export default function StaffListPage() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -10,11 +11,12 @@ export default function StaffListPage() {
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [searchTerm, setSearchTerm] = useState('');
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [permission, setPermission] = useState("");
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const staffIdFromQuery = queryParams.get('staff_id');
   const navigate = useNavigate();
+
+  const { permission } = useContext(AuthContext);
 
   const searchInputRef = useRef(null);
 
