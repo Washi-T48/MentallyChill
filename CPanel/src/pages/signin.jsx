@@ -25,7 +25,7 @@ export default function SignInPage() {
     })
       .then(() => {
         console.log("Login successful");
-        update(user);
+        update(permission);
         navigate("/dashboard");
       })
       .catch((error) => {
