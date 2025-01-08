@@ -45,7 +45,7 @@ authRouter.post('/login', async (req, res) => {
                 secure: true,
                 sameSite: 'None',
             });
-            simpleLog(jwt.decode(token).staff_id, 'Logout');
+            simpleLog(jwt.decode(token).staff_id, 'Login');
             res.status(200).json({ token });
         } else {
             res.sendStatus(401);
