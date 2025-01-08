@@ -23,6 +23,7 @@ export default function Sidebar() {
       try {
         const response = await axios.get("/auth/permission");
         console.log(response.data.permission);
+        setPermission(response.data.permission);
       } catch (error) {
         console.error("Error fetching permission:", error);
       }
