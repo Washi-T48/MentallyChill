@@ -59,41 +59,31 @@ export default function EditStaffPage() {
     }
   };
 
-
-const handleSave = async () => {
+  const handleSave = async () => {
     try {
-      const updatedData = {
-        staff_id: staffData.staff_id, // Ensure staff_id is included
-      };
-      if (staffData.nickname) {
-        updatedData.nickname = staffData.nickname;
-      }
-      if (staffData.name) {
-        updatedData.name = staffData.name;
-      }
-      if (staffData.surname) {
-        updatedData.surname = staffData.surname;
-      }
-      if (staffData.password) {
-        updatedData.password = staffData.password;
-      }
-      if (imageFile) {
-        updatedData.image = staffData.image;
-      }
-      //   if (staffData.permission) {
-      //   updatedData.permission = staffData.permission;
-      // }
+        const formData = new FormData();
+        formData.append('staff_id', staffData.staff_id);
+        formData.append('name', staffData.name);
+        formData.append('surname', staffData.surname);
+        formData.append('nickname', staffData.nickname);
+        formData.append('description', staffData.description);
+        if (imageFile) {
+            formData.append('image', imageFile); // อัปโหลดไฟล์รูปภาพ
+        }
 
-      console.log("Updated Data:", updatedData); // Log the updated data
-
-      await axios.put(`/staff/update`, updatedData);
-      alert("Staff data updated successfully!");
-      navigate('/stafflist');
+        const response = await axios.put(`/staff/update`, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        });
+        alert("Staff data updated successfully!");
+        navigate('/stafflist');
     } catch (error) {
-      console.error("Error updating staff data:", error);
-      alert("Failed to update staff data.");
+        console.error("Error updating staff data:", error.response?.data || error.message);
+        alert("Failed to update staff data. Check the console for details.");
     }
-  };
+};
+
 
   const handleCancel = () => {
     navigate('/stafflist');
