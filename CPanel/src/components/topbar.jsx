@@ -19,6 +19,7 @@ export default function Topbar() {
         console.error("Error fetching data:", error);
       }
     };
+    console.log(staff.staff_id);
 
     fetchStaffData();
   }, []);
