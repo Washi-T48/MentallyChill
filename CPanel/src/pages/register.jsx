@@ -35,7 +35,7 @@ export default function RegisterPage() {
         if (permission !== 'administrator') {
             navigate('/dashboard');
         }
-    }, [permission, navigate]);
+    }, []);
 
     const handleRegister = async (data) => {
         try {
