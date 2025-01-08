@@ -5,6 +5,7 @@ import https from 'https';
 import cors from 'cors';
 
 import publicRouter from './Routes/publicRoutes.js';
+import logRouter from './Routes/logRoutes.js';
 import lineRouter from './Routes/lineRoutes.js';
 import authRouter from './Routes/authRoutes.js';
 import userRouter from './Routes/userRoutes.js';
@@ -49,6 +50,7 @@ app.use(consoleLogExpress);
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/", publicRouter);
+app.use("/log", logRouter)
 app.use("/line", lineRouter);
 app.use("/auth", authRouter)
 app.use("/user", userRouter);
