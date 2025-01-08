@@ -1,10 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect, useContext } from "react";
 import axios from "../components/axioscreds";
-import { AuthContext } from "../context/AuthContext";
 
 export default function SignInPage() {
-  const { update } = useContext(AuthContext);
 
   useEffect(() => {
     document.body.style.backgroundColor = "white";
@@ -25,7 +23,6 @@ export default function SignInPage() {
     })
       .then(() => {
         console.log("Login successful");
-        update(permission);
         navigate("/dashboard");
       })
       .catch((error) => {
