@@ -11,7 +11,7 @@ export default function EditStaffPage() {
     name: "",
     surname: "",
     nickname: "",
-    // permission: ""
+    permission: ""
   });
 
   const navigate = useNavigate();

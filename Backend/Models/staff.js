@@ -41,7 +41,10 @@ const updateStaff = async (staff_id, name, surname, nickname, permission) => {
         values.push(nickname);
         fields.push(`nickname = $${values.length}`);
     }
-
+    if (permission) {
+        values.push(permission);
+        fields.push(`permission = $${values.length}`);
+    }
     if (fields.length === 0) {
         throw new Error('No fields to update');
     }
