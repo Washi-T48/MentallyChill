@@ -24,8 +24,8 @@ export default function SignInPage() {
       password: data.get("password")
     })
       .then(() => {
-        update(user);
         console.log("Login successful");
+        update(permission);
         navigate("/dashboard");
       })
       .catch((error) => {
