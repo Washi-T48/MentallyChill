@@ -10,6 +10,7 @@ export default function LogPage() {
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [searchTerm, setSearchTerm] = useState('');
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [sortOrder, setSortOrder] = useState("newest");
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const staffIdFromQuery = queryParams.get('staff_id');
@@ -60,7 +61,17 @@ export default function LogPage() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const filteredData = data.filter((item) => {
+  const handleSortChange = (event) => {
+    setSortOrder(event.target.value);
+  };
+
+  const sortedData = [...data].sort((a, b) => {
+    const dateA = new Date(a.created);
+    const dateB = new Date(b.created);
+    return sortOrder === "newest" ? dateB - dateA : dateA - dateB;
+  });
+
+  const filteredData = sortedData.filter((item) => {
     return (
       (searchTerm ? item.staff_id.includes(searchTerm.toLowerCase()) : true)
     );
@@ -106,6 +117,14 @@ export default function LogPage() {
             ref={searchInputRef}
             className="py-2 px-4 rounded border w-full md:w-auto"
           />
+          <select
+            value={sortOrder}
+            onChange={handleSortChange}
+            className="py-2 px-4 rounded border w-full md:w-auto"
+          >
+            <option value="newest">Newest</option>
+            <option value="oldest">Oldest</option>
+          </select>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full">
