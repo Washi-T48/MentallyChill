@@ -45,7 +45,7 @@ authRouter.post('/login', async (req, res) => {
                 secure: true,
                 sameSite: 'None',
             });
-            simpleLog(staff_id, 'Login');
+            simpleLog(jwt.decode(token).staff_id, 'Logout');
             res.status(200).json({ token });
         } else {
             res.sendStatus(401);
@@ -101,8 +101,8 @@ authRouter.get('/permission', authMiddleware, async (req, res) => {
 
 authRouter.all('/logout', authMiddleware, async (req, res) => {
     try {
-        simpleLog(jwt.decode(req.cookies.token).staff_id, 'Logout');
         res.clearCookie('token');
+        simpleLog(jwt.decode(req.cookies.token).staff_id, 'Logout');
         res.status(200).json({ token: null });
     } catch (err) {
         logger.error(err);
