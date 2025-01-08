@@ -3,7 +3,6 @@ import { useEffect, useState, useRef, useContext } from "react";
 import Sidebar from "../components/sidebar";
 import Topbar from "../components/topbar";
 import { useLocation, useNavigate } from "react-router-dom";
-import { AuthContext } from "../context/AuthContext";
 
 export default function LogPage() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -15,8 +14,6 @@ export default function LogPage() {
   const queryParams = new URLSearchParams(location.search);
   const staffIdFromQuery = queryParams.get('staff_id');
   const navigate = useNavigate();
-
-  const { permission } = useContext(AuthContext);
 
   const searchInputRef = useRef(null);
 
@@ -31,19 +28,7 @@ export default function LogPage() {
       }
     };
 
-    const fetchPermission = async () => {
-      try {
-        const response = await axios.get(`/auth/permission`);
-        setPermission(response.data.permission);
-        console.log(response.data.permission);
-      }
-       catch (error) {
-        console.error("Error fetching permission:", error);
-      }
-    };
-
     fetchData();
-    fetchPermission();
  }, []);
 
   useEffect(() => {
@@ -105,10 +90,6 @@ export default function LogPage() {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
-  const handleEditClick = (staffId) => {
-    navigate(`/editstaff/${staffId}`);
-  };
-
   const Content = () => {
     return (
       <div className="flex flex-col flex-1 p-4 md:p-10 relative">
@@ -131,7 +112,7 @@ export default function LogPage() {
             <thead>
               <tr className="bg-[#003087] text-white">
                 <th className="py-2 px-4 text-lg md:text-3xl text-center rounded-tl-xl">
-                  เลขที่เจ้าหน้าที่
+                  รหัสบันทึก
                   {/* <button
                     onClick={toggleSortOrder}
                     className="ml-2 py-1 px-2 bg-gray-300 text-black rounded text-sm md:text-2xl"
@@ -139,15 +120,10 @@ export default function LogPage() {
                     {sortOrder === "asc" ? "▲" : "▼"}
                   </button> */}
                 </th>
-                <th className="py-2 px-4 text-lg md:text-3xl text-center">ชื่อเจ้าหน้าที่</th>
+                <th className="py-2 px-4 text-lg md:text-3xl text-center">เลขที่เจ้าหน้าที่</th>
                 <th className={`py-2 px-4 text-lg md:text-3xl text-center ${permission !== "administrator" ? "rounded-tr-xl" : ""}`}>
-                  ชื่อเล่น
+                  การเข้า/ออกระบบ
                 </th>
-                {permission === "administrator" && (
-                  <th className="py-2 px-4 text-lg md:text-3xl text-center rounded-tr-xl">
-                    แก้ไข
-                  </th>
-                )}
               </tr>
             </thead>
             <tbody>
@@ -167,16 +143,6 @@ export default function LogPage() {
                   <td className="py-2 px-4 text-center text-sm md:text-xl">
                     {row.nickname}
                   </td>
-                  {permission === "administrator" && (
-                    <td className="py-2 px-4 text-center text-sm md:text-xl">
-                      <button
-                        onClick={() => handleEditClick(row.staff_id)}
-                        className="py-1 px-3 bg-blue-500 text-white rounded"
-                      >
-                        แก้ไข
-                      </button>
-                    </td>
-                  )}
                 </tr>
               ))}
             </tbody>
