@@ -10,6 +10,7 @@ export default function StaffListPage() {
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [searchTerm, setSearchTerm] = useState('');
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [permission, setPermission] = useState("");
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const staffIdFromQuery = queryParams.get('staff_id');
@@ -28,8 +29,20 @@ export default function StaffListPage() {
       }
     };
 
+    const fetchPermission = async () => {
+      try {
+        const response = await axios.get(`/auth/permission`);
+        setPermission(response.data.permission);
+        console.log(response.data.permission);
+      }
+       catch (error) {
+        console.error("Error fetching permission:", error);
+      }
+
     fetchData();
-  }, []);
+    fetchPermission();
+  };
+ }, []);
 
   useEffect(() => {
     if (searchInputRef.current) {
