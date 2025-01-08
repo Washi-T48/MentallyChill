@@ -18,6 +18,7 @@ export default function SignInPage() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    update(permission);
     const data = new FormData(event.target);
     axios.post("/login", {
       staff_id: data.get("username"),
@@ -25,7 +26,6 @@ export default function SignInPage() {
     })
       .then(() => {
         console.log("Login successful");
-        update(permission);
         navigate("/dashboard");
       })
       .catch((error) => {
