@@ -1,7 +1,6 @@
 import axios from "../components/axioscreds";
 import { useState, useEffect, useContext } from "react";
 import { useNavigate, useLocation, useParams } from "react-router-dom";
-import { AuthContext } from "../context/AuthContext";
 
 export default function Sidebar() {
   const [isDashboardActive, setIsDashboardActive] = useState(true);
@@ -12,12 +11,27 @@ export default function Sidebar() {
   const [isEditProfileActive, setIsEditProfileActive] = useState(false);
   const [isStaffListActive, setIsStaffListActive] = useState(false);
   const [isUserListActive, setIsUserListActive] = useState(false);
+  const [permission, setPermission] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
 
-  const { permission } = useContext(AuthContext);
 
   const { bookingId } = useParams();
+
+  useEffect(() => {
+    const fetchPermission = async () => {
+      try {
+        const response = await axios.get("/auth/permission");
+        console.log(response.data.permission);
+      } catch (error) {
+        console.error("Error fetching permission:", error);
+      }
+    };
+
+    fetchPermission();
+  }, [permission]);
+    
+
 
 
   useEffect(() => {
