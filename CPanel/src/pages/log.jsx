@@ -32,6 +32,26 @@ export default function LogPage() {
     fetchData();
  }, []);
 
+ useEffect(() => {
+    const fetchPermission = async () => {
+        try {
+            const response = await axios.get('/auth/permission', { withCredentials: true });
+            setPermission(response.data.permission);
+            if (response.data.permission !== 'administrator') {
+                navigate('/dashboard');
+            } else {
+                console.log(response.data.permission);
+                navigate('/log');
+            }
+        } catch (error) {
+            console.error('Error fetching permission', error);
+
+        }
+    };
+
+    fetchPermission();
+}, []);
+
   useEffect(() => {
     if (searchInputRef.current) {
       searchInputRef.current.focus();
