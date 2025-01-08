@@ -21,6 +21,7 @@ export default function RegisterPage() {
             try {
                 const response = await axios.get('/auth/permission', { withCredentials: true });
                 setPermission(response.data.permission);
+                navigate('/register');
             } catch (error) {
                 console.error('Error fetching permission', error);
                 navigate('/dashboard');
