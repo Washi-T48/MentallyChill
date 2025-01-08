@@ -121,10 +121,10 @@ export default function LogPage() {
                   </button> */}
                 </th>
                 <th className="py-2 px-4 text-lg md:text-3xl text-center">เลขที่เจ้าหน้าที่</th>
-                <th className="py-2 px-4 text-lg md:text-3xl text-center rounded-tr-xl">
+                <th className="py-2 px-4 text-lg md:text-3xl text-center">
                   การเข้า/ออกระบบ
                 </th>
-                <th className="py-2 px-4 text-lg md:text-3xl text-center rounded-tr-xl">
+                <th className="py-2 px-4 text-lg md:text-3xl text-center">
                   วันที่
                 </th>
                 <th className="py-2 px-4 text-lg md:text-3xl text-center rounded-tr-xl">
@@ -145,6 +145,12 @@ export default function LogPage() {
                   </td>
                   <td className="py-2 px-4 text-center text-sm md:text-xl">
                     {row.name} {row.surname}
+                  </td>
+                  <td className="py-2 px-4 text-center text-sm md:text-xl">
+                    {row.nickname}
+                  </td>
+                  <td className="py-2 px-4 text-center text-sm md:text-xl">
+                    {row.nickname}
                   </td>
                   <td className="py-2 px-4 text-center text-sm md:text-xl">
                     {row.nickname}
