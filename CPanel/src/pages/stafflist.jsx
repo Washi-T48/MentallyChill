@@ -38,10 +38,10 @@ export default function StaffListPage() {
        catch (error) {
         console.error("Error fetching permission:", error);
       }
+    };
 
     fetchData();
     fetchPermission();
-  };
  }, []);
 
   useEffect(() => {
