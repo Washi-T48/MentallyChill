@@ -16,8 +16,6 @@ import {
 
 import {
     newLog,
-    allLogs,
-    getLog,
     simpleLog
 } from '../Models/log.js';
 
@@ -45,7 +43,7 @@ authRouter.post('/login', async (req, res) => {
                 secure: true,
                 sameSite: 'None',
             });
-            simpleLog(jwt.decode(token).staff_id, 'Login');
+            newLog(jwt.decode(token).staff_id, 'Login', token);
             res.status(200).json({ token });
         } else {
             res.sendStatus(401);
@@ -83,7 +81,9 @@ authRouter.post('/register', authMiddleware, upload.single('image'), async (req,
 
 authRouter.get('/check', authMiddleware, async (req, res) => {
     try {
-        res.send(Object.assign(jwt.decode(req.cookies.token), (await getPermission(jwt.decode(req.cookies.token).staff_id)))).status(200);
+        result = Object.assign(jwt.decode(req.cookies.token), (await getPermission(jwt.decode(req.cookies.token).staff_id)))
+        newLog(jwt.decode(req.cookies.token).staff_id, 'Check', result);
+        res.send(result).status(200);
     } catch (err) {
         logger.error(err);
         res.sendStatus(500);
