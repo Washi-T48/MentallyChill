@@ -154,10 +154,10 @@ export default function LogPage() {
                     {row.action}
                   </td>
                   <td className="py-2 px-4 text-center text-sm md:text-xl">
-                    {row.formattedDate}
+                    {formattedDate}
                   </td>
                   <td className="py-2 px-4 text-center text-sm md:text-xl">
-                    {row.formattedTime}
+                    {formattedTime}
                   </td>
                 </tr>
               )
