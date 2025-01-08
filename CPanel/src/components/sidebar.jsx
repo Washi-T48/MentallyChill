@@ -282,7 +282,7 @@ export default function Sidebar() {
         navigate("/userlist");
         break;
       case "log":
-        setIsDashboardActive(true);
+        setIsDashboardActive(false);
         setIsDiagnosisActive(false);
         setIsBookingActive(false);
         setIsAssignDate(false);
