@@ -16,11 +16,6 @@ export default function RegisterPage() {
 
     const [permission, setPermission] = useState(null);
 
-    const roleoptions = [   
-        { value: 'administrator', label: 'ผู้ดูแลระบบ' },
-        { value: 'staff', label: 'เจ้าหน้าที่' },
-    ];
-
     useEffect(() => {
         const fetchPermission = async () => {
             try {
@@ -67,7 +62,7 @@ export default function RegisterPage() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        const { staff_id, name, surname, nickname,permission, password, confirm_password } = event.target.elements;
+        const { staff_id, name, surname, nickname, password, confirm_password } = event.target.elements;
 
         if (password.value !== confirm_password.value) {
             setErrorMessage('รหัสผ่านไม่ตรงกัน');
@@ -79,7 +74,6 @@ export default function RegisterPage() {
         formData.append('name', name.value);
         formData.append('surname', surname.value);
         formData.append('nickname', nickname.value);
-        formData.append('permission', permission.value);
         formData.append('password', password.value);
 
         if (imageFile) {
@@ -161,21 +155,6 @@ export default function RegisterPage() {
                                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 required
                             />
-                        </div>
-                        <div className="mb-4">
-                            <label htmlFor="permission" className="block text-gray-700 text-sm font-bold mb-2">ตำแหน่ง</label>
-                            <select 
-                                name="permission"
-                                id= "permission"
-                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
-                                required
-                            >
-                                {roleoptions.map((option) => (
-                                    <option key={option.value} value={option.value}>
-                                        {option.label}
-                                    </option>
-                                ))}
-                            </select>
                         </div>
                         <div className="mb-4">
                             <label htmlFor="staff_id" className="block text-gray-700 text-sm font-bold mb-2">บัญชีผู้ใช้</label>

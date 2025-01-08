@@ -56,7 +56,7 @@ authRouter.post('/login', async (req, res) => {
 
 authRouter.post('/register', authMiddleware, upload.single('image'), async (req, res) => {
     try {
-        const { staff_id, name, surname, nickname,permission, password } = req.body;
+        const { staff_id, name, surname, nickname, password } = req.body;
         const image = req.file.buffer.toString('base64');
 
         if (!staff_id || !password) {
@@ -66,9 +66,9 @@ authRouter.post('/register', authMiddleware, upload.single('image'), async (req,
 
         const staff = await findStaff(staff_id);
         if (!staff) {
-            const createStaff = await newStaff(staff_id, name, surname, nickname,permission, image);
+            const createStaff = await newStaff(staff_id, name, surname, nickname, image);
             const updatePassword = await registerStaff(staff_id, password);
-            newLog(staff_id, 'Register', { staff_id, name, surname, nickname,permission });
+            newLog(staff_id, 'Register', { staff_id, name, surname, nickname });
             res.status(200).send(updatePassword);
         } else {
             res.status(401).send('Account already exists');
