@@ -78,14 +78,7 @@ const handleSave = async () => {
         updatedData.password = staffData.password;
       }
       if (imageFile) {
-        const reader = new FileReader();
-        reader.onload = async (e) => {
-          const base64Image = e.target.result.split(",")[1];
-          updatedData.image = base64Image;
-          await axios.put(`/staff/update`, updatedData);
-          alert("Staff data updated successfully!");
-        };
-        reader.readAsDataURL(imageFile);
+        updatedData.image = staffData.image;
       }
       //   if (staffData.permission) {
       //   updatedData.permission = staffData.permission;
