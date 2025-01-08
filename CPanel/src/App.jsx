@@ -17,6 +17,7 @@ import AuthCheck from "./components/authCheck";
 import ProtectedRoute from "./components/protectedroute";
 import EditProfilePage from "./pages/editprofile";
 
+import { AuthProvider } from "./context/AuthContext";
 
 function App() {
 
@@ -37,6 +38,7 @@ function App() {
 
   return (
     <>
+    <AuthProvider>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={isLoggedIn ? <DashboardPage /> : <SignInPage />} />
@@ -56,6 +58,7 @@ function App() {
           <Route path="/userlist" element={<ProtectedRoute element={UserListPage} />} />
         </Routes>
       </BrowserRouter>
+    </AuthProvider>
     </>
   );
 }
