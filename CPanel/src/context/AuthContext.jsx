@@ -5,7 +5,6 @@ export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [permission, setPermission] = useState('');
-  const [staff, setStaff] = useState('');
 
   useEffect(() => {
     const fetchPermission = async () => {
@@ -17,25 +16,15 @@ export const AuthProvider = ({ children }) => {
       }
     };
 
-    const fetchStaffData = async () => {
-      try {
-        const response = await axios.get('/auth/check');
-        setStaff(response.data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-
-    fetchStaffData();
     fetchPermission();
   }, []);
 
   const update = (userData) => {
-    setPermission(userData.permission);
+    setPermission(userData);
   }
 
   return (
-    <AuthContext.Provider value={{ permission, staff, update }}>
+    <AuthContext.Provider value={{ permission, update }}>
       {children}
     </AuthContext.Provider>
   );
