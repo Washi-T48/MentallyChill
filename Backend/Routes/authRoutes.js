@@ -45,7 +45,7 @@ authRouter.post('/login', async (req, res) => {
                 secure: true,
                 sameSite: 'None',
             });
-            newLog(staff_id, 'Login', { 'ip': req.headers['x-forwarded-for'] });
+            simpleLog(staff_id, 'Login');
             res.status(200).json({ token });
         } else {
             res.sendStatus(401);
