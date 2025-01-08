@@ -180,6 +180,7 @@ export default function Sidebar() {
         setIsStaffListActive(false);
         setIsUserListActive(false);
         setIsLogActive(true);
+        break;
       default:
         setIsDashboardActive(false);
         setIsDiagnosisActive(false);
