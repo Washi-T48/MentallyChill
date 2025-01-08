@@ -21,7 +21,7 @@ export default function LogPage() {
 
     const fetchData = async () => {
       try {
-        const response = await axios.get(`/staff/all`);
+        const response = await axios.get(`/log/all`);
         setData(response.data);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -112,7 +112,7 @@ export default function LogPage() {
             <thead>
               <tr className="bg-[#003087] text-white">
                 <th className="py-2 px-4 text-lg md:text-3xl text-center rounded-tl-xl">
-                  รหัสบันทึก
+                  เลขที่บันทึก
                   {/* <button
                     onClick={toggleSortOrder}
                     className="ml-2 py-1 px-2 bg-gray-300 text-black rounded text-sm md:text-2xl"
@@ -141,19 +141,19 @@ export default function LogPage() {
                   }`}
                 >
                   <td className="py-2 px-4 text-center text-sm md:text-xl">
-                    {row.staff_id.substr(0, 10)}
+                    {row.id}
                   </td>
                   <td className="py-2 px-4 text-center text-sm md:text-xl">
-                    {row.name} {row.surname}
+                    {row.staff_id}
                   </td>
                   <td className="py-2 px-4 text-center text-sm md:text-xl">
-                    {row.nickname}
+                    {row.action}
                   </td>
                   <td className="py-2 px-4 text-center text-sm md:text-xl">
-                    {row.nickname}
+                    {row.action}
                   </td>
                   <td className="py-2 px-4 text-center text-sm md:text-xl">
-                    {row.nickname}
+                    {row.action}
                   </td>
                 </tr>
               ))}
