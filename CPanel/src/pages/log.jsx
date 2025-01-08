@@ -124,6 +124,12 @@ export default function LogPage() {
                 <th className="py-2 px-4 text-lg md:text-3xl text-center rounded-tr-xl">
                   การเข้า/ออกระบบ
                 </th>
+                <th className="py-2 px-4 text-lg md:text-3xl text-center rounded-tr-xl">
+                  วันที่
+                </th>
+                <th className="py-2 px-4 text-lg md:text-3xl text-center rounded-tr-xl">
+                  เวลา
+                </th>
               </tr>
             </thead>
             <tbody>
