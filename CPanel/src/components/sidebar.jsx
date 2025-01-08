@@ -16,6 +16,7 @@ export default function Sidebar() {
   const location = useLocation();
 
   const { permission } = useContext(AuthContext);
+  const { update } = useContext(AuthContext);
 
   const { bookingId } = useParams();
 
@@ -155,6 +156,7 @@ export default function Sidebar() {
       setIsStaffListActive(true);
       setIsBookingActive(false);
     }
+    update(permission);
   }, [location.pathname]);
 
   const checkActive = (section) => {

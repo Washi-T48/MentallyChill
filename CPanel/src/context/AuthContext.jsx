@@ -17,11 +17,11 @@ export const AuthProvider = ({ children }) => {
     };
 
     fetchPermission();
-  }, [permission]);
+  }, []);
 
-  const update = (userData) => {
-    setPermission(userData);
-  }
+  const update = (permission) => {
+    setPermission(permission);
+  };
 
   return (
     <AuthContext.Provider value={{ permission, update }}>
