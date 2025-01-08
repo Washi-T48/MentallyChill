@@ -16,9 +16,14 @@ export default function Sidebar() {
   const location = useLocation();
 
   const { permission } = useContext(AuthContext);
-  const { update } = useContext(AuthContext);
 
   const { bookingId } = useParams();
+
+  useEffect(() => {
+    if (!permission) {
+      navigate("/signin");
+    }
+  }, [permission, navigate]);
 
   useEffect(() => {
     switch (location.pathname) {
