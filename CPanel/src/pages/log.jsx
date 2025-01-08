@@ -10,6 +10,7 @@ export default function LogPage() {
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [searchTerm, setSearchTerm] = useState('');
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [permission, setPermission] = useState('');
   const [sortOrder, setSortOrder] = useState("newest");
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
