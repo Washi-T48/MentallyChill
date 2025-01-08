@@ -2,7 +2,6 @@ import Sidebar from "../components/sidebar";
 import Topbar from "../components/topbar";
 import axios from "../components/axioscreds";
 import { useState, useContext, useEffect } from "react";
-import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 export default function RegisterPage() {
@@ -12,16 +11,30 @@ export default function RegisterPage() {
     const [modalOpen, setModalOpen] = useState(false);
     const [imageFile, setImageFile] = useState(null);
     const [imageURL, setImageURL] = useState('');
-    const { permission } = useContext(AuthContext);
 
     const navigate = useNavigate();
 
+    const [permission, setPermission] = useState(null);
+
     useEffect(() => {
-        if (!permission) {
-            console.log('Permission not found');
+        const fetchPermission = async () => {
+            try {
+                const response = await axios.get('/auth/permission', { withCredentials: true });
+                setPermission(response.data.permission);
+            } catch (error) {
+                console.error('Error fetching permission', error);
+                navigate('/dashboard');
+            }
+        };
+
+        fetchPermission();
+    }, []);
+
+    useEffect(() => {
+        if (permission !== 'administrator') {
             navigate('/dashboard');
         }
-    }, [permission]);
+    }, [permission, navigate]);
 
     const handleRegister = async (data) => {
         try {
