@@ -38,8 +38,9 @@ function App() {
 
   return (
     <>
+    <AuthProvider>
       <BrowserRouter>
-      <AuthProvider>
+      
         <Routes>
           <Route path="/" element={isLoggedIn ? <DashboardPage /> : <SignInPage />} />
           <Route path="/signin" element={<SignInPage />} />
@@ -57,8 +58,9 @@ function App() {
           <Route path="/userlist" element={<ProtectedRoute element={UserListPage} />} />
         
         </Routes>
-        </AuthProvider>
+        
       </BrowserRouter>
+      </AuthProvider>
     </>
   );
 }
