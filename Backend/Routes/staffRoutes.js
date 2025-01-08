@@ -37,18 +37,19 @@ staffRouter.delete('/delete', async (req, res) => {
     }
 });
 
-staffRouter.put('/update', async (req, res) => {
+staffRouter.put('/update', upload.single('image'), async (req, res) => {
     try {
         const { staff_id, name, surname, nickname, description } = req.body;
-        const image = req.file.buffer.toString('base64');
+        const image = req.file ? req.file.buffer.toString('base64') : null;
         const staff = await updateStaff(staff_id, name, surname, nickname, description, image);
         res.status(200).json(staff);
-    }
-    catch (error) {
+    } catch (error) {
+        console.error('Update Staff Error:', error);
         logger.error(error);
         res.sendStatus(500);
     }
 });
+
 
 staffRouter.get('/lookup/:staff_id', async (req, res) => {
     try {

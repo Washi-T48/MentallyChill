@@ -25,7 +25,7 @@ const deleteStaff = async (staff_id) => {
 //     return (staff["rows"][0])
 // };
 
-const updateStaff = async (staff_id, name, surname, nickname, permission) => {
+const updateStaff = async (staff_id, name, surname, nickname, permission, image) => {
     const fields = [];
     const values = [staff_id];
 
@@ -41,10 +41,10 @@ const updateStaff = async (staff_id, name, surname, nickname, permission) => {
         values.push(nickname);
         fields.push(`nickname = $${values.length}`);
     }
-    if (permission) {
-        values.push(permission);
-        fields.push(`permission = $${values.length}`);
-    }
+    // if (permission) {
+    //     values.push(permission);
+    //     fields.push(`permission = $${values.length}`);
+    // }
     if (image) {
         values.push(image);
         fields.push(`image = $${values.length}`);
@@ -57,7 +57,6 @@ const updateStaff = async (staff_id, name, surname, nickname, permission) => {
     const staff = await pool.query(query, values);
     return staff.rows[0];
 };
-
 const lookupStaff = async (staff_id) => {
     const staff = await pool.query(
         `SELECT staff_id, name, surname, nickname, image, description, permission FROM staff WHERE staff_id = $1 ORDER BY created DESC`,
