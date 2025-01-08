@@ -1,3 +1,4 @@
+import { use } from "react";
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation, useParams } from "react-router-dom";
 
@@ -10,10 +11,25 @@ export default function Sidebar() {
   const [isEditProfileActive, setIsEditProfileActive] = useState(false);
   const [isStaffListActive, setIsStaffListActive] = useState(false);
   const [isUserListActive, setIsUserListActive] = useState(false);
+  const [permission, setPermission] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
 
   const { bookingId } = useParams();
+
+  useEffect(() => {
+    const fetchPermission = async () => {
+      try {
+        const response = await axios.get(`/auth/permission`);
+        setPermission(response.data.permission);
+        console.log(response.data.permission);
+      } catch (error) {
+        console.error("Error fetching permission:", error);
+      }
+    };
+
+    fetchPermission();
+  }, []);
 
   useEffect(() => {
     switch (location.pathname) {
@@ -299,14 +315,16 @@ export default function Sidebar() {
           >
             รายชื่อผู้ใช้
           </div>
-          <div
-            onClick={() => checkActive("register")}
-            className={`flex items-center justify-center p-5 rounded-md cursor-pointer w-full text-2xl ${
-              isRegisterActive ? "bg-[#003087] text-white" : "hover:bg-gray-300"
-            }`}
-          >
-            เพิ่มบัญชีเจ้าหน้าที่
-          </div>
+          {permission === "administrator" && (
+            <div
+              onClick={() => checkActive("register")}
+              className={`flex items-center justify-center p-5 rounded-md cursor-pointer w-full text-2xl ${
+                isRegisterActive ? "bg-[#003087] text-white" : "hover:bg-gray-300"
+              }`}
+            >
+              เพิ่มบัญชีเจ้าหน้าที่
+            </div>
+          )}
           {/* <div
             onClick={() => checkActive("editprofile")}
             className={`flex items-center justify-center p-5 rounded-md cursor-pointer w-full text-2xl ${
