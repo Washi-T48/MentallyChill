@@ -81,9 +81,8 @@ authRouter.post('/register', authMiddleware, upload.single('image'), async (req,
 
 authRouter.get('/check', authMiddleware, async (req, res) => {
     try {
-        result = Object.assign(jwt.decode(req.cookies.token), (await getPermission(jwt.decode(req.cookies.token).staff_id)))
-        newLog(jwt.decode(req.cookies.token).staff_id, 'Check', result);
-        res.send(result).status(200);
+        newLog(jwt.decode(req.cookies.token).staff_id, 'Check', jwt.decode(req.cookies.token));
+        res.send(Object.assign(jwt.decode(req.cookies.token), (await getPermission(jwt.decode(req.cookies.token).staff_id)))).status(200);
     } catch (err) {
         logger.error(err);
         res.sendStatus(500);
