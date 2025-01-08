@@ -38,12 +38,12 @@ function App() {
 
   return (
     <>
-    <AuthProvider>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={isLoggedIn ? <DashboardPage /> : <SignInPage />} />
           {/* <Route path="/" element={<SignInPage />} /> */}
           <Route path="/signin" element={<SignInPage />} />
+        <AuthProvider>
           <Route path="/dashboard" element={<ProtectedRoute element={DashboardPage} />} />
           <Route path="/diagnosis" element={<ProtectedRoute element={DiagnosisPage} />} />
           <Route path="/bookinginfo" element={<ProtectedRoute element={BookingInfoPage} />} />
@@ -56,9 +56,9 @@ function App() {
           <Route path="/editstaff/:staffId" element={<ProtectedRoute element={EditStaffPage} />} />
           <Route path="/stafflist" element={<ProtectedRoute element={StaffListPage} />} />
           <Route path="/userlist" element={<ProtectedRoute element={UserListPage} />} />
+        </AuthProvider>
         </Routes>
       </BrowserRouter>
-    </AuthProvider>
     </>
   );
 }
