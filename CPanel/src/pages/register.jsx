@@ -24,7 +24,6 @@ export default function RegisterPage() {
                 navigate('/register');
             } catch (error) {
                 console.error('Error fetching permission', error);
-                navigate('/dashboard');
             }
         };
 
