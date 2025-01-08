@@ -15,9 +15,7 @@ export default function Sidebar() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const { update } = useContext(AuthContext);
-
-  update(permission);
+  const { permission } = useContext(AuthContext);
 
   const { bookingId } = useParams();
 

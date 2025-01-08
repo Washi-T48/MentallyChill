@@ -17,7 +17,7 @@ export const AuthProvider = ({ children }) => {
     };
 
     fetchPermission();
-  }, []);
+  }, [permission]);
 
   const update = (userData) => {
     setPermission(userData);
