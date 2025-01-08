@@ -11,7 +11,8 @@ export default function EditStaffPage() {
     name: "",
     surname: "",
     nickname: "",
-    permission: ""
+    // password: "",
+    image: ""
   });
 
   const navigate = useNavigate();
@@ -42,6 +43,18 @@ export default function EditStaffPage() {
     }));
   };
 
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    if (file && file.type.startsWith('image/')) {
+        setImageFile(file);
+        const imageURL = URL.createObjectURL(file);
+        setImageURL(imageURL);
+    } else {
+        setErrorMessage('โปรดเลือกไฟล์ที่ถูกต้อง');
+    }
+};
+
+
 const handleSave = async () => {
     try {
       const updatedData = {
@@ -56,6 +69,11 @@ const handleSave = async () => {
       if (staffData.surname) {
         updatedData.surname = staffData.surname;
       }
+      if (staffData.password) {
+        updatedData.password = staffData.password;
+      }
+
+      
       //   if (staffData.permission) {
       //   updatedData.permission = staffData.permission;
       // }
@@ -86,6 +104,21 @@ const handleSave = async () => {
           <div className="p-4 md:p-10">
             <h1 className="text-3xl mb-6">แก้ไขข้อมูลพนักงาน</h1>
             <p className="text-3xl mb-6">เลขที่เจ้าหน้าที่: {staffId}</p>
+            <div className="mb-4">
+              <label htmlFor="image" className="block text-gray-700 text-sm font-bold mb-2">รูปภาพเจ้าหน้าที่</label>
+                <input 
+                  type="file" 
+                  id="image" 
+                  name="image" 
+                  accept="image/*"
+                  onChange={handleFileChange}
+                />
+                  {imageURL && (
+                    <div className="mt-4">
+                      <img src={imageURL} alt="Preview" className="h-40 w-40 object-cover" />
+                    </div>
+                  )}
+            </div>
             <div className="mb-4">
               <label className="block text-lg mb-2">ชื่อ</label>
               <input

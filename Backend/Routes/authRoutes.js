@@ -124,8 +124,10 @@ authRouter.post('/changePassword', authMiddleware, async (req, res) => {
 authRouter.post('/updateStaff', authMiddleware, async (req, res) => {
     try {
         const { staff_id, name, surname, nickname,permission } = req.body;
-        const staff = await updateStaff(staff_id, name, surname, nickname, permission);
-        newLog(staff_id, 'Update', { staff_id, name, surname, nickname, permission });
+        const image = req.file.buffer.toString('base64');
+
+        const staff = await updateStaff(staff_id, name, surname, nickname, image, permission);
+        newLog(staff_id, 'Update', { staff_id, name, surname, nickname, image, permission });
         res.status(200).json(staff);
     } catch (err) {
         logger.error(err);

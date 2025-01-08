@@ -2,8 +2,8 @@ import pool from '../Config/db.js';
 
 const newStaff = async (staff_id, name, surname, nickname, image) => {
     const result = await pool.query(`
-        INSERT INTO staff (staff_id, name, surname, nickname, image) VALUES ($1, $2, $3, $4, $5) RETURNING *`,
-        [staff_id, name, surname, nickname, image]
+        INSERT INTO staff (staff_id, name, surname, nickname, image, permission) VALUES ($1, $2, $3, $4, $5) RETURNING *`,
+        [staff_id, name, surname, nickname, image, permission]
     );
     return result.rows[0];
 };
@@ -44,6 +44,10 @@ const updateStaff = async (staff_id, name, surname, nickname, permission) => {
     if (permission) {
         values.push(permission);
         fields.push(`permission = $${values.length}`);
+    }
+    if (image) {
+        values.push(image);
+        fields.push(`image = $${values.length}`);
     }
     if (fields.length === 0) {
         throw new Error('No fields to update');
