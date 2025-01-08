@@ -139,10 +139,11 @@ export default function StaffListPage() {
                 </th>
                 <th className="py-2 px-4 text-lg md:text-3xl text-center">ชื่อเจ้าหน้าที่</th>
                 <th className="py-2 px-4 text-lg md:text-3xl text-center">ชื่อเล่น</th>
-                {/* <th className="py-2 px-4 text-lg md:text-3xl text-center">ตำแหน่ง</th> */}
-                <th className="py-2 px-4 text-lg md:text-3xl text-center rounded-tr-xl">
-                  แก้ไข
-                </th>
+                {permission === "administrator" && (
+                  <th className="py-2 px-4 text-lg md:text-3xl text-center rounded-tr-xl">
+                    แก้ไข
+                  </th>
+                )}
               </tr>
             </thead>
             <tbody>
@@ -162,17 +163,16 @@ export default function StaffListPage() {
                   <td className="py-2 px-4 text-center text-sm md:text-xl">
                     {row.nickname}
                   </td>
-                  {/* <td className="py-2 px-4 text-center text-sm md:text-xl">
-                    {row.permission}
-                  </td> */}
-                  <td className="py-2 px-4 text-center text-sm md:text-xl">
-                    <button
-                      onClick={() => handleEditClick(row.staff_id)}
-                      className="py-1 px-3 bg-blue-500 text-white rounded"
-                    >
-                      แก้ไข
-                    </button>
-                  </td>
+                  {permission === "administrator" && (
+                    <td className="py-2 px-4 text-center text-sm md:text-xl">
+                      <button
+                        onClick={() => handleEditClick(row.staff_id)}
+                        className="py-1 px-3 bg-blue-500 text-white rounded"
+                      >
+                        แก้ไข
+                      </button>
+                    </td>
+                  )}
                 </tr>
               ))}
             </tbody>
