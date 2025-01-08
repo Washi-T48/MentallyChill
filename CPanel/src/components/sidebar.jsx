@@ -19,11 +19,6 @@ export default function Sidebar() {
 
   const { bookingId } = useParams();
 
-  useEffect(() => {
-    if (!permission) {
-      navigate("/signin");
-    }
-  }, [permission, navigate]);
 
   useEffect(() => {
     switch (location.pathname) {
