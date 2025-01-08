@@ -18,13 +18,13 @@ export default function SignInPage() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    update(user);
     const data = new FormData(event.target);
     axios.post("/login", {
       staff_id: data.get("username"),
       password: data.get("password")
     })
       .then(() => {
+        update(user);
         console.log("Login successful");
         navigate("/dashboard");
       })
