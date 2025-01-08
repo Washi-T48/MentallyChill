@@ -160,11 +160,10 @@ export default function EditStaffPage() {
             <div className="mb-4">
               <label className="block text-lg mb-2">ตำแหน่ง</label>
               <select
-                name="permission"
-                defaultValue={staffData.permission}
-                value={staffData.permission}
-                onChange={handleInputChange}
-                className="py-2 px-4 rounded border w-full"
+                  name="permission"
+                  value={staffData.permission}
+                  onChange={handleInputChange}
+                  className="py-2 px-4 rounded border w-full"
               >
                 <option value="administrator">ผู้ดูแลระบบ</option>
                 <option value="staff">เจ้าหน้าที่</option>
