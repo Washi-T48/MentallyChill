@@ -2,8 +2,8 @@ import Sidebar from "../components/sidebar";
 import Topbar from "../components/topbar";
 import axios from "../components/axioscreds";
 import { useState, useContext, useEffect } from "react";
-import { navigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 export default function RegisterPage() {
     const [loading, setLoading] = useState(false);
@@ -13,6 +13,8 @@ export default function RegisterPage() {
     const [imageFile, setImageFile] = useState(null);
     const [imageURL, setImageURL] = useState('');
     const { permission } = useContext(AuthContext);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (!permission) {
