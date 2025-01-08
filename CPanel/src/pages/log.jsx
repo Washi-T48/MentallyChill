@@ -121,7 +121,7 @@ export default function LogPage() {
                   </button> */}
                 </th>
                 <th className="py-2 px-4 text-lg md:text-3xl text-center">เลขที่เจ้าหน้าที่</th>
-                <th className={`py-2 px-4 text-lg md:text-3xl text-center ${permission !== "administrator" ? "rounded-tr-xl" : ""}`}>
+                <th className="py-2 px-4 text-lg md:text-3xl text-center rounded-tr-xl">
                   การเข้า/ออกระบบ
                 </th>
               </tr>
