@@ -1,8 +1,11 @@
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useContext } from "react";
 import axios from "../components/axioscreds";
+import { AuthContext } from "../context/AuthContext";
 
 export default function SignInPage() {
+  const { update } = useContext(AuthContext);
+
   useEffect(() => {
     document.body.style.backgroundColor = "white";
     // Cleanup to reset the background color when component unmounts
@@ -12,6 +15,7 @@ export default function SignInPage() {
   }, []);
 
   const navigate = useNavigate();
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.target);
@@ -21,6 +25,7 @@ export default function SignInPage() {
     })
       .then(() => {
         console.log("Login successful");
+        update(user);
         navigate("/dashboard");
       })
       .catch((error) => {

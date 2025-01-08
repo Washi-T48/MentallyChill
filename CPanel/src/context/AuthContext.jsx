@@ -30,8 +30,12 @@ export const AuthProvider = ({ children }) => {
     fetchPermission();
   }, []);
 
+  const update = (userData) => {
+    setPermission(userData.permission);
+  }
+
   return (
-    <AuthContext.Provider value={{ permission, staff }}>
+    <AuthContext.Provider value={{ permission, staff, update }}>
       {children}
     </AuthContext.Provider>
   );
