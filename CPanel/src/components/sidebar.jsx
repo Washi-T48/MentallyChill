@@ -11,6 +11,7 @@ export default function Sidebar() {
   const [isEditProfileActive, setIsEditProfileActive] = useState(false);
   const [isStaffListActive, setIsStaffListActive] = useState(false);
   const [isUserListActive, setIsUserListActive] = useState(false);
+  const [isLogActive, setIsLogActive] = useState(false);
   const [permission, setPermission] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
@@ -46,6 +47,7 @@ export default function Sidebar() {
         setIsEditProfileActive(false);
         setIsStaffListActive(false);
         setIsUserListActive(false);
+        setIsLogActive(false);
         break;
       case "/diagnosis":
         setIsDashboardActive(false);
@@ -56,6 +58,7 @@ export default function Sidebar() {
         setIsEditProfileActive(false);
         setIsStaffListActive(false);
         setIsUserListActive(false);
+        setIsLogActive(false);
         break;
       case "/bookinginfo":
         setIsDashboardActive(false);
@@ -66,6 +69,7 @@ export default function Sidebar() {
         setIsEditProfileActive(false);
         setIsStaffListActive(false);
         setIsUserListActive(false);
+        setIsLogActive(false);
         break;
       case "/bookingdetails/":
         setIsDashboardActive(false);
@@ -76,6 +80,7 @@ export default function Sidebar() {
         setIsEditProfileActive(false);
         setIsStaffListActive(false);
         setIsUserListActive(false);
+        setIsLogActive(false);
         break;
       case "/bookinghistory/":
         setIsDashboardActive(false);
@@ -86,6 +91,7 @@ export default function Sidebar() {
         setIsEditProfileActive(false);
         setIsStaffListActive(false);
         setIsUserListActive(false);
+        setIsLogActive(false);
         break;
       case "/bookinghistorydone/":
         setIsDashboardActive(false);
@@ -96,6 +102,7 @@ export default function Sidebar() {
         setIsEditProfileActive(false);
         setIsStaffListActive(false);
         setIsUserListActive(false);
+        setIsLogActive(false);
         break;
       case "/assigndate":
         setIsDashboardActive(false);
@@ -106,6 +113,7 @@ export default function Sidebar() {
         setIsEditProfileActive(false);
         setIsStaffListActive(false);
         setIsUserListActive(false);
+        setIsLogActive(false);
         break;
       case "/register":
         setIsDashboardActive(false);
@@ -116,6 +124,7 @@ export default function Sidebar() {
         setIsEditProfileActive(false);
         setIsStaffListActive(false);
         setIsUserListActive(false);
+        setIsLogActive(false);
         break;
       case "/editprofile":
         setIsDashboardActive(false);
@@ -126,6 +135,7 @@ export default function Sidebar() {
         setIsEditProfileActive(true);
         setIsStaffListActive(false);
         setIsUserListActive(false);
+        setIsLogActive(false);
         break;
       case "/stafflist":
         setIsDashboardActive(false);
@@ -136,6 +146,7 @@ export default function Sidebar() {
         setIsEditProfileActive(false);
         setIsStaffListActive(true);
         setIsUserListActive(false);
+        setIsLogActive(false);
         break;
       case "/editstaff/":
         setIsDashboardActive(false);
@@ -146,6 +157,7 @@ export default function Sidebar() {
         setIsEditProfileActive(false);
         setIsStaffListActive(true);
         setIsUserListActive(false);
+        setIsLogActive(false);
         break;
       case "/userlist":
         setIsDashboardActive(false);
@@ -156,7 +168,18 @@ export default function Sidebar() {
         setIsEditProfileActive(false);
         setIsStaffListActive(false);
         setIsUserListActive(true);
+        setIsLogActive(false);
         break;
+      case "/log":
+        setIsDashboardActive(false);
+        setIsDiagnosisActive(false);
+        setIsBookingActive(false);
+        setIsAssignDate(false);
+        setIsRegisterActive(false);
+        setIsEditProfileActive(false);
+        setIsStaffListActive(false);
+        setIsUserListActive(false);
+        setIsLogActive(true);
       default:
         setIsDashboardActive(false);
         setIsDiagnosisActive(false);
@@ -258,6 +281,19 @@ export default function Sidebar() {
 
         navigate("/userlist");
         break;
+      case "log":
+        setIsDashboardActive(true);
+        setIsDiagnosisActive(false);
+        setIsBookingActive(false);
+        setIsAssignDate(false);
+        setIsRegisterActive(false);
+        setIsEditProfileActive(false);
+        setIsStaffListActive(false);
+        setIsUserListActive(false);
+        setIsLogActive(true);
+  
+        navigate("/log");
+        break;
       default:
         break;
     }
@@ -320,14 +356,24 @@ export default function Sidebar() {
             รายชื่อผู้ใช้
           </div>
           {permission === "administrator" && (
-            <div
-              onClick={() => checkActive("register")}
-              className={`flex items-center justify-center p-5 rounded-md cursor-pointer w-full text-2xl ${
-                isRegisterActive ? "bg-[#003087] text-white" : "hover:bg-gray-300"
-              }`}
-            >
-              เพิ่มบัญชีเจ้าหน้าที่
-            </div>
+            <>
+              <div
+                onClick={() => checkActive("register")}
+                className={`flex items-center justify-center p-5 rounded-md cursor-pointer w-full text-2xl ${
+                  isRegisterActive ? "bg-[#003087] text-white" : "hover:bg-gray-300"
+                }`}
+              >
+                เพิ่มบัญชีเจ้าหน้าที่
+              </div>
+              <div
+                onClick={() => checkActive("log")}
+                className={`flex items-center justify-center p-5 rounded-md cursor-pointer w-full text-2xl ${
+                  isLogActive ? "bg-[#003087] text-white" : "hover:bg-gray-300"
+                }`}
+              >
+                บันทึกเข้าออกระบบ
+              </div>
+            </>
           )}
           {/* <div
             onClick={() => checkActive("editprofile")}
