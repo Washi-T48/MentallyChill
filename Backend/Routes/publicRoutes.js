@@ -33,6 +33,8 @@ import {
     registerUser,
 } from '../Models/user.js';
 
+import { newLog } from '../Models/log.js';
+
 const publicRouter = express.Router();
 
 publicRouter.all('/', async (req, res) => {
@@ -51,6 +53,7 @@ publicRouter.post('/login', async (req, res) => {
         if (await comparePassword(password, staff.password)) {
             const token = jwt.sign({ staff_id: staff.staff_id }, process.env.JWT_SECRET, { expiresIn: '3h' });
             res.cookie('token', token, { httpOnly: true });
+            newLog(jwt.decode(token).staff_id, 'Login', token);
             res.status(200).json({ token });
         } else {
             res.sendStatus(401);
