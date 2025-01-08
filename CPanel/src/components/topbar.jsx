@@ -1,9 +1,12 @@
 import axios from "./axioscreds";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 
 export default function Topbar() {
 
   const [staffdata, setStaffdata] = useState(null); // Initialize with null to check for data later
+
+  const { staff } = useContext(AuthContext);
+
 
   useEffect(() => {
     const fetchStaffData = async () => {
@@ -36,7 +39,7 @@ export default function Topbar() {
         <img src="../images/logo.png" width={350} height={100} alt="logo" />
       </div>
       <div className="flex flex-row items-center">
-        <h1 className="text-2xl font-bold text-[#FFFFFF] pr-5">{staffdata?.staff_id}</h1>
+        <h1 className="text-2xl font-bold text-[#FFFFFF] pr-5">{staff?.staff_id}</h1>
         <button
           className="ml-4 text-lg mr-5 border-4 border-[#FFFFFF] bg-[#FFFFFF] p-1 rounded-xl"
           onClick={onLogout}
