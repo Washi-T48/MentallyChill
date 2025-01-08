@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Sidebar from "../components/sidebar";
 import Topbar from "../components/topbar";
-import { permission } from "process";
 
 export default function EditStaffPage() {
   const { staffId } = useParams();
