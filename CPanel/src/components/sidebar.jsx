@@ -20,20 +20,6 @@ export default function Sidebar() {
   const { bookingId } = useParams();
 
   useEffect(() => {
-    const fetchPermission = async () => {
-      try {
-        const response = await axios.get(`/auth/permission`);
-        setPermission(response.data.permission);
-        console.log(response.data.permission);
-      } catch (error) {
-        console.error("Error fetching permission:", error);
-      }
-    };
-
-    fetchPermission();
-  }, []);
-
-  useEffect(() => {
     switch (location.pathname) {
       case "/dashboard":
         setIsDashboardActive(true);
