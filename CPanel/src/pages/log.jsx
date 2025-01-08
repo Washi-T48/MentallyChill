@@ -123,8 +123,8 @@ export default function LogPage() {
             onChange={handleSortChange}
             className="py-2 px-4 rounded border w-full md:w-auto"
           >
-            <option value="newest">ใหม่สุด</option>
-            <option value="oldest">เก่าสุด</option>
+            <option value="newest">ใหม่สุด  </option>
+            <option value="oldest">เก่าสุด  </option>
           </select>
         </div>
         <div className="overflow-x-auto">
