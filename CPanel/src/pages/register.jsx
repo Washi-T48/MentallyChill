@@ -2,6 +2,8 @@ import Sidebar from "../components/sidebar";
 import Topbar from "../components/topbar";
 import axios from "../components/axioscreds";
 import { useState, useContext, useEffect } from "react";
+import { navigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
 
 export default function RegisterPage() {
     const [loading, setLoading] = useState(false);
