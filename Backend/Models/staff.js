@@ -45,6 +45,10 @@ const updateStaff = async (staff_id, name, surname, nickname, description, image
         values.push(description);
         fields.push(`description = $${values.length}`);
     }
+    if (permission) {
+        values.push(permission);
+        fields.push(`permission = $${values.length}`);
+    }
     if (image) {
         values.push(image);
         fields.push(`image = $${values.length}`);

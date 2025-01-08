@@ -39,9 +39,9 @@ staffRouter.delete('/delete', async (req, res) => {
 
 staffRouter.put('/update', upload.single('image'), async (req, res) => {
     try {
-        const { staff_id, name, surname, nickname, description } = req.body;
+        const { staff_id, name, surname, nickname, description ,permission} = req.body;
         const image = req.file ? req.file.buffer.toString('base64') : null; // ตรวจสอบว่าไฟล์มีหรือไม่
-        const staff = await updateStaff(staff_id, name, surname, nickname, description, image);
+        const staff = await updateStaff(staff_id, name, surname, nickname, description, image, permission);
         res.status(200).json(staff);
     } catch (error) {
         console.error('Update Staff Error:', error);

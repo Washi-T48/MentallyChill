@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Sidebar from "../components/sidebar";
 import Topbar from "../components/topbar";
+import { permission } from "process";
 
 export default function EditStaffPage() {
   const { staffId } = useParams();
@@ -12,7 +13,8 @@ export default function EditStaffPage() {
     surname: "",
     nickname: "",
     // password: "",
-    image: ""
+    image: "",
+    permission: ""
   });
 
   const [imageURL, setImageURL] = useState("");
@@ -67,8 +69,9 @@ export default function EditStaffPage() {
         formData.append('surname', staffData.surname);
         formData.append('nickname', staffData.nickname);
         formData.append('description', staffData.description);
+        formData.append('permission', staffData.permission);
         if (imageFile) {
-            formData.append('image', imageFile); // อัปโหลดไฟล์รูปภาพ
+            formData.append('image', imageFile);
         }
 
         const response = await axios.put(`/staff/update`, formData, {
@@ -155,7 +158,7 @@ export default function EditStaffPage() {
                 className="py-2 px-4 rounded border w-full"
               />
             </div>
-            {/* <div className="mb-4">
+            <div className="mb-4">
               <label className="block text-lg mb-2">ตำแหน่ง</label>
               <select
                 name="permission"
@@ -167,7 +170,7 @@ export default function EditStaffPage() {
                 <option value="administrator">ผู้ดูแลระบบ</option>
                 <option value="staff">เจ้าหน้าที่</option>
               </select>
-            </div> */}
+            </div>
             <div className="flex gap-4">
               <button
                 onClick={handleSave}
