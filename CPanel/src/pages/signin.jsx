@@ -25,6 +25,7 @@ export default function SignInPage() {
     })
       .then(() => {
         console.log("Login successful");
+        const { permission } = response.data.permission;
         update(permission);
         navigate("/dashboard");
       })
