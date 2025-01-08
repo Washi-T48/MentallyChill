@@ -11,7 +11,7 @@ export default function EditStaffPage() {
     name: "",
     surname: "",
     nickname: "",
-    // password: "",
+    password: "",
     image: "",
     permission: ""
   });
@@ -60,8 +60,25 @@ export default function EditStaffPage() {
     }
   };
 
+  const handleChangePassword = async () => {
+    if (!staffData.password) return;
+  
+    try {
+      const response = await axios.post('/auth/changepassword', {
+        staff_id: staffData.staff_id,
+        password: staffData.password,
+      });
+      alert('Password updated successfully!');
+    } catch (error) {
+      console.error('Error changing password:', error.response?.data || error.message);
+      alert('Failed to change password. Check the console for details.');
+    }
+  };
+
   const handleSave = async () => {
     try {
+        await handleChangePassword();
+
         const formData = new FormData();
         formData.append('staff_id', staffData.staff_id);
         formData.append('name', staffData.name);
@@ -168,6 +185,16 @@ export default function EditStaffPage() {
                 <option value="administrator">ผู้ดูแลระบบ</option>
                 <option value="staff">เจ้าหน้าที่</option>
               </select>
+            </div>
+            <div className="mb-4">
+              <label className="block text-lg mb-2">รหัสผ่านใหม่</label>
+              <input
+                type="password"
+                name="password"
+                value={staffData.password}
+                onChange={handleInputChange}
+                className="py-2 px-4 rounded border w-full"
+              />
             </div>
             <div className="flex gap-4">
               <button
