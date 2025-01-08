@@ -29,6 +29,7 @@ export default function EditStaffPage() {
         console.error("Error fetching staff data:", error);
       }
     };
+    
 
     fetchStaffData();
   }, [staffId]);

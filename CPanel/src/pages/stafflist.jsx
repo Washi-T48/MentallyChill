@@ -16,7 +16,7 @@ export default function StaffListPage() {
   const staffIdFromQuery = queryParams.get('staff_id');
   const navigate = useNavigate();
 
-  const { permission } = useContext(AuthContext);
+  const [permission, setPermission] = useState('');
 
   const searchInputRef = useRef(null);
 
