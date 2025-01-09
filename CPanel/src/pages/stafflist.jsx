@@ -140,8 +140,9 @@ export default function StaffListPage() {
                   </button> */}
                 </th>
                 <th className="py-2 px-4 text-lg md:text-3xl text-center">ชื่อเจ้าหน้าที่</th>
+                <th className="py-2 px-4 text-lg md:text-3xl text-center">ชื่อเล่น</th>
                 <th className={`py-2 px-4 text-lg md:text-3xl text-center ${permission !== "administrator" ? "rounded-tr-xl" : ""}`}>
-                  ชื่อเล่น
+                  ตำแหน่ง
                 </th>
                 {permission === "administrator" && (
                   <th className="py-2 px-4 text-lg md:text-3xl text-center rounded-tr-xl">
@@ -166,6 +167,9 @@ export default function StaffListPage() {
                   </td>
                   <td className="py-2 px-4 text-center text-sm md:text-xl">
                     {row.nickname}
+                  </td>
+                  <td className="py-2 px-4 text-center text-sm md:text-xl">
+                    {row.permission}
                   </td>
                   {permission === "administrator" && (
                     <td className="py-2 px-4 text-center text-sm md:text-xl">
