@@ -2,9 +2,9 @@ import React from "react";
 import Logo from "../components/logo";
 import EXicon from "../images/excla_icon.png";
 import { Link, useNavigate } from "react-router-dom";
-import "./result.css";
+import "../pages/result.css";
 
-export const AssessmentResultBase = ({
+export const ResultBase = ({
   title,
   children,
   showAppointmentButton = true,
