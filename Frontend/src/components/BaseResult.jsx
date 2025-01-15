@@ -4,7 +4,7 @@ import EXicon from "../images/excla_icon.png";
 import { Link, useNavigate } from "react-router-dom";
 import "../pages/result.css";
 
-export const ResultBase = ({
+export const BaseResult = ({
   title,
   children,
   showAppointmentButton = true,
