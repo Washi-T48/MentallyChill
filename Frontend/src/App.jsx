@@ -23,6 +23,9 @@ import Confirm_app from "./pages/confirm_app";
 import Finish_app from "./pages/finish_app";
 import LineLiff from "./LIFF/lineLiff";
 import LineDis from "./LIFF/LineDIS";
+import StressFormP1 from "./pages/stress/stress_1";
+import StressFormP2 from "./pages/stress/stress_2";
+import StressResult from "./pages/stress/stressResult";
 
 function App() {
   return (
@@ -48,6 +51,10 @@ function App() {
           <Route path="/finish_app" element={<Finish_app />} />
           <Route path="/lineLiff" element={<LineLiff />} />
           <Route path="/LineDis" element={<LineDis />} />
+
+          <Route path="/stress/1" element={<StressFormP1 />} />
+          <Route path="/stress/2" element={<StressFormP2 />} />
+          <Route path="/stress/result" element={<StressResult />} />
         </Routes>
 
         <footer className="cookieConsent">

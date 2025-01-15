@@ -1,0 +1,39 @@
+
+ 
+  .score {
+    background-color: #f0f0f0;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .description {
+    color: #666;
+  }
+  
+  .question-item {
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+  }
+  
+  .question-item label {
+    display: block;
+    margin-bottom: 10px;
+    color: #333;
+    font-weight: 500;
+  }
+  
+  
+  .btn-back {
+    background-color: #666;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+  }
