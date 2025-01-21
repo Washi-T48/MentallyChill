@@ -82,7 +82,7 @@ export default function StressResult() {
           <div style={{ marginTop: "15px", fontSize: "14px", color: "#888" }}>
             <p>
               * หากมีความกังวลเกี่ยวกับสุขภาพจิต
-              สามารถขอรับคำปรึกษาจากผู้เชี่ยวชาญได้
+              สามารถขอรับคำปรึกษาจากเจ้าหน้าที่ได้
             </p>
           </div>
         </div>
