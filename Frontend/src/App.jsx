@@ -23,9 +23,14 @@ import Confirm_app from "./pages/confirm_app";
 import Finish_app from "./pages/finish_app";
 import LineLiff from "./LIFF/lineLiff";
 import LineDis from "./LIFF/LineDIS";
+
 import StressFormP1 from "./pages/stress/stress_1";
 import StressFormP2 from "./pages/stress/stress_2";
 import StressResult from "./pages/stress/stressResult";
+
+import BurnOutFormP1 from "./pages/burnout/burnout_1";
+import BurnOutFormP2 from "./pages/burnout/burnout_2";
+import BurnOutResult from "./pages/burnout/burnoutResult";
 
 function App() {
   return (
@@ -55,6 +60,10 @@ function App() {
           <Route path="/stress/1" element={<StressFormP1 />} />
           <Route path="/stress/2" element={<StressFormP2 />} />
           <Route path="/stress/result" element={<StressResult />} />
+
+          <Route path="/burnout/1" element={<BurnOutFormP1 />} />
+          <Route path="/burnout/2" element={<BurnOutFormP2 />} />
+          <Route path="/burnout/result" element={<BurnOutResult />} />
         </Routes>
 
         <footer className="cookieConsent">
