@@ -12,12 +12,17 @@ const TOTAL_QUESTIONS = 20;
 
 export default function StressFormP2() {
   const [selectedValues, setSelectedValues] = useState({});
+  const [uid, setUid] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
     const storedValues = localStorage.getItem("stressValues");
     if (storedValues) {
       setSelectedValues(JSON.parse(storedValues));
+    }
+    const storedUid = localStorage.getItem("uid");
+    if (storedUid) {
+      setUid(storedUid);
     }
   }, []);
 
@@ -76,10 +81,7 @@ export default function StressFormP2() {
   return (
     <div>
       <Logo />
-      <div className="progress-indicator">
-        <div className="progress-step completed">หน้า 1/2</div>
-        <div className="progress-step active">หน้า 2/2</div>
-      </div>
+
       <div className="p1_dass21-content">
         <span>
           &nbsp;&nbsp;&nbsp;&nbsp;โปรดเลือกช่องแสดงระดับอาการที่เกิดขึ้นกับตัวท่านตามความเป็นจริงมากที่สุด
