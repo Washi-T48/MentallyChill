@@ -24,12 +24,15 @@
 }
 
 .mental-health h1 {
-    font-size: 24px;
+    font-size: 18px;
+    padding-left: 0.5rem;
+    padding-right: 8px;
     font-stretch: 50%;
     border: #000;
 }
 
 .mental-health img {
+    padding-left: 8px;
     width: 32px;
     height: 32px;
 }
