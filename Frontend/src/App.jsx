@@ -32,6 +32,10 @@ import BurnOutFormP1 from "./pages/burnout/burnout_1";
 import BurnOutFormP2 from "./pages/burnout/burnout_2";
 import BurnOutResult from "./pages/burnout/burnoutResult";
 
+import RQFormP1 from "./pages/rq/rq_1";
+import RQFormP2 from "./pages/rq/rq_2";
+import RQResult from "./pages/rq/rqResult";
+
 function App() {
   return (
     <ProfileProvider>
@@ -64,6 +68,10 @@ function App() {
           <Route path="/burnout/1" element={<BurnOutFormP1 />} />
           <Route path="/burnout/2" element={<BurnOutFormP2 />} />
           <Route path="/burnout/result" element={<BurnOutResult />} />
+
+          <Route path="/rq/1" element={<RQFormP1 />} />
+          <Route path="/rq/2" element={<RQFormP2 />} />
+          <Route path="/rq/result" element={<RQResult />} />
         </Routes>
 
         <footer className="cookieConsent">
