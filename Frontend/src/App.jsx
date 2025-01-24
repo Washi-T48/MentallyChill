@@ -36,6 +36,11 @@ import RQFormP1 from "./pages/rq/rq_1";
 import RQFormP2 from "./pages/rq/rq_2";
 import RQResult from "./pages/rq/rqResult";
 
+import TwoQForm from "./pages/qform/2q";
+import NineQForm from "./pages/qform/9q";
+import EightQForm from "./pages/qform/8q";
+import TwoQResult from "./pages/qform/2q_result";
+
 function App() {
   return (
     <ProfileProvider>
@@ -72,6 +77,11 @@ function App() {
           <Route path="/rq/1" element={<RQFormP1 />} />
           <Route path="/rq/2" element={<RQFormP2 />} />
           <Route path="/rq/result" element={<RQResult />} />
+
+          <Route path="/2q/1" element={<TwoQForm />} />
+          <Route path="/2q/result" element={<TwoQResult />} />
+          <Route path="/2q-9q/1" element={<NineQForm />} />
+          <Route path="/2q-9q-8q/1" element={<EightQForm />} />
         </Routes>
 
         <footer className="cookieConsent">
