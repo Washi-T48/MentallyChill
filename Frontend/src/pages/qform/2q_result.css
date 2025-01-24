@@ -1,0 +1,9 @@
+@media (min-width: 768px) {
+    .description-section {
+      width: 65%;
+    }
+}
+
+.description-section li {
+    font-size: 16px;
+}
