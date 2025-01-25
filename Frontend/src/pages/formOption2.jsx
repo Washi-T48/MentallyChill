@@ -1,11 +1,28 @@
 import React, { useState, useEffect } from "react";
 import "./formOption2.css";
 import Logo from "../components/logo";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { RxPerson } from "react-icons/rx";
 import Loading from "../components/Loading";
 import liff from "@line/liff";
 import axios from "axios";
+
+const getNextPage = (formType) => {
+  switch (formType) {
+    case "DASS-21":
+      return "/p1_dass21";
+    case "STRESS":
+      return "/stress/1";
+    case "2Q9Q8Q":
+      return "/9q-assessment";
+    case "BURNOUT":
+      return "/burnout/1";
+    case "RQ":
+      return "/rq/1";
+    default:
+      return "/dass-21/1";
+  }
+};
 
 export default function FormOption2() {
   const [step2Data, setStep2Data] = useState({
@@ -16,11 +33,25 @@ export default function FormOption2() {
     email: "",
     tel: "",
     sos_tel: "",
+    form_type: "",
   });
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    // Get form_type from URL query parameters
+    const searchParams = new URLSearchParams(location.search);
+    const formType = searchParams.get("form_type");
+    if (formType) {
+      setStep2Data((prev) => ({
+        ...prev,
+        form_type: formType,
+      }));
+    }
+  }, [location]);
 
   useEffect(() => {
     const uid = localStorage.getItem("uid");
@@ -60,7 +91,6 @@ export default function FormOption2() {
 
   const onChange = (evt) => {
     const { name, value } = evt.target;
-
     setStep2Data((oldData) => ({
       ...oldData,
       [name]: value,
@@ -72,15 +102,15 @@ export default function FormOption2() {
     setLoading(true);
     setError(null);
 
-    /* console.log("Form Data:", step2Data); */
-
     try {
       const VITE_API_PATH = import.meta.env.VITE_API_PATH;
       const response = await axios.post(
         `${VITE_API_PATH}/user/register`,
         step2Data
       );
-      navigate("/p1_dass21");
+
+      const nextPage = getNextPage(step2Data.form_type);
+      navigate(nextPage);
     } catch (error) {
       setError("เกิดข้อผิดพลาด โปรดลองอีกครั้งภายหลัง");
     } finally {
@@ -294,3 +324,38 @@ export default function FormOption2() {
     </div>
   );
 }
+/* useEffect(() => {
+    const uid = localStorage.getItem("uid");
+    if (uid) {
+      setStep2Data((prevData) => ({
+        ...prevData,
+        uid: uid,
+      }));
+    } else {
+      liff
+        .init({ liffId: "2005311386-6GQLXp7Z" })
+        .then(() => {
+          if (liff.isLoggedIn()) {
+            liff
+              .getProfile()
+              .then((profile) => {
+                setStep2Data((prevData) => ({
+                  ...prevData,
+                  uid: profile.userId,
+                }));
+                localStorage.setItem("uid", profile.userId);
+              })
+              .catch((err) => {
+                console.error("Error getting profile:", err);
+                setError("Failed to get profile information.");
+              });
+          } else {
+            liff.login();
+          }
+        })
+        .catch((err) => {
+          console.error("Error initializing LIFF:", err);
+          setError("Failed to initialize LIFF. Please try again later.");
+        });
+    }
+  }, []); */
