@@ -63,8 +63,8 @@ function App() {
           <Route path="/dass-21/result" element={<Result />} />
 
           <Route path="/appoint" element={<Appoint />} />
-          <Route path="/confirm_app" element={<Confirm_app />} />
-          <Route path="/finish_app" element={<Finish_app />} />
+          <Route path="/appoint/confirm" element={<Confirm_app />} />
+          <Route path="/appoint/finish" element={<Finish_app />} />
 
           <Route path="/lineLiff" element={<LineLiff />} />
           <Route path="/LineDis" element={<LineDis />} />
