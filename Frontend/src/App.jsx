@@ -55,15 +55,17 @@ function App() {
           <Route path="/remark2" element={<Remark2 />} />
           <Route path="/formOption1" element={<FormOption />} />
           <Route path="/formOption2" element={<FormOption2 />} />
-          <Route path="/cri_dass21" element={<CRI_dass21 />} />
-          <Route path="/p1_dass21" element={<P1_dass21 />} />
-          <Route path="/radio_rate" element={<Radio_rate />} />
-          <Route path="/p2_dass21" element={<P2_dass21 />} />
-          <Route path="/p3_dass21" element={<P3_dass21 />} />
-          <Route path="/result" element={<Result />} />
+
+          <Route path="/dass-21/1" element={<P1_dass21 />} />
+          <Route path="/dass-21/2" element={<P2_dass21 />} />
+          <Route path="/dass-21/3" element={<P3_dass21 />} />
+          <Route path="/dass-21/criteria" element={<CRI_dass21 />} />
+          <Route path="/dass-21/result" element={<Result />} />
+
           <Route path="/appoint" element={<Appoint />} />
           <Route path="/confirm_app" element={<Confirm_app />} />
           <Route path="/finish_app" element={<Finish_app />} />
+
           <Route path="/lineLiff" element={<LineLiff />} />
           <Route path="/LineDis" element={<LineDis />} />
 
