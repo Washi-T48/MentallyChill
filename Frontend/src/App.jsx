@@ -40,6 +40,7 @@ import TwoQForm from "./pages/qform/2q";
 import NineQForm from "./pages/qform/9q";
 import EightQForm from "./pages/qform/8q";
 import TwoQResult from "./pages/qform/2q_result";
+import QResult from "./pages/qform/q_result";
 
 function App() {
   return (
@@ -82,6 +83,7 @@ function App() {
           <Route path="/2q/result" element={<TwoQResult />} />
           <Route path="/2q-9q/1" element={<NineQForm />} />
           <Route path="/2q-9q-8q/1" element={<EightQForm />} />
+          <Route path="/2q-9q-8q/result" element={<QResult />} />
         </Routes>
 
         <footer className="cookieConsent">
