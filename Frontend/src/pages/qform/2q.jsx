@@ -107,7 +107,7 @@ const TwoQForm = () => {
         </form>
 
         <div className="p1_dass21-footer">
-          <button className="btn-next" onClick={handleSubmit}>
+          <button className="btn btn-next" onClick={handleSubmit}>
             ต่อไป
           </button>
         </div>
