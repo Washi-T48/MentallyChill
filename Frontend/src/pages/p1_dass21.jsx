@@ -73,7 +73,7 @@ export default function P1_dass21() {
       const scores = calculateScores();
       console.log(scores);
       localStorage.setItem("dass21Scores", JSON.stringify(scores));
-      navigate("/p2_dass21");
+      navigate("/dass-21/2");
     }
   };
 
