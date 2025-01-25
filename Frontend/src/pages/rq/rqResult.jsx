@@ -97,10 +97,8 @@ export default function RQResult() {
         <div className="score">{score} คะแนน</div>
         <div
           className={`severity ${
-            severity === "สูงกว่าเกณฑ์ปกติ"
+            severity === "สูงกว่าเกณฑ์ปกติ" || severity === "เกณฑ์ปกติ"
               ? "low"
-              : severity === "เกณฑ์ปกติ"
-              ? "medium"
               : "high"
           }`}
         >
