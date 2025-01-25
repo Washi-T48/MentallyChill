@@ -22,7 +22,7 @@ export default function Confirm_app() {
     console.log("Confirmed appointment data:", appointData);
     try {
       await axios.post(`${VITE_API_PATH}/submitAppointment`, appointData);
-      navigate("/finish_app");
+      navigate("/appoint/finish");
     } catch (error) {
       console.error("Error confirming appointment:", error);
       setLoading(false);
