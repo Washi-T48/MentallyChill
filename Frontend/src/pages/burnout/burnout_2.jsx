@@ -2,12 +2,13 @@ import React, { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 import Logo from "../../components/logo";
 import CustomRadioGroup from "../../components/RadioGroup";
+import Loading from "../../components/Loading";
 import "../p1_dass21.css";
 import "../p3_dass21.css";
-import Loading from "../../components/Loading";
 
 const QUESTIONS_RANGE = [12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22];
 
@@ -23,8 +24,12 @@ const styles = {
   },
 };
 
+const VITE_API_PATH = import.meta.env.VITE_API_PATH;
+
 export default function BurnOutFormP2() {
   const [selectedValues, setSelectedValues] = useState({});
+  const [uid, setUid] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -73,13 +78,14 @@ export default function BurnOutFormP2() {
       0
     );
 
-    console.log("คะแนนรวม:");
-    console.log(`ความอ่อนล้าทางอารมณ์: ${emotionalScore}`);
-    console.log(`การลดความเป็นบุคคล: ${depersonalizationScore}`);
-    console.log(`ความสำเร็จส่วนบุคคล: ${personalAchievementScore}`);
+    return {
+      emotionalScore,
+      depersonalizationScore,
+      personalAchievementScore,
+    };
   };
 
-  const handleNextClick = (event) => {
+  const handleNextClick = async (event) => {
     if (!areAllQuestionsAnswered()) {
       toast.error("โปรดตอบคำถามให้ครบทุกข้อ!", {
         position: "top-right",
@@ -91,11 +97,52 @@ export default function BurnOutFormP2() {
         },
       });
       event.preventDefault();
-    } else {
-      calculateScores(selectedValues);
+      return;
+    }
+
+    try {
+      setIsLoading(true);
+
+      const storedValues = JSON.parse(
+        localStorage.getItem("burnoutValues") || "{}"
+      );
+      const allValues = { ...storedValues, ...selectedValues };
+      const scores = calculateScores(allValues);
+
+      const payload = {
+        uid,
+        answers: allValues,
+        scores,
+      };
+
+      await axios.post(`${VITE_API_PATH}/submitForms`, {
+        uid: uid,
+        forms_type: "burnout",
+        result: JSON.stringify(payload),
+      });
+
+      localStorage.setItem("burnoutValues", JSON.stringify(allValues));
+      localStorage.setItem("burnoutScores", JSON.stringify(scores));
+
       navigate("/burnout/result");
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      toast.error("เกิดข้อผิดพลาดในการส่งข้อมูล โปรดลองอีกครั้งภายหลัง", {
+        position: "top-right",
+        hideProgressBar: true,
+        style: {
+          fontSize: "16px",
+          fontFamily: "ChulabhornLikitText-Regular",
+        },
+      });
+    } finally {
+      setIsLoading(false);
     }
   };
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <div>
