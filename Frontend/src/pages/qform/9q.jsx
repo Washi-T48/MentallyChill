@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
 import Logo from "../../components/logo";
+import Loading from "../../components/Loading";
 
 import "./9q.css";
+
+const VITE_API_PATH = import.meta.env.VITE_API_PATH;
 
 const QUESTIONS = {
   1: "เบื่อ ไม่สนใจอยากทำอะไร",
@@ -20,7 +24,16 @@ const QUESTIONS = {
 
 const NineQForm = () => {
   const [answers, setAnswers] = useState({});
+  const [uid, setUid] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const storedUid = localStorage.getItem("uid");
+    if (storedUid) {
+      setUid(storedUid);
+    }
+  }, []);
 
   const handleRadioChange = (question, value) => {
     setAnswers((prev) => ({
@@ -29,7 +42,11 @@ const NineQForm = () => {
     }));
   };
 
-  const handleSubmit = () => {
+  const calculateScore = () => {
+    return Object.values(answers).reduce((sum, value) => sum + value, 0);
+  };
+
+  const handleSubmit = async () => {
     if (Object.keys(answers).length !== 9) {
       toast.error("โปรดตอบคำถามให้ครบทุกข้อ!", {
         position: "top-right",
@@ -42,9 +59,45 @@ const NineQForm = () => {
       return;
     }
 
-    localStorage.setItem("9qAnswers", JSON.stringify(answers));
-    navigate("/2q-9q-8q/1");
+    try {
+      setIsLoading(true);
+
+      const totalScore = calculateScore();
+      const payload = {
+        uid,
+        answers,
+        totalScore,
+      };
+
+      await axios.post(`${VITE_API_PATH}/submitForms`, {
+        uid: uid,
+        forms_type: "9q",
+        result: JSON.stringify(payload),
+      });
+
+      localStorage.setItem(
+        "9qAnswers",
+        JSON.stringify({ answers, totalScore })
+      );
+      navigate("/2q-9q-8q/1");
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      toast.error("เกิดข้อผิดพลาดในการส่งข้อมูล โปรดลองอีกครั้งภายหลัง", {
+        position: "top-right",
+        hideProgressBar: true,
+        style: {
+          fontSize: "16px",
+          fontFamily: "ChulabhornLikitText-Regular",
+        },
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <div>
