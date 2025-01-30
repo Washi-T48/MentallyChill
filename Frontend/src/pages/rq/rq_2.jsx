@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 import Logo from "../../components/logo";
 import CustomRadioGroup from "../../components/RadioGroup";
+import Loading from "../../components/Loading";
 import "../p1_dass21.css";
 import "../p3_dass21.css";
 
@@ -22,8 +24,12 @@ const styles = {
   },
 };
 
+const VITE_API_PATH = import.meta.env.VITE_API_PATH;
+
 export default function RQFormP2() {
   const [selectedValues, setSelectedValues] = useState({});
+  const [uid, setUid] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -52,7 +58,7 @@ export default function RQFormP2() {
     );
   };
 
-  const handleNextClick = (event) => {
+  const handleNextClick = async (event) => {
     if (!areAllQuestionsAnswered()) {
       toast.error("โปรดตอบคำถามให้ครบทุกข้อ!", {
         position: "top-right",
@@ -64,10 +70,46 @@ export default function RQFormP2() {
         },
       });
       event.preventDefault();
-    } else {
+      return;
+    }
+
+    try {
+      setIsLoading(true);
+
+      const storedValues = JSON.parse(localStorage.getItem("rqValues") || "{}");
+      const allValues = { ...storedValues, ...selectedValues };
+
+      const payload = {
+        uid,
+        answers: allValues,
+      };
+
+      await axios.post(`${VITE_API_PATH}/submitForms`, {
+        uid: uid,
+        forms_type: "rq",
+        result: JSON.stringify(payload),
+      });
+
+      localStorage.setItem("rqValues", JSON.stringify(allValues));
       navigate("/rq/result");
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      toast.error("เกิดข้อผิดพลาดในการส่งข้อมูล โปรดลองอีกครั้งภายหลัง", {
+        position: "top-right",
+        hideProgressBar: true,
+        style: {
+          fontSize: "16px",
+          fontFamily: "ChulabhornLikitText-Regular",
+        },
+      });
+    } finally {
+      setIsLoading(false);
     }
   };
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <div>
