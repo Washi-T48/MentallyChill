@@ -7,12 +7,15 @@ import Radio_rate from "../../components/radio_rate";
 import "../p1_dass21.css";
 import "../p3_dass21.css";
 
+import Loading from "../../components/Loading";
+
 const QUESTIONS_PER_PAGE = 10;
 const TOTAL_QUESTIONS = 20;
 
 export default function StressFormP2() {
   const [selectedValues, setSelectedValues] = useState({});
   const [uid, setUid] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -72,11 +75,33 @@ export default function StressFormP2() {
       });
       event.preventDefault();
     } else {
+      setIsLoading(true);
       const totalScore = calculateFinalScore();
+      const payload = {
+        uid,
+        ...totalScore,
+      };
+      axios
+        .post(`${VITE_API_PATH}/submitForms`, {
+          uid: uid,
+          forms_type: "stress",
+          result: JSON.stringify(payload),
+        })
+        .then(() => {
+          localStorage.setItem("stressScore", JSON.stringify(totalScore)); // Save the scores
+          navigate("/stress/result");
+        })
+        .catch((error) => {
+          console.error("Error submitting form:", error);
+          setIsLoading(false);
+        });
       localStorage.setItem("stressScore", totalScore.toString());
-      navigate("/stress/result");
     }
   };
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <div>
