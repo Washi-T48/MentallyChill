@@ -12,6 +12,8 @@ import Loading from "../../components/Loading";
 const QUESTIONS_PER_PAGE = 10;
 const TOTAL_QUESTIONS = 20;
 
+const VITE_API_PATH = import.meta.env.VITE_API_PATH;
+
 export default function StressFormP2() {
   const [selectedValues, setSelectedValues] = useState({});
   const [uid, setUid] = useState("");
