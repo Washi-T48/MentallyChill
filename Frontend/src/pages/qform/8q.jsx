@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Logo from "../../components/logo";
+import Loading from "../../components/Loading";
+import axios from "axios";
 
 import "../p2_dass21.css";
 import "./8q.css";
@@ -43,9 +45,20 @@ const SCORES = {
   8: { true: 4, false: 0 },
 };
 
+const VITE_API_PATH = import.meta.env.VITE_API_PATH;
+
 const EightQForm = () => {
   const [answers, setAnswers] = useState({});
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
+  const [uid, setUid] = useState("");
+
+  useEffect(() => {
+    const storedUid = localStorage.getItem("uid");
+    if (storedUid) {
+      setUid(storedUid);
+    }
+  }, []);
 
   const handleRadioChange = (question, value) => {
     const newAnswers = {
@@ -60,7 +73,7 @@ const EightQForm = () => {
     setAnswers(newAnswers);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const requiredQuestions = answers[3]
       ? ["1", "2", "3", "3.1", "4", "5", "6", "7", "8"]
       : ["1", "2", "3", "4", "5", "6", "7", "8"];
@@ -79,23 +92,51 @@ const EightQForm = () => {
       return;
     }
 
-    const totalScore = Object.entries(answers).reduce(
-      (total, [question, answer]) => {
-        return total + SCORES[question][answer.toString()];
-      },
-      0
-    );
+    try {
+      setIsLoading(true);
 
-    localStorage.setItem(
-      "8qAnswers",
-      JSON.stringify({
+      const totalScore = Object.entries(answers).reduce(
+        (total, [question, answer]) => {
+          return total + SCORES[question][answer.toString()];
+        },
+        0
+      );
+
+      const payload = {
+        uid,
         answers,
         totalScore,
-      })
-    );
+      };
 
-    navigate("/2q-9q-8q/result");
+      await axios.post(`${VITE_API_PATH}/submitForms`, {
+        uid: uid,
+        forms_type: "8q",
+        result: JSON.stringify(payload),
+      });
+
+      localStorage.setItem(
+        "8qAnswers",
+        JSON.stringify({ answers, totalScore })
+      );
+      navigate("/2q-9q-8q/result");
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      toast.error("เกิดข้อผิดพลาดในการส่งข้อมูล โปรดลองอีกครั้งภายหลัง", {
+        position: "top-right",
+        hideProgressBar: true,
+        style: {
+          fontSize: "16px",
+          fontFamily: "ChulabhornLikitText-Regular",
+        },
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <div>
