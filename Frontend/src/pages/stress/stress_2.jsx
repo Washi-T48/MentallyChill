@@ -6,6 +6,7 @@ import Logo from "../../components/logo";
 import Radio_rate from "../../components/radio_rate";
 import "../p1_dass21.css";
 import "../p3_dass21.css";
+import axios from "axios";
 
 import Loading from "../../components/Loading";
 
