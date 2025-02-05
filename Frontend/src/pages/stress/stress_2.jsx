@@ -66,7 +66,7 @@ export default function StressFormP2() {
     return firstPageScore + secondPageScore;
   };
 
-  const handleNextClick = (event) => {
+  const handleNextClick = async (event) => {
     if (!areAllQuestionsAnswered()) {
       toast.error("โปรดตอบคำถามให้ครบทุกข้อ!", {
         position: "top-right",
@@ -84,7 +84,7 @@ export default function StressFormP2() {
         uid,
         ...totalScore,
       };
-      axios
+      await axios
         .post(`${VITE_API_PATH}/submitForms`, {
           uid: uid,
           forms_type: "stress",
