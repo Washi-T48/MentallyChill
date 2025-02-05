@@ -3,7 +3,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 import Logo from "../../components/logo";
-import Radio_rate from "../../components/radio_rate";
+import CustomRadioGroup from "../../components/RadioGroup";
 import "../p1_dass21.css";
 import "./stress_1.css";
 
@@ -86,12 +86,12 @@ export default function StressFormP1() {
           {[...Array(QUESTIONS_PER_PAGE)].map((_, i) => (
             <div key={i}>
               <label>{`${i + 1}. ${getQuestionText(i + 1)}`}</label>
-              <Radio_rate
+              <CustomRadioGroup
                 questionNumber={i + 1}
                 selectedValue={selectedValues[i + 1]}
-                onRadioChange={handleRadioChange}
+                onChange={handleRadioChange}
+                options={[0, 1, 2, 3]}
               />
-              <br />
             </div>
           ))}
         </form>

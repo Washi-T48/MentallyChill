@@ -3,16 +3,13 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 import Logo from "../../components/logo";
-import Radio_rate from "../../components/radio_rate";
-import "../p1_dass21.css";
-import "../p3_dass21.css";
+import CustomRadioGroup from "../../components/RadioGroup";
 import axios from "axios";
-
 import Loading from "../../components/Loading";
+import "../p3_dass21.css";
 
 const QUESTIONS_PER_PAGE = 10;
 const TOTAL_QUESTIONS = 20;
-
 const VITE_API_PATH = import.meta.env.VITE_API_PATH;
 
 export default function StressFormP2() {
@@ -51,18 +48,15 @@ export default function StressFormP2() {
   };
 
   const calculateFinalScore = () => {
-    // Get first page score from localStorage
     const firstPageScore = parseInt(
       localStorage.getItem("stressFirstPageScore") || "0",
       10
     );
 
-    // Calculate second page score
     const secondPageScore = Object.keys(selectedValues)
-      .filter((key) => parseInt(key) > 10) // Only questions 11-20
+      .filter((key) => parseInt(key) > 10)
       .reduce((sum, key) => sum + parseInt(selectedValues[key], 10), 0);
 
-    // Return total score
     return firstPageScore + secondPageScore;
   };
 
@@ -85,21 +79,22 @@ export default function StressFormP2() {
         scores: totalScore,
       };
       console.log(payload);
-      await axios
-        .post(`${VITE_API_PATH}/submitForms`, {
+      try {
+        await axios.post(`${VITE_API_PATH}/submitForms`, {
           uid: uid,
           forms_type: "stress",
           result: JSON.stringify(payload),
-        })
-        .then(() => {
-          localStorage.setItem("stressScore", JSON.stringify(totalScore)); // Save the scores
-          navigate("/stress/result");
-        })
-        .catch((error) => {
-          console.error("Error submitting form:", error);
-          setIsLoading(false);
         });
-      localStorage.setItem("stressScore", totalScore.toString());
+        localStorage.setItem("stressScore", totalScore.toString());
+        navigate("/stress/result");
+      } catch (error) {
+        console.error("Error submitting form:", error);
+        toast.error("เกิดข้อผิดพลาดในการส่งข้อมูล กรุณาลองใหม่อีกครั้ง", {
+          position: "top-right",
+          hideProgressBar: true,
+        });
+        setIsLoading(false);
+      }
     }
   };
 
@@ -110,13 +105,13 @@ export default function StressFormP2() {
   return (
     <div>
       <Logo />
-
       <div className="p1_dass21-content">
         <span>
           &nbsp;&nbsp;&nbsp;&nbsp;โปรดเลือกช่องแสดงระดับอาการที่เกิดขึ้นกับตัวท่านตามความเป็นจริงมากที่สุด
           ว่าในระยะ 2 เดือนที่ผ่านมานี้ ท่านมีอาการ พฤติกรรม
           หรือความรู้สึกต่อไปนี้มากน้อยเพียงใด
         </span>
+
         <p>
           เกณฑ์การให้คะแนน
           <br />
@@ -127,14 +122,16 @@ export default function StressFormP2() {
           2 หมายถึง เป็นบ่อย
           <br />3 หมายถึง เป็นประจำ
         </p>
+
         <form className="dass21-1">
           {[...Array(QUESTIONS_PER_PAGE)].map((_, i) => (
-            <div key={i} className="question-item">
+            <div key={i}>
               <label>{`${i + 11}. ${getQuestionText(i + 11)}`}</label>
-              <Radio_rate
+              <CustomRadioGroup
                 questionNumber={i + 11}
                 selectedValue={selectedValues[i + 11]}
-                onRadioChange={handleRadioChange}
+                onChange={handleRadioChange}
+                options={[0, 1, 2, 3]}
               />
             </div>
           ))}
