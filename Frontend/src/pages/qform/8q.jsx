@@ -105,7 +105,7 @@ const EightQForm = () => {
       const payload = {
         uid,
         answers,
-        totalScore,
+        scores: totalScore,
       };
 
       await axios.post(`${VITE_API_PATH}/submitForms`, {
