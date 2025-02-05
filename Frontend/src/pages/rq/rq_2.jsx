@@ -115,8 +115,6 @@ export default function RQFormP2() {
         ...scores,
       };
 
-      console.log(payload);
-
       await axios.post(`${VITE_API_PATH}/submitForms`, {
         uid: uid,
         forms_type: "rq",
