@@ -82,8 +82,9 @@ export default function StressFormP2() {
       const totalScore = calculateFinalScore();
       const payload = {
         uid,
-        ...totalScore,
+        scores: totalScore,
       };
+      console.log(payload);
       await axios
         .post(`${VITE_API_PATH}/submitForms`, {
           uid: uid,
