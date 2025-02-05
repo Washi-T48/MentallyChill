@@ -45,6 +45,33 @@ export default function RQFormP2() {
     localStorage.setItem("rqValues", JSON.stringify(updatedValues));
   }, [selectedValues]);
 
+  const calculateScores = (values) => {
+    // Define question groups
+    const emotionalEnduranceQuestions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    const encouragementQuestions = [11, 12, 13, 14, 15];
+    const problemManagementQuestions = [16, 17, 18, 19, 20];
+
+    // Define negative questions that need reverse scoring
+    const negativeQuestions = [1, 5, 14, 15, 16];
+
+    const calculateScore = (questions) => {
+      return questions.reduce((sum, q) => {
+        const value = values[q] || 0;
+        if (negativeQuestions.includes(q)) {
+          // Reverse scoring for 1-4 scale
+          return sum + (5 - value);
+        }
+        return sum + value;
+      }, 0);
+    };
+
+    return {
+      emotionalEndurance: calculateScore(emotionalEnduranceQuestions),
+      encouragement: calculateScore(encouragementQuestions),
+      problemManagement: calculateScore(problemManagementQuestions),
+    };
+  };
+
   const handleRadioChange = (questionNumber, value) => {
     setSelectedValues((prevValues) => ({
       ...prevValues,
@@ -79,10 +106,16 @@ export default function RQFormP2() {
       const storedValues = JSON.parse(localStorage.getItem("rqValues") || "{}");
       const allValues = { ...storedValues, ...selectedValues };
 
+      // Calculate scores
+      const scores = calculateScores(allValues);
+
       const payload = {
         uid,
         answers: allValues,
+        ...scores,
       };
+
+      console.log(payload);
 
       await axios.post(`${VITE_API_PATH}/submitForms`, {
         uid: uid,
@@ -91,6 +124,8 @@ export default function RQFormP2() {
       });
 
       localStorage.setItem("rqValues", JSON.stringify(allValues));
+      localStorage.setItem("rqScores", JSON.stringify(scores));
+
       navigate("/rq/result");
     } catch (error) {
       console.error("Error submitting form:", error);
