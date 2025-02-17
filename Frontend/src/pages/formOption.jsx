@@ -80,7 +80,7 @@ export default function FormOption() {
         </div>
         <div
           className="f9Q f-container"
-          onClick={() => navigateStep2("2Q8Q9Q")}
+          onClick={() => navigateStep2("2Q9Q8Q")}
         >
           <img className="ex-icon" src={EXicon}></img>
           <div className="form-name">
