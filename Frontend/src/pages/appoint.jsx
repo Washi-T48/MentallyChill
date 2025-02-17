@@ -80,26 +80,27 @@ export default function Appoint() {
     const today = new Date();
     const formattedDate = today.toISOString().split("T")[0];
     setCurrentDate(formattedDate);
-
-
   }, []);
 
   useEffect(() => {
-    axios.get(`${VITE_API_PATH}/allStaff`)
-    .then((response) => {
-      if (Array.isArray(response.data)) {
-        setStaffList(response.data);
-      } else {
-        console.error("Unexpected response format:", response.data);
+    axios
+      .get(`${VITE_API_PATH}/allStaff`)
+      .then((response) => {
+        if (Array.isArray(response.data)) {
+          setStaffList(response.data);
+        } else {
+          console.error("Unexpected response format:", response.data);
+          setStaffList([]);
+        }
+      })
+      .catch((error) => {
+        console.error(
+          "Error fetching staff data:",
+          error.response?.data || error.message
+        );
         setStaffList([]);
-      }
-    })
-    .catch((error) => {
-      console.error("Error fetching staff data:", error.response?.data || error.message);
-      setStaffList([]);
-    });
+      });
   }, []);
-
 
   useEffect(() => {
     if (appointData.date && appointData.medDoctor) {
@@ -107,15 +108,24 @@ export default function Appoint() {
     }
   }, [appointData.date, appointData.medDoctor]);
 
-  const onSubmit = (e) => { e.preventDefault();
-      const requiredFields = ["contactMethod", "medDoctor", "date", "time", "topic", "detail", "medHistory"];
+  const onSubmit = (e) => {
+    e.preventDefault();
+    const requiredFields = [
+      "contactMethod",
+      "medDoctor",
+      "date",
+      "time",
+      "topic",
+      "detail",
+      "medHistory",
+    ];
     for (const field of requiredFields) {
       if (!appointData[field]) {
         setError("กรุณากรอกข้อมูลให้ครบทุกช่องที่มีเครื่องหมาย *");
         return;
       }
     }
-  
+
     if (appointData.date < currentDate) {
       setError("กรุณาเลือกวันที่ถูกต้อง");
       return;
@@ -125,7 +135,7 @@ export default function Appoint() {
 
     setTimeout(() => {
       setLoading(false);
-      navigate("/confirm_app", { state: { appointData } });
+      navigate("/appoint/confirm", { state: { appointData } });
     }, 1000);
   };
 
@@ -184,52 +194,60 @@ export default function Appoint() {
   //     .finally(() => {
   //       setLoadingSlots(false);
   //     });
-  // };  
+  // };
 
-    const fetchAvailableTimeSlots = () => {
-      if (!appointData.date || !appointData.medDoctor) return;
-      setLoadingSlots(true);
-    
-      axios.post(`${VITE_API_PATH}/getStaffTimeByDate`, { staff_id: appointData.medDoctor, date: appointData.date })
-        .then((response) => {
-          let availableTimes = response.data;
-    
-          if (Array.isArray(availableTimes)) {
-            // Convert times to usable format
-            availableTimes = availableTimes.map((slot) => ({
-              start: slot.time_start,
-              end: slot.time_end,
-            }));
-    
-            // If the selected date is today, filter times at least 6 hours ahead
-            if (appointData.date === currentDate) {
-              const now = new Date();
-              const currentTime = now.getHours() * 60 + now.getMinutes(); // Convert current time to minutes
-    
-              availableTimes = availableTimes.filter((slot) => {
-                const [startHour, startMinute] = slot.start.split(":").map(Number);
-                const startTimeInMinutes = startHour * 60 + startMinute;
-    
-                // Check if the start time is at least 6 hours (360 minutes) ahead of the current time
-                return startTimeInMinutes >= currentTime + 360;
-              });
-            }
-    
-            setTimeSlots(availableTimes);
-          } else {
-            console.error("Unexpected response format:", response.data);
-            setTimeSlots([]);
+  const fetchAvailableTimeSlots = () => {
+    if (!appointData.date || !appointData.medDoctor) return;
+    setLoadingSlots(true);
+
+    axios
+      .post(`${VITE_API_PATH}/getStaffTimeByDate`, {
+        staff_id: appointData.medDoctor,
+        date: appointData.date,
+      })
+      .then((response) => {
+        let availableTimes = response.data;
+
+        if (Array.isArray(availableTimes)) {
+          // Convert times to usable format
+          availableTimes = availableTimes.map((slot) => ({
+            start: slot.time_start,
+            end: slot.time_end,
+          }));
+
+          // If the selected date is today, filter times at least 6 hours ahead
+          if (appointData.date === currentDate) {
+            const now = new Date();
+            const currentTime = now.getHours() * 60 + now.getMinutes(); // Convert current time to minutes
+
+            availableTimes = availableTimes.filter((slot) => {
+              const [startHour, startMinute] = slot.start
+                .split(":")
+                .map(Number);
+              const startTimeInMinutes = startHour * 60 + startMinute;
+
+              // Check if the start time is at least 6 hours (360 minutes) ahead of the current time
+              return startTimeInMinutes >= currentTime + 360;
+            });
           }
-        })
-        .catch((error) => {
-          console.error("Error fetching available time slots:", error.response?.data || error.message);
+
+          setTimeSlots(availableTimes);
+        } else {
+          console.error("Unexpected response format:", response.data);
           setTimeSlots([]);
-        })
-        .finally(() => {
-          setLoadingSlots(false);
-        });
-    };
-  
+        }
+      })
+      .catch((error) => {
+        console.error(
+          "Error fetching available time slots:",
+          error.response?.data || error.message
+        );
+        setTimeSlots([]);
+      })
+      .finally(() => {
+        setLoadingSlots(false);
+      });
+  };
 
   const hasSubtopics = (topic) => topics[topic]?.length > 0;
 
@@ -352,7 +370,6 @@ export default function Appoint() {
                   </>
                 )}
               </select>
-
             </label>
           </div>
           <div className="app-detail">

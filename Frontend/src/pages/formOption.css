@@ -69,25 +69,17 @@ html {
     align-items: center;
 }
 
-
-.ST5,
-.f9Q,
-.f8Q,
-.YMM {
-    background-color: #C5C6D0;
-}
-
 .form-name {
-    font-size: 10px;
+    font-size: 12px;
     width: 258px;
 }
 
 small {
-    font-size: 11px;
+    font-size: 10px;
 
 }
 
-.DASS21:hover {
+.DASS21:hover, .ST5:hover, .f9Q:hover, .f8Q:hover, .YMM:hover {
     animation: pulse 1s infinite;
     transition: .3s;
   }

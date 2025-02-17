@@ -24,6 +24,24 @@ import Finish_app from "./pages/finish_app";
 import LineLiff from "./LIFF/lineLiff";
 import LineDis from "./LIFF/LineDIS";
 
+import StressFormP1 from "./pages/stress/stress_1";
+import StressFormP2 from "./pages/stress/stress_2";
+import StressResult from "./pages/stress/stressResult";
+
+import BurnOutFormP1 from "./pages/burnout/burnout_1";
+import BurnOutFormP2 from "./pages/burnout/burnout_2";
+import BurnOutResult from "./pages/burnout/burnoutResult";
+
+import RQFormP1 from "./pages/rq/rq_1";
+import RQFormP2 from "./pages/rq/rq_2";
+import RQResult from "./pages/rq/rqResult";
+
+import TwoQForm from "./pages/qform/2q";
+import NineQForm from "./pages/qform/9q";
+import EightQForm from "./pages/qform/8q";
+import TwoQResult from "./pages/qform/2q_result";
+import QResult from "./pages/qform/q_result";
+
 function App() {
   return (
     <ProfileProvider>
@@ -37,17 +55,37 @@ function App() {
           <Route path="/remark2" element={<Remark2 />} />
           <Route path="/formOption1" element={<FormOption />} />
           <Route path="/formOption2" element={<FormOption2 />} />
-          <Route path="/cri_dass21" element={<CRI_dass21 />} />
-          <Route path="/p1_dass21" element={<P1_dass21 />} />
-          <Route path="/radio_rate" element={<Radio_rate />} />
-          <Route path="/p2_dass21" element={<P2_dass21 />} />
-          <Route path="/p3_dass21" element={<P3_dass21 />} />
-          <Route path="/result" element={<Result />} />
+
+          <Route path="/dass-21/1" element={<P1_dass21 />} />
+          <Route path="/dass-21/2" element={<P2_dass21 />} />
+          <Route path="/dass-21/3" element={<P3_dass21 />} />
+          <Route path="/dass-21/criteria" element={<CRI_dass21 />} />
+          <Route path="/dass-21/result" element={<Result />} />
+
           <Route path="/appoint" element={<Appoint />} />
-          <Route path="/confirm_app" element={<Confirm_app />} />
-          <Route path="/finish_app" element={<Finish_app />} />
+          <Route path="/appoint/confirm" element={<Confirm_app />} />
+          <Route path="/appoint/finish" element={<Finish_app />} />
+
           <Route path="/lineLiff" element={<LineLiff />} />
           <Route path="/LineDis" element={<LineDis />} />
+
+          <Route path="/stress/1" element={<StressFormP1 />} />
+          <Route path="/stress/2" element={<StressFormP2 />} />
+          <Route path="/stress/result" element={<StressResult />} />
+
+          <Route path="/burnout/1" element={<BurnOutFormP1 />} />
+          <Route path="/burnout/2" element={<BurnOutFormP2 />} />
+          <Route path="/burnout/result" element={<BurnOutResult />} />
+
+          <Route path="/rq/1" element={<RQFormP1 />} />
+          <Route path="/rq/2" element={<RQFormP2 />} />
+          <Route path="/rq/result" element={<RQResult />} />
+
+          <Route path="/2q/1" element={<TwoQForm />} />
+          <Route path="/2q/result" element={<TwoQResult />} />
+          <Route path="/2q-9q/1" element={<NineQForm />} />
+          <Route path="/2q-9q-8q/1" element={<EightQForm />} />
+          <Route path="/2q-9q-8q/result" element={<QResult />} />
         </Routes>
 
         <footer className="cookieConsent">

@@ -66,39 +66,48 @@ export default function FormOption() {
           </div>
           <img className="ent-icon" src={Enter}></img>
         </div>
-        <div className="ST5 f-container">
+        <div
+          className="ST5 f-container"
+          onClick={() => navigateStep2("STRESS")}
+        >
           <img className="ex-icon" src={EXicon}></img>
           <div className="form-name">
-            <b>ST-5</b> (not available)
+            <b>แบบประเมินความเครียดด้วยตนเอง</b>
             <br />
             <small>สำหรับประเมินความเครียด</small>
           </div>
           <img className="ent-icon" src={Enter}></img>
         </div>
-        <div className="f9Q f-container">
+        <div
+          className="f9Q f-container"
+          onClick={() => navigateStep2("2Q9Q8Q")}
+        >
           <img className="ex-icon" src={EXicon}></img>
           <div className="form-name">
-            <b>9Q</b> (not available)
+            <b>2Q 8Q 9Q</b>
             <br />
-            <small>สำหรับประเมินโรคซึมเศร้า</small>
+            <small>สำหรับประเมินโรคซึมเศร้า และความเสี่ยงในการฆ่าตัวตาย</small>
           </div>
           <img className="ent-icon" src={Enter}></img>
         </div>
-        <div className="f8Q f-container">
+        <div
+          className="f8Q f-container"
+          onClick={() => navigateStep2("BURNOUT")}
+        >
           <img className="ex-icon" src={EXicon}></img>
           <div className="form-name">
-            <b>8Q</b> (not available)
+            <b>แบบประเมินภาวะหมดไฟในการทำงาน (Burn Out)</b>
             <br />
-            <small>สำหรับประเมินความเสี่ยงในการฆ่าตัวตาย</small>
+            <small>สำหรับประเมินภาวะหมดไฟในการทำงาน </small>
           </div>
           <img className="ent-icon" src={Enter}></img>
         </div>
-        <div className="YMM f-container">
+        <div className="YMM f-container" onClick={() => navigateStep2("RQ")}>
           <img className="ex-icon" src={EXicon}></img>
           <div className="form-name">
-            <b>Young Minds Matter (YMM)</b> (not available)
+            <b>RQ (Resilience Quotient)</b>
             <br />
-            <small>แบบสำรวจสุขภาพจิตและความเป็นอยู่ที่ดีของเด็ก</small>
+            <small>แบบประเมินพลังสุขภาพจิต </small>
           </div>
           <img className="ent-icon" src={Enter}></img>
         </div>

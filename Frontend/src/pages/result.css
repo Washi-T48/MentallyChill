@@ -19,17 +19,20 @@
     max-width: 450px;
     height: 80px;
     color: white;
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 .mental-health h1 {
-    font-size: 24px;
+    font-size: 18px;
+    padding-left: 0.5rem;
+    padding-right: 8px;
     font-stretch: 50%;
     border: #000;
 }
 
 .mental-health img {
+    padding-left: 8px;
     width: 32px;
     height: 32px;
 }
@@ -61,13 +64,14 @@
     border-radius: 10px;
     margin: 10px auto;
     max-width: 500px;
+    font-size: 16px;
     
 }
 
-.result span {
+/* .result span {
     text-shadow: 1px 1px #000000;
 }
-
+ */
 .normal {
     background-color: #4caf50;
     color: white;
