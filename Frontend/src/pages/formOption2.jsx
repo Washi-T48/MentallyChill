@@ -10,11 +10,11 @@ import axios from "axios";
 const getNextPage = (formType) => {
   switch (formType) {
     case "DASS-21":
-      return "/p1_dass21";
+      return "/dass-21/1";
     case "STRESS":
       return "/stress/1";
     case "2Q9Q8Q":
-      return "/9q-assessment";
+      return "/2q/1";
     case "BURNOUT":
       return "/burnout/1";
     case "RQ":
