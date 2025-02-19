@@ -194,19 +194,12 @@ return (
       </div>
       <div className="w-full overflow-x-hidden">
         <div className="p-4 md:p-10">
-          {/* <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
-            <StatCard title="คำขอการจอง" value={countBooking} color="blue" tone="500"/>
-            <StatCard className="col-span-2" title="จำนวนผลการประเมิน" value={countDiag} color="violet" />
-            <StatCard title="ระดับปกติ" value={lowCount} color="green" />
-            <StatCard title="ระดับปานกลาง" value={mediumCount} color="orange" tone="300" />
-            <StatCard title="ระดับร้ายแรง" value={highCount} color="rose" />
-          </div> */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
             <StatCard title="คำขอการจอง" value={countBooking} color="blue" tone="500"/>
             <StatCard title="จำนวนผลการประเมิน" value={countDiag} color="violet" />
             <div className="hidden lg:block"></div> {/* Empty div for the third column in the first row */}
             <StatCard title="ระดับปกติ" value={lowCount} color="green" />
-            <StatCard title="ระดับปานกลาง" value={mediumCount} color="orange" tone="300" />
+            <StatCard title="ระดับปานกลาง" value={mediumCount} color="orange" />
             <StatCard title="ระดับร้ายแรง" value={highCount} color="rose" />
           </div>
 
