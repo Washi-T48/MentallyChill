@@ -24,12 +24,6 @@ export default function DashboardPage() {
   const [mediumCount, setMediumCount] = useState(0);
   const [highCount, setHighCount] = useState(0);
 
-  const colors = {
-    orange: "bg-orange-400",
-    blue: "bg-blue-400",
-    green: "bg-green-400",
-    red: "bg-red-400",
-  };
 
   useEffect(() => {
     const fetchDiagData = async () => {
@@ -256,6 +250,12 @@ return (
 );
 }
 
+const colors = {
+  orange: "bg-orange-400",
+  blue: "bg-blue-400",
+  green: "bg-green-400",
+  red: "bg-red-400",
+};
 function StatCard({ title, value, color, tone = 400 }) {
   return (
     <div className={`flex flex-col justify-between border-4 border-white rounded-md p-4 h-32 ${colors[color] || "bg-gray-400"}`}>
