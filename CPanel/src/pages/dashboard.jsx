@@ -24,6 +24,13 @@ export default function DashboardPage() {
   const [mediumCount, setMediumCount] = useState(0);
   const [highCount, setHighCount] = useState(0);
 
+  const colors = {
+    orange: "bg-orange-400",
+    blue: "bg-blue-400",
+    green: "bg-green-400",
+    red: "bg-red-400",
+  };
+
   useEffect(() => {
     const fetchDiagData = async () => {
       try {
@@ -251,7 +258,7 @@ return (
 
 function StatCard({ title, value, color, tone = 400 }) {
   return (
-    <div className={`flex flex-col justify-between border-4 border-white rounded-md bg-${color}-${tone} p-4 h-32`}>
+    <div className={`flex flex-col justify-between border-4 border-white rounded-md p-4 h-32 ${colors[color] || "bg-gray-400"}`}>
       <div className="text-lg text-white drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">{title}</div>
       <div className="text-4xl md:text-5xl lg:text-6xl text-white drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">{value}</div>
     </div>
