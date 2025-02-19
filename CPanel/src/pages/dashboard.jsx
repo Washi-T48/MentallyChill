@@ -255,6 +255,8 @@ const colors = {
   blue: "bg-blue-400",
   green: "bg-green-400",
   red: "bg-red-400",
+  violet: "bg-violet-400",
+  rose: "bg-rose-400",
 };
 function StatCard({ title, value, color, tone = 400 }) {
   return (
