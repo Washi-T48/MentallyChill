@@ -207,7 +207,7 @@ export default function DashboardPage() {
                 value={mediumCount}
                 color="yellow"
               />
-              <StatCard title="ระดับร้ายแรง" value={highCount} color="rose" />
+              <StatCard title="ระดับร้ายแรง" value={highCount} color="red" />
             </div>
             {/* <CategoryStats
               title="ความซึมเศร้า"
@@ -263,7 +263,7 @@ export default function DashboardPage() {
                     <StatCard
                       title="ระดับร้ายแรง"
                       value={highCount}
-                      color="rose"
+                      color="red"
                     />
                   </>
                 )}
@@ -282,7 +282,7 @@ export default function DashboardPage() {
                     <StatCard
                       title="ระดับร้ายแรง"
                       value={highCount}
-                      color="rose"
+                      color="red"
                     />
                   </>
                 )}
@@ -291,7 +291,7 @@ export default function DashboardPage() {
                     <StatCard
                       title="ระดับร้ายแรง"
                       value={highCount}
-                      color="rose"
+                      color="red"
                     />
                     <StatCard
                       title="ระดับปกติ"
@@ -315,7 +315,7 @@ export default function DashboardPage() {
                     <StatCard
                       title="ระดับร้ายแรง"
                       value={highCount}
-                      color="rose"
+                      color="red"
                     />
                     <StatCard
                       title="ระดับปกติ"
@@ -339,7 +339,7 @@ export default function DashboardPage() {
                     <StatCard
                       title="ระดับร้ายแรง"
                       value={highCount}
-                      color="rose"
+                      color="red"
                     />
                   </>
                 )}
@@ -370,7 +370,7 @@ const colors = {
   orange: "bg-orange-400",
   blue: "bg-blue-400",
   green: "bg-green-400",
-  red: "bg-red-400",
+  red: "bg-red-600",
   violet: "bg-violet-400",
   rose: "bg-rose-400",
   yellow: "bg-yellow-500",
