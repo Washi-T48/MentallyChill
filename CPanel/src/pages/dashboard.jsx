@@ -188,7 +188,7 @@ export default function DashboardPage() {
           <div className="p-4 md:p-10">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
               <StatCard
-                title="คำขอการจอง scs"
+                title="คำขอการจอง"
                 value={countBooking}
                 color="blue"
                 tone="500"
@@ -208,30 +208,30 @@ export default function DashboardPage() {
               />
               <StatCard title="ระดับร้ายแรง" value={highCount} color="rose" />
             </div>
-
-            <CategoryStats
-              title="ความซึมเศร้า"
-              low={countdlow}
-              medium={countdmedium}
-              high={countdhigh}
-              bgColor="blue"
-              tone="500"
-            />
-            <CategoryStats
-              title="ความวิตกกังวล"
-              low={countalow}
-              medium={countamedium}
-              high={countahigh}
-              bgColor="violet"
-            />
-            <CategoryStats
-              title="ความเครียด"
-              low={countslow}
-              medium={countsmedium}
-              high={countshigh}
-              bgColor="red"
-            />
-
+            <div className="border-4 border-blue rounded-md p-4">
+              <CategoryStats
+                title="ความซึมเศร้า"
+                low={countdlow}
+                medium={countdmedium}
+                high={countdhigh}
+                bgColor="blue"
+                tone="500"
+              />
+              <CategoryStats
+                title="ความวิตกกังวล"
+                low={countalow}
+                medium={countamedium}
+                high={countahigh}
+                bgColor="violet"
+              />
+              <CategoryStats
+                title="ความเครียด"
+                low={countslow}
+                medium={countsmedium}
+                high={countshigh}
+                bgColor="red"
+              />
+            </div>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8">
               <DataTable
                 title="การจองครั้งล่าสุด"
