@@ -233,7 +233,7 @@ export default function DashboardPage() {
             /> */}
             <div className="border-4 border-blue-700 bg-white rounded-md">
               <div className="flex flex-row bg-blue-700 rounded-md p-4 items-center">
-                <div className="text-lg text-white m-4"> แบบประเมิน : </div>
+                <div className="text-2xl text-white m-4"> แบบประเมิน : </div>
                 <select
                   className="w-[200px] border rounded p-2"
                   onChange={(e) => {
