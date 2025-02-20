@@ -239,6 +239,7 @@ export default function DashboardPage() {
                   onChange={(e) => {
                     setSelectedFormType(e.target.value);
                   }}
+                  style={customStyles}
                 >
                   <option value="">dass21</option>
                   <option value="ความซึมเศร้า">burnout</option>
@@ -375,6 +376,17 @@ const colors = {
   rose: "bg-rose-400",
   yellow: "bg-yellow-500",
 };
+
+const customStyles = {
+  dropdownIndicator: (base) => ({
+    ...base,
+    color: "rgb(255, 255, 255)", // White color
+    "&:hover": {
+      color: "rgb(255, 255, 255)", // Ensure it stays white on hover
+    },
+  }),
+};
+
 function StatCard({ title, value, color, tone = 400 }) {
   return (
     <div
