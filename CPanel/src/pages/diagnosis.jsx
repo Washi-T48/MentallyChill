@@ -243,6 +243,17 @@ export default function DiagnosisPage() {
                     {row.forms_type}
                   </td>
                   <td className="py-2 px-4 text-center text-sm md:text-xl">
+                    {row.result
+                      ? `${getResultCategory(
+                          row.result.d,
+                          row.result.a,
+                          row.result.s
+                        )} (D: ${row.result.d} A: ${row.result.a} S: ${
+                          row.result.s
+                        })`
+                      : "null"}
+                  </td>
+                  <td className="py-2 px-4 text-center text-sm md:text-xl">
                     {row.result &&
                     row.result.d !== undefined &&
                     row.result.a !== undefined &&
