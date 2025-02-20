@@ -209,28 +209,9 @@ export default function DashboardPage() {
               <StatCard title="ระดับร้ายแรง" value={highCount} color="rose" />
             </div>
             <div className="border-4 border-blue-700 bg-white rounded-md p-4">
-              <CategoryStats
-                title="ความซึมเศร้า"
-                low={countdlow}
-                medium={countdmedium}
-                high={countdhigh}
-                bgColor="blue"
-                tone="500"
-              />
-              <CategoryStats
-                title="ความวิตกกังวล"
-                low={countalow}
-                medium={countamedium}
-                high={countahigh}
-                bgColor="violet"
-              />
-              <CategoryStats
-                title="ความเครียด"
-                low={countslow}
-                medium={countsmedium}
-                high={countshigh}
-                bgColor="red"
-              />
+              <div className="bg-blue-700 rounded-md p-4">
+                <div className="text-lg text-white"> แบบประเมิน : </div>
+              </div>
             </div>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8">
               <DataTable
@@ -264,7 +245,7 @@ const colors = {
 function StatCard({ title, value, color, tone = 400 }) {
   return (
     <div
-      className={`flex flex-col justify-between border-4 border-white rounded-md p-4 h-32 ${
+      className={`flex flex-col justify-between border-4 border-black rounded-md p-4 h-32 ${
         colors[color] || "bg-gray-400"
       }`}
     >
