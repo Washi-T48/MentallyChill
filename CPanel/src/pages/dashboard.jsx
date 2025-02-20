@@ -247,7 +247,7 @@ export default function DashboardPage() {
                   <option value="ความเครียด">2Q8Q9Q</option>
                 </select>
               </div>
-              <div className="grid grid-cols-3 gap-4">
+              <div className="grid grid-cols-3 gap-4 m-10">
                 <StatCard title="ระดับร้ายแรง" value={highCount} color="rose" />
                 <StatCard title="ระดับร้ายแรง" value={highCount} color="rose" />
                 <StatCard title="ระดับร้ายแรง" value={highCount} color="rose" />
