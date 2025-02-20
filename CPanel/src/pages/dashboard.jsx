@@ -208,8 +208,8 @@ export default function DashboardPage() {
               />
               <StatCard title="ระดับร้ายแรง" value={highCount} color="rose" />
             </div>
-            <div className="border-4 border-blue-700 bg-white rounded-md p-4">
-              <div className="bg-blue-700 rounded-md">
+            <div className="border-4 border-blue-700 bg-white rounded-md">
+              <div className="bg-blue-700 rounded-md p-4">
                 <div className="text-lg text-white"> แบบประเมิน : </div>
               </div>
             </div>
