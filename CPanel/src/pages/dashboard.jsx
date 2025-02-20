@@ -368,10 +368,10 @@ export default function DashboardPage() {
 
 const colors = {
   orange: "bg-orange-400",
-  blue: "bg-blue-400",
+  blue: "bg-blue-500",
   green: "bg-green-500",
   red: "bg-red-600",
-  violet: "bg-violet-400",
+  violet: "bg-violet-500",
   rose: "bg-rose-400",
   yellow: "bg-yellow-500",
 };
