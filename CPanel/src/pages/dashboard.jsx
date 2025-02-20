@@ -212,7 +212,7 @@ export default function DashboardPage() {
               <div className="bg-blue-700 rounded-md p-4">
                 <div className="text-lg text-white"> แบบประเมิน : </div>
               </div>
-              <div className="m-10">
+              <div className="mt-14 mb-4 mx-4">
                 <StatCard title="ระดับร้ายแรง" value={highCount} color="rose" />
               </div>
             </div>
