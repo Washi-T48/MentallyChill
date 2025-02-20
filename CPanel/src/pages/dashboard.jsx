@@ -231,8 +231,8 @@ export default function DashboardPage() {
               high={countshigh}
               bgColor="red"
             /> */}
-            <div className="border-4 border-blue-700 bg-white rounded-md">
-              <div className="flex flex-row bg-blue-700 rounded-md p-4 items-center">
+            <div className="border-4 border-[#003087] bg-white rounded-md">
+              <div className="flex flex-row bg-[#003087] rounded-md p-4 items-center">
                 <div className="text-2xl text-white m-4"> แบบประเมิน : </div>
                 <select
                   className="w-[200px] border rounded p-2 text-xl bg-blue-600 text-white"
