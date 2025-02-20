@@ -373,7 +373,7 @@ const colors = {
   red: "bg-red-400",
   violet: "bg-violet-400",
   rose: "bg-rose-400",
-  yellow: "bg-yellow-300",
+  yellow: "bg-yellow-500",
 };
 function StatCard({ title, value, color, tone = 400 }) {
   return (
