@@ -237,54 +237,115 @@ export default function DashboardPage() {
                 <div className="grid grid-cols-3 gap-4 m-10">
                   {selectedFormType === "ความซึมเศร้า" && (
                     <>
-                      <StatCard title="ระดับปานกลาง" value={mediumCount} color="orange" />
-                      <StatCard title="ระดับปกติ" value={lowCount} color="green" />
-                      <StatCard title="ระดับร้ายแรง" value={highCount} color="rose" />
+                      <StatCard
+                        title="ระดับปานกลาง"
+                        value={mediumCount}
+                        color="orange"
+                      />
+                      <StatCard
+                        title="ระดับปกติ"
+                        value={lowCount}
+                        color="green"
+                      />
+                      <StatCard
+                        title="ระดับร้ายแรง"
+                        value={highCount}
+                        color="rose"
+                      />
                     </>
                   )}
                   {selectedFormType === "ความวิตกกังวล" && (
                     <>
-                      <StatCard title="ระดับปกติ" value={lowCount} color="green" />
-                      <StatCard title="ระดับปานกลาง" value={mediumCount} color="orange" />
-                      <StatCard title="ระดับร้ายแรง" value={highCount} color="rose" />
+                      <StatCard
+                        title="ระดับปกติ"
+                        value={lowCount}
+                        color="green"
+                      />
+                      <StatCard
+                        title="ระดับปานกลาง"
+                        value={mediumCount}
+                        color="orange"
+                      />
+                      <StatCard
+                        title="ระดับร้ายแรง"
+                        value={highCount}
+                        color="rose"
+                      />
                     </>
                   )}
                   {selectedFormType === "ความเครียด" && (
                     <>
-                      <StatCard title="ระดับร้ายแรง" value={highCount} color="rose" />
-                      <StatCard title="ระดับปกติ" value={lowCount} color="green" />
-                      <StatCard title="ระดับปานกลาง" value={mediumCount} color="orange" />
+                      <StatCard
+                        title="ระดับร้ายแรง"
+                        value={highCount}
+                        color="rose"
+                      />
+                      <StatCard
+                        title="ระดับปกติ"
+                        value={lowCount}
+                        color="green"
+                      />
+                      <StatCard
+                        title="ระดับปานกลาง"
+                        value={mediumCount}
+                        color="orange"
+                      />
                     </>
                   )}
                   {selectedFormType === "2Q8Q9Q" && (
                     <>
-                      <StatCard title="ระดับปานกลาง" value={mediumCount} color="orange" />
-                      <StatCard title="ระดับร้ายแรง" value={highCount} color="rose" />
-                      <StatCard title="ระดับปกติ" value={lowCount} color="green" />
+                      <StatCard
+                        title="ระดับปานกลาง"
+                        value={mediumCount}
+                        color="orange"
+                      />
+                      <StatCard
+                        title="ระดับร้ายแรง"
+                        value={highCount}
+                        color="rose"
+                      />
+                      <StatCard
+                        title="ระดับปกติ"
+                        value={lowCount}
+                        color="green"
+                      />
                     </>
                   )}
                   {selectedFormType === "" && (
                     <>
-                      <StatCard title="ระดับปกติ" value={lowCount} color="green" />
-                      <StatCard title="ระดับปานกลาง" value={mediumCount} color="orange" />
-                      <StatCard title="ระดับร้ายแรง" value={highCount} color="rose" />
+                      <StatCard
+                        title="ระดับปกติ"
+                        value={lowCount}
+                        color="green"
+                      />
+                      <StatCard
+                        title="ระดับปานกลาง"
+                        value={mediumCount}
+                        color="orange"
+                      />
+                      <StatCard
+                        title="ระดับร้ายแรง"
+                        value={highCount}
+                        color="rose"
+                      />
                     </>
                   )}
                 </div>
-            </div>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8">
-              <DataTable
-                title="การจองครั้งล่าสุด"
-                data={recentBookingInfo}
-                columns={["เลขที่การจอง", "หัวข้อ", "วันที่"]}
-                bgColor="green"
-              />
-              <DataTable
-                title="ผลการประเมินครั้งล่าสุด"
-                data={recentDiagnosis}
-                columns={["เลขที่ผู้ใช้", "ประเภทแบบฟอร์ม", "วันที่"]}
-                bgColor="violet"
-              />
+              </div>
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8">
+                <DataTable
+                  title="การจองครั้งล่าสุด"
+                  data={recentBookingInfo}
+                  columns={["เลขที่การจอง", "หัวข้อ", "วันที่"]}
+                  bgColor="green"
+                />
+                <DataTable
+                  title="ผลการประเมินครั้งล่าสุด"
+                  data={recentDiagnosis}
+                  columns={["เลขที่ผู้ใช้", "ประเภทแบบฟอร์ม", "วันที่"]}
+                  bgColor="violet"
+                />
+              </div>
             </div>
           </div>
         </div>
