@@ -248,8 +248,12 @@ export default function DashboardPage() {
                 </select>
               </div>
               <div className="grid grid-cols-3 gap-4 m-10">
-                <StatCard title="ระดับร้ายแรง" value={highCount} color="rose" />
-                <StatCard title="ระดับร้ายแรง" value={highCount} color="rose" />
+                <StatCard title="ระดับปกติ" value={lowCount} color="green" />
+                <StatCard
+                  title="ระดับปานกลาง"
+                  value={mediumCount}
+                  color="orange"
+                />
                 <StatCard title="ระดับร้ายแรง" value={highCount} color="rose" />
               </div>
             </div>
