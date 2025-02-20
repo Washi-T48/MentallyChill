@@ -23,6 +23,7 @@ export default function DashboardPage() {
   const [lowCount, setLowCount] = useState(0);
   const [mediumCount, setMediumCount] = useState(0);
   const [highCount, setHighCount] = useState(0);
+  const [selectedFormType, setSelectedFormType] = useState("");
 
   useEffect(() => {
     const fetchDiagData = async () => {
@@ -208,9 +209,42 @@ export default function DashboardPage() {
               />
               <StatCard title="ระดับร้ายแรง" value={highCount} color="rose" />
             </div>
+            {/* <CategoryStats
+              title="ความซึมเศร้า"
+              low={countdlow}
+              medium={countdmedium}
+              high={countdhigh}
+              bgColor="blue"
+              tone="500"
+            />
+            <CategoryStats
+              title="ความวิตกกังวล"
+              low={countalow}
+              medium={countamedium}
+              high={countahigh}
+              bgColor="violet"
+            />
+            <CategoryStats
+              title="ความเครียด"
+              low={countslow}
+              medium={countsmedium}
+              high={countshigh}
+              bgColor="red"
+            /> */}
             <div className="border-4 border-blue-700 bg-white rounded-md">
-              <div className="bg-blue-700 rounded-md p-4">
+              <div className="bg-blue-700 rounded-md p-6">
                 <div className="text-lg text-white"> แบบประเมิน : </div>
+                <select
+                  className="w-full border rounded p-2"
+                  onChange={(e) => {
+                    setSelectedFormType(e.target.value);
+                  }}
+                >
+                  <option value="">ทั้งหมด</option>
+                  <option value="ความซึมเศร้า">ความซึมเศร้า</option>
+                  <option value="ความวิตกกังวล">ความวิตกกังวล</option>
+                  <option value="ความเครียด">ความเครียด</option>
+                </select>
               </div>
               <div className="m-10">
                 <StatCard title="ระดับร้ายแรง" value={highCount} color="rose" />
