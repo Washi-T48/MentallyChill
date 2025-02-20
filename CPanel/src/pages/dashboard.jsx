@@ -235,7 +235,7 @@ export default function DashboardPage() {
               <div className="flex flex-row bg-blue-700 rounded-md p-4 items-center">
                 <div className="text-2xl text-white m-4"> แบบประเมิน : </div>
                 <select
-                  className="w-[200px] border rounded p-2 text-2xl"
+                  className="w-[200px] border rounded p-2 text-xl"
                   onChange={(e) => {
                     setSelectedFormType(e.target.value);
                   }}
