@@ -240,13 +240,14 @@ export default function DashboardPage() {
                     setSelectedFormType(e.target.value);
                   }}
                 >
-                  <option value="">ทั้งหมด</option>
-                  <option value="ความซึมเศร้า">ความซึมเศร้า</option>
-                  <option value="ความวิตกกังวล">ความวิตกกังวล</option>
-                  <option value="ความเครียด">ความเครียด</option>
+                  <option value="">dass21</option>
+                  <option value="ความซึมเศร้า">burnout</option>
+                  <option value="ความวิตกกังวล">rq</option>
+                  <option value="ความเครียด">stress</option>
+                  <option value="ความเครียด">2Q8Q9Q</option>
                 </select>
               </div>
-              <div className="m-10">
+              <div className="grid grid-cols-3 gap-4">
                 <StatCard title="ระดับร้ายแรง" value={highCount} color="rose" />
                 <StatCard title="ระดับร้ายแรง" value={highCount} color="rose" />
                 <StatCard title="ระดับร้ายแรง" value={highCount} color="rose" />
