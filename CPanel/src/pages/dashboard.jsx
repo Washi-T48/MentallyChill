@@ -234,28 +234,43 @@ export default function DashboardPage() {
             <div className="border-4 border-blue-700 bg-white rounded-md">
               <div className="flex flex-row bg-blue-700 rounded-md p-4 items-center">
                 <div className="text-2xl text-white m-4"> แบบประเมิน : </div>
-                <select
-                  className="w-[200px] border rounded p-2 text-xl"
-                  onChange={(e) => {
-                    setSelectedFormType(e.target.value);
-                  }}
-                >
-                  <option value="">dass21</option>
-                  <option value="ความซึมเศร้า">burnout</option>
-                  <option value="ความวิตกกังวล">rq</option>
-                  <option value="ความเครียด">stress</option>
-                  <option value="ความเครียด">2Q8Q9Q</option>
-                </select>
-              </div>
-              <div className="grid grid-cols-3 gap-4 m-10">
-                <StatCard title="ระดับปกติ" value={lowCount} color="green" />
-                <StatCard
-                  title="ระดับปานกลาง"
-                  value={mediumCount}
-                  color="orange"
-                />
-                <StatCard title="ระดับร้ายแรง" value={highCount} color="rose" />
-              </div>
+                <div className="grid grid-cols-3 gap-4 m-10">
+                  {selectedFormType === "ความซึมเศร้า" && (
+                    <>
+                      <StatCard title="ระดับปานกลาง" value={mediumCount} color="orange" />
+                      <StatCard title="ระดับปกติ" value={lowCount} color="green" />
+                      <StatCard title="ระดับร้ายแรง" value={highCount} color="rose" />
+                    </>
+                  )}
+                  {selectedFormType === "ความวิตกกังวล" && (
+                    <>
+                      <StatCard title="ระดับปกติ" value={lowCount} color="green" />
+                      <StatCard title="ระดับปานกลาง" value={mediumCount} color="orange" />
+                      <StatCard title="ระดับร้ายแรง" value={highCount} color="rose" />
+                    </>
+                  )}
+                  {selectedFormType === "ความเครียด" && (
+                    <>
+                      <StatCard title="ระดับร้ายแรง" value={highCount} color="rose" />
+                      <StatCard title="ระดับปกติ" value={lowCount} color="green" />
+                      <StatCard title="ระดับปานกลาง" value={mediumCount} color="orange" />
+                    </>
+                  )}
+                  {selectedFormType === "2Q8Q9Q" && (
+                    <>
+                      <StatCard title="ระดับปานกลาง" value={mediumCount} color="orange" />
+                      <StatCard title="ระดับร้ายแรง" value={highCount} color="rose" />
+                      <StatCard title="ระดับปกติ" value={lowCount} color="green" />
+                    </>
+                  )}
+                  {selectedFormType === "" && (
+                    <>
+                      <StatCard title="ระดับปกติ" value={lowCount} color="green" />
+                      <StatCard title="ระดับปานกลาง" value={mediumCount} color="orange" />
+                      <StatCard title="ระดับร้ายแรง" value={highCount} color="rose" />
+                    </>
+                  )}
+                </div>
             </div>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8">
               <DataTable
