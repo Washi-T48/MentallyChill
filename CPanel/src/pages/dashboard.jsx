@@ -24,13 +24,10 @@ export default function DashboardPage() {
   const [mediumCount, setMediumCount] = useState(0);
   const [highCount, setHighCount] = useState(0);
 
-
   useEffect(() => {
     const fetchDiagData = async () => {
       try {
-        const response = await axios.get(
-          `/forms/all`
-        );
+        const response = await axios.get(`/forms/all`);
         setDiagData(response.data);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -39,9 +36,7 @@ export default function DashboardPage() {
 
     const fetchCountDiag = async () => {
       try {
-        const response = await axios.get(
-          `/forms/count`
-        );
+        const response = await axios.get(`/forms/count`);
         const data = response.data.count;
         setCountDiag(data);
       } catch (error) {
@@ -51,9 +46,7 @@ export default function DashboardPage() {
 
     const fetchBookingData = async () => {
       try {
-        const response = await axios.get(
-          `/appointment/all`
-        );
+        const response = await axios.get(`/appointment/all`);
         setBookingData(response.data);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -62,9 +55,7 @@ export default function DashboardPage() {
 
     const fetchCountBooking = async () => {
       try {
-        const response = await axios.get(
-          `/appointment/count`
-        );
+        const response = await axios.get(`/appointment/count`);
         const data = response.data.count;
         setCountBooking(data);
       } catch (error) {
@@ -84,11 +75,11 @@ export default function DashboardPage() {
       let low = 0;
       let medium = 0;
       let high = 0;
-  
+
       let resD = 0;
       let resA = 0;
       let resS = 0;
-  
+
       let dlow = 0;
       let dmedium = 0;
       let dhigh = 0;
@@ -98,11 +89,11 @@ export default function DashboardPage() {
       let slow = 0;
       let smedium = 0;
       let shigh = 0;
-  
+
       diagdata.forEach((entry) => {
         if (entry.result) {
           const { d, a, s } = entry.result;
-  
+
           // Convert values to numbers
           const dNum = Number(d);
           resD += dNum;
@@ -110,11 +101,11 @@ export default function DashboardPage() {
           resA += aNum;
           const sNum = Number(s);
           resS += sNum;
-  
+
           let drank = 0;
           let arank = 0;
           let srank = 0;
-  
+
           if (dNum >= 0 && dNum <= 6) {
             drank = 1;
             dlow++;
@@ -125,7 +116,7 @@ export default function DashboardPage() {
             drank = 3;
             dhigh++;
           }
-  
+
           if (aNum >= 0 && aNum <= 5) {
             arank = 1;
             alow++;
@@ -136,7 +127,7 @@ export default function DashboardPage() {
             arank = 3;
             ahigh++;
           }
-  
+
           if (sNum >= 0 && sNum <= 9) {
             srank = 1;
             slow++;
@@ -147,9 +138,9 @@ export default function DashboardPage() {
             srank = 3;
             shigh++;
           }
-  
+
           const maxValue = Math.max(drank, arank, srank);
-  
+
           if (maxValue === 1) {
             low++;
           } else if (maxValue === 2) {
@@ -159,7 +150,7 @@ export default function DashboardPage() {
           }
         }
       });
-  
+
       setResD(resD);
       setResA(resA);
       setResS(resS);
@@ -176,78 +167,90 @@ export default function DashboardPage() {
       setMediumCount(medium);
       setHighCount(high);
     };
-  
+
     classifyAndCount();
   }, [diagdata]);
-  
+
   // Get recent diagnosis data with maximum 5 rows
   const recentDiagnosis = diagdata.slice(0, 5);
 
   // Get recent booking information with maximum 5 rows
   const recentBookingInfo = bookingdata.slice(0, 5);
 
-return (
-  <div className="flex flex-col min-h-screen">
-    <Topbar />
-    <div className="flex flex-1 flex-row">
-      <div className="flex relative w-72">
-        <Sidebar />
-      </div>
-      <div className="w-full overflow-x-hidden">
-        <div className="p-4 md:p-10">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
-            <StatCard title="คำขอการจอง" value={countBooking} color="blue" tone="500"/>
-            <StatCard title="จำนวนผลการประเมิน" value={countDiag} color="violet" />
-            <div className="hidden lg:block"></div> {/* Empty div for the third column in the first row */}
-            <StatCard title="ระดับปกติ" value={lowCount} color="green" />
-            <StatCard title="ระดับปานกลาง" value={mediumCount} color="orange" />
-            <StatCard title="ระดับร้ายแรง" value={highCount} color="rose" />
-          </div>
+  return (
+    <div className="flex flex-col min-h-screen">
+      <Topbar />
+      <div className="flex flex-1 flex-row">
+        <div className="flex relative w-72">
+          <Sidebar />
+        </div>
+        <div className="w-full overflow-x-hidden">
+          <div className="p-4 md:p-10">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+              <StatCard
+                title="คำขอการจอง scs"
+                value={countBooking}
+                color="blue"
+                tone="500"
+              />
+              <StatCard
+                title="จำนวนผลการประเมิน"
+                value={countDiag}
+                color="violet"
+              />
+              <div className="hidden lg:block"></div>{" "}
+              {/* Empty div for the third column in the first row */}
+              <StatCard title="ระดับปกติ" value={lowCount} color="green" />
+              <StatCard
+                title="ระดับปานกลาง"
+                value={mediumCount}
+                color="orange"
+              />
+              <StatCard title="ระดับร้ายแรง" value={highCount} color="rose" />
+            </div>
 
-
-          <CategoryStats 
-            title="ความซึมเศร้า" 
-            low={countdlow} 
-            medium={countdmedium} 
-            high={countdhigh} 
-            bgColor="blue"
-            tone="500"
-          />
-          <CategoryStats 
-            title="ความวิตกกังวล" 
-            low={countalow} 
-            medium={countamedium} 
-            high={countahigh} 
-            bgColor="violet"
-          />
-          <CategoryStats 
-            title="ความเครียด" 
-            low={countslow} 
-            medium={countsmedium} 
-            high={countshigh} 
-            bgColor="red"
-          />
-          
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8">
-            <DataTable 
-              title="การจองครั้งล่าสุด" 
-              data={recentBookingInfo} 
-              columns={["เลขที่การจอง", "หัวข้อ", "วันที่"]} 
-              bgColor="green"
+            <CategoryStats
+              title="ความซึมเศร้า"
+              low={countdlow}
+              medium={countdmedium}
+              high={countdhigh}
+              bgColor="blue"
+              tone="500"
             />
-            <DataTable 
-              title="ผลการประเมินครั้งล่าสุด" 
-              data={recentDiagnosis} 
-              columns={["เลขที่ผู้ใช้", "ประเภทแบบฟอร์ม", "วันที่"]} 
+            <CategoryStats
+              title="ความวิตกกังวล"
+              low={countalow}
+              medium={countamedium}
+              high={countahigh}
               bgColor="violet"
             />
+            <CategoryStats
+              title="ความเครียด"
+              low={countslow}
+              medium={countsmedium}
+              high={countshigh}
+              bgColor="red"
+            />
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8">
+              <DataTable
+                title="การจองครั้งล่าสุด"
+                data={recentBookingInfo}
+                columns={["เลขที่การจอง", "หัวข้อ", "วันที่"]}
+                bgColor="green"
+              />
+              <DataTable
+                title="ผลการประเมินครั้งล่าสุด"
+                data={recentDiagnosis}
+                columns={["เลขที่ผู้ใช้", "ประเภทแบบฟอร์ม", "วันที่"]}
+                bgColor="violet"
+              />
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-);
+  );
 }
 
 const colors = {
@@ -260,9 +263,17 @@ const colors = {
 };
 function StatCard({ title, value, color, tone = 400 }) {
   return (
-    <div className={`flex flex-col justify-between border-4 border-white rounded-md p-4 h-32 ${colors[color] || "bg-gray-400"}`}>
-      <div className="text-lg text-white drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">{title}</div>
-      <div className="text-4xl md:text-5xl lg:text-6xl text-white drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">{value}</div>
+    <div
+      className={`flex flex-col justify-between border-4 border-white rounded-md p-4 h-32 ${
+        colors[color] || "bg-gray-400"
+      }`}
+    >
+      <div className="text-lg text-white drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">
+        {title}
+      </div>
+      <div className="text-4xl md:text-5xl lg:text-6xl text-white drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">
+        {value}
+      </div>
     </div>
   );
 }
@@ -270,9 +281,24 @@ function StatCard({ title, value, color, tone = 400 }) {
 function CategoryStats({ title, low, medium, high, bgColor, tone }) {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 my-8">
-      <StatCard title={`${title} ต่ำ`} value={low} color={bgColor} tone={tone} />
-      <StatCard title={`${title} ปานกลาง`} value={medium} color={bgColor} tone={tone} />
-      <StatCard title={`${title} รุนแรง`} value={high} color={bgColor} tone={tone} />
+      <StatCard
+        title={`${title} ต่ำ`}
+        value={low}
+        color={bgColor}
+        tone={tone}
+      />
+      <StatCard
+        title={`${title} ปานกลาง`}
+        value={medium}
+        color={bgColor}
+        tone={tone}
+      />
+      <StatCard
+        title={`${title} รุนแรง`}
+        value={high}
+        color={bgColor}
+        tone={tone}
+      />
     </div>
   );
 }
@@ -285,16 +311,24 @@ function DataTable({ title, data, columns, bgColor }) {
         <thead>
           <tr className={`bg-${bgColor}-400`}>
             {columns.map((col, index) => (
-              <th key={index} className="py-2 px-4 text-white drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">{col}</th>
+              <th
+                key={index}
+                className="py-2 px-4 text-white drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]"
+              >
+                {col}
+              </th>
             ))}
           </tr>
         </thead>
         <tbody>
           {data.map((item, index) => (
-            <tr key={index} className={index % 2 === 0 ? "bg-white " : "bg-gray-100"}>
+            <tr
+              key={index}
+              className={index % 2 === 0 ? "bg-white " : "bg-gray-100"}
+            >
               {columns.map((col, cellIndex) => {
                 let value;
-                switch(col) {
+                switch (col) {
                   case "เลขที่การจอง":
                     value = item.booking_id;
                     break;
@@ -315,7 +349,9 @@ function DataTable({ title, data, columns, bgColor }) {
                 }
                 return (
                   <td key={cellIndex} className="py-2 px-4 text-center">
-                    {typeof value === 'string' && value.includes('T') ? value.substring(0, 10) : value}
+                    {typeof value === "string" && value.includes("T")
+                      ? value.substring(0, 10)
+                      : value}
                   </td>
                 );
               })}
@@ -326,12 +362,3 @@ function DataTable({ title, data, columns, bgColor }) {
     </div>
   );
 }
-
-
-
-
-
-
-
-
-
