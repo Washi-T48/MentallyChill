@@ -434,38 +434,38 @@ function StatCard({ title, value, color, tone = 400 }) {
   );
 }
 
-function CategoryStats({ title, low, medium, high, bgColor, tone }) {
-  return (
-    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 my-8">
-      <StatCard
-        title={`${title} ต่ำ`}
-        value={low}
-        color={bgColor}
-        tone={tone}
-      />
-      <StatCard
-        title={`${title} ปานกลาง`}
-        value={medium}
-        color={bgColor}
-        tone={tone}
-      />
-      <StatCard
-        title={`${title} รุนแรง`}
-        value={high}
-        color={bgColor}
-        tone={tone}
-      />
-    </div>
-  );
-}
+// function CategoryStats({ title, low, medium, high, bgColor, tone }) {
+//   return (
+//     <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 my-8">
+//       <StatCard
+//         title={`${title} ต่ำ`}
+//         value={low}
+//         color={bgColor}
+//         tone={tone}
+//       />
+//       <StatCard
+//         title={`${title} ปานกลาง`}
+//         value={medium}
+//         color={bgColor}
+//         tone={tone}
+//       />
+//       <StatCard
+//         title={`${title} รุนแรง`}
+//         value={high}
+//         color={bgColor}
+//         tone={tone}
+//       />
+//     </div>
+//   );
+// }
 
 function DataTable({ title, data, columns, bgColor }) {
   return (
     <div className="overflow-x-auto">
       <h2 className="text-2xl mb-3 ">{title}</h2>
-      <table className="w-full">
+      <table className="w-full border-4">
         <thead>
-          <tr className={`bg-${bgColor}-400`}>
+          <tr className={`bg-${bgColor}-500 border-4 border-black`}>
             {columns.map((col, index) => (
               <th
                 key={index}
