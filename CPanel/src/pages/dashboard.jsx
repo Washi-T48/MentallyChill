@@ -330,32 +330,32 @@ export default function DashboardPage() {
                     <StatCard
                       title="ความซึมเศร้า"
                       value={countdlow}
-                      color="green"
+                      color="blue"
                     />
                     <StatCard
                       title="ความซึมเศร้า"
                       value={countdmedium}
-                      color="yellow"
+                      color="blue"
                     />
                     <StatCard
                       title="ความซึมเศร้า"
                       value={countdhigh}
-                      color="red"
+                      color="blue"
                     />
                     <StatCard
                       title="ความวิตกกังวล"
                       value={countalow}
-                      color="red"
+                      color="violet"
                     />
                     <StatCard
                       title="ความวิตกกังวล"
                       value={countamedium}
-                      color="red"
+                      color="violet"
                     />
                     <StatCard
                       title="ความวิตกกังวล"
                       value={countahigh}
-                      color="red"
+                      color="violet"
                     />
                     <StatCard
                       title="ความเครียด"
