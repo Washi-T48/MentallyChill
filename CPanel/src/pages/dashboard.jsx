@@ -242,14 +242,14 @@ export default function DashboardPage() {
                   style={customStyles}
                 >
                   <option value="">dass21</option>
-                  <option value="ความซึมเศร้า">burnout</option>
-                  <option value="ความวิตกกังวล">rq</option>
-                  <option value="ความเครียด">stress</option>
-                  <option value="ความเครียด">2Q8Q9Q</option>
+                  <option value="burnout">burnout</option>
+                  <option value="rq">rq</option>
+                  <option value="stress">stress</option>
+                  <option value="2Q8Q9Q">2Q8Q9Q</option>
                 </select>
               </div>
               <div className="grid grid-cols-3 gap-4 m-10">
-                {selectedFormType === "ความซึมเศร้า" && (
+                {selectedFormType === "burnout" && (
                   <>
                     <StatCard
                       title="ระดับปานกลาง"
@@ -268,7 +268,7 @@ export default function DashboardPage() {
                     />
                   </>
                 )}
-                {selectedFormType === "ความวิตกกังวล" && (
+                {selectedFormType === "rq" && (
                   <>
                     <StatCard
                       title="ระดับปกติ"
@@ -287,7 +287,7 @@ export default function DashboardPage() {
                     />
                   </>
                 )}
-                {selectedFormType === "ความเครียด" && (
+                {selectedFormType === "stress" && (
                   <>
                     <StatCard
                       title="ระดับร้ายแรง"
