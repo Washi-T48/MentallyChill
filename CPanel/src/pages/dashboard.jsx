@@ -465,7 +465,7 @@ function DataTable({ title, data, columns, bgColor }) {
       <h2 className="text-2xl mb-3 ">{title}</h2>
       <table className="w-full border-4">
         <thead>
-          <tr className={`bg-${bgColor}-500 border-4 border-black`}>
+          <tr className={`bg-${bgColor}-500 border-2 border-black`}>
             {columns.map((col, index) => (
               <th
                 key={index}
