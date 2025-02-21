@@ -2,6 +2,7 @@ import axios from "../components/axioscreds";
 import { useEffect, useState } from "react";
 import Sidebar from "../components/sidebar";
 import Topbar from "../components/topbar";
+import { data } from "autoprefixer";
 
 export default function DashboardPage() {
   const [bookingdata, setBookingData] = useState([]);
@@ -12,6 +13,30 @@ export default function DashboardPage() {
   const [resA, setResA] = useState(0);
   const [resS, setResS] = useState(0);
   const [resStress, setResStress] = useState(0);
+  const [EmotionalScore, setEmotionalScore] = useState(0);
+  const [Depersonalization, setDepersonalization] = useState(0);
+  const [personalAccomplishment, setPersonalAccomplishment] = useState(0);
+  const [rqemotion , setrqemotion] = useState(0);
+  const [rqencouragement , setrqencouragement] = useState(0);
+  const [rqproblem , setrqproblem] = useState(0);
+  const [countrqlowemotion, setcountrqlowemotion] = useState(0);
+  const [countrqmediumemotion, setcountrqmediumemotion] = useState(0);
+  const [countrqhighemotion, setcountrqhighemotion] = useState(0);
+  const [countrqlowencouragement, setcountrqlowencouragement] = useState(0);
+  const [countrqmediumencouragement, setcountrqmediumencouragement] = useState(0);
+  const [countrqhighencouragement, setcountrqhighencouragement] = useState(0);
+  const [countrqlowproblem, setcountrqlowproblem] = useState(0);
+  const [countrqmediumproblem, setcountrqmediumproblem] = useState(0);
+  const [countrqhighproblem, setcountrqhighproblem] = useState(0);
+  const [countlowEmotionalScore, setcountlowEmotionalScore] = useState(0);
+  const [countmediumEmotionalScore, setcountmediumEmotionalScore] = useState(0);
+  const [counthighEmotionalScore, setcounthighEmotionalScore] = useState(0);
+  const [countlowDepersonalization, setcountlowDepersonalization] = useState(0);
+  const [countmediumDepersonalization, setcountmediumDepersonalization] = useState(0);
+  const [counthighDepersonalization, setcounthighDepersonalization] = useState(0);
+  const [countlowpersonalAccomplishment, setcountlowPersonalAccomplishment] = useState(0);
+  const [countmediumpersonalAccomplishment, setcountmediumPersonalAccomplishment] = useState(0);
+  const [counthighpersonalAccomplishment, setcounthighPersonalAccomplishment] = useState(0);
   const [countStressLow, setCountStressLow] = useState(0);
   const [countStressMedium, setCountStressMedium] = useState(0);
   const [countStressHigh, setCountStressHigh] = useState(0);
@@ -80,106 +105,172 @@ export default function DashboardPage() {
       let low = 0;
       let medium = 0;
       let high = 0;
-
+  
       let resD = 0;
       let resA = 0;
       let resS = 0;
       let resStress = 0;
-
-      let dlow = 0;
-      let dmedium = 0;
-      let dhigh = 0;
-      let alow = 0;
-      let amedium = 0;
-      let ahigh = 0;
-      let slow = 0;
-      let smedium = 0;
-      let shigh = 0;
-      let stresslow = 0;
-      let stressmedium = 0;
-      let stresshigh = 0;
-
+      let resEmotionScore = 0;
+      let resDepersonal = 0;
+      let resPersonalAccomp = 0;
+      let resrqemotion = 0;
+      let resrqencouragement = 0;
+      let resrqproblem = 0;
+  
+      let dlow = 0, dmedium = 0, dhigh = 0;
+      let alow = 0, amedium = 0, ahigh = 0;
+      let slow = 0, smedium = 0, shigh = 0;
+      let stresslow = 0, stressmedium = 0, stresshigh = 0;
+      let lowEmotionScore = 0, mediumEmotionScore = 0, highEmotionScore = 0;
+      let lowDepersonal = 0, mediumDepersonal = 0, highDepersonal = 0;
+      let lowPersonalAccomp = 0, mediumPersonalAccomp = 0, highPersonalAccomp = 0;
+      let lowrqemotion = 0, mediumrqemotion = 0, highrqemotion = 0;
+      let lowrqencouragement = 0, mediumrqencouragement = 0, highrqencouragement = 0;
+      let lowrqproblem = 0, mediumrqproblem = 0, highrqproblem = 0;
+  
       diagdata.forEach((entry) => {
-        if (entry.form_type === "stress" && entry.result && entry.result.scores !== undefined) {
-          const stressScore = Number(entry.result.scores);
-        
-          if (stressScore >= 30) {
-            stresshigh++;
-            high++;
-          } else if (stressScore >= 26) {
-            stressmedium++;
-            medium++;
-          } else if (stressScore >= 0 && stressScore <= 18) {
-            stresslow++;
-            low++;
-          } 
-          // เพิ่มเงื่อนไขสำหรับคะแนน 19-25
-          else {
-            stressmedium++;
-            medium++;
-          }
-        }
-
         if (entry.result) {
           const { d, a, s } = entry.result;
-
-          // Convert values to numbers
+          
           const dNum = Number(d);
-          resD += dNum;
           const aNum = Number(a);
-          resA += aNum;
           const sNum = Number(s);
-          resS += sNum;
 
-          let drank = 0;
-          let arank = 0;
-          let srank = 0;
+          if (entry.forms_type === "rq" && entry.result) {
+            const { emotionalEndurance, encouragement, problemManagement } = entry.result;
+            
+            const emotionalEnduranceNum = Number(emotionalEndurance);
+            const encouragementNum = Number(encouragement);
+            const problemManagementNum = Number(problemManagement);
 
-          if (dNum >= 0 && dNum <= 6) {
-            drank = 1;
-            dlow++;
-          } else if (dNum >= 7 && dNum <= 13) {
-            drank = 2;
-            dmedium++;
-          } else if (dNum >= 14) {
-            drank = 3;
-            dhigh++;
+            resrqemotion += emotionalEnduranceNum;
+            resrqencouragement += encouragementNum;
+            resrqproblem += problemManagementNum;
+
+            let EmotionScorerank = emotionalEnduranceNum > 34 ? 1 : emotionalEnduranceNum >= 27 ? 2 : 3;
+            let Encouragementrank = encouragementNum > 19 ? 1 : encouragementNum >= 14 ? 2 : 3;
+            let ProblemManagementrank = problemManagementNum > 18 ? 1 : problemManagementNum >= 13 ? 2 : 3;
+
+            if (EmotionScorerank === 1) highrqemotion++;
+            else if (EmotionScorerank === 2) mediumrqemotion++;
+            else lowrqemotion++;
+
+            if (Encouragementrank === 1) highrqencouragement++;
+            else if (Encouragementrank === 2) mediumrqencouragement++;
+            else lowrqencouragement++;
+
+            if (ProblemManagementrank === 1) highrqproblem++;
+            else if (ProblemManagementrank === 2) mediumrqproblem++;
+            else lowrqproblem++;
+
+            const allValue = emotionalEnduranceNum + encouragementNum + problemManagementNum;
+            if (allValue > 69) low++;
+            else if (allValue >= 55) medium++;
+            else high++;
           }
 
-          if (aNum >= 0 && aNum <= 5) {
-            arank = 1;
-            alow++;
-          } else if (aNum >= 6 && aNum <= 9) {
-            arank = 2;
-            amedium++;
-          } else if (aNum >= 10) {
-            arank = 3;
-            ahigh++;
+          if (entry.forms_type === "burnout" && entry.result.scores) {
+            const { emotionalScore, depersonalizationScore, personalAchievementScore } = entry.result.scores;
+  
+            const emotionalScoreNum = Number(emotionalScore);
+            const depersonalizationNum = Number(depersonalizationScore);
+            const personalAccomplishmentNum = Number(personalAchievementScore);
+  
+            resEmotionScore += emotionalScoreNum;
+            resDepersonal += depersonalizationNum;
+            resPersonalAccomp += personalAccomplishmentNum;
+  
+            let EmotionScorerank = emotionalScoreNum >= 27 ? 3 : emotionalScoreNum >= 17 ? 2 : 1;
+            let Depersonalrank = depersonalizationNum >= 13 ? 3 : depersonalizationNum >= 7 ? 2 : 1;
+            let PersonalAccomprank = personalAccomplishmentNum >= 39 ? 1 : personalAccomplishmentNum >= 32 ? 2 : 3;
+  
+            if (EmotionScorerank === 3) highEmotionScore++;
+            else if (EmotionScorerank === 2) mediumEmotionScore++;
+            else lowEmotionScore++;
+  
+            if (Depersonalrank === 3) highDepersonal++;
+            else if (Depersonalrank === 2) mediumDepersonal++;
+            else lowDepersonal++;
+  
+            if (PersonalAccomprank === 1) highPersonalAccomp++;
+            else if (PersonalAccomprank === 2) mediumPersonalAccomp++;
+            else lowPersonalAccomp++;
+  
+            const maxValue = Math.max(EmotionScorerank, Depersonalrank, PersonalAccomprank);
+            if (maxValue === 1) low++;
+            else if (maxValue === 2) medium++;
+            else high++;
           }
-
-          if (sNum >= 0 && sNum <= 9) {
-            srank = 1;
-            slow++;
-          } else if (sNum >= 10 && sNum <= 16) {
-            srank = 2;
-            smedium++;
-          } else if (sNum >= 17) {
-            srank = 3;
-            shigh++;
+  
+          if (entry.forms_type === "dass21") {
+            resD += dNum;
+            resA += aNum;
+            resS += sNum;
+  
+            let drank = 0;
+            let arank = 0;
+            let srank = 0;
+  
+            if (dNum >= 0 && dNum <= 6) {
+              drank = 1;
+              dlow++;
+            } else if (dNum >= 7 && dNum <= 13) {
+              drank = 2;
+              dmedium++;
+            } else if (dNum >= 14) {
+              drank = 3;
+              dhigh++;
+            }
+  
+            if (aNum >= 0 && aNum <= 5) {
+              arank = 1;
+              alow++;
+            } else if (aNum >= 6 && aNum <= 9) {
+              arank = 2;
+              amedium++;
+            } else if (aNum >= 10) {
+              arank = 3;
+              ahigh++;
+            }
+  
+            if (sNum >= 0 && sNum <= 9) {
+              srank = 1;
+              slow++;
+            } else if (sNum >= 10 && sNum <= 16) {
+              srank = 2;
+              smedium++;
+            } else if (sNum >= 17) {
+              srank = 3;
+              shigh++;
+            }
+  
+            const maxValue = Math.max(drank, arank, srank);
+            if (maxValue === 1) {
+              low++;
+            } else if (maxValue === 2) {
+              medium++;
+            } else if (maxValue === 3) {
+              high++;
+            }
           }
-
-          const maxValue = Math.max(drank, arank, srank);
-
-          if (maxValue === 1) {
-            low++;
-          } else if (maxValue === 2) {
-            medium++;
-          } else if (maxValue === 3) {
-            high++;
+  
+          if (entry.forms_type === "stress" && entry.result.scores) {
+            const scoreNum = Number(entry.result.scores);
+            resStress += scoreNum;
+  
+            let stressrank = scoreNum <= 25 ? 1 : scoreNum <= 29 ? 2 : 3;
+  
+            if (stressrank === 1) stresslow++;
+            else if (stressrank === 2) stressmedium++;
+            else stresshigh++;
+  
+            if (stressrank === 1) low++;
+            else if (stressrank === 2) medium++;
+            else high++;
           }
         }
       });
-
+  
       setResD(resD);
       setResA(resA);
       setResS(resS);
@@ -199,10 +290,35 @@ export default function DashboardPage() {
       setCountStressLow(stresslow);
       setCountStressMedium(stressmedium);
       setCountStressHigh(stresshigh);
-    };
+      setEmotionalScore(resEmotionScore);
+      setDepersonalization(resDepersonal);
+      setPersonalAccomplishment(resPersonalAccomp);
+      setcountlowEmotionalScore(lowEmotionScore);
+      setcountmediumEmotionalScore(mediumEmotionScore);
+      setcounthighEmotionalScore(highEmotionScore);
+      setcountlowDepersonalization(lowDepersonal);
+      setcountmediumDepersonalization(mediumDepersonal);
+      setcounthighDepersonalization(highDepersonal);
+      setcountlowPersonalAccomplishment(lowPersonalAccomp);
+      setcountmediumPersonalAccomplishment(mediumPersonalAccomp);
+      setcounthighPersonalAccomplishment(highPersonalAccomp);
+      setrqemotion(resrqemotion);
+      setrqencouragement(resrqencouragement);
+      setrqproblem(resrqproblem);
+      setcountrqlowemotion(lowrqemotion);
+      setcountrqmediumemotion(mediumrqemotion);
+      setcountrqhighemotion(highrqemotion);
+      setcountrqlowencouragement(lowrqencouragement);
+      setcountrqmediumencouragement(mediumrqencouragement);
+      setcountrqhighencouragement(highrqencouragement);
+      setcountrqlowproblem(lowrqproblem);
+      setcountrqmediumproblem(mediumrqproblem);
+      setcountrqhighproblem(highrqproblem);
 
+    };
+  
     classifyAndCount();
-  }, [diagdata]);
+  }, [diagdata]); 
 
   // Get recent diagnosis data with maximum 5 rows
   const recentDiagnosis = diagdata.slice(0, 5);
@@ -284,18 +400,48 @@ export default function DashboardPage() {
                 {selectedFormType === "burnout" && (
                   <>
                     <StatCard
-                      title="ระดับปานกลาง"
-                      value={mediumCount}
-                      color="yellow"
-                    />
-                    <StatCard
-                      title="ระดับปกติ"
-                      value={lowCount}
+                      title="ด้านความอ่อนล้าทางอารมณ์ ระดับต่ำ"
+                      value={countlowEmotionalScore}
                       color="green"
                     />
                     <StatCard
-                      title="ระดับร้ายแรง"
-                      value={highCount}
+                      title="ด้านความอ่อนล้าทางอารมณ์ ระดับปานกลาง"
+                      value={countmediumEmotionalScore}
+                      color="yellow"
+                    />
+                    <StatCard
+                      title="ด้านความอ่อนล้าทางอารมณ์ ระดับสูง"
+                      value={counthighEmotionalScore}
+                      color="red"
+                    />
+                    <StatCard
+                      title="ด้านการลดความเป็นบุคคล ระดับต่ำ"
+                      value={countlowDepersonalization}
+                      color="green"
+                    />
+                    <StatCard
+                      title="ด้านการลดความเป็นบุคคล ระดับปานกลาง"
+                      value={countmediumDepersonalization}
+                      color="yellow"
+                    />
+                    <StatCard
+                      title="ด้านการลดความเป็นบุคคล ระดับสูง"
+                      value={counthighDepersonalization}
+                      color="red"
+                    />
+                    <StatCard
+                      title="ด้านความสำเร็จส่วนบุคคล ระดับสูง"
+                      value={counthighpersonalAccomplishment}
+                      color="green"
+                    />
+                    <StatCard
+                      title="ด้านความสำเร็จส่วนบุคคล ระดับปานกลาง"
+                      value={countmediumpersonalAccomplishment}
+                      color="yellow"
+                    />
+                    <StatCard
+                      title="ด้านความสำเร็จส่วนบุคคล ระดับต่ำ"
+                      value={countlowpersonalAccomplishment}
                       color="red"
                     />
                   </>
@@ -303,36 +449,68 @@ export default function DashboardPage() {
                 {selectedFormType === "rq" && (
                   <>
                     <StatCard
-                      title="ระดับปกติ"
-                      value={lowCount}
+                      title="ด้านความทนทานทางอารมณ์ สูงกว่าเกณฑ์ปกติ"
+                      value={countrqhighemotion}
                       color="green"
                     />
                     <StatCard
-                      title="ระดับปานกลาง"
-                      value={mediumCount}
+                      title="ด้านความทนทานทางอารมณ์ เกณฑ์ปกติ"
+                      value={countrqmediumemotion}
                       color="yellow"
                     />
                     <StatCard
-                      title="ระดับร้ายแรง"
-                      value={highCount}
+                      title="ด้านความทนทานทางอารมณ์ ต่ำกว่าเกณฑ์ปกติ"
+                      value={countrqlowemotion}
+                      color="red"
+                    />
+                    <StatCard
+                      title="ด้านกำลังใจ สูงกว่าเกณฑ์ปกติ"
+                      value={countrqhighencouragement}
+                      color="green"
+                    />
+                    <StatCard
+                      title="ด้านกำลังใจ เกณฑ์ปกติ"
+                      value={countrqmediumencouragement}
+                      color="yellow"
+                    />
+                    <StatCard
+                      title="ด้านกำลังใจ ต่ำกว่าเกณฑ์ปกติ"
+                      value={countrqlowencouragement}
+                      color="red"
+                    />
+                    <StatCard
+                      title="ด้านการจัดการกับปัญหา สูงกว่าเกณฑ์ปกติ"
+                      value={countrqhighproblem}
+                      color="green"
+                    />
+                    <StatCard
+                      title="ด้านการจัดการกับปัญหา เกณฑ์ปกติ"
+                      value={countrqmediumproblem}
+                      color="yellow"
+                    />
+                    <StatCard
+                      title="ด้านการจัดการกับปัญหา ต่ำกว่าเกณฑ์ปกติ"
+                      value={countrqlowproblem}
                       color="red"
                     />
                   </>
+                  
+                  
                 )}
                 {selectedFormType === "stress" && (
                   <>
                     <StatCard
-                      title="ระดับปกติ"
+                      title="ไม่มีภาวะเครียด & เครียดในระดับปกติ"
                       value={countStressLow}
                       color="green"
                     />
                     <StatCard
-                      title="ระดับปานกลาง"
+                      title="เครียดปานกลาง"
                       value={countStressMedium}
                       color="yellow"
                     />
                     <StatCard
-                      title="ระดับร้ายแรง"
+                      title="เครียดมาก"
                       value={countStressHigh}
                       color="red"
                     />
@@ -343,6 +521,22 @@ export default function DashboardPage() {
                     <StatCard
                       title="ระดับปานกลาง"
                       value={mediumCount}
+                      color="green"
+                    />
+                    <StatCard
+                      title="ระดับร้ายแรง"
+                      value={highCount}
+                      color="yellow"
+                    />
+                    <br />
+                    <StatCard
+                      title="ระดับปกติ"
+                      value={lowCount}
+                      color="green"
+                    />
+                    <StatCard
+                      title="ระดับปานกลาง"
+                      value={mediumCount}
                       color="yellow"
                     />
                     <StatCard
@@ -355,52 +549,62 @@ export default function DashboardPage() {
                       value={lowCount}
                       color="green"
                     />
+                    <StatCard
+                      title="ระดับปานกลาง"
+                      value={mediumCount}
+                      color="yellow"
+                    />
+                    <StatCard
+                      title="ระดับร้ายแรง"
+                      value={highCount}
+                      color="red"
+                    />
                   </>
                 )}
                 {selectedFormType === "" && (
                   <>
                     <StatCard
-                      title="ความซึมเศร้า"
+                      title="ความซึมเศร้า ระดับต่ำ"
                       value={countdlow}
                       color="blue"
                     />
                     <StatCard
-                      title="ความซึมเศร้า"
+                      title="ความซึมเศร้า ระดับกลาง"
                       value={countdmedium}
                       color="blue"
                     />
                     <StatCard
-                      title="ความซึมเศร้า"
+                      title="ความซึมเศร้า ระดับร้ายแรง"
                       value={countdhigh}
                       color="blue"
                     />
                     <StatCard
-                      title="ความวิตกกังวล"
+                      title="ความวิตกกังวล ระดับต่ำ"
                       value={countalow}
                       color="violet"
                     />
                     <StatCard
-                      title="ความวิตกกังวล"
+                      title="ความวิตกกังวล ระดับกลาง"
                       value={countamedium}
                       color="violet"
                     />
                     <StatCard
-                      title="ความวิตกกังวล"
+                      title="ความวิตกกังวล ระดับร้ายแรง"
                       value={countahigh}
                       color="violet"
                     />
                     <StatCard
-                      title="ความเครียด"
+                      title="ความเครียด ระดับต่ำ"
                       value={countslow}
                       color="red"
                     />
                     <StatCard
-                      title="ความเครียด"
+                      title="ความเครียด ระดับกลาง"
                       value={countsmedium}
                       color="red"
                     />
                     <StatCard
-                      title="ความเครียด"
+                      title="ความเครียด ระดับร้ายแรง"
                       value={countshigh}
                       color="red"
                     />
