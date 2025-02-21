@@ -14,11 +14,11 @@ export default function DiagnosisPage() {
   const [formTypeData, setFormTypeData] = useState([]);
   const [sortOrder, setSortOrder] = useState("desc");
   const [rowsPerPage, setRowsPerPage] = useState(10);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
-  const userIdFromQuery = queryParams.get('user_id');
+  const userIdFromQuery = queryParams.get("user_id");
 
   const searchInputRef = useRef(null);
 
@@ -70,27 +70,28 @@ export default function DiagnosisPage() {
       }
     };
 
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
     handleResize();
 
-    return () => window.removeEventListener('resize', handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   const exporttocsv = async () => {
     try {
-      const response = await axios.get('/export/exportformResult', { responseType: 'blob' });
+      const response = await axios.get("/export/exportformResult", {
+        responseType: "blob",
+      });
       const url = window.URL.createObjectURL(new Blob([response.data]));
-      const link = document.createElement('a');
+      const link = document.createElement("a");
       link.href = url;
-      link.setAttribute('download', 'result.csv');
+      link.setAttribute("download", "result.csv");
       document.body.appendChild(link);
       link.click();
       link.remove();
     } catch (error) {
-      console.error('Error exporting data:', error);
+      console.error("Error exporting data:", error);
     }
   };
-
 
   const getResultCategory = (d, a, s) => {
     const dCategory = d <= 6 ? "ปกติ" : d <= 13 ? "ปานกลาง" : "ร้ายแรง";
@@ -110,7 +111,9 @@ export default function DiagnosisPage() {
   });
 
   const filteredData = sortedData.filter((item) => {
-    const resultCategory = item.result ? getResultCategory(item.result.d, item.result.a, item.result.s) : "";
+    const resultCategory = item.result
+      ? getResultCategory(item.result.d, item.result.a, item.result.s)
+      : "";
     return (
       (selectedFormType ? item.forms_type === selectedFormType : true) &&
       (selectedResult ? resultCategory === selectedResult : true) &&
@@ -163,7 +166,6 @@ export default function DiagnosisPage() {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
-
   const Content = () => {
     return (
       <div className="flex flex-col flex-1 p-4 md:p-10 relative">
@@ -215,8 +217,12 @@ export default function DiagnosisPage() {
                     {sortOrder === "asc" ? "▲" : "▼"}
                   </button>
                 </th>
-                <th className="py-2 px-4 text-lg md:text-3xl text-center">ประเภทแบบฟอร์ม</th>
-                <th className="py-2 px-4 text-lg md:text-3xl text-center">ผลการประเมิน</th>
+                <th className="py-2 px-4 text-lg md:text-3xl text-center">
+                  ประเภทแบบฟอร์ม
+                </th>
+                <th className="py-2 px-4 text-lg md:text-3xl text-center">
+                  ผลการประเมิน
+                </th>
                 <th className="py-2 px-4 text-lg md:text-3xl text-center rounded-tr-xl">
                   เลขที่ผู้ใช้
                 </th>
@@ -238,7 +244,13 @@ export default function DiagnosisPage() {
                   </td>
                   <td className="py-2 px-4 text-center text-sm md:text-xl">
                     {row.result
-                      ? `${getResultCategory(row.result.d, row.result.a, row.result.s)} (D: ${row.result.d} A: ${row.result.a} S: ${row.result.s})`
+                      ? `${getResultCategory(
+                          row.result.d,
+                          row.result.a,
+                          row.result.s
+                        )} (D: ${row.result.d} A: ${row.result.a} S: ${
+                          row.result.s
+                        })`
                       : "null"}
                   </td>
                   <td className="py-2 px-4 text-center text-sm md:text-xl">
