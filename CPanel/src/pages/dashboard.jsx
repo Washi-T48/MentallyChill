@@ -357,6 +357,21 @@ export default function DashboardPage() {
                       value={highCount}
                       color="red"
                     />
+                    <StatCard
+                      title="ระดับร้ายแรง"
+                      value={highCount}
+                      color="red"
+                    />
+                    <StatCard
+                      title="ระดับร้ายแรง"
+                      value={highCount}
+                      color="red"
+                    />
+                    <StatCard
+                      title="ระดับร้ายแรง"
+                      value={highCount}
+                      color="red"
+                    />
                   </>
                 )}
               </div>
