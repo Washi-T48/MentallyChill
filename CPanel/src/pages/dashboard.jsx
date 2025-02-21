@@ -328,47 +328,47 @@ export default function DashboardPage() {
                 {selectedFormType === "" && (
                   <>
                     <StatCard
-                      title="ระดับปกติ"
+                      title="ความซึมเศร้า"
                       value={countdlow}
                       color="green"
                     />
                     <StatCard
-                      title="ระดับปานกลาง"
+                      title="ความซึมเศร้า"
                       value={countdmedium}
                       color="yellow"
                     />
                     <StatCard
-                      title="ระดับร้ายแรง"
+                      title="ความซึมเศร้า"
                       value={countdhigh}
                       color="red"
                     />
                     <StatCard
-                      title="ระดับร้ายแรง"
+                      title="ความวิตกกังวล"
                       value={countalow}
                       color="red"
                     />
                     <StatCard
-                      title="ระดับร้ายแรง"
+                      title="ความวิตกกังวล"
                       value={countamedium}
                       color="red"
                     />
                     <StatCard
-                      title="ระดับร้ายแรง"
+                      title="ความวิตกกังวล"
                       value={countahigh}
                       color="red"
                     />
                     <StatCard
-                      title="ระดับร้ายแรง"
+                      title="ความเครียด"
                       value={countslow}
                       color="red"
                     />
                     <StatCard
-                      title="ระดับร้ายแรง"
+                      title="ความเครียด"
                       value={countsmedium}
                       color="red"
                     />
                     <StatCard
-                      title="ระดับร้ายแรง"
+                      title="ความเครียด"
                       value={countshigh}
                       color="red"
                     />
