@@ -329,47 +329,47 @@ export default function DashboardPage() {
                   <>
                     <StatCard
                       title="ระดับปกติ"
-                      value={lowCount}
+                      value={countdlow}
                       color="green"
                     />
                     <StatCard
                       title="ระดับปานกลาง"
-                      value={mediumCount}
+                      value={countdmedium}
                       color="yellow"
                     />
                     <StatCard
                       title="ระดับร้ายแรง"
-                      value={highCount}
+                      value={countdhigh}
                       color="red"
                     />
                     <StatCard
                       title="ระดับร้ายแรง"
-                      value={highCount}
+                      value={countalow}
                       color="red"
                     />
                     <StatCard
                       title="ระดับร้ายแรง"
-                      value={highCount}
+                      value={countamedium}
                       color="red"
                     />
                     <StatCard
                       title="ระดับร้ายแรง"
-                      value={highCount}
+                      value={countahigh}
                       color="red"
                     />
                     <StatCard
                       title="ระดับร้ายแรง"
-                      value={highCount}
+                      value={countslow}
                       color="red"
                     />
                     <StatCard
                       title="ระดับร้ายแรง"
-                      value={highCount}
+                      value={countsmedium}
                       color="red"
                     />
                     <StatCard
                       title="ระดับร้ายแรง"
-                      value={highCount}
+                      value={countshigh}
                       color="red"
                     />
                   </>
