@@ -187,9 +187,16 @@ export default function DashboardPage() {
         </div>
         <div className="w-full overflow-x-hidden">
           <div className="p-4 md:p-10">
+            {/* <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+            <StatCard title="คำขอการจอง" value={countBooking} color="blue" tone="500"/>
+            <StatCard className="col-span-2" title="จำนวนผลการประเมิน" value={countDiag} color="violet" />
+            <StatCard title="ระดับปกติ" value={lowCount} color="green" />
+            <StatCard title="ระดับปานกลาง" value={mediumCount} color="orange" tone="300" />
+            <StatCard title="ระดับร้ายแรง" value={highCount} color="rose" />
+          </div> */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
               <StatCard
-                title="คำขอการจอง"
+                title="คำขอการจองxx"
                 value={countBooking}
                 color="blue"
                 tone="500"
@@ -205,11 +212,13 @@ export default function DashboardPage() {
               <StatCard
                 title="ระดับปานกลาง"
                 value={mediumCount}
-                color="yellow"
+                color="orange"
+                tone="300"
               />
-              <StatCard title="ระดับร้ายแรง" value={highCount} color="red" />
+              <StatCard title="ระดับร้ายแรง" value={highCount} color="rose" />
             </div>
-            {/* <CategoryStats
+
+            <CategoryStats
               title="ความซึมเศร้า"
               low={countdlow}
               medium={countdmedium}
@@ -230,152 +239,8 @@ export default function DashboardPage() {
               medium={countsmedium}
               high={countshigh}
               bgColor="red"
-            /> */}
-            <div className="border-4 border-[#003087] bg-white rounded-md">
-              <div className="flex flex-row bg-[#003087] rounded-md p-4 items-center">
-                <div className="text-2xl text-white m-4"> แบบประเมิน : </div>
-                <select
-                  className="w-[200px] border border-transparent rounded-xl p-2 text-xl bg-blue-600 text-white shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]"
-                  onChange={(e) => {
-                    setSelectedFormType(e.target.value);
-                  }}
-                  style={customStyles}
-                >
-                  <option value="">dass21</option>
-                  <option value="burnout">burnout</option>
-                  <option value="rq">rq</option>
-                  <option value="stress">stress</option>
-                  <option value="2Q8Q9Q">2Q8Q9Q</option>
-                </select>
-              </div>
-              <div className="grid grid-cols-3 gap-4 m-10">
-                {selectedFormType === "burnout" && (
-                  <>
-                    <StatCard
-                      title="ระดับปานกลาง"
-                      value={mediumCount}
-                      color="yellow"
-                    />
-                    <StatCard
-                      title="ระดับปกติ"
-                      value={lowCount}
-                      color="green"
-                    />
-                    <StatCard
-                      title="ระดับร้ายแรง"
-                      value={highCount}
-                      color="red"
-                    />
-                  </>
-                )}
-                {selectedFormType === "rq" && (
-                  <>
-                    <StatCard
-                      title="ระดับปกติ"
-                      value={lowCount}
-                      color="green"
-                    />
-                    <StatCard
-                      title="ระดับปานกลาง"
-                      value={mediumCount}
-                      color="yellow"
-                    />
-                    <StatCard
-                      title="ระดับร้ายแรง"
-                      value={highCount}
-                      color="red"
-                    />
-                  </>
-                )}
-                {selectedFormType === "stress" && (
-                  <>
-                    <StatCard
-                      title="ระดับร้ายแรง"
-                      value={highCount}
-                      color="red"
-                    />
-                    <StatCard
-                      title="ระดับปกติ"
-                      value={lowCount}
-                      color="green"
-                    />
-                    <StatCard
-                      title="ระดับปานกลาง"
-                      value={mediumCount}
-                      color="yellow"
-                    />
-                  </>
-                )}
-                {selectedFormType === "2Q8Q9Q" && (
-                  <>
-                    <StatCard
-                      title="ระดับปานกลาง"
-                      value={mediumCount}
-                      color="yellow"
-                    />
-                    <StatCard
-                      title="ระดับร้ายแรง"
-                      value={highCount}
-                      color="red"
-                    />
-                    <StatCard
-                      title="ระดับปกติ"
-                      value={lowCount}
-                      color="green"
-                    />
-                  </>
-                )}
-                {selectedFormType === "" && (
-                  <>
-                    <StatCard
-                      title="ความซึมเศร้า"
-                      value={countdlow}
-                      color="blue"
-                    />
-                    <StatCard
-                      title="ความซึมเศร้า"
-                      value={countdmedium}
-                      color="blue"
-                    />
-                    <StatCard
-                      title="ความซึมเศร้า"
-                      value={countdhigh}
-                      color="blue"
-                    />
-                    <StatCard
-                      title="ความวิตกกังวล"
-                      value={countalow}
-                      color="violet"
-                    />
-                    <StatCard
-                      title="ความวิตกกังวล"
-                      value={countamedium}
-                      color="violet"
-                    />
-                    <StatCard
-                      title="ความวิตกกังวล"
-                      value={countahigh}
-                      color="violet"
-                    />
-                    <StatCard
-                      title="ความเครียด"
-                      value={countslow}
-                      color="red"
-                    />
-                    <StatCard
-                      title="ความเครียด"
-                      value={countsmedium}
-                      color="red"
-                    />
-                    <StatCard
-                      title="ความเครียด"
-                      value={countshigh}
-                      color="red"
-                    />
-                  </>
-                )}
-              </div>
-            </div>
+            />
+
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8">
               <DataTable
                 title="การจองครั้งล่าสุด"
@@ -383,12 +248,179 @@ export default function DashboardPage() {
                 columns={["เลขที่การจอง", "หัวข้อ", "วันที่"]}
                 bgColor="green"
               />
-              <DataTable
-                title="ผลการประเมินครั้งล่าสุด"
-                data={recentDiagnosis}
-                columns={["เลขที่ผู้ใช้", "ประเภทแบบฟอร์ม", "วันที่"]}
+              <CategoryStats
+                title="ความวิตกกังวล"
+                low={countalow}
+                medium={countamedium}
+                high={countahigh}
                 bgColor="violet"
               />
+              <CategoryStats
+                title="ความเครียด"
+                low={countslow}
+                medium={countsmedium}
+                high={countshigh}
+                bgColor="red"
+              />
+              <div className="border-4 border-[#003087] bg-white rounded-md">
+                <div className="flex flex-row bg-[#003087] rounded-md p-4 items-center">
+                  <div className="text-2xl text-white m-4"> แบบประเมิน : </div>
+                  <select
+                    className="w-[200px] border border-transparent rounded-xl p-2 text-xl bg-blue-600 text-white shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]"
+                    onChange={(e) => {
+                      setSelectedFormType(e.target.value);
+                    }}
+                    style={customStyles}
+                  >
+                    <option value="">dass21</option>
+                    <option value="burnout">burnout</option>
+                    <option value="rq">rq</option>
+                    <option value="stress">stress</option>
+                    <option value="2Q8Q9Q">2Q8Q9Q</option>
+                  </select>
+                </div>
+                <div className="grid grid-cols-3 gap-4 m-10">
+                  {selectedFormType === "burnout" && (
+                    <>
+                      <StatCard
+                        title="ระดับปานกลาง"
+                        value={mediumCount}
+                        color="yellow"
+                      />
+                      <StatCard
+                        title="ระดับปกติ"
+                        value={lowCount}
+                        color="green"
+                      />
+                      <StatCard
+                        title="ระดับร้ายแรง"
+                        value={highCount}
+                        color="red"
+                      />
+                    </>
+                  )}
+                  {selectedFormType === "rq" && (
+                    <>
+                      <StatCard
+                        title="ระดับปกติ"
+                        value={lowCount}
+                        color="green"
+                      />
+                      <StatCard
+                        title="ระดับปานกลาง"
+                        value={mediumCount}
+                        color="yellow"
+                      />
+                      <StatCard
+                        title="ระดับร้ายแรง"
+                        value={highCount}
+                        color="red"
+                      />
+                    </>
+                  )}
+                  {selectedFormType === "stress" && (
+                    <>
+                      <StatCard
+                        title="ระดับร้ายแรง"
+                        value={highCount}
+                        color="red"
+                      />
+                      <StatCard
+                        title="ระดับปกติ"
+                        value={lowCount}
+                        color="green"
+                      />
+                      <StatCard
+                        title="ระดับปานกลาง"
+                        value={mediumCount}
+                        color="yellow"
+                      />
+                    </>
+                  )}
+                  {selectedFormType === "2Q8Q9Q" && (
+                    <>
+                      <StatCard
+                        title="ระดับปานกลาง"
+                        value={mediumCount}
+                        color="yellow"
+                      />
+                      <StatCard
+                        title="ระดับร้ายแรง"
+                        value={highCount}
+                        color="red"
+                      />
+                      <StatCard
+                        title="ระดับปกติ"
+                        value={lowCount}
+                        color="green"
+                      />
+                    </>
+                  )}
+                  {selectedFormType === "" && (
+                    <>
+                      <StatCard
+                        title="ความซึมเศร้า"
+                        value={countdlow}
+                        color="blue"
+                      />
+                      <StatCard
+                        title="ความซึมเศร้า"
+                        value={countdmedium}
+                        color="blue"
+                      />
+                      <StatCard
+                        title="ความซึมเศร้า"
+                        value={countdhigh}
+                        color="blue"
+                      />
+                      <StatCard
+                        title="ความวิตกกังวล"
+                        value={countalow}
+                        color="violet"
+                      />
+                      <StatCard
+                        title="ความวิตกกังวล"
+                        value={countamedium}
+                        color="violet"
+                      />
+                      <StatCard
+                        title="ความวิตกกังวล"
+                        value={countahigh}
+                        color="violet"
+                      />
+                      <StatCard
+                        title="ความเครียด"
+                        value={countslow}
+                        color="red"
+                      />
+                      <StatCard
+                        title="ความเครียด"
+                        value={countsmedium}
+                        color="red"
+                      />
+                      <StatCard
+                        title="ความเครียด"
+                        value={countshigh}
+                        color="red"
+                      />
+                    </>
+                  )}
+                </div>
+              </div>
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8">
+                <DataTable
+                  title="การจองครั้งล่าสุด"
+                  data={recentBookingInfo}
+                  columns={["เลขที่การจอง", "หัวข้อ", "วันที่"]}
+                  bgColor="green"
+                />
+                <DataTable
+                  title="ผลการประเมินครั้งล่าสุด"
+                  data={recentDiagnosis}
+                  columns={["เลขที่ผู้ใช้", "ประเภทแบบฟอร์ม", "วันที่"]}
+                  bgColor="violet"
+                />
+              </div>
             </div>
           </div>
         </div>
