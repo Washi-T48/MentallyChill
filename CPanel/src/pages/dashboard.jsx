@@ -142,6 +142,7 @@ export default function DashboardPage() {
           const sNum = Number(s);
 
           if (entry.forms_type === "2q") {
+            console.log(entry.result);
             for (const [key, value] of Object.entries(entry.result)) {
               if (key === "q1") {
                 if (value === "true") {
