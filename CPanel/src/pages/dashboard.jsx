@@ -147,12 +147,12 @@ export default function DashboardPage() {
               if (key === "q1") {
                 if (value === true) {
                   count2qSad++;
+                }
               }
               if (key === "q2") {
                 if (value === true) {
                   count2qBored++;
                   }
-                }
               }
             }
           }
