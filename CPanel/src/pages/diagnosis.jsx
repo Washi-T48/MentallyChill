@@ -116,7 +116,7 @@ export default function DiagnosisPage() {
       : "";
     return (
       (selectedFormType ? item.forms_type === selectedFormType : true) &&
-      (selectedResult ? resultCategory === selectedResult : true) &&
+      (selectedResult && item.forms_type === "dass21" ? resultCategory === selectedResult : true) &&
       (searchTerm ? item.user_id.includes(searchTerm.toLowerCase()) : true)
     );
   });
@@ -254,6 +254,10 @@ export default function DiagnosisPage() {
                     ) : row.forms_type === "2q" ? (
                       row.result
                         ? `เศร้า/หดหู่/ท้อแท้ ในช่วง 2 สัปดาห์: ${row.result.q1 ? "ใช่" : "ไม่ใช่"} | เบื่อ/ไม่เพลิดเพลิน ในช่วง 2 สัปดาห์: ${row.result.q2 ? "ใช่" : "ไม่ใช่"}`
+                        : "null"
+                    ) : row.forms_type === "rq" ? (
+                      row.result
+                        ? `ความอดทนทางอารมณ์: ${row.result.emotionalEndurance}, กำลังใจ: ${row.result.encouragement}, การจัดการปัญหา: ${row.result.problemManagement}`
                         : "null"
                     ) : (
                       row.result ? row.result.scores : "null"
