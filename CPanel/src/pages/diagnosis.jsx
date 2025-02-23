@@ -116,7 +116,7 @@ export default function DiagnosisPage() {
       : "";
     return (
       (selectedFormType ? item.forms_type === selectedFormType : true) &&
-      (selectedResult && item.forms_type === "dass21" ? resultCategory === selectedResult : true) &&
+      (item.forms_type === "dass21" && selectedResult ? resultCategory === selectedResult : true) &&
       (searchTerm ? item.user_id.includes(searchTerm.toLowerCase()) : true)
     );
   });
