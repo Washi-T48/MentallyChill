@@ -248,8 +248,8 @@ export default function DiagnosisPage() {
                         ? `${getResultCategory(row.result.d, row.result.a, row.result.s)} (D: ${row.result.d} A: ${row.result.a} S: ${row.result.s})`
                         : "null"
                     ) : row.forms_type === "burnout" ? (
-                      row.result && Array.isArray(row.result.scores)
-                        ? row.result.scores.join(", ")
+                      row.result && row.result.scores
+                        ? `ความอ่อนล้าทางอารมณ์ : ${row.result.scores.emotionalScore}, การลดความเป็นบุคคล : ${row.result.scores.depersonalizationScore}, ความสำเร็จส่วนบุคคล : ${row.result.scores.personalAchievementScore}`
                         : "null"
                     ) : (
                       row.result ? row.result.scores : "null"
