@@ -54,6 +54,12 @@ export default function DashboardPage() {
   const [highCount, setHighCount] = useState(0);
   const [count2qsad, setCount2qSad] = useState(0);
   const [count2qbored, setCount2qBored] = useState(0);
+  const [count9qlow, setCount9qlow] = useState(0);
+  const [count9qmedium, setCount9qmedium] = useState(0);
+  const [count9qhigh, setCount9qhigh] = useState(0);
+  const [count8qlow, setCount8qlow] = useState(0);
+  const [count8qmedium, setCount8qmedium] = useState(0);
+  const [count8qhigh, setCount8qhigh] = useState(0);
   const [selectedFormType, setSelectedFormType] = useState("");
 
   useEffect(() => {
@@ -132,6 +138,12 @@ export default function DashboardPage() {
 
       let count2qSad = 0;
       let count2qBored = 0;
+      let count9qlow= 0;
+      let count9qmedium = 0;
+      let count9qhigh = 0;
+      let count8qlow = 0;
+      let count8qmedium = 0;
+      let count8qhigh = 0;
   
       diagdata.forEach((entry) => {
         if (entry.result) {
@@ -159,30 +171,34 @@ export default function DashboardPage() {
           if (entry.forms_type === "9q") {
             console.log(entry.result);
             for (const [key, value] of Object.entries(entry.result)) {
-              // if (key === "q1") {
-              //   if (value === true) {
-              //     console.log(value);
-              //   }
-              // }
-              console.log(value);
+              if (key === "scores") {
+                if (value < 13) {
+                  count9qlow++;
+                } else if (value >= 13 && value <= 18) {
+                  count9qmedium++;
+                }
+                else {
+                  count9qhigh++;
+                }
+              }
             }
           }
 
-          // if (entry.forms_type === "8q") {
-          //   console.log(entry.result);
-          //   for (const [key, value] of Object.entries(entry.result)) {
-          //     if (key === "q1") {
-          //       if (value === true) {
-          //         count2qSad++;
-          //       }
-          //     }
-          //     if (key === "q2") {
-          //       if (value === true) {
-          //         count2qBored++;
-          //         }
-          //     }
-          //   }
-          // }
+          if (entry.forms_type === "8q") {
+            console.log(entry.result);
+            for (const [key, value] of Object.entries(entry.result)) {
+              if (key === "scores") {
+                if (value < 9) {
+                  count8qlow++;
+                } else if (value >= 9 && value <= 16) {
+                  count8qmedium++;
+                }
+                else {
+                  count8qhigh++;
+                }
+              }
+            }
+          }
 
           if (entry.forms_type === "rq" && entry.result) {
             const { emotionalEndurance, encouragement, problemManagement } = entry.result;
@@ -319,6 +335,12 @@ export default function DashboardPage() {
         }
       });
   
+      setCount9qlow(count9qlow);
+      setCount9qmedium(count9qmedium);
+      setCount9qhigh(count9qhigh);
+      setCount8qlow(count8qlow);
+      setCount8qmedium(count8qmedium);
+      setCount8qhigh(count8qhigh);
       setCount2qSad(count2qSad);
       setCount2qBored(count2qBored);
       setResD(resD);
@@ -364,9 +386,6 @@ export default function DashboardPage() {
       setcountrqlowproblem(lowrqproblem);
       setcountrqmediumproblem(mediumrqproblem);
       setcountrqhighproblem(highrqproblem);
-
-      console.log("count2qSad: " + count2qSad);
-      console.log("count2qBored: " + count2qBored);
     };
   
     classifyAndCount();
@@ -409,28 +428,6 @@ export default function DashboardPage() {
               />
               <StatCard title="ระดับร้ายแรง" value={highCount} color="red" />
             </div>
-            {/* <CategoryStats
-              title="ความซึมเศร้า"
-              low={countdlow}
-              medium={countdmedium}
-              high={countdhigh}
-              bgColor="blue"
-              tone="500"
-            />
-            <CategoryStats
-              title="ความวิตกกังวล"
-              low={countalow}
-              medium={countamedium}
-              high={countahigh}
-              bgColor="violet"
-            />
-            <CategoryStats
-              title="ความเครียด"
-              low={countslow}
-              medium={countsmedium}
-              high={countshigh}
-              bgColor="red"
-            /> */}
             <div className="border-4 border-[#003087] bg-white rounded-md">
               <div className="flex flex-row bg-[#003087] rounded-md p-4 items-center">
                 <div className="text-2xl text-white m-4"> แบบประเมิน : </div>
@@ -583,32 +580,32 @@ export default function DashboardPage() {
                     <br />
                     <StatCard
                       title="ไม่มีหรือมีภาวะซึมเศร้าระดับน้อย"
-                      value={lowCount}
+                      value={count9qlow}
                       color="green"
                     />
                     <StatCard
                       title="มีภาวะซึมเศร้าระดับปานกลาง"
-                      value={mediumCount}
+                      value={count9qmedium}
                       color="yellow"
                     />
                     <StatCard
                       title="มีภาวะซึมเศร้าระดับรุนแรง"
-                      value={highCount}
+                      value={count9qhigh}
                       color="red"
                     />
                     <StatCard
                       title="ไม่มีหรือมีแนวโน้มจะฆ่าตัวตายในปัจจุบันระดับน้อย"
-                      value={lowCount}
+                      value={count8qlow}
                       color="green"
                     />
                     <StatCard
                       title="มีแนวโน้มจะฆ่าตัวตายในปัจจุบันระดับปานกลาง"
-                      value={mediumCount}
+                      value={count8qmedium}
                       color="yellow"
                     />
                     <StatCard
                       title="มีแนวโน้มจะฆ่าตัวตายในปัจจุบันระดับรุนแรง"
-                      value={highCount}
+                      value={count8qhigh}
                       color="red"
                     />
                   </>
