@@ -52,6 +52,8 @@ export default function DashboardPage() {
   const [lowCount, setLowCount] = useState(0);
   const [mediumCount, setMediumCount] = useState(0);
   const [highCount, setHighCount] = useState(0);
+  const [count2qsad, setCount2qSad] = useState(0);
+  const [count2qbored, setCount2qBored] = useState(0);
   const [selectedFormType, setSelectedFormType] = useState("");
 
   useEffect(() => {
@@ -127,6 +129,9 @@ export default function DashboardPage() {
       let lowrqemotion = 0, mediumrqemotion = 0, highrqemotion = 0;
       let lowrqencouragement = 0, mediumrqencouragement = 0, highrqencouragement = 0;
       let lowrqproblem = 0, mediumrqproblem = 0, highrqproblem = 0;
+
+      let count2qSad = 0;
+      let count2qBored = 0;
   
       diagdata.forEach((entry) => {
         if (entry.result) {
@@ -135,6 +140,21 @@ export default function DashboardPage() {
           const dNum = Number(d);
           const aNum = Number(a);
           const sNum = Number(s);
+
+          if (entry.forms_type === "2q") {
+            for (const [key, value] of Object.entries(entry.result)) {
+              if (key === "q1") {
+                if (value === "true") {
+                  count2qSad++;
+              }
+              if (key === "q2") {
+                if (value === "true") {
+                  count2qBored++;
+                  }
+                }
+              }
+            }
+          }
 
           if (entry.forms_type === "rq" && entry.result) {
             const { emotionalEndurance, encouragement, problemManagement } = entry.result;
@@ -271,6 +291,8 @@ export default function DashboardPage() {
         }
       });
   
+      setCount2qSad(count2qSad);
+      setCount2qBored(count2qBored);
       setResD(resD);
       setResA(resA);
       setResS(resS);
@@ -520,12 +542,12 @@ export default function DashboardPage() {
                   <>
                     <StatCard
                       title="เศร้า หดหู่ ท้อแท้ ในช่วง 2 สัปดาห์"
-                      value={mediumCount}
+                      value={count2qsad}
                       color="green"
                     />
                     <StatCard
                       title="เบื่อ ไม่เพลิดเพลิน ในช่วง 2 สัปดาห์"
-                      value={highCount}
+                      value={count2qbored}
                       color="yellow"
                     />
                     <br />
