@@ -247,6 +247,10 @@ export default function DiagnosisPage() {
                       row.result
                         ? `${getResultCategory(row.result.d, row.result.a, row.result.s)} (D: ${row.result.d} A: ${row.result.a} S: ${row.result.s})`
                         : "null"
+                    ) : row.forms_type === "burnout" ? (
+                      row.result && Array.isArray(row.result.scores)
+                        ? row.result.scores.join(", ")
+                        : "null"
                     ) : (
                       row.result ? row.result.scores : "null"
                     )}
