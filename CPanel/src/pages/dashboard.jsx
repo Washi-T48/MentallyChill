@@ -545,7 +545,7 @@ export default function DashboardPage() {
                       color="red"
                     />
                     <StatCard
-                      title="ระดับปกติ"
+                      title="ไม่มีหรือมีแนวโน้มจะฆ่าตัวตายในปัจจุบันระดับน้อย "
                       value={lowCount}
                       color="green"
                     />
