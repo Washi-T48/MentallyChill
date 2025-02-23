@@ -145,11 +145,11 @@ export default function DashboardPage() {
             console.log(entry.result);
             for (const [key, value] of Object.entries(entry.result)) {
               if (key === "q1") {
-                if (value === "true") {
+                if (value === true) {
                   count2qSad++;
               }
               if (key === "q2") {
-                if (value === "true") {
+                if (value === true) {
                   count2qBored++;
                   }
                 }
