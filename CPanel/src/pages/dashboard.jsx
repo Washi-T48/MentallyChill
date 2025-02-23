@@ -545,17 +545,17 @@ export default function DashboardPage() {
                       color="red"
                     />
                     <StatCard
-                      title="ไม่มีหรือมีแนวโน้มจะฆ่าตัวตายในปัจจุบันระดับน้อย "
+                      title="ไม่มีหรือมีแนวโน้มจะฆ่าตัวตายในปัจจุบันระดับน้อย"
                       value={lowCount}
                       color="green"
                     />
                     <StatCard
-                      title="ระดับปานกลาง"
+                      title="มีแนวโน้มจะฆ่าตัวตายในปัจจุบันระดับปานกลาง"
                       value={mediumCount}
                       color="yellow"
                     />
                     <StatCard
-                      title="ระดับร้ายแรง"
+                      title="มีแนวโน้มจะฆ่าตัวตายในปัจจุบันระดับรุนแรง"
                       value={highCount}
                       color="red"
                     />
