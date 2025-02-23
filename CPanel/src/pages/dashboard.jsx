@@ -337,6 +337,8 @@ export default function DashboardPage() {
       setcountrqmediumproblem(mediumrqproblem);
       setcountrqhighproblem(highrqproblem);
 
+      console.log("count2qSad: " + count2qSad);
+      console.log("count2qBored: " + count2qBored);
     };
   
     classifyAndCount();
