@@ -169,7 +169,7 @@ export default function DashboardPage() {
           }
 
           if (entry.forms_type === "9q") {
-            console.log(entry.result);
+            console.log("9q :", entry.result);
             for (const [key, value] of Object.entries(entry.result)) {
               if (key === "scores") {
                 if (value < 13) {
@@ -185,7 +185,7 @@ export default function DashboardPage() {
           }
 
           if (entry.forms_type === "8q") {
-            console.log(entry.result);
+            console.log("8q :", entry.result);
             for (const [key, value] of Object.entries(entry.result)) {
               if (key === "scores") {
                 if (value < 9) {
