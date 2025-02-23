@@ -530,17 +530,17 @@ export default function DashboardPage() {
                     />
                     <br />
                     <StatCard
-                      title="ระดับปกติ"
+                      title="ไม่มีหรือมีภาวะซึมเศร้าระดับน้อย"
                       value={lowCount}
                       color="green"
                     />
                     <StatCard
-                      title="ระดับปานกลาง"
+                      title="มีภาวะซึมเศร้าระดับปานกลาง"
                       value={mediumCount}
                       color="yellow"
                     />
                     <StatCard
-                      title="ระดับร้ายแรง"
+                      title="มีภาวะซึมเศร้าระดับรุนแรง"
                       value={highCount}
                       color="red"
                     />
