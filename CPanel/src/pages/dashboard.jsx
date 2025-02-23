@@ -519,12 +519,12 @@ export default function DashboardPage() {
                 {selectedFormType === "2Q8Q9Q" && (
                   <>
                     <StatCard
-                      title="ระดับปานกลาง"
+                      title="เศร้า หดหู่ ท้อแท้ ในช่วง 2 สัปดาห์"
                       value={mediumCount}
                       color="green"
                     />
                     <StatCard
-                      title="ระดับร้ายแรง"
+                      title="เบื่อ ไม่เพลิดเพลิน ในช่วง 2 สัปดาห์"
                       value={highCount}
                       color="yellow"
                     />
