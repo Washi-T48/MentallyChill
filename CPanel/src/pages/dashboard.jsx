@@ -142,7 +142,6 @@ export default function DashboardPage() {
           const sNum = Number(s);
 
           if (entry.forms_type === "2q") {
-            console.log(entry.result);
             for (const [key, value] of Object.entries(entry.result)) {
               if (key === "q1") {
                 if (value === true) {
@@ -156,6 +155,34 @@ export default function DashboardPage() {
               }
             }
           }
+
+          if (entry.forms_type === "9q") {
+            console.log(entry.result);
+            for (const [key, value] of Object.entries(entry.result)) {
+              // if (key === "q1") {
+              //   if (value === true) {
+              //     console.log(value);
+              //   }
+              // }
+              console.log(value);
+            }
+          }
+
+          // if (entry.forms_type === "8q") {
+          //   console.log(entry.result);
+          //   for (const [key, value] of Object.entries(entry.result)) {
+          //     if (key === "q1") {
+          //       if (value === true) {
+          //         count2qSad++;
+          //       }
+          //     }
+          //     if (key === "q2") {
+          //       if (value === true) {
+          //         count2qBored++;
+          //         }
+          //     }
+          //   }
+          // }
 
           if (entry.forms_type === "rq" && entry.result) {
             const { emotionalEndurance, encouragement, problemManagement } = entry.result;
