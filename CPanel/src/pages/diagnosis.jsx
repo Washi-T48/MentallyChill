@@ -253,7 +253,7 @@ export default function DiagnosisPage() {
                         : "null"
                     ) : row.forms_type === "2q" ? (
                       row.result
-                        ? `เศร้า/หดหู่/ท้อแท้ ในช่วง 2 สัปดาห์: ${row.result.q1 ? "ใช่" : "ไม่ใช่"}, เบื่อ/ไม่เพลิดเพลิน ในช่วง 2 สัปดาห์: ${row.result.q2 ? "ใช่" : "ไม่ใช่"}`
+                        ? `เศร้า/หดหู่/ท้อแท้ ในช่วง 2 สัปดาห์: ${row.result.q1 ? "ใช่" : "ไม่ใช่"} | เบื่อ/ไม่เพลิดเพลิน ในช่วง 2 สัปดาห์: ${row.result.q2 ? "ใช่" : "ไม่ใช่"}`
                         : "null"
                     ) : (
                       row.result ? row.result.scores : "null"
