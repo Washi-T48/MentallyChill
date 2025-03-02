@@ -6,15 +6,33 @@ const QResult = () => {
   const [eightQScore, setEightQScore] = useState(0);
 
   useEffect(() => {
-    const nineQAnswers = JSON.parse(localStorage.getItem("9qAnswers") || "{}");
-    const eightQAnswers = JSON.parse(localStorage.getItem("8qAnswers") || "{}");
+    try {
+      // อ่านข้อมูลจาก localStorage
+      const nineQData = JSON.parse(localStorage.getItem("9qAnswers") || "{}");
+      const eightQData = JSON.parse(localStorage.getItem("8qAnswers") || "{}");
 
-    const totalNineQ = Object.values(nineQAnswers).reduce(
-      (sum, score) => sum + score,
-      0
-    );
-    setNineQScore(totalNineQ);
-    setEightQScore(eightQAnswers.totalScore || 0);
+      // ดึงค่า totalScore ถ้ามี
+      if (nineQData.totalScore !== undefined) {
+        setNineQScore(nineQData.totalScore);
+      }
+      // ถ้าไม่มี totalScore ให้คำนวณจาก answers
+      else if (nineQData.answers) {
+        const score = Object.values(nineQData.answers).reduce(
+          (sum, val) => sum + val,
+          0
+        );
+        setNineQScore(score);
+      }
+
+      // ดึงค่า totalScore ของ 8Q
+      if (eightQData.totalScore !== undefined) {
+        setEightQScore(eightQData.totalScore);
+      }
+    } catch (error) {
+      console.error("Error parsing data:", error);
+      setNineQScore(0);
+      setEightQScore(0);
+    }
   }, []);
 
   const getNineQSeverity = (score) => {
