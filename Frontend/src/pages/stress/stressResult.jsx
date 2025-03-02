@@ -73,6 +73,7 @@ export default function StressResult() {
             backgroundColor: "rgba(255, 255, 255, 0.9)",
             borderRadius: "10px",
             boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
+            maxWidth: "70%",
           }}
         >
           <h3 style={{ marginBottom: "10px", color: "#333" }}>คำแนะนำ</h3>
