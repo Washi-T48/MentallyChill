@@ -16,14 +16,7 @@ import timetableRouter from './Routes/timetableRoutes.js'
 import exportRouter from './Routes/exportRoutes.js';
 
 import logger, { consoleLogExpress } from './Middleware/logger.js';
-import authMiddleware from './Middleware/auth.js';
-
 import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 const app = express();
 
@@ -61,9 +54,9 @@ app.use("/timetable", timetableRouter);
 app.use("/export", exportRouter);
 
 https.createServer({
-    key: fs.readFileSync(path.resolve(__dirname, './certs', 'privkey.pem')),
-    cert: fs.readFileSync(path.resolve(__dirname, './certs', 'cert.pem')),
-    ca: fs.readFileSync(path.resolve(__dirname, './certs', 'chain.pem')),
+    key: fs.readFileSync(`/etc/letsencrypt/live/mindcra.com-0001/privkey.pem`),
+    cert: fs.readFileSync(`/etc/letsencrypt/live/mindcra.com-0001/cert.pem`),
+    ca: fs.readFileSync(`/etc/letsencrypt/live/mindcra.com-0001/chain.pem`),
 }, app).listen(PORT, () => {
     logger.info(`Server started on port ${PORT}`);
 });
