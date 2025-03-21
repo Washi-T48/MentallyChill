@@ -1,7 +1,6 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import fs from 'fs'
-import path from 'path';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -14,9 +13,9 @@ export default defineConfig({
     host: '0.0.0.0',
     port: 443,
     https: {
-      key: fs.readFileSync(path.resolve(__dirname, './certs', 'privkey.pem')),
-      cert: fs.readFileSync(path.resolve(__dirname, './certs', 'cert.pem')),
-      ca: fs.readFileSync(path.resolve(__dirname, './certs', 'chain.pem')),
+      key: fs.readFileSync(`/etc/letsencrypt/live/mindcra.com-0001/privkey.pem`),
+      cert: fs.readFileSync(`/etc/letsencrypt/live/mindcra.com-0001/cert.pem`),
+      ca: fs.readFileSync(`/etc/letsencrypt/live/mindcra.com-0001/chain.pem`),
     },
     proxy: {
       '/api': {
