@@ -183,7 +183,18 @@ export default function RQResult() {
         />
 
         <div className="description-section">
-          <h3>คำอธิบาย:</h3>
+          <h3
+            style={{
+              marginBottom: "10px",
+              color: "#333",
+              textAlign: "center",
+              borderBottom: "1px solid #ddd",
+              paddingBottom: "10px",
+              whiteSpace: "pre-line",
+            }}
+          >
+            คำอธิบาย
+          </h3>
           <div className="description-item">
             <h4>ด้านความทนทานทางอารมณ์</h4>
             <p>
@@ -214,12 +225,16 @@ export default function RQResult() {
           >
             <h3
               style={{
+                marginBottom: "10px",
+                color: "#333",
                 textAlign: "center",
+                borderBottom: "1px solid #ddd",
+                paddingBottom: "10px",
               }}
             >
               สรุปผลการประเมิน
             </h3>
-            <p style={{ marginTop: "20px" }}>
+            <p style={{ marginTop: "20px", whiteSpace: "pre-line" }}>
               {totalSeverity === "ต่ำกว่าเกณฑ์ปกติ"
                 ? "จากผลการประเมิน ท่านควรพัฒนาพลังสุขภาพจิตในด้านที่มีคะแนนต่ำกว่าเกณฑ์ปกติ ตามคำแนะนำที่ให้ไว้ในแต่ละด้าน การมีพลังสุขภาพจิตที่ดีจะช่วยให้ท่านสามารถรับมือกับความท้าทายและปัญหาในชีวิตได้อย่างมีประสิทธิภาพ"
                 : "ท่านจัดอยู่ในกลุ่มคนที่มีพลังสุขภาพจิตดีเยี่ยม ขอให้ท่านรักษาศักยภาพด้านนี้ไว้ ท่านอาจพัฒนาตนเองโดยการแสวงหาความรู้ เพื่อเสริมพลังสุขภาพจิตให้คงอยู่ เช่น การฝึกทักษะในการแก้ไขปัญหา การสร้างกำลังใจให้ตนเอง"}
