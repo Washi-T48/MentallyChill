@@ -76,18 +76,30 @@ export default function StressResult() {
             maxWidth: "100%",
           }}
         >
-          <h3 style={{ marginBottom: "10px", color: "#333" }}>คำแนะนำ</h3>
+          <h3
+            style={{
+              marginBottom: "10px",
+              color: "#333",
+              textAlign: "center",
+              borderBottom: "1px solid #ddd",
+              paddingBottom: "10px",
+            }}
+          >
+            สรุปผลการประเมิน
+          </h3>
           <p
             style={{
               fontSize: "16px",
               lineHeight: "1.5",
               color: "#666",
               whiteSpace: "pre-line",
+              backgroundColor: "#f5f5f5",
+              borderRadius: "4px",
             }}
           >
             {recommendation}
           </p>
-          <div style={{ marginTop: "15px", fontSize: "14px", color: "#888" }}>
+          <div style={{ marginTop: "15px", fontSize: "16px", color: "#666" }}>
             <p>
               * หากมีความกังวลเกี่ยวกับสุขภาพจิต
               สามารถขอรับคำปรึกษาจากเจ้าหน้าที่ได้
