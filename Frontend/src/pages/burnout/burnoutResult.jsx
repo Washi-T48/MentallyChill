@@ -202,7 +202,17 @@ export default function BurnOutResult() {
         />
 
         <div className="description-section">
-          <h3>คำอธิบาย:</h3>
+          <h3
+            style={{
+              marginBottom: "10px",
+              color: "#333",
+              textAlign: "center",
+              borderBottom: "1px solid #ddd",
+              paddingBottom: "10px",
+            }}
+          >
+            คำอธิบาย
+          </h3>
           <div className="description-item">
             <h4>ด้านความอ่อนล้าทางอารมณ์</h4>
             <p>การมีอารมณ์ที่เหนื่อยล้า หมดแรง หมดความกระตือรือร้น</p>
@@ -215,10 +225,21 @@ export default function BurnOutResult() {
             <h4>ด้านความสำเร็จส่วนบุคคล</h4>
             <p>ความรู้สึกไม่ประสบความสำเร็จและไม่มีประสิทธิภาพในการทำงาน</p>
           </div>
+          <h3
+            style={{
+              marginBottom: "10px",
+              color: "#333",
+              textAlign: "center",
+              borderBottom: "1px solid #ddd",
+              paddingBottom: "10px",
+            }}
+          >
+            สรุปผลการประเมิน
+          </h3>
           <div
             className="description-item"
             style={{
-              margin: "1.5rem 0",
+              margin: "1.5rem auto",
               padding: "1rem",
               backgroundColor:
                 overallAssessment.level === "ระดับสูง"
@@ -232,13 +253,6 @@ export default function BurnOutResult() {
           >
             <h3
               style={{
-                textAlign: "center",
-              }}
-            >
-              สรุปผลการประเมิน
-            </h3>
-            <h3
-              style={{
                 color:
                   overallAssessment.level === "ระดับสูง"
                     ? "#FF4D4D"
@@ -247,6 +261,7 @@ export default function BurnOutResult() {
                     : "#4CAF50",
                 textAlign: "center",
                 fontWeight: "regular",
+                marginTop: "10px",
               }}
             >
               {overallAssessment.level}
