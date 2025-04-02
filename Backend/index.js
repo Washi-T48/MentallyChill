@@ -1,6 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv'
 import cookieParser from 'cookie-parser';
+import https from 'https';
 import cors from 'cors';
 
 import publicRouter from './Routes/publicRoutes.js';
@@ -15,6 +16,7 @@ import timetableRouter from './Routes/timetableRoutes.js'
 import exportRouter from './Routes/exportRoutes.js';
 
 import logger, { consoleLogExpress } from './Middleware/logger.js';
+import fs from 'fs';
 
 const app = express();
 
@@ -51,6 +53,10 @@ app.use("/appointment", appointmentRouter);
 app.use("/timetable", timetableRouter);
 app.use("/export", exportRouter);
 
-app.listen(PORT, () => {
+https.createServer({
+    key: fs.readFileSync(`/etc/letsencrypt/live/mindcra.com-0001/privkey.pem`),
+    cert: fs.readFileSync(`/etc/letsencrypt/live/mindcra.com-0001/cert.pem`),
+    ca: fs.readFileSync(`/etc/letsencrypt/live/mindcra.com-0001/chain.pem`),
+}, app).listen(PORT, () => {
     logger.info(`Server started on port ${PORT}`);
 });
