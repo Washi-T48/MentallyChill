@@ -64,7 +64,9 @@ export default function RegisterPage() {
       return;
     }
 
-    console.log(formData);
+    for (let pair of formData.entries()) {
+      console.log(pair[0] + ": " + pair[1]);
+    }
     handleRegister(formData);
   };
 
