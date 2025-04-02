@@ -123,7 +123,7 @@ authRouter.post('/changePassword', authMiddleware, async (req, res) => {
 
 authRouter.post('/updateStaff', authMiddleware, async (req, res) => {
     try {
-        const { staff_id, name, surname, nickname,permission } = req.body;
+        const { staff_id, name, surname, nickname, permission } = req.body;
         const image = req.file.buffer.toString('base64');
 
         const staff = await updateStaff(staff_id, name, surname, nickname, image, permission);

@@ -1,8 +1,9 @@
 import pool from '../Config/db.js';
 
 const newStaff = async (staff_id, name, surname, nickname, image) => {
+    const permission = staff
     const result = await pool.query(`
-        INSERT INTO staff (staff_id, name, surname, nickname, image, permission) VALUES ($1, $2, $3, $4, $5) RETURNING *`,
+        INSERT INTO staff (staff_id, name, surname, nickname, image, permission) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`,
         [staff_id, name, surname, nickname, image, permission]
     );
     return result.rows[0];
