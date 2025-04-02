@@ -12,30 +12,30 @@ export default function RegisterPage() {
   const [imageFile, setImageFile] = useState(null);
   const [imageURL, setImageURL] = useState("");
 
-  const navigate = useNavigate();
+  //   const navigate = useNavigate();
 
-  const [permission, setPermission] = useState(null);
+  //   const [permission, setPermission] = useState(null);
 
-  useEffect(() => {
-    const fetchPermission = async () => {
-      try {
-        const response = await axios.get("/auth/permission", {
-          withCredentials: true,
-        });
-        setPermission(response.data.permission);
-        if (response.data.permission !== "administrator") {
-          navigate("/dashboard");
-        } else {
-          console.log(response.data.permission);
-          navigate("/register");
-        }
-      } catch (error) {
-        console.error("Error fetching permission", error);
-      }
-    };
+  //   useEffect(() => {
+  //     const fetchPermission = async () => {
+  //       try {
+  //         const response = await axios.get("/auth/permission", {
+  //           withCredentials: true,
+  //         });
+  //         setPermission(response.data.permission);
+  //         if (response.data.permission !== "administrator") {
+  //           navigate("/dashboard");
+  //         } else {
+  //           console.log(response.data.permission);
+  //           navigate("/register");
+  //         }
+  //       } catch (error) {
+  //         console.error("Error fetching permission", error);
+  //       }
+  //     };
 
-    fetchPermission();
-  }, []);
+  //     fetchPermission();
+  //   }, []);
 
   const handleRegister = async (data) => {
     try {
