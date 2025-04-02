@@ -17,6 +17,7 @@ export default function RegisterPage() {
       setLoading(true);
       setErrorMessage("");
       setSuccessMessage("");
+      console.log(data);
       const response = await axios.post("/auth/register", data, {
         withCredentials: true,
       });
@@ -64,7 +65,6 @@ export default function RegisterPage() {
       return;
     }
 
-    console.log(formData);
     handleRegister(formData);
   };
 
