@@ -436,7 +436,6 @@ export default function DashboardPage() {
             </div>
             <div className="text-2xl font-bold">ประเภทของผู้แบบทำแบบประเมินทั้งหมด</div>
             <PieChart
-              className="w-full h-full"
               colors={['red', 'blue', 'green']} // Use palette
               series={[
                 {
@@ -452,7 +451,7 @@ export default function DashboardPage() {
                   startAngle: -45,
                   endAngle: 320,
                   cx: 150,
-                  cy: 100,
+                  cy: 150,
                 }
               ]}
             />
