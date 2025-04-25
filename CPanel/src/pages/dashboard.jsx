@@ -436,6 +436,8 @@ export default function DashboardPage() {
             </div>
             <div className="text-2xl font-bold mb-4">ประเภทของผู้แบบทำแบบประเมินทั้งหมด</div>
             <PieChart
+              className="w-full h-full"
+              colors={['red', 'blue', 'green']} // Use palette
               series={[
                 {
                   data: [
