@@ -450,7 +450,7 @@ export default function DashboardPage() {
                   paddingAngle: 5,
                   cornerRadius: 5,
                   startAngle: -45,
-                  endAngle: 225,
+                  endAngle: 320,
                   cx: 150,
                   cy: 150,
                 }
