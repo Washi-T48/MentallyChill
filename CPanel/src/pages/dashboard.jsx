@@ -404,6 +404,7 @@ export default function DashboardPage() {
         </div>
         <div className="w-full overflow-x-hidden">
           <div className="p-4 md:p-10">
+            <div className="text-2xl font-bold mb-4">ประเภทของผู้แบบทำแบบประเมินทั้งหมด</div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 mb-8">
               <StatCard
                 title="คำขอการจอง"
