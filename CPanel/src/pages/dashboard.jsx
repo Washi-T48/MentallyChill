@@ -430,7 +430,7 @@ export default function DashboardPage() {
             <div className="text-2xl font-bold">ประเภทของผู้แบบทำแบบประเมินทั้งหมด</div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 mb-8">
               <PieChart
-                colors={["#4caf50", "#ffeb3b", "#f44336"]}
+                colors={["#f44336", "#ffeb3b", "#4caf50"]}
                 series={[
                   {
                     arcLabel: (item) => `${Math.round(item.value)}%`,
