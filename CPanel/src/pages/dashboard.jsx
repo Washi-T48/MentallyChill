@@ -417,15 +417,8 @@ export default function DashboardPage() {
                 value={countDiag}
                 color="violet"
               />
-              {/* <StatCard title="ระดับปกติ" value={lowCount} color="green" />
-              <StatCard
-                title="ระดับปานกลาง"
-                value={mediumCount}
-                color="yellow"
-              />
-              <StatCard title="ระดับร้ายแรง" value={highCount} color="red" /> */}
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+            {/* <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
               <StatCard title="ระดับปกติ" value={lowCount} color="green" />
               <StatCard
                 title="ระดับปานกลาง"
@@ -433,30 +426,9 @@ export default function DashboardPage() {
                 color="yellow"
               />
               <StatCard title="ระดับร้ายแรง" value={highCount} color="red" />
-            </div>
+            </div> */}
             <div className="text-2xl font-bold">ประเภทของผู้แบบทำแบบประเมินทั้งหมด</div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 mb-8">
-              {/* <PieChart
-                series={[
-                  {
-                    arcLabel: (item) => `${item.value}%`,
-                    arcLabelMinAngle: 35,
-                    arcLabelRadius: '60%',
-                    data: [
-                      { id: 0, value: 512, label: 'ระดับรุนแรง' },
-                      { id: 1, value: 128, label: 'ระดับปานกลาง' },
-                      { id: 2, value: 60, label: 'ระดับปกติ' },
-                    ],
-                  },
-                ]}
-                sx={{
-                  [`& .${pieArcLabelClasses.root}`]: {
-                    fontWeight: 'bold',
-                  },
-                }}
-                width={400}
-                height={400}
-              /> */}
               <PieChart
                 series={[
                   {
@@ -733,7 +705,7 @@ export default function DashboardPage() {
                 )}
               </div>
             </div>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8">
+            {/* <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8">
               <DataTable
                 title="การจองครั้งล่าสุด"
                 data={recentBookingInfo}
@@ -746,7 +718,7 @@ export default function DashboardPage() {
                 columns={["เลขที่ผู้ใช้", "ประเภทแบบฟอร์ม", "วันที่"]}
                 bgColor="violet"
               />
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
@@ -767,9 +739,9 @@ const colors = {
 const customStyles = {
   dropdownIndicator: (base) => ({
     ...base,
-    color: "rgb(255, 255, 255)", // White color
+    color: "rgb(255, 255, 255)",
     "&:hover": {
-      color: "rgb(255, 255, 255)", // Ensure it stays white on hover
+      color: "rgb(255, 255, 255)",
     },
   }),
 };
