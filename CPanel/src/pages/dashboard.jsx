@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Sidebar from "../components/sidebar";
 import Topbar from "../components/topbar";
 import { data } from "autoprefixer";
+import { PieChart } from '@mui/x-charts/PieChart';
 
 export default function DashboardPage() {
   const [bookingdata, setBookingData] = useState([]);
@@ -434,6 +435,25 @@ export default function DashboardPage() {
               <StatCard title="ระดับร้ายแรง" value={highCount} color="red" />
             </div>
             <div className="text-2xl font-bold mb-4">ประเภทของผู้แบบทำแบบประเมินทั้งหมด</div>
+            <PieChart
+              series={[
+                {
+                  data: [
+                    { id: 0, value: 10, label: 'series A' },
+                    { id: 1, value: 15, label: 'series B' },
+                    { id: 2, value: 20, label: 'series C' },
+                  ],
+                  innerRadius: 30,
+                  outerRadius: 100,
+                  paddingAngle: 5,
+                  cornerRadius: 5,
+                  startAngle: -45,
+                  endAngle: 225,
+                  cx: 150,
+                  cy: 150,
+                }
+              ]}
+            />
             <div className="border-4 border-[#003087] bg-white rounded-md">
               <div className="flex flex-row bg-[#003087] rounded-md p-4 items-center">
                 <div className="text-2xl text-white m-4"> แบบประเมิน : </div>
