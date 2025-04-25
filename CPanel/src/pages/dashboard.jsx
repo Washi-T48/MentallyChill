@@ -436,7 +436,7 @@ export default function DashboardPage() {
             </div>
             <div className="text-2xl font-bold">ประเภทของผู้แบบทำแบบประเมินทั้งหมด</div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 mb-8">
-              <PieChart
+              {/* <PieChart
                 series={[
                   {
                     arcLabel: (item) => `${item.value}%`,
@@ -446,6 +446,39 @@ export default function DashboardPage() {
                       { id: 0, value: 512, label: 'ระดับรุนแรง' },
                       { id: 1, value: 128, label: 'ระดับปานกลาง' },
                       { id: 2, value: 60, label: 'ระดับปกติ' },
+                    ],
+                  },
+                ]}
+                sx={{
+                  [`& .${pieArcLabelClasses.root}`]: {
+                    fontWeight: 'bold',
+                  },
+                }}
+                width={400}
+                height={400}
+              /> */}
+              <PieChart
+                series={[
+                  {
+                    arcLabel: (item) => `${Math.round(item.value)}%`,
+                    arcLabelMinAngle: 35,
+                    arcLabelRadius: '60%',
+                    data: [
+                      { 
+                        id: 0, 
+                        value: Math.round((highCount / (lowCount + mediumCount + highCount)) * 100) || 0, 
+                        label: 'ระดับรุนแรง' 
+                      },
+                      { 
+                        id: 1, 
+                        value: Math.round((mediumCount / (lowCount + mediumCount + highCount)) * 100) || 0, 
+                        label: 'ระดับปานกลาง' 
+                      },
+                      { 
+                        id: 2, 
+                        value: Math.round((lowCount / (lowCount + mediumCount + highCount)) * 100) || 0, 
+                        label: 'ระดับปกติ' 
+                      },
                     ],
                   },
                 ]}
