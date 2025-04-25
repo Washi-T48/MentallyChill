@@ -523,7 +523,7 @@ export default function DashboardPage() {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 mb-8">
               <div>
                 <PieChart
-                  colors={["#f44336", "#4caf50"]}
+                  colors={["lightskyblue", "lightgray"]}
                   series={[
                     {
                       arcLabel: (item) => `${Math.round(item.value)}%`,
