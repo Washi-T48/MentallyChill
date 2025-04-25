@@ -454,8 +454,8 @@ export default function DashboardPage() {
                   cy: 150,
                 }
               ]}
-              width={200}
-              height={200}
+              width={300}
+              height={300}
             />
             <div className="mt-10 border-4 border-[#003087] bg-white rounded-md">
               <div className="flex flex-row bg-[#003087] rounded-md p-4 items-center">
