@@ -291,89 +291,105 @@ export default function DiagnosisPage() {
           />
         </div>
         <div className="overflow-x-auto">
-          <table className="w-full">
-            <thead>
-              <tr className="bg-[#003087] text-white">
-                <th className="py-2 px-4 text-lg md:text-3xl text-center rounded-tl-xl">
-                  วันที่
-                  <button
-                    onClick={toggleSortOrder}
-                    className="ml-2 py-1 px-2 bg-gray-300 text-black rounded text-sm md:text-2xl"
-                  >
-                    {sortOrder === "asc" ? "▲" : "▼"}
-                  </button>
-                </th>
-                <th className="py-2 px-4 text-lg md:text-3xl text-center">
-                  ประเภทแบบฟอร์ม
-                </th>
-                <th className="py-2 px-4 text-lg md:text-3xl text-center">
-                  ผลการประเมิน
-                </th>
-                <th className="py-2 px-4 text-lg md:text-3xl text-center rounded-tr-xl">
-                  เลขที่ผู้ใช้
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {paginatedData.map((row, index) => (
-                <tr
-                  key={index}
-                  className={`transition ease-in-out duration-150 border-2 ${
-                    index % 2 === 0 ? "bg-zinc-200" : "bg-gray-300"
-                  }`}
-                >
-                  <td className="py-2 px-4 text-center text-sm md:text-xl">
-                    {row.created.substr(0, 10)}
-                  </td>
-                  <td className="py-2 px-4 text-center text-sm md:text-xl">
-                    {row.forms_type}
-                  </td>
-                  <td className="py-2 px-4 text-center text-sm md:text-xl">
-                    {row.forms_type === "dass21" ? (
-                      row.result
-                        ? `${getResultCategory(row.result.d, row.result.a, row.result.s)} (D: ${row.result.d} A: ${row.result.a} S: ${row.result.s})`
-                        : "null"
-                    ) : row.forms_type === "burnout" ? (
-                      row.result && row.result.scores
-                        ? `ความอ่อนล้าทางอารมณ์ : ${row.result.scores.emotionalScore}, การลดความเป็นบุคคล : ${row.result.scores.depersonalizationScore}, ความสำเร็จส่วนบุคคล : ${row.result.scores.personalAchievementScore}`
-                        : "null"
-                    ) : row.forms_type === "2q" ? (
-                      row.result
-                        ? `เศร้า/หดหู่/ท้อแท้ ในช่วง 2 สัปดาห์: ${row.result.q1 ? "ใช่" : "ไม่ใช่"} | เบื่อ/ไม่เพลิดเพลิน ในช่วง 2 สัปดาห์: ${row.result.q2 ? "ใช่" : "ไม่ใช่"}`
-                        : "null"
-                    ) : row.forms_type === "rq" ? (
-                      row.result
-                        ? `ความอดทนทางอารมณ์: ${row.result.emotionalEndurance}, กำลังใจ: ${row.result.encouragement}, การจัดการปัญหา: ${row.result.problemManagement}`
-                        : "null"
-                    ) : (
-                      row.result ? row.result.scores : "null"
-                    )}
-                  </td>
-                  <td className="py-2 px-4 text-center text-sm md:text-xl">
-                    {row.user_id}
-                  </td>
+          {filteredData.length > 0 ? (
+            <table className="w-full">
+              <thead>
+                <tr className="bg-[#003087] text-white">
+                  <th className="py-2 px-4 text-lg md:text-3xl text-center rounded-tl-xl">
+                    วันที่
+                    <button
+                      onClick={toggleSortOrder}
+                      className="ml-2 py-1 px-2 bg-gray-300 text-black rounded text-sm md:text-2xl"
+                    >
+                      {sortOrder === "asc" ? "▲" : "▼"}
+                    </button>
+                  </th>
+                  <th className="py-2 px-4 text-lg md:text-3xl text-center">
+                    ประเภทแบบฟอร์ม
+                  </th>
+                  <th className="py-2 px-4 text-lg md:text-3xl text-center">
+                    ผลการประเมิน
+                  </th>
+                  <th className="py-2 px-4 text-lg md:text-3xl text-center rounded-tr-xl">
+                    เลขที่ผู้ใช้
+                  </th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {paginatedData.map((row, index) => (
+                  <tr
+                    key={index}
+                    className={`transition ease-in-out duration-150 border-2 ${
+                      index % 2 === 0 ? "bg-zinc-200" : "bg-gray-300"
+                    }`}
+                  >
+                    <td className="py-2 px-4 text-center text-sm md:text-xl">
+                      {row.created.substr(0, 10)}
+                    </td>
+                    <td className="py-2 px-4 text-center text-sm md:text-xl">
+                      {row.forms_type}
+                    </td>
+                    <td className="py-2 px-4 text-center text-sm md:text-xl">
+                      {row.forms_type === "dass21" ? (
+                        row.result
+                          ? `${getResultCategory(row.result.d, row.result.a, row.result.s)} (D: ${row.result.d} A: ${row.result.a} S: ${row.result.s})`
+                          : "null"
+                      ) : row.forms_type === "burnout" ? (
+                        row.result && row.result.scores
+                          ? `ความอ่อนล้าทางอารมณ์ : ${row.result.scores.emotionalScore}, การลดความเป็นบุคคล : ${row.result.scores.depersonalizationScore}, ความสำเร็จส่วนบุคคล : ${row.result.scores.personalAchievementScore}`
+                          : "null"
+                      ) : row.forms_type === "2q" ? (
+                        row.result
+                          ? `เศร้า/หดหู่/ท้อแท้ ในช่วง 2 สัปดาห์: ${row.result.q1 ? "ใช่" : "ไม่ใช่"} | เบื่อ/ไม่เพลิดเพลิน ในช่วง 2 สัปดาห์: ${row.result.q2 ? "ใช่" : "ไม่ใช่"}`
+                          : "null"
+                      ) : row.forms_type === "rq" ? (
+                        row.result
+                          ? `ความอดทนทางอารมณ์: ${row.result.emotionalEndurance}, กำลังใจ: ${row.result.encouragement}, การจัดการปัญหา: ${row.result.problemManagement}`
+                          : "null"
+                      ) : (
+                        row.result ? row.result.scores : "null"
+                      )}
+                    </td>
+                    <td className="py-2 px-4 text-center text-sm md:text-xl">
+                      {row.user_id}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          ) : (
+            <div className="mt-6 text-center">
+              <div className="py-10 px-4 bg-gray-100 rounded-md border border-gray-300">
+                <p className="text-2xl text-gray-600">ไม่พบข้อมูลที่ตรงกับเงื่อนไขการกรอง</p>
+                <button
+                  className="mt-4 py-2 px-6 bg-blue-600 text-white rounded hover:bg-blue-700"
+                  onClick={clearAllFilters}
+                >
+                  ล้างการกรองทั้งหมด
+                </button>
+              </div>
+            </div>
+          )}
         </div>
-        <div className="mt-6 flex justify-center w-full">
-          <button
-            className="py-2 px-4 mx-2 bg-[#003087] text-white rounded"
-            onClick={handlePrevPage}
-            disabled={currentPage === 1}
-          >
-            ก่อนหน้า
-          </button>
-          <span className="py-2 px-4 mx-2">{`Page ${currentPage} of ${totalPages}`}</span>
-          <button
-            className="py-2 px-4 mx-2 bg-[#003087] text-white rounded"
-            onClick={handleNextPage}
-            disabled={currentPage === totalPages}
-          >
-            ถัดไป
-          </button>
-        </div>
+        {filteredData.length > 0 && (
+          <div className="mt-6 flex justify-center w-full">
+            <button
+              className="py-2 px-4 mx-2 bg-[#003087] text-white rounded"
+              onClick={handlePrevPage}
+              disabled={currentPage === 1}
+            >
+              ก่อนหน้า
+            </button>
+            <span className="py-2 px-4 mx-2">{`Page ${currentPage} of ${totalPages}`}</span>
+            <button
+              className="py-2 px-4 mx-2 bg-[#003087] text-white rounded"
+              onClick={handleNextPage}
+              disabled={currentPage === totalPages}
+            >
+              ถัดไป
+            </button>
+          </div>
+        )}
       </div>
     );
   };
