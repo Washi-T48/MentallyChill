@@ -437,24 +437,19 @@ export default function DashboardPage() {
             <div className="text-2xl font-bold">ประเภทของผู้แบบทำแบบประเมินทั้งหมด</div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 mb-8">
               <PieChart
-                colors={['crimson', 'gold', 'limegreen']} // Use palette
                 series={[
                   {
-                    data: [
-                      { id: 0, value: 10, label: 'ระดับรุนแรง' },
-                      { id: 1, value: 15, label: 'ระดับปานกลาง' },
-                      { id: 2, value: 20, label: 'ระดับปกติ' },
-                    ],
-                    innerRadius: 70,
-                    outerRadius: 150,
-                    paddingAngle: 5,
-                    cornerRadius: 5,
-                    startAngle: -45,
-                    endAngle: 320,
-                    cx: 150,
-                    cy: 200,
-                  }
+                    arcLabel: (item) => `${item.value}%`,
+                    arcLabelMinAngle: 35,
+                    arcLabelRadius: '60%',
+                    data: [lowCount, mediumCount, highCount],
+                  },
                 ]}
+                sx={{
+                  [`& .${pieArcLabelClasses.root}`]: {
+                    fontWeight: 'bold',
+                  },
+                }}
                 width={400}
                 height={400}
               />
