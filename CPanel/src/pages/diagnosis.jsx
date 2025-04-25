@@ -10,6 +10,7 @@ export default function DiagnosisPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedFormType, setSelectedFormType] = useState("");
   const [selectedResult, setSelectedResult] = useState("");
+  const [selectedMonth, setSelectedMonth] = useState("");
   const [data, setData] = useState([]);
   const [formTypeData, setFormTypeData] = useState([]);
   const [sortOrder, setSortOrder] = useState("desc");
@@ -104,6 +105,46 @@ export default function DiagnosisPage() {
     return "ปกติ";
   };
 
+  const getMonthOptions = () => {
+    const options = [];
+    const currentYear = new Date().getFullYear();
+    const currentMonth = new Date().getMonth() + 1;
+
+    for (let i = 0; i < 12; i++) {
+      let month = currentMonth - i;
+      let year = currentYear;
+
+      if (month <= 0) {
+        month += 12;
+        year -= 1;
+      }
+
+      const monthStr = month.toString().padStart(2, "0");
+      const monthValue = `${year}-${monthStr}`;
+
+      const thaiMonths = [
+        "มกราคม",
+        "กุมภาพันธ์",
+        "มีนาคม",
+        "เมษายน",
+        "พฤษภาคม",
+        "มิถุนายน",
+        "กรกฎาคม",
+        "สิงหาคม",
+        "กันยายน",
+        "ตุลาคม",
+        "พฤศจิกายน",
+        "ธันวาคม",
+      ];
+
+      options.push(`${thaiMonths[month - 1]} ${year}`);
+    }
+
+    return options;
+  };
+
+  const monthOptions = getMonthOptions();
+
   const sortedData = data.sort((a, b) => {
     const dateA = new Date(a.created);
     const dateB = new Date(b.created);
@@ -114,10 +155,43 @@ export default function DiagnosisPage() {
     const resultCategory = item.result
       ? getResultCategory(item.result.d, item.result.a, item.result.s)
       : "";
+
+    let monthMatch = true;
+    if (selectedMonth) {
+      const itemDate = new Date(item.created);
+      const itemYear = itemDate.getFullYear();
+      const itemMonth = itemDate.getMonth() + 1;
+
+      const thaiMonths = [
+        "มกราคม",
+        "กุมภาพันธ์",
+        "มีนาคม",
+        "เมษายน",
+        "พฤษภาคม",
+        "มิถุนายน",
+        "กรกฎาคม",
+        "สิงหาคม",
+        "กันยายน",
+        "ตุลาคม",
+        "พฤศจิกายน",
+        "ธันวาคม",
+      ];
+
+      const [monthName, yearStr] = selectedMonth.split(" ");
+      const selectedMonthIndex = thaiMonths.indexOf(monthName) + 1;
+      const selectedYear = parseInt(yearStr);
+
+      monthMatch =
+        itemYear === selectedYear && itemMonth === selectedMonthIndex;
+    }
+
     return (
       (selectedFormType ? item.forms_type === selectedFormType : true) &&
-      (selectedResult ? (item.forms_type === "dass21" && resultCategory === selectedResult) : true) &&
-      (searchTerm ? item.user_id.includes(searchTerm.toLowerCase()) : true)
+      (selectedResult
+        ? item.forms_type === "dass21" && resultCategory === selectedResult
+        : true) &&
+      (searchTerm ? item.user_id.includes(searchTerm.toLowerCase()) : true) &&
+      monthMatch
     );
   });
 
@@ -146,9 +220,15 @@ export default function DiagnosisPage() {
     setCurrentPage(1);
   };
 
+  const handleSelectMonth = (option) => {
+    setSelectedMonth(option);
+    setCurrentPage(1);
+  };
+
   const clearAllFilters = () => {
     setSelectedFormType("");
     setSelectedResult("");
+    setSelectedMonth("");
     setCurrentPage(1);
   };
 
@@ -187,6 +267,12 @@ export default function DiagnosisPage() {
               options={["ร้ายแรง", "ปานกลาง", "ปกติ"]}
               onSelect={handleSelectResult}
               selected={selectedResult}
+            />
+            <Dropdown
+              placehold={"เดือน"}
+              options={monthOptions}
+              onSelect={handleSelectMonth}
+              selected={selectedMonth}
             />
             <button
               className="py-2 px-4 bg-red-500 text-white rounded w-full md:w-auto"
