@@ -404,7 +404,6 @@ export default function DashboardPage() {
         </div>
         <div className="w-full overflow-x-hidden">
           <div className="p-4 md:p-10">
-            <div className="text-2xl font-bold mb-4">ประเภทของผู้แบบทำแบบประเมินทั้งหมด</div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 mb-8">
               <StatCard
                 title="คำขอการจอง"
@@ -434,6 +433,7 @@ export default function DashboardPage() {
               />
               <StatCard title="ระดับร้ายแรง" value={highCount} color="red" />
             </div>
+            <div className="text-2xl font-bold mb-4">ประเภทของผู้แบบทำแบบประเมินทั้งหมด</div>
             <div className="border-4 border-[#003087] bg-white rounded-md">
               <div className="flex flex-row bg-[#003087] rounded-md p-4 items-center">
                 <div className="text-2xl text-white m-4"> แบบประเมิน : </div>
