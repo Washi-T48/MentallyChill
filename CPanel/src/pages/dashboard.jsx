@@ -458,8 +458,7 @@ export default function DashboardPage() {
                 width={300}
                 height={300}
               />
-              <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-1 gap-4 mb-8">
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+              <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-1 gap-4">
                   <StatCard title="ระดับปกติ" value={lowCount} color="green" />
                   <StatCard
                     title="ระดับปานกลาง"
@@ -467,7 +466,6 @@ export default function DashboardPage() {
                     color="yellow"
                   />
                   <StatCard title="ระดับร้ายแรง" value={highCount} color="red" />
-                </div>
               </div>
             </div>
             <div className="mt-10 border-4 border-[#003087] bg-white rounded-md">
