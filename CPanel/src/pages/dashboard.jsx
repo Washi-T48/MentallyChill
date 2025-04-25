@@ -403,7 +403,7 @@ export default function DashboardPage() {
         <div className="flex relative w-72">
           <Sidebar />
         </div>
-        <div className="w-full overflow-x-hidden">
+        <div className="w-full">
           <div className="p-4 md:p-10">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 mb-8">
               <StatCard
@@ -434,7 +434,7 @@ export default function DashboardPage() {
               />
               <StatCard title="ระดับร้ายแรง" value={highCount} color="red" />
             </div>
-            <div className="text-2xl font-bold mb-4">ประเภทของผู้แบบทำแบบประเมินทั้งหมด</div>
+            <div className="text-2xl font-bold">ประเภทของผู้แบบทำแบบประเมินทั้งหมด</div>
             <PieChart
               className="w-full h-full"
               colors={['red', 'blue', 'green']} // Use palette
