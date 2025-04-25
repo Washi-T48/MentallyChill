@@ -452,7 +452,7 @@ export default function DashboardPage() {
                     startAngle: -45,
                     endAngle: 320,
                     cx: 150,
-                    cy: 150,
+                    cy: 200,
                   }
                 ]}
                 width={400}
