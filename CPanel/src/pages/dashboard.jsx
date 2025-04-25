@@ -521,35 +521,38 @@ export default function DashboardPage() {
             
             <div className="text-2xl font-bold">ประเภทของผู้แบบทำแบบประเมินทั้งหมด</div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 mb-8">
-              <PieChart
-                colors={["#f44336", "#4caf50"]}
-                series={[
-                  {
-                    arcLabel: (item) => `${Math.round(item.value)}%`,
-                    arcLabelMinAngle: 35,
-                    arcLabelRadius: '60%',
-                    data: [
-                      { 
-                        id: 0, 
-                        value: Math.round((collegecount / (collegecount + highschoolcount)) * 100) || 0, 
-                        label: 'อุดมศึกษา' 
-                      },
-                      { 
-                        id: 1, 
-                        value: Math.round((highschoolcount / (collegecount + highschoolcount)) * 100) || 0, 
-                        label: 'มัธยมศึกษา' 
-                      },
-                    ],
-                  },
-                ]}
-                sx={{
-                  [`& .${pieArcLabelClasses.root}`]: {
-                    fontWeight: 'bold',
-                  },
-                }}
-                width={400}
-                height={400}
-              />
+              <div>
+                <PieChart
+                  colors={["#f44336", "#4caf50"]}
+                  series={[
+                    {
+                      arcLabel: (item) => `${Math.round(item.value)}%`,
+                      arcLabelMinAngle: 35,
+                      arcLabelRadius: '60%',
+                      data: [
+                        { 
+                          id: 0, 
+                          value: Math.round((collegecount / (collegecount + highschoolcount)) * 100) || 0, 
+                          label: 'อุดมศึกษา' 
+                        },
+                        { 
+                          id: 1, 
+                          value: Math.round((highschoolcount / (collegecount + highschoolcount)) * 100) || 0, 
+                          label: 'มัธยมศึกษา' 
+                        },
+                      ],
+                    },
+                  ]}
+                  sx={{
+                    [`& .${pieArcLabelClasses.root}`]: {
+                      fontWeight: 'bold',
+                    },
+                  }}
+                  width={400}
+                  height={400}
+                />
+                <div>อุดมศึกษา : {collegecount} คน</div><div>มัธยมศึกษา : {highschoolcount} คน</div>
+              </div>
               <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-1 gap-4">
                   <StatCard title="ระดับปกติ" value={lowCount} color="green" />
                   <StatCard
