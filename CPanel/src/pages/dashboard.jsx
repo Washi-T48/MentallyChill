@@ -403,7 +403,7 @@ export default function DashboardPage() {
         <div className="flex relative w-72">
           <Sidebar />
         </div>
-        <div className="w-full">
+        <div className="w-full overflow-x-hidden">
           <div className="p-4 md:p-10">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 mb-8">
               <StatCard
