@@ -456,7 +456,7 @@ export default function DashboardPage() {
                 }
               ]}
             />
-            <div className="border-4 border-[#003087] bg-white rounded-md">
+            <div className="mt-10 border-4 border-[#003087] bg-white rounded-md">
               <div className="flex flex-row bg-[#003087] rounded-md p-4 items-center">
                 <div className="text-2xl text-white m-4"> แบบประเมิน : </div>
                 <select
