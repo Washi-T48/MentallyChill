@@ -404,7 +404,7 @@ export default function DashboardPage() {
         </div>
         <div className="w-full overflow-x-hidden">
           <div className="p-4 md:p-10">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 mb-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
               <StatCard
                 title="คำขอการจอง"
                 value={countBooking}
@@ -416,8 +416,6 @@ export default function DashboardPage() {
                 value={countDiag}
                 color="violet"
               />
-              <div className="hidden lg:block"></div>{" "}
-              {/* Empty div for the third column in the first row */}
               <StatCard title="ระดับปกติ" value={lowCount} color="green" />
               <StatCard
                 title="ระดับปานกลาง"
@@ -707,7 +705,7 @@ function StatCard({ title, value, color, tone = 400 }) {
         colors[color] || "bg-gray-400"
       }`}
     >
-      <div className="pb-8 text-lg text-white drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">
+      <div className="pb-4 text-lg text-white drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">
         {title}
       </div>
       <div className="text-4xl md:text-5xl lg:text-6xl text-white drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">
