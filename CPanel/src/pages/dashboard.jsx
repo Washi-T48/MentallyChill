@@ -463,7 +463,6 @@ export default function DashboardPage() {
         <div className="w-full">
           <div className="p-4 md:p-10">
             <div className="flex flex-wrap justify-between items-center mb-4">
-              <h1 className="text-2xl font-bold">แดชบอร์ด</h1>
               <div className="flex items-center">
                 <label className="mr-2 font-medium">เดือน:</label>
                 <select
