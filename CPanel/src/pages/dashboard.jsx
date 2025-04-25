@@ -455,8 +455,8 @@ export default function DashboardPage() {
                     cy: 150,
                   }
                 ]}
-                width={300}
-                height={300}
+                width={400}
+                height={400}
               />
               <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-1 gap-4">
                   <StatCard title="ระดับปกติ" value={lowCount} color="green" />
