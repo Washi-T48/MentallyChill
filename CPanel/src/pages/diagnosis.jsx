@@ -361,12 +361,6 @@ export default function DiagnosisPage() {
             <div className="mt-6 text-center">
               <div className="py-10 px-4 bg-gray-100 rounded-md border border-gray-300">
                 <p className="text-2xl text-gray-600">ไม่พบข้อมูล</p>
-                <button
-                  className="mt-4 py-2 px-6 bg-blue-600 text-white rounded hover:bg-blue-700"
-                  onClick={clearAllFilters}
-                >
-                  ล้างการกรองทั้งหมด
-                </button>
               </div>
             </div>
           )}
