@@ -2,7 +2,6 @@ import axios from "../components/axioscreds";
 import { useEffect, useState } from "react";
 import Sidebar from "../components/sidebar";
 import Topbar from "../components/topbar";
-import { data } from "autoprefixer";
 import { PieChart, pieArcLabelClasses } from '@mui/x-charts/PieChart';
 
 export default function DashboardPage() {
@@ -10,16 +9,6 @@ export default function DashboardPage() {
   const [diagdata, setDiagData] = useState([]);
   const [countDiag, setCountDiag] = useState(0);
   const [countBooking, setCountBooking] = useState(0);
-  const [resD, setResD] = useState(0);
-  const [resA, setResA] = useState(0);
-  const [resS, setResS] = useState(0);
-  const [resStress, setResStress] = useState(0);
-  const [EmotionalScore, setEmotionalScore] = useState(0);
-  const [Depersonalization, setDepersonalization] = useState(0);
-  const [personalAccomplishment, setPersonalAccomplishment] = useState(0);
-  const [rqemotion , setrqemotion] = useState(0);
-  const [rqencouragement , setrqencouragement] = useState(0);
-  const [rqproblem , setrqproblem] = useState(0);
   const [countrqlowemotion, setcountrqlowemotion] = useState(0);
   const [countrqmediumemotion, setcountrqmediumemotion] = useState(0);
   const [countrqhighemotion, setcountrqhighemotion] = useState(0);
@@ -65,6 +54,8 @@ export default function DashboardPage() {
   const [selectedMonth, setSelectedMonth] = useState("all");
   const [filteredDiagData, setFilteredDiagData] = useState([]);
   const [filteredBookingData, setFilteredBookingData] = useState([]);
+  const [collegecount, setCollegecount] = useState(0);
+  const [highschoolcount, setHighschoolcount] = useState(0);
 
   useEffect(() => {
     const fetchDiagData = async () => {
@@ -105,10 +96,35 @@ export default function DashboardPage() {
       }
     };
 
+    const fetchUserData = async () => {
+      try {
+        const response = await axios.get(`/user/all`);
+        const users = response.data;
+        
+        // Count college and high school students
+        let college = 0;
+        let highschool = 0;
+        
+        users.forEach(user => {
+          if (user.grade_level && user.grade_level.includes("อุดมศึกษา")) {
+            college++;
+          } else {
+            highschool++;
+          }
+        });
+        
+        setCollegecount(college);
+        setHighschoolcount(highschool);
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+
     fetchCountDiag();
     fetchCountBooking();
     fetchDiagData();
     fetchBookingData();
+    fetchUserData();
   }, []);
 
   useEffect(() => {
@@ -496,7 +512,7 @@ export default function DashboardPage() {
             <div className="text-2xl font-bold">ประเภทของผู้แบบทำแบบประเมินทั้งหมด</div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 mb-8">
               <PieChart
-                colors={["#f44336", "#ffeb3b", "#4caf50"]}
+                colors={["#f44336", "#4caf50"]}
                 series={[
                   {
                     arcLabel: (item) => `${Math.round(item.value)}%`,
@@ -505,18 +521,13 @@ export default function DashboardPage() {
                     data: [
                       { 
                         id: 0, 
-                        value: Math.round((highCount / (lowCount + mediumCount + highCount)) * 100) || 0, 
+                        value: collegecount, 
                         label: 'ระดับรุนแรง' 
                       },
                       { 
                         id: 1, 
-                        value: Math.round((mediumCount / (lowCount + mediumCount + highCount)) * 100) || 0, 
+                        value: highschoolcount, 
                         label: 'ระดับปานกลาง' 
-                      },
-                      { 
-                        id: 2, 
-                        value: Math.round((lowCount / (lowCount + mediumCount + highCount)) * 100) || 0, 
-                        label: 'ระดับปกติ' 
                       },
                     ],
                   },
