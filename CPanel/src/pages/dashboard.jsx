@@ -9,6 +9,16 @@ export default function DashboardPage() {
   const [diagdata, setDiagData] = useState([]);
   const [countDiag, setCountDiag] = useState(0);
   const [countBooking, setCountBooking] = useState(0);
+  const [resD, setResD] = useState(0);
+  const [resA, setResA] = useState(0);
+  const [resS, setResS] = useState(0);
+  const [resStress, setResStress] = useState(0);
+  const [EmotionalScore, setEmotionalScore] = useState(0);
+  const [Depersonalization, setDepersonalization] = useState(0);
+  const [personalAccomplishment, setPersonalAccomplishment] = useState(0);
+  const [rqemotion , setrqemotion] = useState(0);
+  const [rqencouragement , setrqencouragement] = useState(0);
+  const [rqproblem , setrqproblem] = useState(0);
   const [countrqlowemotion, setcountrqlowemotion] = useState(0);
   const [countrqmediumemotion, setcountrqmediumemotion] = useState(0);
   const [countrqhighemotion, setcountrqhighemotion] = useState(0);
