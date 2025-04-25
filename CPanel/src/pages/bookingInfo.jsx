@@ -15,6 +15,7 @@ export default function BookingInfoPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedTopic, setSelectedTopic] = useState('');
   const [selectedStatus, setSelectedStatus] = useState('');
+  const [selectedMonth, setSelectedMonth] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
   const [topicData, setTopicData] = useState([]);
   const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -25,6 +26,33 @@ export default function BookingInfoPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentUserId, setCurrentUserId] = useState(null);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  const getMonthOptions = () => {
+    const options = [];
+    const currentYear = new Date().getFullYear();
+    const currentMonth = new Date().getMonth() + 1;
+
+    for (let i = 0; i < 12; i++) {
+      let month = currentMonth - i;
+      let year = currentYear;
+
+      if (month <= 0) {
+        month += 12;
+        year -= 1;
+      }
+
+      const thaiMonths = [
+        "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน",
+        "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"
+      ];
+
+      options.push(`${thaiMonths[month - 1]} ${year}`);
+    }
+
+    return options;
+  };
+
+  const monthOptions = getMonthOptions();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -89,6 +117,11 @@ export default function BookingInfoPage() {
     setCurrentPage(1);
   };
 
+  const handleSelectMonth = (option) => {
+    setSelectedMonth(option);
+    setCurrentPage(1);
+  };
+
   const handleSearchTermChange = (event) => {
     setSearchTerm(event.target.value);
     setCurrentPage(1);
@@ -97,6 +130,7 @@ export default function BookingInfoPage() {
   const clearAllFilters = () => {
     setSelectedTopic('');
     setSelectedStatus('');
+    setSelectedMonth('');
     setSearchTerm('');
     setCurrentPage(1);
   };
@@ -117,10 +151,29 @@ export default function BookingInfoPage() {
   };
 
   const filteredData = data.filter((item) => {
+    let monthMatch = true;
+    if (selectedMonth) {
+      const itemDate = new Date(item.appointment_date);
+      const itemYear = itemDate.getFullYear();
+      const itemMonth = itemDate.getMonth() + 1;
+
+      const thaiMonths = [
+        "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน",
+        "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"
+      ];
+
+      const [monthName, yearStr] = selectedMonth.split(' ');
+      const selectedMonthIndex = thaiMonths.indexOf(monthName) + 1;
+      const selectedYear = parseInt(yearStr);
+
+      monthMatch = (itemYear === selectedYear && itemMonth === selectedMonthIndex);
+    }
+
     return (
       (selectedTopic ? item.topic === selectedTopic : true) &&
       (selectedStatus ? item.status === selectedStatus : true) &&
-      (searchTerm ? item.user_id.includes(searchTerm.toLowerCase()) : true)
+      (searchTerm ? item.user_id.includes(searchTerm.toLowerCase()) : true) &&
+      monthMatch
     );
   });
 
@@ -138,7 +191,6 @@ export default function BookingInfoPage() {
       console.error('Error exporting data:', error);
     }
   };
-  
 
   const totalPages = Math.ceil(filteredData.length / rowsPerPage);
 
@@ -154,7 +206,7 @@ export default function BookingInfoPage() {
     (currentPage - 1) * rowsPerPage,
     currentPage * rowsPerPage
   );
-  
+
   const handleModalClose = () => {
     setIsModalOpen(false);
     setCurrentUserId(null);
@@ -209,6 +261,12 @@ export default function BookingInfoPage() {
                   onSelect={(option) => handleSelectStatus(statusOptions.find(status => status.label === option).value)}
                   selected={statusOptions.find((opt) => opt.value === selectedStatus)?.label || ''}
                 />
+                <Dropdown
+                  placehold={'เดือน'}
+                  options={monthOptions}
+                  onSelect={handleSelectMonth}
+                  selected={selectedMonth}
+                />
                 <button
                   className="py-2 px-4 bg-red-500 rounded text-white w-full md:w-auto"
                   onClick={clearAllFilters}
@@ -246,79 +304,89 @@ export default function BookingInfoPage() {
           </div>
         </div>
         <div className="overflow-x-auto">
-          <table className="w-full">
-            <thead>
-              <tr className="bg-[#003087] text-white">
-                <th className="py-2 px-4 text-lg md:text-2xl text-center rounded-tl-xl">สถานะ</th>
-                <th className="py-2 px-4 text-lg md:text-2xl text-center">วันที่</th>
-                <th className="py-2 px-4 text-lg md:text-2xl text-center">หัวข้อ</th>
-                <th className="py-2 px-4 text-lg md:text-2xl text-center">เวลา</th>
-                <th className="py-2 px-4 text-lg md:text-2xl text-center">เลขที่ผู้ใช้</th>
-                <th className="py-2 px-4 text-lg md:text-2xl text-center">เลขที่การจอง</th>
-                <th className="py-2 px-4 text-lg md:text-2xl text-center rounded-tr-xl">จองอีกครั้ง</th>
-              </tr>
-            </thead>
-            <tbody>
-              {paginatedData.map((row, index) => (
-                <tr
-                  key={index}
-                  className={`transition ease-in-out duration-150 border-2 ${
-                    index % 2 === 0 ? 'bg-zinc-200' : 'bg-gray-300'
-                  } ${
-                    row.status === 'decline'
-                      ? 'hover:cursor-default'
-                      : 'hover:bg-gray-500 hover:text-white hover:cursor-pointer'
-                  }`}
-                  onClick={() => gotoDetail(row.status, row.booking_id)}
-                >
-                  <td className="pl-4 md:pl-24 text-center text-xl md:text-3xl">{getStatusIcon(row.status)}</td>
-                  <td className="py-1.5 text-center text-sm md:text-xl">{row.appointment_date.substring(0, 10)}</td>
-                  <td className="py-1.5 px-4 text-center text-sm md:text-xl">{row.topic}</td>
-                  <td className="py-1.5 px-4 text-center text-sm md:text-xl">{formatTimeWithOffset(row.appointment_date, 7)}</td>
-                  <td className="py-1.5 px-4 text-center text-sm md:text-xl">
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        navigate(`/diagnosis?user_id=${row.user_id}`);
-                      }}
-                      className="py-1 px-3 bg-blue-500 text-white rounded hover:bg-blue-700 transition duration-200 ease-in-out z-100"
-                    >
-                      {row.user_id}
-                    </button>
-                  </td>
-                  <td className="py-1.5 px-4 text-center text-sm md:text-xl">{row.booking_id}</td>
-                  <td className="py-1 px-4 text-center text-xs md:text-md">
-                    {row.status === 'complete' && (
-                      <button
-                        onClick={(event) => handleRebook(event, row.user_id)}
-                        className="py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-700 transition duration-200 ease-in-out"
-                      >
-                        จองอีกครั้ง
-                      </button>
-                    )}
-                  </td>
+          {filteredData.length > 0 ? (
+            <table className="w-full">
+              <thead>
+                <tr className="bg-[#003087] text-white">
+                  <th className="py-2 px-4 text-lg md:text-2xl text-center rounded-tl-xl">สถานะ</th>
+                  <th className="py-2 px-4 text-lg md:text-2xl text-center">วันที่</th>
+                  <th className="py-2 px-4 text-lg md:text-2xl text-center">หัวข้อ</th>
+                  <th className="py-2 px-4 text-lg md:text-2xl text-center">เวลา</th>
+                  <th className="py-2 px-4 text-lg md:text-2xl text-center">เลขที่ผู้ใช้</th>
+                  <th className="py-2 px-4 text-lg md:text-2xl text-center">เลขที่การจอง</th>
+                  <th className="py-2 px-4 text-lg md:text-2xl text-center rounded-tr-xl">จองอีกครั้ง</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {paginatedData.map((row, index) => (
+                  <tr
+                    key={index}
+                    className={`transition ease-in-out duration-150 border-2 ${
+                      index % 2 === 0 ? 'bg-zinc-200' : 'bg-gray-300'
+                    } ${
+                      row.status === 'decline'
+                        ? 'hover:cursor-default'
+                        : 'hover:bg-gray-500 hover:text-white hover:cursor-pointer'
+                    }`}
+                    onClick={() => gotoDetail(row.status, row.booking_id)}
+                  >
+                    <td className="pl-4 md:pl-24 text-center text-xl md:text-3xl">{getStatusIcon(row.status)}</td>
+                    <td className="py-1.5 text-center text-sm md:text-xl">{row.appointment_date.substring(0, 10)}</td>
+                    <td className="py-1.5 px-4 text-center text-sm md:text-xl">{row.topic}</td>
+                    <td className="py-1.5 px-4 text-center text-sm md:text-xl">{formatTimeWithOffset(row.appointment_date, 7)}</td>
+                    <td className="py-1.5 px-4 text-center text-sm md:text-xl">
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          navigate(`/diagnosis?user_id=${row.user_id}`);
+                        }}
+                        className="py-1 px-3 bg-blue-500 text-white rounded hover:bg-blue-700 transition duration-200 ease-in-out z-100"
+                      >
+                        {row.user_id}
+                      </button>
+                    </td>
+                    <td className="py-1.5 px-4 text-center text-sm md:text-xl">{row.booking_id}</td>
+                    <td className="py-1 px-4 text-center text-xs md:text-md">
+                      {row.status === 'complete' && (
+                        <button
+                          onClick={(event) => handleRebook(event, row.user_id)}
+                          className="py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-700 transition duration-200 ease-in-out"
+                        >
+                          จองอีกครั้ง
+                        </button>
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          ) : (
+            <div className="mt-6 text-center">
+              <div className="py-10 px-4 bg-gray-100 rounded-md border border-gray-300">
+                <p className="text-2xl text-gray-600">ไม่พบข้อมูล</p>
+              </div>
+            </div>
+          )}
         </div>
-        <div className="mt-6 flex justify-center w-full">
-          <button
-            className="py-2 px-4 mx-2 bg-[#003087] text-white rounded"
-            onClick={handlePrevPage}
-            disabled={currentPage === 1}
-          >
-            ก่อนหน้า
-          </button>
-          <span className="py-2 px-4 mx-2">{`Page ${currentPage} of ${totalPages}`}</span>
-          <button
-            className="py-2 px-4 mx-2 bg-[#003087] text-white rounded"
-            onClick={handleNextPage}
-            disabled={currentPage === totalPages}
-          >
-            ถัดไป
-          </button>
-        </div>
+        {filteredData.length > 0 && (
+          <div className="mt-6 flex justify-center w-full">
+            <button
+              className="py-2 px-4 mx-2 bg-[#003087] text-white rounded"
+              onClick={handlePrevPage}
+              disabled={currentPage === 1}
+            >
+              ก่อนหน้า
+            </button>
+            <span className="py-2 px-4 mx-2">{`Page ${currentPage} of ${totalPages}`}</span>
+            <button
+              className="py-2 px-4 mx-2 bg-[#003087] text-white rounded"
+              onClick={handleNextPage}
+              disabled={currentPage === totalPages}
+            >
+              ถัดไป
+            </button>
+          </div>
+        )}
       </div>
     );
   };
