@@ -240,7 +240,7 @@ export default function BookingInfoPage() {
 
     return (
       <div className="flex flex-col flex-1 p-4 md:p-10 relative w-full">
-        <div className="grid grid-cols-1 2xl:grid-cols-2 gap-10 mb-6">
+        <div className="grid grid-cols-1 2xl:grid-cols-2 gap-20 mb-6">
           <div>
             <div className='flex flex-col md:flex-row gap-6 mb-6 text-center items-center'>
               <h1 className="text-3xl md:text-5xl">การจอง</h1>
