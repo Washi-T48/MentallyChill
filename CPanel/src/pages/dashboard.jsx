@@ -750,7 +750,7 @@ const customStyles = {
 function StatCard({ title, value, color, tone = 400 }) {
   return (
     <div
-      className={`flex flex-col justify-between border-4 border-black rounded-md p-4 h-full ${
+      className={`flex flex-col justify-between rounded-md p-4 h-full ${
         colors[color] || "bg-gray-400"
       }`}
     >
