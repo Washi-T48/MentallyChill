@@ -445,14 +445,14 @@ export default function DashboardPage() {
                     { id: 1, value: 15, label: 'series B' },
                     { id: 2, value: 20, label: 'series C' },
                   ],
-                  innerRadius: 30,
+                  innerRadius: 45,
                   outerRadius: 100,
                   paddingAngle: 5,
                   cornerRadius: 5,
                   startAngle: -45,
                   endAngle: 320,
                   cx: 150,
-                  cy: 150,
+                  cy: 300,
                 }
               ]}
             />
