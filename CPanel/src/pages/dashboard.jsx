@@ -435,28 +435,41 @@ export default function DashboardPage() {
               <StatCard title="ระดับร้ายแรง" value={highCount} color="red" />
             </div>
             <div className="text-2xl font-bold">ประเภทของผู้แบบทำแบบประเมินทั้งหมด</div>
-            <PieChart
-              colors={['red', 'blue', 'green']} // Use palette
-              series={[
-                {
-                  data: [
-                    { id: 0, value: 10, label: 'series A' },
-                    { id: 1, value: 15, label: 'series B' },
-                    { id: 2, value: 20, label: 'series C' },
-                  ],
-                  innerRadius: 45,
-                  outerRadius: 100,
-                  paddingAngle: 5,
-                  cornerRadius: 5,
-                  startAngle: -45,
-                  endAngle: 320,
-                  cx: 150,
-                  cy: 150,
-                }
-              ]}
-              width={300}
-              height={300}
-            />
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 mb-8">
+              <PieChart
+                colors={['red', 'blue', 'green']} // Use palette
+                series={[
+                  {
+                    data: [
+                      { id: 0, value: 10, label: 'series A' },
+                      { id: 1, value: 15, label: 'series B' },
+                      { id: 2, value: 20, label: 'series C' },
+                    ],
+                    innerRadius: 45,
+                    outerRadius: 100,
+                    paddingAngle: 5,
+                    cornerRadius: 5,
+                    startAngle: -45,
+                    endAngle: 320,
+                    cx: 150,
+                    cy: 150,
+                  }
+                ]}
+                width={300}
+                height={300}
+              />
+              <div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+                  <StatCard title="ระดับปกติ" value={lowCount} color="green" />
+                  <StatCard
+                    title="ระดับปานกลาง"
+                    value={mediumCount}
+                    color="yellow"
+                  />
+                  <StatCard title="ระดับร้ายแรง" value={highCount} color="red" />
+                </div>
+              </div>
+            </div>
             <div className="mt-10 border-4 border-[#003087] bg-white rounded-md">
               <div className="flex flex-row bg-[#003087] rounded-md p-4 items-center">
                 <div className="text-2xl text-white m-4"> แบบประเมิน : </div>
