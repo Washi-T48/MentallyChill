@@ -703,11 +703,11 @@ const customStyles = {
 function StatCard({ title, value, color, tone = 400 }) {
   return (
     <div
-      className={`flex flex-col justify-between border-4 border-black rounded-md px-4 pt-4 pb-8 h-32 ${
+      className={`flex flex-col justify-between border-4 border-black rounded-md p-4 h-32 ${
         colors[color] || "bg-gray-400"
       }`}
     >
-      <div className="text-lg text-white drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">
+      <div className="pb-8 text-lg text-white drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">
         {title}
       </div>
       <div className="text-4xl md:text-5xl lg:text-6xl text-white drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">
