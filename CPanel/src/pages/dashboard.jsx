@@ -404,6 +404,7 @@ export default function DashboardPage() {
         </div>
         <div className="w-full overflow-x-hidden">
           <div className="p-4 md:p-10">
+            <div>สวัสดี {username}</div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
               <StatCard
                 title="คำขอการจอง"
@@ -716,31 +717,6 @@ function StatCard({ title, value, color, tone = 400 }) {
     </div>
   );
 }
-
-// function CategoryStats({ title, low, medium, high, bgColor, tone }) {
-//   return (
-//     <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 my-8">
-//       <StatCard
-//         title={`${title} ต่ำ`}
-//         value={low}
-//         color={bgColor}
-//         tone={tone}
-//       />
-//       <StatCard
-//         title={`${title} ปานกลาง`}
-//         value={medium}
-//         color={bgColor}
-//         tone={tone}
-//       />
-//       <StatCard
-//         title={`${title} รุนแรง`}
-//         value={high}
-//         color={bgColor}
-//         tone={tone}
-//       />
-//     </div>
-//   );
-// }
 
 function DataTable({ title, data, columns, bgColor }) {
   return (
