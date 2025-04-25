@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import Sidebar from "../components/sidebar";
 import Topbar from "../components/topbar";
 import { data } from "autoprefixer";
-import { PieChart } from '@mui/x-charts/PieChart';
+import { PieChart, pieArcLabelClasses } from '@mui/x-charts/PieChart';
 
 export default function DashboardPage() {
   const [bookingdata, setBookingData] = useState([]);
