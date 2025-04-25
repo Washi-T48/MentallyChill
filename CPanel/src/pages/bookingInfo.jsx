@@ -240,66 +240,76 @@ export default function BookingInfoPage() {
 
     return (
       <div className="flex flex-col flex-1 p-4 md:p-10 relative w-full">
-        <div className="grid grid-cols-1 2xl:grid-cols-2 gap-20 mb-6">
-          <div>
-            <div className='flex flex-col md:flex-row gap-6 mb-6 text-center items-center'>
-              <h1 className="text-3xl md:text-5xl">การจอง</h1>
-              <ExportButton onClick={exporttocsv} />
-            </div>
-            <div className="flex flex-col md:flex-row gap-4 mb-6 items-start md:items-center">
-              <h2 className="text-2xl md:text-4xl mb-2 md:mb-0">Filter : </h2>
-              <div className="flex flex-col md:flex-row gap-4 w-full md:w-auto">
-                <Dropdown
-                  placehold={'หัวข้อ'}
-                  options={topicList}
-                  onSelect={handleSelectTopic}
-                  selected={selectedTopic}
-                />
-                <Dropdown
-                  placehold={'สถานะ'}
-                  options={statusOptions.map(option => option.label)}
-                  onSelect={(option) => handleSelectStatus(statusOptions.find(status => status.label === option).value)}
-                  selected={statusOptions.find((opt) => opt.value === selectedStatus)?.label || ''}
-                />
-                <Dropdown
-                  placehold={'เดือน'}
-                  options={monthOptions}
-                  onSelect={handleSelectMonth}
-                  selected={selectedMonth}
-                />
-                <button
-                  className="py-2 px-4 bg-red-500 rounded text-white w-full md:w-auto"
-                  onClick={clearAllFilters}
-                >
-                  ล้างการกรอง
-                </button>
+        <div className="flex flex-col gap-6 mb-10">
+          <div className="flex flex-col lg:flex-row justify-between items-start gap-8">
+            <div className="w-full lg:w-3/5">
+              <div className='flex flex-col md:flex-row gap-6 mb-6 items-center'>
+                <h1 className="text-3xl md:text-5xl">การจอง</h1>
+                <ExportButton onClick={exporttocsv} />
               </div>
-              <input
-                type="search"
-                placeholder="ค้นหาโดยเลขที่ผู้ใช้"
-                onChange={handleSearchTermChange}
-                value={searchTerm}
-                ref={searchInputRef}
-                className="py-2 px-4 rounded border w-full md:w-auto"
-              />
+              <div className="flex flex-col gap-4">
+                <div className="flex flex-wrap items-center gap-4">
+                  <h2 className="text-2xl md:text-3xl">Filter:</h2>
+                  <div className="flex flex-wrap gap-4">
+                    <Dropdown
+                      placehold={'หัวข้อ'}
+                      options={topicList}
+                      onSelect={handleSelectTopic}
+                      selected={selectedTopic}
+                    />
+                    <Dropdown
+                      placehold={'สถานะ'}
+                      options={statusOptions.map(option => option.label)}
+                      onSelect={(option) => handleSelectStatus(statusOptions.find(status => status.label === option).value)}
+                      selected={statusOptions.find((opt) => opt.value === selectedStatus)?.label || ''}
+                    />
+                    <Dropdown
+                      placehold={'เดือน'}
+                      options={monthOptions}
+                      onSelect={handleSelectMonth}
+                      selected={selectedMonth}
+                    />
+                  </div>
+                </div>
+                <div className="flex flex-wrap items-center gap-4">
+                  <input
+                    type="search"
+                    placeholder="ค้นหาโดยเลขที่ผู้ใช้"
+                    onChange={handleSearchTermChange}
+                    value={searchTerm}
+                    ref={searchInputRef}
+                    className="py-2 px-4 rounded border flex-grow"
+                  />
+                  <button
+                    className="py-2 px-4 bg-red-500 rounded text-white"
+                    onClick={clearAllFilters}
+                  >
+                    ล้างการกรอง
+                  </button>
+                </div>
+              </div>
             </div>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-2 gap-2 md:justify-end mb-5">
-            <div className="flex flex-row items-center gap-3 text-sm md:text-xl justify-start">
-              <MdOutlineCheckBoxOutlineBlank className="text-xl md:text-3xl bg-amber-300" />
-              =<div>รอการยืนยัน</div>
-            </div>
-            <div className="flex flex-row items-center gap-3 text-sm md:text-xl justify-start">
-              <IoChatboxEllipsesSharp className="text-xl md:text-3xl bg-violet-400" />=
-              <div>รอการสรุปผล</div>
-            </div>
-            <div className="flex flex-row items-center gap-3 text-sm md:text-xl justify-start">
-              <MdOutlineCheckBox className="text-xl md:text-3xl bg-green-400" />=
-              <div>เสร็จสิ้น</div>
-            </div>
-            <div className="flex flex-row items-center gap-3 text-sm md:text-xl justify-start">
-              <MdOutlineIndeterminateCheckBox className="text-xl md:text-3xl bg-red-400" />
-              =<div>ปฏิเสธ</div>
+            
+            <div className="w-full lg:w-2/5 p-4 bg-gray-100 rounded-lg">
+              <h3 className="text-xl mb-3 font-medium">สถานะการจอง</h3>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="flex items-center gap-2">
+                  <MdOutlineCheckBoxOutlineBlank className="text-xl md:text-2xl bg-amber-300" />
+                  <span>รอการยืนยัน</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <IoChatboxEllipsesSharp className="text-xl md:text-2xl bg-violet-400" />
+                  <span>รอการสรุปผล</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <MdOutlineCheckBox className="text-xl md:text-2xl bg-green-400" />
+                  <span>เสร็จสิ้น</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <MdOutlineIndeterminateCheckBox className="text-xl md:text-2xl bg-red-400" />
+                  <span>ปฏิเสธ</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
