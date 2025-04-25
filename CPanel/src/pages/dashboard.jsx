@@ -531,13 +531,13 @@ export default function DashboardPage() {
                     data: [
                       { 
                         id: 0, 
-                        value: collegecount, 
-                        label: 'ระดับรุนแรง' 
+                        value: Math.round((collegecount / (collegecount + highschoolcount)) * 100) || 0, 
+                        label: 'อุดมศึกษา' 
                       },
                       { 
                         id: 1, 
-                        value: highschoolcount, 
-                        label: 'ระดับปานกลาง' 
+                        value: Math.round((highschoolcount / (collegecount + highschoolcount)) * 100) || 0, 
+                        label: 'มัธยมศึกษา' 
                       },
                     ],
                   },
