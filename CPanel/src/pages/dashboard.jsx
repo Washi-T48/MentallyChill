@@ -62,6 +62,9 @@ export default function DashboardPage() {
   const [count8qmedium, setCount8qmedium] = useState(0);
   const [count8qhigh, setCount8qhigh] = useState(0);
   const [selectedFormType, setSelectedFormType] = useState("");
+  const [selectedMonth, setSelectedMonth] = useState("all");
+  const [filteredDiagData, setFilteredDiagData] = useState([]);
+  const [filteredBookingData, setFilteredBookingData] = useState([]);
 
   useEffect(() => {
     const fetchDiagData = async () => {
@@ -109,6 +112,24 @@ export default function DashboardPage() {
   }, []);
 
   useEffect(() => {
+    if (selectedMonth === "all") {
+      setFilteredDiagData(diagdata);
+      setFilteredBookingData(bookingdata);
+    } else {
+      const filterByMonth = (data) => {
+        return data.filter(item => {
+          const date = item.created || item.appointment_date || "";
+          if (!date) return false;
+          return date.substring(0, 7) === selectedMonth;
+        });
+      };
+      
+      setFilteredDiagData(filterByMonth(diagdata));
+      setFilteredBookingData(filterByMonth(bookingdata));
+    }
+  }, [selectedMonth, diagdata, bookingdata]);
+
+  useEffect(() => {
     // Process data to classify and count levels
     const classifyAndCount = () => {
       let low = 0;
@@ -146,7 +167,7 @@ export default function DashboardPage() {
       let count8qmedium = 0;
       let count8qhigh = 0;
   
-      diagdata.forEach((entry) => {
+      filteredDiagData.forEach((entry) => {
         if (entry.result) {
           const { d, a, s } = entry.result;
           
@@ -388,13 +409,49 @@ export default function DashboardPage() {
     };
   
     classifyAndCount();
-  }, [diagdata]); 
+  }, [filteredDiagData]); 
 
   // Get recent diagnosis data with maximum 5 rows
-  const recentDiagnosis = diagdata.slice(0, 5);
+  const recentDiagnosis = filteredDiagData.slice(0, 5);
 
   // Get recent booking information with maximum 5 rows
-  const recentBookingInfo = bookingdata.slice(0, 5);
+  const recentBookingInfo = filteredBookingData.slice(0, 5);
+
+  // Generate month options for the dropdown
+  const getMonthOptions = () => {
+    const options = [{ value: "all", label: "ทั้งหมด" }];
+    const currentYear = new Date().getFullYear();
+    const currentMonth = new Date().getMonth() + 1;
+    
+    // Add last 12 months
+    for (let i = 0; i < 12; i++) {
+      let month = currentMonth - i;
+      let year = currentYear;
+      
+      if (month <= 0) {
+        month += 12;
+        year -= 1;
+      }
+      
+      const monthStr = month.toString().padStart(2, '0');
+      const monthValue = `${year}-${monthStr}`;
+      
+      // Map month number to Thai month name
+      const thaiMonths = [
+        "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน",
+        "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"
+      ];
+      
+      options.push({
+        value: monthValue,
+        label: `${thaiMonths[month-1]} ${year}`
+      });
+    }
+    
+    return options;
+  };
+
+  const monthOptions = getMonthOptions();
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -405,28 +462,38 @@ export default function DashboardPage() {
         </div>
         <div className="w-full">
           <div className="p-4 md:p-10">
+            <div className="flex flex-wrap justify-between items-center mb-4">
+              <h1 className="text-2xl font-bold">แดชบอร์ด</h1>
+              <div className="flex items-center">
+                <label className="mr-2 font-medium">เดือน:</label>
+                <select
+                  className="border border-gray-300 rounded-md p-2 bg-white"
+                  value={selectedMonth}
+                  onChange={(e) => setSelectedMonth(e.target.value)}
+                >
+                  {monthOptions.map((option) => (
+                    <option key={option.value} value={option.value}>
+                      {option.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+            
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 mb-8">
               <StatCard
                 title="คำขอการจอง"
-                value={countBooking}
+                value={selectedMonth === "all" ? countBooking : filteredBookingData.length}
                 color="blue"
                 tone="500"
               />
               <StatCard
                 title="จำนวนผลการประเมิน"
-                value={countDiag}
+                value={selectedMonth === "all" ? countDiag : filteredDiagData.length}
                 color="violet"
               />
             </div>
-            {/* <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
-              <StatCard title="ระดับปกติ" value={lowCount} color="green" />
-              <StatCard
-                title="ระดับปานกลาง"
-                value={mediumCount}
-                color="yellow"
-              />
-              <StatCard title="ระดับร้ายแรง" value={highCount} color="red" />
-            </div> */}
+            
             <div className="text-2xl font-bold">ประเภทของผู้แบบทำแบบประเมินทั้งหมด</div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 mb-8">
               <PieChart
@@ -706,20 +773,6 @@ export default function DashboardPage() {
                 )}
               </div>
             </div>
-            {/* <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8">
-              <DataTable
-                title="การจองครั้งล่าสุด"
-                data={recentBookingInfo}
-                columns={["เลขที่การจอง", "หัวข้อ", "วันที่"]}
-                bgColor="green"
-              />
-              <DataTable
-                title="ผลการประเมินครั้งล่าสุด"
-                data={recentDiagnosis}
-                columns={["เลขที่ผู้ใช้", "ประเภทแบบฟอร์ม", "วันที่"]}
-                bgColor="violet"
-              />
-            </div> */}
           </div>
         </div>
       </div>
