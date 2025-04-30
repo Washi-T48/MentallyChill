@@ -2,70 +2,142 @@ import axios from "../components/axioscreds";
 import { useEffect, useState } from "react";
 import Sidebar from "../components/sidebar";
 import Topbar from "../components/topbar";
-import { PieChart, pieArcLabelClasses } from '@mui/x-charts/PieChart';
+import { PieChart, pieArcLabelClasses } from "@mui/x-charts/PieChart";
 
 export default function DashboardPage() {
+  // Basic dashboard data
   const [bookingdata, setBookingData] = useState([]);
   const [diagdata, setDiagData] = useState([]);
   const [countDiag, setCountDiag] = useState(0);
   const [countBooking, setCountBooking] = useState(0);
-  const [resD, setResD] = useState(0);
-  const [resA, setResA] = useState(0);
-  const [resS, setResS] = useState(0);
-  const [resStress, setResStress] = useState(0);
-  const [EmotionalScore, setEmotionalScore] = useState(0);
-  const [Depersonalization, setDepersonalization] = useState(0);
-  const [personalAccomplishment, setPersonalAccomplishment] = useState(0);
-  const [rqemotion , setrqemotion] = useState(0);
-  const [rqencouragement , setrqencouragement] = useState(0);
-  const [rqproblem , setrqproblem] = useState(0);
-  const [countrqlowemotion, setcountrqlowemotion] = useState(0);
-  const [countrqmediumemotion, setcountrqmediumemotion] = useState(0);
-  const [countrqhighemotion, setcountrqhighemotion] = useState(0);
-  const [countrqlowencouragement, setcountrqlowencouragement] = useState(0);
-  const [countrqmediumencouragement, setcountrqmediumencouragement] = useState(0);
-  const [countrqhighencouragement, setcountrqhighencouragement] = useState(0);
-  const [countrqlowproblem, setcountrqlowproblem] = useState(0);
-  const [countrqmediumproblem, setcountrqmediumproblem] = useState(0);
-  const [countrqhighproblem, setcountrqhighproblem] = useState(0);
-  const [countlowEmotionalScore, setcountlowEmotionalScore] = useState(0);
-  const [countmediumEmotionalScore, setcountmediumEmotionalScore] = useState(0);
-  const [counthighEmotionalScore, setcounthighEmotionalScore] = useState(0);
-  const [countlowDepersonalization, setcountlowDepersonalization] = useState(0);
-  const [countmediumDepersonalization, setcountmediumDepersonalization] = useState(0);
-  const [counthighDepersonalization, setcounthighDepersonalization] = useState(0);
-  const [countlowpersonalAccomplishment, setcountlowPersonalAccomplishment] = useState(0);
-  const [countmediumpersonalAccomplishment, setcountmediumPersonalAccomplishment] = useState(0);
-  const [counthighpersonalAccomplishment, setcounthighPersonalAccomplishment] = useState(0);
-  const [countStressLow, setCountStressLow] = useState(0);
-  const [countStressMedium, setCountStressMedium] = useState(0);
-  const [countStressHigh, setCountStressHigh] = useState(0);
-  const [countdlow, setCountdlow] = useState(0);
-  const [countdmedium, setCountdmedium] = useState(0);
-  const [countdhigh, setCountdhigh] = useState(0);
-  const [countalow, setCountalow] = useState(0);
-  const [countamedium, setCountamedium] = useState(0);
-  const [countahigh, setCountahigh] = useState(0);
-  const [countslow, setCountslow] = useState(0);
-  const [countsmedium, setCountsmedium] = useState(0);
-  const [countshigh, setCountshigh] = useState(0);
-  const [lowCount, setLowCount] = useState(0);
-  const [mediumCount, setMediumCount] = useState(0);
-  const [highCount, setHighCount] = useState(0);
-  const [count2qsad, setCount2qSad] = useState(0);
-  const [count2qbored, setCount2qBored] = useState(0);
-  const [count9qlow, setCount9qlow] = useState(0);
-  const [count9qmedium, setCount9qmedium] = useState(0);
-  const [count9qhigh, setCount9qhigh] = useState(0);
-  const [count8qlow, setCount8qlow] = useState(0);
-  const [count8qmedium, setCount8qmedium] = useState(0);
-  const [count8qhigh, setCount8qhigh] = useState(0);
+
+  // Filter states
   const [selectedFormType, setSelectedFormType] = useState("");
   const [selectedMonth, setSelectedMonth] = useState("all");
   const [filteredDiagData, setFilteredDiagData] = useState([]);
   const [filteredBookingData, setFilteredBookingData] = useState([]);
-  const [collegecount, setCollegecount] = useState(0);
-  const [highschoolcount, setHighschoolcount] = useState(0);
+
+  // User demographic data
+  const [demographics, setDemographics] = useState({
+    collegecount: 0,
+    highschoolcount: 0,
+  });
+
+  // Summary counts
+  const [severityCounts, setSeverityCounts] = useState({
+    low: 0,
+    medium: 0,
+    high: 0,
+  });
+
+  // DASS21 scores
+  const [dassScores, setDassScores] = useState({
+    resD: 0,
+    resA: 0,
+    resS: 0,
+  });
+
+  // DASS21 depression levels
+  const [depressionLevels, setDepressionLevels] = useState({
+    low: 0,
+    medium: 0,
+    high: 0,
+  });
+
+  // DASS21 anxiety levels
+  const [anxietyLevels, setAnxietyLevels] = useState({
+    low: 0,
+    medium: 0,
+    high: 0,
+  });
+
+  // DASS21 stress levels
+  const [stressLevels, setStressLevels] = useState({
+    low: 0,
+    medium: 0,
+    high: 0,
+  });
+
+  // Stress test scores and levels
+  const [stressTest, setStressTest] = useState({
+    score: 0,
+    low: 0,
+    medium: 0,
+    high: 0,
+  });
+
+  // Burnout test scores
+  const [burnoutScores, setBurnoutScores] = useState({
+    emotionalScore: 0,
+    depersonalization: 0,
+    personalAccomplishment: 0,
+  });
+
+  // Burnout emotional exhaustion levels
+  const [emotionalExhaustionLevels, setEmotionalExhaustionLevels] = useState({
+    low: 0,
+    medium: 0,
+    high: 0,
+  });
+
+  // Burnout depersonalization levels
+  const [depersonalizationLevels, setDepersonalizationLevels] = useState({
+    low: 0,
+    medium: 0,
+    high: 0,
+  });
+
+  // Burnout personal accomplishment levels
+  const [personalAccomplishmentLevels, setPersonalAccomplishmentLevels] =
+    useState({
+      low: 0,
+      medium: 0,
+      high: 0,
+    });
+
+  // Resilience quotient scores
+  const [rqScores, setRqScores] = useState({
+    emotion: 0,
+    encouragement: 0,
+    problem: 0,
+  });
+
+  // RQ emotional endurance levels
+  const [rqEmotionLevels, setRqEmotionLevels] = useState({
+    low: 0,
+    medium: 0,
+    high: 0,
+  });
+
+  // RQ encouragement levels
+  const [rqEncouragementLevels, setRqEncouragementLevels] = useState({
+    low: 0,
+    medium: 0,
+    high: 0,
+  });
+
+  // RQ problem management levels
+  const [rqProblemLevels, setRqProblemLevels] = useState({
+    low: 0,
+    medium: 0,
+    high: 0,
+  });
+
+  // 2Q/8Q/9Q test results
+  const [mentalHealthScreening, setMentalHealthScreening] = useState({
+    sad2q: 0,
+    bored2q: 0,
+    depression9q: {
+      low: 0,
+      medium: 0,
+      high: 0,
+    },
+    suicideRisk8q: {
+      low: 0,
+      medium: 0,
+      high: 0,
+    },
+  });
 
   useEffect(() => {
     const fetchDiagData = async () => {
@@ -110,21 +182,20 @@ export default function DashboardPage() {
       try {
         const response = await axios.get(`/user/all`);
         const users = response.data;
-        
+
         // Count college and high school students
         let college = 0;
         let highschool = 0;
-        
-        users.forEach(user => {
+
+        users.forEach((user) => {
           if (user.grade_level && user.grade_level.includes("อุดมศึกษา")) {
             college++;
           } else {
             highschool++;
           }
         });
-        
-        setCollegecount(college);
-        setHighschoolcount(highschool);
+
+        setDemographics({ collegecount: college, highschoolcount: highschool });
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
@@ -143,13 +214,13 @@ export default function DashboardPage() {
       setFilteredBookingData(bookingdata);
     } else {
       const filterByMonth = (data) => {
-        return data.filter(item => {
+        return data.filter((item) => {
           const date = item.created || item.appointment_date || "";
           if (!date) return false;
           return date.substring(0, 7) === selectedMonth;
         });
       };
-      
+
       setFilteredDiagData(filterByMonth(diagdata));
       setFilteredBookingData(filterByMonth(bookingdata));
     }
@@ -158,45 +229,35 @@ export default function DashboardPage() {
   useEffect(() => {
     // Process data to classify and count levels
     const classifyAndCount = () => {
-      let low = 0;
-      let medium = 0;
-      let high = 0;
-  
-      let resD = 0;
-      let resA = 0;
-      let resS = 0;
-      let resStress = 0;
-      let resEmotionScore = 0;
-      let resDepersonal = 0;
-      let resPersonalAccomp = 0;
-      let resrqemotion = 0;
-      let resrqencouragement = 0;
-      let resrqproblem = 0;
-  
-      let dlow = 0, dmedium = 0, dhigh = 0;
-      let alow = 0, amedium = 0, ahigh = 0;
-      let slow = 0, smedium = 0, shigh = 0;
-      let stresslow = 0, stressmedium = 0, stresshigh = 0;
-      let lowEmotionScore = 0, mediumEmotionScore = 0, highEmotionScore = 0;
-      let lowDepersonal = 0, mediumDepersonal = 0, highDepersonal = 0;
-      let lowPersonalAccomp = 0, mediumPersonalAccomp = 0, highPersonalAccomp = 0;
-      let lowrqemotion = 0, mediumrqemotion = 0, highrqemotion = 0;
-      let lowrqencouragement = 0, mediumrqencouragement = 0, highrqencouragement = 0;
-      let lowrqproblem = 0, mediumrqproblem = 0, highrqproblem = 0;
+      let severityTotals = { low: 0, medium: 0, high: 0 };
+      let dassTotal = { resD: 0, resA: 0, resS: 0 };
+      let depressionTotal = { low: 0, medium: 0, high: 0 };
+      let anxietyTotal = { low: 0, medium: 0, high: 0 };
+      let stressTotal = { low: 0, medium: 0, high: 0 };
+      let stressTestTotal = { score: 0, low: 0, medium: 0, high: 0 };
+      let burnoutTotal = {
+        emotionalScore: 0,
+        depersonalization: 0,
+        personalAccomplishment: 0,
+      };
+      let emotionalExhaustionTotal = { low: 0, medium: 0, high: 0 };
+      let depersonalizationTotal = { low: 0, medium: 0, high: 0 };
+      let personalAccomplishmentTotal = { low: 0, medium: 0, high: 0 };
+      let rqTotal = { emotion: 0, encouragement: 0, problem: 0 };
+      let rqEmotionTotal = { low: 0, medium: 0, high: 0 };
+      let rqEncouragementTotal = { low: 0, medium: 0, high: 0 };
+      let rqProblemTotal = { low: 0, medium: 0, high: 0 };
+      let screeningTotal = {
+        sad2q: 0,
+        bored2q: 0,
+        depression9q: { low: 0, medium: 0, high: 0 },
+        suicideRisk8q: { low: 0, medium: 0, high: 0 },
+      };
 
-      let count2qSad = 0;
-      let count2qBored = 0;
-      let count9qlow= 0;
-      let count9qmedium = 0;
-      let count9qhigh = 0;
-      let count8qlow = 0;
-      let count8qmedium = 0;
-      let count8qhigh = 0;
-  
       filteredDiagData.forEach((entry) => {
         if (entry.result) {
           const { d, a, s } = entry.result;
-          
+
           const dNum = Number(d);
           const aNum = Number(a);
           const sNum = Number(s);
@@ -205,13 +266,13 @@ export default function DashboardPage() {
             for (const [key, value] of Object.entries(entry.result)) {
               if (key === "q1") {
                 if (value === true) {
-                  count2qSad++;
+                  screeningTotal.sad2q++;
                 }
               }
               if (key === "q2") {
                 if (value === true) {
-                  count2qBored++;
-                  }
+                  screeningTotal.bored2q++;
+                }
               }
             }
           }
@@ -220,12 +281,11 @@ export default function DashboardPage() {
             for (const [key, value] of Object.entries(entry.result)) {
               if (key === "scores") {
                 if (value < 13) {
-                  count9qlow++;
+                  screeningTotal.depression9q.low++;
                 } else if (value >= 13 && value <= 18) {
-                  count9qmedium++;
-                }
-                else {
-                  count9qhigh++;
+                  screeningTotal.depression9q.medium++;
+                } else {
+                  screeningTotal.depression9q.high++;
                 }
               }
             }
@@ -235,245 +295,246 @@ export default function DashboardPage() {
             for (const [key, value] of Object.entries(entry.result)) {
               if (key === "scores") {
                 if (value < 9) {
-                  count8qlow++;
+                  screeningTotal.suicideRisk8q.low++;
                 } else if (value >= 9 && value <= 16) {
-                  count8qmedium++;
-                }
-                else {
-                  count8qhigh++;
+                  screeningTotal.suicideRisk8q.medium++;
+                } else {
+                  screeningTotal.suicideRisk8q.high++;
                 }
               }
             }
           }
 
           if (entry.forms_type === "rq" && entry.result) {
-            const { emotionalEndurance, encouragement, problemManagement } = entry.result;
-            
+            const { emotionalEndurance, encouragement, problemManagement } =
+              entry.result;
+
             const emotionalEnduranceNum = Number(emotionalEndurance);
             const encouragementNum = Number(encouragement);
             const problemManagementNum = Number(problemManagement);
 
-            resrqemotion += emotionalEnduranceNum;
-            resrqencouragement += encouragementNum;
-            resrqproblem += problemManagementNum;
+            rqTotal.emotion += emotionalEnduranceNum;
+            rqTotal.encouragement += encouragementNum;
+            rqTotal.problem += problemManagementNum;
 
-            let EmotionScorerank = emotionalEnduranceNum > 34 ? 1 : emotionalEnduranceNum >= 27 ? 2 : 3;
-            let Encouragementrank = encouragementNum > 19 ? 1 : encouragementNum >= 14 ? 2 : 3;
-            let ProblemManagementrank = problemManagementNum > 18 ? 1 : problemManagementNum >= 13 ? 2 : 3;
+            let EmotionScorerank =
+              emotionalEnduranceNum > 34
+                ? 1
+                : emotionalEnduranceNum >= 27
+                ? 2
+                : 3;
+            let Encouragementrank =
+              encouragementNum > 19 ? 1 : encouragementNum >= 14 ? 2 : 3;
+            let ProblemManagementrank =
+              problemManagementNum > 18
+                ? 1
+                : problemManagementNum >= 13
+                ? 2
+                : 3;
 
-            if (EmotionScorerank === 1) highrqemotion++;
-            else if (EmotionScorerank === 2) mediumrqemotion++;
-            else lowrqemotion++;
+            if (EmotionScorerank === 1) rqEmotionTotal.high++;
+            else if (EmotionScorerank === 2) rqEmotionTotal.medium++;
+            else rqEmotionTotal.low++;
 
-            if (Encouragementrank === 1) highrqencouragement++;
-            else if (Encouragementrank === 2) mediumrqencouragement++;
-            else lowrqencouragement++;
+            if (Encouragementrank === 1) rqEncouragementTotal.high++;
+            else if (Encouragementrank === 2) rqEncouragementTotal.medium++;
+            else rqEncouragementTotal.low++;
 
-            if (ProblemManagementrank === 1) highrqproblem++;
-            else if (ProblemManagementrank === 2) mediumrqproblem++;
-            else lowrqproblem++;
+            if (ProblemManagementrank === 1) rqProblemTotal.high++;
+            else if (ProblemManagementrank === 2) rqProblemTotal.medium++;
+            else rqProblemTotal.low++;
 
-            const allValue = emotionalEnduranceNum + encouragementNum + problemManagementNum;
-            if (allValue > 69) low++;
-            else if (allValue >= 55) medium++;
-            else high++;
+            const allValue =
+              emotionalEnduranceNum + encouragementNum + problemManagementNum;
+            if (allValue > 69) severityTotals.low++;
+            else if (allValue >= 55) severityTotals.medium++;
+            else severityTotals.high++;
           }
 
           if (entry.forms_type === "burnout" && entry.result.scores) {
-            const { emotionalScore, depersonalizationScore, personalAchievementScore } = entry.result.scores;
-  
+            const {
+              emotionalScore,
+              depersonalizationScore,
+              personalAchievementScore,
+            } = entry.result.scores;
+
             const emotionalScoreNum = Number(emotionalScore);
             const depersonalizationNum = Number(depersonalizationScore);
             const personalAccomplishmentNum = Number(personalAchievementScore);
-  
-            resEmotionScore += emotionalScoreNum;
-            resDepersonal += depersonalizationNum;
-            resPersonalAccomp += personalAccomplishmentNum;
-  
-            let EmotionScorerank = emotionalScoreNum >= 27 ? 3 : emotionalScoreNum >= 17 ? 2 : 1;
-            let Depersonalrank = depersonalizationNum >= 13 ? 3 : depersonalizationNum >= 7 ? 2 : 1;
-            let PersonalAccomprank = personalAccomplishmentNum >= 39 ? 1 : personalAccomplishmentNum >= 32 ? 2 : 3;
-  
-            if (EmotionScorerank === 3) highEmotionScore++;
-            else if (EmotionScorerank === 2) mediumEmotionScore++;
-            else lowEmotionScore++;
-  
-            if (Depersonalrank === 3) highDepersonal++;
-            else if (Depersonalrank === 2) mediumDepersonal++;
-            else lowDepersonal++;
-  
-            if (PersonalAccomprank === 1) highPersonalAccomp++;
-            else if (PersonalAccomprank === 2) mediumPersonalAccomp++;
-            else lowPersonalAccomp++;
-  
-            const maxValue = Math.max(EmotionScorerank, Depersonalrank, PersonalAccomprank);
-            if (maxValue === 1) low++;
-            else if (maxValue === 2) medium++;
-            else high++;
+
+            burnoutTotal.emotionalScore += emotionalScoreNum;
+            burnoutTotal.depersonalization += depersonalizationNum;
+            burnoutTotal.personalAccomplishment += personalAccomplishmentNum;
+
+            let EmotionScorerank =
+              emotionalScoreNum >= 27 ? 3 : emotionalScoreNum >= 17 ? 2 : 1;
+            let Depersonalrank =
+              depersonalizationNum >= 13
+                ? 3
+                : depersonalizationNum >= 7
+                ? 2
+                : 1;
+            let PersonalAccomprank =
+              personalAccomplishmentNum >= 39
+                ? 1
+                : personalAccomplishmentNum >= 32
+                ? 2
+                : 3;
+
+            if (EmotionScorerank === 3) emotionalExhaustionTotal.high++;
+            else if (EmotionScorerank === 2) emotionalExhaustionTotal.medium++;
+            else emotionalExhaustionTotal.low++;
+
+            if (Depersonalrank === 3) depersonalizationTotal.high++;
+            else if (Depersonalrank === 2) depersonalizationTotal.medium++;
+            else depersonalizationTotal.low++;
+
+            if (PersonalAccomprank === 1) personalAccomplishmentTotal.high++;
+            else if (PersonalAccomprank === 2)
+              personalAccomplishmentTotal.medium++;
+            else personalAccomplishmentTotal.low++;
+
+            const maxValue = Math.max(
+              EmotionScorerank,
+              Depersonalrank,
+              PersonalAccomprank
+            );
+            if (maxValue === 1) severityTotals.low++;
+            else if (maxValue === 2) severityTotals.medium++;
+            else severityTotals.high++;
           }
-  
+
           if (entry.forms_type === "dass21") {
-            resD += dNum;
-            resA += aNum;
-            resS += sNum;
-  
+            dassTotal.resD += dNum;
+            dassTotal.resA += aNum;
+            dassTotal.resS += sNum;
+
             let drank = 0;
             let arank = 0;
             let srank = 0;
-  
+
             if (dNum >= 0 && dNum <= 6) {
               drank = 1;
-              dlow++;
+              depressionTotal.low++;
             } else if (dNum >= 7 && dNum <= 13) {
               drank = 2;
-              dmedium++;
+              depressionTotal.medium++;
             } else if (dNum >= 14) {
               drank = 3;
-              dhigh++;
+              depressionTotal.high++;
             }
-  
+
             if (aNum >= 0 && aNum <= 5) {
               arank = 1;
-              alow++;
+              anxietyTotal.low++;
             } else if (aNum >= 6 && aNum <= 9) {
               arank = 2;
-              amedium++;
+              anxietyTotal.medium++;
             } else if (aNum >= 10) {
               arank = 3;
-              ahigh++;
+              anxietyTotal.high++;
             }
-  
+
             if (sNum >= 0 && sNum <= 9) {
               srank = 1;
-              slow++;
+              stressTotal.low++;
             } else if (sNum >= 10 && sNum <= 16) {
               srank = 2;
-              smedium++;
+              stressTotal.medium++;
             } else if (sNum >= 17) {
               srank = 3;
-              shigh++;
+              stressTotal.high++;
             }
-  
+
             const maxValue = Math.max(drank, arank, srank);
             if (maxValue === 1) {
-              low++;
+              severityTotals.low++;
             } else if (maxValue === 2) {
-              medium++;
+              severityTotals.medium++;
             } else if (maxValue === 3) {
-              high++;
+              severityTotals.high++;
             }
           }
-  
+
           if (entry.forms_type === "stress" && entry.result.scores) {
             const scoreNum = Number(entry.result.scores);
-            resStress += scoreNum;
-  
+            stressTestTotal.score += scoreNum;
+
             let stressrank = scoreNum <= 25 ? 1 : scoreNum <= 29 ? 2 : 3;
-  
-            if (stressrank === 1) stresslow++;
-            else if (stressrank === 2) stressmedium++;
-            else stresshigh++;
-  
-            if (stressrank === 1) low++;
-            else if (stressrank === 2) medium++;
-            else high++;
+
+            if (stressrank === 1) stressTestTotal.low++;
+            else if (stressrank === 2) stressTestTotal.medium++;
+            else stressTestTotal.high++;
+
+            if (stressrank === 1) severityTotals.low++;
+            else if (stressrank === 2) severityTotals.medium++;
+            else severityTotals.high++;
           }
         }
       });
-  
-      setCount9qlow(count9qlow);
-      setCount9qmedium(count9qmedium);
-      setCount9qhigh(count9qhigh);
-      setCount8qlow(count8qlow);
-      setCount8qmedium(count8qmedium);
-      setCount8qhigh(count8qhigh);
-      setCount2qSad(count2qSad);
-      setCount2qBored(count2qBored);
-      setResD(resD);
-      setResA(resA);
-      setResS(resS);
-      setCountdlow(dlow);
-      setCountdmedium(dmedium);
-      setCountdhigh(dhigh);
-      setCountalow(alow);
-      setCountamedium(amedium);
-      setCountahigh(ahigh);
-      setCountslow(slow);
-      setCountsmedium(smedium);
-      setCountshigh(shigh);
-      setLowCount(low);
-      setMediumCount(medium);
-      setHighCount(high);
-      setResStress(resStress);
-      setCountStressLow(stresslow);
-      setCountStressMedium(stressmedium);
-      setCountStressHigh(stresshigh);
-      setEmotionalScore(resEmotionScore);
-      setDepersonalization(resDepersonal);
-      setPersonalAccomplishment(resPersonalAccomp);
-      setcountlowEmotionalScore(lowEmotionScore);
-      setcountmediumEmotionalScore(mediumEmotionScore);
-      setcounthighEmotionalScore(highEmotionScore);
-      setcountlowDepersonalization(lowDepersonal);
-      setcountmediumDepersonalization(mediumDepersonal);
-      setcounthighDepersonalization(highDepersonal);
-      setcountlowPersonalAccomplishment(lowPersonalAccomp);
-      setcountmediumPersonalAccomplishment(mediumPersonalAccomp);
-      setcounthighPersonalAccomplishment(highPersonalAccomp);
-      setrqemotion(resrqemotion);
-      setrqencouragement(resrqencouragement);
-      setrqproblem(resrqproblem);
-      setcountrqlowemotion(lowrqemotion);
-      setcountrqmediumemotion(mediumrqemotion);
-      setcountrqhighemotion(highrqemotion);
-      setcountrqlowencouragement(lowrqencouragement);
-      setcountrqmediumencouragement(mediumrqencouragement);
-      setcountrqhighencouragement(highrqencouragement);
-      setcountrqlowproblem(lowrqproblem);
-      setcountrqmediumproblem(mediumrqproblem);
-      setcountrqhighproblem(highrqproblem);
+
+      // Update all state variables with the new counted values
+      setSeverityCounts(severityTotals);
+      setDassScores(dassTotal);
+      setDepressionLevels(depressionTotal);
+      setAnxietyLevels(anxietyTotal);
+      setStressLevels(stressTotal);
+      setStressTest(stressTestTotal);
+      setBurnoutScores(burnoutTotal);
+      setEmotionalExhaustionLevels(emotionalExhaustionTotal);
+      setDepersonalizationLevels(depersonalizationTotal);
+      setPersonalAccomplishmentLevels(personalAccomplishmentTotal);
+      setRqScores(rqTotal);
+      setRqEmotionLevels(rqEmotionTotal);
+      setRqEncouragementLevels(rqEncouragementTotal);
+      setRqProblemLevels(rqProblemTotal);
+      setMentalHealthScreening(screeningTotal);
     };
-  
+
     classifyAndCount();
-  }, [filteredDiagData]); 
-
-  // Get recent diagnosis data with maximum 5 rows
-  const recentDiagnosis = filteredDiagData.slice(0, 5);
-
-  // Get recent booking information with maximum 5 rows
-  const recentBookingInfo = filteredBookingData.slice(0, 5);
+  }, [filteredDiagData]);
 
   // Generate month options for the dropdown
   const getMonthOptions = () => {
     const options = [{ value: "all", label: "ทั้งหมด" }];
     const currentYear = new Date().getFullYear();
     const currentMonth = new Date().getMonth() + 1;
-    
+
     // Add last 12 months
     for (let i = 0; i < 12; i++) {
       let month = currentMonth - i;
       let year = currentYear;
-      
+
       if (month <= 0) {
         month += 12;
         year -= 1;
       }
-      
-      const monthStr = month.toString().padStart(2, '0');
+
+      const monthStr = month.toString().padStart(2, "0");
       const monthValue = `${year}-${monthStr}`;
-      
+
       // Map month number to Thai month name
       const thaiMonths = [
-        "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน",
-        "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"
+        "มกราคม",
+        "กุมภาพันธ์",
+        "มีนาคม",
+        "เมษายน",
+        "พฤษภาคม",
+        "มิถุนายน",
+        "กรกฎาคม",
+        "สิงหาคม",
+        "กันยายน",
+        "ตุลาคม",
+        "พฤศจิกายน",
+        "ธันวาคม",
       ];
-      
+
       options.push({
         value: monthValue,
-        label: `${thaiMonths[month-1]} ${year}`
+        label: `${thaiMonths[month - 1]} ${year}`,
       });
     }
-    
+
     return options;
   };
 
@@ -504,22 +565,31 @@ export default function DashboardPage() {
                 </select>
               </div>
             </div>
-            
+
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 mb-8">
               <StatCard
                 title="คำขอการจอง"
-                value={selectedMonth === "all" ? countBooking : filteredBookingData.length}
+                value={
+                  selectedMonth === "all"
+                    ? countBooking
+                    : filteredBookingData.length
+                }
                 color="blue"
                 tone="500"
               />
               <StatCard
                 title="จำนวนผลการประเมิน"
-                value={selectedMonth === "all" ? countDiag : filteredDiagData.length}
+                value={
+                  selectedMonth === "all" ? countDiag : filteredDiagData.length
+                }
                 color="violet"
               />
             </div>
-            
-            <div className="text-2xl font-bold">ประเภทของผู้แบบทำแบบประเมินทั้งหมด</div>
+
+            {/* User types pie chart */}
+            <div className="text-2xl font-bold">
+              ประเภทของผู้แบบทำแบบประเมินทั้งหมด
+            </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 mb-8">
               <div>
                 <PieChart
@@ -528,41 +598,64 @@ export default function DashboardPage() {
                     {
                       arcLabel: (item) => `${Math.round(item.value)}%`,
                       arcLabelMinAngle: 35,
-                      arcLabelRadius: '60%',
+                      arcLabelRadius: "60%",
                       data: [
-                        { 
-                          id: 0, 
-                          value: Math.round((collegecount / (collegecount + highschoolcount)) * 100) || 0, 
-                          label: 'อุดมศึกษา' 
+                        {
+                          id: 0,
+                          value:
+                            Math.round(
+                              (demographics.collegecount /
+                                (demographics.collegecount +
+                                  demographics.highschoolcount)) *
+                                100
+                            ) || 0,
+                          label: "อุดมศึกษา",
                         },
-                        { 
-                          id: 1, 
-                          value: Math.round((highschoolcount / (collegecount + highschoolcount)) * 100) || 0, 
-                          label: 'มัธยมศึกษา' 
+                        {
+                          id: 1,
+                          value:
+                            Math.round(
+                              (demographics.highschoolcount /
+                                (demographics.collegecount +
+                                  demographics.highschoolcount)) *
+                                100
+                            ) || 0,
+                          label: "มัธยมศึกษา",
                         },
                       ],
                     },
                   ]}
                   sx={{
                     [`& .${pieArcLabelClasses.root}`]: {
-                      fontWeight: 'bold',
+                      fontWeight: "bold",
                     },
                   }}
                   width={400}
                   height={400}
                 />
-                <div>อุดมศึกษา : {collegecount} คน</div><div>มัธยมศึกษา : {highschoolcount} คน</div>
+                <div>อุดมศึกษา : {demographics.collegecount} คน</div>
+                <div>มัธยมศึกษา : {demographics.highschoolcount} คน</div>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-1 gap-4">
-                  <StatCard title="ระดับปกติ" value={lowCount} color="green" />
-                  <StatCard
-                    title="ระดับปานกลาง"
-                    value={mediumCount}
-                    color="yellow"
-                  />
-                  <StatCard title="ระดับร้ายแรง" value={highCount} color="red" />
+                <StatCard
+                  title="ระดับปกติ"
+                  value={severityCounts.low}
+                  color="green"
+                />
+                <StatCard
+                  title="ระดับปานกลาง"
+                  value={severityCounts.medium}
+                  color="yellow"
+                />
+                <StatCard
+                  title="ระดับร้ายแรง"
+                  value={severityCounts.high}
+                  color="red"
+                />
               </div>
             </div>
+
+            {/* Form type selector and results */}
             <div className="mt-10 border-4 border-[#003087] bg-white rounded-md">
               <div className="flex flex-row bg-[#003087] rounded-md p-4 items-center">
                 <div className="text-2xl text-white m-4"> แบบประเมิน : </div>
@@ -585,47 +678,47 @@ export default function DashboardPage() {
                   <>
                     <StatCard
                       title="ด้านความอ่อนล้าทางอารมณ์ ระดับต่ำ"
-                      value={countlowEmotionalScore}
+                      value={emotionalExhaustionLevels.low}
                       color="green"
                     />
                     <StatCard
                       title="ด้านความอ่อนล้าทางอารมณ์ ระดับปานกลาง"
-                      value={countmediumEmotionalScore}
+                      value={emotionalExhaustionLevels.medium}
                       color="yellow"
                     />
                     <StatCard
                       title="ด้านความอ่อนล้าทางอารมณ์ ระดับสูง"
-                      value={counthighEmotionalScore}
+                      value={emotionalExhaustionLevels.high}
                       color="red"
                     />
                     <StatCard
                       title="ด้านการลดความเป็นบุคคล ระดับต่ำ"
-                      value={countlowDepersonalization}
+                      value={depersonalizationLevels.low}
                       color="green"
                     />
                     <StatCard
                       title="ด้านการลดความเป็นบุคคล ระดับปานกลาง"
-                      value={countmediumDepersonalization}
+                      value={depersonalizationLevels.medium}
                       color="yellow"
                     />
                     <StatCard
                       title="ด้านการลดความเป็นบุคคล ระดับสูง"
-                      value={counthighDepersonalization}
+                      value={depersonalizationLevels.high}
                       color="red"
                     />
                     <StatCard
                       title="ด้านความสำเร็จส่วนบุคคล ระดับสูง"
-                      value={counthighpersonalAccomplishment}
+                      value={personalAccomplishmentLevels.high}
                       color="green"
                     />
                     <StatCard
                       title="ด้านความสำเร็จส่วนบุคคล ระดับปานกลาง"
-                      value={countmediumpersonalAccomplishment}
+                      value={personalAccomplishmentLevels.medium}
                       color="yellow"
                     />
                     <StatCard
                       title="ด้านความสำเร็จส่วนบุคคล ระดับต่ำ"
-                      value={countlowpersonalAccomplishment}
+                      value={personalAccomplishmentLevels.low}
                       color="red"
                     />
                   </>
@@ -634,68 +727,66 @@ export default function DashboardPage() {
                   <>
                     <StatCard
                       title="ด้านความทนทานทางอารมณ์ สูงกว่าเกณฑ์ปกติ"
-                      value={countrqhighemotion}
+                      value={rqEmotionLevels.high}
                       color="green"
                     />
                     <StatCard
                       title="ด้านความทนทานทางอารมณ์ เกณฑ์ปกติ"
-                      value={countrqmediumemotion}
+                      value={rqEmotionLevels.medium}
                       color="yellow"
                     />
                     <StatCard
                       title="ด้านความทนทานทางอารมณ์ ต่ำกว่าเกณฑ์ปกติ"
-                      value={countrqlowemotion}
+                      value={rqEmotionLevels.low}
                       color="red"
                     />
                     <StatCard
                       title="ด้านกำลังใจ สูงกว่าเกณฑ์ปกติ"
-                      value={countrqhighencouragement}
+                      value={rqEncouragementLevels.high}
                       color="green"
                     />
                     <StatCard
                       title="ด้านกำลังใจ เกณฑ์ปกติ"
-                      value={countrqmediumencouragement}
+                      value={rqEncouragementLevels.medium}
                       color="yellow"
                     />
                     <StatCard
                       title="ด้านกำลังใจ ต่ำกว่าเกณฑ์ปกติ"
-                      value={countrqlowencouragement}
+                      value={rqEncouragementLevels.low}
                       color="red"
                     />
                     <StatCard
                       title="ด้านการจัดการกับปัญหา สูงกว่าเกณฑ์ปกติ"
-                      value={countrqhighproblem}
+                      value={rqProblemLevels.high}
                       color="green"
                     />
                     <StatCard
                       title="ด้านการจัดการกับปัญหา เกณฑ์ปกติ"
-                      value={countrqmediumproblem}
+                      value={rqProblemLevels.medium}
                       color="yellow"
                     />
                     <StatCard
                       title="ด้านการจัดการกับปัญหา ต่ำกว่าเกณฑ์ปกติ"
-                      value={countrqlowproblem}
+                      value={rqProblemLevels.low}
                       color="red"
                     />
                   </>
-                  
-                  
                 )}
                 {selectedFormType === "stress" && (
                   <>
                     <StatCard
                       title="ไม่มีภาวะเครียด & เครียดในระดับปกติ"
-                      value={countStressLow}
+                      value={stressLevels.low}
                       color="green"
                     />
                     <StatCard
                       title="เครียดปานกลาง"
-                      value={countStressMedium}
+                      value={stressLevels.medium}
                       color="yellow"
                     />
                     <StatCard
                       title="เครียดมาก"
-                      value={countStressHigh}
+                      value={stressLevels.high}
                       color="red"
                     />
                   </>
@@ -704,43 +795,43 @@ export default function DashboardPage() {
                   <>
                     <StatCard
                       title="เศร้า หดหู่ ท้อแท้ ในช่วง 2 สัปดาห์"
-                      value={count2qsad}
+                      value={mentalHealthScreening.sad2q}
                       color="green"
                     />
                     <StatCard
                       title="เบื่อ ไม่เพลิดเพลิน ในช่วง 2 สัปดาห์"
-                      value={count2qbored}
+                      value={mentalHealthScreening.bored2q}
                       color="yellow"
                     />
                     <br />
                     <StatCard
                       title="ไม่มีหรือมีภาวะซึมเศร้าระดับน้อย"
-                      value={count9qlow}
+                      value={mentalHealthScreening.depression9q.low}
                       color="green"
                     />
                     <StatCard
                       title="มีภาวะซึมเศร้าระดับปานกลาง"
-                      value={count9qmedium}
+                      value={mentalHealthScreening.depression9q.medium}
                       color="yellow"
                     />
                     <StatCard
                       title="มีภาวะซึมเศร้าระดับรุนแรง"
-                      value={count9qhigh}
+                      value={mentalHealthScreening.depression9q.high}
                       color="red"
                     />
                     <StatCard
                       title="ไม่มีหรือมีแนวโน้มจะฆ่าตัวตายในปัจจุบันระดับน้อย"
-                      value={count8qlow}
+                      value={mentalHealthScreening.suicideRisk8q.low}
                       color="green"
                     />
                     <StatCard
                       title="มีแนวโน้มจะฆ่าตัวตายในปัจจุบันระดับปานกลาง"
-                      value={count8qmedium}
+                      value={mentalHealthScreening.suicideRisk8q.medium}
                       color="yellow"
                     />
                     <StatCard
                       title="มีแนวโน้มจะฆ่าตัวตายในปัจจุบันระดับรุนแรง"
-                      value={count8qhigh}
+                      value={mentalHealthScreening.suicideRisk8q.high}
                       color="red"
                     />
                   </>
@@ -749,47 +840,47 @@ export default function DashboardPage() {
                   <>
                     <StatCard
                       title="ความซึมเศร้า ระดับต่ำ"
-                      value={countdlow}
+                      value={depressionLevels.low}
                       color="blue"
                     />
                     <StatCard
                       title="ความซึมเศร้า ระดับกลาง"
-                      value={countdmedium}
+                      value={depressionLevels.medium}
                       color="blue"
                     />
                     <StatCard
                       title="ความซึมเศร้า ระดับร้ายแรง"
-                      value={countdhigh}
+                      value={depressionLevels.high}
                       color="blue"
                     />
                     <StatCard
                       title="ความวิตกกังวล ระดับต่ำ"
-                      value={countalow}
+                      value={anxietyLevels.low}
                       color="violet"
                     />
                     <StatCard
                       title="ความวิตกกังวล ระดับกลาง"
-                      value={countamedium}
+                      value={anxietyLevels.medium}
                       color="violet"
                     />
                     <StatCard
                       title="ความวิตกกังวล ระดับร้ายแรง"
-                      value={countahigh}
+                      value={anxietyLevels.high}
                       color="violet"
                     />
                     <StatCard
                       title="ความเครียด ระดับต่ำ"
-                      value={countslow}
+                      value={stressLevels.low}
                       color="red"
                     />
                     <StatCard
                       title="ความเครียด ระดับกลาง"
-                      value={countsmedium}
+                      value={stressLevels.medium}
                       color="red"
                     />
                     <StatCard
                       title="ความเครียด ระดับร้ายแรง"
-                      value={countshigh}
+                      value={stressLevels.high}
                       color="red"
                     />
                   </>
@@ -817,9 +908,6 @@ const customStyles = {
   dropdownIndicator: (base) => ({
     ...base,
     color: "rgb(255, 255, 255)",
-    "&:hover": {
-      color: "rgb(255, 255, 255)",
-    },
   }),
 };
 
@@ -836,66 +924,6 @@ function StatCard({ title, value, color, tone = 400 }) {
       <div className="text-4xl md:text-5xl lg:text-6xl text-white drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">
         {value}
       </div>
-    </div>
-  );
-}
-
-function DataTable({ title, data, columns, bgColor }) {
-  return (
-    <div className="overflow-x-auto">
-      <h2 className="text-2xl mb-3 ">{title}</h2>
-      <table className="w-full">
-        <thead>
-          <tr className={`bg-${bgColor}-500 border-2 border-black`}>
-            {columns.map((col, index) => (
-              <th
-                key={index}
-                className="py-2 px-4 text-white drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]"
-              >
-                {col}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {data.map((item, index) => (
-            <tr
-              key={index}
-              className={index % 2 === 0 ? "bg-white " : "bg-gray-100"}
-            >
-              {columns.map((col, cellIndex) => {
-                let value;
-                switch (col) {
-                  case "เลขที่การจอง":
-                    value = item.booking_id;
-                    break;
-                  case "หัวข้อ":
-                    value = item.topic;
-                    break;
-                  case "วันที่":
-                    value = item.appointment_date || item.created;
-                    break;
-                  case "เลขที่ผู้ใช้":
-                    value = item.user_id;
-                    break;
-                  case "ประเภทแบบฟอร์ม":
-                    value = item.forms_type;
-                    break;
-                  default:
-                    value = "";
-                }
-                return (
-                  <td key={cellIndex} className="py-2 px-4 text-center">
-                    {typeof value === "string" && value.includes("T")
-                      ? value.substring(0, 10)
-                      : value}
-                  </td>
-                );
-              })}
-            </tr>
-          ))}
-        </tbody>
-      </table>
     </div>
   );
 }
