@@ -120,6 +120,7 @@ select.gender {
 
 select.age {
     max-width: 180px;
+    min-width: 110px;
     height: 55px;
     min-height: 55px;
     font-family: ChulabhornLikitText-Regular;
