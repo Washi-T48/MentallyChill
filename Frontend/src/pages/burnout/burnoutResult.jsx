@@ -95,9 +95,72 @@ export default function BurnOutResult() {
     }
   };
 
+  const getRecommendation = (
+    emotionalLevel,
+    depersonalizationLevel,
+    personalAccomplishmentLevel
+  ) => {
+    // สร้างตัวแปรเก็บจำนวนด้านที่มีระดับสูง (นับระดับต่ำของความสำเร็จส่วนบุคคลเป็นระดับสูงของภาวะหมดไฟ)
+    let highBurnoutCount = 0;
+    let mediumBurnoutCount = 0;
+
+    if (emotionalLevel === "ระดับสูง") highBurnoutCount++;
+    if (emotionalLevel === "ระดับปานกลาง") mediumBurnoutCount++;
+
+    if (depersonalizationLevel === "ระดับสูง") highBurnoutCount++;
+    if (depersonalizationLevel === "ระดับปานกลาง") mediumBurnoutCount++;
+
+    if (personalAccomplishmentLevel === "ระดับต่ำ") highBurnoutCount++;
+    if (personalAccomplishmentLevel === "ระดับปานกลาง") mediumBurnoutCount++;
+
+    // ถ้ามีอย่างน้อย 2 ด้านที่อยู่ในระดับสูง ถือว่ามีภาวะหมดไฟระดับสูง
+    if (highBurnoutCount >= 2) {
+      return {
+        level: "ระดับสูง",
+        recommendation:
+          "ท่านมีภาวะหมดไฟในการทำงานในระดับสูง ควรได้รับการสนับสนุน เช่น ปรึกษาเพื่อนร่วมงาน หัวหน้า หรือผู้เชี่ยวชาญด้านสุขภาพจิต เพื่อหาแนวทางลดภาวะหมดไฟและฟื้นฟูสภาพจิตใจ",
+      };
+    }
+    // ถ้ามีอย่างน้อย 2 ด้านที่อยู่ในระดับปานกลางหรือสูง ถือว่ามีภาวะหมดไฟระดับปานกลาง
+    else if (highBurnoutCount + mediumBurnoutCount >= 2) {
+      return {
+        level: "ระดับปานกลาง",
+        recommendation:
+          "ท่านเริ่มมีความเสี่ยงต่อภาวะหมดไฟในการทำงาน อาจต้องปรับวิธีทำงาน ลดความเครียด และหาเวลาพักผ่อน เพื่อป้องกันไม่ให้ภาวะหมดไฟพัฒนาไปสู่ระดับที่รุนแรงขึ้น",
+      };
+    }
+    // นอกจากนั้นถือว่ามีภาวะหมดไฟระดับต่ำ
+    else {
+      return {
+        level: "ระดับต่ำ",
+        recommendation:
+          "ท่านมีสุขภาพจิตดี มีภาวะหมดไฟในการทำงานต่ำ ควรรักษาสมดุลของการทำงานและชีวิตส่วนตัวเพื่อให้สุขภาพจิตคงอยู่ในระดับที่ดีต่อไป",
+      };
+    }
+  };
+
   if (isLoading) {
     return <Loading />;
   }
+
+  const emotionalLevel = getSeverityLevel(
+    scores.emotionalExhaustion,
+    "emotionalExhaustion"
+  );
+  const depersonalizationLevel = getSeverityLevel(
+    scores.depersonalization,
+    "depersonalization"
+  );
+  const personalAccomplishmentLevel = getSeverityLevel(
+    scores.personalAccomplishment,
+    "personalAccomplishment"
+  );
+
+  const overallAssessment = getRecommendation(
+    emotionalLevel,
+    depersonalizationLevel,
+    personalAccomplishmentLevel
+  );
 
   const ResultBox = ({ label, score, severity }) => (
     <div className="result-box">
@@ -125,30 +188,31 @@ export default function BurnOutResult() {
         <ResultBox
           label="ด้านความอ่อนล้าทางอารมณ์"
           score={scores.emotionalExhaustion}
-          severity={getSeverityLevel(
-            scores.emotionalExhaustion,
-            "emotionalExhaustion"
-          )}
+          severity={emotionalLevel}
         />
         <ResultBox
           label="ด้านการลดความเป็นบุคคล"
           score={scores.depersonalization}
-          severity={getSeverityLevel(
-            scores.depersonalization,
-            "depersonalization"
-          )}
+          severity={depersonalizationLevel}
         />
         <ResultBox
           label="ด้านความสำเร็จส่วนบุคคล"
           score={scores.personalAccomplishment}
-          severity={getSeverityLevel(
-            scores.personalAccomplishment,
-            "personalAccomplishment"
-          )}
+          severity={personalAccomplishmentLevel}
         />
 
         <div className="description-section">
-          <h3>คำอธิบาย:</h3>
+          <h3
+            style={{
+              marginBottom: "10px",
+              color: "#333",
+              textAlign: "center",
+              borderBottom: "1px solid #ddd",
+              paddingBottom: "10px",
+            }}
+          >
+            คำอธิบาย
+          </h3>
           <div className="description-item">
             <h4>ด้านความอ่อนล้าทางอารมณ์</h4>
             <p>การมีอารมณ์ที่เหนื่อยล้า หมดแรง หมดความกระตือรือร้น</p>
@@ -160,6 +224,52 @@ export default function BurnOutResult() {
           <div className="description-item">
             <h4>ด้านความสำเร็จส่วนบุคคล</h4>
             <p>ความรู้สึกไม่ประสบความสำเร็จและไม่มีประสิทธิภาพในการทำงาน</p>
+          </div>
+          <h3
+            style={{
+              marginBottom: "10px",
+              color: "#333",
+              textAlign: "center",
+              borderBottom: "1px solid #ddd",
+              paddingBottom: "10px",
+            }}
+          >
+            สรุปผลการประเมิน
+          </h3>
+          <div
+            className="description-item"
+            style={{
+              margin: "1.5rem auto",
+              padding: "1rem",
+              backgroundColor:
+                overallAssessment.level === "ระดับสูง"
+                  ? "#FFE5E5"
+                  : overallAssessment.level === "ระดับปานกลาง"
+                  ? "#fff8e1"
+                  : "#e8f5e9",
+              borderRadius: "8px",
+              boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
+            }}
+          >
+            <h3
+              style={{
+                color:
+                  overallAssessment.level === "ระดับสูง"
+                    ? "#FF4D4D"
+                    : overallAssessment.level === "ระดับปานกลาง"
+                    ? "#FF9800"
+                    : "#4CAF50",
+                textAlign: "center",
+                fontWeight: "regular",
+                marginTop: "10px",
+              }}
+            >
+              {overallAssessment.level}
+            </h3>
+            <p style={{ marginTop: "20px" }}>
+              {"\n"}
+              {overallAssessment.recommendation}
+            </p>
           </div>
         </div>
         <ToastContainer />

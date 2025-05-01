@@ -20,7 +20,7 @@
     100% { transform: rotate(360deg); }
   }
   
-  p {
+  .loading-container p {
     font-size: 1.5em;
     margin-top: 20px;
   }

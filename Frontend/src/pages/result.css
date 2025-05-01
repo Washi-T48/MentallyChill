@@ -192,6 +192,12 @@
     .mental-group {
         width: 500px;
     }
+    div.mental-detail div {
+        width: 70%;
+    }
+    div.description-item {
+        width: 70%;
+    }
 }
 
 @media screen and (min-width: 1024px) {
@@ -199,4 +205,5 @@
         width: 144px;
         height: 234px;
     }
+    
 }

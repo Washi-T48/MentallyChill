@@ -22,8 +22,18 @@ const TwoQResult = () => {
       </div>
 
       <div className="description-section">
-        <h3>รายละเอียดผลการประเมิน</h3>
-        <div className="description-item">
+        <h3
+          style={{
+            marginBottom: "10px",
+            color: "#333",
+            textAlign: "center",
+            borderBottom: "1px solid #ddd",
+            paddingBottom: "10px",
+          }}
+        >
+          สรุปผลการประเมิน
+        </h3>
+        <div className="description-item" style={{ whiteSpace: "pre-line" }}>
           <p>
             จากการประเมินพบว่าท่านไม่มีอาการของโรคซึมเศร้า
             ขอให้ท่านรักษาสุขภาพกายและสุขภาพจิตให้แข็งแรงด้วยการ

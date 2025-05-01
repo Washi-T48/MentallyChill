@@ -37,7 +37,7 @@ export default function FormOption2() {
   });
 
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [formErrors, setFormErrors] = useState({});
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -76,7 +76,10 @@ export default function FormOption2() {
               })
               .catch((err) => {
                 console.error("Error getting profile:", err);
-                setError("Failed to get profile information.");
+                setFormErrors({
+                  ...formErrors,
+                  uid: "ไม่สามารถรับข้อมูลโปรไฟล์ได้",
+                });
               });
           } else {
             liff.login();
@@ -84,7 +87,7 @@ export default function FormOption2() {
         })
         .catch((err) => {
           console.error("Error initializing LIFF:", err);
-          setError("Failed to initialize LIFF. Please try again later.");
+          setFormErrors({ ...formErrors, uid: "ไม่สามารถเชื่อมต่อ LIFF ได้" });
         });
     }
   }, []);
@@ -95,12 +98,95 @@ export default function FormOption2() {
       ...oldData,
       [name]: value,
     }));
+
+    // ลบข้อความผิดพลาดเมื่อผู้ใช้แก้ไขข้อมูล
+    if (formErrors[name]) {
+      setFormErrors((prev) => {
+        const newErrors = { ...prev };
+        delete newErrors[name];
+        return newErrors;
+      });
+    }
+  };
+
+  // ตรวจสอบความถูกต้องของข้อมูล
+  const validateForm = () => {
+    const errors = {};
+
+    if (!step2Data.uid && !step2Data.uid.trim()) {
+      errors.uid = "ไม่พบข้อมูล UID";
+    }
+
+    if (!step2Data.gender) {
+      errors.gender = "กรุณาเลือกเพศ";
+    }
+
+    if (!step2Data.age) {
+      errors.age = "กรุณาเลือกช่วงอายุ";
+    }
+
+    const yearParts = step2Data.year.split(" ");
+    if (!step2Data.year || !yearParts[0]) {
+      errors.year = "กรุณาเลือกระดับการศึกษาหรือตำแหน่ง";
+    } else {
+      const level = yearParts[0]; // มัธยมศึกษา, อุดมศึกษา, บุคลากร
+      const subLevel = yearParts[1]; // ระดับชั้น, คณะ, ตำแหน่ง
+      const detail = yearParts[2]; // รายละเอียดเพิ่มเติม (ถ้ามี)
+
+      if (!subLevel) {
+        errors.year = `กรุณาเลือก${
+          level === "มัธยมศึกษา"
+            ? "ระดับชั้น"
+            : level === "อุดมศึกษา"
+            ? "คณะ"
+            : "ตำแหน่ง"
+        }`;
+      } else if (
+        (level === "บุคลากร" && !detail) ||
+        (level === "อุดมศึกษา" && subLevel === "คณะพยาบาล" && !detail)
+      ) {
+        errors.year = `กรุณาเลือก${
+          level === "บุคลากร" ? "สังกัด" : "หลักสูตร"
+        }`;
+      }
+    }
+
+    if (!step2Data.email) {
+      errors.email = "กรุณากรอกอีเมล";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(step2Data.email)) {
+      errors.email = "รูปแบบอีเมลไม่ถูกต้อง";
+    }
+
+    if (!step2Data.tel) {
+      errors.tel = "กรุณากรอกเบอร์ติดต่อ";
+    } else if (!/^[0-9]{10}$/.test(step2Data.tel)) {
+      errors.tel = "กรุณากรอกเบอร์ติดต่อให้ถูกต้อง (10 หลัก)";
+    }
+
+    if (step2Data.sos_tel && !/^[0-9]{10}$/.test(step2Data.sos_tel)) {
+      errors.sos_tel = "กรุณากรอกเบอร์ติดต่อฉุกเฉินให้ถูกต้อง (10 หลัก)";
+    }
+
+    if (!step2Data.form_type) {
+      errors.form_type = "ไม่พบประเภทแบบฟอร์ม";
+    }
+
+    return errors;
   };
 
   const onSubmit = async (e) => {
     e.preventDefault();
+    console.log("Submitting form with data:", step2Data);
+
+    // ตรวจสอบความถูกต้องของข้อมูล
+    const errors = validateForm();
+    if (Object.keys(errors).length > 0) {
+      setFormErrors(errors);
+      return;
+    }
+
     setLoading(true);
-    setError(null);
+    setFormErrors({});
 
     try {
       const VITE_API_PATH = import.meta.env.VITE_API_PATH;
@@ -109,10 +195,30 @@ export default function FormOption2() {
         step2Data
       );
 
+      localStorage.setItem("userProfile", JSON.stringify(step2Data));
+
       const nextPage = getNextPage(step2Data.form_type);
       navigate(nextPage);
     } catch (error) {
-      setError("เกิดข้อผิดพลาด โปรดลองอีกครั้งภายหลัง");
+      console.error("API Error:", error);
+
+      if (error.response) {
+        // กรณี API ตอบกลับด้วย status code ที่ไม่ใช่ 2xx
+        setFormErrors({
+          api: `เกิดข้อผิดพลาด (${error.response.status}): ${
+            error.response.data?.message || "โปรดลองอีกครั้งภายหลัง"
+          }`,
+        });
+      } else if (error.request) {
+        // กรณีส่งคำขอไปแล้วแต่ไม่ได้รับการตอบกลับ
+        setFormErrors({
+          api: "ไม่สามารถเชื่อมต่อกับเซิร์ฟเวอร์ได้ โปรดตรวจสอบการเชื่อมต่ออินเทอร์เน็ต",
+        });
+      } else {
+        setFormErrors({
+          api: "เกิดข้อผิดพลาดในการส่งข้อมูล โปรดลองอีกครั้งภายหลัง",
+        });
+      }
     } finally {
       setLoading(false);
     }
@@ -130,8 +236,9 @@ export default function FormOption2() {
         <p>กรอกข้อมูลผู้ขอรับคำปรึกษาเบื้องต้น</p>
       </div>
 
-      {error && <p className="error-message">{error}</p>}
-
+      {formErrors.api && <p className="error-message">{formErrors.api}</p>}
+      {"\n"}
+      {formErrors.uid && <p className="field-error">{formErrors.uid}</p>}
       <div className="form-fill">
         <form onSubmit={onSubmit}>
           <div className="form_uid">
@@ -142,7 +249,7 @@ export default function FormOption2() {
           <div className="gender-age">
             <RxPerson className="ioperson" />
             <select
-              className="gender"
+              className={`gender ${formErrors.gender ? "input-error" : ""}`}
               value={step2Data.gender}
               name="gender"
               onChange={onChange}
@@ -155,22 +262,44 @@ export default function FormOption2() {
               <option value="อื่นๆ">อื่นๆ</option>
             </select>
 
-            <input
-              className="age"
-              type="number"
-              placeholder="อายุ"
+            <select
+              className={`age ${formErrors.age ? "input-error" : ""}`}
               value={step2Data.age}
               name="age"
               onChange={onChange}
               required
-              aria-label="Age"
-            />
+              aria-label="Age Generation"
+            >
+              <option value="">ช่วงอายุ</option>
+              <option value="The Silent Generation">
+                The Silent Generation (คนที่เกิดระหว่างปี พ.ศ. 2471-2488)
+              </option>
+              <option value="Gen Baby Boom">
+                Gen Baby Boom (คนที่เกิดระหว่างปี พ.ศ.2489-2507)
+              </option>
+              <option value="Gen X">
+                Gen X (คนที่เกิดระหว่างปี พ.ศ. 2508-2522)
+              </option>
+              <option value="Gen Y">
+                Gen Y (คนที่เกิดระหว่างปี พ.ศ.2523-2540)
+              </option>
+              <option value="Gen Z">
+                Gen Z (คนที่เกิดหลัง พ.ศ. 2541-2565)
+              </option>
+              <option value="Gen Alpha">
+                Gen Alpha (คนที่จะเกิดในช่วงปี พ.ศ. 2566 เป็นต้นไป)
+              </option>
+            </select>
           </div>
+          {formErrors.gender && (
+            <p className="field-error">{formErrors.gender}</p>
+          )}
+          {formErrors.age && <p className="field-error">{formErrors.age}</p>}
 
           <div className="eduLevel">
             <label>ระดับการศึกษา</label>
             <select
-              className="eduLevel"
+              className={`eduLevel ${formErrors.year ? "input-error" : ""}`}
               name="year"
               value={step2Data.year.split(" ")[0] || ""} // Get first part (education level)
               onChange={(e) => {
@@ -178,21 +307,35 @@ export default function FormOption2() {
                   ...oldData,
                   year: e.target.value, // Reset year
                 }));
+                // ลบข้อความผิดพลาดเมื่อผู้ใช้แก้ไขข้อมูล
+                if (formErrors.year) {
+                  setFormErrors((prev) => {
+                    const newErrors = { ...prev };
+                    delete newErrors.year;
+                    return newErrors;
+                  });
+                }
               }}
               required
               aria-label="Education Level"
             >
-              <option value="">เลือกระดับการศึกษา</option>
+              <option value="">เลือกระดับการศึกษาหรือตำแหน่ง</option>
               <option value="มัธยมศึกษา">มัธยมศึกษา</option>
               <option value="อุดมศึกษา">อุดมศึกษา</option>
+              <option value="บุคลากร">บุคลากร</option>
             </select>
+            {formErrors.year && (
+              <p className="field-error">{formErrors.year}</p>
+            )}
           </div>
 
           {step2Data.year.startsWith("มัธยมศึกษา") && (
             <div className="secondaryLevel">
               <label>ระดับชั้น</label>
               <select
-                className="secondaryLevel"
+                className={`secondaryLevel ${
+                  formErrors.year ? "input-error" : ""
+                }`}
                 name="year"
                 value={step2Data.year.split(" ")[1] || ""} // Get second part (school year)
                 onChange={(e) => {
@@ -200,6 +343,13 @@ export default function FormOption2() {
                     ...oldData,
                     year: `${oldData.year.split(" ")[0]} ${e.target.value}`, // Combine
                   }));
+                  if (formErrors.year) {
+                    setFormErrors((prev) => {
+                      const newErrors = { ...prev };
+                      delete newErrors.year;
+                      return newErrors;
+                    });
+                  }
                 }}
                 required
                 aria-label="Secondary School Level"
@@ -219,7 +369,7 @@ export default function FormOption2() {
             <div className="faculty">
               <label>คณะ</label>
               <select
-                className="faculty"
+                className={`faculty ${formErrors.year ? "input-error" : ""}`}
                 name="year"
                 value={step2Data.year.split(" ")[1] || ""} // Get second part (faculty)
                 onChange={(e) => {
@@ -227,26 +377,72 @@ export default function FormOption2() {
                     ...oldData,
                     year: `${oldData.year.split(" ")[0]} ${e.target.value}`, // Combine
                   }));
+                  if (formErrors.year) {
+                    setFormErrors((prev) => {
+                      const newErrors = { ...prev };
+                      delete newErrors.year;
+                      return newErrors;
+                    });
+                  }
                 }}
                 required
                 aria-label="Faculty"
               >
                 <option value="">เลือกคณะ</option>
-                <option value="พยาบาล">พยาบาล</option>
-                <option value="เทคโนโลยีการแพทย์">เทคโนโลยีการแพทย์</option>
-                <option value="แพทย์ศาสตร์">แพทย์ศาสตร์</option>
-                <option value="วิศวกรรมศาสตร์">วิศวกรรมศาสตร์</option>
-                <option value="ศึกษาศาสตร์">ศึกษาศาสตร์</option>
-                <option value="วิทยาศาสตร์">วิทยาศาสตร์</option>
+                <option value="คณะพยาบาล">คณะพยาบาล</option>
+                <option value="คณะเทคโนโลยีการแพทย์">
+                  คณะเทคโนโลยีการแพทย์
+                </option>
+                <option value="คณะแพทย์ศาสตร์">คณะแพทย์ศาสตร์</option>
+                <option value="คณะวิศวกรรมศาสตร์">คณะวิศวกรรมศาสตร์</option>
+                <option value="คณะศึกษาศาสตร์">คณะศึกษาศาสตร์</option>
+                <option value="คณะวิทยาศาสตร์">คณะวิทยาศาสตร์</option>
               </select>
             </div>
           )}
 
-          {step2Data.year.split(" ")[1] === "พยาบาล" && (
-            <div className="course">
-              <label>เลือกหลักสูตร</label>
+          {step2Data.year.startsWith("บุคลากร") && (
+            <div className="secondaryLevel">
+              <label>ตำแหน่ง</label>
               <select
-                className="course"
+                className={`secondaryLevel ${
+                  formErrors.year ? "input-error" : ""
+                }`}
+                name="year"
+                value={step2Data.year.split(" ")[1] || ""} // Get second part (position)
+                onChange={(e) => {
+                  setStep2Data((oldData) => ({
+                    ...oldData,
+                    year: `${oldData.year.split(" ")[0]} ${e.target.value}`, // Combine
+                  }));
+                  if (formErrors.year) {
+                    setFormErrors((prev) => {
+                      const newErrors = { ...prev };
+                      delete newErrors.year;
+                      return newErrors;
+                    });
+                  }
+                }}
+                required
+                aria-label="Position"
+              >
+                <option value="">เลือกตำแหน่ง</option>
+                <option value="อาจารย์">อาจารย์</option>
+                <option value="พยาบาล">พยาบาล</option>
+                <option value="นักศึกษา">นักศึกษา</option>
+                <option value="ผู้ช่วยพยาบาล">ผู้ช่วยพยาบาล</option>
+                <option value="บุคลากรทางการแพทย์">บุคลากรทางการแพทย์</option>
+                <option value="บุคลากรสายวิชาการ">บุคลากรสายวิชาการ</option>
+                <option value="สนับสนุนทั่วไป">สนับสนุนทั่วไป</option>
+              </select>
+            </div>
+          )}
+
+          {step2Data.year.split(" ")[0] === "บุคลากร" && (
+            <div className="course">
+              <label>เลือกสังกัด</label>
+              <select
+                className={`course ${formErrors.year ? "input-error" : ""}`}
                 name="year"
                 value={step2Data.year.split(" ")[2] || ""} // Get third part
                 onChange={(e) => {
@@ -256,6 +452,60 @@ export default function FormOption2() {
                       oldData.year.split(" ")[1]
                     } ${e.target.value}`, // Combine
                   }));
+                  if (formErrors.year) {
+                    setFormErrors((prev) => {
+                      const newErrors = { ...prev };
+                      delete newErrors.year;
+                      return newErrors;
+                    });
+                  }
+                }}
+                required
+                aria-label="Course"
+              >
+                <option value="">เลือกสังกัด</option>
+                <option value="สำนักงานราชวิทยาลัยจุฬาภรณ์">
+                  สำนักงานราชวิทยาลัยจุฬาภรณ์
+                </option>
+                <option value="โรงพยาบาลจุฬาภรณ์">โรงพยาบาลจุฬาภรณ์</option>
+                <option value="วิทยาลัยวิทยาศาสตร์การแพทย์เจ้าฟ้าจุฬาภรณ์">
+                  วิทยาลัยวิทยาศาสตร์การแพทย์เจ้าฟ้าจุฬาภรณ์
+                </option>
+                <option value="คณะแพทยศาสตร์ศรีสวางควัฒน">
+                  คณะแพทยศาสตร์ศรีสวางควัฒน
+                </option>
+                <option value="คณะพยาบาลศาสตร์อัครราชกุมารี">
+                  คณะพยาบาลศาสตร์อัครราชกุมารี
+                </option>
+                <option value="คณะเทคโนโลยีวิทยาศาสตร์สุขภาพ">
+                  คณะเทคโนโลยีวิทยาศาสตร์สุขภาพ
+                </option>
+                <option value="คณะวิทยาศาสตร์">คณะวิทยาศาสตร์</option>
+              </select>
+            </div>
+          )}
+
+          {step2Data.year.split(" ")[1] === "คณะพยาบาล" && (
+            <div className="course">
+              <label>เลือกหลักสูตร</label>
+              <select
+                className={`course ${formErrors.year ? "input-error" : ""}`}
+                name="year"
+                value={step2Data.year.split(" ")[2] || ""} // Get third part
+                onChange={(e) => {
+                  setStep2Data((oldData) => ({
+                    ...oldData,
+                    year: `${oldData.year.split(" ")[0]} ${
+                      oldData.year.split(" ")[1]
+                    } ${e.target.value}`, // Combine
+                  }));
+                  if (formErrors.year) {
+                    setFormErrors((prev) => {
+                      const newErrors = { ...prev };
+                      delete newErrors.year;
+                      return newErrors;
+                    });
+                  }
                 }}
                 required
                 aria-label="Course"
@@ -271,24 +521,25 @@ export default function FormOption2() {
           <div className="email">
             <label>อีเมล </label>
             <input
-              className="email"
+              className={`email ${formErrors.email ? "input-error" : ""}`}
               type="email"
               placeholder="example@gmail.com"
               value={step2Data.email}
               name="email"
-              pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$"
               onChange={onChange}
               required
               aria-label="Email"
             />
+            {formErrors.email && (
+              <p className="field-error">{formErrors.email}</p>
+            )}
           </div>
 
           <div className="tel">
             <label>เบอร์ติดต่อ </label>
             <input
-              className="tel"
+              className={`tel ${formErrors.tel ? "input-error" : ""}`}
               type="tel"
-              pattern="[0-9]{3}[0-9]{3}[0-9]{4}"
               placeholder="0000000000"
               value={step2Data.tel}
               name="tel"
@@ -297,14 +548,14 @@ export default function FormOption2() {
               aria-label="Telephone"
             />
             <small>Ex: 0000000000</small>
+            {formErrors.tel && <p className="field-error">{formErrors.tel}</p>}
           </div>
 
           <div className="sos-tel">
             <label>เบอร์ติดต่อฉุกเฉิน (Optional)</label>
             <input
-              className="sos-tel"
+              className={`sos-tel ${formErrors.sos_tel ? "input-error" : ""}`}
               type="tel"
-              pattern="[0-9]{3}[0-9]{3}[0-9]{4}"
               placeholder="0000000000"
               value={step2Data.sos_tel}
               name="sos_tel"
@@ -312,6 +563,9 @@ export default function FormOption2() {
               aria-label="Emergency Telephone"
             />
             <small>Ex: 0000000000</small>
+            {formErrors.sos_tel && (
+              <p className="field-error">{formErrors.sos_tel}</p>
+            )}
           </div>
 
           <div className="next-btn">
@@ -324,38 +578,3 @@ export default function FormOption2() {
     </div>
   );
 }
-/* useEffect(() => {
-    const uid = localStorage.getItem("uid");
-    if (uid) {
-      setStep2Data((prevData) => ({
-        ...prevData,
-        uid: uid,
-      }));
-    } else {
-      liff
-        .init({ liffId: "2005311386-6GQLXp7Z" })
-        .then(() => {
-          if (liff.isLoggedIn()) {
-            liff
-              .getProfile()
-              .then((profile) => {
-                setStep2Data((prevData) => ({
-                  ...prevData,
-                  uid: profile.userId,
-                }));
-                localStorage.setItem("uid", profile.userId);
-              })
-              .catch((err) => {
-                console.error("Error getting profile:", err);
-                setError("Failed to get profile information.");
-              });
-          } else {
-            liff.login();
-          }
-        })
-        .catch((err) => {
-          console.error("Error initializing LIFF:", err);
-          setError("Failed to initialize LIFF. Please try again later.");
-        });
-    }
-  }, []); */
