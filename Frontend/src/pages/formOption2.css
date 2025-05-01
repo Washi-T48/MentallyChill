@@ -65,7 +65,7 @@ input {
     border-radius: 4px;
     border-color: #F1F1F1;
     line-height: 24px;
-    padding-left: 16px;
+    padding-left: 12px;
 }
 
 .ioperson {
@@ -99,16 +99,18 @@ input {
     margin: 1rem auto;
     position: relative;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-content: center;
     flex-direction: row;
     flex-wrap: nowrap;
     color: #333333;
+    max-width: 300px; /* Add max-width to container */
+    padding: 0 10px;
 }
 
 select.gender {
     max-width: 200px;
-    min-width: 110px;
+    min-width: 120px;
     height: 55px;
     min-height: 55px;
     font-family: ChulabhornLikitText-Regular;
@@ -119,14 +121,19 @@ select.gender {
 }
 
 select.age {
-    max-width: 150px;
-    min-width: 110px;
+    max-width: 180px;
     height: 55px;
     min-height: 55px;
+    text-overflow: ellipsis; /* Add ellipsis for text overflow */
+    white-space: nowrap; /* Prevent text from wrapping */
     font-family: ChulabhornLikitText-Regular;
     font-size: 14px;
     -webkit-appearance: none;
     appearance: none;
+}
+
+select.age option {
+    white-space: normal; 
 }
 
 .tel label, .sos-tel label, .email label, .eduLevel label, .secondaryLevel label, .faculty label, .course label{
@@ -236,6 +243,20 @@ p.field-error, p.error-message {
     html { 
         background-position: top;
       }
+      select.age {
+        max-width: 150px;
+        min-width: 120px;
+    }
+    
+    select.gender {
+        max-width: 150px;
+        min-width: 120px;
+    }
+    
+    .gender-age {
+        justify-content: space-evenly;
+        gap: 2rem; 
+    }
 }
 
 @media screen and (min-width: 425px) {

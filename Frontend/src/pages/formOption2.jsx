@@ -7,6 +7,16 @@ import Loading from "../components/Loading";
 import liff from "@line/liff";
 import axios from "axios";
 
+const ageOptions = [
+  { value: "", label: "ช่วงอายุ" },
+  { value: "The Silent Generation", label: "Silent Gen (2471-2488)" },
+  { value: "Gen Baby Boom", label: "Baby Boom (2489-2507)" },
+  { value: "Gen X", label: "Gen X (2508-2522)" },
+  { value: "Gen Y", label: "Gen Y (2523-2540)" },
+  { value: "Gen Z", label: "Gen Z (2541-2565)" },
+  { value: "Gen Alpha", label: "Gen Alpha (2566- )" },
+];
+
 const getNextPage = (formType) => {
   switch (formType) {
     case "DASS-21":
@@ -52,6 +62,11 @@ export default function FormOption2() {
       }));
     }
   }, [location]);
+
+  const getAgeLabel = (value) => {
+    const option = ageOptions.find((opt) => opt.value === value);
+    return option ? option.label : value;
+  };
 
   useEffect(() => {
     const uid = localStorage.getItem("uid");
@@ -269,26 +284,16 @@ export default function FormOption2() {
               onChange={onChange}
               required
               aria-label="Age Generation"
+              title={
+                ageOptions.find((opt) => opt.value === step2Data.age)?.label ||
+                ""
+              }
             >
-              <option value="">ช่วงอายุ</option>
-              <option value="The Silent Generation">
-                The Silent Generation (คนที่เกิดระหว่างปี พ.ศ. 2471-2488)
-              </option>
-              <option value="Gen Baby Boom">
-                Gen Baby Boom (คนที่เกิดระหว่างปี พ.ศ.2489-2507)
-              </option>
-              <option value="Gen X">
-                Gen X (คนที่เกิดระหว่างปี พ.ศ. 2508-2522)
-              </option>
-              <option value="Gen Y">
-                Gen Y (คนที่เกิดระหว่างปี พ.ศ.2523-2540)
-              </option>
-              <option value="Gen Z">
-                Gen Z (คนที่เกิดหลัง พ.ศ. 2541-2565)
-              </option>
-              <option value="Gen Alpha">
-                Gen Alpha (คนที่จะเกิดในช่วงปี พ.ศ. 2566 เป็นต้นไป)
-              </option>
+              {ageOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
             </select>
           </div>
           {formErrors.gender && (
