@@ -122,7 +122,7 @@ select.gender {
 
 select.age {
     max-width: 200px;
-    min-width: 160px;
+    min-width: 180px;
     height: 55px;
     min-height: 55px;
     text-overflow: ellipsis; /* Add ellipsis for text overflow */
