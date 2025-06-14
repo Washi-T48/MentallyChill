@@ -685,7 +685,7 @@ export default function DashboardPage() {
               <div className="flex items-center">
                 <label className="mr-2 font-medium">เดือน:</label>
                 <select
-                  className="border border-gray-300 rounded-md py-4 px-6 bg-white"
+                  className="border border-gray-300 rounded-md py-2 px-6 bg-white"
                   value={selectedMonth}
                   onChange={(e) => setSelectedMonth(e.target.value)}
                 >
@@ -700,20 +700,20 @@ export default function DashboardPage() {
 
             <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-3 gap-4 mb-8">
               <StatCard
-                title="ผู้ใช้ทั้งหมด"
+                title="จำนวนผู้ใช้"
                 value={countUsers}
                 color="#CCDDFD"
                 tone="500"
               />
               <StatCard
-                title="จำนวนการประเมินทั้งหมด"
+                title="จำนวนการประเมิน"
                 value={
                   selectedMonth === "all" ? countDiag : filteredDiagData.length
                 }
                 color="#CCDDFD"
               />
               <StatCard
-                title="จำนวนนัดหมายทั้งหมด"
+                title="จำนวนการนัดหมาย"
                 value={
                   selectedMonth === "all"
                     ? countBooking
@@ -817,7 +817,7 @@ export default function DashboardPage() {
             </div>
 
             {/* Form type selector and results */}
-            <div className="mt-10 border-4 border-[#003087] bg-white rounded-md">
+            {/* <div className="mt-10 border-4 border-[#003087] bg-white rounded-md">
               <div className="flex flex-row bg-[#003087] rounded-md p-4 items-center">
                 <div className="text-2xl text-white m-4"> แบบประเมิน : </div>
                 <select
@@ -1047,7 +1047,7 @@ export default function DashboardPage() {
                   </>
                 )}
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
