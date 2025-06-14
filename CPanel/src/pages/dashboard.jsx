@@ -236,20 +236,20 @@ export default function DashboardPage() {
     const diagCounts = [];
     const bookingCounts = [];
 
-    // Thai month names
+    // Thai month abbreviations for line chart only
     const thaiMonths = [
-      "มกราคม",
-      "กุมภาพันธ์",
-      "มีนาคม",
-      "เมษายน",
-      "พฤษภาคม",
-      "มิถุนายน",
-      "กรกฎาคม",
-      "สิงหาคม",
-      "กันยายน",
-      "ตุลาคม",
-      "พฤศจิกายน",
-      "ธันวาคม",
+      "ม.ค.",
+      "ก.พ.",
+      "มี.ค.",
+      "เม.ย.",
+      "พ.ค.",
+      "มิ.ย.",
+      "ก.ค.",
+      "ส.ค.",
+      "ก.ย.",
+      "ต.ค.",
+      "พ.ย.",
+      "ธ.ค.",
     ];
 
     // Generate all 12 months (Jan to Dec)
@@ -729,7 +729,7 @@ export default function DashboardPage() {
               ประเภทของผู้แบบทำแบบประเมินทั้งหมด
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 mb-8">
-              <div>
+              <div className="flex flex-col items-center">
                 <PieChart
                   colors={["lightgray", "lightskyblue"]}
                   series={[
