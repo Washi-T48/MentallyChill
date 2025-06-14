@@ -930,10 +930,10 @@ function StatCard({ title, value, color }) {
       className="flex flex-col justify-between rounded-md p-4 h-full"
       style={{ backgroundColor: bgColor }}
     >
-      <div className="pb-4 text-lg text-white drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">
+      <div className="pb-4 text-lg text-black drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">
         {title}
       </div>
-      <div className="text-4xl md:text-5xl lg:text-6xl text-white drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">
+      <div className="text-4xl md:text-5xl lg:text-6xl text-black drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">
         {value}
       </div>
     </div>
