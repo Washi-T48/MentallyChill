@@ -10,6 +10,7 @@ export default function DashboardPage() {
   const [diagdata, setDiagData] = useState([]);
   const [countDiag, setCountDiag] = useState(0);
   const [countBooking, setCountBooking] = useState(0);
+  const [countUsers, setCountUsers] = useState(0); // New state for user count
 
   // Filter states
   const [selectedFormType, setSelectedFormType] = useState("");
@@ -182,6 +183,9 @@ export default function DashboardPage() {
       try {
         const response = await axios.get(`/user/all`);
         const users = response.data;
+
+        // Set the user count
+        setCountUsers(users.length);
 
         // Count college and high school students
         let college = 0;
@@ -568,7 +572,20 @@ export default function DashboardPage() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 mb-8">
               <StatCard
-                title="คำขอการจอง"
+                title="ผู้ใช้ทั้งหมด"
+                value={countUsers}
+                color="blue"
+                tone="500"
+              />
+              <StatCard
+                title="จำนวนการประเมินทั้งหมด"
+                value={
+                  selectedMonth === "all" ? countDiag : filteredDiagData.length
+                }
+                color="violet"
+              />
+              <StatCard
+                title="จำนวนนัดหมายทั้งหมด"
                 value={
                   selectedMonth === "all"
                     ? countBooking
@@ -576,13 +593,6 @@ export default function DashboardPage() {
                 }
                 color="blue"
                 tone="500"
-              />
-              <StatCard
-                title="จำนวนผลการประเมิน"
-                value={
-                  selectedMonth === "all" ? countDiag : filteredDiagData.length
-                }
-                color="violet"
               />
             </div>
 
