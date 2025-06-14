@@ -258,22 +258,21 @@ export default function DashboardPage() {
       
       months.push(thaiMonths[i]);
 
-      // Filter users by type and month
-      let filteredUsers = users;
-      if (userTypeFilter === "college") {
-        filteredUsers = users.filter((user) =>
-          user.grade_level && user.grade_level.includes("อุดมศึกษา")
-        );
-      } else if (userTypeFilter === "highschool") {
-        filteredUsers = users.filter(
-          (user) => !user.grade_level || !user.grade_level.includes("อุดมศึกษา")
-        );
-      }
-
-      // Count users created in this month
-      const monthlyUsers = filteredUsers.filter((user) => {
+      // Count users created in this month with type filter applied
+      const monthlyUsers = users.filter((user) => {
+        // First filter by month
         if (!user.created) return false;
-        return user.created.substring(0, 7) === monthKey;
+        if (user.created.substring(0, 7) !== monthKey) return false;
+
+        // Then filter by user type
+        if (userTypeFilter === "college") {
+          return user.grade_level && user.grade_level.includes("อุดมศึกษา");
+        } else if (userTypeFilter === "highschool") {
+          return !user.grade_level || !user.grade_level.includes("อุดมศึกษา");
+        }
+        
+        // If "all" is selected, include all users
+        return true;
       }).length;
 
       // Count diagnoses for this month and user type
