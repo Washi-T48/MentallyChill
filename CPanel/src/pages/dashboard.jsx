@@ -905,13 +905,13 @@ export default function DashboardPage() {
 }
 
 const colors = {
-  orange: "bg-orange-400",
-  blue: "bg-blue-500",
-  green: "bg-green-500",
-  red: "bg-red-600",
-  violet: "bg-violet-500",
-  rose: "bg-rose-400",
-  yellow: "bg-yellow-500",
+  orange: "#FB923C", // orange-400
+  blue: "#3B82F6", // blue-500
+  green: "#22C55E", // green-500
+  red: "#DC2626", // red-600
+  violet: "#8B5CF6", // violet-500
+  rose: "#FB7185", // rose-400
+  yellow: "#EAB308", // yellow-500
 };
 
 const customStyles = {
@@ -921,12 +921,14 @@ const customStyles = {
   }),
 };
 
-function StatCard({ title, value, color, tone = 400 }) {
+function StatCard({ title, value, color }) {
+  // Determine if color is a hex value or a named color
+  const bgColor = color.startsWith("#") ? color : colors[color] || "#9CA3AF"; // Use gray-400 as default
+
   return (
     <div
-      className={`flex flex-col justify-between rounded-md p-4 h-full ${
-        colors[color] || "bg-gray-400"
-      }`}
+      className="flex flex-col justify-between rounded-md p-4 h-full"
+      style={{ backgroundColor: bgColor }}
     >
       <div className="pb-4 text-lg text-white drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">
         {title}
