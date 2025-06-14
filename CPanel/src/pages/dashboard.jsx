@@ -574,7 +574,7 @@ export default function DashboardPage() {
               <StatCard
                 title="ผู้ใช้ทั้งหมด"
                 value={countUsers}
-                color="blue"
+                color="#CCDDFD"
                 tone="500"
               />
               <StatCard
@@ -582,7 +582,7 @@ export default function DashboardPage() {
                 value={
                   selectedMonth === "all" ? countDiag : filteredDiagData.length
                 }
-                color="violet"
+                color="#CCDDFD"
               />
               <StatCard
                 title="จำนวนนัดหมายทั้งหมด"
@@ -591,7 +591,7 @@ export default function DashboardPage() {
                     ? countBooking
                     : filteredBookingData.length
                 }
-                color="blue"
+                color="#CCDDFD"
                 tone="500"
               />
             </div>
