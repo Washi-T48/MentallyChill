@@ -276,8 +276,8 @@ export default function DashboardPage() {
 
       // Count users created in this month
       const monthlyUsers = filteredUsers.filter((user) => {
-        if (!user.created_at) return false;
-        return user.created_at.substring(0, 7) === monthKey;
+        if (!user.created) return false;
+        return user.created.substring(0, 7) === monthKey;
       }).length;
 
       // Count diagnoses for this month and user type
