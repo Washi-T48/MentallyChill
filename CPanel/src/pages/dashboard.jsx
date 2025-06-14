@@ -230,40 +230,33 @@ export default function DashboardPage() {
   // Add new function to process monthly data
   const processMonthlyData = (users) => {
     const currentDate = new Date();
+    const currentYear = currentDate.getFullYear();
     const months = [];
     const userCounts = [];
     const diagCounts = [];
     const bookingCounts = [];
 
-    // Generate last 6 months
-    for (let i = 5; i >= 0; i--) {
-      const date = new Date(
-        currentDate.getFullYear(),
-        currentDate.getMonth() - i,
-        1
-      );
-      const monthKey = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(
-        2,
-        "0"
-      )}`;
+    // Thai month names
+    const thaiMonths = [
+      "มกราคม",
+      "กุมภาพันธ์",
+      "มีนาคม",
+      "เมษายน",
+      "พฤษภาคม",
+      "มิถุนายน",
+      "กรกฎาคม",
+      "สิงหาคม",
+      "กันยายน",
+      "ตุลาคม",
+      "พฤศจิกายน",
+      "ธันวาคม",
+    ];
 
-      // Thai month names
-      const thaiMonths = [
-        "ม.ค.",
-        "ก.พ.",
-        "มี.ค.",
-        "เม.ย.",
-        "พ.ค.",
-        "มิ.ย.",
-        "ก.ค.",
-        "ส.ค.",
-        "ก.ย.",
-        "ต.ค.",
-        "พ.ย.",
-        "ธ.ค.",
-      ];
-
-      months.push(thaiMonths[date.getMonth()]);
+    // Generate all 12 months (Jan to Dec)
+    for (let i = 0; i < 12; i++) {
+      const monthKey = `${currentYear}-${String(i + 1).padStart(2, "0")}`;
+      
+      months.push(thaiMonths[i]);
 
       // Filter users by type and month
       let filteredUsers = users;
@@ -795,28 +788,28 @@ export default function DashboardPage() {
                   </select>
                 </div>
                 <LineChart
-                  width={500}
-                  height={300}
+                  width={800}
+                  height={500}
                   series={[
                     {
                       data: monthlyData.userCounts,
                       label: "ผู้ใช้ใหม่",
-                      color: "#1500",
+                      color: "#3B82F6",
                     },
                     {
                       data: monthlyData.diagCounts,
                       label: "การประเมิน",
-                      color: "#300",
+                      color: "#22C55E",
                     },
                     {
                       data: monthlyData.bookingCounts,
                       label: "นัดหมาย",
-                      color: "#50",
+                      color: "#DC2626",
                     },
                   ]}
                   xAxis={[{ scaleType: "point", data: monthlyData.months }]}
                   yAxis={[{ min: 0 }]}
-                  margin={{ left: 50, right: 50, top: 50, bottom: 50 }}
+                  margin={{ left: 80, right: 80, top: 80, bottom: 80 }}
                 />
               </div>
             </div>
