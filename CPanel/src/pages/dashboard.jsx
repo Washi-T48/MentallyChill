@@ -671,6 +671,18 @@ export default function DashboardPage() {
 
   const monthOptions = getMonthOptions();
 
+  // Add function to get filtered user count by month
+  const getFilteredUserCount = () => {
+    if (selectedMonth === "all") {
+      return countUsers;
+    }
+    
+    return userData.filter((user) => {
+      if (!user.created) return false;
+      return user.created.substring(0, 7) === selectedMonth;
+    }).length;
+  };
+
   return (
     <div className="flex flex-col min-h-screen">
       <Topbar />
@@ -700,7 +712,7 @@ export default function DashboardPage() {
             <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-3 gap-4 mb-8">
               <StatCard
                 title="จำนวนผู้ใช้"
-                value={countUsers}
+                value={getFilteredUserCount()}
                 color="#CCDDFD"
                 tone="500"
               />
