@@ -11,6 +11,7 @@ export default function DashboardPage() {
   const [countDiag, setCountDiag] = useState(0);
   const [countBooking, setCountBooking] = useState(0);
   const [countUsers, setCountUsers] = useState(0); // New state for user count
+  const [userData, setUserData] = useState([]);
 
   // Filter states
   const [selectedFormType, setSelectedFormType] = useState("");
@@ -193,6 +194,8 @@ export default function DashboardPage() {
         const response = await axios.get(`/user/all`);
         const users = response.data;
 
+        setUserData(users);
+
         // Set the user count
         setCountUsers(users.length);
 
@@ -289,14 +292,17 @@ export default function DashboardPage() {
 
           if (userTypeFilter === "all") return true;
 
-          // You'll need to add user_id to your diagdata to properly filter
-          // For now, we'll use a proportional estimate
-          const userTypeRatio =
-            userTypeFilter === "college"
-              ? demographics.collegecount / (demographics.collegecount + demographics.highschoolcount)
-              : demographics.highschoolcount / (demographics.collegecount + demographics.highschoolcount);
+          // Find the user who created this diagnosis
+          const user = users.find(u => u.id === item.user_id);
+          if (!user) return false;
 
-          return Math.random() < userTypeRatio; // This is a temporary solution
+          if (userTypeFilter === "college") {
+            return user.grade_level && user.grade_level.includes("อุดมศึกษา");
+          } else if (userTypeFilter === "highschool") {
+            return !user.grade_level || !user.grade_level.includes("อุดมศึกษา");
+          }
+
+          return false;
         }).length;
 
       // Count bookings for this month and user type
@@ -308,13 +314,17 @@ export default function DashboardPage() {
 
           if (userTypeFilter === "all") return true;
 
-          // Similar proportional estimate for bookings
-          const userTypeRatio =
-            userTypeFilter === "college"
-              ? demographics.collegecount / (demographics.collegecount + demographics.highschoolcount)
-              : demographics.highschoolcount / (demographics.collegecount + demographics.highschoolcount);
+          // Find the user who made this booking
+          const user = users.find(u => u.id === item.user_id);
+          if (!user) return false;
 
-          return Math.random() < userTypeRatio; // This is a temporary solution
+          if (userTypeFilter === "college") {
+            return user.grade_level && user.grade_level.includes("อุดมศึกษา");
+          } else if (userTypeFilter === "highschool") {
+            return !user.grade_level || !user.grade_level.includes("อุดมศึกษา");
+          }
+
+          return false;
         }).length;
 
       userCounts.push(monthlyUsers);
@@ -332,11 +342,10 @@ export default function DashboardPage() {
 
   // Update monthly data when filter changes
   useEffect(() => {
-    if (diagdata.length > 0 && bookingdata.length > 0) {
-      const users = [...Array(countUsers)]; // Placeholder, you'd need actual user data
-      processMonthlyData(users);
+    if (userData.length > 0 && diagdata.length > 0 && bookingdata.length > 0) {
+      processMonthlyData(userData);
     }
-  }, [userTypeFilter, diagdata, bookingdata, demographics]);
+  }, [userTypeFilter, diagdata, bookingdata, userData]);
 
   useEffect(() => {
     if (selectedMonth === "all") {
