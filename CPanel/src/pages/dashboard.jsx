@@ -778,7 +778,7 @@ export default function DashboardPage() {
                 <div className="flex items-center mb-4">
                   <label className="mr-2 font-medium">ประเภทผู้ใช้:</label>
                   <select
-                    className="border border-gray-300 rounded-md p-2 bg-white"
+                    className="border border-gray-300 rounded-md p-3 bg-white text-lg w-40"
                     value={userTypeFilter}
                     onChange={(e) => setUserTypeFilter(e.target.value)}
                   >
