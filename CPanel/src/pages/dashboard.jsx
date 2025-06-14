@@ -729,7 +729,7 @@ export default function DashboardPage() {
               ประเภทของผู้แบบทำแบบประเมินทั้งหมด
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 mb-8">
-              <div className="flex flex-col items-start justify-center">
+              <div className="flex flex-col items-center justify-center">
                 <PieChart
                   colors={["lightgray", "lightskyblue"]}
                   series={[
