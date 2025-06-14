@@ -776,7 +776,7 @@ export default function DashboardPage() {
               </div>
               <div className="flex flex-col">
                 <div className="flex items-center mb-4">
-                  <label className="mr-2 font-medium">ประเภทผู้ใช้:</label>
+                  <label className="mr-2 font-medium text-lg">ประเภทผู้ใช้:</label>
                   <select
                     className="border border-gray-300 rounded-md p-3 bg-white text-lg w-40"
                     value={userTypeFilter}
