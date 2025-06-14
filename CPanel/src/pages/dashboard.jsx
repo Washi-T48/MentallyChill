@@ -771,8 +771,10 @@ export default function DashboardPage() {
                   width={400}
                   height={400}
                 />
-                <div>อุดมศึกษา : {demographics.collegecount} คน</div>
-                <div>มัธยมศึกษา : {demographics.highschoolcount} คน</div>
+                <div className="flex flex-col items-start w-full">
+                  <div>อุดมศึกษา : {demographics.collegecount} คน</div>
+                  <div>มัธยมศึกษา : {demographics.highschoolcount} คน</div>
+                </div>
               </div>
               <div className="flex flex-col">
                 <div className="flex items-center mb-4">
