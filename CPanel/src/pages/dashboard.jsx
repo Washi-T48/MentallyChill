@@ -685,7 +685,7 @@ export default function DashboardPage() {
               <div className="flex items-center">
                 <label className="mr-2 font-medium">เดือน:</label>
                 <select
-                  className="border border-gray-300 rounded-md p-6 bg-white"
+                  className="border border-gray-300 rounded-md py-4 px-6 bg-white"
                   value={selectedMonth}
                   onChange={(e) => setSelectedMonth(e.target.value)}
                 >
