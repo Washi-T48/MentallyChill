@@ -19,17 +19,20 @@ export default function SignInPage() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.target);
-    axios.post("/login", {
-      staff_id: data.get("username"),
-      password: data.get("password")
-    })
+    axios
+      .post("/login", {
+        staff_id: data.get("username"),
+        password: data.get("password"),
+      })
       .then((response) => {
         console.log("Login successful");
         update(response.data.permission);
         navigate("/dashboard");
       })
-      .catch((error) => {
-        window.alert("บัญชีผู้ใช้หรือรหัสผ่านของท่านไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง");
+      .catch(() => {
+        window.alert(
+          "บัญชีผู้ใช้หรือรหัสผ่านของท่านไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง"
+        );
       });
     event.target.reset();
   };

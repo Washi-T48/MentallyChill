@@ -255,7 +255,7 @@ export default function DashboardPage() {
     // Generate all 12 months (Jan to Dec)
     for (let i = 0; i < 12; i++) {
       const monthKey = `${currentYear}-${String(i + 1).padStart(2, "0")}`;
-      
+
       months.push(thaiMonths[i]);
 
       // Count users created in this month with type filter applied
@@ -270,54 +270,52 @@ export default function DashboardPage() {
         } else if (userTypeFilter === "highschool") {
           return !user.grade_level || !user.grade_level.includes("อุดมศึกษา");
         }
-        
+
         // If "all" is selected, include all users
         return true;
       }).length;
 
       // Count diagnoses for this month and user type
-      const monthlyDiag = diagdata
-        .filter((item) => {
-          if (!item.created) return false;
-          const itemMonth = item.created.substring(0, 7);
-          if (itemMonth !== monthKey) return false;
+      const monthlyDiag = diagdata.filter((item) => {
+        if (!item.created) return false;
+        const itemMonth = item.created.substring(0, 7);
+        if (itemMonth !== monthKey) return false;
 
-          if (userTypeFilter === "all") return true;
+        if (userTypeFilter === "all") return true;
 
-          // Find the user who created this diagnosis
-          const user = users.find(u => u.id === item.user_id);
-          if (!user) return false;
+        // Find the user who created this diagnosis
+        const user = users.find((u) => u.id === item.user_id);
+        if (!user) return false;
 
-          if (userTypeFilter === "college") {
-            return user.grade_level && user.grade_level.includes("อุดมศึกษา");
-          } else if (userTypeFilter === "highschool") {
-            return !user.grade_level || !user.grade_level.includes("อุดมศึกษา");
-          }
+        if (userTypeFilter === "college") {
+          return user.grade_level && user.grade_level.includes("อุดมศึกษา");
+        } else if (userTypeFilter === "highschool") {
+          return !user.grade_level || !user.grade_level.includes("อุดมศึกษา");
+        }
 
-          return false;
-        }).length;
+        return false;
+      }).length;
 
       // Count bookings for this month and user type
-      const monthlyBookings = bookingdata
-        .filter((item) => {
-          if (!item.appointment_date) return false;
-          const itemMonth = item.appointment_date.substring(0, 7);
-          if (itemMonth !== monthKey) return false;
+      const monthlyBookings = bookingdata.filter((item) => {
+        if (!item.appointment_date) return false;
+        const itemMonth = item.appointment_date.substring(0, 7);
+        if (itemMonth !== monthKey) return false;
 
-          if (userTypeFilter === "all") return true;
+        if (userTypeFilter === "all") return true;
 
-          // Find the user who made this booking
-          const user = users.find(u => u.id === item.user_id);
-          if (!user) return false;
+        // Find the user who made this booking
+        const user = users.find((u) => u.id === item.user_id);
+        if (!user) return false;
 
-          if (userTypeFilter === "college") {
-            return user.grade_level && user.grade_level.includes("อุดมศึกษา");
-          } else if (userTypeFilter === "highschool") {
-            return !user.grade_level || !user.grade_level.includes("อุดมศึกษา");
-          }
+        if (userTypeFilter === "college") {
+          return user.grade_level && user.grade_level.includes("อุดมศึกษา");
+        } else if (userTypeFilter === "highschool") {
+          return !user.grade_level || !user.grade_level.includes("อุดมศึกษา");
+        }
 
-          return false;
-        }).length;
+        return false;
+      }).length;
 
       userCounts.push(monthlyUsers);
       diagCounts.push(monthlyDiag);
@@ -676,7 +674,7 @@ export default function DashboardPage() {
     if (selectedMonth === "all") {
       return countUsers;
     }
-    
+
     return userData.filter((user) => {
       if (!user.created) return false;
       return user.created.substring(0, 7) === selectedMonth;
@@ -789,7 +787,9 @@ export default function DashboardPage() {
               </div>
               <div className="flex flex-col">
                 <div className="flex items-center mb-4">
-                  <label className="mr-2 font-medium text-lg">ประเภทผู้ใช้:</label>
+                  <label className="mr-2 font-medium text-lg">
+                    ประเภทผู้ใช้:
+                  </label>
                   <select
                     className="border border-gray-300 rounded-md p-3 bg-white text-lg w-40"
                     value={userTypeFilter}
@@ -828,7 +828,7 @@ export default function DashboardPage() {
             </div>
 
             {/* Form type selector and results */}
-            {/* <div className="mt-10 border-4 border-[#003087] bg-white rounded-md">
+            <div className="mt-10 border-4 border-[#003087] bg-white rounded-md">
               <div className="flex flex-row bg-[#003087] rounded-md p-4 items-center">
                 <div className="text-2xl text-white m-4"> แบบประเมิน : </div>
                 <select
@@ -1058,7 +1058,7 @@ export default function DashboardPage() {
                   </>
                 )}
               </div>
-            </div> */}
+            </div>
           </div>
         </div>
       </div>
@@ -1093,9 +1093,7 @@ function StatCard({ title, value, color }) {
       style={{ backgroundColor: bgColor }}
     >
       <div className="pb-4 text-lg text-black">{title}</div>
-      <div className="text-4xl md:text-5xl lg:text-6xl text-black">
-        {value}
-      </div>
+      <div className="text-4xl md:text-5xl lg:text-6xl text-black">{value}</div>
     </div>
   );
 }
