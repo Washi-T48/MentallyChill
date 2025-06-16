@@ -9,12 +9,14 @@ export default defineConfig({
     open: true,
     host: "0.0.0.0",
     port: 444,
-    https: false,
-    //    https: {
-    //      key: fs.readFileSync(`/etc/letsencrypt/live/mindcra.com-0001/privkey.pem`),
-    //      cert: fs.readFileSync(`/etc/letsencrypt/live/mindcra.com-0001/cert.pem`),
-    //      ca: fs.readFileSync(`/etc/letsencrypt/live/mindcra.com-0001/chain.pem`),
-    //    },
+    // https: false,
+    https: {
+      key: fs.readFileSync(
+        `/etc/letsencrypt/live/mindcra.com-0001/privkey.pem`
+      ),
+      cert: fs.readFileSync(`/etc/letsencrypt/live/mindcra.com-0001/cert.pem`),
+      ca: fs.readFileSync(`/etc/letsencrypt/live/mindcra.com-0001/chain.pem`),
+    },
     proxy: {
       "/api": {
         target: "https://sombat.cc:3000/",
