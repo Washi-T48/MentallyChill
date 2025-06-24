@@ -5,10 +5,12 @@ import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import thLocale from "@fullcalendar/core/locales/th";
 import TimeSelectorModal from "./timeselector";
+import DefaultTimeModal from "./defaultTimeModal";
 import axios from "./axioscreds";
 
 const Calendar = ({ setFetchTrigger }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDefaultTimeModalOpen, setIsDefaultTimeModalOpen] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
   const [timeRange, setTimeRange] = useState({ start: "", end: "" });
   const [events, setEvents] = useState([]);
@@ -16,6 +18,8 @@ const Calendar = ({ setFetchTrigger }) => {
   const [day, setDay] = useState(null);
   const [month, setMonth] = useState(null);
   const [year, setYear] = useState(null);
+  const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
+  const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
 
   useEffect(() => {
     const fetchStaffData = async () => {
@@ -80,7 +84,6 @@ const Calendar = ({ setFetchTrigger }) => {
     setTimeRange({ start: info.startStr, end: info.endStr });
     setIsModalOpen(true);
   };
-
   const handleModalSave = (start, end) => {
     const newEvent = {
       title: `${start} - ${end}`,
@@ -93,8 +96,46 @@ const Calendar = ({ setFetchTrigger }) => {
     window.location.reload();
   };
 
+  const handleDefaultTimeClick = () => {
+    setIsDefaultTimeModalOpen(true);
+  };
+
+  const handleDefaultTimeModalSave = () => {
+    setIsDefaultTimeModalOpen(false);
+    setFetchTrigger((prev) => !prev);
+    window.location.reload();
+  };
+
+  const handleCalendarNavigation = (info) => {
+    setCurrentMonth(info.view.currentStart.getMonth());
+    setCurrentYear(info.view.currentStart.getFullYear());
+  };
   return (
     <div className="bg-white p-4 rounded shadow-lg w-full max-w-4xl h-[800px]">
+      <div className="mb-4 flex justify-between items-center">
+        <h2 className="text-xl font-semibold text-gray-800">ปฏิทินการทำงาน</h2>
+        <button
+          onClick={handleDefaultTimeClick}
+          className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg font-medium transition-colors duration-200 flex items-center space-x-2"
+        >
+          <svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            className="h-5 w-5" 
+            fill="none" 
+            viewBox="0 0 24 24" 
+            stroke="currentColor"
+          >
+            <path 
+              strokeLinecap="round" 
+              strokeLinejoin="round" 
+              strokeWidth={2} 
+              d="M12 6v6m0 0v6m0-6h6m-6 0H6" 
+            />
+          </svg>
+          <span>ตั้งเวลาเริ่มต้น</span>
+        </button>
+      </div>
+      
       <FullCalendar
         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
         initialView="dayGridMonth"
@@ -104,11 +145,11 @@ const Calendar = ({ setFetchTrigger }) => {
           left: "prev,next today",
           center: "title",
           right: "dayGridMonth,timeGridDay",
-        }}
-        events={events}
+        }}        events={events}
         dateClick={handleDateClick}
         selectable={true}
         select={handleTimeSelect}
+        datesSet={handleCalendarNavigation}
       />
 
       {isModalOpen && (
@@ -120,6 +161,15 @@ const Calendar = ({ setFetchTrigger }) => {
           end={timeRange.end}
           onClose={() => setIsModalOpen(false)}
           onSave={handleModalSave}
+        />
+      )}
+
+      {isDefaultTimeModalOpen && (
+        <DefaultTimeModal
+          month={currentMonth}
+          year={currentYear}
+          onClose={() => setIsDefaultTimeModalOpen(false)}
+          onSave={handleDefaultTimeModalSave}
         />
       )}
     </div>
