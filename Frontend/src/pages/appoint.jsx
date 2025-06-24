@@ -170,32 +170,6 @@ export default function Appoint() {
     }
   };
 
-  // const fetchAvailableTimeSlots = () => {
-  //   if (!appointData.date || !appointData.medDoctor) return;
-  //   setLoadingSlots(true);
-  //   console.log(appointData);
-  //   axios.post(`${VITE_API_PATH}/getStaffTimeByDate`, { staff_id: appointData.medDoctor, date: appointData.date })
-  //     .then((response) => {
-  //       const availableTimes = response.data;
-  //       if (Array.isArray(availableTimes)) {
-  //         setTimeSlots(availableTimes.map((slot) => ({
-  //           start: slot.time_start,
-  //           end: slot.time_end,
-  //         })));
-  //       } else {
-  //         console.error("Unexpected response format:", response.data);
-  //         setTimeSlots([]);
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error fetching available time slots:", error.response?.data || error.message);
-  //       setTimeSlots([]);
-  //     })
-  //     .finally(() => {
-  //       setLoadingSlots(false);
-  //     });
-  // };
-
   const fetchAvailableTimeSlots = () => {
     if (!appointData.date || !appointData.medDoctor) return;
     setLoadingSlots(true);
