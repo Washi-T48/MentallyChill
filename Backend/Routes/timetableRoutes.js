@@ -14,6 +14,31 @@ import {
 
 const timetableRouter = express.Router();
 
+// แปลง "HH:MM" เป็น Date object
+function parseTime(dateStr, timeStr) {
+    return new Date(`${dateStr}T${timeStr}:00`);
+}
+
+// แปลง Date object เป็น "HH:MM"
+function formatTime(date) {
+    return date.toTimeString().slice(0, 5);
+}
+
+function getWeekdaysInMonth(year, month) {
+    const dates = [];
+    const daysInMonth = new Date(year, month, 0).getDate(); // month is 1-based
+
+    for (let day = 1; day <= daysInMonth; day++) {
+        const date = new Date(year, month - 1, day);
+        const dayOfWeek = date.getDay(); // 0=Sunday, 1=Monday, ..., 6=Saturday
+        if (dayOfWeek >= 1 && dayOfWeek <= 5) {
+            dates.push(date.toISOString().slice(0, 10)); // format YYYY-MM-DD
+        }
+    }
+
+    return dates;
+}
+
 timetableRouter.all('/', async (req, res) => {
     res.sendStatus(200);
 });
@@ -31,6 +56,73 @@ timetableRouter.post('/new', async (req, res) => {
     }
     catch (error) {
         logger.error(error);
+        res.sendStatus(500);
+    }
+});
+
+timetableRouter.post('/newautosplit', async (req, res) => {
+    try {
+        const { staff_id, date, time_start, time_end } = req.body;
+        const start = parseTime(date, time_start);
+        const end = parseTime(date, time_end);
+        const intervalMinutes = 30;
+        let current = new Date(start);
+        const insertedSlots = [];
+        while (current < end) {
+            const next = new Date(current.getTime() + intervalMinutes * 60000);
+            if (next > end) break;
+            const slotStart = formatTime(current);
+            const slotEnd = formatTime(next);
+            const duplicatecheck = await checkdupicateTime(staff_id, date, slotStart, slotEnd);
+            if (duplicatecheck.length === 0) {
+                const newSlot = await newTimeTable(staff_id, date, slotStart, slotEnd);
+                insertedSlots.push(newSlot);
+            }
+            current = next;
+        }
+        res.status(200).json({ inserted: insertedSlots, count: insertedSlots.length });
+    } catch (error) {
+        logger.error(error);
+        res.sendStatus(500);
+    }
+});
+
+timetableRouter.post('/setmonthly', async (req, res) => {
+    try {
+        const { staff_id, year, month, time_start, time_end } = req.body;
+
+        const weekdays = getWeekdaysInMonth(year, month);
+        const intervalMinutes = 30;
+        const insertedSlots = [];
+
+        for (const date of weekdays) {
+            let current = parseTime(date, time_start);
+            const end = parseTime(date, time_end);
+
+            while (current < end) {
+                const next = new Date(current.getTime() + intervalMinutes * 60000);
+                if (next > end) break;
+
+                const slotStart = formatTime(current);
+                const slotEnd = formatTime(next);
+
+                const duplicatecheck = await checkdupicateTime(staff_id, date, slotStart, slotEnd);
+                if (duplicatecheck.length === 0) {
+                    const newSlot = await newTimeTable(staff_id, date, slotStart, slotEnd);
+                    insertedSlots.push(newSlot);
+                }
+
+                current = next;
+            }
+        }
+
+        res.status(200).json({
+            inserted_count: insertedSlots.length,
+            working_days: weekdays.length,
+            inserted_slots: insertedSlots
+        });
+    } catch (err) {
+        logger.error(err);
         res.sendStatus(500);
     }
 });
